@@ -1,0 +1,141 @@
+---
+title: "Contact | Code Stitch Web Designs"
+description: "Meta description for the page"
+preloadImg: "/assets/images/cabinets2.jpg"
+permalink: "contact/"
+eleventyNavigation:
+  key: Contact Us
+  order: 600
+  hideOnDesktop: true
+---
+
+{% extends "layouts/base.html" %} {% block head %}
+<link rel="stylesheet" href="/assets/css/contact.css" />
+{% endblock %} {% block body %}
+
+<!-- ============================================ -->
+<!--                    LANDING                   -->
+<!-- ============================================ -->
+
+<section id="int-hero">
+  <h1 id="home-h">Contact Us</h1>
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/assets/images/cabinets2-m.jpg"
+    />
+    <source media="(min-width: 601px)" srcset="/assets/images/cabinets2.jpg" />
+    <img
+      aria-hidden="true"
+      decoding="async"
+      src="/assets/images/cabinets2.jpg"
+      alt="kitchen cabinets"
+      loading="eager"
+      width="2500"
+      height="1667"
+    />
+  </picture>
+</section>
+
+<!-- ============================================ -->
+<!--                Contact Form                  -->
+<!-- ============================================ -->
+
+<section id="contact">
+  <div class="container">
+    <form id="form" name="Contact Form" method="post">
+      <div class="content">
+        <span class="topper">Contact</span>
+        <h2 class="title">Get in Touch</h2>
+        <p class="text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ridiculus
+          elementum ullamcorper ipsum porttitor aliquam. Id magna urna ultrices
+          odio pulvinar. Sed ut.
+        </p>
+      </div>
+      <label>
+        Name
+        <input required type="text" id="name" name="name" placeholder="Name" />
+      </label>
+      <label>
+        Email
+        <input
+          required
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Email"
+        />
+      </label>
+      <label>
+        Phone
+        <input
+          required
+          type="text"
+          id="phone"
+          name="phone"
+          placeholder="Phone"
+        />
+      </label>
+      <label>
+        How Did You Find Us
+        <input
+          type="text"
+          id="find"
+          name="find-us"
+          placeholder="How did you find us?"
+        />
+      </label>
+      <label class="label-message">
+        Message
+        <textarea
+          required
+          name="Message"
+          id="message"
+          placeholder="Write message..."
+        ></textarea>
+      </label>
+      <button class="button-solid" type="submit">Submit Message</button>
+    </form>
+    <div class="right-section">
+      <!--Email-->
+      <span class="header">Email</span>
+      <a class="link" href="mailto:{{client.email}}">{{client.email}}</a>
+      <!--Phone-->
+      <span class="header">Phone</span>
+      <a class="link" href="tel:{{client.phoneForTel}}"
+        >{{client.phoneFormatted}}</a
+      >
+      <!--Address-->
+      <span class="header">Address</span>
+      <a class="link" href="{{client.address.mapLink}}">
+        {{client.address.lineOne}},
+        <br />
+        {{client.address.lineTwo}},
+        <br />
+        <span class="block">
+          {{client.address.city}} {{client.address.state}}
+          {{client.address.zip}}
+        </span>
+      </a>
+
+      <!-- Background Image-->
+      <picture class="bg-picture">
+        <source
+          media="(min-width: 601px)"
+          srcset="/assets/images/skyscraper.jpg"
+        />
+        <img
+          aria-hidden="true"
+          decoding="async"
+          src="/assets/images/skyscraper.jpg"
+          alt="building"
+          loading="lazy"
+          width="2500"
+          height="1667"
+        />
+      </picture>
+    </div>
+  </div>
+</section>
+{% endblock %}

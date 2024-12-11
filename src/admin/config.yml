@@ -1,0 +1,62 @@
+backend:
+    name: git-gateway
+    branch: main
+
+local_backend: true
+# change url to a link to the image you want to use, no file paths, must be a URL
+logo_url: https://codestitch.app/frontend/images/logo.png
+
+media_folder: "src/assets/images/blog"
+public_folder: "/assets/images/blog"
+
+collections:
+    - name: "blog"
+      label: "Blog"
+      folder: "src/content/blog"
+      create: true
+      slug: "{{slug}}"
+      fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - {
+                label: "URL Slug",
+                name: "url",
+                widget: "string",
+                hint: 'Specify where the page will be written to. If you use "Blog Post", the post will be accessible from "blog/blog-post"',
+            }
+          - { label: "Description", name: "description", widget: "string" }
+          - { label: "Author", name: "author", widget: "string" }
+          - { label: "Date", name: "date", widget: "datetime" }
+          - { label: "Featured Image", name: "image", widget: "image" }
+          - { label: "Image Caption", name: "imageAlt", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          
+    - name: "project"
+      label: "Project"
+      folder: "src/content/project"
+      create: true
+      slug: "{{slug}}"
+      fields:
+          - { label: "Project Title", name: "title", widget: "string" }
+          - {
+                label: "URL Slug",
+                name: "url",
+                widget: "string",
+                hint: 'Specify where the page will be written to. If you use "Sample Project", the post will be accessible from "project/sample-project"',
+            }
+          - { label: "Description", name: "description", widget: "string" }
+          - { label: "Featured Image", name: "image", widget: "image" }
+          - { label: "Image Caption", name: "imageAlt", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          
+    - name: "song"
+      label: "Song"
+      folder: "src/content/song"
+      create: true
+      slug: "{{slug}}"
+      fields:
+          - { label: "Song Title", name: "title", widget: "string" }
+          - { label: "Artist", name: "artist", widget: "string" }
+          - { label: "Album", name: "album", widget: "string" }
+          - { label: "Release Date", name: "releaseDate", widget: "datetime" }
+          - { label: "Song Lyrics", name: "lyrics", widget: "markdown" }
+        

@@ -1,0 +1,123 @@
+---
+title: "About | Code Stitch Web Designs"
+description: "Meta description for the page"
+preloadImg: "/assets/images/cabinets2.jpg"
+permalink: "about/"
+eleventyNavigation:
+  key: About Us
+  order: 200
+---
+
+{% extends "layouts/base.html" %} {% block head %}
+<link rel="stylesheet" href="/assets/css/about.css" />
+{% endblock %} {% block body %}
+<!-- ============================================ -->
+<!--                    LANDING                   -->
+<!-- ============================================ -->
+
+<section id="int-hero">
+  <h1 id="home-h">About Us</h1>
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/assets/images/cabinets2-m.jpg"
+    />
+    <source media="(min-width: 601px)" srcset="/assets/images/cabinets2.jpg" />
+    <img
+      aria-hidden="true"
+      decoding="async"
+      src="/assets/images/cabinets2.jpg"
+      alt="kitchen cabinets"
+      loading="eager"
+      width="2500"
+      height="1667"
+    />
+  </picture>
+</section>
+
+<!-- ============================================ -->
+<!--                 Side By Side                 -->
+<!-- ============================================ -->
+
+<section id="sbs">
+  <div class="container">
+    <!-- Left Image Section -->
+    <div class="left">
+      <picture class="picture picture1">
+        <source
+          media="(max-width: 600px)"
+          srcset="/assets/images/cabinets2-m.jpg"
+        />
+        <source
+          media="(min-width: 601px)"
+          srcset="/assets/images/cabinets2.jpg"
+        />
+        <img
+          aria-hidden="true"
+          decoding="async"
+          src="/assets/images/cabinets2.jpg"
+          alt="cabinets"
+          loading="lazy"
+          width="400"
+          height="563"
+        />
+      </picture>
+      <picture class="picture picture2">
+        <source
+          media="(max-width: 600px)"
+          srcset="/assets/images/construction-m.jpg"
+        />
+        <source
+          media="(min-width: 601px)"
+          srcset="/assets/images/construction.jpg"
+        />
+        <img
+          aria-hidden="true"
+          decoding="async"
+          src="/assets/images/construction.jpg"
+          alt="house"
+          loading="lazy"
+          width="400"
+          height="563"
+        />
+      </picture>
+    </div>
+    <!-- Right Content Section-->
+    <div class="right">
+      <span class="topper">About Us</span>
+      <h2 class="title">About Company Title</h2>
+      <p class="text">
+        In consequat tincidunt turpis sit amet imperdiet. Praesent Class
+        officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur
+        et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent
+        nonatourean olei aptent taciti sociosqu ad litora torquent per.
+      </p>
+      <p class="text">
+        In consequat tincidunt turpis sit amet imperdiet. Praesent Class
+        officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur
+        et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent
+        nonatourean olei aptent taciti sociosqu ad litora torquent per.
+      </p>
+      <div class="flex-group">
+        <p class="flex-p">
+          In consequat tincidunt turpis sit amet imperdiet. Praesent Classei
+          consequat tincidunt turpis sit amet imperdiet for mind.
+        </p>
+        <span class="name">Justin Time</span>
+        <span class="job">CEO-Founder</span>
+        <img
+          class="quote-icon"
+          loading="lazy"
+          decoding="async"
+          src="https://csimg.nyc3.digitaloceanspaces.com/SideBySide/quote-white.svg"
+          alt="gavel"
+          width="136"
+          height="77"
+        />
+      </div>
+      <a href="/projects" class="button-solid">Our Projects</a>
+    </div>
+  </div>
+</section>
+
+{% include 'components/cta.html' %} {% endblock %}
