@@ -4,7 +4,7 @@
 
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-    #sbsr-1279 {
+    #about {
         padding: var(--sectionPadding);
         overflow: hidden;
         position: relative;
@@ -154,7 +154,7 @@
 
 /* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
-    #sbsr-1279 {
+    #about {
         .content {
             flex-direction: row;
             flex-wrap: wrap;
@@ -182,7 +182,7 @@
 
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
-    #sbsr-1279 {
+    #about {
         /* moved padding back to the section container */
         padding: var(--sectionPadding);
 
@@ -233,7 +233,9 @@
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
     body.dark-mode {
-        #sbsr-1279 {
+        #about {
+            border-top: 2px solid #fff;
+            
             .title,
             .text {
                 color: var(--bodyTextColorWhite);
@@ -577,6 +579,7 @@
 @media only screen and (min-width: 0rem) {
     body.dark-mode {
         #blog {
+            border-top: 2px solid #fff;
             .topper {
                 color: var(--primaryLight);
             }
@@ -613,7 +616,7 @@
 
 /* Mobile */
 @media only screen and (min-width: 0rem) {
-    #gallery-42 {
+    #gallery {
         padding: 4rem;
 
         .container {
@@ -739,7 +742,7 @@
 
 /* Tablet */
 @media only screen and (min-width: 48rem) {
-    #gallery-42 {
+    #gallery {
         .content {
             flex-direction: row;
             justify-content: space-between;
@@ -790,7 +793,7 @@
 /* Dark mode */
 @media only screen and (min-width: 0rem) {
     body.dark-mode {
-        #gallery-42 {
+        #gallery {
             .title,
             .text {
                 color: var(--bodyTextColorWhite);

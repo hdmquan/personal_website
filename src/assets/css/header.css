@@ -146,7 +146,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 1.5rem;
   }
   #navigation .logo {
     width: auto;
@@ -360,15 +359,12 @@
   body.dark-mode:before {
     background-color: var(--dark);
   }
-  body.dark-mode #navigation:before {
-    background-color: var(--dark);
-  }
   body.dark-mode #navigation .logo {
     /* makes it white */
     filter: grayscale(1) brightness(1000%);
   }
   body.dark-mode #navigation .toggle {
-    background-color: var(--secondary);
+    background-color: #fff;
   }
   body.dark-mode #navigation .phone {
     color: var(--bodyTextColorWhite);
@@ -381,7 +377,7 @@
     filter: grayscale(1) brightness(1000%);
   }
   body.dark-mode #navigation .line {
-    background-color: #fff;
+    background-color: #000;
   }
   body.dark-mode #navigation .li-link {
     color: var(--bodyTextColorWhite);
@@ -572,7 +568,7 @@
   }
   #navigation {
     width: 100%;
-    height: 4rem;
+    height: 6rem;
     /* prevents padding from affecting height and width */
     box-sizing: border-box;
     /* 12px - 24px */

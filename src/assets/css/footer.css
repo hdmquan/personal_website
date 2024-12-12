@@ -88,6 +88,10 @@
   body.dark-mode #footer .link:before {
     background: #fff;
   }
+  body.dark-mode #footer .ul {
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
 }
 
 /*# sourceMappingURL=footer.css.map */

@@ -132,6 +132,7 @@
         align-items: center;
         min-height: 30vh;
         padding-top: calc(50 / 16 * 1rem);
+        border-bottom: 2px solid #fff;
 
         picture {
             z-index: -2;
@@ -204,10 +205,11 @@
         background-attachment: fixed;
         min-height: calc(300 / 16 * 1rem);
         height: auto;
-        padding: calc(64 / 16 * 1rem) 0;
+        padding: calc(96 / 16 * 1rem) 0 calc(64 / 16 * 1rem);
         font-size: inherit;
     }
 }
+
 
 /*-- -------------------------- -->
 <---        Main Content        -->
@@ -396,6 +398,7 @@
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
     body.dark-mode {
+        
         .recent-articles {
             .blog-h1,
             .blog-desc,

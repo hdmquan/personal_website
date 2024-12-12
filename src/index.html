@@ -105,11 +105,7 @@ eleventyNavigation:
   </div>
 </section>
 
-<!-- ============================================ -->
-<!--              Side By Side Reverse            -->
-<!-- ============================================ -->
-
-<section id="sbsr-1279">
+<section id="about">
   <div class="container">
     <picture class="picture">
       <img
@@ -148,10 +144,6 @@ eleventyNavigation:
   </picture>
 </section>
 
-<!-- ============================================ -->
-<!--                 Recent Projects              -->
-<!-- ============================================ -->
-
 <section id="blog">
   <div class="container">
     <div class="content">
@@ -185,11 +177,6 @@ eleventyNavigation:
           <div class="item-text">
             <h3 class="h3">{{ project.data.title }}</h3>
             <p class="desc">{{ project.data.description }}</p>
-            {#
-            <div class="info">
-              <span class="date">{{ project.date | date("%-d %b, %Y") }}</span>
-            </div>
-            #}
           </div>
         </a>
       </li>
@@ -198,9 +185,6 @@ eleventyNavigation:
       {% endif %}
     </ul>
   </div>
-  {#
-  <div class="bubbles" aria-hidden="true"></div>
-  #}
 </section>
 
 <section id="blog">
@@ -236,11 +220,6 @@ eleventyNavigation:
           <div class="item-text">
             <h3 class="h3">{{ blog.data.title }}</h3>
             <p class="desc">{{ blog.data.description }}</p>
-            {#
-            <div class="info">
-              <span class="date">{{ blog.date | date("%-d %b, %Y") }}</span>
-            </div>
-            #}
           </div>
         </a>
       </li>
@@ -249,9 +228,6 @@ eleventyNavigation:
       {% endif %}
     </ul>
   </div>
-  {#
-  <div class="bubbles" aria-hidden="true"></div>
-  #}
 </section>
 
 {% endblock %}

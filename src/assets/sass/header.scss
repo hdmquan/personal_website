@@ -182,7 +182,7 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            gap: calc(24 / 16 * 1rem);
+            // gap: calc(24 / 16 * 1rem);
         }
 
         .logo {
@@ -432,9 +432,6 @@
             background-color: var(--dark);
         }
         #navigation {
-            &:before {
-                background-color: var(--dark);
-            }
 
             .logo {
                 /* makes it white */
@@ -442,7 +439,7 @@
             }
 
             .toggle {
-                background-color: var(--secondary);
+                background-color: #fff;
             }
 
             .phone {
@@ -459,7 +456,7 @@
             }
 
             .line {
-                background-color: #fff;
+                background-color: #000;
             }
 
             .li-link {
@@ -697,7 +694,7 @@
     #navigation {
         width: 100%;
         // max-width: calc(1440 / 16 * 1rem);
-        height: calc(64 / 16 * 1rem);
+        height: calc(96 / 16 * 1rem);
         /* prevents padding from affecting height and width */
         box-sizing: border-box;
         /* 12px - 24px */

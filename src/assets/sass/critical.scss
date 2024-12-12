@@ -58,8 +58,6 @@
                 content: "";
                 opacity: 1;
                 display: block;
-                background: -moz-linear-gradient(top, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0) 100%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(top, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0) 100%); /* Chrome10-25,Safari5.1-6 */
                 height: 100%;
                 width: 1px;
             }
@@ -176,9 +174,7 @@
                 /* Right Line */
                 content: "";
                 opacity: 1;
-                display: block;
-                background: -moz-linear-gradient(top, rgba(250, 251, 252, 0) 0%, rgba(250, 251, 252, 0.5) 100%); /* FF3.6-15 */
-                background: -webkit-linear-gradient(top, rgba(250, 251, 252, 0) 0%, rgba(250, 251, 252, 0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+            display: block;
                 height: 100%;
                 width: 1px;
             }
@@ -212,113 +208,18 @@
                     opacity: 0.8;
                 }
             }
-        }
-    }
-}
-
-/*-- -------------------------- -->
-<---          Services          -->
-<--- -------------------------- -*/
-
-/* Mobile */
-@media only screen and (min-width: 0rem) {
-    .services {
-        z-index: 100;
-        position: relative;
-        border-top: calc(6 / 16 * 1em) solid var(--primary);
-        border-radius: calc(5 / 16 * 1em);
-        margin: auto;
-        margin-top: calc(-167 / 16 * 1em);
-        margin-bottom: calc(50 / 16 * 1em);
-        background: #fff;
-        max-width: calc(1320 / 16 * 1em);
-        width: 90%;
-        padding: calc(50 / 16 * 1em) calc(20 / 16 * 1em);
-        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.05);
-        .card {
-            display: block;
-            margin: auto;
-            margin-bottom: calc(50 / 16 * 1em);
-            max-width: calc(357 / 16 * 1em);
-            width: 100%;
-
-            picture {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 50%;
-                margin: auto;
-                margin-bottom: calc(23 / 16 * 1em);
-                background: var(--primary);
-                height: calc(88 / 16 * 1em);
-                width: calc(88 / 16 * 1em);
-
-                img {
-                    height: calc(48 / 16 * 1em);
-                    width: calc(48 / 16 * 1em);
-                }
-            }
-            h2 {
-                margin-bottom: calc(13 / 20 * 1em);
-                font-size: calc(32 / 16 * 1em);
-                line-height: calc(27 / 20 * 1em);
-                font-weight: 700;
-                color: #1a1a1a;
-                text-align: center;
-            }
-            p {
-                opacity: 0.7;
-                width: 100%;
-                line-height: calc(24 / 18 * 1em);
-                text-align: center;
-            }
-            &:last-of-type {
-                margin-bottom: 0;
-            }
-        }
-    }
-}
-
-/* Inbetween */
-@media only screen and (min-width: 768px) {
-    .services {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        width: 98%;
-        font-size: min(1.8vw, 1em);
-
-        .card {
-            margin: 0;
-            max-width: calc(325 / 16 * 1em);
-        }
-    }
-}
-
-/* Large Desktop */
-@media only screen and (min-width: 1300px) {
-    .services {
-        padding: calc(50 / 16 * 1em) calc(80 / 16 * 1em);
-
-        .card {
-            max-width: calc(357 / 16 * 1em);
-        }
-    }
-}
-
-/* Dark mode */
-@media only screen and (min-width: 0rem) {
-    body.dark-mode {
-        #services {
-            background: var(--medium);
-
-            picture {
-                background: var(--primaryDark);
-            }
-
-            h2 {
-                font-weight: bold;
+            .title,
+            .text,
+            .topper {
                 color: #fff;
+            }
+
+            img {
+                filter: invert(100%);
+            }
+
+            .button-solid {
+                border: 2px solid #fff;
             }
         }
     }
