@@ -161,7 +161,6 @@
     top: 0;
     left: 0;
     content: "";
-    opacity: 0.7;
     display: block;
     background: #000;
     height: 100%;
@@ -183,9 +182,8 @@
     background-attachment: fixed;
     min-height: 18.75rem;
     height: auto;
-    padding-top: 11.25rem;
+    padding: 4rem 0;
     font-size: inherit;
-    padding-block-end: 6.25rem;
   }
 }
 /*-- -------------------------- -->
@@ -624,181 +622,6 @@
     margin: 1rem 0;
     height: auto;
     width: 100%;
-  }
-}
-/*-- -------------------------- -->
-<---           Footer           -->
-<--- -------------------------- -*/
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
-  #footer {
-    background-color: #1a1a1a;
-    /* 60px - 100px top and bottom */
-    padding: clamp(3.75em, 7.82vw, 6.25em) 1em;
-    font-family: "Nexa", "Arial", sans-serif;
-  }
-  #footer .container {
-    margin: auto;
-    max-width: 80em;
-    width: 100%;
-  }
-  #footer .logo-group {
-    position: relative;
-    /* takes up all the space, lets the other ul's wrap below it */
-    width: 100%;
-  }
-  #footer .logo {
-    display: block;
-    /* 28px - 44px */
-    margin-bottom: clamp(1.75em, 4.17vw, 2.75em);
-    height: auto;
-    /* 210px - 240px */
-    width: clamp(13.125em, 8vw, 15em);
-  }
-  #footer .logo-img {
-    height: auto;
-    width: 100%;
-  }
-  #footer .text {
-    margin: 0;
-    margin-bottom: 2.5rem;
-    /* changes to 521px at desktop */
-    max-width: 21.5rem;
-    color: var(--bodyTextColorWhite);
-  }
-  #footer .nav {
-    margin: 0;
-    /* 32px - 40px */
-    margin-bottom: clamp(2em, 5.3vw, 2.5em);
-    padding: 0;
-    padding-left: 1em;
-  }
-  #footer .nav-li {
-    list-style: none;
-    line-height: 1.5em;
-  }
-  #footer .nav-li:last-of-type {
-    margin-bottom: 0;
-  }
-  #footer .header {
-    position: relative;
-    display: block;
-    margin-bottom: 1.25rem;
-    font-size: 1rem;
-    line-height: 1.5em;
-    font-weight: 700;
-    color: var(--bodyTextColorWhite);
-  }
-  #footer .nav-link {
-    position: relative;
-    text-decoration: none;
-    font-size: 1rem;
-    line-height: 1.5em;
-    color: var(--bodyTextColorWhite);
-  }
-  #footer .nav-link:before {
-    position: absolute;
-    bottom: -0.125rem;
-    left: 0;
-    /* underline */
-    content: "";
-    opacity: 1;
-    display: block;
-    /* current color of the parent */
-    background: currentColor;
-    height: 0.125rem;
-    width: 0%;
-    transition: width 0.3s;
-  }
-  #footer .nav-link:hover:before {
-    width: 100%;
-  }
-  #footer .bottom {
-    position: relative;
-    width: 100%;
-    padding-left: 1em;
-  }
-  #footer .copyright {
-    display: block;
-    font-size: 1rem;
-    line-height: 1.5em;
-    color: #b4b2c7;
-  }
-  #footer .social {
-    position: absolute;
-    bottom: 0;
-    right: 1em;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 0.75em;
-  }
-  #footer .social-link {
-    z-index: 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: #4e4b66;
-    height: 1.5rem;
-    width: 1.5rem;
-    transition: transform 0.3s, background-color 0.3s;
-  }
-  #footer .social-link:hover {
-    transform: translateY(-0.1875rem);
-    background-color: var(--primary);
-  }
-  #footer .social-img {
-    display: block;
-    height: 0.8125rem;
-    width: auto;
-  }
-}
-/* Inbetween - 600px */
-@media only screen and (min-width: 37.5em) {
-  #footer .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    /* 48px - 60px */
-    column-gap: clamp(3em, 5.9vw, 3.75em);
-  }
-}
-/* Tablet - 768px */
-@media only screen and (min-width: 48rem) {
-  #footer .logo-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    /* 20px - 60px */
-    margin-bottom: clamp(1.25em, 4vw, 3.75em);
-  }
-  #footer .logo {
-    margin: 0;
-  }
-  #footer .text {
-    margin: 0;
-    max-width: 32.5625rem;
-    width: 50%;
-    text-align: right;
-  }
-  #footer .nav {
-    padding: 0;
-  }
-  #footer .bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-  }
-  #footer .social {
-    position: relative;
-    /* reset these positions */
-    bottom: auto;
-    right: auto;
-    flex-direction: row;
   }
 }
 

@@ -14,6 +14,22 @@
   #hero span {
     font-weight: 900;
   }
+  #hero .social-section {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
+  #hero .social-section .topper {
+    margin: 0;
+  }
+  #hero .social-section img:hover {
+    filter: invert(25%) sepia(50%) saturate(1000%) hue-rotate(270deg);
+  }
+  #hero a {
+    text-decoration: none;
+  }
   #hero .container {
     position: relative;
     display: flex;
@@ -60,10 +76,16 @@
   #hero .button-solid {
     margin-bottom: 1rem;
     height: initial;
-    line-height: clamp(2.875em, 5.5vw, 3.5em);
+    border: 2px solid #000;
+    line-height: 2.3rem;
+    padding: 0 1.25rem;
     width: auto;
     align-self: flex-start;
-    color: var(--bodyTextColorWhite);
+    color: var(--bodyTextColor);
+    background-color: #fff;
+  }
+  #hero .button-solid:hover {
+    color: #fff;
   }
   #hero .button-transparent {
     z-index: 1;

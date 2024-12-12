@@ -36,14 +36,16 @@ collections:
       create: true
       slug: "{{slug}}"
       fields:
-          - { label: "Project Title", name: "title", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
           - {
                 label: "URL Slug",
                 name: "url",
                 widget: "string",
-                hint: 'Specify where the page will be written to. If you use "Sample Project", the post will be accessible from "project/sample-project"',
+                hint: 'Specify where the page will be written to. If you use "Blog Post", the post will be accessible from "blog/blog-post"',
             }
           - { label: "Description", name: "description", widget: "string" }
+          - { label: "Author", name: "author", widget: "string" }
+          - { label: "Date", name: "date", widget: "datetime" }
           - { label: "Featured Image", name: "image", widget: "image" }
           - { label: "Image Caption", name: "imageAlt", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
@@ -57,6 +59,8 @@ collections:
           - { label: "Song Title", name: "title", widget: "string" }
           - { label: "Artist", name: "artist", widget: "string" }
           - { label: "Album", name: "album", widget: "string" }
+          - { label: "Date", name: "date", widget: "datetime" }
+          - { label: "Featured Image", name: "image", widget: "image" }
           - { label: "Release Date", name: "releaseDate", widget: "datetime" }
           - { label: "Song Lyrics", name: "lyrics", widget: "markdown" }
         

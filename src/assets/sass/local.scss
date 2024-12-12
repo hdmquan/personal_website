@@ -1,12 +1,266 @@
 /*-- -------------------------- -->
+<---   Side By Side Reverse     -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #sbsr-1279 {
+        padding: var(--sectionPadding);
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        border-top: 2px solid #000;
+
+        
+
+        .container {
+            width: 100%;
+            /* changes to 1280px at desktop */
+            max-width: calc(850 / 16 * 1rem);
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            flex-direction: column;
+            /* 48px - 108px */
+            gap: clamp(3rem, 5vw, 6.75rem);
+        }
+
+        .content {
+            /* set text align to left if content needs to be left aligned */
+            text-align: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            /* centers content horizontally, set to flex-start to left align */
+            align-items: flex-start;
+            /* sends it to the bottom in the 2nd position */
+            order: 2;
+        }
+
+        // .title {
+        //     max-width: 20ch;
+        // }
+
+        .text {
+            margin-bottom: calc(16 / 16 * 1rem);
+            &:last-of-type {
+                margin-bottom: calc(32 / 16 * 1rem);
+            }
+            font-size: 1.5rem;
+        }
+
+        .button-solid {
+            font-size: calc(16 / 16 * 1rem);
+            /* 46px - 56px */
+            line-height: clamp(2.875em, 5.5vw, 3.5em);
+            text-decoration: none;
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
+            color: #fff;
+            border: none;
+            min-width: calc(150 / 16 * 1rem);
+            padding: 0 calc(24 / 16 * 1rem);
+            background-color: var(--primary);
+            border-radius: calc(4 / 16 * 1rem);
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            /* prevents padding from adding to the width */
+            box-sizing: border-box;
+            transition: color 0.3s;
+
+            &:before {
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 0%;
+                background: #000;
+                opacity: 1;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                transition: width 0.3s;
+            }
+
+            &:hover {
+                color: #fff;
+                &:before {
+                    width: 100%;
+                }
+            }
+        }
+
+        .picture {
+            width: 100%;
+            /* 456px - 598px */
+            height: clamp(28.5rem, 46vw, 37.375rem);
+            overflow: hidden;
+            display: block;
+            /* sends it to the bottom in the 2nd position */
+            order: 2;
+            position: relative;
+            z-index: 1;
+
+            // &:before {
+            //     /* black overlay */
+            //     content: "";
+            //     width: 100%;
+            //     height: 100%;
+            //     background: #1a1a1a;
+            //     opacity: 0.2; */
+            //     position: absolute;
+            //     display: block;
+            //     top: 0;
+            //     left: 0;
+            //     z-index: 1;
+            // }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                object-position: left;
+                top: 0;
+                left: 0;
+                filter: saturate(0.7); /* Lowered image saturation */
+            }
+        }
+
+        .background {
+            width: 100%;
+            height: 50%;
+            background-color: #1a1a1a;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #sbsr-1279 {
+        .content {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            row-gap: calc(32 / 16 * 1rem);
+        }
+
+        .flex {
+            width: 45%;
+        }
+
+        .title {
+            margin: 0;
+        }
+
+        .text {
+            width: 50%;
+        }
+
+        .button-solid {
+            margin-right: auto;
+        }
+    }
+}
+
+/* Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+    #sbsr-1279 {
+        /* moved padding back to the section container */
+        padding: var(--sectionPadding);
+
+        .container {
+            max-width: calc(1280 / 16 * 1rem);
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .content {
+            width: 100%;
+            max-width: calc(433 / 16 * 1rem);
+            margin: 0;
+            flex-direction: column;
+            row-gap: 0;
+            order: 1;
+        }
+
+        .flex {
+            width: 100%;
+        }
+
+        .title {
+            margin: 0 0 calc(16 / 16 * 1rem) 0;
+            color: var(--headerColor);
+        }
+
+        .text {
+            width: 100%;
+        }
+
+        .picture {
+            max-width: calc(738 / 16 * 1rem);
+        }
+
+        .background {
+            width: 60vw;
+            height: 100%;
+            /* 172px - 336px */
+            margin-left: clamp(11.125rem, 30vw, 21rem);
+            left: 50%;
+            top: 0;
+        }
+    }
+}
+
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode {
+        #sbsr-1279 {
+            .title,
+            .text {
+                color: var(--bodyTextColorWhite);
+            }
+
+            .text {
+                opacity: 0.8;
+            }
+
+            .background {
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+        }
+    }
+}
+
+                                
+
+/*-- -------------------------- -->
 <---        Recent Posts        -->
 <--- -------------------------- -*/
 
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-    #blog-1347 {
-        padding: var(--sectionPadding);
-        padding-bottom: 0;
+    #blog {
+        padding: 4rem;
+        border-top: 2px solid #000;
         position: relative;
         z-index: 1;
         overflow: hidden;
@@ -132,6 +386,7 @@
             justify-content: space-between;
             /* makes the item text the element that grows to fill the container */
             flex-grow: 1;
+            border: 1px solid #ebebeb;
             transition: background-color 0.3s;
         }
 
@@ -274,7 +529,7 @@
 
 /* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
-    #blog-1347 {
+    #blog {
         .bubbles {
             display: block;
         }
@@ -293,7 +548,7 @@
 
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
-    #blog-1347 {
+    #blog {
         .container {
             max-width: calc(1280 / 16 * 1rem);
         }
@@ -310,7 +565,7 @@
 
 /* Large Desktop - 1300px */
 @media only screen and (min-width: 81.25rem) {
-    #blog-1347 {
+    #blog {
         .bubbles {
             margin-right: calc(-990 / 16 * 1rem);
             right: 50%;
@@ -321,7 +576,7 @@
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
     body.dark-mode {
-        #blog-1347 {
+        #blog {
             .topper {
                 color: var(--primaryLight);
             }
@@ -359,7 +614,7 @@
 /* Mobile */
 @media only screen and (min-width: 0rem) {
     #gallery-42 {
-        padding: var(--sectionPadding);
+        padding: 4rem;
 
         .container {
             width: 100%;

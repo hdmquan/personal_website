@@ -16,5 +16,5 @@ module.exports = {
         "twitter": "https://www.instagram.com/",
     },
     //! Make sure you include the file protocol (e.g. https://) and that NO TRAILING SLASH is included
-    "domain": "https://northmelbourneweb.com"
+    "domain": "https://alan-huynh.is-a.dev"
 };

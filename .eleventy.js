@@ -3,6 +3,9 @@ const pluginEleventyNavigation = require("@11ty/eleventy-navigation");
 const pluginMinifier = require("@sherby/eleventy-plugin-files-minifier");
 const pluginSitemap = require("@quasibit/eleventy-plugin-sitemap");
 
+const dateFilter = require("nunjucks-date-filter");
+
+
 // Configs
 const configCss = require("./src/config/css");
 const configJs = require("./src/config/javascript");
@@ -12,6 +15,7 @@ const configServer = require("./src/config/server");
 // Other
 const filterPostDate = require("./src/config/postDate");
 const isProduction = configServer.isProduction;
+
 
 module.exports = function (eleventyConfig) {
     // Add Template Formats
@@ -24,6 +28,7 @@ module.exports = function (eleventyConfig) {
     // Add Plugins
     eleventyConfig.addPlugin(pluginEleventyNavigation);
     eleventyConfig.addPlugin(pluginSitemap, configSitemap);
+    eleventyConfig.addNunjucksFilter("date", dateFilter);
 
     if (isProduction) {
         eleventyConfig.addPlugin(pluginMinifier);

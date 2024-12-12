@@ -1,6 +1,6 @@
 ---
-title: "Blog | Code Stitch Web Designs"
-description: "Meta description for the page"
+title: "Projects | Alan Huynh"
+description: "Where I wrote about Data and Machine Learning projects I worked on"
 preloadImg: "/assets/images/cabinets2.jpg"
 permalink: "project/"
 eleventyNavigation:
@@ -16,23 +16,8 @@ eleventyNavigation:
 <!-- ============================================ -->
 
 <section id="int-hero">
-  <h1 id="home-h">Blog</h1>
-  <picture>
-    <source
-      media="(max-width: 600px)"
-      srcset="/assets/images/cabinets2-m.jpg"
-    />
-    <source media="(min-width: 601px)" srcset="/assets/images/cabinets2.jpg" />
-    <img
-      aria-hidden="true"
-      decoding="async"
-      src="/assets/images/cabinets2.jpg"
-      alt="kitchen cabinets"
-      loading="eager"
-      width="2500"
-      height="1667"
-    />
-  </picture>
+  <h1 id="home-h">My Project</h1>
+  <p class="description">Where I wrote about interesting stuff I worked on</p>
 </section>
 
 <!-- ============================================ -->
@@ -46,15 +31,15 @@ eleventyNavigation:
     <!--                 Blog Articles                -->
     <!-- ============================================ -->
 
-    {% if collections.blog | length == 0 %}
-    <h1>No Recent Posts</h1>
-    {% else %} {%- for post in collections.blog | reverse -%}
+    {% if collections.project | length == 0 %}
+    <h1>No Recent Projects</h1>
+    {% else %} {%- for project in collections.project | reverse -%}
     <article class="recent-articles">
       <!--Main Article Image-->
       <picture class="blog-mainImage">
         <img
-          src="{{ post.data.image }}"
-          alt="{{ post.data.imageAlt }}"
+          src="{{ project.data.image }}"
+          alt="{{ project.data.imageAlt }}"
           width="795"
           height="400"
           decoding="async"
@@ -66,26 +51,26 @@ eleventyNavigation:
           <!--Author Image-->
           <picture class="blog-author-img">
             <img
-              src="/assets/svgs/profile.svg"
-              alt="house"
+              src="/assets/images/alan.jpeg"
+              alt="Author Image"
               width="32"
               height="32"
               decoding="async"
             />
           </picture>
-          <span class="blog-author">{{ post.data.author }}</span>
+          <span class="blog-author">{{ project.data.author }}</span>
           <span aria-hidden="true" class="blog-dot"></span>
           <!--Blog Date-->
-          <span class="blog-date">{{ post.date | postDate }}</span>
+          <span class="blog-date"
+            >{{ project.date | date("MMMM D, YYYY") }}</span
+          >
         </div>
-        <h2 class="blog-h1">{{ post.data.title }}</h2>
-        <p class="blog-desc">{{ post.data.description }}</p>
-        <a href="{{ post.url }}" class="blog-link">Continue Reading</a>
+        <h2 class="blog-h1">{{ project.data.title }}</h2>
+        <p class="blog-desc">{{ project.data.description }}</p>
+        <a href="{{ project.url }}" class="blog-link">Continue Reading</a>
       </div>
     </article>
     {%- endfor -%} {% endif %}
   </div>
-
-  {% include 'components/featured-post.html' %}
 </div>
 {% endblock %}

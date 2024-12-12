@@ -3,44 +3,43 @@
 <--- -------------------------- -*/
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-  #footer-108 {
+  #footer {
     /* 40px - 100px top and bottom */
-    padding: clamp(2.5rem, 7.9vw, 6.25rem) 1rem;
     /* 40px - 50px */
-    padding-bottom: clamp(2.5rem, 7.9vw, 3.125rem);
+    padding-bottom: clamp(1rem, 3vw, 2rem);
   }
-  #footer-108 .container {
+  #footer .container {
     width: 100%;
-    max-width: 80rem;
     margin: auto;
   }
-  #footer-108 .ul {
+  #footer .ul {
     /* 40px - 60px*/
-    padding: 0 0 clamp(2.5rem, 4.7vw, 3.75rem);
+    padding: clamp(2.5rem, 4.7vw, 3.75rem) 0;
     margin: auto;
-    border-bottom: 1px solid #eff0f6;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
   }
-  #footer-108 .li {
+  #footer .li {
     list-style: none;
     text-align: center;
     margin-bottom: 1.25rem;
   }
-  #footer-108 .li:last-of-type {
+  #footer .li:last-of-type {
     margin-bottom: 0;
   }
-  #footer-108 .link {
+  #footer .link {
     /* 16px - 20px */
     font-size: clamp(1rem, 1.55vw, 1.25rem);
     line-height: 1.5em;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 200;
     color: var(--bodyTextColor);
     position: relative;
   }
-  #footer-108 .link:hover:before {
+  #footer .link:hover:before {
     width: 100%;
   }
-  #footer-108 .link:before {
+  #footer .link:before {
     /* top right box */
     content: "";
     width: 0%;
@@ -53,7 +52,7 @@
     left: 0;
     transition: width 0.3s;
   }
-  #footer-108 .copyright {
+  #footer .copyright {
     /* 14px - 16px */
     font-size: clamp(0.875rem, 1.6vw, 1rem);
     text-align: center;
@@ -65,28 +64,28 @@
 }
 /* Tablet - 600px */
 @media only screen and (min-width: 37.5rem) {
-  #footer-108 .ul {
+  #footer .ul {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  #footer-108 .li {
+  #footer .li {
     /* 44px - 88px */
     margin: 0 clamp(2.75rem, 6.2vw, 5.5rem) 0 0;
   }
-  #footer-108 .li:last-of-type {
+  #footer .li:last-of-type {
     margin: 0;
   }
 }
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
-  body.dark-mode #footer-108 {
+  body.dark-mode #footer {
     background-color: rgba(0, 0, 0, 0.2);
   }
-  body.dark-mode #footer-108 .link {
+  body.dark-mode #footer .link {
     color: #fff;
   }
-  body.dark-mode #footer-108 .link:before {
+  body.dark-mode #footer .link:before {
     background: #fff;
   }
 }

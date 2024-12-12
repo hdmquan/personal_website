@@ -1,7 +1,7 @@
 ---
-title: "Pixel Perfect Websites | Code Stitch Web Designs | Denver, CO"
-description: "Meta description for the page"
-preloadImg: "/assets/images/landing.jpg"
+title: "Melbourne Machine Learning Engineer | Geospatial & Computer Vision"
+description: "Alan Huynh is a Melbourne-based Machine Learning Engineer specializing in geospatial analysis, computer vision, and automation. Explore his portfolio, blog, and innovative projects involving geospatial temporal and environmental data."
+
 permalink: "/"
 tags: "sitemap" # Sitemap will use all pages in content/, due to content.json. As index.html is not included in content/ we need to manually add the sitemap tag to this page (only).
 eleventyNavigation:
@@ -39,17 +39,120 @@ eleventyNavigation:
   <div class="container">
     <h1 class="title">Hi, I'm Alan.</h1>
     <p class="text">
-      <span>Machine Learning</span> Engineer with <span>Geospatial</span> and
+      <span>Machine Learning</span> Engineer in <span>Geospatial</span> and
       <span>Computer Vision</span>.
     </p>
+    <div class="social-section">
+      <h2 class="topper">My Social</h2>
+      <div class="social-icons">
+        <a
+          href="https://www.linkedin.com/in/hdmquan"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/assets/svgs/linkedin-svgrepo-com.svg"
+            alt="LinkedIn"
+            width="40"
+            height="40"
+          />
+        </a>
+        <a
+          href="https://www.github.com/hdmquan"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/assets/svgs/github-svgrepo-com.svg"
+            alt="GitHub"
+            width="40"
+            height="40"
+          />
+        </a>
+        <a
+          href="https://www.twitter.com/alan_huyn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/assets/svgs/twitter-svgrepo-com.svg"
+            alt="Twitter"
+            width="40"
+            height="40"
+          />
+        </a>
+        <a
+          href="https://soundcloud.com/symphonynonine"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/assets/svgs/soundcloud-svgrepo-com.svg"
+            alt="Instagram"
+            width="40"
+            height="40"
+          />
+        </a>
+      </div>
+      <a
+        href="/assets/images/blog/alan-huynh-resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button-solid"
+        >My Resume</a
+      >
+    </div>
   </div>
+</section>
+
+<!-- ============================================ -->
+<!--              Side By Side Reverse            -->
+<!-- ============================================ -->
+
+<section id="sbsr-1279">
+  <div class="container">
+    <picture class="picture">
+      <img
+        loading="lazy"
+        decoding="async"
+        src="/assets/images/talk.jpeg"
+        alt="construction"
+        width="738"
+        height="598"
+      />
+    </picture>
+    <div class="content">
+      <div class="flex">
+        <h2 class="title">About Me</h2>
+      </div>
+      <p class="text">
+        I'm a Machine Learning Engineer in Melbourne who loves automation and
+        exploring all kinds of ML projects. I enjoy working on Geospatial,
+        Environmental, and Temporal data but am always open to new challenges.
+      </p>
+      <p class="text">
+        Outside of software, I'm a classical-trained pianist, composer, EDM fan,
+        and rhythm game enthusiast.
+      </p>
+    </div>
+  </div>
+  <picture class="background">
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/assets/svgs/contour-lines.svg"
+      alt="waves"
+      width="960"
+      height="839"
+    />
+  </picture>
 </section>
 
 <!-- ============================================ -->
 <!--                 Recent Projects              -->
 <!-- ============================================ -->
 
-<section id="blog-1347">
+<section id="blog">
   <div class="container">
     <div class="content">
       <div class="flex">
@@ -100,7 +203,7 @@ eleventyNavigation:
   #}
 </section>
 
-<section id="blog-1347">
+<section id="blog">
   <div class="container">
     <div class="content">
       <div class="flex">
@@ -149,163 +252,6 @@ eleventyNavigation:
   {#
   <div class="bubbles" aria-hidden="true"></div>
   #}
-</section>
-
-<!-- ============================================ -->
-<!--                  Gallery                     -->
-<!-- ============================================ -->
-
-<section id="gallery-42">
-  <div class="container">
-    <div class="content">
-      <div class="flex">
-        <span class="topper">My Gallery</span>
-        <h2 class="title">Silly pictures of me</h2>
-      </div>
-      {#
-      <div class="flex">
-        <a aria-label="view more pictures" href="" class="more-link">
-          View More
-          <img src="/assets/svgs/arrow.svg" alt="Arrow Icon" />
-        </a>
-      </div>
-      #}
-    </div>
-    <div class="image-group">
-      <picture class="picture picture-1">
-        <source
-          media="(max-width: 600px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra1-m.jpg
-          "
-        />
-        <source
-          media="(min-width: 601px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra1.jpg
-          "
-        />
-        <img
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra1.jpg"
-          alt="formerly dress you people outside"
-          width="380"
-          height="271"
-        />
-      </picture>
-      <picture class="picture picture-2">
-        <source
-          media="(max-width: 600px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra2-m.jpg
-          "
-        />
-        <source
-          media="(min-width: 601px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra2.jpg
-          "
-        />
-        <img
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra2.jpg"
-          alt="formal dinner"
-          width="380"
-          height="271"
-        />
-      </picture>
-      <picture class="picture picture-3">
-        <source
-          media="(max-width: 600px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra3-m.jpg
-          "
-        />
-        <source
-          media="(min-width: 601px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra3.jpg
-          "
-        />
-        <img
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra3.jpg"
-          alt="formerly dress you people outside"
-          width="780"
-          height="582"
-        />
-      </picture>
-      <picture class="picture picture-4">
-        <source
-          media="(max-width: 600px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra4-m.jpg
-          "
-        />
-        <source
-          media="(min-width: 601px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra4.jpg
-          "
-        />
-        <img
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra4.jpg"
-          alt="recital"
-          width="780"
-          height="582"
-        />
-      </picture>
-      <picture class="picture picture-5">
-        <source
-          media="(max-width: 600px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra5-m.jpg
-          "
-        />
-        <source
-          media="(min-width: 601px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra5.jpg
-          "
-        />
-        <img
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra5.jpg"
-          alt="formal evening"
-          width="380"
-          height="271"
-        />
-      </picture>
-      <picture class="picture picture-6">
-        <source
-          media="(max-width: 600px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra6-m.jpg
-          "
-        />
-        <source
-          media="(min-width: 601px)"
-          srcset="
-            https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra6.jpg
-          "
-        />
-        <img
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Gallery/orchestra6.jpg"
-          alt="formal dinner"
-          width="380"
-          height="271"
-        />
-      </picture>
-    </div>
-  </div>
 </section>
 
 {% endblock %}

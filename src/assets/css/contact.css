@@ -1,272 +1,249 @@
-/* PAGE-SPECIFIC STYLES FOR THE CONTACT PAGE */
+/* STYLES FOR ABOVE THE FOLD */
 /*-- -------------------------- -->
-<---          Contact           -->
+<---           Hero             -->
 <--- -------------------------- -*/
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-  :root {
-    /* 13px - 16px */
-    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
-    /* 31px - 49px */
-    --headerFontSize: clamp(1.9375rem, 4.5vw, 3.0625rem);
-    --bodyFontSize: 1rem;
-    /* 60px - 100px top and bottom */
-    --sectionPadding: clamp(3.75em, 7.82vw, 6.25em) 1rem;
-  }
-  #contact {
-    padding: var(--sectionPadding);
-    font-family: "Nexa", "Arial", sans-serif;
-  }
-  #contact .container {
-    margin: auto;
-    /* changes to 1280px at desktop */
-    max-width: 50rem;
-    width: 100%;
-  }
-  #contact .content {
-    width: 100%;
-  }
-  #contact .topper {
-    /* 8px - 12px */
-    margin-bottom: clamp(0.5rem, 1.4vw, 0.75rem);
-    text-align: left;
-  }
-  #contact .title {
-    max-width: 50rem;
-    text-align: left;
-  }
-  #contact .text {
-    margin: 0 auto 0 0;
-    /* 40px - 48px */
-    margin-bottom: clamp(2.5rem, 6.3vw, 3rem);
-    /* 404px - 522px */
-    max-width: clamp(25.25rem, 30vw, 32.625rem);
-    text-align: left;
-  }
-  #contact #form {
-    margin-bottom: 2.5rem;
-  }
-  #contact #form label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    /* 12px - 20px */
-    margin-bottom: clamp(0.75rem, 1.3em, 1.25rem);
-    font-size: 1rem;
-    line-height: 1.5em;
-    font-weight: 700;
-    color: var(--headerColor);
-  }
-  #contact #form .label-message {
-    /* 32px - 48px */
-    margin-bottom: clamp(2rem, 6.3vw, 3rem);
-  }
-  #contact #form input,
-  #contact #form textarea {
-    border: 1px solid #b4b2c7;
-    border-radius: 0.5rem;
-    margin-top: 0.25rem;
-    height: 4rem;
-    width: 100%;
-    /* prevents border & padding from affecting height */
-    box-sizing: border-box;
-    padding-left: 1.25rem;
-    font-size: 1rem;
-    transition: border 0.3s;
-  }
-  #contact #form input:hover,
-  #contact #form textarea:hover {
-    border: 1px solid var(--primary);
-  }
-  #contact #form textarea {
-    min-height: 7.5rem;
-    padding-top: 1.25rem;
-    font-family: inherit;
-  }
-  #contact #form .button-solid {
-    border: none;
-    width: 100%;
-  }
-  #contact .right-section {
+  #hero {
+    z-index: 1;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    border-radius: 0.5rem;
-    height: 20rem;
-    /* cuts off corners on img tag */
     overflow: hidden;
-    /* 24px - 40px top & bottom */
-    /* 20px - 40px left & right */
-    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+    padding-top: 7.5rem;
+    text-align: center;
   }
-  #contact .header {
-    display: block;
-    margin-bottom: 0.5rem;
-    /* 16px - 20px */
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    line-height: 1.2em;
-    font-weight: 700;
-    color: var(--bodyTextColorWhite);
+  #hero span {
+    font-weight: 900;
   }
-  #contact .link {
+  #hero .container {
     position: relative;
-    display: block;
-    margin-bottom: 1.25rem;
-    text-decoration: none;
-    /* 16px - 20px */
-    font-size: clamp(1rem, 3vw, 1.25rem);
-    line-height: 1.2em;
-    color: var(--bodyTextColorWhite);
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 80em;
+    width: 90%;
   }
-  #contact .link:before {
+  #hero .container:before {
     position: absolute;
-    bottom: -0.125rem;
+    top: 0;
     left: 0;
-    /* Animated underline */
+    /* Left Line */
     content: "";
     opacity: 1;
     display: block;
-    /* current color of the parent */
-    background: currentColor;
-    height: 2px;
-    width: 0%;
-    transition: width 0.3s;
+    background: -moz-linear-gradient(top, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0) 100%); /* Chrome10-25,Safari5.1-6 */
+    height: 100%;
+    width: 1px;
   }
-  #contact .link:hover:before {
+  #hero .topper {
+    margin-bottom: 1rem;
+    color: var(--primary);
+    text-align: center;
+  }
+  #hero .title {
     width: 100%;
+    color: var(--bodyTextColor);
+    font-size: clamp(6rem, 10vw, 8rem);
+    margin-bottom: 2rem;
+    text-align: left;
   }
-  #contact .link:last-of-type {
-    margin-bottom: 0;
+  #hero .text {
+    /* 32px - 40px */
+    /* 40px - 48px */
+    margin-bottom: clamp(2.5rem, 4vw, 3rem);
+    color: var(--bodyTextColor);
+    font-size: clamp(1.9375rem, 3.9vw, 3.0625rem);
+    max-width: 58.75rem;
+    margin-left: auto;
+    text-align: left;
   }
-  #contact .block {
-    /* sends second address line to the bottom on its own line */
+  #hero .button-solid {
+    margin-bottom: 1rem;
+    height: initial;
+    line-height: clamp(2.875em, 5.5vw, 3.5em);
+    width: auto;
+    align-self: flex-start;
+    color: var(--bodyTextColorWhite);
+  }
+  #hero .button-transparent {
+    z-index: 1;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--bodyTextColorWhite);
+    margin: 0 0.5rem;
+    background-color: transparent;
+    /* 46px - 56px */
+    height: clamp(2.875em, 5.5vw, 3.5em);
+    width: 11.25rem;
+    box-sizing: border-box;
+    padding: 0;
+    text-decoration: none;
+    font-size: 1rem;
+    /* 46px - 56px */
+    line-height: clamp(2.875em, 5.5vw, 3.5em);
+    font-weight: 700;
+    color: #fff;
+  }
+  #hero .button-transparent .img {
     display: block;
+    margin-right: 0.75rem;
   }
-  #contact .bg-picture {
+  #hero .button-transparent:before {
     z-index: -1;
     position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    height: 100%;
-    width: 100%;
-    transition: transform 0.6s;
-  }
-  #contact .bg-picture img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    /* Makes img tag act as a background image */
-    object-fit: cover;
-  }
-  #contact .bg-picture:before {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* background color overlay */
+    /* so it sits on top of the border */
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
     content: "";
+    opacity: 1;
+    /* this is what creates the grow affect on hover */
+    transform: scaleX(0);
     display: block;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
-    height: 100%;
-    width: 100%;
+    background: #000;
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  #hero .button-transparent:hover:before {
+    transform: scaleX(1);
   }
 }
-/* Tablet - 700px */
-@media only screen and (min-width: 43.75em) {
-  #contact #form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  #contact #form label {
-    width: 48%;
-  }
-  #contact #form .label-message {
-    width: 100%;
-  }
-}
-/* Small Desktop - 1024px */
+/* Tablet - 768px */
 @media only screen and (min-width: 64rem) {
-  #contact .container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    max-width: 80rem;
-    gap: 5rem;
+  #hero .container {
+    padding: 4rem 0 0 0;
   }
-  #contact #form {
-    max-width: 39.375rem;
+  #hero .container:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* Right Line */
+    content: "";
+    opacity: 1;
+    display: block;
+    background: -moz-linear-gradient(top, rgba(250, 251, 252, 0) 0%, rgba(250, 251, 252, 0.5) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(250, 251, 252, 0) 0%, rgba(250, 251, 252, 0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+    height: 100%;
+    width: 1px;
   }
-  #contact #form label {
-    width: 100%;
-  }
-  #contact .right-section {
-    /* changes to 578px at 1300px wide */
-    height: 42.875rem;
-    max-width: 33.875rem;
-    width: 40%;
-    /* prevents flexbox from squishing it */
-    flex: none;
-  }
-  #contact .right-section:hover .bg-picture {
-    transform: scale(1.1);
-  }
-  #contact .block {
-    /* goes back to inline so it stays "in line" with the rest of the text */
-    display: inline-block;
+  #hero .button-solid {
+    margin-right: 1.25rem;
+    margin-bottom: 0;
   }
 }
-/* Small Desktop - 1300px */
+/* Desktop Parallax Effect - 1300px */
 @media only screen and (min-width: 81.25em) {
-  #contact #form {
-    column-gap: 0rem;
-  }
-  #contact #form label {
-    max-width: 19.0625rem;
-    width: 48%;
-  }
-  #contact #form .label-message {
-    max-width: 100%;
-  }
-  #contact .right-section {
-    height: 36.125rem;
+  #hero {
+    background: url("/assets/images/landing.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* creates parallax effect on background image */
+    background-attachment: fixed;
   }
 }
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
-  body.dark-mode #contact .text,
-  body.dark-mode #contact .title {
-    color: var(--bodyTextColorWhite);
+  body.dark-mode #hero .background:before {
+    opacity: 0.8;
   }
-  body.dark-mode #contact #form label,
-  body.dark-mode #contact #form input,
-  body.dark-mode #contact #form textarea {
-    background-color: transparent;
-    color: var(--bodyTextColorWhite);
+}
+/*-- -------------------------- -->
+<---          Services          -->
+<--- -------------------------- -*/
+/* Mobile */
+@media only screen and (min-width: 0rem) {
+  .services {
+    z-index: 100;
+    position: relative;
+    border-top: 0.375em solid var(--primary);
+    border-radius: 0.3125em;
+    margin: auto;
+    margin-top: -10.4375em;
+    margin-bottom: 3.125em;
+    background: #fff;
+    max-width: 82.5em;
+    width: 90%;
+    padding: 3.125em 1.25em;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.05);
   }
-  body.dark-mode #contact #form label::placeholder,
-  body.dark-mode #contact #form input::placeholder,
-  body.dark-mode #contact #form textarea::placeholder {
-    /* lighten up the color of the text by 40%*/
-    filter: brightness(1.4);
+  .services .card {
+    display: block;
+    margin: auto;
+    margin-bottom: 3.125em;
+    max-width: 22.3125em;
+    width: 100%;
   }
-  body.dark-mode #contact .bg-picture {
-    background-color: #000;
+  .services .card picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: auto;
+    margin-bottom: 1.4375em;
+    background: var(--primary);
+    height: 5.5em;
+    width: 5.5em;
   }
-  body.dark-mode #contact .bg-picture img {
-    /* lets parent background-color bleed through and darken it */
-    opacity: 0.5;
+  .services .card picture img {
+    height: 3em;
+    width: 3em;
+  }
+  .services .card h2 {
+    margin-bottom: 0.65em;
+    font-size: 2em;
+    line-height: 1.35em;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+  }
+  .services .card p {
+    opacity: 0.7;
+    width: 100%;
+    line-height: 1.3333333333em;
+    text-align: center;
+  }
+  .services .card:last-of-type {
+    margin-bottom: 0;
+  }
+}
+/* Inbetween */
+@media only screen and (min-width: 768px) {
+  .services {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 98%;
+    font-size: min(1.8vw, 1em);
+  }
+  .services .card {
+    margin: 0;
+    max-width: 20.3125em;
+  }
+}
+/* Large Desktop */
+@media only screen and (min-width: 1300px) {
+  .services {
+    padding: 3.125em 5em;
+  }
+  .services .card {
+    max-width: 22.3125em;
+  }
+}
+/* Dark mode */
+@media only screen and (min-width: 0rem) {
+  body.dark-mode #services {
+    background: var(--medium);
+  }
+  body.dark-mode #services picture {
+    background: var(--primaryDark);
+  }
+  body.dark-mode #services h2 {
+    font-weight: bold;
+    color: #fff;
   }
 }
 

@@ -18,6 +18,30 @@
             font-weight: 900;
         }
 
+        .social-section {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+
+            .topper {
+                margin: 0;
+            }
+
+                img {
+                    &:hover {
+                    filter: invert(25%) sepia(50%) saturate(1000%) hue-rotate(270deg);
+                }
+            }
+        }
+
+        a {
+            text-decoration: none;
+            // font-size: 0;
+            // line-height: 0;
+        }
+
         .container {
             position: relative;
             display: flex;
@@ -70,10 +94,19 @@
         .button-solid {
             margin-bottom: calc(16 / 16 * 1rem);
             height: initial;
-            line-height: clamp(2.875em, 5.5vw, 3.5em);
+            // line-height: clamp(2.875em, 5.5vw, 3.5em);
+            border: 2px solid #000;
+            line-height: 2.30rem;
+            padding: 0 1.25rem;
             width: auto;
             align-self: flex-start;
-            color: var(--bodyTextColorWhite);
+            color: var(--bodyTextColor);
+            background-color: #fff;
+
+            &:hover {
+                color: #fff;
+            }
+
         }
 
         .button-transparent {

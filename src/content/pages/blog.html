@@ -1,6 +1,6 @@
 ---
-title: "Blog | Code Stitch Web Designs"
-description: "Meta description for the page"
+title: "Blog | Alan Huynh"
+description: "Where I wrote about machine learning and geospatial stuff!"
 preloadImg: "/assets/images/cabinets2.jpg"
 permalink: "blog/"
 eleventyNavigation:
@@ -16,23 +16,8 @@ eleventyNavigation:
 <!-- ============================================ -->
 
 <section id="int-hero">
-  <h1 id="home-h">Blog</h1>
-  <picture>
-    <source
-      media="(max-width: 600px)"
-      srcset="/assets/images/cabinets2-m.jpg"
-    />
-    <source media="(min-width: 601px)" srcset="/assets/images/cabinets2.jpg" />
-    <img
-      aria-hidden="true"
-      decoding="async"
-      src="/assets/images/cabinets2.jpg"
-      alt="kitchen cabinets"
-      loading="eager"
-      width="2500"
-      height="1667"
-    />
-  </picture>
+  <h1 id="home-h">My Blog</h1>
+  <p class="description">Where I wrote about interesting stuff I found</p>
 </section>
 
 <!-- ============================================ -->
@@ -85,7 +70,5 @@ eleventyNavigation:
     </article>
     {%- endfor -%} {% endif %}
   </div>
-
-  {% include 'components/featured-post.html' %}
 </div>
 {% endblock %}
