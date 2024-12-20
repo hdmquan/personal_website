@@ -25,7 +25,7 @@
     margin: 0;
   }
   #hero .social-section img:hover {
-    filter: invert(25%) sepia(50%) saturate(1000%) hue-rotate(270deg);
+    filter: invert(40%) sepia(39%) saturate(3345%) hue-rotate(223deg) brightness(104%) contrast(101%);
   }
   #hero a {
     text-decoration: none;

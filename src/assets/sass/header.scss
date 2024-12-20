@@ -688,6 +688,7 @@
             max-width: 100%;
             border-radius: 0;
             top: 0;
+            border-bottom: 2px #000 solid;
         }
     }
 
@@ -844,6 +845,7 @@
             padding: 0;
             display: flex;
             align-items: center;
+            font-weight: 900;
             /* prevent flexbox from squishing it */
             flex: none;
         }
@@ -921,6 +923,13 @@
 /* Dark Mode */
 @media only screen and (min-width: 64rem) {
     body.dark-mode {
+
+        &.scroll {
+            #navigation {
+                border-bottom: 2px #fff solid;
+            }
+        }
+
         #navigation {
             background-color: var(--dark);
 

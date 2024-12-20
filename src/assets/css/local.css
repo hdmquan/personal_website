@@ -11,16 +11,14 @@
     border-top: 2px solid #000;
   }
   #about .container {
-    width: 100%;
-    /* changes to 1280px at desktop */
-    max-width: 53.125rem;
+    max-width: 80rem;
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: stretch;
     flex-direction: column;
     /* 48px - 108px */
-    gap: clamp(3rem, 5vw, 6.75rem);
+    gap: clamp(6rem, 10vw, 13rem);
   }
   #about .content {
     /* set text align to left if content needs to be left aligned */
@@ -36,9 +34,6 @@
   #about .text {
     margin-bottom: 1rem;
     font-size: 1.5rem;
-  }
-  #about .text:last-of-type {
-    margin-bottom: 2rem;
   }
   #about .button-solid {
     font-size: 1rem;
@@ -103,7 +98,7 @@
   }
   #about .background {
     width: 100%;
-    height: 50%;
+    height: 40%;
     background-color: #1a1a1a;
     display: block;
     position: absolute;
@@ -196,7 +191,10 @@
     opacity: 0.8;
   }
   body.dark-mode #about .background {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #fff;
+  }
+  body.dark-mode #about .background img {
+    filter: invert(100%);
   }
 }
 /*-- -------------------------- -->
@@ -212,7 +210,7 @@
     overflow: hidden;
   }
   #blog .container {
-    width: 100%;
+    width: 90%;
     max-width: 80rem;
     margin: auto;
     display: flex;
@@ -303,7 +301,7 @@
   #blog .picture img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;

@@ -1,5 +1,5 @@
 ---
-title: First place in MLAI Aus Green Battery Hack
+title: MLAI Aus Green Battery Hack Submission
 url: green-battery-hack
 description: The MLAI Green Battery Hack is a beginner friendly AI hackathon to
   support Australia's journey to carbon net zero. Your AI model will control a
