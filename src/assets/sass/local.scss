@@ -386,10 +386,11 @@
             padding: calc(20 / 16 * 1rem);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             /* makes the item text the element that grows to fill the container */
             flex-grow: 1;
-            border: 1px solid #ebebeb;
+            // border: 1px solid #000;
+            background-color: #f9f9f9;
             transition: background-color 0.3s;
         }
 
@@ -405,7 +406,7 @@
             align-items: center;
             gap: calc(16 / 16 * 1rem);
             transition: color 0.3s;
-            margin-bottom: calc(16 / 16 * 1rem);
+            margin-bottom: calc(32 / 16 * 1rem);
         }
 
         .icon-wrapper {

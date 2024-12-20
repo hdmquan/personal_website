@@ -310,10 +310,10 @@
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     /* makes the item text the element that grows to fill the container */
     flex-grow: 1;
-    border: 1px solid #ebebeb;
+    background-color: #f9f9f9;
     transition: background-color 0.3s;
   }
   #blog .h3 {
@@ -328,7 +328,7 @@
     align-items: center;
     gap: 1rem;
     transition: color 0.3s;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
   #blog .icon-wrapper {
     width: 3rem;
