@@ -33,7 +33,7 @@ eleventyNavigation:
 
     {% if collections.project | length == 0 %}
     <h1>No Recent Projects</h1>
-    {% else %} {%- for project in collections.project | reverse -%}
+    {% else %} {%- for project in collections.project -%}
     <article class="recent-articles">
       <!--Main Article Image-->
       <picture class="blog-mainImage">
