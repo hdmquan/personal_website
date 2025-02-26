@@ -42,8 +42,5 @@
     },
     "resolutions": {
         "@dabh/diagnostics": "2.0.3"
-    },
-    "overrides": {
-        "@dabh/diagnostics": null
     }
 }
