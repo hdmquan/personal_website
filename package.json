@@ -44,6 +44,6 @@
         "@dabh/diagnostics": "2.0.3"
     },
     "overrides": {
-        "@dabh/diagnostics": "2.0.3"
+        "@dabh/diagnostics": null
     }
 }
