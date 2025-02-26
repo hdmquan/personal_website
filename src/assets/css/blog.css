@@ -356,6 +356,10 @@
   body.dark-mode .recent-articles .blog-date {
     color: #f7f7f7;
   }
+  body.dark-mode .recent-articles .blog-link {
+    background-color: #fff;
+    color: var(--headerColor);
+  }
   body.dark-mode .blog-sidebar .feature-h3,
   body.dark-mode .blog-sidebar .feature-date,
   body.dark-mode .blog-sidebar .blog-header {

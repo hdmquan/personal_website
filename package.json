@@ -10,7 +10,11 @@
         "build:eleventy": "cross-env ELEVENTY_ENV=PROD eleventy",
         "watch:cms": "npx decap-server",
         "start": "del-cli ./public --force && npm-run-all --parallel watch:*",
-        "build": "run-s build:*"
+        "build": "npm ci && run-s build:*"
+    },
+    "engines": {
+        "node": ">=16.0.0",
+        "npm": ">=8.0.0"
     },
     "repository": {
         "type": "git",
