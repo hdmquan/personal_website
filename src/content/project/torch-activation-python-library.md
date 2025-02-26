@@ -3,11 +3,13 @@ title: Torch Activation - Python library
 url: torch-activation
 description: Torch-activation, a collection of activation functions for PyTorch library
 author: Alan Huynh
-date: 2025-02-27T00:40:00.000Z
+date: 2024-12-12T17:16:00.000Z
 image: /assets/images/blog/untitled-design-3-.png
 imageAlt: torch-activation
 ---
 # Exploring Unconventional Activation Functions - Torch Activation Library
+
+[GitHub](https://github.com/hdmquan/torch_activation) | [PYPI](https://pypi.org/project/torch-activation/) | [ReadTheDocs](https://torch-activation.readthedocs.io/en/latest/index.html)
 
 ## Introduction
 
