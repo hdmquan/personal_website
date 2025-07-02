@@ -1,14 +1,10 @@
 @media only screen and (min-width: 0rem) {
   :root {
-    --primary: #000;
-    --primaryLight: #fff;
-    --secondary: #000;
-    --secondaryLight: #000;
-    --background: #fff;
-    --headerColor: #000;
-    --bodyTextColor: #111;
-    --bodyTextColorWhite: #fff;
-    --accent: #7070ff;
+    --text: #000;
+    --background: #EAE5D2;
+    --primary: #6CB274;
+    --secondary: #956f84;
+    --accent: ##7c5d92;
     /* 13px - 16px */
     --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
     /* 31px - 49px */
@@ -98,54 +94,22 @@
 }
 /* Fonts and general styles */
 @media only screen and (min-width: 0rem) {
+  /* Set base content font */
   body,
   html {
-    margin: 0;
-    overflow-x: hidden;
-    padding: 0;
-    font-family: "Nexa", Arial, sans-serif;
-    font-size: 100%;
-    color: var(--bodyTextColor);
+    font-family: "Baskervville", "Georgia", serif;
   }
-  *,
-  *:before,
-  *:after {
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-  }
-  body {
-    transition: background-color 0.3s;
-  }
-  .container {
-    position: relative;
-    margin: auto;
-    width: 92%;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 0;
-    color: var(--headerColor);
-    font-family: "Nexa", Arial, sans-serif;
-  }
-  p,
-  li,
-  a {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5em;
-  }
-  p,
-  li {
-    color: #222;
-  }
-  a:hover,
-  button:hover {
-    cursor: pointer;
+  /* Override for UI elements */
+  button,
+  nav a,
+  .header,
+  .footer,
+  .nav,
+  .menu a,
+  .cta,
+  .btn {
+    font-family: "Montserrat", "Helvetica Neue", sans-serif;
+    letter-spacing: 0.5px;
   }
   .skip {
     z-index: -1111111;
@@ -154,19 +118,32 @@
     left: 0;
     opacity: 0;
   }
+  /* baskervville-regular - latin */
   @font-face {
     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: "Nexa";
+    font-family: "Baskervville";
     font-style: normal;
-    font-weight: 200;
-    src: url("/assets/fonts/Nexa-ExtraLight.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+    font-weight: 400;
+    src: url("/assets/fonts/baskervville-v19-latin-regular.eot"); /* IE9 Compat Modes */
+    src: url("/assets/fonts/baskervville-v19-latin-regular.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/baskervville-v19-latin-regular.woff2") format("woff2"), url("/assets/fonts/baskervville-v19-latin-regular.woff") format("woff"), url("/assets/fonts/baskervville-v19-latin-regular.ttf") format("truetype"), url("/assets/fonts/baskervville-v19-latin-regular.svg#Baskervville") format("svg"); /* Legacy iOS */
   }
+  /* baskervville-600 - latin */
   @font-face {
     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: "Nexa";
+    font-family: "Baskervville";
     font-style: normal;
-    font-weight: 900;
-    src: url("/assets/fonts/Nexa-Heavy.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+    font-weight: 600;
+    src: url("/assets/fonts/baskervville-v19-latin-600.eot"); /* IE9 Compat Modes */
+    src: url("/assets/fonts/baskervville-v19-latin-600.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/baskervville-v19-latin-600.woff2") format("woff2"), url("/assets/fonts/baskervville-v19-latin-600.woff") format("woff"), url("/assets/fonts/baskervville-v19-latin-600.ttf") format("truetype"), url("/assets/fonts/baskervville-v19-latin-600.svg#Baskervville") format("svg"); /* Legacy iOS */
+  }
+  /* montserrat-regular - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/assets/fonts/montserrat-v30-latin-regular.eot"); /* IE9 Compat Modes */
+    src: url("/assets/fonts/montserrat-v30-latin-regular.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/montserrat-v30-latin-regular.woff2") format("woff2"), url("/assets/fonts/montserrat-v30-latin-regular.woff") format("woff"), url("/assets/fonts/montserrat-v30-latin-regular.ttf") format("truetype"), url("/assets/fonts/montserrat-v30-latin-regular.svg#Montserrat") format("svg"); /* Legacy iOS */
   }
 }
 /* Reset Margins */

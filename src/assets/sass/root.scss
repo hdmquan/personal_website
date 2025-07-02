@@ -113,64 +113,25 @@
 
 /* Fonts and general styles */
 @media only screen and (min-width: 0rem) {
+    /* Set base content font */
     body,
     html {
-        margin: 0;
-        overflow-x: hidden;
-        padding: 0;
-        font-family: "Nexa", Arial, sans-serif;
-        font-size: 100%;
-        color: var(--bodyTextColor);
+        font-family: "Baskervville", "Georgia", serif;
     }
 
-    *,
-    *:before,
-    *:after {
-        margin: 0;
-        box-sizing: border-box;
-        padding: 0;
+    /* Override for UI elements */
+    button,
+    nav a,
+    .header,
+    .footer,
+    .nav,
+    .menu a,
+    .cta,
+    .btn {
+        font-family: "Montserrat", "Helvetica Neue", sans-serif;
+        letter-spacing: 0.5px;
     }
 
-    body {
-        transition: background-color 0.3s;
-    }
-
-    .container {
-        position: relative;
-        margin: auto;
-        width: 92%;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0;
-        color: var(--headerColor);
-        font-family: "Nexa", Arial, sans-serif;
-    }
-
-    p,
-    li,
-    a {
-        margin: 0;
-        font-size: calc(16 / 16 * 1rem);
-        line-height: 1.5em;
-    }
-
-    p,
-    li {
-        color: #222;
-    }
-
-    a,
-    button {
-        &:hover {
-            cursor: pointer;
-        }
-    }
 
     // Hidden Screen reader skip nav button
     .skip {
@@ -206,6 +167,20 @@
         url('/assets/fonts/baskervville-v19-latin-600.woff') format('woff'), /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, iOS 5+ */
         url('/assets/fonts/baskervville-v19-latin-600.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
         url('/assets/fonts/baskervville-v19-latin-600.svg#Baskervville') format('svg'); /* Legacy iOS */
+    }
+
+    /* montserrat-regular - latin */
+    @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/montserrat-v30-latin-regular.eot'); /* IE9 Compat Modes */
+    src: url('/assets/fonts/montserrat-v30-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('/assets/fonts/montserrat-v30-latin-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+        url('/assets/fonts/montserrat-v30-latin-regular.woff') format('woff'), /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, iOS 5+ */
+        url('/assets/fonts/montserrat-v30-latin-regular.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+        url('/assets/fonts/montserrat-v30-latin-regular.svg#Montserrat') format('svg'); /* Legacy iOS */
     }
 }
 
