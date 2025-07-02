@@ -1,10 +1,10 @@
 @media only screen and (min-width: 0rem) {
   :root {
     --text: #000;
-    --background: #EAE5D2;
+    --background: #F3EEE7;
     --primary: #6CB274;
     --secondary: #956f84;
-    --accent: ##7c5d92;
+    --accent: #7c5d92;
     /* 13px - 16px */
     --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
     /* 31px - 49px */
@@ -21,17 +21,17 @@
     font-size: var(--topperFontSize);
     line-height: 1.2em;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--accent);
     text-align: inherit;
   }
   .title {
     position: relative;
     margin: 0 0 1rem 0;
-    max-width: 43.75rem;
+    max-width: 50rem;
     font-size: var(--headerFontSize);
     line-height: 1.2em;
     font-weight: 200;
-    color: var(--headerColor);
+    color: var(--text);
     text-align: inherit;
   }
   .text {
@@ -40,7 +40,7 @@
     width: 100%;
     font-size: var(--bodyFontSize);
     line-height: 1.5em;
-    color: var(--bodyTextColor);
+    color: var(--text);
     text-align: inherit;
   }
   .button-solid {
@@ -98,6 +98,7 @@
   body,
   html {
     font-family: "Baskervville", "Georgia", serif;
+    background-color: var(--background);
   }
   /* Override for UI elements */
   button,
