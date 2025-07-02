@@ -1,15 +1,11 @@
 @media only screen and (min-width: 0rem) {
     // Website colors
     :root {
-        --primary: #000;
-        --primaryLight: #fff;
-        --secondary: #000;
-        --secondaryLight: #000;
-        --background: #fff;
-        --headerColor: #000;
-        --bodyTextColor: #111;
-        --bodyTextColorWhite: #fff;
-        --accent: #7070ff;
+        --text: #000;
+        --background: #EAE5D2;
+        --primary: #6CB274;
+        --secondary: #956f84;
+        --accent: ##7c5d92;
 
         /* 13px - 16px */
         --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
