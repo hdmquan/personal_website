@@ -28,6 +28,7 @@ collections:
           - { label: "Featured Image", name: "image", widget: "image" }
           - { label: "Image Caption", name: "imageAlt", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "Tags", name: "tags", widget: "list" }
           
     - name: "project"
       label: "Project"
@@ -48,7 +49,8 @@ collections:
           - { label: "Featured Image", name: "image", widget: "image" }
           - { label: "Image Caption", name: "imageAlt", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
-          
+          - { label: "Tags", name: "tags", widget: "list" }
+
     - name: "song"
       label: "Song"
       folder: "src/content/song"

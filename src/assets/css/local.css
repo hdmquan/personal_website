@@ -8,7 +8,7 @@
     overflow: hidden;
     position: relative;
     z-index: 1;
-    border-top: 2px solid #000;
+    border-top: 1px solid #000;
   }
   #about .container {
     max-width: 80rem;
@@ -33,47 +33,7 @@
   }
   #about .text {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
-  }
-  #about .button-solid {
-    font-size: 1rem;
-    /* 46px - 56px */
-    line-height: clamp(2.875em, 5.5vw, 3.5em);
-    text-decoration: none;
-    font-weight: 700;
-    text-align: center;
-    margin: 0;
-    color: #fff;
-    border: none;
-    min-width: 9.375rem;
-    padding: 0 1.5rem;
-    background-color: var(--primary);
-    border-radius: 0.25rem;
-    overflow: hidden;
-    display: inline-block;
-    position: relative;
-    z-index: 1;
-    /* prevents padding from adding to the width */
-    box-sizing: border-box;
-    transition: color 0.3s;
-  }
-  #about .button-solid:before {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 0%;
-    background: #000;
-    opacity: 1;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: width 0.3s;
-  }
-  #about .button-solid:hover {
-    color: #fff;
-  }
-  #about .button-solid:hover:before {
-    width: 100%;
+    font-size: 1.1rem;
   }
   #about .picture {
     width: 100%;
@@ -88,13 +48,12 @@
   }
   #about .picture img {
     width: 100%;
-    height: 100%;
+    height: 80%;
     object-fit: cover;
     position: absolute;
     object-position: left;
     top: 0;
     left: 0;
-    filter: saturate(0.7); /* Lowered image saturation */
   }
   #about .background {
     width: 100%;
@@ -124,16 +83,13 @@
     row-gap: 2rem;
   }
   #about .flex {
-    width: 45%;
+    width: 100%;
   }
   #about .title {
     margin: 0;
   }
   #about .text {
     width: 50%;
-  }
-  #about .button-solid {
-    margin-right: auto;
   }
 }
 /* Desktop - 1024px */
@@ -181,7 +137,7 @@
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
   body.dark-mode #about {
-    border-top: 2px solid #fff;
+    border-top: 1px solid #fff;
   }
   body.dark-mode #about .title,
   body.dark-mode #about .text {
@@ -204,13 +160,13 @@
 @media only screen and (min-width: 0rem) {
   #blog {
     padding: 4rem;
-    border-top: 2px solid #000;
+    border-top: 1px solid #000;
     position: relative;
     z-index: 1;
     overflow: hidden;
   }
   #blog .container {
-    width: 90%;
+    width: 100%;
     max-width: 80rem;
     margin: auto;
     display: flex;
@@ -228,36 +184,12 @@
     /* centers content horizontally, set to flex-start to left align */
     align-items: flex-start;
   }
-  #blog .more-link {
-    font-size: 0.9375rem;
-    font-weight: 700;
-    text-decoration: none;
-    line-height: 1.5em;
-    width: 8rem;
-    color: var(--headerColor);
-    position: relative;
+  #blog .horizontal-flex {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  #blog .more-link:before {
-    content: "";
-    position: absolute;
-    display: block;
-    height: 2px;
-    width: 100%;
-    background: currentColor;
-    opacity: 1;
-    bottom: -0.1875rem;
-    left: 0;
-  }
-  #blog .more-link:hover svg {
-    transform: translateX(0.4375rem);
-  }
-  #blog .more-link svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    transition: transform 0.3s;
+    gap: 1rem;
   }
   #blog .card-group {
     width: 100%;
@@ -275,9 +207,6 @@
     display: flex;
     flex-direction: column;
     grid-column: span 12;
-  }
-  #blog .item:hover .h3 {
-    text-decoration: underline;
   }
   #blog .link {
     text-decoration: none;
@@ -307,18 +236,15 @@
     left: 0;
   }
   #blog .item-text {
-    padding: 1.25rem;
+    padding: 1.25rem 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     /* makes the item text the element that grows to fill the container */
     flex-grow: 1;
-    background-color: #f9f9f9;
     transition: background-color 0.3s;
   }
-  #blog .h3 {
-    /* 20px - 25px */
-    font-size: clamp(1.25rem, 1.8vw, 1.5625rem);
+  #blog .h4 {
     font-weight: 200;
     line-height: 1.2em;
     text-align: left;
@@ -328,7 +254,11 @@
     align-items: center;
     gap: 1rem;
     transition: color 0.3s;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  #blog .desc {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
   }
   #blog .icon-wrapper {
     width: 3rem;
@@ -391,53 +321,6 @@
     left: 0;
     z-index: -1;
   }
-  #blog .bubbles {
-    width: 20.0625rem;
-    height: 26.4375rem;
-    display: none;
-    position: absolute;
-    top: 66.4375rem;
-    right: -8.75rem;
-    z-index: -1;
-  }
-  #blog .bubbles:before {
-    /* white border bubble */
-    content: "";
-    width: 16.5rem;
-    height: 16.5rem;
-    background: transparent;
-    opacity: 1;
-    border: 1px solid #1a1a1a;
-    border-radius: 50%;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    animation-name: floatAnimation;
-    animation-duration: 5s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: forwards;
-  }
-  #blog .bubbles:after {
-    /* orange bubble */
-    content: "";
-    width: 16.5rem;
-    height: 16.5rem;
-    background: var(--primary);
-    opacity: 0.1;
-    border-radius: 50%;
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    animation-name: floatAnimation2;
-    animation-duration: 14s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: forwards;
-  }
 }
 /* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
@@ -475,14 +358,14 @@
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
   body.dark-mode #blog {
-    border-top: 2px solid #fff;
+    border-top: 1px solid #fff;
   }
   body.dark-mode #blog .topper {
     color: var(--primaryLight);
   }
   body.dark-mode #blog .title,
   body.dark-mode #blog .text,
-  body.dark-mode #blog .h3,
+  body.dark-mode #blog .h4,
   body.dark-mode #blog .date,
   body.dark-mode #blog .category {
     color: var(--bodyTextColorWhite);
@@ -491,9 +374,6 @@
   body.dark-mode #blog .date,
   body.dark-mode #blog .category {
     opacity: 0.8;
-  }
-  body.dark-mode #blog .item-text {
-    background-color: var(--medium);
   }
   body.dark-mode #blog .category::before {
     background-color: var(--accent);

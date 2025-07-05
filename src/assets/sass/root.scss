@@ -9,10 +9,12 @@
         --headerColor: #000;
         --bodyTextColor: #111;
         --bodyTextColorWhite: #fff;
-        --accent: #7070ff;
+        --accent: #6cb274;
+        --emphasis: rgba(108, 178, 116, .2);
 
         /* 13px - 16px */
         --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+        --topperFontSizeSmall: clamp(0.5rem, 1vw, 0.75rem);
         /* 31px - 49px */
         --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
         --bodyFontSize: 1rem;
@@ -29,15 +31,26 @@
         letter-spacing: 0.1em;
         font-size: var(--topperFontSize);
         line-height: 1.2em;
-        font-weight: 700;
+        font-weight: 200;
         color: var(--primary);
         text-align: inherit;
+        font-family: "Nexa", Arial, sans-serif;
+    }
+
+    .topper-small {
+        display: block;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: var(--topperFontSizeSmall);
+        font-family: "Nexa", Arial, sans-serif;
+
     }
 
     .title {
         position: relative;
         margin: 0 0 1rem 0;
-        max-width: 43.75rem;
+        max-width: 50rem;
         font-size: var(--headerFontSize);
         line-height: 1.2em;
         font-weight: 200;
@@ -55,48 +68,38 @@
         text-align: inherit;
     }
 
-    // Button - can be replaced using CodeStitch's "Button" Stitches
     .button-solid {
-        z-index: 1;
-        position: relative;
-        display: inline-block;
-        background-color: var(--primary);
+        margin-bottom: calc(16 / 16 * 1rem);
+        height: initial;
+        // line-height: clamp(2.875em, 5.5vw, 3.5em);
+        border: 1px solid #000;
+        line-height: 2.30rem;
+        padding: 0 1.25rem;
         width: auto;
-        padding: 0 calc(30 / 16 * 1rem);
+        align-self: flex-start;
+        color: var(--bodyTextColor);
+        box-shadow: inset 0 -6px var(--emphasis);
         text-decoration: none;
-        text-transform: uppercase;
-        font-size: calc(16 / 16 * 1rem);
-        line-height: calc(50 / 16 * 1em);
-        font-weight: 900;
-
-        // Transition Properties
-        color: #000;
-        transition: color 0.3s;
-        transition-delay: 0.1s;
-        text-align: center;
+        background-color: #fff;
+        transition: all 0.3s;
 
         &:hover {
             color: #fff;
-            &:before {
-                width: 100%;
-            }
+            background-color: var(--primary);
+            box-shadow: none;
         }
 
-        &:before {
-            z-index: -1;
-            position: absolute;
-            top: 0;
-            left: 0;
-            content: "";
-            opacity: 1;
-            display: block;
-            background-color: #000;
-            height: 100%;
+    }
 
-            //Transition properties
-            width: 0;
-            transition: width 0.3s;
-        }
+    .button {
+        padding-top: 0.5rem;
+        height: initial;
+        line-height: 2.30rem;
+        width: auto;
+        align-self: flex-start;
+        color: var(--bodyTextColor);
+        text-decoration: underline;
+        transition: all 0.3s;
     }
 
     .hide-on-mobile {
@@ -115,6 +118,27 @@
     }
 }
 
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode {
+        .button-solid {
+            color: var(--bodyTextColorWhite);
+            background-color: var(--dark);
+            box-shadow: inset 0 -6px var(--emphasis-dark);
+
+            &:hover {
+                color: var(--bodyTextColor);
+                background-color: var(--primaryLight);
+                box-shadow: none;
+            }
+        }
+
+        .button {
+            color: var(--bodyTextColorWhite);
+        }
+    }
+}
+
 /* Fonts and general styles */
 @media only screen and (min-width: 0rem) {
     body,
@@ -122,7 +146,7 @@
         margin: 0;
         overflow-x: hidden;
         padding: 0;
-        font-family: "Nexa", Arial, sans-serif;
+        font-family: "Baskervville", "Georgia", serif;
         font-size: 100%;
         color: var(--bodyTextColor);
     }
@@ -153,15 +177,24 @@
     h6 {
         margin: 0;
         color: var(--headerColor);
-        font-family: "Nexa", Arial, sans-serif;
+        font-family: "Baskervville", "Georgia", serif;
     }
 
-    p,
+    p {
+        font-family: "Baskervville", "Georgia", serif;
+        margin: 0;
+        font-size: calc(16 / 16 * 1rem);
+        font-weight: 200;
+        line-height: 1.5em;
+    }
+
     li,
     a {
         margin: 0;
         font-size: calc(16 / 16 * 1rem);
         line-height: 1.5em;
+        font-family: "Nexa", Arial, sans-serif;
+
     }
 
     p,
@@ -197,6 +230,15 @@
         font-style: normal;
         font-weight: 900;
         src: url('/assets/fonts/Nexa-Heavy.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+    }
+    /* baskervville-regular - latin */
+    @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Baskervville';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/baskervville-v19-latin-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+        url('/assets/fonts/baskervville-v19-latin-regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
     }
 }
 

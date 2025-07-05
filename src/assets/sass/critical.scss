@@ -11,11 +11,12 @@
         position: relative;
         overflow: hidden;
         padding-top: calc(120 / 16 * 1rem);
-        // padding-bottom: calc(100 / 16 * 1rem);
+        margin-bottom: calc(50 / 16 * 1rem);
         text-align: center;
 
         span {
-            font-weight: 900;
+            font-style: italic;
+            box-shadow: inset 0 -6px var(--emphasis);
         }
 
         .social-section {
@@ -30,9 +31,10 @@
             }
 
                 img {
+                    transition: transform 0.3s;
                     &:hover {
-                    filter: invert(40%) sepia(39%) saturate(3345%) hue-rotate(223deg) brightness(104%) contrast(101%);
-                    ;
+                    // Zoom in
+                    transform: scale(1.2);
                 }
             }
         }
@@ -87,25 +89,7 @@
             font-size: clamp(1.9375rem, 3.9vw, 3.0625rem);
             max-width: calc(940 / 16 * 1rem);
             margin-left: auto;
-            text-align: left;
-        }
-
-        .button-solid {
-            margin-bottom: calc(16 / 16 * 1rem);
-            height: initial;
-            // line-height: clamp(2.875em, 5.5vw, 3.5em);
-            border: 2px solid #000;
-            line-height: 2.30rem;
-            padding: 0 1.25rem;
-            width: auto;
-            align-self: flex-start;
-            color: var(--bodyTextColor);
-            background-color: #fff;
-
-            &:hover {
-                color: #fff;
-            }
-
+            text-align: right;
         }
 
         .button-transparent {
@@ -221,6 +205,10 @@
 
             .button-solid {
                 border: 2px solid #fff;
+            }
+
+            span {
+                box-shadow: inset 0 -6px var(--emphasis-dark);
             }
         }
     }

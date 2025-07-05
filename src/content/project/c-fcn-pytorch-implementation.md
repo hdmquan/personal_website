@@ -1,14 +1,16 @@
 ---
 title: C-FCN PyTorch Implementation
 url: c-fcn-pytorch
-description: This is a PyTorch implementation of C-FCN, a low power
-  convolutional neural network for cloud segmentation in satellite images, as
-  proposed in "Low-power neural networks for semantic segmentation of satellite
-  images" (Balh et al., 2019).
+description: PyTorch implementation of C-FCN, a low-power CNN for cloud
+  segmentation in satellite imagery.
 author: Alan Huynh
 date: 2023-05-11T02:43:00.000Z
 image: /assets/images/blog/screenshot_13-12-2024_24236_openaccess.thecvf.com.jpeg
 imageAlt: neural network
+tags:
+  - research
+  - machine-learning
+  - computer-vision
 ---
 This is a PyTorch implementation of C-FCN, a low power convolutional neural network for cloud segmentation in satellite images, as proposed in "Low-power neural networks for semantic segmentation of satellite images" (Balh et al., [2019](https://openaccess.thecvf.com/content_ICCVW_2019/papers/LPCV/Bahl_Low-Power_Neural_Networks_for_Semantic_Segmentation_of_Satellite_Images_ICCVW_2019_paper.pdf)).
 

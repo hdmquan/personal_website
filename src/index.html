@@ -31,19 +31,14 @@ eleventyNavigation:
 </script>
 {% endblock %} {% block body %}
 
-<!-- ============================================ -->
-<!--                    Hero                      -->
-<!-- ============================================ -->
-
 <section id="hero">
   <div class="container">
     <h1 class="title">Hi, I'm Alan.</h1>
     <p class="text">
-      <span>Machine Learning</span> Engineer in <span>Geospatial</span> and
-      <span>Computer Vision</span>.
+      Automation & AI<br> for <span>Climate</span>, <span>Compliance</span>, and
+      <span>Business</span>.
     </p>
     <div class="social-section">
-      <h2 class="topper">My Social</h2>
       <div class="social-icons">
         <a
           href="https://www.linkedin.com/in/hdmquan"
@@ -69,30 +64,6 @@ eleventyNavigation:
             height="40"
           />
         </a>
-        <a
-          href="https://www.twitter.com/alan_huyn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="/assets/svgs/twitter-svgrepo-com.svg"
-            alt="Twitter"
-            width="40"
-            height="40"
-          />
-        </a>
-        <a
-          href="https://soundcloud.com/symphonynonine"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="/assets/svgs/soundcloud-svgrepo-com.svg"
-            alt="Instagram"
-            width="40"
-            height="40"
-          />
-        </a>
       </div>
       <a
         href="/assets/images/blog/alan-huynh-resume.pdf"
@@ -105,44 +76,6 @@ eleventyNavigation:
   </div>
 </section>
 
-<section id="about">
-  <div class="container">
-    <picture class="picture">
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/assets/images/talk.jpeg"
-        alt="construction"
-        width="738"
-        height="598"
-      />
-    </picture>
-    <div class="content">
-      <div class="flex">
-        <h2 class="title">About Me</h2>
-      </div>
-      <p class="text">
-        I'm a Machine Learning Engineer in Melbourne who loves automation and
-        exploring all kinds of ML projects. I enjoy working on Geospatial,
-        Environmental, and Temporal data but am always open to new challenges.
-      </p>
-      <p class="text">
-        Outside of software, I'm a classical-trained pianist, composer, EDM fan,
-        and rhythm game enthusiast.
-      </p>
-    </div>
-  </div>
-  <picture class="background">
-    <img
-      loading="lazy"
-      decoding="async"
-      src="/assets/svgs/contour-lines.svg"
-      alt="waves"
-      width="960"
-      height="839"
-    />
-  </picture>
-</section>
 
 <section id="blog">
   <div class="container">
@@ -150,12 +83,6 @@ eleventyNavigation:
       <div class="flex">
         <span class="topper">My Projects</span>
         <h2 class="title">What I worked on</h2>
-      </div>
-      <div class="flex">
-        <a aria-label="view more pictures" href="" class="more-link">
-          View More
-          <img src="/assets/svgs/arrow.svg" alt="Arrow Icon" />
-        </a>
       </div>
     </div>
 
@@ -175,8 +102,10 @@ eleventyNavigation:
             />
           </picture>
           <div class="item-text">
-            <h3 class="h3">{{ project.data.title }}</h3>
+            <p class="topper-small">{{ project.data.tags[2] }}</p>
+            <h3 class="h4">{{ project.data.title }}</h3>
             <p class="desc">{{ project.data.description }}</p>
+            <a href="{{ project.url }}" class="button">Read more</a>
           </div>
         </a>
       </li>
@@ -193,12 +122,6 @@ eleventyNavigation:
       <div class="flex">
         <span class="topper">My Blog</span>
         <h2 class="title">What I wrote about</h2>
-      </div>
-      <div class="flex">
-        <a aria-label="view more pictures" href="" class="more-link">
-          View More
-          <img src="/assets/svgs/arrow.svg" alt="Arrow Icon" />
-        </a>
       </div>
     </div>
 
@@ -218,7 +141,8 @@ eleventyNavigation:
             />
           </picture>
           <div class="item-text">
-            <h3 class="h3">{{ blog.data.title }}</h3>
+            <p class="topper-small">{{ blog.data.tags[2] }}</p>
+            <h3 class="h4">{{ blog.data.title }}</h3>
             <p class="desc">{{ blog.data.description }}</p>
           </div>
         </a>
@@ -229,5 +153,50 @@ eleventyNavigation:
     </ul>
   </div>
 </section>
+
+<section id="about">
+  <div class="container">
+    <picture class="picture">
+      <img
+        loading="lazy"
+        decoding="async"
+        src="/assets/images/talk.jpeg"
+        alt="construction"
+        width="738"
+        height="598"
+      />
+    </picture>
+    <div class="content">
+      <div class="flex">
+        <p class="topper">About Me</p>
+        <h2 class="title">AI x Geo x Climate</h2>
+      </div>
+      <p class="text">
+        I'm an AI and automation engineer based in Melbourne, building tools across geospatial, climate-tech, and ESG domains. I focus on turning complex data into practical systems that deliver insight and impact.
+      </p>
+      <p class="text" style="margin-bottom: 3rem;">
+        Outside of tech, I am a musician, hiker, and rhythm game enthusiast.
+      </p>
+      <a
+        href="/assets/images/blog/alan-huynh-resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button-solid"
+        >More About Me</a
+      >
+    </div>
+  </div>
+  <picture class="background">
+    <img
+      loading="lazy"
+      decoding="async"
+      src="/assets/svgs/contour-lines.svg"
+      alt="waves"
+      width="960"
+      height="839"
+    />
+  </picture>
+</section>
+
 
 {% endblock %}

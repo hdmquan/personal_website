@@ -9,10 +9,12 @@
     position: relative;
     overflow: hidden;
     padding-top: 7.5rem;
+    margin-bottom: 3.125rem;
     text-align: center;
   }
   #hero span {
-    font-weight: 900;
+    font-style: italic;
+    box-shadow: inset 0 -6px var(--emphasis);
   }
   #hero .social-section {
     display: flex;
@@ -24,8 +26,11 @@
   #hero .social-section .topper {
     margin: 0;
   }
+  #hero .social-section img {
+    transition: transform 0.3s;
+  }
   #hero .social-section img:hover {
-    filter: invert(40%) sepia(39%) saturate(3345%) hue-rotate(223deg) brightness(104%) contrast(101%);
+    transform: scale(1.2);
   }
   #hero a {
     text-decoration: none;
@@ -69,21 +74,7 @@
     font-size: clamp(1.9375rem, 3.9vw, 3.0625rem);
     max-width: 58.75rem;
     margin-left: auto;
-    text-align: left;
-  }
-  #hero .button-solid {
-    margin-bottom: 1rem;
-    height: initial;
-    border: 2px solid #000;
-    line-height: 2.3rem;
-    padding: 0 1.25rem;
-    width: auto;
-    align-self: flex-start;
-    color: var(--bodyTextColor);
-    background-color: #fff;
-  }
-  #hero .button-solid:hover {
-    color: #fff;
+    text-align: right;
   }
   #hero .button-transparent {
     z-index: 1;
@@ -178,6 +169,9 @@
   }
   body.dark-mode #hero .button-solid {
     border: 2px solid #fff;
+  }
+  body.dark-mode #hero span {
+    box-shadow: inset 0 -6px var(--emphasis-dark);
   }
 }
 
