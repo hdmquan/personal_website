@@ -125,6 +125,7 @@
             color: var(--bodyTextColorWhite);
             background-color: var(--dark);
             box-shadow: inset 0 -6px var(--emphasis-dark);
+            border: 1px solid var(--bodyTextColorWhite);
 
             &:hover {
                 color: var(--bodyTextColor);

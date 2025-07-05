@@ -20,8 +20,8 @@
             /* 40px - 60px*/
             padding: clamp(2.5rem, 4.7vw, 3.75rem) 0;
             margin: auto;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
         }
 
         .li {
@@ -106,8 +106,8 @@
                 }
             }
             .ul {
-                border-top: 2px solid #fff;
-                border-bottom: 2px solid #fff;
+                border-top: 1px solid #fff;
+                border-bottom: 1px solid #fff;
             }
         }
     }

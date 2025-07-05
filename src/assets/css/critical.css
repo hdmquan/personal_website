@@ -167,9 +167,6 @@
   body.dark-mode #hero img {
     filter: invert(100%);
   }
-  body.dark-mode #hero .button-solid {
-    border: 2px solid #fff;
-  }
   body.dark-mode #hero span {
     box-shadow: inset 0 -6px var(--emphasis-dark);
   }
