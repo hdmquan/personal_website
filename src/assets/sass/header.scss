@@ -382,31 +382,17 @@
         }
 
         .li-link {
-            font-size: calc(24 / 16 * 1rem);
-            line-height: 1.2em;
+            font-size: clamp(1rem, 1.55vw, 1.25rem);
+            line-height: 1.5em;
             text-decoration: none;
             margin: 0;
-            color: var(--headerColor);
+            color: var(--bodyTextColor);
             display: inline-block;
             position: relative;
+            transition: box-shadow 0.3s;
 
-            &:before {
-                /* active state underline */
-                content: "";
-                width: 100%;
-                height: 1px;
-                background: currentColor;
-                opacity: 1;
-                display: none;
-                position: absolute;
-                bottom: calc(-2 / 16 * 1rem);
-                left: 0;
-            }
-
-            &.active {
-                &:before {
-                    display: block;
-                }
+            &:hover {
+                box-shadow: inset 0 -6px var(--emphasis);
             }
         }
 
@@ -851,21 +837,17 @@
         }
 
         .li-link {
-            font-size: calc(16 / 16 * 1rem);
+            font-size: clamp(1rem, 1.55vw, 1.25rem);
             line-height: 1.5em;
             text-decoration: none;
             margin: 0;
-            color: var(--headerColor);
+            color: var(--bodyTextColor);
             display: block;
             position: relative;
-            transition: color 0.3s;
+            transition: color 0.3s, box-shadow 0.3s;
 
             &:hover {
-                color: var(--primary);
-            }
-
-            &.active {
-                color: var(--primary);
+                box-shadow: inset 0 -6px var(--emphasis);
             }
         }
 
