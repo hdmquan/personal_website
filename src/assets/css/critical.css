@@ -2,127 +2,118 @@
 /*-- -------------------------- -->
 <---           Hero             -->
 <--- -------------------------- -*/
-/* Mobile - 360px */
-@media only screen and (min-width: 0rem) {
-  #hero {
-    z-index: 1;
-    position: relative;
-    overflow: hidden;
-    padding-top: 7.5rem;
-    margin-bottom: 3.125rem;
-    text-align: center;
-  }
-  #hero span {
-    font-style: italic;
-    box-shadow: inset 0 -6px var(--emphasis);
-  }
-  #hero .social-section {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 4rem;
-  }
-  #hero .social-section .topper {
-    margin: 0;
-  }
-  #hero .social-section img {
-    transition: transform 0.3s;
-  }
-  #hero .social-section img:hover {
-    transform: scale(1.2);
-  }
-  #hero a {
-    text-decoration: none;
-  }
-  #hero .container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    max-width: 80em;
-    width: 90%;
-  }
-  #hero .container:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* Left Line */
-    content: "";
-    opacity: 1;
-    display: block;
-    height: 100%;
-    width: 1px;
-  }
-  #hero .topper {
-    margin-bottom: 1rem;
-    color: var(--primary);
-    text-align: center;
-  }
-  #hero .title {
-    width: 100%;
-    color: var(--bodyTextColor);
-    font-size: clamp(6rem, 10vw, 8rem);
-    margin-bottom: 2rem;
-    text-align: left;
-  }
-  #hero .text {
-    /* 32px - 40px */
-    /* 40px - 48px */
-    margin-bottom: clamp(2.5rem, 4vw, 3rem);
-    color: var(--bodyTextColor);
-    font-size: clamp(1.9375rem, 3.9vw, 3.0625rem);
-    max-width: 58.75rem;
-    margin-left: auto;
-    text-align: right;
-  }
-  #hero .button-transparent {
-    z-index: 1;
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--bodyTextColorWhite);
-    margin: 0 0.5rem;
-    background-color: transparent;
-    /* 46px - 56px */
-    height: clamp(2.875em, 5.5vw, 3.5em);
-    width: 11.25rem;
-    box-sizing: border-box;
-    padding: 0;
-    text-decoration: none;
-    font-size: 1rem;
-    /* 46px - 56px */
-    line-height: clamp(2.875em, 5.5vw, 3.5em);
-    font-weight: 700;
-    color: #fff;
-  }
-  #hero .button-transparent .img {
-    display: block;
-    margin-right: 0.75rem;
-  }
-  #hero .button-transparent:before {
-    z-index: -1;
-    position: absolute;
-    /* so it sits on top of the border */
-    top: -1px;
-    bottom: -1px;
-    left: -1px;
-    right: -1px;
-    content: "";
-    opacity: 1;
-    /* this is what creates the grow affect on hover */
-    transform: scaleX(0);
-    display: block;
-    background: #000;
-    transition: transform 0.3s;
-    transform-origin: left;
-  }
-  #hero .button-transparent:hover:before {
-    transform: scaleX(1);
-  }
+#hero {
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+  padding-top: 7.5rem;
+  margin-bottom: 3.125rem;
+  text-align: center;
+  /* Tablet - 768px */
+  /* Desktop Parallax Effect - 1300px */
 }
-/* Tablet - 768px */
+#hero span {
+  font-style: italic;
+  box-shadow: inset 0 -6px var(--emphasis);
+}
+#hero .social-section {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+#hero .social-section .topper {
+  margin: 0;
+}
+#hero .social-section img {
+  transition: transform 0.3s;
+}
+#hero .social-section img:hover {
+  transform: scale(1.2);
+}
+#hero a {
+  text-decoration: none;
+}
+#hero .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 80em;
+  width: 90%;
+}
+#hero .container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  opacity: 1;
+  display: block;
+  height: 100%;
+  width: 1px;
+}
+#hero .topper {
+  margin-bottom: 1rem;
+  color: var(--primary);
+  text-align: center;
+}
+#hero .title {
+  width: 100%;
+  color: var(--bodyTextColor);
+  font-size: clamp(6rem, 10vw, 8rem);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+#hero .text {
+  margin-bottom: clamp(2.5rem, 4vw, 3rem);
+  color: var(--bodyTextColor);
+  font-size: clamp(1.9375rem, 3.9vw, 3.0625rem);
+  max-width: 58.75rem;
+  margin-left: auto;
+  text-align: right;
+}
+#hero .button-transparent {
+  z-index: 1;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--bodyTextColorWhite);
+  margin: 0 0.5rem;
+  background-color: transparent;
+  height: clamp(2.875em, 5.5vw, 3.5em);
+  width: 11.25rem;
+  box-sizing: border-box;
+  padding: 0;
+  text-decoration: none;
+  font-size: 1rem;
+  line-height: clamp(2.875em, 5.5vw, 3.5em);
+  font-weight: 700;
+  color: #fff;
+}
+#hero .button-transparent .img {
+  display: block;
+  margin-right: 0.75rem;
+}
+#hero .button-transparent:before {
+  z-index: -1;
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  content: "";
+  opacity: 1;
+  transform: scaleX(0);
+  display: block;
+  background: #000;
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+#hero .button-transparent:hover:before {
+  transform: scaleX(1);
+}
 @media only screen and (min-width: 64rem) {
   #hero .container {
     padding: 4rem 0 0 0;
@@ -131,7 +122,6 @@
     position: absolute;
     top: 0;
     right: 0;
-    /* Right Line */
     content: "";
     opacity: 1;
     display: block;
@@ -143,33 +133,30 @@
     margin-bottom: 0;
   }
 }
-/* Desktop Parallax Effect - 1300px */
 @media only screen and (min-width: 81.25em) {
   #hero {
     background: url("/assets/images/landing.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    /* creates parallax effect on background image */
     background-attachment: fixed;
   }
 }
+
 /* Dark Mode */
-@media only screen and (min-width: 0rem) {
-  body.dark-mode #hero .background:before {
-    opacity: 0.8;
-  }
-  body.dark-mode #hero .title,
-  body.dark-mode #hero .text,
-  body.dark-mode #hero .topper {
-    color: #fff;
-  }
-  body.dark-mode #hero img {
-    filter: invert(100%);
-  }
-  body.dark-mode #hero span {
-    box-shadow: inset 0 -6px var(--emphasis-dark);
-  }
+body.dark-mode #hero .background:before {
+  opacity: 0.8;
+}
+body.dark-mode #hero .title,
+body.dark-mode #hero .text,
+body.dark-mode #hero .topper {
+  color: #fff;
+}
+body.dark-mode #hero img {
+  filter: invert(100%);
+}
+body.dark-mode #hero span {
+  box-shadow: inset 0 -6px var(--emphasis-dark);
 }
 
 /*# sourceMappingURL=critical.css.map */

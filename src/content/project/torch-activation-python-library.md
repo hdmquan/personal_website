@@ -7,9 +7,9 @@ date: 2025-02-27T01:07:00.000Z
 image: /assets/images/blog/untitled-design-3-.png
 imageAlt: torch-activation
 tags:
-  - implementation
-  - machine-learning
   - research
+  - machine-learning
+  - open-source
 ---
 # Exploring Unconventional Activation Functions - Torch Activation Library
 

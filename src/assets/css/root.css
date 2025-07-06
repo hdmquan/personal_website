@@ -1,96 +1,183 @@
-@media only screen and (min-width: 0rem) {
-  :root {
-    --primary: #000;
-    --primaryLight: #fff;
-    --secondary: #000;
-    --secondaryLight: #000;
-    --background: #fff;
-    --headerColor: #000;
-    --bodyTextColor: #111;
-    --bodyTextColorWhite: #fff;
-    --accent: #6cb274;
-    --emphasis: rgba(108, 178, 116, .2);
-    /* 13px - 16px */
-    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
-    --topperFontSizeSmall: clamp(0.5rem, 1vw, 0.75rem);
-    /* 31px - 49px */
-    --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
-    --bodyFontSize: 1rem;
-    /* 60px - 100px top and bottom */
-    --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
-  }
-  .topper {
-    display: block;
-    margin-bottom: 0.25rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: var(--topperFontSize);
-    line-height: 1.2em;
-    font-weight: 200;
-    color: var(--primary);
-    text-align: inherit;
-    font-family: "Nexa", Arial, sans-serif;
-  }
-  .topper-small {
-    display: block;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: var(--topperFontSizeSmall);
-    font-family: "Nexa", Arial, sans-serif;
-  }
-  .title {
-    position: relative;
-    margin: 0 0 1rem 0;
-    max-width: 50rem;
-    font-size: var(--headerFontSize);
-    line-height: 1.2em;
-    font-weight: 200;
-    color: var(--headerColor);
-    text-align: inherit;
-  }
-  .text {
-    margin: 0;
-    max-width: 40.625rem;
-    width: 100%;
-    font-size: var(--bodyFontSize);
-    line-height: 1.5em;
-    color: var(--bodyTextColor);
-    text-align: inherit;
-  }
-  .button-solid {
-    margin-bottom: 1rem;
-    height: initial;
-    border: 1px solid #000;
-    line-height: 2.3rem;
-    padding: 0 1.25rem;
-    width: auto;
-    align-self: flex-start;
-    color: var(--bodyTextColor);
-    box-shadow: inset 0 -6px var(--emphasis);
-    text-decoration: none;
-    background-color: #fff;
-    transition: all 0.3s;
-  }
-  .button-solid:hover {
-    color: #fff;
-    background-color: var(--primary);
-    box-shadow: none;
-  }
-  .button {
-    padding-top: 0.5rem;
-    height: initial;
-    line-height: 2.3rem;
-    width: auto;
-    align-self: flex-start;
-    color: var(--bodyTextColor);
-    text-decoration: underline;
-    transition: all 0.3s;
-  }
-  .hide-on-mobile {
-    display: none;
-  }
+:root {
+  --primary: #000;
+  --primaryLight: #fff;
+  --secondary: #000;
+  --secondaryLight: #000;
+  --background: #fff;
+  --headerColor: #000;
+  --bodyTextColor: #111;
+  --bodyTextColorWhite: #fff;
+  --accent: #6cb274;
+  --emphasis: rgba(108, 178, 116, 0.2);
+  --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+  --topperFontSizeSmall: clamp(0.5rem, 1vw, 0.75rem);
+  --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
+  --bodyFontSize: 1rem;
+  --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
 }
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: "Baskervville", "Georgia", serif;
+  font-size: 100%;
+  color: var(--bodyTextColor);
+  transition: background-color 0.3s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--headerColor);
+  font-family: "Baskervville", "Georgia", serif;
+}
+
+p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 1.5em;
+  color: #222;
+}
+
+li, a {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5em;
+  font-family: "Nexa", Arial, sans-serif;
+}
+
+li {
+  color: #222;
+}
+
+a:hover, button:hover {
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  margin: auto;
+  width: 92%;
+}
+
+.hide-on-mobile {
+  display: none;
+}
+
+.hide-on-desktop {
+  display: block;
+}
+
+.skip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1111111;
+  opacity: 0;
+}
+
+.topper {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: var(--topperFontSize);
+  font-weight: 200;
+  line-height: 1.2em;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: inherit;
+  font-family: "Nexa", Arial, sans-serif;
+}
+
+.topper-small {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: var(--topperFontSizeSmall);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: "Nexa", Arial, sans-serif;
+}
+
+.title {
+  position: relative;
+  margin: 0 0 1rem 0;
+  max-width: 50rem;
+  font-size: var(--headerFontSize);
+  line-height: 1.2em;
+  font-weight: 200;
+  color: var(--headerColor);
+  text-align: inherit;
+}
+
+.text {
+  margin: 0;
+  max-width: 40.625rem;
+  width: 100%;
+  font-size: var(--bodyFontSize);
+  line-height: 1.5em;
+  color: var(--bodyTextColor);
+  text-align: inherit;
+}
+
+.button-solid {
+  margin-bottom: 1rem;
+  padding: 0 1.25rem;
+  height: initial;
+  width: auto;
+  line-height: 2.3rem;
+  border: 1px solid #000;
+  color: var(--bodyTextColor);
+  background-color: #fff;
+  box-shadow: inset 0 -6px var(--emphasis);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: all 0.3s;
+}
+.button-solid:hover {
+  color: #fff;
+  background-color: var(--primary);
+  box-shadow: none;
+}
+
+.button {
+  margin-bottom: 1rem;
+  height: initial;
+  width: auto;
+  line-height: 2.3rem;
+  color: var(--bodyTextColor);
+  box-shadow: inset 0 -6px var(--emphasis);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.button:hover {
+  box-shadow: inset 0 -18px var(--emphasis);
+}
+
+body.dark-mode .button-solid {
+  color: var(--bodyTextColorWhite);
+  background-color: var(--dark);
+  box-shadow: inset 0 -6px var(--emphasis-dark);
+  border: 1px solid var(--bodyTextColorWhite);
+}
+body.dark-mode .button-solid:hover {
+  color: var(--bodyTextColor);
+  background-color: var(--primaryLight);
+  box-shadow: none;
+}
+body.dark-mode .button {
+  color: var(--bodyTextColorWhite);
+}
+
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
   .hide-on-mobile {
@@ -100,125 +187,33 @@
     display: none;
   }
 }
-/* Dark Mode */
-@media only screen and (min-width: 0rem) {
-  body.dark-mode .button-solid {
-    color: var(--bodyTextColorWhite);
-    background-color: var(--dark);
-    box-shadow: inset 0 -6px var(--emphasis-dark);
-    border: 1px solid var(--bodyTextColorWhite);
-  }
-  body.dark-mode .button-solid:hover {
-    color: var(--bodyTextColor);
-    background-color: var(--primaryLight);
-    box-shadow: none;
-  }
-  body.dark-mode .button {
-    color: var(--bodyTextColorWhite);
-  }
-}
-/* Fonts and general styles */
-@media only screen and (min-width: 0rem) {
-  body,
-  html {
-    margin: 0;
-    overflow-x: hidden;
-    padding: 0;
-    font-family: "Baskervville", "Georgia", serif;
-    font-size: 100%;
-    color: var(--bodyTextColor);
-  }
-  *,
-  *:before,
-  *:after {
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-  }
-  body {
-    transition: background-color 0.3s;
-  }
-  .container {
-    position: relative;
-    margin: auto;
-    width: 92%;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 0;
-    color: var(--headerColor);
-    font-family: "Baskervville", "Georgia", serif;
-  }
-  p {
-    font-family: "Baskervville", "Georgia", serif;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 200;
-    line-height: 1.5em;
-  }
-  li,
-  a {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5em;
-    font-family: "Nexa", Arial, sans-serif;
-  }
-  p,
-  li {
-    color: #222;
-  }
-  a:hover,
-  button:hover {
-    cursor: pointer;
-  }
-  .skip {
-    z-index: -1111111;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  }
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: "Nexa";
-    font-style: normal;
-    font-weight: 200;
-    src: url("/assets/fonts/Nexa-ExtraLight.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
-  }
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: "Nexa";
-    font-style: normal;
-    font-weight: 900;
-    src: url("/assets/fonts/Nexa-Heavy.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
-  }
-  /* baskervville-regular - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: "Baskervville";
-    font-style: normal;
-    font-weight: 400;
-    src: url("/assets/fonts/baskervville-v19-latin-regular.woff2") format("woff2"), url("/assets/fonts/baskervville-v19-latin-regular.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
-  }
-}
-/* Reset Margins */
-@media only screen and (min-width: 1024px) {
-  body,
-  html {
-    margin: 0;
-    padding: 0;
-  }
-}
-/* Scale full website with the viewport width */
+/* Large screens - 3000px */
 @media only screen and (min-width: 3000px) {
   body,
   html {
     font-size: 0.55vw;
   }
+}
+@font-face {
+  font-display: swap;
+  font-family: "Nexa";
+  font-style: normal;
+  font-weight: 200;
+  src: url("/assets/fonts/Nexa-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Nexa";
+  font-style: normal;
+  font-weight: 900;
+  src: url("/assets/fonts/Nexa-Heavy.ttf") format("truetype");
+}
+@font-face {
+  font-display: swap;
+  font-family: "Baskervville";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/fonts/baskervville-v19-latin-regular.woff2") format("woff2"), url("/assets/fonts/baskervville-v19-latin-regular.ttf") format("truetype");
 }
 
 /*# sourceMappingURL=root.css.map */

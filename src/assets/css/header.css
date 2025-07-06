@@ -343,35 +343,6 @@
     display: block;
   }
 }
-/* Dark Mode */
-@media only screen and (max-width: 63.9375rem) {
-  body.dark-mode:before {
-    background-color: var(--dark);
-  }
-  body.dark-mode #navigation .logo {
-    /* makes it white */
-    filter: grayscale(1) brightness(1000%);
-  }
-  body.dark-mode #navigation .toggle {
-    background-color: #fff;
-  }
-  body.dark-mode #navigation .phone {
-    color: var(--bodyTextColorWhite);
-  }
-  body.dark-mode #navigation .ul-wrapper {
-    background-color: transparent;
-  }
-  body.dark-mode #navigation .phone-icon {
-    /* turns it white */
-    filter: grayscale(1) brightness(1000%);
-  }
-  body.dark-mode #navigation .line {
-    background-color: #000;
-  }
-  body.dark-mode #navigation .li-link {
-    color: var(--bodyTextColorWhite);
-  }
-}
 /*-- -------------------------- -->
 <---     Navigation Dropdown    -->
 <--- -------------------------- -*/
@@ -533,15 +504,6 @@
   }
   #navigation .li-link.drop-link:before {
     display: none;
-  }
-}
-/* Dark Mode - Desktop */
-@media only screen and (min-width: 64rem) {
-  body.dark-mode #navigation .drop-ul {
-    background-color: var(--dark);
-  }
-  body.dark-mode #navigation .li-link.drop-link:hover {
-    color: var(--bodyTextColorWhite);
   }
 }
 /*-- -------------------------- -->
@@ -752,7 +714,37 @@
     display: flex;
   }
 }
-/* Dark Mode */
+/*
+Dark Mode Styles
+*/
+/* Dark Mode - Mobile */
+@media only screen and (max-width: 63.9375rem) {
+  body.dark-mode:before {
+    background-color: var(--dark);
+  }
+  body.dark-mode #navigation .logo {
+    filter: grayscale(1) brightness(1000%);
+  }
+  body.dark-mode #navigation .toggle {
+    background-color: #fff;
+  }
+  body.dark-mode #navigation .phone {
+    color: var(--bodyTextColorWhite);
+  }
+  body.dark-mode #navigation .ul-wrapper {
+    background-color: transparent;
+  }
+  body.dark-mode #navigation .phone-icon {
+    filter: grayscale(1) brightness(1000%);
+  }
+  body.dark-mode #navigation .line {
+    background-color: #000;
+  }
+  body.dark-mode #navigation .li-link {
+    color: var(--bodyTextColorWhite);
+  }
+}
+/* Dark Mode - Desktop */
 @media only screen and (min-width: 64rem) {
   body.dark-mode.scroll #navigation {
     border-bottom: 1px #fff solid;
@@ -761,7 +753,6 @@
     background-color: var(--dark);
   }
   body.dark-mode #navigation .logo {
-    /* turns it white */
     filter: grayscale(1) brightness(1000%);
   }
   body.dark-mode #navigation .li-link,
@@ -771,11 +762,14 @@
   body.dark-mode #navigation .phone-icon {
     filter: grayscale(1) brightness(10005);
   }
-  body.dark-mode #navigation .li-link.active {
+  body.dark-mode #navigation .li-link.active, body.dark-mode #navigation .li-link:hover {
     color: var(--secondary);
   }
-  body.dark-mode #navigation .li-link:hover {
-    color: var(--secondary);
+  body.dark-mode #navigation .drop-ul {
+    background-color: var(--dark);
+  }
+  body.dark-mode #navigation .li-link.drop-link:hover {
+    color: var(--bodyTextColorWhite);
   }
 }
 
