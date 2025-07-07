@@ -868,7 +868,7 @@
   #steps .number {
     /* 80px - 100px */
     font-size: clamp(5rem, 1vw, 6.25rem);
-    font-weight: 900;
+    font-weight: 400;
     line-height: 1.2em;
     color: var(--primary);
     opacity: 0.12;
@@ -880,7 +880,7 @@
     font-size: clamp(1.25rem, 2vw, 1.5625rem);
     font-weight: 700;
     line-height: 1.2em;
-    margin: -1.9375rem 0 1rem 0;
+    margin: -2rem 0 1rem 0;
     color: var(--headerColor);
   }
   #steps .item-text {

@@ -1,249 +1,249 @@
-/* STYLES FOR ABOVE THE FOLD */
-/*-- -------------------------- -->
-<---           Hero             -->
-<--- -------------------------- -*/
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-  #hero {
-    z-index: 1;
-    position: relative;
-    overflow: hidden;
-    padding-top: 7.5rem;
-    text-align: center;
+  #contact-inline {
+    border-top: 1px solid #000;
+    padding: var(--sectionPadding);
   }
-  #hero span {
-    font-weight: 900;
-  }
-  #hero .container {
-    position: relative;
+  #contact-inline .container {
+    width: 100%;
+    /* changes to 1280px at desktop */
+    max-width: 50rem;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    max-width: 80em;
-    width: 90%;
-  }
-  #hero .container:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* Left Line */
-    content: "";
-    opacity: 1;
-    display: block;
-    background: -moz-linear-gradient(top, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0) 100%); /* Chrome10-25,Safari5.1-6 */
-    height: 100%;
-    width: 1px;
-  }
-  #hero .topper {
-    margin-bottom: 1rem;
-    color: var(--primary);
-    text-align: center;
-  }
-  #hero .title {
-    width: 100%;
-    color: var(--bodyTextColor);
-    font-size: clamp(6rem, 10vw, 8rem);
-    margin-bottom: 2rem;
-    text-align: left;
-  }
-  #hero .text {
-    /* 32px - 40px */
-    /* 40px - 48px */
-    margin-bottom: clamp(2.5rem, 4vw, 3rem);
-    color: var(--bodyTextColor);
-    font-size: clamp(1.9375rem, 3.9vw, 3.0625rem);
-    max-width: 58.75rem;
-    margin-left: auto;
-    text-align: left;
-  }
-  #hero .button-solid {
-    margin-bottom: 1rem;
-    height: initial;
-    line-height: clamp(2.875em, 5.5vw, 3.5em);
-    width: auto;
-    align-self: flex-start;
-    color: var(--bodyTextColorWhite);
-  }
-  #hero .button-transparent {
-    z-index: 1;
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
     align-items: center;
-    border: 1px solid var(--bodyTextColorWhite);
-    margin: 0 0.5rem;
-    background-color: transparent;
-    /* 46px - 56px */
-    height: clamp(2.875em, 5.5vw, 3.5em);
-    width: 11.25rem;
-    box-sizing: border-box;
-    padding: 0;
-    text-decoration: none;
+    /* 48px - 64px */
+    gap: clamp(3rem, 6vw, 4rem);
+  }
+  #contact-inline .content {
+    /* set text align to left if content needs to be left aligned */
+    text-align: left;
+    width: 100%;
+    margin: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    /* centers content horizontally, set to flex-start to left align */
+    align-items: flex-start;
+  }
+  #contact-inline .left-section {
+    width: 100%;
+  }
+  #contact-inline #form {
+    width: 100%;
+  }
+  #contact-inline .label {
     font-size: 1rem;
-    /* 46px - 56px */
-    line-height: clamp(2.875em, 5.5vw, 3.5em);
     font-weight: 700;
-    color: #fff;
+    line-height: 1.5em;
+    /* 12px - 20px */
+    margin-bottom: clamp(0.75rem, 1.3em, 1.25rem);
+    color: var(--headerColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
   }
-  #hero .button-transparent .img {
-    display: block;
-    margin-right: 0.75rem;
+  #contact-inline .label-message {
+    /* 32px - 48px */
+    margin-bottom: clamp(2rem, 5.3vw, 3rem);
   }
-  #hero .button-transparent:before {
-    z-index: -1;
-    position: absolute;
-    /* so it sits on top of the border */
-    top: -1px;
-    bottom: -1px;
-    left: -1px;
-    right: -1px;
-    content: "";
-    opacity: 1;
-    /* this is what creates the grow affect on hover */
-    transform: scaleX(0);
-    display: block;
-    background: #000;
-    transition: transform 0.3s;
-    transform-origin: left;
+  #contact-inline .input,
+  #contact-inline .textarea {
+    font-size: 1rem;
+    width: 100%;
+    height: 4rem;
+    margin-top: 0.25rem;
+    /* prevents border & padding from affecting height */
+    box-sizing: border-box;
+    padding-left: 0.5rem;
+    border: 1px solid #000;
+    transition: border 0.3s;
+    font-family: inherit;
   }
-  #hero .button-transparent:hover:before {
-    transform: scaleX(1);
+  #contact-inline .input:hover,
+  #contact-inline .textarea:hover {
+    border: 1px solid var(--primary);
   }
-}
-/* Tablet - 768px */
-@media only screen and (min-width: 64rem) {
-  #hero .container {
-    padding: 4rem 0 0 0;
+  #contact-inline .textarea {
+    font-family: inherit;
+    min-height: 7.5rem;
+    margin: 0;
+    padding-top: 1.25rem;
   }
-  #hero .container:after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    /* Right Line */
-    content: "";
-    opacity: 1;
-    display: block;
-    background: -moz-linear-gradient(top, rgba(250, 251, 252, 0) 0%, rgba(250, 251, 252, 0.5) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(250, 251, 252, 0) 0%, rgba(250, 251, 252, 0.5) 100%); /* Chrome10-25,Safari5.1-6 */
-    height: 100%;
-    width: 1px;
+  #contact-inline .submit {
+    width: fit-content;
+    font-family: "Nexa", Arial, sans-serif;
+    font-size: 1rem;
   }
-  #hero .button-solid {
-    margin-right: 1.25rem;
+  #contact-inline .right-section {
+    width: 100%;
+    /* prevents padding and border from affecting height and width */
+    box-sizing: border-box;
+    /* 24px - 40px top & bottom */
+    /* 20px - 40px left & right */
+    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
+    /* cuts off corners on img tag */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    /* 28px - 40px */
+    gap: clamp(1.75rem, 4vw, 2.5rem);
+    position: relative;
+  }
+  #contact-inline .ul {
+    margin: 0;
+    padding: 0;
+  }
+  #contact-inline .li {
+    list-style: none;
+    /* 16px - 20px */
+    margin-bottom: clamp(1rem, 2vw, 1.25rem);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #contact-inline .li:hover .icon-wrapper {
+    transform: scale(1.2);
+  }
+  #contact-inline .li:last-of-type {
     margin-bottom: 0;
   }
+  #contact-inline .header {
+    /* 16px - 20px */
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.2em;
+    margin-bottom: 0.5rem;
+    color: var(--headerColor);
+    display: block;
+  }
+  #contact-inline .link {
+    /* 16px - 20px */
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.2em;
+    text-decoration: none;
+    color: var(--bodyTextColor);
+    position: relative;
+  }
+  #contact-inline .link:hover:before {
+    width: 100%;
+  }
+  #contact-inline .link:before {
+    /* top right box */
+    content: "";
+    width: 0%;
+    height: 2px;
+    /* current color of parent */
+    background: currentColor;
+    opacity: 1;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s;
+  }
+  #contact-inline .icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    /* 16px - 20px */
+    margin-right: clamp(1rem, 2vw, 1.25rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s;
+    flex: none;
+  }
+  #contact-inline .icon {
+    /* 32px -36px */
+    width: clamp(2rem, 3vw, 2.25rem);
+    height: auto;
+    display: block;
+  }
 }
-/* Desktop Parallax Effect - 1300px */
-@media only screen and (min-width: 81.25em) {
-  #hero {
-    background: url("/assets/images/landing.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* creates parallax effect on background image */
-    background-attachment: fixed;
+/* Tablet - 700px */
+@media only screen and (min-width: 43.75rem) {
+  #contact-inline #form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  #contact-inline .label {
+    width: 48%;
+  }
+  #contact-inline .label-message {
+    width: 100%;
+  }
+  #contact-inline .button-solid {
+    margin-left: 0;
+  }
+  #contact-inline .right-section {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+/* Small Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+  #contact-inline .container {
+    max-width: 80rem;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    /* 60px - 108px */
+    gap: clamp(3.75rem, 5.9vw + 2em, 6.75rem);
+  }
+  #contact-inline .left-section {
+    max-width: 32.625rem;
+  }
+  #contact-inline .label {
+    width: 100%;
+  }
+  #contact-inline .right-section {
+    width: 40vw;
+    max-width: 39.375rem;
+    flex-direction: column;
+    align-items: flex-start;
+    /* prevents flexbox from squishing it */
+    flex: none;
+  }
+  #contact-inline .picture {
+    width: 100%;
+    max-width: 100%;
+    height: 27.375rem;
   }
 }
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
-  body.dark-mode #hero .background:before {
-    opacity: 0.8;
+  body.dark-mode {
+    border-top: 1px solid #fff;
   }
-}
-/*-- -------------------------- -->
-<---          Services          -->
-<--- -------------------------- -*/
-/* Mobile */
-@media only screen and (min-width: 0rem) {
-  .services {
-    z-index: 100;
-    position: relative;
-    border-top: 0.375em solid var(--primary);
-    border-radius: 0.3125em;
-    margin: auto;
-    margin-top: -10.4375em;
-    margin-bottom: 3.125em;
-    background: #fff;
-    max-width: 82.5em;
-    width: 90%;
-    padding: 3.125em 1.25em;
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.05);
+  body.dark-mode #contact-inline .text,
+  body.dark-mode #contact-inline .title {
+    color: var(--bodyTextColorWhite);
   }
-  .services .card {
-    display: block;
-    margin: auto;
-    margin-bottom: 3.125em;
-    max-width: 22.3125em;
-    width: 100%;
+  body.dark-mode #contact-inline #form label,
+  body.dark-mode #contact-inline #form input,
+  body.dark-mode #contact-inline #form textarea {
+    background-color: transparent;
+    color: var(--bodyTextColorWhite);
   }
-  .services .card picture {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin: auto;
-    margin-bottom: 1.4375em;
-    background: var(--primary);
-    height: 5.5em;
-    width: 5.5em;
+  body.dark-mode #contact-inline #form label::placeholder,
+  body.dark-mode #contact-inline #form input::placeholder,
+  body.dark-mode #contact-inline #form textarea::placeholder {
+    color: var(--bodyTextColorWhite);
   }
-  .services .card picture img {
-    height: 3em;
-    width: 3em;
+  body.dark-mode #contact-inline #form .input,
+  body.dark-mode #contact-inline #form .textarea {
+    border-color: #fff;
   }
-  .services .card h2 {
-    margin-bottom: 0.65em;
-    font-size: 2em;
-    line-height: 1.35em;
-    font-weight: 700;
-    color: #1a1a1a;
-    text-align: center;
+  body.dark-mode #contact-inline .icon {
+    filter: invert(100%);
   }
-  .services .card p {
-    opacity: 0.7;
-    width: 100%;
-    line-height: 1.3333333333em;
-    text-align: center;
-  }
-  .services .card:last-of-type {
-    margin-bottom: 0;
-  }
-}
-/* Inbetween */
-@media only screen and (min-width: 768px) {
-  .services {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 98%;
-    font-size: min(1.8vw, 1em);
-  }
-  .services .card {
-    margin: 0;
-    max-width: 20.3125em;
-  }
-}
-/* Large Desktop */
-@media only screen and (min-width: 1300px) {
-  .services {
-    padding: 3.125em 5em;
-  }
-  .services .card {
-    max-width: 22.3125em;
-  }
-}
-/* Dark mode */
-@media only screen and (min-width: 0rem) {
-  body.dark-mode #services {
-    background: var(--medium);
-  }
-  body.dark-mode #services picture {
-    background: var(--primaryDark);
-  }
-  body.dark-mode #services h2 {
-    font-weight: bold;
-    color: #fff;
+  body.dark-mode #contact-inline .header,
+  body.dark-mode #contact-inline .link {
+    color: var(--bodyTextColorWhite);
   }
 }
 
