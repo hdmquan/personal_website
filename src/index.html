@@ -1,12 +1,12 @@
 ---
-title: "Alan Huynh | Machine Learning Engineer | Geospatial & Computer Vision"
-description: "Alan Huynh is a Melbourne-based Machine Learning Engineer specializing in geospatial analysis, computer vision, and automation. Explore his portfolio, blog, and innovative projects involving geospatial temporal and environmental data."
+title: "Alan Huynh | AI & Geospatial Engineer in Melbourne"
+description: "Melbourne-based AI and Geospatial Engineer specializing in climate tech and computer vision projects."
 
 permalink: "/"
 tags: "sitemap" # Sitemap will use all pages in content/, due to content.json. As index.html is not included in content/ we need to manually add the sitemap tag to this page (only).
 eleventyNavigation:
-  key: Home
-  order: 100
+    key: Home
+    order: 100
 ---
 
 {% extends "layouts/base.html" %} {% block head %}
@@ -15,186 +15,310 @@ eleventyNavigation:
 
 <!-- Script for Netlify Identity -->
 <script
-  defer
-  src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+    defer
+    src="https://identity.netlify.com/v1/netlify-identity-widget.js"
 ></script>
 <script defer>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", (user) => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
+    if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+            if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                });
+            }
         });
-      }
-    });
-  }
+    }
 </script>
 {% endblock %} {% block body %}
 
 <section id="hero">
-  <div class="container">
-    <h1 class="title">Hi, I'm Alan.</h1>
-    <p class="text">
-      Automation & AI<br> for <span>Climate</span>, <span>Compliance</span>, and
-      <span>Business</span>.
-    </p>
-    <div class="social-section">
-      <div class="social-icons">
-        <a
-          href="https://www.linkedin.com/in/hdmquan"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="/assets/svgs/linkedin-svgrepo-com.svg"
-            alt="LinkedIn"
-            width="40"
-            height="40"
-          />
-        </a>
-        <a
-          href="https://www.github.com/hdmquan"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="/assets/svgs/github-svgrepo-com.svg"
-            alt="GitHub"
-            width="40"
-            height="40"
-          />
-        </a>
-      </div>
-      <a
-        href="/assets/images/blog/alan-huynh-resume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="button-solid"
-        >My Resume</a
-      >
+    <div class="container">
+        <p class="title">Hi, I'm Alan.</p>
+        <h1 class="text">
+            Automation & AI<br />
+            for <span>Climate</span>, <span>Compliance</span>, and
+            <span>Business</span>.
+        </h1>
+        <div class="social-section">
+            <div class="social-icons">
+                <a
+                    href="https://www.linkedin.com/in/hdmquan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="/assets/svgs/linkedin-svgrepo-com.svg"
+                        alt="LinkedIn"
+                        width="40"
+                        height="40"
+                    />
+                </a>
+                <a
+                    href="https://www.github.com/hdmquan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="/assets/svgs/github-svgrepo-com.svg"
+                        alt="GitHub"
+                        width="40"
+                        height="40"
+                    />
+                </a>
+            </div>
+            <a
+                href="/assets/images/blog/alan-huynh-resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="button-solid"
+                >My Resume</a
+            >
+        </div>
     </div>
-  </div>
 </section>
 
-
-<section id="blog">
-  <div class="container">
-    <div class="content">
-      <div class="flex">
-        <span class="topper">My Projects</span>
-        <h2 class="title">What I worked on</h2>
-      </div>
+<section id="intro">
+    <script defer src="/assets/js/about.js"></script>
+    <div class="container">
+        <div class="image-group">
+            <picture class="picture">
+                <img
+                    src="/assets/images/talk.jpeg"
+                    alt="hackathon"
+                    width="605"
+                    height="690"
+                />
+            </picture>
+            <!-- <img class="floater" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/white-swirl.svg" alt="graphic" loading="lazy" decoding="async" height="710" aria-hidden="true" width="690"> -->
+        </div>
+        <div class="content">
+            <span class="topper">What I do</span>
+            <h2 class="title">AI Systems for Data, Compliance, and Climate</h2>
+            <p class="text">
+                I work at the intersection of machine learning, automation, and
+                environmental intelligence. My focus is on building real-world
+                systems that turn data into insight — whether for ESG reporting,
+                geospatial analysis, or deep learning research.
+            </p>
+            <ul class="faq-group">
+                <li class="faq-item active">
+                    <button class="service-button">
+                        <img
+                            class="icon"
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                            src="/assets/svgs/brain.svg"
+                            alt="icon"
+                            width="32"
+                            height="32"
+                        />
+                        <span class="button-text">
+                            Applied Machine Learning Systems
+                        </span>
+                        <span class="indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="item-p">
+                        I build end-to-end ML workflows — from experimentation
+                        to deployment — with automation in mind. Tools include
+                        PyTorch, FastAPI, HuggingFace, and vector databases.
+                        Ideal for productizing R&D and enabling AI agents.
+                    </p>
+                </li>
+                <li class="faq-item">
+                    <button class="service-button">
+                        <img
+                            class="icon"
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                            src="/assets/svgs/map.svg"
+                            alt="icon"
+                            width="32"
+                            height="32"
+                        />
+                        <span class="button-text">
+                            Geospatial & Environmental Intelligence
+                        </span>
+                        <span class="indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="item-p">
+                        I develop tools that process and analyze climate,
+                        satellite, and compliance data — from spatial pipelines
+                        to computer vision-based monitoring. Perfect for Scope 3
+                        analysis and ESG insights.
+                    </p>
+                </li>
+                <li class="faq-item">
+                    <button class="service-button">
+                        <img
+                            class="icon"
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                            src="/assets/svgs/graph.svg"
+                            alt="icon"
+                            width="32"
+                            height="32"
+                        />
+                        <span class="button-text">
+                            Data-Centric AI & Scientific Modeling
+                        </span>
+                        <span class="indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="item-p">
+                        My work often involves building machine learning systems
+                        grounded in physical laws, using physics-informed neural
+                        nets and modeling-heavy data. I speak data — from
+                        sensors to structure.
+                    </p>
+                </li>
+                <li class="faq-item">
+                    <button class="service-button">
+                        <img
+                            class="icon"
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                            src="/assets/svgs/chip.svg"
+                            alt="icon"
+                            width="32"
+                            height="32"
+                        />
+                        <span class="button-text">
+                            Prototyping with Hardware + Vision
+                        </span>
+                        <span class="indicator" aria-hidden="true"></span>
+                    </button>
+                    <p class="item-p">
+                        From high-altitude balloons to vision-based monitoring,
+                        I build prototypes that connect physical systems to AI
+                        backends. Bridging hardware, firmware, and CV logic.
+                    </p>
+                </li>
+            </ul>
+            <a href="" class="button-solid">More About Me</a>
+        </div>
     </div>
-
-    <ul class="card-group">
-      {% if collections.project | length > 0 %} {%- for project in
-      collections.project | reverse -%}
-      <li class="item">
-        <a class="link" href="{{ project.url }}">
-          <picture class="picture">
-            <img
-              decoding="async"
-              src="{{ project.data.image }}"
-              alt="{{ project.data.imageAlt }}"
-              width="420"
-              height="420"
-              aria-hidden="true"
-            />
-          </picture>
-          <div class="item-text">
-            <p class="topper-small">{{ project.data.tags[2] }}</p>
-            <h3 class="h4">{{ project.data.title }}</h3>
-            <p class="desc">{{ project.data.description }}</p>
-            <a class="button">Read more</a>
-          </div>
-        </a>
-      </li>
-      {%- endfor -%} {% else %}
-      <p class="error">Something went wrong, no project found.</p>
-      {% endif %}
-    </ul>
-  </div>
 </section>
 
 <section id="blog">
-  <div class="container">
-    <div class="content">
-      <div class="flex">
-        <span class="topper">My Blog</span>
-        <h2 class="title">What I wrote about</h2>
-      </div>
-    </div>
+    <div class="container">
+        <div class="content">
+            <div class="flex">
+                <span class="topper">My Projects</span>
+                <h2 class="title">What I worked on</h2>
+            </div>
+        </div>
 
-    <ul class="card-group">
-      {% if collections.blog | length > 0 %} {%- for blog in collections.blog |
-      reverse -%}
-      <li class="item">
-        <a class="link" href="{{ blog.url }}">
-          <picture class="picture">
-            <img
-              decoding="async"
-              src="{{ blog.data.image }}"
-              alt="{{ blog.data.imageAlt }}"
-              width="420"
-              height="420"
-              aria-hidden="true"
-            />
-          </picture>
-          <div class="item-text">
-            <p class="topper-small">{{ blog.data.tags[2] }}</p>
-            <h3 class="h4">{{ blog.data.title }}</h3>
-            <p class="desc">{{ blog.data.description }}</p>
-          </div>
-        </a>
-      </li>
-      {%- endfor -%} {% else %}
-      <p class="error">Something went wrong, no blog found.</p>
-      {% endif %}
-    </ul>
-  </div>
+        <ul class="card-group">
+            {% if collections.project | length > 0 %} {%- for project in
+            collections.project | reverse -%}
+            <li class="item">
+                <a class="link" href="{{ project.url }}">
+                    <picture class="picture">
+                        <img
+                            decoding="async"
+                            src="{{ project.data.image }}"
+                            alt="{{ project.data.imageAlt }}"
+                            width="420"
+                            height="420"
+                            aria-hidden="true"
+                        />
+                    </picture>
+                    <div class="item-text">
+                        <p class="topper-small">{{ project.data.tags[2] }}</p>
+                        <h3 class="h4">{{ project.data.title }}</h3>
+                        <p class="desc">{{ project.data.description }}</p>
+                        <a class="button">Read more</a>
+                    </div>
+                </a>
+            </li>
+            {%- endfor -%} {% else %}
+            <p class="error">Something went wrong, no project found.</p>
+            {% endif %}
+        </ul>
+    </div>
+</section>
+
+<section id="blog">
+    <div class="container">
+        <div class="content">
+            <div class="flex">
+                <span class="topper">My Blog</span>
+                <h2 class="title">What I wrote about</h2>
+            </div>
+        </div>
+
+        <ul class="card-group">
+            {% if collections.blog | length > 0 %} {%- for blog in
+            collections.blog | reverse -%}
+            <li class="item">
+                <a class="link" href="{{ blog.url }}">
+                    <picture class="picture">
+                        <img
+                            decoding="async"
+                            src="{{ blog.data.image }}"
+                            alt="{{ blog.data.imageAlt }}"
+                            width="420"
+                            height="420"
+                            aria-hidden="true"
+                        />
+                    </picture>
+                    <div class="item-text">
+                        <p class="topper-small">{{ blog.data.tags[2] }}</p>
+                        <h3 class="h4">{{ blog.data.title }}</h3>
+                        <p class="desc">{{ blog.data.description }}</p>
+                    </div>
+                </a>
+            </li>
+            {%- endfor -%} {% else %}
+            <p class="error">Something went wrong, no blog found.</p>
+            {% endif %}
+        </ul>
+    </div>
 </section>
 
 <section id="about">
-  <div class="container">
-    <picture class="picture">
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/assets/images/talk.jpeg"
-        alt="construction"
-        width="738"
-        height="598"
-      />
-    </picture>
-    <div class="content">
-      <div class="flex">
-        <p class="topper">About Me</p>
-        <h2 class="title">AI x Geo x Climate</h2>
-      </div>
-      <p class="text">
-        I'm an AI and automation engineer based in Melbourne, building tools across geospatial, climate-tech, and ESG domains. I focus on turning complex data into practical systems that deliver insight and impact.
-      </p>
-      <p class="text" style="margin-bottom: 3rem;">
-        Outside of tech, I am a musician, hiker, and rhythm game enthusiast.
-      </p>
-      <a
-        href="/about"
-        class="button-solid"
-        >More About Me</a
-      >
+    <div class="container">
+        <picture class="picture">
+            <img
+                loading="lazy"
+                decoding="async"
+                src="/assets/images/hackathon.jpeg"
+                alt="construction"
+                width="738"
+                height="598"
+            />
+        </picture>
+        <div class="content">
+            <div class="flex">
+                <p class="topper">About Me</p>
+                <h2 class="title">AI x Geo x Climate</h2>
+            </div>
+            <p class="text">
+                I'm an AI and automation engineer based in Melbourne, building
+                tools across geospatial, climate-tech, and ESG domains. I focus
+                on turning complex data into practical systems that deliver
+                insight and impact.
+            </p>
+            <p class="text" style="margin-bottom: 3rem">
+                Outside of tech, I am a musician, hiker, and rhythm game
+                enthusiast.
+            </p>
+            <a href="/about" class="button-solid">More About Me</a>
+        </div>
     </div>
-  </div>
-  <picture class="background">
-    <img
-      loading="lazy"
-      decoding="async"
-      src="/assets/svgs/contour-lines.svg"
-      alt="waves"
-      width="960"
-      height="839"
-    />
-  </picture>
+    <picture class="background">
+        <img
+            loading="lazy"
+            decoding="async"
+            src="/assets/svgs/contour-lines.svg"
+            alt="waves"
+            width="960"
+            height="839"
+        />
+    </picture>
 </section>
-
 
 {% endblock %}

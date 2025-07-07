@@ -186,6 +186,323 @@
     }
 }
 
+/*-- -------------------------- -->
+<---         Services           -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #intro {
+        border-top: 1px solid #000;
+        padding: var(--sectionPadding);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+
+        .container {
+            width: 100%;
+            /* changes to 1280px at small desktop */
+            max-width: calc(584 / 16 * 1rem);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 40px - 64px */
+            gap: clamp(2.5rem, 3.9vw, 4rem);
+        }
+
+        .image-group {
+            width: 100%;
+            height: auto;
+            margin: 0;
+            position: relative;
+        }
+
+        .picture {
+            width: 100%;
+            min-height: calc(328 / 16 * 1rem);
+            display: block;
+            position: relative;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: left;
+            }
+        }
+
+        .floater {
+            width: clamp(20.125rem, 40vw, 28.1875rem);
+            height: clamp(20.1875rem, 40vw, 28.25rem);
+            position: absolute;
+            bottom: calc(0 / 16 * 1rem);
+            z-index: 1;
+            mix-blend-mode: soft-light;
+        }
+
+        .content {
+            text-align: left;
+            width: 100%;
+            max-width: calc(650 / 16 * 1rem);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            flex: none;
+        }
+
+        .title {
+            /* 16px - 24px */
+            margin: 0 0 clamp(1rem, 1.96vw, 1.5rem) 0;
+        }
+
+        .text {
+            /* 16px - 24px */
+            margin: 0 0 clamp(1rem, 1.96vw, 1.5rem) 0;
+        }
+
+        .faq-group {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* 16px - 20px */
+            gap: clamp(1rem, 2.4vw, 1.25rem);
+        }
+
+        .button-solid {
+            margin: 0;
+        }
+
+        .faq-item {
+            list-style: none;
+            width: 100%;
+            background-color: transparent;
+            padding: 0;
+            box-sizing: border-box;
+            transition: border-bottom 0.3s;
+
+            &.active {
+                .indicator {
+                    &:before {
+                        transform: translate(-50%, -50%) rotate(360deg);
+                    }
+
+                    &:after {
+                        transform: translate(-50%, -50%) rotate(0deg);
+                    }
+                }
+
+                .item-p {
+                    height: auto;
+                    padding-top: calc(16 / 16 * 1rem);
+                    opacity: 1;
+                    transform: scaleY(1);
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    
+        .service-button {
+            /* 16px - 20px */
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            line-height: 1.2em;
+            text-align: left;
+            width: 100%;            
+            border: none;
+            background: transparent;
+            color: var(--headerColor);
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            /* 16px - 24px */
+            gap: clamp(1rem, 2.5vw, 1.5rem);
+            position: relative;
+            transition:
+                background-color 0.3s,
+                color 0.3s;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .indicator {
+            width: calc(24 / 16 * 1rem);
+            height: calc(24 / 16 * 1rem);
+            position: relative;
+            z-index: 1;
+
+            &:before {
+                /* left line */
+                content: '';
+                width: calc(16 / 16 * 1rem);
+                height: calc(2 / 16 * 1rem);
+                background-color: #000;
+                opacity: 1;
+                border-radius: 2px;
+                position: absolute;
+                display: block;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: transform .5s;
+            }
+
+            &:after {
+                /* right line */
+                content: '';
+                width: calc(16 / 16 * 1rem);
+                height: calc(2 / 16 * 1rem);
+                background-color: #000;
+                opacity: 1;
+                border-radius: 2px;
+                position: absolute;
+                display: block;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(90deg);
+                transition: transform .5s;
+            }
+        }
+
+        .button-text {
+            width: 90%;
+            padding: 0;
+            display: block;
+        }
+
+        .item-p {
+            font-size: calc(14 / 16 * 1rem);
+            line-height: 1.5em;
+            width: 100%;
+            max-width: none;
+            height: 0;
+            margin: 0;
+            box-sizing: border-box;
+            opacity: 0;
+            color: var(--bodyTextColor);
+            overflow: hidden;
+            position: relative;
+            transition:
+                opacity 0.3s,
+                padding-bottom 0.3s,
+                padding-top 0.3s;
+        }
+
+        .icon {
+            width: calc(32 / 16 * 1rem);
+            height: calc(32 / 16 * 1rem);
+            display: block;
+        }
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #intro {
+        .picture {
+            height: 100%;
+            min-width: calc(584 / 16 * 1rem);
+            width: 48vw;
+            right: 0;
+            top: 0;
+        }
+    }
+}
+
+/* Small Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+    #intro {
+        .container {
+            max-width: calc(1280 / 16 * 1rem);
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+
+        .content {
+            width: 55%;
+        }
+
+        .image-group {
+            width: 100%;
+            max-width: calc(542 / 16 * 1rem);
+        }
+
+        .picture {
+            width: 100%;
+            min-width: 100%;
+        }
+
+        .floater {
+            width: calc(451 / 16 * 1rem);
+            right: clamp(50%, 18vw, 75%);
+            bottom: calc(-100 / 16 * 1rem);
+        }
+    }
+}
+
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode {
+        #intro {
+            background-color: rgba(0, 0, 0, .2);
+
+            .title,
+            .text,
+            .button-text,
+            .item-p,
+            .h3 {
+                color: var(--bodyTextColorWhite);
+            }
+
+            .faq-item {
+                background-color: rgba(0, 0, 0, 0.4);
+                border-color: rgba(255, 255, 255, .1);
+            }
+
+            .faq-item.active {
+                border-color: var(--primary);
+            }
+
+            .faq-item.active .button {
+                color: var(--secondary);
+            }
+
+            .faq-item.active .button:before,
+            .faq-item.active .button:after {
+                background-color: var(--secondary);
+            }
+
+            .button {
+                color: var(--bodyTextColorWhite);
+            }
+
+            .button:before,
+            .button:after {
+                background-color: var(--bodyTextColorWhite);
+            }
+
+            .floater {
+                opacity: 0.1;
+            }
+        }
+    }
+}
+
                                 
 
 /*-- -------------------------- -->

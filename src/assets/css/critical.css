@@ -70,6 +70,7 @@
   color: var(--bodyTextColor);
   font-size: clamp(1.9375rem, 3.9vw, 3.0625rem);
   max-width: 58.75rem;
+  font-weight: 400;
   margin-left: auto;
   text-align: right;
 }

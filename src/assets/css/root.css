@@ -35,7 +35,7 @@ html {
   transition: background-color 0.3s;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, span {
   margin: 0;
   color: var(--headerColor);
   font-family: "Baskervville", "Georgia", serif;
@@ -47,6 +47,7 @@ p {
   font-weight: 200;
   line-height: 1.5em;
   color: #222;
+  font-family: "Baskervville", "Georgia", serif;
 }
 
 li, a {
