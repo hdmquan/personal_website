@@ -5,7 +5,6 @@ const pluginSitemap = require("@quasibit/eleventy-plugin-sitemap");
 
 const dateFilter = require("nunjucks-date-filter");
 
-
 // Configs
 const configCss = require("./src/config/css");
 const configJs = require("./src/config/javascript");
@@ -16,8 +15,13 @@ const configServer = require("./src/config/server");
 const filterPostDate = require("./src/config/postDate");
 const isProduction = configServer.isProduction;
 
-
 module.exports = function (eleventyConfig) {
+    const startYear = 2022;
+    const currentYear = new Date().getFullYear();
+
+    eleventyConfig.addGlobalData("startYear", startYear);
+    eleventyConfig.addGlobalData("currentYear", currentYear);
+
     // Add Template Formats
     eleventyConfig.addTemplateFormats("css");
     eleventyConfig.addExtension("css", configCss);
@@ -47,15 +51,21 @@ module.exports = function (eleventyConfig) {
 
     // Add Custom Collections
     eleventyConfig.addCollection("blog", (collectionApi) => {
-        return collectionApi.getFilteredByGlob("src/content/blog/*.md").reverse(); // Reverse for newest first
+        return collectionApi
+            .getFilteredByGlob("src/content/blog/*.md")
+            .reverse(); // Reverse for newest first
     });
 
     eleventyConfig.addCollection("project", (collectionApi) => {
-        return collectionApi.getFilteredByGlob("src/content/project/*.md").reverse(); // Reverse for newest first
+        return collectionApi
+            .getFilteredByGlob("src/content/project/*.md")
+            .reverse(); // Reverse for newest first
     });
 
     eleventyConfig.addCollection("songs", (collectionApi) => {
-        return collectionApi.getFilteredByGlob("src/content/songs/*.md").reverse(); // Reverse for newest first
+        return collectionApi
+            .getFilteredByGlob("src/content/songs/*.md")
+            .reverse(); // Reverse for newest first
     });
 
     // Set Server Options
