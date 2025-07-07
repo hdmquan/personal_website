@@ -912,6 +912,45 @@
     /* centers content horizontally, set to flex-start to left align */
     align-items: flex-start;
   }
+  #gallery .img-hover {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+  #gallery .img-hover img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  #gallery .img-hover:hover img {
+    transform: scale(1.05); /* optional zoom effect */
+  }
+  #gallery .img-hover .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--overlay);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  #gallery .img-hover:hover .overlay {
+    opacity: 1;
+  }
+  #gallery .overlay-text {
+    font-size: 1rem;
+    padding: 1rem;
+    text-align: center;
+    color: var(--bodyTextColorWhite);
+    font-family: "Nexa", Arial, sans-serif;
+    font-weight: 700;
+  }
   #gallery .text {
     margin-bottom: 1rem;
     max-width: 39.375rem;

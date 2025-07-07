@@ -84,9 +84,9 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
                 I’ve worked across a few different teams building machine
                 learning systems, data pipelines, and tools that actually get
                 used, from climate and compliance to edge devices and backend
-                platforms for {{ currentYear - startYear }}+. Below are
-                some of the places I’ve worked, what I focused on, and how it
-                turned out.
+                platforms for {{ currentYear - startYear }}+. Below are some of
+                the places I’ve worked, what I focused on, and how it turned
+                out.
             </p>
             <ul class="faq-group">
                 <li class="experience-item active">
@@ -345,32 +345,52 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
             </div>
             <div class="flex">
                 <p class="text">
-                    A few glimpses into what I’ve done — projects, events, a
-                    hackathon win, and some talks. Mostly work, some fun, and a
-                    few things that aren't productive at all :D
+                    Some photos and screenshots from work, side projects, a
+                    hackathon we won, and one or two things that aren’t work at
+                    all LOL.
                 </p>
-                <a aria-label="view more pictures" href="/about" class="button">
-                    More About Me
-                </a>
             </div>
         </div>
         <div class="image-group">
-            <picture class="picture picture-1">
+            <a
+                href="https://www.meetup.com/arcaea-melbourne/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="picture picture-1 img-hover"
+            >
                 <img
                     src="/assets/images/meetup.jpg"
                     alt="meetup"
                     width="605"
                     height="690"
                 />
-            </picture>
-            <picture class="picture picture-2">
+                <div class="overlay">
+                    <p class="overlay-text">
+                        Arcaea Melbourne<br />A monthly meetup for a mobile
+                        rhythm game I organize. <br /><br />
+                        Join us! >
+                    </p>
+                </div>
+            </a>
+            <a
+                href="https://github.com/hdmquan/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="picture picture-2 img-hover"
+            >
                 <img
                     src="/assets/images/compli.jpg"
                     alt="complications"
                     width="605"
                     height="690"
                 />
-            </picture>
+                <div class="overlay">
+                    <p class="overlay-text">
+                        My GitHub!<br /><br />Check out my open source projects
+                        and library >
+                    </p>
+                </div>
+            </a>
             <picture class="picture picture-3">
                 <iframe
                     src="https://www.youtube.com/embed/LDpGDlyv8W0"
@@ -381,29 +401,48 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
                     allowfullscreen
                 ></iframe>
             </picture>
-            <picture class="picture picture-4">
+            <a
+                href="https://www.linkedin.com/feed/update/urn:li:activity:7195318442927824896/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="picture picture-4 img-hover"
+            >
                 <img
                     src="/assets/images/hackathon.jpeg"
                     alt="hackathon"
                     width="605"
                     height="690"
                 />
-            </picture>
-            <picture class="picture picture-5">
+                <div class="overlay">
+                    <p class="overlay-text">
+                        Green Battery Hack<br />Our team of 5 won first prize at
+                        the ML energy spot market trading using Deep Learning
+                        and simulation.<br /><br />
+                        Check out the project >
+                    </p>
+                </div>
+            </a>
+            <picture class="picture picture-5 img-hover">
                 <img
                     src="/assets/images/hike.jpg"
                     alt="hike"
                     width="605"
                     height="690"
                 />
+                <div class="overlay">
+                    <p class="overlay-text">I love hiking!<br>This particular one is at Werribee Gorge with my seniors at ITPA<br><br>Ask me out if you want company :D</p>
+                </div>
             </picture>
-            <picture class="picture picture-6">
+            <picture class="picture picture-6 img-hover">
                 <img
                     src="/assets/images/gears.jpg"
                     alt="gears"
                     width="605"
                     height="690"
                 />
+                <div class="overlay">
+                    <p class="overlay-text">Not an audiophile but I love music and my gear :D</p>
+                </div>
             </picture>
         </div>
     </div>
