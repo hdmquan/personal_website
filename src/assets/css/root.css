@@ -8,7 +8,7 @@
   --bodyTextColor: #111;
   --bodyTextColorWhite: #fff;
   --accent: #6cb274;
-  --emphasis: rgba(108, 178, 116, 0.2);
+  --emphasis: #adebad;
   --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
   --topperFontSizeSmall: clamp(0.5rem, 1vw, 0.75rem);
   --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
