@@ -1,0 +1,172 @@
+---
+title: "About | Alan Huynh"
+description: "Where I wrote about machine learning and geospatial stuff!"
+
+permalink: "about/"
+eleventyNavigation:
+  key: About
+  order: 500
+---
+
+{% extends "layouts/base.html" %} {% block head %}
+<link rel="stylesheet" href="/assets/css/about.css" />
+{% endblock %} {% block body %}
+
+<section id="text-right">
+    <div class="container">
+        <div class="video-container">
+            <iframe
+                width="100%"
+                height="100%"
+                style="height: 400px;"
+                src="https://www.youtube.com/embed/LDpGDlyv8W0"
+            >
+            </iframe>
+        </div>
+        <div class="content">
+            <span class="topper">Tech Talk</span>
+            <h2 class="title">DDD Melbourne</h2>
+            <p class="text">
+                I once gave a talk at DDD Melbourne on why not everything needs
+                machine learning which, yeah, is a bit odd coming from someone
+                who works in ML. But at the time, a lot of people were trying to
+                force it into every problem like it was the answer to
+                everything.
+            </p>
+            <p class="text">
+                Working in AI, I’ve seen a fair bit of hype. Machine learning
+                gets thrown at things it doesn’t always belong. I think it’s
+                worth being clear about where it fits, and where it doesn’t.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="text-left">
+    <div class="container">
+        <div class="video-container">
+            <img
+                class="picture"
+                src="/assets/images/hackathon.jpeg"
+                alt="hackathon"
+                width="605"
+                height="690"
+                style="width: auto;"
+            />
+        </div>
+        <div class="content">
+            <span class="topper">1st Place</span>
+            <h2 class="title">Green Battery Hackathon</h2>
+            <p class="text">
+                We built a trading system for the Australian energy spot market
+                using real data from AEMO, goal was to maximize profit across
+                simulated trades. 
+            </p>
+            <p class="text">
+                We tried everything from traditional
+                strategies with Optuna tuning, to reinforcement learning, to
+                custom ML setups, but what stuck was a neural network trained
+                on a custom loss: max profit - actual profit.
+            </p>
+            <p class="text">
+                For the pitch, we framed the idea from a business perspective —
+                not just the tech, which helped us stand out. We ended up
+                taking first place for the pitch, and second for the algorithm
+                itself.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="text-right">
+    <div class="container">
+        <picture class="picture">
+            <!--Mobile Image-->
+            <source
+                media="(max-width: 600px)"
+                srcset="
+                    https://csimg.nyc3.cdn.digitaloceanspaces.com/SideBySide/room.jpg
+                "
+            />
+            <!--Tablet and above Image-->
+            <source
+                media="(min-width: 601px)"
+                srcset="
+                    https://csimg.nyc3.cdn.digitaloceanspaces.com/SideBySide/room.jpg
+                "
+            />
+            <img
+                loading="lazy"
+                decoding="async"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/SideBySide/room.jpg"
+                alt="room"
+                width="494"
+                height="700"
+            />
+        </picture>
+        <div class="content">
+            <span class="topper">What We Do</span>
+            <h2 class="title">House Painting Contractors For Oak Harbor</h2>
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p class="text">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum
+            </p>
+            <a href="" class="button-solid">Get Free Quote</a>
+        </div>
+    </div>
+</section>
+
+<section id="text-left">
+    <div class="container">
+        <picture class="picture">
+            <!--Mobile Image-->
+            <source
+                media="(max-width: 600px)"
+                srcset="
+                    https://csimg.nyc3.cdn.digitaloceanspaces.com/SideBySide/room.jpg
+                "
+            />
+            <!--Tablet and above Image-->
+            <source
+                media="(min-width: 601px)"
+                srcset="
+                    https://csimg.nyc3.cdn.digitaloceanspaces.com/SideBySide/room.jpg
+                "
+            />
+            <img
+                loading="lazy"
+                decoding="async"
+                src="https://csimg.nyc3.cdn.digitaloceanspaces.com/SideBySide/room.jpg"
+                alt="room"
+                width="494"
+                height="700"
+            />
+        </picture>
+        <div class="content">
+            <span class="topper">What We Do</span>
+            <h2 class="title">House Painting Contractors For Oak Harbor</h2>
+            <p class="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p class="text">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum
+            </p>
+            <a href="" class="button-solid">Get Free Quote</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,169 +1,168 @@
-/* PAGE-SPECIFIC STYLES FOR THE ABOUT PAGE */
 /*-- -------------------------- -->
 <---       Side By Side         -->
 <--- -------------------------- -*/
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-  #sbs {
-    padding: var(--sectionPadding);
-  }
-  #sbs .container {
+  #text-left .container,
+  #text-right .container {
+    width: 100%;
+    max-width: 80rem;
+    margin: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: auto;
-    max-width: 80rem;
+    /* 48px - 64px */
+    gap: clamp(3rem, 7vw, 4rem);
+  }
+  #text-left .content,
+  #text-right .content {
+    /* set text align to left if content needs to be left aligned */
+    text-align: left;
     width: 100%;
-    row-gap: 2.5rem;
+    max-width: 32.625rem;
+    /* moved section padding to the .content so we can have the picture be full width on mobile without the padding preventing it from doing so */
+    padding: var(--sectionPadding);
+    padding-top: 0;
+    /* prevents padding from affecting width and height */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    /* centers content horizontally, set to flex-start to left align */
+    align-items: flex-start;
   }
-  #sbs .left {
-    position: relative;
-    height: 39.75em;
-    /* using ems so we can use font size to scale the whole section */
-    width: 39.4375em;
-    /* scaling the font size with the view width */
-    font-size: min(2.31vw, 0.7em);
+  #text-left .text,
+  #text-right .text {
+    margin-bottom: 1rem;
   }
-  #sbs .picture {
-    position: absolute;
+  #text-left .text:last-of-type,
+  #text-right .text:last-of-type {
+    margin-bottom: 2rem;
+  }
+  #text-left .picture,
+  #text-right .picture {
     display: block;
-    border-radius: 1.5em;
-    /* clips img tag corners */
-    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: auto;
   }
-  #sbs .picture img {
+  #text-left .picture img,
+  #text-right .picture img {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    /* makes image act like a background image */
     object-fit: cover;
   }
-  #sbs .picture1 {
-    top: 0;
-    left: 0;
-    height: 36.3125em;
-    width: 32.625em;
-  }
-  #sbs .picture2 {
-    bottom: 0;
-    right: 0;
-    /* 6px - 12px */
-    border: clamp(0.375em, 1.5vw, 0.75em) solid #fff;
-    background-color: #fff;
-    height: 25em;
-    width: 25.875em;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 40px;
-  }
-  #sbs .right {
-    margin: auto;
-    max-width: 33.875rem;
-  }
-  #sbs .topper {
-    margin-bottom: 0.25rem;
-    text-align: left;
-  }
-  #sbs .title {
-    max-width: 50rem;
-    text-align: left;
-  }
-  #sbs .text {
-    margin-bottom: 1rem;
-    max-width: 46.875rem;
-    color: var(--bodyTextColor);
-    text-align: left;
-  }
-  #sbs .text:last-of-type {
-    margin-bottom: 2rem;
-  }
-  #sbs .flex-group {
+  #text-left .video-container,
+  #text-right .video-container {
+    width: 100%;
+    height: 100%;
     position: relative;
-    border-radius: 1rem;
-    background-color: #f7f7f7;
-    /* 16px - 32px */
-    padding: clamp(1rem, 3vw, 2rem);
-  }
-  #sbs .flex-p {
-    margin: 0 0 1rem;
-    /* 14px - 16px */
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
-    line-height: 1.5em;
-    color: #353535;
-  }
-  #sbs .name {
-    display: block;
-    margin: 0 0 0.25rem;
-    text-transform: uppercase;
-    font-size: 1rem;
-    line-height: 1.2em;
-    font-weight: bold;
-    color: var(--headerColor);
-  }
-  #sbs .job {
-    display: block;
-    font-size: 0.875rem;
-    line-height: 1.5em;
-    color: #353535;
-  }
-  #sbs .quote-icon {
-    position: absolute;
-    bottom: 0rem;
-    /* 16px - 32px */
-    right: clamp(1rem, 4vw, 2rem);
-    height: auto;
-    /* 60px - 136px */
-    width: clamp(3.75rem, 10vw, 8.5rem);
-  }
-  #sbs .button-solid {
-    margin-top: 2rem;
   }
 }
-/* Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
-  #sbs .container {
-    flex-flow: row;
-    justify-content: space-between;
-    gap: 3.25rem;
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+  #text-left,
+  #text-right {
+    padding: var(--sectionPadding);
   }
-  #sbs .left {
-    font-size: min(1.2vw, 1em);
-    flex: none;
+  #text-left .container,
+  #text-right .container {
+    flex-direction: row;
+    justify-content: flex-start;
+    /* 60px - 128px */
+    gap: clamp(3.75rem, 10vw, 8rem);
   }
-  #sbs .right {
-    margin: 0;
+  #text-left .content,
+  #text-right .content {
+    width: 53%;
+    /* reset the padding, add the section padding back to the section container */
+    padding: 0;
+  }
+  #text-left .picture,
+  #text-right .picture {
+    width: 47vw;
+    /* 518px - 700px */
+    position: relative;
+  }
+  #text-left .picture:before,
+  #text-right .picture:before {
+    /* yellow box */
+    content: "";
+    width: 50%;
+    height: 60%;
+    background: var(--secondary);
+    opacity: 1;
+    display: block;
+    position: absolute;
+    /* 16px - 28px, wrapped in calc function to multiple by negative 1 and get a negative clamp value */
+    bottom: calc(clamp(1rem, 2.4vw, 1.75rem) * -1);
+    left: calc(clamp(1rem, 2.4vw, 1.75rem) * -1);
   }
 }
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
-  body.dark-mode #sbs .left:before, body.dark-mode #sbs .left:after {
-    background: var(--accent);
-  }
-  body.dark-mode #sbs .picture2 {
-    /* 6px - 12px */
-    border: clamp(0.375em, 1.5vw, 0.75em) solid var(--dark);
-    background-color: var(--dark);
-  }
-  body.dark-mode #sbs .topper {
-    color: var(--primaryLight);
-  }
-  body.dark-mode #sbs .title,
-  body.dark-mode #sbs .text,
-  body.dark-mode #sbs .h3,
-  body.dark-mode #sbs .flex-p,
-  body.dark-mode #sbs .name {
+  body.dark-mode #text-left .topper,
+  body.dark-mode #text-right .topper {
     color: var(--bodyTextColorWhite);
   }
-  body.dark-mode #sbs .flex-group {
+  body.dark-mode #text-left .title,
+  body.dark-mode #text-left .text,
+  body.dark-mode #text-right .title,
+  body.dark-mode #text-right .text {
+    color: var(--bodyTextColorWhite);
+  }
+  body.dark-mode #text-left .text,
+  body.dark-mode #text-right .text {
+    opacity: 0.8;
+  }
+  body.dark-mode #text-left .picture:before,
+  body.dark-mode #text-right .picture:before {
     background-color: var(--accent);
   }
-  body.dark-mode #sbs .job {
-    opacity: 0.8;
-    color: var(--bodyTextColorWhite);
+}
+/*-- -------------------------- -->
+<---    Side By Side Reverse    -->
+<--- -------------------------- -*/
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+  #text-right {
+    background-color: #f7f7f7;
   }
-  body.dark-mode #sbs .quote-icon {
-    opacity: 0.2;
+}
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+  #text-right .container {
+    justify-content: flex-end;
+  }
+  #text-right .content {
+    /* sends it to the left in the first position */
+    order: -1;
+  }
+  #text-right .picture {
+    /* 16px - 28px, added margin left and bottom to picture so it pushes away by the same amount the yellow box element overlaps it left and bottom. This maintains consistent spacing left and bottom */
+    margin: 0 clamp(1rem, 2.4vw, 1.75rem) clamp(1rem, 2.4vw, 1.75rem) 0;
+  }
+  #text-right .picture:before {
+    /* yellow box */
+    content: "";
+    width: 50%;
+    height: 60%;
+    background: var(--secondary);
+    opacity: 1;
+    display: block;
+    position: absolute;
+    left: auto;
+    /* 16px - 28px, wrapped in calc function to multiple by negative 1 and get a negative clamp value */
+    bottom: calc(clamp(1rem, 2.4vw, 1.75rem) * -1);
+    right: calc(clamp(1rem, 2.4vw, 1.75rem) * -1);
+  }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+  body.dark-mode #text-right {
+    background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
