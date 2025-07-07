@@ -152,8 +152,7 @@ a:hover, button:hover {
 .button {
   margin-bottom: 1rem;
   height: initial;
-  width: auto;
-  line-height: 2.3rem;
+  width: fit-content;
   color: var(--bodyTextColor);
   box-shadow: inset 0 -6px var(--emphasis);
   text-decoration: none;
