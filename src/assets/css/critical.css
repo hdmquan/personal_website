@@ -157,6 +157,7 @@ body.dark-mode #hero img {
   filter: invert(100%);
 }
 body.dark-mode #hero span {
+  color: var(--bodyTextColorWhite);
   box-shadow: inset 0 -6px var(--emphasis-dark);
 }
 

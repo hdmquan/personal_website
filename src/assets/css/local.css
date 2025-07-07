@@ -381,35 +381,23 @@
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
   body.dark-mode #intro {
-    background-color: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid #fff;
   }
-  body.dark-mode #intro .title,
-  body.dark-mode #intro .text,
-  body.dark-mode #intro .button-text,
-  body.dark-mode #intro .item-p,
-  body.dark-mode #intro .h3 {
-    color: var(--bodyTextColorWhite);
+  body.dark-mode #intro .icon {
+    filter: invert(100%);
   }
-  body.dark-mode #intro .faq-item {
-    background-color: rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  body.dark-mode #intro .faq-item.active {
-    border-color: var(--primary);
-  }
-  body.dark-mode #intro .faq-item.active .button {
-    color: var(--secondary);
+  body.dark-mode #intro .indicator:before, body.dark-mode #intro .indicator:after {
+    background-color: var(--bodyTextColorWhite);
   }
   body.dark-mode #intro .faq-item.active .button:before,
   body.dark-mode #intro .faq-item.active .button:after {
-    background-color: var(--secondary);
+    background-color: var(--primary);
   }
   body.dark-mode #intro .button {
     color: var(--bodyTextColorWhite);
   }
-  body.dark-mode #intro .button:before,
-  body.dark-mode #intro .button:after {
-    background-color: var(--bodyTextColorWhite);
+  body.dark-mode #intro .item-p {
+    color: var(--bodyTextColorWhite);
   }
   body.dark-mode #intro .floater {
     opacity: 0.1;
@@ -805,6 +793,158 @@
   }
   body.dark-mode #gallery .link svg path {
     fill: var(--bodyTextColorWhite);
+  }
+}
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+  #steps {
+    border-top: 1px solid #000;
+    padding: var(--sectionPadding);
+  }
+  #steps .container {
+    width: 100%;
+    /* changes to 1920px at tablet */
+    max-width: 36.5rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 48px - 64px */
+    gap: clamp(3rem, 6vw, 4rem);
+  }
+  #steps .content {
+    /* set text align to left if content needs to be left aligned */
+    text-align: center;
+    width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    /* centers content horizontally, set to flex-start to left align */
+    align-items: center;
+  }
+  #steps .text {
+    /* Override.  topper title and first text should be removed and put into your global css sheet so it can control every instance of them on your site and is consistent. This selector is a section specific override that stays inside this stitch */
+    max-width: 32.625rem;
+  }
+  #steps .card-group {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    justify-items: center;
+    align-items: stretch;
+    grid-auto-flow: row;
+  }
+  #steps .item {
+    list-style: none;
+    /* prevents padding and border from affecting height and width */
+    box-sizing: border-box;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    /* bottom border */
+  }
+  #steps .item::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    /* to change the color of the bottom border, adjust the second color (at 50%). the first and third will blend the color to transparent */
+    /* note you'll also have to change the color in the tablet media query when the lines go vertical */
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgb(186, 186, 186) 50%, rgba(255, 255, 255, 0) 100%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  #steps .item:first-of-type {
+    padding-top: 0;
+  }
+  #steps .item:last-of-type {
+    padding-bottom: 0;
+  }
+  #steps .item:last-of-type::after {
+    content: none;
+  }
+  #steps .number {
+    /* 80px - 100px */
+    font-size: clamp(5rem, 1vw, 6.25rem);
+    font-weight: 900;
+    line-height: 1.2em;
+    color: var(--primary);
+    opacity: 0.12;
+    display: block;
+    font-family: "Nexa", Arial, sans-serif;
+  }
+  #steps .h3 {
+    /* 20px - 25px */
+    font-size: clamp(1.25rem, 2vw, 1.5625rem);
+    font-weight: 700;
+    line-height: 1.2em;
+    margin: -1.9375rem 0 1rem 0;
+    color: var(--headerColor);
+  }
+  #steps .item-text {
+    /* 14px - 16px */
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.5em;
+    text-align: left;
+    margin: 0;
+    color: var(--bodyTextColor);
+  }
+}
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+  #steps .container {
+    max-width: 120rem;
+  }
+  #steps .card-group {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  #steps .item {
+    /* 24px - 60px */
+    padding: clamp(1.5rem, 3vw, 3.75rem);
+    /* the specificity of the mobile .item means we need to explicitly define the first and last items here, too */
+  }
+  #steps .item::after {
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(186, 186, 186) 50%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0.6;
+    opacity: 0.6;
+    right: 0;
+    left: initial;
+  }
+  #steps .item:first-of-type, #steps .item:last-of-type {
+    /* 24px - 60px */
+    padding: clamp(1.5rem, 3vw, 3.75rem);
+  }
+}
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+  body.dark-mode #steps {
+    border-top: 1px solid #fff;
+  }
+  body.dark-mode #steps .topper {
+    color: var(--primaryLight);
+  }
+  body.dark-mode #steps .title {
+    color: var(--bodyTextColorWhite);
+  }
+  body.dark-mode #steps .item {
+    border-color: var(--bodyTextColorWhite);
+  }
+  body.dark-mode #steps .item:after {
+    opacity: 0.2;
+  }
+  body.dark-mode #steps .item-text,
+  body.dark-mode #steps .text {
+    color: var(--bodyTextColorWhite);
+    opacity: 0.8;
+  }
+  body.dark-mode #steps .h3,
+  body.dark-mode #steps .number {
+    color: var(--primaryLight);
   }
 }
 

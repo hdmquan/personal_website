@@ -12,7 +12,7 @@
         border-top: 1px solid #000;
 
         .container {
-            max-width: calc(1280/16 * 1rem);
+            max-width: calc(1280 / 16 * 1rem);
             margin: auto;
             display: flex;
             justify-content: center;
@@ -166,7 +166,7 @@
     body.dark-mode {
         #about {
             border-top: 1px solid #fff;
-            
+
             .title,
             .text {
                 color: var(--bodyTextColorWhite);
@@ -313,13 +313,13 @@
                 cursor: pointer;
             }
         }
-    
+
         .service-button {
             /* 16px - 20px */
             font-size: clamp(1rem, 2vw, 1.25rem);
             line-height: 1.2em;
             text-align: left;
-            width: 100%;            
+            width: 100%;
             border: none;
             background: transparent;
             color: var(--headerColor);
@@ -330,9 +330,7 @@
             /* 16px - 24px */
             gap: clamp(1rem, 2.5vw, 1.5rem);
             position: relative;
-            transition:
-                background-color 0.3s,
-                color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
 
             &:hover {
                 cursor: pointer;
@@ -347,7 +345,7 @@
 
             &:before {
                 /* left line */
-                content: '';
+                content: "";
                 width: calc(16 / 16 * 1rem);
                 height: calc(2 / 16 * 1rem);
                 background-color: #000;
@@ -358,12 +356,12 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                transition: transform .5s;
+                transition: transform 0.5s;
             }
 
             &:after {
                 /* right line */
-                content: '';
+                content: "";
                 width: calc(16 / 16 * 1rem);
                 height: calc(2 / 16 * 1rem);
                 background-color: #000;
@@ -374,7 +372,7 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%) rotate(90deg);
-                transition: transform .5s;
+                transition: transform 0.5s;
             }
         }
 
@@ -396,10 +394,7 @@
             color: var(--bodyTextColor);
             overflow: hidden;
             position: relative;
-            transition:
-                opacity 0.3s,
-                padding-bottom 0.3s,
-                padding-top 0.3s;
+            transition: opacity 0.3s, padding-bottom 0.3s, padding-top 0.3s;
         }
 
         .icon {
@@ -459,42 +454,33 @@
 @media only screen and (min-width: 0rem) {
     body.dark-mode {
         #intro {
-            background-color: rgba(0, 0, 0, .2);
-
-            .title,
-            .text,
-            .button-text,
-            .item-p,
-            .h3 {
-                color: var(--bodyTextColorWhite);
+            border-top: 1px solid #fff;
+            
+            .icon {
+                filter: invert(100%);
             }
 
-            .faq-item {
-                background-color: rgba(0, 0, 0, 0.4);
-                border-color: rgba(255, 255, 255, .1);
+            .indicator {
+                &:before,
+                &:after {
+                    background-color: var(--bodyTextColorWhite);
+                }
             }
 
-            .faq-item.active {
-                border-color: var(--primary);
-            }
-
-            .faq-item.active .button {
-                color: var(--secondary);
-            }
 
             .faq-item.active .button:before,
             .faq-item.active .button:after {
-                background-color: var(--secondary);
+                background-color: var(--primary);
             }
 
             .button {
                 color: var(--bodyTextColorWhite);
             }
 
-            .button:before,
-            .button:after {
-                background-color: var(--bodyTextColorWhite);
+            .item-p {
+                color: var(--bodyTextColorWhite);
             }
+
 
             .floater {
                 opacity: 0.1;
@@ -502,8 +488,6 @@
         }
     }
 }
-
-                                
 
 /*-- -------------------------- -->
 <---        Recent Posts        -->
@@ -520,7 +504,7 @@
 
         .container {
             width: 100%;
-            max-width: calc(1280/16 * 1rem);
+            max-width: calc(1280 / 16 * 1rem);
             margin: auto;
             display: flex;
             flex-direction: column;
@@ -622,7 +606,7 @@
         }
 
         .desc {
-            font-size: .9rem;
+            font-size: 0.9rem;
             margin-bottom: calc(16 / 16 * 1rem);
         }
 
@@ -642,9 +626,7 @@
         .icon {
             width: auto;
             height: calc(12 / 16 * 1rem);
-            transition:
-                filter 0.3s,
-                transform 0.3s;
+            transition: filter 0.3s, transform 0.3s;
         }
 
         .info {
@@ -708,7 +690,7 @@
         .content {
             flex-direction: row;
             justify-content: space-between;
-            gap: calc(48/16 * 1rem);
+            gap: calc(48 / 16 * 1rem);
         }
 
         .flex {
@@ -790,7 +772,7 @@
 
         .container {
             width: 100%;
-            max-width: calc(1280/16 * 1rem);
+            max-width: calc(1280 / 16 * 1rem);
             margin: auto;
             display: flex;
             flex-direction: column;
@@ -810,19 +792,19 @@
         }
 
         .text {
-            margin-bottom: calc(16/16 * 1rem);
-            max-width: calc(630/16 * 1rem);
+            margin-bottom: calc(16 / 16 * 1rem);
+            max-width: calc(630 / 16 * 1rem);
             &:last-of-type {
-                margin-bottom: calc(32/16 * 1rem);
+                margin-bottom: calc(32 / 16 * 1rem);
             }
         }
 
         .more-link {
-            font-size: calc(15/16 * 1rem);
+            font-size: calc(15 / 16 * 1rem);
             font-weight: 700;
             text-decoration: none;
             line-height: 1.5em;
-            width: calc(128/16 * 1rem);
+            width: calc(128 / 16 * 1rem);
             color: var(--headerColor);
             position: relative;
             display: flex;
@@ -837,7 +819,7 @@
                 width: 100%;
                 background: currentColor;
                 opacity: 1;
-                bottom: calc(-3/16 * 1rem);
+                bottom: calc(-3 / 16 * 1rem);
                 left: 0;
             }
             &:hover {
@@ -847,8 +829,8 @@
             }
 
             svg {
-                width: calc(24/16 * 1rem);
-                height: calc(24/16 * 1rem);
+                width: calc(24 / 16 * 1rem);
+                height: calc(24 / 16 * 1rem);
                 transition: transform 0.3s;
             }
         }
@@ -915,7 +897,7 @@
         .content {
             flex-direction: row;
             justify-content: space-between;
-            gap: calc(48/16 * 1rem);
+            gap: calc(48 / 16 * 1rem);
         }
 
         .flex {
@@ -984,4 +966,193 @@
         }
     }
 }
-                                
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #steps {
+        border-top: 1px solid #000;
+        padding: var(--sectionPadding);
+
+        .container {
+            width: 100%;
+            /* changes to 1920px at tablet */
+            max-width: calc(584 / 16 * 1rem);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 48px - 64px */
+            gap: clamp(3rem, 6vw, 4rem);
+        }
+
+        .content {
+            /* set text align to left if content needs to be left aligned */
+            text-align: center;
+            width: 100%;
+            padding: 0 calc(16 / 16 * 1rem);
+            display: flex;
+            flex-direction: column;
+            /* centers content horizontally, set to flex-start to left align */
+            align-items: center;
+        }
+
+        .text {
+            /* Override.  topper title and first text should be removed and put into your global css sheet so it can control every instance of them on your site and is consistent. This selector is a section specific override that stays inside this stitch */
+            max-width: calc(522 / 16 * 1rem);
+        }
+
+        .card-group {
+            margin: 0;
+            padding: 0;
+            display: grid;
+            justify-items: center;
+            align-items: stretch;
+            grid-auto-flow: row;
+        }
+
+        .item {
+            list-style: none;
+            /* prevents padding and border from affecting height and width */
+            box-sizing: border-box;
+            padding: calc(24 / 16 * 1rem);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+
+            /* bottom border */
+            &::after {
+                content: "";
+                width: 100%;
+                height: 1px;
+                /* to change the color of the bottom border, adjust the second color (at 50%). the first and third will blend the color to transparent */
+                /* note you'll also have to change the color in the tablet media query when the lines go vertical */
+                background: linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(186, 186, 186, 1) 50%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+
+            &:first-of-type {
+                padding-top: 0;
+            }
+
+            &:last-of-type {
+                padding-bottom: 0;
+
+                &::after {
+                    content: none;
+                }
+            }
+        }
+
+        .number {
+            /* 80px - 100px */
+            font-size: clamp(5rem, 1vw, 6.25rem);
+            font-weight: 900;
+            line-height: 1.2em;
+            color: var(--primary);
+            opacity: 0.12;
+            display: block;
+            font-family: "Nexa", Arial, sans-serif;
+        }
+
+        .h3 {
+            /* 20px - 25px */
+            font-size: clamp(1.25rem, 2vw, 1.5625rem);
+            font-weight: 700;
+            line-height: 1.2em;
+            margin: calc(-31 / 16 * 1rem) 0 calc(16 / 16 * 1rem) 0;
+            color: var(--headerColor);
+        }
+
+        .item-text {
+            /* 14px - 16px */
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            line-height: 1.5em;
+            text-align: left;
+            margin: 0;
+            color: var(--bodyTextColor);
+        }
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #steps {
+        .container {
+            max-width: calc(1920 / 16 * 1rem);
+        }
+
+        .card-group {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .item {
+            /* 24px - 60px */
+            padding: clamp(1.5rem, 3vw, 3.75rem);
+
+            &::after {
+                width: 1px;
+                height: 100%;
+                background: linear-gradient(
+                    0deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(186, 186, 186, 1) 50%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                opacity: 0.6;
+                opacity: 0.6;
+                right: 0;
+                left: initial;
+            }
+
+            /* the specificity of the mobile .item means we need to explicitly define the first and last items here, too */
+            &:first-of-type,
+            &:last-of-type {
+                /* 24px - 60px */
+                padding: clamp(1.5rem, 3vw, 3.75rem);
+            }
+        }
+    }
+}
+
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode {
+        #steps {
+            border-top: 1px solid #fff;
+
+            .topper {
+                color: var(--primaryLight);
+            }
+            .title {
+                color: var(--bodyTextColorWhite);
+            }
+
+            .item {
+                border-color: var(--bodyTextColorWhite);
+                &:after {
+                    opacity: 0.2;
+                }
+            }
+
+            .item-text,
+            .text {
+                color: var(--bodyTextColorWhite);
+                opacity: 0.8;
+            }
+
+            .h3,
+            .number {
+                color: var(--primaryLight);
+            }
+        }
+    }
+}

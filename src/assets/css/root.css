@@ -163,6 +163,14 @@ a:hover, button:hover {
   box-shadow: inset 0 -24px var(--emphasis);
 }
 
+body.dark-mode .topper,
+body.dark-mode .title,
+body.dark-mode .text,
+body.dark-mode .button-text,
+body.dark-mode .item-p,
+body.dark-mode .h3 {
+  color: var(--bodyTextColorWhite);
+}
 body.dark-mode .button-solid {
   color: var(--bodyTextColorWhite);
   background-color: var(--dark);

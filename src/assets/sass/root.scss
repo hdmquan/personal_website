@@ -201,6 +201,15 @@ a, button {
 // =============================================================================
 
 body.dark-mode {
+    .topper,
+    .title,
+    .text,
+    .button-text,
+    .item-p,
+    .h3 {
+        color: var(--bodyTextColorWhite);
+    }
+
     .button-solid {
         color: var(--bodyTextColorWhite);
         background-color: var(--dark);
