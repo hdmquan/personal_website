@@ -1,7 +1,91 @@
+/* Mobile */
+@media only screen and (min-width: 0rem) {
+    #int-hero {
+        z-index: 1;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 30vh;
+        padding-top: calc(50 / 16 * 1rem);
+        border-bottom: 2px solid #fff;
 
-/*-- -------------------------- -->
-<---       Side By Side         -->
-<--- -------------------------- -*/
+        picture {
+            z-index: -2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+
+        h1 {
+            position: relative;
+            margin: 0 auto;
+            margin-top: calc(70 / 16 * 1rem);
+            margin-bottom: calc(30 / 16 * 1rem);
+            max-width: calc(500 / 16 * 1rem);
+            width: 96%;
+            font-size: calc(64 / 30 * 1rem);
+            color: #fff;
+            text-align: center;
+        }
+
+        p {
+            display: block;
+            margin: auto;
+            margin-bottom: calc(30 / 16 * 1rem);
+            max-width: calc(400 / 16 * 1rem);
+            width: 96%;
+            color: #fff;
+            text-align: center;
+        }
+
+        &:before {
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            display: block;
+            background: #000;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+/* Tablet */
+@media only screen and (min-width: 48rem) {
+    #int-hero {
+        font-size: 100%;
+
+        h1 {
+            font-size: calc(64 / 16 * 1rem);
+        }
+    }
+}
+
+/* Small Desktop */
+@media only screen and (min-width: 64rem) {
+    #int-hero {
+        background-attachment: fixed;
+        min-height: calc(300 / 16 * 1rem);
+        height: auto;
+        padding: calc(96 / 16 * 1rem) 0 calc(64 / 16 * 1rem);
+        font-size: inherit;
+    }
+}
 
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
