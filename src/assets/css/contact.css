@@ -1,10 +1,10 @@
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-  #contact-inline {
+  #contact {
     border-top: 1px solid #000;
     padding: var(--sectionPadding);
   }
-  #contact-inline .container {
+  #contact .container {
     width: 100%;
     /* changes to 1280px at desktop */
     max-width: 50rem;
@@ -15,7 +15,7 @@
     /* 48px - 64px */
     gap: clamp(3rem, 6vw, 4rem);
   }
-  #contact-inline .content {
+  #contact .content {
     /* set text align to left if content needs to be left aligned */
     text-align: left;
     width: 100%;
@@ -25,13 +25,13 @@
     /* centers content horizontally, set to flex-start to left align */
     align-items: flex-start;
   }
-  #contact-inline .left-section {
+  #contact .left-section {
     width: 100%;
   }
-  #contact-inline #form {
+  #contact #form {
     width: 100%;
   }
-  #contact-inline .label {
+  #contact .label {
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.5em;
@@ -43,12 +43,12 @@
     justify-content: center;
     align-items: flex-start;
   }
-  #contact-inline .label-message {
+  #contact .label-message {
     /* 32px - 48px */
     margin-bottom: clamp(2rem, 5.3vw, 3rem);
   }
-  #contact-inline .input,
-  #contact-inline .textarea {
+  #contact .input,
+  #contact .textarea {
     font-size: 1rem;
     width: 100%;
     height: 4rem;
@@ -60,22 +60,22 @@
     transition: border 0.3s;
     font-family: inherit;
   }
-  #contact-inline .input:hover,
-  #contact-inline .textarea:hover {
+  #contact .input:hover,
+  #contact .textarea:hover {
     border: 1px solid var(--primary);
   }
-  #contact-inline .textarea {
+  #contact .textarea {
     font-family: inherit;
     min-height: 7.5rem;
     margin: 0;
     padding-top: 1.25rem;
   }
-  #contact-inline .submit {
+  #contact .submit {
     width: fit-content;
     font-family: "Nexa", Arial, sans-serif;
     font-size: 1rem;
   }
-  #contact-inline .right-section {
+  #contact .right-section {
     width: 100%;
     /* prevents padding and border from affecting height and width */
     box-sizing: border-box;
@@ -92,11 +92,11 @@
     gap: clamp(1.75rem, 4vw, 2.5rem);
     position: relative;
   }
-  #contact-inline .ul {
+  #contact .ul {
     margin: 0;
     padding: 0;
   }
-  #contact-inline .li {
+  #contact .li {
     list-style: none;
     /* 16px - 20px */
     margin-bottom: clamp(1rem, 2vw, 1.25rem);
@@ -104,13 +104,13 @@
     justify-content: flex-start;
     align-items: center;
   }
-  #contact-inline .li:hover .icon-wrapper {
+  #contact .li:hover .icon-wrapper {
     transform: scale(1.2);
   }
-  #contact-inline .li:last-of-type {
+  #contact .li:last-of-type {
     margin-bottom: 0;
   }
-  #contact-inline .header {
+  #contact .header {
     /* 16px - 20px */
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 700;
@@ -119,7 +119,7 @@
     color: var(--headerColor);
     display: block;
   }
-  #contact-inline .link {
+  #contact .link {
     /* 16px - 20px */
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.2em;
@@ -127,10 +127,10 @@
     color: var(--bodyTextColor);
     position: relative;
   }
-  #contact-inline .link:hover:before {
+  #contact .link:hover:before {
     width: 100%;
   }
-  #contact-inline .link:before {
+  #contact .link:before {
     /* top right box */
     content: "";
     width: 0%;
@@ -144,7 +144,7 @@
     left: 0;
     transition: width 0.3s;
   }
-  #contact-inline .icon-wrapper {
+  #contact .icon-wrapper {
     width: 4rem;
     height: 4rem;
     /* 16px - 20px */
@@ -155,7 +155,7 @@
     transition: transform 0.3s;
     flex: none;
   }
-  #contact-inline .icon {
+  #contact .icon {
     /* 32px -36px */
     width: clamp(2rem, 3vw, 2.25rem);
     height: auto;
@@ -164,29 +164,29 @@
 }
 /* Tablet - 700px */
 @media only screen and (min-width: 43.75rem) {
-  #contact-inline #form {
+  #contact #form {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  #contact-inline .label {
+  #contact .label {
     width: 48%;
   }
-  #contact-inline .label-message {
+  #contact .label-message {
     width: 100%;
   }
-  #contact-inline .button-solid {
+  #contact .button-solid {
     margin-left: 0;
   }
-  #contact-inline .right-section {
+  #contact .right-section {
     flex-direction: row;
     align-items: center;
   }
 }
 /* Small Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
-  #contact-inline .container {
+  #contact .container {
     max-width: 80rem;
     flex-direction: row;
     justify-content: flex-end;
@@ -194,13 +194,13 @@
     /* 60px - 108px */
     gap: clamp(3.75rem, 5.9vw + 2em, 6.75rem);
   }
-  #contact-inline .left-section {
+  #contact .left-section {
     max-width: 32.625rem;
   }
-  #contact-inline .label {
+  #contact .label {
     width: 100%;
   }
-  #contact-inline .right-section {
+  #contact .right-section {
     width: 40vw;
     max-width: 39.375rem;
     flex-direction: column;
@@ -208,7 +208,7 @@
     /* prevents flexbox from squishing it */
     flex: none;
   }
-  #contact-inline .picture {
+  #contact .picture {
     width: 100%;
     max-width: 100%;
     height: 27.375rem;
@@ -216,33 +216,33 @@
 }
 /* Dark Mode */
 @media only screen and (min-width: 0rem) {
-  body.dark-mode #contact-inline {
+  body.dark-mode #contact {
     border-top: 1px solid #fff;
   }
-  body.dark-mode #contact-inline .text,
-  body.dark-mode #contact-inline .title {
+  body.dark-mode #contact .text,
+  body.dark-mode #contact .title {
     color: var(--bodyTextColorWhite);
   }
-  body.dark-mode #contact-inline #form label,
-  body.dark-mode #contact-inline #form input,
-  body.dark-mode #contact-inline #form textarea {
+  body.dark-mode #contact #form label,
+  body.dark-mode #contact #form input,
+  body.dark-mode #contact #form textarea {
     background-color: transparent;
     color: var(--bodyTextColorWhite);
   }
-  body.dark-mode #contact-inline #form label::placeholder,
-  body.dark-mode #contact-inline #form input::placeholder,
-  body.dark-mode #contact-inline #form textarea::placeholder {
+  body.dark-mode #contact #form label::placeholder,
+  body.dark-mode #contact #form input::placeholder,
+  body.dark-mode #contact #form textarea::placeholder {
     color: var(--bodyTextColorWhite);
   }
-  body.dark-mode #contact-inline #form .input,
-  body.dark-mode #contact-inline #form .textarea {
+  body.dark-mode #contact #form .input,
+  body.dark-mode #contact #form .textarea {
     border-color: #fff;
   }
-  body.dark-mode #contact-inline .icon {
+  body.dark-mode #contact .icon {
     filter: invert(100%);
   }
-  body.dark-mode #contact-inline .header,
-  body.dark-mode #contact-inline .link {
+  body.dark-mode #contact .header,
+  body.dark-mode #contact .link {
     color: var(--bodyTextColorWhite);
   }
 }
