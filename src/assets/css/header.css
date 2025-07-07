@@ -97,20 +97,19 @@
     height: 100%;
   }
   #navigation {
-    width: 94%;
-    max-width: 80rem;
+    background-color: #fff;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    max-width: 100%;
     /* prevents padding from affecting height and width */
     box-sizing: border-box;
     /* 11px - 24px */
-    padding: clamp(0.75rem, 2vw, 1.5rem);
-    /* 11px - 24px */
-    border-radius: clamp(0.75rem, 2vw, 1.5rem);
     position: fixed;
-    top: 2rem;
-    left: 50%;
+    top: 0;
+    left: 0;
     z-index: 10000;
-    transform: translateX(-50%);
-    transition: top 0.3s, border-radius 0.3s, width 0.3s, max-width 0.3s;
+    transform: none;
+    transition: none;
   }
   #navigation:before {
     /* background color */
@@ -122,9 +121,9 @@
     display: block;
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: transform 0.2s, border-radius 0.3s ease-in-out;
+    left: 0;
+    transform: none;
+    transition: none;
   }
   #navigation.active:before {
     transform: translateX(-50%) scale(1.03);
@@ -142,9 +141,8 @@
     transform: translateY(0);
   }
   #navigation .container {
-    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
   }
   #navigation .logo {
@@ -168,10 +166,9 @@
   }
   #navigation .toggle {
     width: 3.5rem;
-    height: 3.5rem;
     margin: 0 0 0 auto;
-    background-color: #1a1a1a;
     border: none;
+    background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,7 +227,7 @@
   #navigation .line {
     width: 100%;
     height: 1px;
-    background-color: #fafbfc;
+    background-color: #000;
     border-radius: 1px;
     position: absolute;
     left: 50%;
@@ -605,7 +602,6 @@
     text-decoration: none;
     width: 2rem;
     height: 2rem;
-    background-color: #f7f7f7;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -722,11 +718,14 @@ Dark Mode Styles
   body.dark-mode:before {
     background-color: var(--dark);
   }
+  body.dark-mode #navigation {
+    background-color: var(--dark);
+  }
   body.dark-mode #navigation .logo {
     filter: grayscale(1) brightness(1000%);
   }
   body.dark-mode #navigation .toggle {
-    background-color: #fff;
+    background-color: var(--dark);
   }
   body.dark-mode #navigation .phone {
     color: var(--bodyTextColorWhite);
@@ -738,7 +737,7 @@ Dark Mode Styles
     filter: grayscale(1) brightness(1000%);
   }
   body.dark-mode #navigation .line {
-    background-color: #000;
+    background-color: #fff;
   }
   body.dark-mode #navigation .li-link {
     color: var(--bodyTextColorWhite);

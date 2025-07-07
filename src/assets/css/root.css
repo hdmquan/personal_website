@@ -68,7 +68,6 @@ a:hover, button:hover {
 .container {
   position: relative;
   margin: auto;
-  width: 92%;
 }
 
 .hide-on-mobile {
