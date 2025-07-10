@@ -9,6 +9,9 @@ author: Alan Huynh
 date: 2025-07-10T15:23:00.000Z
 image: /assets/images/blog/wind-turbine-future-energy.2e16d0ba.fill-933x525-c100.jpg
 imageAlt: wind-turbine
+tags:
+  - esg
+  - scope-3
 ---
 At the start of this year (2025), Australia’s mandatory ESG reporting kicked off through the ASSA 5000 standards, starting with the largest companies first. But eventually, most businesses will be pulled along into carbon accounting. Not just because of the regulation but because your customers will need your carbon data for their own reports. 
 
