@@ -47,17 +47,6 @@
         margin: auto;
         max-width: calc(1280 / 16 * 1em);
         width: 90%;
-
-        &:before {
-            position: absolute;
-            top: 0;
-            left: 0;
-            content: "";
-            opacity: 1;
-            display: block;
-            height: 100%;
-            width: 1px;
-        }
     }
 
     .topper {

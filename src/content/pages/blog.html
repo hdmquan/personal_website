@@ -11,18 +11,14 @@ eleventyNavigation:
 {% extends "layouts/base.html" %} {% block head %}
 <link rel="stylesheet" href="/assets/css/blog.css" />
 {% endblock %} {% block body %}
-<!-- ============================================ -->
-<!--                    LANDING                   -->
-<!-- ============================================ -->
 
 <section id="int-hero">
-  <h1 id="home-h">My Blog</h1>
-  <p class="description">Where I wrote about interesting stuff I found</p>
+  <div class="container">
+    <h1 id="home-h">My Blog</h1>
+    <p class="description">Where I write about interesting stuff I found</p>
+  </div>
 </section>
 
-<!-- ============================================ -->
-<!--              Main Blog Content               -->
-<!-- ============================================ -->
 
 <div class="blog-container main-content-wrapper">
   <!--Main content -->
@@ -37,7 +33,7 @@ eleventyNavigation:
     <article class="recent-articles">
       <!--Main Article Image-->
       <picture class="blog-mainImage">
-        <img
+      <img
           src="{{ post.data.image }}"
           alt="{{ post.data.imageAlt }}"
           width="795"
@@ -51,7 +47,7 @@ eleventyNavigation:
           <!--Author Image-->
           <picture class="blog-author-img">
             <img
-              src="/assets/svgs/profile.svg"
+              src="/assets/images/alan.jpeg"
               alt="house"
               width="32"
               height="32"

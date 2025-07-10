@@ -131,8 +131,9 @@
         justify-content: center;
         align-items: center;
         min-height: 30vh;
-        padding-top: calc(50 / 16 * 1rem);
-        border-bottom: 2px solid #fff;
+        margin-top: calc(96 / 16 * 1rem);
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
 
         picture {
             z-index: -2;
@@ -152,38 +153,34 @@
             }
         }
 
-        h1 {
+        .container {
             position: relative;
-            margin: 0 auto;
-            margin-top: calc(70 / 16 * 1rem);
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            margin-top: calc(16 / 16 * 1rem);
             margin-bottom: calc(30 / 16 * 1rem);
-            max-width: calc(500 / 16 * 1rem);
-            width: 96%;
-            font-size: calc(64 / 30 * 1rem);
-            color: #fff;
-            text-align: center;
+            max-width: calc(1280 / 16 * 1rem);
+            width: 90%;
+        }
+
+        h1 {
+            width: 100%;
+            color: var(--bodyTextColor);
+            font-size: clamp(3rem, 10vw, 4rem);
+            margin-bottom: calc(32 / 16 * 1rem);
+            text-align: left;
+            font-weight: 200;
         }
 
         p {
-            display: block;
-            margin: auto;
-            margin-bottom: calc(30 / 16 * 1rem);
-            max-width: calc(400 / 16 * 1rem);
-            width: 96%;
-            color: #fff;
-            text-align: center;
-        }
-
-        &:before {
-            z-index: -1;
-            position: absolute;
-            top: 0;
-            left: 0;
-            content: "";
-            display: block;
-            background: #000;
-            height: 100%;
-            width: 100%;
+            margin-bottom: clamp(2.5rem, 4vw, 3rem);
+            color: var(--bodyTextColor);
+            font-size: clamp(1rem, 2vw, 2rem);
+            max-width: calc(940 / 16 * 1rem);
+            font-weight: 400;
+            margin-left: auto;
+            text-align: right;
         }
     }
 }
@@ -196,20 +193,28 @@
         h1 {
             font-size: calc(64 / 16 * 1rem);
         }
+
+        .container {
+            margin-top: calc(70 / 16 * 1rem);
+        }
     }
 }
 
-/* Small Desktop */
-@media only screen and (min-width: 64rem) {
-    #int-hero {
-        background-attachment: fixed;
-        min-height: calc(300 / 16 * 1rem);
-        height: auto;
-        padding: calc(96 / 16 * 1rem) 0 calc(64 / 16 * 1rem);
-        font-size: inherit;
+/* Dark Mode */
+@media only screen and (min-width: 0rem) {
+    body.dark-mode {
+        #int-hero {
+            background-color: var(--dark);
+            border-bottom: 1px solid #fff;
+            border-top: 1px solid #fff;
+
+            h1,
+            p {
+                color: var(--bodyTextColorWhite);
+            }
+        }
     }
 }
-
 
 /*-- -------------------------- -->
 <---        Main Content        -->
