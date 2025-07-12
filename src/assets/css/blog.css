@@ -235,7 +235,6 @@
   .recent-articles .blog-mainImage {
     position: relative;
     display: block;
-    border-radius: 0.5em 0.5em 0 0;
     height: clamp(200px, 30vw, 400px);
     width: 100%;
     overflow: hidden;
@@ -249,9 +248,7 @@
     object-fit: cover;
   }
   .recent-articles .article-group {
-    border: 1px solid #ebebeb;
-    border-radius: 0 0 0.5em 0.5em;
-    padding: clamp(30px, 5vw, 50px);
+    padding: clamp(30px, 5vw, 50px) 5px;
   }
   .recent-articles .blog-author-img {
     position: relative;
@@ -284,7 +281,7 @@
   .recent-articles .blog-dot {
     display: block;
     border-radius: 50%;
-    background-color: var(--primary);
+    background-color: var(--emphasis);
     height: 3px;
     width: 3px;
   }
@@ -506,7 +503,6 @@
   .blog-article .blog-mainImage {
     position: relative;
     display: block;
-    border-radius: 0.5em;
     margin-bottom: 3.125em;
     height: clamp(200px, 30vw, 400px);
     width: 100%;
@@ -551,7 +547,7 @@
   .blog-article .blog-dot {
     display: block;
     border-radius: 50%;
-    background-color: #fe4f70;
+    background-color: var(--emphasis);
     height: 3px;
     width: 3px;
   }

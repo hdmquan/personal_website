@@ -514,6 +514,8 @@
     border-radius: 0;
     top: 0;
     border-bottom: 1px #000 solid;
+    height: 4.5rem;
+    padding: 0;
   }
   #navigation {
     width: 100%;
@@ -530,7 +532,7 @@
     left: 50%;
     z-index: 10000;
     transform: translateX(-50%);
-    transition: top 0.3s, border-radius 0.3s, width 0.3s, max-width 0.3s;
+    transition: height 0.3s, padding 0.3s;
   }
   #navigation .container {
     width: 100%;
