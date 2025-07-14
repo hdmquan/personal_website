@@ -26,7 +26,8 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
         });
     }
 </script>
-{% endblock %} {% block body %}
+{% endblock %} 
+{% block body %}
 
 <section id="hero">
     <div class="container">
@@ -207,6 +208,8 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
         </div>
     </div>
 </section>
+
+<!-- {% include "components/tech-ribbon.html" %} -->
 
 <section id="intro">
     <script defer src="/assets/js/about.js"></script>

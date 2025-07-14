@@ -1,0 +1,38 @@
+@media only screen and (min-width: 0rem) {
+  .tech-ribbon {
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+  .tech-ribbon .tech-track {
+    display: inline-flex;
+    animation: scroll 30s linear infinite;
+    will-change: transform;
+  }
+  .tech-ribbon .tech-track img {
+    height: clamp(40px, 4vw, 80px);
+    margin: 0 0.5rem;
+    flex-shrink: 0;
+  }
+}
+@media only screen and (min-width: 0rem) and (max-width: 600px) {
+  .tech-ribbon .tech-track img {
+    height: clamp(15px, 3vw, 30px);
+    margin: 0 0.5rem;
+  }
+}
+@media only screen and (min-width: 0rem) {
+  .tech-ribbon .tech-track.paused {
+    animation-play-state: paused;
+  }
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/*# sourceMappingURL=tech-ribbon.css.map */
