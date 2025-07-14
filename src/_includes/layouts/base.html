@@ -1,76 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Standard meta tags -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <!-- Standard meta tags -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="description" content="{{ description | default('Melbourne-based Machine Learning Engineer specializing in AI agents, automation systems, and geospatial intelligence.') }}" />
-    <meta name="keywords" content="machine learning, AI, geospatial, climate tech, Melbourne, engineer, Alan Huynh" />
-    <meta name="application-name" content="Alan Huynh" />
-    <link rel="canonical" href="{{ client.domain }}{{ page.url }}" />
+        <meta
+            name="description"
+            content="{{ description | default('Melbourne-based Machine Learning Engineer specializing in AI agents, automation systems, and geospatial intelligence.') }}"
+        />
+        <meta
+            name="keywords"
+            content="machine learning, AI, geospatial, climate tech, Melbourne, engineer, Alan Huynh"
+        />
+        <meta name="application-name" content="Alan Huynh" />
+        <link rel="canonical" href="{{ client.domain }}{{ page.url }}" />
 
-    <!-- Social Media Display -->
-    <meta property="og:title" content="{{ title | default('Alan Huynh – ML & Geospatial Engineer') }}" />
-    <meta property="og:description" content="{{ description | default('Melbourne-based Machine Learning Engineer specializing in AI agents, automation systems, and geospatial intelligence.') }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ client.domain }}{{ page.url }}" />
-    <meta property="og:image" content="{{ ogImage | default('/assets/images/logo-small.png') }}" />
-    <meta property="og:image:secure_url" content="{{ ogImage | default('/assets/images/logo-small.png') }}" />
+        <!-- Social Media Display -->
+        <meta
+            property="og:title"
+            content="{{ title | default('Alan Huynh – ML & Geospatial Engineer') }}"
+        />
+        <meta
+            property="og:description"
+            content="{{ description | default('Melbourne-based Machine Learning Engineer specializing in AI agents, automation systems, and geospatial intelligence.') }}"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="{{ client.domain }}{{ page.url }}" />
+        <meta
+            property="og:image"
+            content="{{ ogImage | default('/assets/images/logo-small.png') }}"
+        />
+        <meta
+            property="og:image:secure_url"
+            content="{{ ogImage | default('/assets/images/logo-small.png') }}"
+        />
 
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png?v1" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
-    <link rel="manifest" href="/assets/favicons/site.webmanifest" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+        <!-- Favicon -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/assets/favicons/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/assets/favicons/favicon-32x32.png?v1"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/assets/favicons/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
 
-    <!-- Preloads -->
-    <link rel="preload" as="image" href="/assets/svgs/logo-white.svg" />
-    <link rel="preload" as="font" type="font/ttf" href="/assets/fonts/Nexa-ExtraLight.ttf" crossorigin />
-    <link rel="preload" as="font" type="font/ttf" href="/assets/fonts/Nexa-Heavy.ttf" crossorigin />
-    {% if preloadImg != '' %}
-    <link rel="preload" as="image" href="{{ preloadImg }}" />
-    {% endif %}
+        <!-- Preloads -->
+        <link rel="preload" as="image" href="/assets/svgs/logo-white.svg" />
+        <link
+            rel="preload"
+            as="font"
+            type="font/ttf"
+            href="/assets/fonts/Nexa-ExtraLight.ttf"
+            crossorigin
+        />
+        <link
+            rel="preload"
+            as="font"
+            type="font/ttf"
+            href="/assets/fonts/Nexa-Heavy.ttf"
+            crossorigin
+        />
+        {% if preloadImg != '' %}
+        <link rel="preload" as="image" href="{{ preloadImg }}" />
+        {% endif %}
 
-    <!-- Stylesheets & Scripts -->
-    <link rel="stylesheet" href="/assets/css/root.css" />
-    <link rel="stylesheet" href="/assets/css/header.css" />
-    <link rel="stylesheet" href="/assets/css/dark.css" />
-    <link rel="stylesheet" href="/assets/css/footer.css" />
-    <script defer src="/assets/js/dark.js"></script>
-    <script defer src="/assets/js/nav.js"></script>
+        <!-- Stylesheets & Scripts -->
+        <link rel="stylesheet" href="/assets/css/root.css" />
+        <link rel="stylesheet" href="/assets/css/header.css" />
+        <link rel="stylesheet" href="/assets/css/dark.css" />
+        <link rel="stylesheet" href="/assets/css/footer.css" />
+        <script defer src="/assets/js/dark.js"></script>
+        <script defer src="/assets/js/nav.js"></script>
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Alan Huynh",
-      "url": "{{ client.domain }}",
-      "sameAs": [
-        "https://www.linkedin.com/in/hdmquan",
-        "https://github.com/hdmquan"
-      ],
-      "jobTitle": "Machine Learning & Geospatial Engineer",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Melbourne",
-        "addressCountry": "Australia"
-      }
-    }
-    </script>
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "Alan Huynh",
+                "url": "{{ client.domain }}",
+                "sameAs": [
+                    "https://www.linkedin.com/in/hdmquan",
+                    "https://github.com/hdmquan"
+                ],
+                "jobTitle": "Machine Learning & Geospatial Engineer",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Melbourne",
+                    "addressCountry": "Australia"
+                }
+            }
+        </script>
 
-    {% block head %}{% endblock %}
-    <title>{{ title | default('Alan Huynh – ML & Geospatial Engineer in Melbourne') }}</title>
-  </head>
+        {% block head %}{% endblock %}
+        <title>
+            {{ title | default('Alan Huynh – ML & Geospatial Engineer in
+            Melbourne') }}
+        </title>
+    </head>
 
-  <body>
-    <a class="skip" aria-label="skip to main content" href="#main" tabindex="1">Click To Skip To Main Content</a>
-    {% include "components/header.html" %}
-    <main id="main">{% block body %}{% endblock %}</main>
-    {% include "components/footer.html" %}
-  </body>
+    <body>
+        <a
+            class="skip"
+            aria-label="skip to main content"
+            href="#main"
+            tabindex="1"
+            >Click To Skip To Main Content</a
+        >
+        {% include "components/header.html" %}
+        <main id="main">{% block body %}{% endblock %}</main>
+        {% include "components/footer.html" %}
+        {% include "components/booking-popup.html" %}
+    </body>
 </html>
