@@ -1,0 +1,454 @@
+---
+title: "Top 9 — SymphonyNoNine"
+description: "Top 9 song."
+permalink: /top-9/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 9 — SymphonyNoNine</title>
+  <meta name="description" content="Top 9 song. And over-designed, over-engineered showcase." />
+  <link rel="stylesheet" href="/assets/css/root.css" />
+  <link rel="stylesheet" href="/assets/css/top-9.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <meta property="og:title" content="Top 9 — SymphonyNoNine" />
+  <meta property="og:description" content="Nine tracks. Personal. Obsessive." />
+  <meta property="og:image" content="https://alan-huynh.is-a.dev/assets/images/top-9-preview.jpg" />
+  <meta property="og:url" content="https://alan-huynh.is-a.dev/top-9/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+<script>
+    (function(){
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches))
+        document.body && document.body.classList.add('dark-mode');
+    })();
+  </script>
+</head>
+<body>
+<script>
+  (function(){
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches))
+      document.body.classList.add('dark-mode');
+  })();
+</script>
+
+<div id="top9-page">
+  <header id="top9-hero">
+    <span class="badge">SymphonyNoNine's</span>
+    <h1>Top 9</h1>
+    <div class="master-vol">
+      <span class="vol-label">VOL</span>
+      <input type="range" id="master-vol" min="0" max="100" value="80" aria-label="Master volume" />
+      <span class="vol-value" id="vol-value">80</span>
+    </div>
+  </header>
+
+  <section id="top9-grid">
+    <ul class="top9-cards">
+      {% for track in top9 %}
+      <li class="top9-card"
+          data-slug="{{ track.slug }}"
+          data-rank="{{ track.rank }}"
+          data-bpm="{{ track.bpm }}"
+          data-note="{{ track.note | escape }}"
+          data-cover="{{ track.cover }}"
+          data-title="{{ track.title | escape }}"
+          data-artist="{{ track.artist | escape }}"
+          data-year="{{ track.year }}">
+
+        <div class="top9-cover-wrap">
+          {% if track.cover %}
+            <img src="{{ track.cover }}" alt="{{ track.title }} cover"
+                 loading="lazy" decoding="async" width="400" height="400" />
+          {% else %}
+            <div class="top9-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+                <path d="M12 9V3M15 12h6M12 15v6M9 12H3"/>
+              </svg>
+            </div>
+          {% endif %}
+          <canvas class="top9-wave" aria-hidden="true"></canvas>
+          <span class="top9-rank">{{ track.rank }}</span>
+          <button class="top9-note-btn" aria-label="Liner note">?</button>
+        </div>
+
+        <div class="top9-note-overlay">
+          <button class="note-close" aria-label="Close note">CLOSE ×</button>
+          <p class="note-title">{{ track.title }}</p>
+          <p class="note-body">{{ track.note }}</p>
+        </div>
+
+        <div class="top9-info">
+          <p class="top9-title">{{ track.title }}</p>
+          <p class="top9-meta">{{ track.artist }} &middot; {{ track.year }}</p>
+        </div>
+
+        <div class="top9-controls">
+          <button class="top9-play" aria-label="Play {{ track.title }}"
+                  data-audio="{{ track.audio }}">
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <div class="top9-seek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="top9-seek-fill"></div>
+            <div class="top9-seek-thumb"></div>
+          </div>
+        </div>
+
+        <div class="top9-controls-row2">
+          <span class="top9-time" data-duration="{{ track.duration }}">--:--</span>
+        </div>
+
+        <audio preload="auto" src="{{ track.audio }}"></audio>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+
+<!-- Now Playing bar -->
+<div id="now-playing-bar" aria-live="polite">
+  <div class="np-cover-placeholder" id="np-cover-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+    </svg>
+  </div>
+  <div class="np-info">
+    <p class="np-title" id="np-title">—</p>
+    <div class="np-seek" id="np-seek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="np-seek-fill" id="np-seek-fill"></div>
+      <div class="np-seek-thumb" id="np-seek-thumb"></div>
+    </div>
+    <p class="np-meta" id="np-meta">—</p>
+  </div>
+  <div class="np-bpm">
+    <span class="np-bpm-val" id="np-bpm">---</span>
+    <span class="np-bpm-label">BPM</span>
+  </div>
+</div>
+
+<div id="kb-hint">
+  <kbd>1–9</kbd> jump &nbsp; <kbd>space</kbd> play/pause &nbsp; <kbd>←→</kbd> seek &nbsp; <kbd>m</kbd> mute
+</div>
+
+<button id="t9-dark-toggle" aria-label="Toggle dark mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <circle cx="12" cy="12" r="5"/>
+    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" fill="none"/>
+  </svg>
+</button>
+
+<script>
+(function () {
+  /* ── State ───────────────────────────────────── */
+  let current   = null;   // active <audio>
+  let currentCard = null;
+  let muted     = false;
+  let prevVol   = 80;
+  let audioCtx  = null;
+  let analyser  = null;
+  let sourceMap  = new Map(); // audio → MediaElementSource
+  let pendingBlob = new Map(); // audio → blob URL awaiting swap
+
+  /* ── Elements ────────────────────────────────── */
+  const volSlider  = document.getElementById('master-vol');
+  const volValue   = document.getElementById('vol-value');
+  const npBar      = document.getElementById('now-playing-bar');
+  const npTitle    = document.getElementById('np-title');
+  const npMeta     = document.getElementById('np-meta');
+  const npBpm      = document.getElementById('np-bpm');
+  const npSeekEl   = document.getElementById('np-seek');
+  const npSeekFill = document.getElementById('np-seek-fill');
+  const npSeekThumb= document.getElementById('np-seek-thumb');
+  const npCoverWrap= document.getElementById('np-cover-wrap');
+  const kbHint     = document.getElementById('kb-hint');
+  const cards      = Array.from(document.querySelectorAll('.top9-card'));
+  const allAudio   = cards.map(c => c.querySelector('audio'));
+
+  /* ── Helpers ─────────────────────────────────── */
+  function fmt(s) {
+    s = Math.floor(s);
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  function getVol() { return parseInt(volSlider.value, 10) / 100; }
+
+  /* ── Volume ──────────────────────────────────── */
+  function applyVol(v) {
+    allAudio.forEach(a => a.volume = v / 100);
+    volValue.textContent = v;
+    volSlider.style.background =
+      `linear-gradient(90deg, var(--g1) 0%, var(--g2) ${v}%, var(--panel-inset) ${v}%)`;
+  }
+  applyVol(volSlider.value);
+  volSlider.addEventListener('input', () => applyVol(volSlider.value));
+
+  /* ── Init duration labels ────────────────────── */
+  document.querySelectorAll('.top9-time[data-duration]').forEach(el => {
+    el.textContent = fmt(parseInt(el.dataset.duration, 10));
+  });
+
+  /* ── Web Audio analyser ──────────────────────── */
+  function ensureAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function connectAnalyser(audio) {
+    ensureAudioCtx();
+    if (!analyser) {
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+      analyser.connect(audioCtx.destination);
+    }
+    if (!sourceMap.has(audio)) {
+      const src = audioCtx.createMediaElementSource(audio);
+      src.connect(analyser);
+      sourceMap.set(audio, src);
+    }
+  }
+
+  /* ── Waveform draw loop ──────────────────────── */
+  let rafId = null;
+  function drawWave(canvas) {
+    if (!analyser) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const data = new Uint8Array(analyser.frequencyBinCount);
+
+    const BAR_W = 3, GAP = 5;
+    function frame() {
+      rafId = requestAnimationFrame(frame);
+      analyser.getByteFrequencyData(data);
+      ctx.clearRect(0, 0, W, H);
+      const step = BAR_W + GAP;
+      const count = Math.floor(W / step);
+      const offset = (W - count * step) / 2;
+      for (let i = 0; i < count; i++) {
+        const v = data[Math.floor(i * data.length / count)];
+        const h = Math.max(2, (v / 255) * H);
+        const alpha = 0.55 + (v / 255) * 0.45;
+        ctx.fillStyle = `rgba(68,98,74,0.9)`;
+        ctx.fillRect(offset + i * step, H - h, BAR_W, h);
+      }
+    }
+    frame();
+  }
+
+  function stopWave() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  /* ── Stop a card ─────────────────────────────── */
+  function stopCard(card) {
+    if (!card) return;
+    const a    = card.querySelector('audio');
+    const btn  = card.querySelector('.top9-play');
+    const fill = card.querySelector('.top9-seek-fill');
+    const thumb = card.querySelector('.top9-seek-thumb');
+    a.pause();
+    // Swap in blob URL now that audio is paused
+    if (pendingBlob.has(a)) {
+      a.src = pendingBlob.get(a);
+      pendingBlob.delete(a);
+    }
+    btn.classList.remove('playing');
+    btn.querySelector('.icon-play').style.display  = '';
+    btn.querySelector('.icon-pause').style.display = 'none';
+    if (fill)  fill.style.width = '0%';
+    if (thumb) thumb.style.left = '0%';
+    card.classList.remove('active');
+    stopWave();
+  }
+
+  /* ── Play a card ─────────────────────────────── */
+  function playCard(card) {
+    if (currentCard && currentCard !== card) stopCard(currentCard);
+
+    const audio = card.querySelector('audio');
+    const btn   = card.querySelector('.top9-play');
+    const wave  = card.querySelector('.top9-wave');
+
+    connectAnalyser(audio);
+    audio.volume = getVol();
+    audio.play();
+    current     = audio;
+    currentCard = card;
+
+    btn.classList.add('playing');
+    btn.querySelector('.icon-play').style.display  = 'none';
+    btn.querySelector('.icon-pause').style.display = '';
+    card.classList.add('active');
+
+    wave.width  = wave.offsetWidth  || 400;
+    wave.height = wave.offsetHeight || 100;
+    drawWave(wave);
+
+    // Now Playing bar
+    npBar.classList.add('visible');
+    npTitle.textContent = card.dataset.title;
+    npMeta.textContent  = card.dataset.artist + ' · ' + card.dataset.year;
+    npBpm.textContent   = card.dataset.bpm;
+
+    // Cover in NP bar
+    npCoverWrap.innerHTML = '';
+    if (card.dataset.cover && card.dataset.cover !== 'null') {
+      const img = document.createElement('img');
+      img.src = card.dataset.cover;
+      img.className = 'np-cover';
+      img.alt = '';
+      npCoverWrap.appendChild(img);
+    } else {
+      npCoverWrap.innerHTML = `<div class="np-cover-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>`;
+    }
+  }
+
+  /* ── Per-card wiring ─────────────────────────── */
+  cards.forEach(card => {
+    const btn   = card.querySelector('.top9-play');
+    const audio = card.querySelector('audio');
+    const seekEl    = card.querySelector('.top9-seek');
+    const seekFill  = card.querySelector('.top9-seek-fill');
+    const seekThumb = card.querySelector('.top9-seek-thumb');
+    const time  = card.querySelector('.top9-time');
+    const noteBtn  = card.querySelector('.top9-note-btn');
+    const noteOverlay = card.querySelector('.top9-note-overlay');
+    const noteClose   = card.querySelector('.note-close');
+    btn.addEventListener('click', () => {
+      if (audio.paused) playCard(card);
+      else { stopCard(card); current = null; currentCard = null; }
+    });
+
+    function setSeekPct(pct) {
+      seekFill.style.width  = pct + '%';
+      seekThumb.style.left  = pct + '%';
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const pct = (audio.currentTime / audio.duration) * 100;
+      setSeekPct(pct);
+      time.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+      if (current === audio) setNpPct(pct);
+    });
+
+    audio.addEventListener('ended', () => {
+      stopCard(card);
+      setSeekPct(0);
+      audio.currentTime = 0;
+      current = null; currentCard = null;
+    });
+
+    seekEl.addEventListener('click', e => {
+      const pct = (e.offsetX / seekEl.offsetWidth) * 100;
+      setSeekPct(pct);
+      if (audio.duration) audio.currentTime = (pct / 100) * audio.duration;
+      if (currentCard !== card) playCard(card);
+      else if (audio.paused) audio.play();
+    });
+
+    // Liner note flip
+    noteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      card.classList.toggle('note-open');
+    });
+    noteClose.addEventListener('click', e => {
+      e.stopPropagation();
+      card.classList.remove('note-open');
+    });
+
+  });
+
+  function setNpPct(pct) {
+    npSeekFill.style.width = pct + '%';
+    npSeekThumb.style.left = pct + '%';
+  }
+
+  /* ── NP bar seek ─────────────────────────────── */
+  npSeekEl.addEventListener('click', e => {
+    const pct = (e.offsetX / npSeekEl.offsetWidth) * 100;
+    setNpPct(pct);
+    if (current && current.duration) current.currentTime = (pct / 100) * current.duration;
+  });
+
+  /* ── Dark mode ───────────────────────────────── */
+  document.getElementById('t9-dark-toggle').addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+
+  /* ── Keyboard shortcuts ──────────────────────── */
+  let kbHintTimer = null;
+  function showKbHint() {
+    kbHint.classList.add('show');
+    clearTimeout(kbHintTimer);
+    kbHintTimer = setTimeout(() => kbHint.classList.remove('show'), 2500);
+  }
+
+  document.addEventListener('keydown', e => {
+    const tag = document.activeElement.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+    // 1–9: jump to track
+    if (e.key >= '1' && e.key <= '9') {
+      const idx = parseInt(e.key, 10) - 1;
+      if (cards[idx]) { playCard(cards[idx]); cards[idx].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      showKbHint();
+      return;
+    }
+
+    switch (e.key) {
+      case ' ':
+        e.preventDefault();
+        if (currentCard) {
+          if (current.paused) playCard(currentCard);
+          else { stopCard(currentCard); current = null; currentCard = null; }
+        } else if (cards[0]) playCard(cards[0]);
+        showKbHint();
+        break;
+
+      case 'ArrowRight':
+        if (current && current.duration) { current.currentTime = Math.min(current.currentTime + 10, current.duration); showKbHint(); }
+        break;
+
+      case 'ArrowLeft':
+        if (current) { current.currentTime = Math.max(current.currentTime - 10, 0); showKbHint(); }
+        break;
+
+      case 'm': case 'M':
+        muted = !muted;
+        allAudio.forEach(a => a.muted = muted);
+        volSlider.style.opacity = muted ? '0.4' : '1';
+        showKbHint();
+        break;
+    }
+  });
+
+  /* ── Prefetch audio as blobs so seeking works regardless of server ── */
+  allAudio.forEach(audio => {
+    fetch(audio.src)
+      .then(r => r.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        if (audio.paused) {
+          audio.src = url;
+        } else {
+          pendingBlob.set(audio, url);
+        }
+      })
+      .catch(() => {});
+  });
+
+})();
+</script>
+</body>
+</html>
