@@ -51,6 +51,7 @@ body.dark-mode {
 /* ── Page ──────────────────────────────────────── */
 #top9-page {
   min-height: 100vh;
+  overscroll-behavior: none;
   background: var(--bg);
   background-image: repeating-linear-gradient(
     0deg, transparent, transparent 2px,
