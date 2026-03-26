@@ -8,6 +8,7 @@
     "year": "2024",
     "duration": 257,
     "bpm": 148,
+    "cue": 165,
     "note": "The bridge at 2:45 is the best build up you can ever get followed by the best vocal counterpoint one can ever get.",
     "audio": "/assets/audio/top-9/shadow-shape.mp3",
     "cover": "/assets/images/top-9/shadow-shape.jpg"
@@ -21,6 +22,7 @@
     "year": "2020",
     "duration": 367,
     "bpm": 83,
+    "cue": 256,
     "note": "A track accompanied me for near a decade now; tragic, hopeful... just as life itself.",
     "audio": "/assets/audio/top-9/what-could-have-been.mp3",
     "cover": "/assets/images/top-9/what-could-have-been.jpg"
@@ -34,6 +36,7 @@
     "year": "2024",
     "duration": 271,
     "bpm": 128,
+    "cue": 220,
     "note": "It simply magical, 2 and a half minutes of pure tension to be briefly release at the end; just addicting.",
     "audio": "/assets/audio/top-9/mhiqural.mp3",
     "cover": "/assets/images/top-9/mhiqural.jpg"
@@ -47,6 +50,7 @@
     "year": "2024",
     "duration": 103,
     "bpm": 120,
+    "cue": 35,
     "note": "Look at the stars. Look at the sky. As light as a feather.",
     "audio": "/assets/audio/top-9/devotion.mp3",
     "cover": "/assets/images/top-9/devotion.jpg"
@@ -60,6 +64,7 @@
     "year": "2009",
     "duration": 220,
     "bpm": 129,
+    "cue": 40,
     "note": "The GOAT, most iconic Yura.",
     "audio": "/assets/audio/top-9/hameln.mp3",
     "cover": "/assets/images/top-9/hameln.jpg"
@@ -73,6 +78,7 @@
     "year": "2022",
     "duration": 212,
     "bpm": 117,
+    "cue": 85,
     "note": "Very light, bright and enjoyable artcore with a neuro section.",
     "audio": "/assets/audio/top-9/eternal-dream.mp3",
     "cover": "/assets/images/top-9/eternal-dream.jpg"
@@ -86,6 +92,7 @@
     "year": "2023",
     "duration": 316,
     "bpm": 123,
+    "cue": 60,
     "note": "Top 1 shit post track on earth. Multi-genre executed to perfection, transition are simply insane.",
     "audio": "/assets/audio/top-9/mariah-carey.mp3",
     "cover": "/assets/images/top-9/mariah-carey.jpg"
@@ -99,6 +106,7 @@
     "year": "2019",
     "duration": 122,
     "bpm": 85,
+    "cue": 45,
     "note": "Remind me of early 2010s... that's it.",
     "audio": "/assets/audio/top-9/red-snow.mp3",
     "cover": "/assets/images/top-9/red-snow.jpg"
@@ -112,6 +120,7 @@
     "year": "2005",
     "duration": 230,
     "bpm": 117,
+    "cue": 100,
     "note": "Weirdest track here... Took me nearly a decade to find it and then accompanied me to face death itself...",
     "audio": "/assets/audio/top-9/shining-the-morning.mp3",
     "cover": "/assets/images/top-9/shining-the-morning.jpg"

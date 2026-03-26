@@ -59,7 +59,8 @@ permalink: /top-9/
           data-cover="{{ track.cover }}"
           data-title="{{ track.title | escape }}"
           data-artist="{{ track.artist | escape }}"
-          data-year="{{ track.year }}">
+          data-year="{{ track.year }}"
+          data-cue="{{ track.cue }}">
 
         <div class="top9-cover-wrap">
           {% if track.cover %}
@@ -319,13 +320,24 @@ permalink: /top-9/
     const seekEl    = card.querySelector('.top9-seek');
     const seekFill  = card.querySelector('.top9-seek-fill');
     const seekThumb = card.querySelector('.top9-seek-thumb');
+
+    // Cue point tick
+    const cue = parseFloat(card.dataset.cue);
+    const dur = parseFloat(card.querySelector('.top9-time').dataset.duration);
+    if (cue && dur) {
+      const tick = document.createElement('div');
+      tick.className = 'top9-seek-cue';
+      tick.style.left = (cue / dur * 100) + '%';
+      tick.dataset.label = fmt(cue);
+      seekEl.appendChild(tick);
+    }
     const time  = card.querySelector('.top9-time');
     const noteBtn  = card.querySelector('.top9-note-btn');
     const noteOverlay = card.querySelector('.top9-note-overlay');
     const noteClose   = card.querySelector('.note-close');
     btn.addEventListener('click', () => {
       if (audio.paused) playCard(card);
-      else { stopCard(card); current = null; currentCard = null; }
+      else { stopCard(card); current = null; currentCard = null; npBar.classList.remove('visible'); }
     });
 
     function setSeekPct(pct) {
@@ -346,6 +358,7 @@ permalink: /top-9/
       setSeekPct(0);
       audio.currentTime = 0;
       current = null; currentCard = null;
+      npBar.classList.remove('visible');
     });
 
     seekEl.addEventListener('click', e => {

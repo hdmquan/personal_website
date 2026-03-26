@@ -6,7 +6,7 @@
   }
   .tech-ribbon .tech-track {
     display: inline-flex;
-    animation: scroll 30s linear infinite;
+    animation: scroll 20s linear infinite;
     will-change: transform;
   }
   .tech-ribbon .tech-track img {
