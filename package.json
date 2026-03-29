@@ -11,7 +11,8 @@
         "build:eleventy": "cross-env ELEVENTY_ENV=PROD eleventy",
         "watch:cms": "npx decap-server",
         "start": "del-cli ./public --force && npm-run-all --parallel watch:*",
-        "build": "npm cache clean --force && npm ci && run-s build:*"
+        "build:cbd": "cd ../cbd_dt && npm run build",
+        "build": "npm cache clean --force && npm ci && run-s build:cbd build:sass build:eleventy"
     },
     "engines": {
         "node": ">=16.0.0",

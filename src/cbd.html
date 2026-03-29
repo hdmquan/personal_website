@@ -1,0 +1,79 @@
+---
+title: "Melbourne CBD Digital Twin — Alan Huynh"
+description: "Live 3D visualisation of Melbourne CBD — tram positions, pedestrian density, urban heat, and air quality. Zero-server architecture."
+permalink: /cbd/
+layout: layouts/base.html
+---
+
+{% block head %}
+<style>
+  #cbd-wrap {
+    width: 100%;
+    height: calc(100vh - 6rem);
+    margin-top: 6rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  #cbd-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  #cbd-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: var(--bg);
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  #cbd-loading.hidden { opacity: 0; }
+  .cbd-spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid var(--rule);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
+  .cbd-loading-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+{% endblock %}
+
+{% block body %}
+<div id="cbd-wrap">
+  <div id="cbd-loading">
+    <div class="cbd-spinner"></div>
+    <span class="cbd-loading-label">Loading Digital Twin</span>
+  </div>
+  <iframe
+    id="cbd-frame"
+    src="/cbd-app/"
+    title="Melbourne CBD Digital Twin"
+    allow="accelerometer; fullscreen"
+    loading="lazy"
+  ></iframe>
+</div>
+<script>
+  (function() {
+    var frame = document.getElementById('cbd-frame');
+    var loading = document.getElementById('cbd-loading');
+    frame.addEventListener('load', function() {
+      loading.classList.add('hidden');
+    });
+  })();
+</script>
+{% endblock %}

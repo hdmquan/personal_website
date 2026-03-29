@@ -71,9 +71,78 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
                 class="button-solid"
                 >My Resume</a
             >
+            <div class="dial-wrap" id="projectDialWrap">
+                <div class="dial-ring" aria-hidden="true">
+                    <button
+                        class="dial-knob"
+                        id="projectDial"
+                        aria-label="Browse personal projects"
+                        aria-expanded="false"
+                        aria-controls="dialFan"
+                    ></button>
+                </div>
+                <span class="dial-legend" aria-hidden="true">PROJECTS</span>
+                <nav class="dial-fan" id="dialFan" aria-label="Projects">
+                    <a href="/project/c-fcn-pytorch/" class="fan-item" style="--a:300deg;--d:0s">
+                        <span class="fan-pip" aria-hidden="true"></span>
+                        <span class="fan-label">C-FCN</span>
+                    </a>
+                    <a href="/project/torch-activation/" class="fan-item" style="--a:340deg;--d:0.04s">
+                        <span class="fan-pip" aria-hidden="true"></span>
+                        <span class="fan-label">Torch Activation</span>
+                    </a>
+                    <a href="/cbd/" class="fan-item" style="--a:20deg;--d:0.08s">
+                        <span class="fan-pip" aria-hidden="true"></span>
+                        <span class="fan-label">CBD Twin</span>
+                    </a>
+                    <a href="/top-9/" class="fan-item" style="--a:60deg;--d:0.12s">
+                        <span class="fan-pip" aria-hidden="true"></span>
+                        <span class="fan-label">Top 9</span>
+                    </a>
+                </nav>
+            </div>
         </div>
     </div>
 </section>
+<script>
+(function(){
+  var wrap = document.getElementById('projectDialWrap');
+  var dial = document.getElementById('projectDial');
+  var fan  = document.getElementById('dialFan');
+  if (!wrap || !dial || !fan) return;
+
+  function close() {
+    fan.classList.remove('is-open');
+    dial.setAttribute('aria-expanded', 'false');
+    dial.style.transform = '';
+  }
+
+  dial.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = !fan.classList.contains('is-open');
+    fan.classList.toggle('is-open', open);
+    dial.setAttribute('aria-expanded', String(open));
+    if (!open) dial.style.transform = '';
+  });
+
+  fan.querySelectorAll('.fan-item').forEach(function(item) {
+    item.addEventListener('mouseenter', function() {
+      var a = parseFloat(item.style.getPropertyValue('--a'));
+      dial.style.transform = 'rotate(' + a + 'deg)';
+    });
+    item.addEventListener('mouseleave', function() {
+      dial.style.transform = '';
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!wrap.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') close();
+  });
+})();
+</script>
 
 <section id="experience">
     <script defer src="/assets/js/experience.js"></script>

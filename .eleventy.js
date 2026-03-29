@@ -40,6 +40,7 @@ module.exports = function (eleventyConfig) {
 
     // Passthrough Copy
     eleventyConfig.addPassthroughCopy("./src/assets");
+    eleventyConfig.addPassthroughCopy("./src/cbd-app");
     eleventyConfig.addPassthroughCopy("./src/admin");
     eleventyConfig.addPassthroughCopy("./src/_redirects");
 

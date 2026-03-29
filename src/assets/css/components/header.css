@@ -342,8 +342,11 @@
     position: relative;
     transition: color 0.3s;
   }
-  #navigation .li-link:hover {
+  #navigation .li-link:hover, #navigation .li-link.active {
     color: var(--accent);
+  }
+  #navigation .li-link.active {
+    font-weight: 400;
   }
   #navigation .button-solid {
     display: none;
@@ -681,8 +684,11 @@
     position: relative;
     transition: color 0.3s;
   }
-  #navigation .li-link:hover {
+  #navigation .li-link:hover, #navigation .li-link.active {
     color: var(--accent);
+  }
+  #navigation .li-link.active {
+    font-weight: 400;
   }
   #navigation .button-solid {
     margin: 0;
