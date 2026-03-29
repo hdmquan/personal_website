@@ -1,90 +1,91 @@
-/* PAGE-SPECIFIC STYLES FOR THE REVIEWS PAGE */
+/* ── Reviews ─────────────────────────────────────── */
+#reviews {
+    margin: auto;
+    padding-top: calc(120 / 16 * 1rem);
+    padding-bottom: calc(50 / 16 * 1rem);
 
-/*-- -------------------------- -->
-<---           Reviews          -->
-<--- -------------------------- -*/
+    .container {
+        max-width: calc(1320 / 16 * 1rem);
+        width: 96%;
+    }
 
-/* Mobile */
-@media only screen and (min-width: 0rem) {
-    #reviews {
+    .review {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0.5rem;
         margin: auto;
-        padding-top: calc(120 / 16 * 1rem);
-        padding-bottom: calc(50 / 16 * 1rem);
+        margin-bottom: calc(100 / 16 * 1rem);
+        background: var(--panel);
+        border: 1px solid var(--rule);
+        max-width: calc(410 / 16 * 1rem);
+        width: 100%;
+        padding: calc(64 / 16 * 1rem) calc(30 / 16 * 1rem) calc(18 / 16 * 1rem);
+        box-shadow: 0 4px 16px var(--sh), 0 1px 0 var(--hi) inset;
 
-        .container {
-            max-width: calc(1320 / 16 * 1rem);
-            width: 96%;
+        .profile {
+            position: absolute;
+            top: calc(-51 / 16 * 1rem);
+            left: calc(30 / 16 * 1rem);
+            display: block;
+            border-radius: 50%;
+            margin-bottom: calc(16 / 16 * 1rem);
+            margin-left: 0;
+            height: calc(99 / 16 * 1rem);
+            width: calc(99 / 16 * 1rem);
+            border: 3px solid var(--panel);
+            box-shadow: 0 2px 8px var(--sh-deep);
         }
 
-        .review {
-            position: relative;
+        p {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 0.95rem;
+            line-height: 1.65em;
+            color: var(--text-2);
+            margin-bottom: calc(28 / 16 * 1rem);
+            text-align: left;
+        }
+
+        .star-group {
             display: flex;
-            flex-direction: column;
-            border-radius: calc(5 / 16 * 1rem);
-            margin: auto;
-            margin-bottom: calc(100 / 16 * 1rem);
-            background: #fff;
-            max-width: calc(410 / 16 * 1rem);
-            width: 100%;
-            padding: calc(64 / 16 * 1rem) calc(30 / 16 * 1rem) calc(18 / 16 * 1rem) calc(30 / 16 * 1rem);
-            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.05);
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--rule);
+            margin-top: auto;
+            padding-top: calc(16 / 16 * 1rem);
 
-            .profile {
-                position: absolute;
-                top: calc(-51 / 16 * 1rem);
-                left: calc(30 / 16 * 1rem);
+            .name {
                 display: block;
-                border-radius: 50%;
-                margin-bottom: calc(16 / 16 * 1rem);
-                margin-left: 0;
-                height: calc(99 / 16 * 1rem);
-                width: calc(99 / 16 * 1rem);
-            }
-
-            p {
-                margin-bottom: calc(28 / 16 * 1rem);
-                line-height: 1.5em;
+                font-family: 'DM Mono', monospace;
+                font-size: 0.65rem;
+                font-weight: 400;
+                letter-spacing: 0.08em;
+                color: var(--text);
                 text-align: left;
             }
 
-            .star-group {
-                display: flex;
-                flex-wrap: nowrap;
-                justify-content: space-between;
-                align-items: center;
-                border-top: 1px solid #e7e7e7;
-                margin-top: auto;
-                padding-top: calc(16 / 16 * 1rem);
-
-                .name {
-                    display: block;
-                    line-height: calc(24 / 16 * 1rem);
-                    font-weight: bold;
-                    color: #1a1a1a;
-                    text-align: left;
-                }
-
-                .desc {
-                    display: block;
-                    font-weight: 400;
-                    color: #575757;
-                }
-
-                img {
-                    display: block;
-                    margin: 0;
-                    height: calc(15 / 16 * 1rem);
-                    width: calc(91 / 16 * 1rem);
-                }
+            .desc {
+                display: block;
+                font-family: 'DM Mono', monospace;
+                font-size: 0.6rem;
+                font-weight: 300;
+                letter-spacing: 0.06em;
+                color: var(--text-3);
             }
-            &:last-of-type {
-                margin-bottom: 0;
+
+            img {
+                display: block;
+                margin: 0;
+                height: calc(15 / 16 * 1rem);
+                width: calc(91 / 16 * 1rem);
             }
         }
+
+        &:last-of-type { margin-bottom: 0; }
     }
 }
 
-/* Tablet */
 @media only screen and (min-width: 48rem) {
     #reviews {
         padding-top: calc(150 / 16 * 1rem);
@@ -100,32 +101,8 @@
         }
 
         .review {
-            margin: 0;
-            margin-bottom: calc(150 / 16 * 1rem);
-
-            &:last-of-type {
-                margin-bottom: calc(150 / 16 * 1rem);
-            }
-        }
-    }
-}
-
-/* Dark Mode */
-@media only screen and (min-width: 0rem) {
-    body.dark-mode {
-        #reviews {
-            .review {
-                background: var(--medium);
-
-                .name {
-                    color: #fff;
-                }
-
-                .desc {
-                    opacity: 0.7;
-                    color: #fff;
-                }
-            }
+            margin: 0 0 calc(150 / 16 * 1rem);
+            &:last-of-type { margin-bottom: calc(150 / 16 * 1rem); }
         }
     }
 }

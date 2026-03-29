@@ -1,286 +1,168 @@
-// =============================================================================
-// ROOT STYLES
-// =============================================================================
+/* ── Design tokens ───────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Serif+Display:ital@0;1&display=swap');
 
-// CSS Custom Properties
+*, *::before, *::after { box-sizing: border-box; }
+
 :root {
-    // Colors
-    --primary: #000;
-    --primaryLight: #fff;
-    --secondary: #000;
-    --secondaryLight: #000;
-    --background: #fff;
-    --headerColor: #000;
-    --bodyTextColor: #111;
-    --bodyTextColorWhite: #fff;
-    --accent: #6cb274;
-    // --emphasis: rgba(108, 178, 116, 0.2);
-    --emphasis: #adebad;
-    --overlay: rgba(108, 178, 116, .9);
-
-    // Typography
-    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
-    --topperFontSizeSmall: clamp(0.5rem, 1vw, 0.75rem);
-    --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
-    --bodyFontSize: 1rem;
-
-    // Spacing
-    --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
+  --g1: #44624a;
+  --g2: #8ba888;
+  --g3: #c0cfb2;
+  --g4: #f1ebe1;
+  --bg:           #eae6df;
+  --panel:        #e2ddd6;
+  --panel-raised: #eeebe5;
+  --panel-inset:  #d6d2cb;
+  --text:         #1e2a20;
+  --text-2:       #6b7d6d;
+  --text-3:       #9aaa9c;
+  --accent:       #44624a;
+  --accent-hi:    #5a7c60;
+  --accent-sh:    var(--accent-sh);
+  --hi:           rgba(255,255,255,0.7);
+  --sh:           rgba(0,0,0,0.12);
+  --sh-deep:      rgba(0,0,0,0.22);
+  --rule:         rgba(0,0,0,0.07);
+  --overlay:      rgba(20,35,22,0.78);
+  --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
 }
 
-// =============================================================================
-// BASE STYLES
-// =============================================================================
-
-// Reset and base elements
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body.dark-mode {
+  --bg:           #191e1a;
+  --panel:        #1e2420;
+  --panel-raised: #242c26;
+  --panel-inset:  #171c18;
+  --text:         #e8ede8;
+  --text-2:       #9aaa9c;
+  --text-3:       #5a6b5c;
+  --accent:       #8ba888;
+  --accent-hi:    #a0bfa0;
+  --accent-sh:    #5a7c60;
+  --hi:           rgba(255,255,255,0.06);
+  --sh:           rgba(0,0,0,0.35);
+  --sh-deep:      rgba(0,0,0,0.5);
+  --rule:         rgba(255,255,255,0.05);
+  --overlay:      rgba(10,20,12,0.85);
 }
 
-body,
-html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-family: "Baskervville", "Georgia", serif;
-    font-size: 100%;
-    color: var(--bodyTextColor);
-    transition: background-color 0.3s;
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Serif Display', Georgia, serif;
+  transition: background 0.3s, color 0.3s;
 }
 
-// Typography
-h1, h2, h3, h4, h5, h6, span {
-    margin: 0;
-    color: var(--headerColor);
-    font-family: "Baskervville", "Georgia", serif;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.015) 0px,
+    rgba(0,0,0,0.015) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* ── Shared button styles ────────────────────────── */
+.button-solid {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: var(--g1);
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 0.4rem;
+  height: 2.6rem;
+  padding: 0 1.5rem;
+  box-shadow:
+    0 1px 0 var(--hi) inset,
+    0 3px 0 var(--accent-sh),
+    0 4px 8px var(--sh-deep);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover { background: var(--accent-hi); }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.08) inset,
+      0 1px 0 var(--accent-sh),
+      0 2px 4px var(--sh);
+  }
+}
+
+/* ── Topper label ────────────────────────────────── */
+.topper {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* ── Section title ───────────────────────────────── */
+.title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.2em;
+}
+
+/* ── Body text ───────────────────────────────────── */
+.text {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  line-height: 1.7em;
+  color: var(--text-2);
 }
 
 p {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 200;
-    line-height: 1.5em;
-    color: #222;
-    font-family: "Baskervville", "Georgia", serif;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-2);
 }
 
-li, a {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5em;
-    font-family: "Nexa", Arial, sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  color: var(--text);
 }
 
-li {
-    color: #222;
-}
-
-a, button {
-    &:hover {
-        cursor: pointer;
-    }
-}
-
-// =============================================================================
-// UTILITY CLASSES
-// =============================================================================
-
+/* ── Container ───────────────────────────────────── */
 .container {
-    position: relative;
-    margin: auto;
+  width: 90%;
+  max-width: 80rem;
+  margin: auto;
 }
 
-.hide-on-mobile {
-    display: none;
-}
+/* ── Images ──────────────────────────────────────── */
+img { max-width: 100%; display: block; }
 
-.hide-on-desktop {
-    display: block;
-}
-
+/* ── Skip link ───────────────────────────────────── */
 .skip {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1111111;
-    opacity: 0;
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 99999;
+  &:focus { top: 0; }
 }
 
-// =============================================================================
-// TEXT STYLES
-// =============================================================================
-
-.topper {
-    display: block;
-    margin-bottom: 0.25rem;
-    font-size: var(--topperFontSize);
-    font-weight: 200;
-    line-height: 1.2em;
-    color: var(--primary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: inherit;
-    font-family: "Nexa", Arial, sans-serif;
-}
-
-.topper-small {
-    display: block;
-    margin-bottom: 1rem;
-    font-size: var(--topperFontSizeSmall);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-family: "Nexa", Arial, sans-serif;
-}
-
-.title {
-    position: relative;
-    margin: 0 0 1rem 0;
-    max-width: 50rem;
-    font-size: var(--headerFontSize);
-    line-height: 1.2em;
-    font-weight: 200;
-    color: var(--headerColor);
-    text-align: inherit;
-}
-
-.text {
-    margin: 0;
-    max-width: 40.625rem;
-    width: 100%;
-    font-size: var(--bodyFontSize);
-    line-height: 1.5em;
-    color: var(--bodyTextColor);
-    text-align: inherit;
-}
-
-// =============================================================================
-// BUTTON STYLES
-// =============================================================================
-
-.button-solid {
-    margin-bottom: 1rem;
-    padding: 0 1.25rem;
-    height: initial;
-    width: auto;
-    line-height: 2.3rem;
-    border: 1px solid #000;
-    color: var(--bodyTextColor);
-    background-color: #fff;
-    box-shadow: inset 0 -6px var(--emphasis);
-    text-decoration: none;
-    align-self: flex-start;
-    transition: all 0.3s;
-
-    &:hover {
-        color: #fff;
-        background-color: var(--primary);
-        box-shadow: none;
-    }
-}
-
-.button {
-    margin-bottom: 1rem;
-    height: initial;
-    width: fit-content;
-    color: var(--bodyTextColor);
-    box-shadow: inset 0 -6px var(--emphasis);
-    text-decoration: none;
-    transition: all 0.3s;
-
-    &:hover {
-        box-shadow: inset 0 -24px var(--emphasis);
-    }
-}
-
-// =============================================================================
-// DARK MODE
-// =============================================================================
-
-body.dark-mode {
-    .topper,
-    .title,
-    .text,
-    .button-text,
-    .item-p,
-    .h3 {
-        color: var(--bodyTextColorWhite);
-    }
-
-    .button-solid {
-        color: var(--bodyTextColorWhite);
-        background-color: var(--dark);
-        box-shadow: inset 0 -6px var(--emphasis-dark);
-        border: 1px solid var(--bodyTextColorWhite);
-
-        &:hover {
-            color: var(--bodyTextColor);
-            background-color: var(--primaryLight);
-            box-shadow: none;
-        }
-    }
-
-    .button {
-        color: var(--bodyTextColorWhite);
-        box-shadow: inset 0 -6px var(--emphasis-dark);
-
-        &:hover {
-            box-shadow: inset 0 -24px var(--emphasis-dark);
-        }
-    }
-}
-
-// =============================================================================
-// RESPONSIVE BREAKPOINTS
-// =============================================================================
-
-/* Desktop - 1024px */
-@media only screen and (min-width: 64rem) {
-    .hide-on-mobile {
-        display: block;
-    }
-
-    .hide-on-desktop {
-        display: none;
-    }
-}
-
-/* Large screens - 3000px */
-@media only screen and (min-width: 3000px) {
-    body,
-    html {
-        font-size: 0.55vw;
-    }
-}
-
-// =============================================================================
-// FONT FACE DECLARATIONS
-// =============================================================================
-
-@font-face {
-    font-display: swap;
-    font-family: 'Nexa';
-    font-style: normal;
-    font-weight: 200;
-    src: url('/assets/fonts/Nexa-ExtraLight.ttf') format('truetype');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Nexa';
-    font-style: normal;
-    font-weight: 900;
-    src: url('/assets/fonts/Nexa-Heavy.ttf') format('truetype');
-}
-
-@font-face {
-    font-display: swap;
-    font-family: 'Baskervville';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/assets/fonts/baskervville-v19-latin-regular.woff2') format('woff2'),
-         url('/assets/fonts/baskervville-v19-latin-regular.ttf') format('truetype');
+/* ── Section h2 titles ───────────────────────────── */
+h2.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1rem;
 }

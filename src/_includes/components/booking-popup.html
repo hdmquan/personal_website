@@ -9,11 +9,12 @@
 ></script>
 <script type="text/javascript">
     window.onload = function () {
+        const isDark = document.body.classList.contains('dark-mode');
         Calendly.initBadgeWidget({
             url: "https://calendly.com/hdmquan/30min",
             text: "Take a chat",
-            color: "#ffffff",
-            textColor: "#000000",
+            color: isDark ? "#8ba888" : "#44624a",
+            textColor: "#ffffff",
         });
     };
 </script>

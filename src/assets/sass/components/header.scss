@@ -4,38 +4,52 @@
 
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-    body.dark-mode {
-        #dark-mode-toggle {
-            .sun {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-
-            .moon {
-                opacity: 0;
-                transform: translate(-50%, -150%);
-            }
+    body.dark-mode #dark-mode-toggle {
+        .sun {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+        .moon {
+            opacity: 0;
+            transform: translate(-50%, -150%);
         }
     }
 
     #dark-mode-toggle {
-        width: calc(48 / 16 * 1rem);
-        height: calc(48 / 16 * 1rem);
+        width: 2.2rem;
+        height: 2.2rem;
         margin: 0;
         padding: 0;
-        background: transparent;
-        border: none;
-        display: block;
+        background: var(--panel-raised);
+        border: 1px solid rgba(0,0,0,0.12);
+        border-radius: 0.35rem;
+        box-shadow:
+            0 1px 0 var(--hi) inset,
+            0 2px 0 var(--accent),
+            0 3px 6px var(--sh-deep);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         order: 4;
+        flex-shrink: 0;
         position: relative;
         z-index: 1000;
         overflow: hidden;
+        transition: transform 0.08s ease, box-shadow 0.08s ease;
+        cursor: pointer;
+        color: var(--text-2);
 
-        img,
+        &:active {
+            transform: translateY(1px);
+            box-shadow:
+                0 1px 0 rgba(0,0,0,0.08) inset,
+                0 1px 0 var(--accent),
+                0 1px 3px var(--sh);
+        }
+
         svg {
-            width: calc(20 / 16 * 1rem);
-            height: calc(20 / 16 * 1rem);
-            //center image inside button
+            width: 1rem;
+            height: 1rem;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -45,14 +59,12 @@
 
         .moon {
             z-index: 2;
-            // Transition properties
             transition: transform 0.3s, opacity 0.3s;
         }
 
         .sun {
             opacity: 0;
             z-index: 1;
-            // Transition property
             transform: translate(-50%, 100%);
             transition: transform 0.3s, opacity 0.3s;
         }
@@ -88,7 +100,7 @@
             content: "";
             width: 100%;
             height: 0%;
-            background: #fff;
+            background: var(--panel);
             opacity: 1;
             display: block;
             position: absolute;
@@ -123,13 +135,11 @@
     }
 
     #navigation {
-        background-color: #fff;
+        background-color: var(--panel);
         width: 100%;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid var(--rule);
         max-width: 100%;
-        /* prevents padding from affecting height and width */
         box-sizing: border-box;
-        /* 11px - 24px */
         position: fixed;
         top: 0;
         left: 0;
@@ -138,15 +148,10 @@
         transition: none;
 
         &:before {
-            /* background color */
             content: "";
             width: 100%;
             height: 100%;
-            // background: #fff;
-            // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
             opacity: 1;
-            /* 11px - 24px */
-            // border-radius: clamp(0.75rem, 2vw, 1.5rem);
             display: block;
             position: absolute;
             top: 0;
@@ -163,7 +168,7 @@
             .ul-wrapper {
                 opacity: 1;
                 transform: scaleY(1);
-                background-color: #fff;
+                background-color: var(--panel);
             }
 
             .toggle {
@@ -180,7 +185,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            // gap: calc(24 / 16 * 1rem);
         }
 
         .logo {
@@ -188,7 +192,6 @@
             max-width: calc(200 / 16 * 1rem);
             height: 100%;
             margin: 0 auto 0 0;
-            /* prevents padding from affecting height and width */
             box-sizing: border-box;
             padding: 0;
             display: flex;
@@ -199,27 +202,40 @@
             img {
                 width: 100%;
                 height: 100%;
-                /* ensures the image never overflows the container. It stays contained within it's width and height and expands to fill it then stops once it reaches an edge */
                 object-fit: contain;
+                filter: none;
             }
         }
 
         .toggle {
-            width: calc(56 / 16 * 1rem);
+            width: 2.2rem;
+            height: 2.2rem;
             margin: 0 0 0 auto;
-            border: none;
-            // border-radius: calc(4 / 16 * 1rem);
-            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.12);
+            border-radius: 0.4rem;
+            background: var(--panel-raised);
+            box-shadow:
+                0 1px 0 var(--hi) inset,
+                0 2px 0 var(--accent),
+                0 3px 6px var(--sh-deep);
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             z-index: 1;
-            transition: transform 0.6s;
+            transition: transform 0.08s ease, box-shadow 0.08s ease, rotate 0.6s;
+            cursor: pointer;
+
+            &:active {
+                transform: translateY(1px);
+                box-shadow:
+                    0 1px 0 rgba(0,0,0,0.08) inset,
+                    0 1px 0 var(--accent),
+                    0 1px 3px var(--sh);
+            }
         }
 
         .nav {
-            /* sends it to the right in the 3rd position */
             order: 3;
         }
 
@@ -234,7 +250,7 @@
             line-height: 1.5em;
             text-decoration: none;
             margin: 0;
-            color: var(--headerColor);
+            color: var(--text-2);
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -271,7 +287,6 @@
         }
 
         .box {
-            /* 24px - 28px */
             width: clamp(1.5rem, 2vw, 1.75rem);
             height: calc(16 / 16 * 1rem);
             position: relative;
@@ -280,7 +295,7 @@
         .line {
             width: 100%;
             height: 1px;
-            background-color: #000;
+            background-color: var(--text-2);
             border-radius: 1px;
             position: absolute;
             left: 50%;
@@ -325,6 +340,7 @@
             transform: scaleY(0);
             transition: transform 0.4s, opacity 0.3s;
             transform-origin: top;
+            border-bottom: 1px solid var(--rule);
         }
 
         .ul {
@@ -345,52 +361,35 @@
             list-style: none;
             margin-right: 0;
             opacity: 0;
-            /* transition from these values */
             transform: translateY(-4.375rem);
             transition: transform 0.6s, opacity 0.9s;
 
-            &:nth-of-type(1) {
-                transition-delay: 0.05s;
-            }
-            &:nth-of-type(2) {
-                transition-delay: 0.1s;
-            }
-            &:nth-of-type(3) {
-                transition-delay: 0.15s;
-            }
-            &:nth-of-type(4) {
-                transition-delay: 0.2s;
-            }
-            &:nth-of-type(5) {
-                transition-delay: 0.25s;
-            }
-            &:nth-of-type(6) {
-                transition-delay: 0.3s;
-            }
-            &:nth-of-type(7) {
-                transition-delay: 0.35s;
-            }
-            &:nth-of-type(8) {
-                transition-delay: 0.4s;
-            }
-            &:nth-of-type(9) {
-                transition-delay: 0.45s;
-            }
+            &:nth-of-type(1) { transition-delay: 0.05s; }
+            &:nth-of-type(2) { transition-delay: 0.1s; }
+            &:nth-of-type(3) { transition-delay: 0.15s; }
+            &:nth-of-type(4) { transition-delay: 0.2s; }
+            &:nth-of-type(5) { transition-delay: 0.25s; }
+            &:nth-of-type(6) { transition-delay: 0.3s; }
+            &:nth-of-type(7) { transition-delay: 0.35s; }
+            &:nth-of-type(8) { transition-delay: 0.4s; }
+            &:nth-of-type(9) { transition-delay: 0.45s; }
         }
 
         .li-link {
-            font-size: clamp(1rem, 1.55vw, 1.25rem);
-            line-height: 1.5em;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
             text-decoration: none;
             margin: 0;
-            color: var(--bodyTextColor);
+            color: var(--text-2);
             display: inline-block;
             position: relative;
-            transition: box-shadow 0.3s;
+            transition: color 0.3s;
 
-            &:hover {
-                box-shadow: inset 0 -6px var(--emphasis);
-            }
+            &:hover, &.active { color: var(--accent); }
+            &.active { font-weight: 400; }
         }
 
         .button-solid {
@@ -422,7 +421,7 @@
         }
 
         .dropdown {
-            color: var(--bodyTextColorWhite);
+            color: var(--text-2);
             position: relative;
             &.active {
                 .drop-ul {
@@ -458,7 +457,8 @@
             height: 0;
             margin: 0;
             padding: 0;
-            background-color: var(--primary);
+            background: var(--panel-raised);
+            border: 1px solid rgba(0,0,0,0.1);
             opacity: 0;
             border-radius: calc(16 / 16 * 1rem);
             display: flex;
@@ -478,9 +478,12 @@
 
         .li-link {
             &.drop-link {
-                /* 14px - 16px */
+                font-family: 'DM Mono', monospace;
                 font-size: clamp(0.875rem, 2vw, 1.25rem);
-                color: #fff;
+                font-weight: 300;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-2);
             }
         }
     }
@@ -516,14 +519,12 @@
             min-width: calc(200 / 16 * 1rem);
             margin: 0;
             padding: 0;
-            background-color: #fff;
-            box-shadow: inset rgba(149, 157, 165, 0.1) 0px 8px 10px;
+            background: var(--panel-raised);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 4px 16px var(--sh-deep);
             opacity: 0;
-            border-bottom: 5px solid var(--primary);
             border-radius: 0 0 calc(24 / 16 * 1rem) calc(24 / 16 * 1rem);
             visibility: hidden;
-            /* if you have 8 or more links in your dropdown nav, uncomment the columns property to make the list into 2 even columns. Change it to 3 or 4 if you need extra columns. Then remove the transition delays on the drop-li so they don't have weird scattered animations */
-            // columns: 2;
             position: absolute;
             top: 100%;
             z-index: -100;
@@ -544,53 +545,37 @@
             transform: translateY(-0.625rem);
             transition: opacity 0.6s, transform 0.6s;
 
-            &:nth-of-type(1) {
-                transition-delay: 0.05s;
-            }
-            &:nth-of-type(2) {
-                transition-delay: 0.1s;
-            }
-            &:nth-of-type(3) {
-                transition-delay: 0.15s;
-            }
-            &:nth-of-type(4) {
-                transition-delay: 0.2s;
-            }
-            &:nth-of-type(5) {
-                transition-delay: 0.25s;
-            }
-            &:nth-of-type(6) {
-                transition-delay: 0.3s;
-            }
-            &:nth-of-type(7) {
-                transition-delay: 0.35s;
-            }
-            &:nth-of-type(8) {
-                transition-delay: 0.4s;
-            }
-            &:nth-of-type(9) {
-                transition-delay: 0.45s;
-            }
+            &:nth-of-type(1) { transition-delay: 0.05s; }
+            &:nth-of-type(2) { transition-delay: 0.1s; }
+            &:nth-of-type(3) { transition-delay: 0.15s; }
+            &:nth-of-type(4) { transition-delay: 0.2s; }
+            &:nth-of-type(5) { transition-delay: 0.25s; }
+            &:nth-of-type(6) { transition-delay: 0.3s; }
+            &:nth-of-type(7) { transition-delay: 0.35s; }
+            &:nth-of-type(8) { transition-delay: 0.4s; }
+            &:nth-of-type(9) { transition-delay: 0.45s; }
         }
 
         .li-link {
             &.drop-link {
-                font-size: calc(16 / 16 * 1rem);
+                font-family: 'DM Mono', monospace;
+                font-size: 0.72rem;
+                font-weight: 300;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
                 line-height: 1.5em;
-                text-transform: capitalize;
                 text-decoration: none;
                 white-space: nowrap;
                 width: 100%;
-                /* prevents padding from affecting height and width */
                 box-sizing: border-box;
                 padding: calc(12 / 16 * 1rem);
-                color: var(--headerColor);
+                color: var(--text-2);
                 display: block;
                 transition: color 0.3s, background-color 0.3s;
 
                 &:hover {
-                    color: var(--bodyTextColorWhite);
-                    background-color: var(--primary);
+                    color: var(--accent);
+                    background-color: var(--panel-inset);
                 }
 
                 &:before {
@@ -613,7 +598,7 @@
             max-width: 100%;
             border-radius: 0;
             top: 0;
-            border-bottom: 1px #000 solid;
+            border-bottom: 1px solid var(--rule);
             height: calc(72 / 16 * 1rem);
             padding: 0;
         }
@@ -621,20 +606,15 @@
 
     #navigation {
         width: 100%;
-        // max-width: calc(1440 / 16 * 1rem);
         height: calc(96 / 16 * 1rem);
-        /* prevents padding from affecting height and width */
         box-sizing: border-box;
-        /* 11px - 24px */
         padding: clamp(0.75rem, 2vw, 1.5rem) 0;
-        background-color: #fff;
-        // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        /* 11px - 24px */
-        // border-radius: clamp(0.75rem, 2vw, 1.5rem);
+        background: var(--panel);
+        border-bottom: 1px solid var(--rule);
+        box-shadow: 0 2px 12px var(--sh);
         display: flex;
         align-items: center;
         position: fixed;
-        // top: calc(32 / 16 * 1rem);
         left: 50%;
         z-index: 10000;
         transform: translateX(-50%);
@@ -644,7 +624,6 @@
             width: 100%;
             max-width: calc(1440 / 16 * 1rem);
             margin: auto;
-            /* prevents padding from affecting height and width */
             box-sizing: border-box;
             padding: 0 calc(24 / 16 * 1rem);
             display: flex;
@@ -661,7 +640,6 @@
             width: 18.4%;
             max-width: calc(350 / 16 * 1rem);
             height: calc(32 / 16 * 1rem);
-            /* margin-right auto pushes everything away from it to the right */
             margin: 0 auto 0 0;
             padding: 0;
             display: flex;
@@ -672,8 +650,8 @@
             img {
                 width: auto;
                 height: 100%;
-                /* ensures the image never overflows the container. It stays contained within it's width and height and expands to fill it then stops once it reaches an edge */
                 object-fit: contain;
+                filter: none;
             }
         }
 
@@ -689,7 +667,7 @@
             line-height: 1.5em;
             text-decoration: none;
             margin: 0;
-            color: var(--headerColor);
+            color: var(--text-2);
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -725,11 +703,10 @@
             transition: background-color 0.3s;
 
             &:hover {
-                background-color: var(--primary);
+                background-color: var(--panel-inset);
 
                 .social-icon {
                     opacity: 1;
-                    filter: grayscale(1) brightness(10000%);
                 }
             }
         }
@@ -746,7 +723,6 @@
             height: 100%;
             display: flex;
             align-items: center;
-            /* absolutely positioned to be dead center */
             position: absolute;
             top: 50%;
             left: 50%;
@@ -761,7 +737,6 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            /* 20px - 36px */
             gap: clamp(1.25rem, 2.6vw, 2.25rem);
         }
 
@@ -772,63 +747,28 @@
             display: flex;
             align-items: center;
             font-weight: 400;
-            /* prevent flexbox from squishing it */
             flex: none;
         }
 
         .li-link {
-            font-size: clamp(1rem, 1.55vw, 1.25rem);
-            line-height: 1.5em;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
             text-decoration: none;
             margin: 0;
-            color: var(--bodyTextColor);
+            color: var(--text-2);
             display: block;
             position: relative;
-            transition: color 0.3s, box-shadow 0.3s;
+            transition: color 0.3s;
 
-            &:hover {
-                box-shadow: inset 0 -6px var(--emphasis);
-            }
+            &:hover, &.active { color: var(--accent); }
+            &.active { font-weight: 400; }
         }
 
         .button-solid {
-            font-size: calc(16 / 16 * 1rem);
-            font-weight: 700;
-            /* 46px - 56px */
-            line-height: clamp(2.875em, 5.5vw, 3.5em);
-            text-align: center;
-            text-decoration: none;
-            min-width: calc(150 / 16 * 1rem);
             margin: 0;
-            /* prevents padding from adding to the width */
-            box-sizing: border-box;
-            padding: 0 calc(32 / 16 * 1rem);
-            color: #fff;
-            background-color: var(--primary);
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-            transition: color 0.3s;
-
-            &:before {
-                content: "";
-                width: 0%;
-                height: 100%;
-                background: #fff;
-                opacity: 1;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: -1;
-                transition: width 0.3s;
-            }
-
-            &:hover {
-                color: #1a1a1a;
-                &:before {
-                    width: 100%;
-                }
-            }
         }
     }
 }
@@ -841,79 +781,3 @@
         }
     }
 }
-
-/*
-Dark Mode Styles
-*/
-
-/* Dark Mode - Mobile */
-@media only screen and (max-width: 63.9375rem) {
-    body.dark-mode {
-        &:before {
-            background-color: var(--dark);
-        }
-        #navigation {
-            background-color: var(--dark);
-            .logo {
-                filter: grayscale(1) brightness(1000%);
-            }
-            .toggle {
-                background-color: var(--dark);
-            }
-            .phone {
-                color: var(--bodyTextColorWhite);
-            }
-            .ul-wrapper {
-                background-color: transparent;
-            }
-            .phone-icon {
-                filter: grayscale(1) brightness(1000%);
-            }
-            .line {
-                background-color: #fff;
-            }
-            .li-link {
-                color: var(--bodyTextColorWhite);
-            }
-        }
-    }
-}
-
-/* Dark Mode - Desktop */
-@media only screen and (min-width: 64rem) {
-    body.dark-mode {
-        &.scroll {
-            #navigation {
-                border-bottom: 1px #fff solid;
-            }
-        }
-        #navigation {
-            background-color: var(--dark);
-            .logo {
-                filter: grayscale(1) brightness(1000%);
-            }
-            .li-link,
-            .phone {
-                color: var(--bodyTextColorWhite);
-            }
-            .phone-icon {
-                filter: grayscale(1) brightness(10005);
-            }
-            .li-link {
-                &.active,
-                &:hover {
-                    box-shadow: inset 0 -6px var(--emphasis-dark);
-                }
-            }
-            .drop-ul {
-                background-color: var(--dark);
-            }
-            .li-link.drop-link {
-                &:hover {
-                    color: var(--bodyTextColorWhite);
-                }
-            }
-        }
-    }
-}
-                                

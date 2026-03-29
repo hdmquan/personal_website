@@ -1,79 +1,85 @@
-/* PAGE-SPECIFIC STYLES FOR THE REVIEWS PAGE */
-/*-- -------------------------- -->
-<---           Reviews          -->
-<--- -------------------------- -*/
-/* Mobile */
-@media only screen and (min-width: 0rem) {
-  #reviews {
-    margin: auto;
-    padding-top: 7.5rem;
-    padding-bottom: 3.125rem;
-  }
-  #reviews .container {
-    max-width: 82.5rem;
-    width: 96%;
-  }
-  #reviews .review {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.3125rem;
-    margin: auto;
-    margin-bottom: 6.25rem;
-    background: #fff;
-    max-width: 25.625rem;
-    width: 100%;
-    padding: 4rem 1.875rem 1.125rem 1.875rem;
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.05);
-  }
-  #reviews .review .profile {
-    position: absolute;
-    top: -3.1875rem;
-    left: 1.875rem;
-    display: block;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    margin-left: 0;
-    height: 6.1875rem;
-    width: 6.1875rem;
-  }
-  #reviews .review p {
-    margin-bottom: 1.75rem;
-    line-height: 1.5em;
-    text-align: left;
-  }
-  #reviews .review .star-group {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #e7e7e7;
-    margin-top: auto;
-    padding-top: 1rem;
-  }
-  #reviews .review .star-group .name {
-    display: block;
-    line-height: 1.5rem;
-    font-weight: bold;
-    color: #1a1a1a;
-    text-align: left;
-  }
-  #reviews .review .star-group .desc {
-    display: block;
-    font-weight: 400;
-    color: #575757;
-  }
-  #reviews .review .star-group img {
-    display: block;
-    margin: 0;
-    height: 0.9375rem;
-    width: 5.6875rem;
-  }
-  #reviews .review:last-of-type {
-    margin-bottom: 0;
-  }
+@charset "UTF-8";
+/* ── Reviews ─────────────────────────────────────── */
+#reviews {
+  margin: auto;
+  padding-top: 7.5rem;
+  padding-bottom: 3.125rem;
 }
-/* Tablet */
+#reviews .container {
+  max-width: 82.5rem;
+  width: 96%;
+}
+#reviews .review {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  margin: auto;
+  margin-bottom: 6.25rem;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  max-width: 25.625rem;
+  width: 100%;
+  padding: 4rem 1.875rem 1.125rem;
+  box-shadow: 0 4px 16px var(--sh), 0 1px 0 var(--hi) inset;
+}
+#reviews .review .profile {
+  position: absolute;
+  top: -3.1875rem;
+  left: 1.875rem;
+  display: block;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  margin-left: 0;
+  height: 6.1875rem;
+  width: 6.1875rem;
+  border: 3px solid var(--panel);
+  box-shadow: 0 2px 8px var(--sh-deep);
+}
+#reviews .review p {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.65em;
+  color: var(--text-2);
+  margin-bottom: 1.75rem;
+  text-align: left;
+}
+#reviews .review .star-group {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  margin-top: auto;
+  padding-top: 1rem;
+}
+#reviews .review .star-group .name {
+  display: block;
+  font-family: "DM Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-align: left;
+}
+#reviews .review .star-group .desc {
+  display: block;
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+}
+#reviews .review .star-group img {
+  display: block;
+  margin: 0;
+  height: 0.9375rem;
+  width: 5.6875rem;
+}
+#reviews .review:last-of-type {
+  margin-bottom: 0;
+}
+
 @media only screen and (min-width: 48rem) {
   #reviews {
     padding-top: 9.375rem;
@@ -88,24 +94,10 @@
     column-gap: 1.875rem;
   }
   #reviews .review {
-    margin: 0;
-    margin-bottom: 9.375rem;
+    margin: 0 0 9.375rem;
   }
   #reviews .review:last-of-type {
     margin-bottom: 9.375rem;
-  }
-}
-/* Dark Mode */
-@media only screen and (min-width: 0rem) {
-  body.dark-mode #reviews .review {
-    background: var(--medium);
-  }
-  body.dark-mode #reviews .review .name {
-    color: #fff;
-  }
-  body.dark-mode #reviews .review .desc {
-    opacity: 0.7;
-    color: #fff;
   }
 }
 

@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../sass/components/tech-ribbon.scss"],"names":[],"mappings":"AAAA;EACI;IACI;IACA;IACA;;EAEA;IACI;IACA;IACA;;EAEA;IACI;IACA;IACA;;;AAEA;EALJ;IAMQ;IACA;;;AAlBpB;EAsBY;IACI;;EAKZ;IACI;MACI;;IAEJ;MACI","file":"tech-ribbon.css"}
+{"version":3,"sourceRoot":"","sources":["../../sass/components/tech-ribbon.scss"],"names":[],"mappings":";AAAA;AACA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAEA;EAAU;;AAGd;EAAW;;AAGf;EACI;IAAO;;EACP;IAAO","file":"tech-ribbon.css"}
