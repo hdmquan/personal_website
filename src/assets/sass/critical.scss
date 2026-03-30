@@ -137,15 +137,13 @@
   #hero .button-solid { margin-right: 1.25rem; margin-bottom: 0; }
 }
 
+/* TODO: Knob - to use */
 /* ── Project Dial ─────────────────────────────────── */
 .social-section .dial-wrap {
-  margin-left: 0.5rem;
-  padding-left: 1rem;
-  border-left: 1px solid var(--rule);
+  margin-left: 0.75rem;
 }
 
 .dial-wrap {
-  --ring: 3.6rem;
   position: relative;
   display: inline-flex;
   flex-direction: column;
@@ -154,64 +152,53 @@
 }
 
 .dial-ring {
-  width: var(--ring);
-  height: var(--ring);
-  border-radius: 50%;
-  background:
-    repeating-conic-gradient(
-      color-mix(in srgb, var(--text-3) 55%, transparent) 0deg 1.2deg,
-      transparent 1.2deg 20deg
-    ),
-    var(--panel-inset);
-  border: 1px solid var(--rule);
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.2), 0 1px 0 var(--hi);
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .dial-knob {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 36% 33%, var(--panel-raised), color-mix(in srgb, var(--panel) 60%, var(--panel-inset)));
-  border: 1px solid var(--rule);
-  box-shadow:
-    0 1px 0 var(--hi) inset,
-    0 -1px 0 rgba(0,0,0,0.14) inset,
-    0 3px 8px var(--sh-deep);
   cursor: pointer;
   position: relative;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.08s;
+  flex: none;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  background: var(--panel-raised);
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 4px 8px var(--sh-deep);
 
   &::before {
     content: '';
     position: absolute;
-    width: 2px;
-    height: 28%;
-    background: var(--accent);
-    border-radius: 1px;
-    top: 10%;
+    width: 0.28rem;
+    height: 0.28rem;
+    top: 0.22rem;
     left: 50%;
     transform: translateX(-50%);
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow:
+      0 0 5px 2px color-mix(in srgb, var(--accent) 55%, transparent),
+      0 0 10px 3px color-mix(in srgb, var(--accent) 20%, transparent);
   }
 
-  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
   &:active {
-    box-shadow:
-      0 -1px 0 var(--hi) inset,
-      0 1px 0 rgba(0,0,0,0.1) inset,
-      0 1px 4px var(--sh);
+    transform: translateY(2px) !important;
+    box-shadow: 0 2px 4px var(--sh);
   }
 
   &[aria-expanded="true"] {
     box-shadow:
-      0 1px 0 var(--hi) inset,
-      0 1px 0 rgba(0,0,0,0.08) inset,
-      0 2px 6px var(--sh),
-      0 0 0 2px color-mix(in srgb, var(--accent) 28%, transparent);
+      0 4px 8px var(--sh-deep),
+      0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent);
   }
 }
 
@@ -224,69 +211,69 @@
   pointer-events: none;
 }
 
-.dial-fan {
+.dial-arc-wrap {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--ring, 3.6rem);
-  height: var(--ring, 3.6rem);
+  width: 15rem;
+  height: 8.4375rem;
+  left: 50%;
+  bottom: 50%;
+  transform: translateX(-50%);
   pointer-events: none;
   z-index: 100;
 }
 
-.fan-item {
-  --r: 5.5rem;
-  position: absolute;
-  left: calc(50% + sin(var(--a)) * var(--r));
-  top: calc(50% - cos(var(--a)) * var(--r));
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
+.dial-arc {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.arc-item {
+  --d: 0s;
   text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  pointer-events: none;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s;
-  transition-delay: var(--d, 0s);
+
+  .arc-seg {
+    fill: var(--panel-raised);
+    stroke: var(--rule);
+    stroke-width: 2;
+    transform-origin: 80px 90px;
+    transform: scale(0);
+    opacity: 0;
+    transition:
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) var(--d),
+      opacity 0.2s var(--d),
+      fill 0.15s,
+      stroke 0.15s;
+  }
+
+  .arc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 7px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: var(--text-3);
+    opacity: 0;
+    transition: opacity 0.15s var(--d), fill 0.15s;
+    pointer-events: none;
+  }
 
   &:hover, &:focus-visible {
-    .fan-pip {
-      background: var(--accent);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent), 0 2px 4px var(--sh-deep);
+    .arc-seg {
+      fill: var(--panel-inset);
+      stroke: var(--accent);
     }
-    .fan-label { color: var(--accent); border-color: var(--accent); }
+    .arc-label { fill: var(--accent); }
   }
 }
 
-.fan-pip {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--panel-raised);
-  border: 1px solid var(--rule);
-  box-shadow: 0 1px 0 var(--hi) inset, 0 1px 0 var(--accent-sh), 0 2px 4px var(--sh-deep);
-  transition: background 0.15s, box-shadow 0.15s;
-  flex: none;
-}
-
-.fan-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.48rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-2);
-  white-space: nowrap;
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  border-radius: 0.2rem;
-  padding: 0.15rem 0.4rem;
-  box-shadow: 0 1px 3px var(--sh);
-  transition: color 0.15s, border-color 0.15s;
-}
-
-.dial-fan.is-open .fan-item {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
+.dial-wrap.is-open .dial-arc-wrap {
   pointer-events: auto;
+}
+
+.dial-wrap.is-open .arc-item {
+  .arc-seg {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .arc-label { opacity: 1; }
 }
