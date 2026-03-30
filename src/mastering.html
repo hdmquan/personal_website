@@ -1,0 +1,859 @@
+---
+title: "Mastering Suite — SymphonyNoNine"
+description: "Web-based audio mastering suite."
+permalink: /mastering/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mastering Suite — SymphonyNoNine</title>
+  <link rel="stylesheet" href="/assets/css/root.css" />
+  <link rel="stylesheet" href="/assets/css/mastering.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.body&&document.body.classList.add('dark-mode');})();</script>
+</head>
+<body>
+<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.body.classList.add('dark-mode');})();</script>
+
+<div id="mastering-page">
+
+  <!-- ══ HEADER ══ -->
+  <header class="mk-hdr">
+    <span class="mk-logo">MS<span class="mk-logo-sub">·01</span></span>
+    <span class="mk-track" id="mk-track-name">— NO FILE —</span>
+    <div class="mk-hdr-end">
+      <div class="mk-gr-strip">
+        <span class="mk-lbl">GR</span>
+        <div class="mk-gr-track"><div class="mk-gr-fill" id="grFill"></div></div>
+        <span class="mk-gr-val" id="grVal">0.0</span>
+      </div>
+      <button id="mk-dark-toggle" class="mk-ico-btn" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="currentColor" style="display:none"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══ 3-COLUMN FACE ══ -->
+  <div class="mk-face">
+
+    <!-- ── LEFT: DSP controls ── -->
+    <div class="mk-col mk-col--left">
+
+      <div class="mk-card" data-label="COMPRESSOR">
+        <div class="mk-hsliders">
+          <div class="mk-hs" data-p="compThresh"  data-min="-60"   data-max="0"    data-val="-24"   data-unit="dB"><span class="mk-hs-lbl">THR</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-compThresh">-24.0 dB</span></div>
+          <div class="mk-hs" data-p="compRatio"   data-min="1"     data-max="20"   data-val="4"     data-unit=":1" data-log="1"><span class="mk-hs-lbl">RAT</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-compRatio">4.0:1</span></div>
+          <div class="mk-hs" data-p="compAttack"  data-min="0.001" data-max="1"    data-val="0.003" data-unit="s"  data-log="1"><span class="mk-hs-lbl">ATK</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-compAttack">3 ms</span></div>
+          <div class="mk-hs" data-p="compRelease" data-min="0.01"  data-max="3"    data-val="0.25"  data-unit="s"  data-log="1"><span class="mk-hs-lbl">REL</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-compRelease">250 ms</span></div>
+          <div class="mk-hs" data-p="compMakeup"  data-min="0"     data-max="30"   data-val="0"     data-unit="dB"><span class="mk-hs-lbl">MKP</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-compMakeup">0.0 dB</span></div>
+          <div class="mk-hs" data-p="compKnee"    data-min="0"     data-max="40"   data-val="10"    data-unit="dB"><span class="mk-hs-lbl">KNE</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-compKnee">10.0 dB</span></div>
+        </div>
+      </div>
+
+      <div class="mk-card" data-label="CHARACTER">
+        <div class="mk-hsliders">
+          <div class="mk-hs" data-p="drive" data-min="0"   data-max="100" data-val="0"   data-unit="%"><span class="mk-hs-lbl">DRV</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-drive">0%</span></div>
+          <div class="mk-hs" data-p="tone"  data-min="-12" data-max="12"  data-val="0"   data-unit="dB"><span class="mk-hs-lbl">TNE</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-tone">0.0 dB</span></div>
+          <div class="mk-hs" data-p="width" data-min="0"   data-max="200" data-val="100" data-unit="%"><span class="mk-hs-lbl">WID</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-width">100%</span></div>
+        </div>
+      </div>
+
+      <div class="mk-card" data-label="GAINS">
+        <div class="mk-hsliders">
+          <div class="mk-hs" data-p="inputGain"   data-min="-24"  data-max="24"    data-val="0"     data-unit="dB"><span class="mk-hs-lbl">IN</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-inputGain">0.0 dB</span></div>
+          <div class="mk-hs" data-p="outputLevel" data-min="-24"  data-max="6"     data-val="0"     data-unit="dB"><span class="mk-hs-lbl">OUT</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-outputLevel">0.0 dB</span></div>
+          <div class="mk-hs" data-p="hpf"         data-min="20"   data-max="500"   data-val="20"    data-unit="Hz" data-log="1"><span class="mk-hs-lbl">HPF</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-hpf">Off</span></div>
+          <div class="mk-hs" data-p="lpf"         data-min="1000" data-max="22000" data-val="22000" data-unit="Hz" data-log="1"><span class="mk-hs-lbl">LPF</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-lpf">Off</span></div>
+        </div>
+      </div>
+
+      <div class="mk-card" data-label="LIMITER">
+        <div class="mk-hsliders">
+          <div class="mk-hs" data-p="limThresh"  data-min="-12"  data-max="0"  data-val="-0.3" data-unit="dBFS"><span class="mk-hs-lbl">CEIL</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-limThresh">-0.3 dBFS</span></div>
+          <div class="mk-hs" data-p="limRelease" data-min="0.01" data-max="1"  data-val="0.05" data-unit="s" data-log="1"><span class="mk-hs-lbl">REL</span><div class="mk-hs-track"><div class="mk-hs-fill"></div><div class="mk-hs-thumb"></div></div><span class="mk-hs-val" id="v-limRelease">50 ms</span></div>
+        </div>
+      </div>
+
+    </div><!-- end left -->
+
+    <!-- ── MIDDLE: EQ viz | 10-band PEQ | Player ── -->
+    <div class="mk-col mk-col--mid">
+
+      <div class="mk-screen">
+        <canvas id="mk-eq-canvas"></canvas>
+      </div>
+
+      <div class="mk-card mk-eq-card" data-label="10-BAND PEQ">
+        <div class="mk-eq-10">
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq0Freq" data-min="20"   data-max="80"    data-val="32"   data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq0Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq0Freq">32</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq1Freq" data-min="40"   data-max="160"   data-val="63"   data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq1Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq1Freq">63</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq2Freq" data-min="80"   data-max="320"   data-val="125"  data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq2Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq2Freq">125</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq3Freq" data-min="160"  data-max="640"   data-val="250"  data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq3Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq3Freq">250</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq4Freq" data-min="300"  data-max="1200"  data-val="500"  data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq4Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq4Freq">500</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq5Freq" data-min="600"  data-max="2400"  data-val="1000" data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq5Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq5Freq">1k</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq6Freq" data-min="1200" data-max="5000"  data-val="2000" data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq6Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq6Freq">2k</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq7Freq" data-min="2500" data-max="10000" data-val="4000" data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq7Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq7Freq">4k</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq8Freq" data-min="5000" data-max="20000" data-val="8000" data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq8Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq8Freq">8k</div>
+          </div>
+
+          <div class="mk-bc">
+            <div class="mk-bk"><div class="mk-knob mk-knob--sm" data-p="eq9Freq" data-min="8000" data-max="20000" data-val="16000" data-unit="Hz" data-log="1"></div></div>
+            <div class="mk-slider" data-p="eq9Gain" data-min="-12" data-max="12" data-val="0" data-unit="dB"><div class="mk-slider-track"><div class="mk-slider-fill"></div><div class="mk-slider-thumb"></div></div></div>
+            <div class="mk-bhz" id="v-eq9Freq">16k</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mk-screen mk-screen--player">
+        <div class="mk-upload" id="mkUpload">
+          <input type="file" id="mkFileInput" accept="audio/*" hidden />
+          <svg class="mk-upload-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="16" r="13" stroke-dasharray="4 3"/>
+            <path d="M16 22v-10M11 16l5-5 5 5M10 24h12"/>
+          </svg>
+          <p class="mk-upload-txt">drop audio</p>
+          <p class="mk-upload-sub">wav · flac · mp3 · aiff</p>
+        </div>
+        <div id="mkPlayer" style="display:none;flex:1;flex-direction:column;min-height:0">
+          <div class="mk-waveform-wrap">
+            <canvas id="mk-waveform" class="mk-waveform"></canvas>
+            <div class="mk-playhead" id="mkPlayhead"></div>
+          </div>
+          <div class="mk-transport">
+            <button class="mk-btn mk-btn-sq" id="mkPlay" aria-label="Play/Pause">
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <button class="mk-btn mk-btn-sq" id="mkStop" aria-label="Stop">
+              <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+            </button>
+            <button class="mk-btn mk-btn-sq" id="mkLoop" aria-label="Loop">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+            </button>
+            <div class="mk-seek" id="mkSeek">
+              <div class="mk-seek-fill" id="mkSeekFill"></div>
+              <div class="mk-seek-thumb" id="mkSeekThumb"></div>
+            </div>
+            <span class="mk-time"><span id="mkTimeCur">0:00</span>/<span id="mkTimeTot">0:00</span></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end mid -->
+
+    <!-- ── RIGHT: Spectrum | Freq response viz ── -->
+    <div class="mk-col mk-col--right">
+      <div class="mk-screen"><canvas id="mk-spec-canvas"></canvas></div>
+      <div class="mk-screen"><canvas id="mk-viz-canvas"></canvas></div>
+    </div>
+
+  </div><!-- end face -->
+
+</div>
+
+<script>
+(function () {
+'use strict';
+
+// ── CSS var reader ─────────────────────────────────────────────
+function cv(n) {
+  const el = document.getElementById('mastering-page') || document.documentElement;
+  return getComputedStyle(el).getPropertyValue(n).trim();
+}
+function C() {
+  return {
+    panelRaised:  cv('--panel-raised'),
+    panel:        cv('--panel'),
+    panelInset:   cv('--panel-inset'),
+    screenBg:     cv('--screen-bg'),
+    screenLabel:  cv('--screen-label'),
+    hi:           cv('--hi'),
+    sh:           cv('--sh'),
+    shDeep:       cv('--sh-deep'),
+    accent:       cv('--accent'),
+    accentHi:     cv('--accent-hi'),
+    text2:        cv('--text-2'),
+    text3:        cv('--text-3'),
+  };
+}
+
+// ── Knob (CSS var rotation — dot only) ────────────────────────
+function setKnobAngle(el, norm) {
+  el.style.setProperty('--rot', (-135 + norm * 270) + 'deg');
+}
+
+// ── Slider (CSS fill/thumb) ────────────────────────────────────
+function updateSlider(el, norm) {
+  const thumb = el.querySelector('.mk-slider-thumb');
+  const fill  = el.querySelector('.mk-slider-fill');
+  const pct = norm * 100;
+  const mid = 50;
+  thumb.style.bottom = pct + '%';
+  const lo = Math.min(pct, mid), hi = Math.max(pct, mid);
+  fill.style.bottom = lo + '%';
+  fill.style.top    = (100 - hi) + '%';
+}
+
+// ── Param helpers ──────────────────────────────────────────────
+const P = {};
+function lerp(a, b, t) { return a + (b - a) * t; }
+function n2v(n, mn, mx, log) { return log ? Math.exp(lerp(Math.log(mn), Math.log(mx), n)) : lerp(mn, mx, n); }
+function v2n(v, mn, mx, log) { return log ? (Math.log(v) - Math.log(mn)) / (Math.log(mx) - Math.log(mn)) : (v - mn) / (mx - mn); }
+function fmtT(s) { return Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0'); }
+function fmtV(p, v, u) {
+  if (p === 'hpf' && v <= 21)    return 'Off';
+  if (p === 'lpf' && v >= 21900) return 'Off';
+  if (u === 'Hz')   return v >= 1000 ? (v/1000).toFixed(v>=10000?0:1)+' kHz' : Math.round(v)+' Hz';
+  if (u === ':1')   return v.toFixed(1)+':1';
+  if (u === 's')    return v < 0.1 ? Math.round(v*1000)+' ms' : v.toFixed(2)+' s';
+  if (u === 'dB' || u === 'dBFS') return v.toFixed(1)+' '+u;
+  if (u === '%')    return Math.round(v)+'%';
+  return v.toFixed(2);
+}
+
+// ── 10-band EQ config ──────────────────────────────────────────
+const EQ_BANDS = [
+  { freq: 32,    type: 'lowshelf', Q: 0.7 },
+  { freq: 63,    type: 'peaking',  Q: 1.4 },
+  { freq: 125,   type: 'peaking',  Q: 1.4 },
+  { freq: 250,   type: 'peaking',  Q: 1.4 },
+  { freq: 500,   type: 'peaking',  Q: 1.4 },
+  { freq: 1000,  type: 'peaking',  Q: 1.4 },
+  { freq: 2000,  type: 'peaking',  Q: 1.4 },
+  { freq: 4000,  type: 'peaking',  Q: 1.4 },
+  { freq: 8000,  type: 'peaking',  Q: 1.4 },
+  { freq: 16000, type: 'highshelf',Q: 0.7 },
+];
+
+// ── Audio engine ───────────────────────────────────────────────
+let ac = null, buf = null, src = null;
+let playing = false, looping = false, tStart = 0, pauseAt = 0;
+const N = {};
+
+function initAudio() {
+  if (ac) return;
+  ac = new (window.AudioContext || window.webkitAudioContext)();
+  N.inGain   = ac.createGain();
+  N.hpf      = ac.createBiquadFilter(); N.hpf.type = 'highpass';
+  N.lpf      = ac.createBiquadFilter(); N.lpf.type = 'lowpass';
+
+  N.eq = EQ_BANDS.map(b => {
+    const f = ac.createBiquadFilter();
+    f.type = b.type; f.frequency.value = b.freq; f.Q.value = b.Q; f.gain.value = 0;
+    return f;
+  });
+  // Apply any freq knob values already set
+  for (let i = 0; i < 10; i++) {
+    const fp = P['eq'+i+'Freq'];
+    if (fp) N.eq[i].frequency.value = fp.value;
+  }
+
+  N.comp    = ac.createDynamicsCompressor();
+  N.driveIn = ac.createGain();
+  N.shaper  = ac.createWaveShaper(); N.shaper.oversample = '4x';
+  N.driveOut= ac.createGain();
+  N.makeup  = ac.createGain();
+  N.tone    = ac.createBiquadFilter(); N.tone.type = 'highshelf'; N.tone.frequency.value = 6000;
+  N.outGain = ac.createGain();
+  N.lim     = ac.createDynamicsCompressor();
+  N.lim.ratio.value = 20; N.lim.attack.value = 0.001; N.lim.release.value = 0.05; N.lim.knee.value = 0;
+  N.analyser= ac.createAnalyser(); N.analyser.fftSize = 2048;
+  N.specAn  = ac.createAnalyser(); N.specAn.fftSize = 2048; N.specAn.smoothingTimeConstant = 0.82;
+
+  const chain = [N.inGain, N.hpf, N.lpf, ...N.eq, N.comp, N.driveIn, N.shaper, N.driveOut, N.makeup, N.tone, N.outGain, N.lim, N.analyser, N.specAn];
+  chain.reduce((a,b) => { a.connect(b); return b; });
+  N.specAn.connect(ac.destination);
+
+  Object.keys(P).forEach(k => applyParam(k, P[k].value));
+  buildCurve(0);
+}
+
+function buildCurve(pct) {
+  const n = 512, c = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const x = (i*2)/n - 1;
+    if (pct < 0.5) { c[i] = x; continue; }
+    const k = (pct/100) * 160;
+    c[i] = ((Math.PI + k) * x) / (Math.PI + k * Math.abs(x));
+  }
+  N.shaper.curve = c;
+  N.driveOut.gain.setTargetAtTime(1 / (1 + (pct/100)*1.4), ac.currentTime, 0.01);
+}
+
+function db2g(db) { return Math.pow(10, db/20); }
+
+function applyParam(p, v) {
+  if (!ac) return;
+  const t = ac.currentTime;
+  const gm = p.match(/^eq(\d)Gain$/), fm = p.match(/^eq(\d)Freq$/);
+  if (gm && N.eq) { N.eq[+gm[1]].gain.setTargetAtTime(v, t, 0.01); return; }
+  if (fm && N.eq) { N.eq[+fm[1]].frequency.setTargetAtTime(v, t, 0.01); return; }
+  switch(p) {
+    case 'inputGain':   N.inGain.gain.setTargetAtTime(db2g(v), t, 0.01); break;
+    case 'hpf':         N.hpf.frequency.setTargetAtTime(v<=21?20:v, t, 0.01); break;
+    case 'lpf':         N.lpf.frequency.setTargetAtTime(v>=21900?22000:v, t, 0.01); break;
+    case 'compThresh':  N.comp.threshold.setTargetAtTime(v, t, 0.01); break;
+    case 'compRatio':   N.comp.ratio.setTargetAtTime(v, t, 0.01); break;
+    case 'compAttack':  N.comp.attack.setTargetAtTime(v, t, 0.01); break;
+    case 'compRelease': N.comp.release.setTargetAtTime(v, t, 0.01); break;
+    case 'compMakeup':  N.makeup.gain.setTargetAtTime(db2g(v), t, 0.01); break;
+    case 'compKnee':    N.comp.knee.setTargetAtTime(v, t, 0.01); break;
+    case 'drive':       buildCurve(v); break;
+    case 'tone':        N.tone.gain.setTargetAtTime(v, t, 0.01); break;
+    case 'width':       break;
+    case 'outputLevel': N.outGain.gain.setTargetAtTime(db2g(v), t, 0.01); break;
+    case 'limThresh':   N.lim.threshold.setTargetAtTime(v, t, 0.01); break;
+    case 'limRelease':  N.lim.release.setTargetAtTime(v, t, 0.01); break;
+  }
+}
+
+// ── Horizontal slider setup (left col) ────────────────────────
+function updateHSlider(el, norm) {
+  const fill  = el.querySelector('.mk-hs-fill');
+  const thumb = el.querySelector('.mk-hs-thumb');
+  const pct = norm * 100;
+  fill.style.width  = pct + '%';
+  thumb.style.left  = pct + '%';
+}
+
+function setupHSliders() {
+  document.querySelectorAll('.mk-hs[data-p]').forEach(el => {
+    const p   = el.dataset.p;
+    const mn  = parseFloat(el.dataset.min);
+    const mx  = parseFloat(el.dataset.max);
+    const dv  = parseFloat(el.dataset.val);
+    const u   = el.dataset.unit || '';
+    const log = !!el.dataset.log;
+    const n0  = v2n(dv, mn, mx, log);
+    P[p] = { min:mn, max:mx, norm:n0, value:dv, unit:u, log };
+    updateHSlider(el, n0);
+
+    let x0, n00;
+    function move(cx) {
+      const w = el.querySelector('.mk-hs-track').offsetWidth || 120;
+      P[p].norm  = Math.max(0, Math.min(1, n00 + (cx - x0) / w));
+      P[p].value = n2v(P[p].norm, mn, mx, log);
+      updateHSlider(el, P[p].norm);
+      const ve = document.getElementById('v-' + p);
+      if (ve) ve.textContent = fmtV(p, P[p].value, u);
+      applyParam(p, P[p].value);
+      if (p === 'hpf' || p === 'lpf') drawEQ();
+    }
+    function down(e) {
+      e.preventDefault();
+      el.classList.add('dragging');
+      x0 = e.clientX ?? e.touches[0].clientX; n00 = P[p].norm;
+      const mm = ev => move(ev.clientX ?? ev.touches[0].clientX);
+      const up = () => {
+        el.classList.remove('dragging');
+        window.removeEventListener('mousemove', mm); window.removeEventListener('mouseup', up);
+        window.removeEventListener('touchmove', mm); window.removeEventListener('touchend', up);
+      };
+      window.addEventListener('mousemove', mm); window.addEventListener('mouseup', up);
+      window.addEventListener('touchmove', mm, {passive:false}); window.addEventListener('touchend', up);
+    }
+    el.addEventListener('mousedown', down);
+    el.addEventListener('touchstart', down, {passive:false});
+    // Click to jump
+    el.querySelector('.mk-hs-track').addEventListener('click', e => {
+      const r = e.currentTarget.getBoundingClientRect();
+      P[p].norm  = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+      P[p].value = n2v(P[p].norm, mn, mx, log);
+      updateHSlider(el, P[p].norm);
+      const ve = document.getElementById('v-' + p);
+      if (ve) ve.textContent = fmtV(p, P[p].value, u);
+      applyParam(p, P[p].value);
+      if (p === 'hpf' || p === 'lpf') drawEQ();
+    });
+    el.addEventListener('dblclick', () => {
+      P[p].value = dv; P[p].norm = v2n(dv, mn, mx, log);
+      updateHSlider(el, P[p].norm);
+      const ve = document.getElementById('v-' + p); if (ve) ve.textContent = fmtV(p, dv, u);
+      applyParam(p, dv);
+      if (p === 'hpf' || p === 'lpf') drawEQ();
+    });
+    el.addEventListener('wheel', e => {
+      e.preventDefault();
+      P[p].norm  = Math.max(0, Math.min(1, P[p].norm + e.deltaY * -0.001));
+      P[p].value = n2v(P[p].norm, mn, mx, log);
+      updateHSlider(el, P[p].norm);
+      const ve = document.getElementById('v-' + p); if (ve) ve.textContent = fmtV(p, P[p].value, u);
+      applyParam(p, P[p].value);
+      if (p === 'hpf' || p === 'lpf') drawEQ();
+    }, {passive:false});
+  });
+}
+
+// ── Knob setup ─────────────────────────────────────────────────
+function setupKnobs() {
+  document.querySelectorAll('.mk-knob[data-p]').forEach(el => {
+    const p   = el.dataset.p;
+    const mn  = parseFloat(el.dataset.min);
+    const mx  = parseFloat(el.dataset.max);
+    const dv  = parseFloat(el.dataset.val);
+    const u   = el.dataset.unit || '';
+    const log = !!el.dataset.log;
+    const n0  = v2n(dv, mn, mx, log);
+    P[p] = { min:mn, max:mx, norm:n0, value:dv, unit:u, log };
+    setKnobAngle(el, n0);
+
+    let y0, n00;
+    function move(cy2, shift) {
+      const dy = y0 - cy2;
+      P[p].norm  = Math.max(0, Math.min(1, n00 + dy * (shift ? 0.002 : 0.007)));
+      P[p].value = n2v(P[p].norm, mn, mx, log);
+      setKnobAngle(el, P[p].norm);
+      const ve = document.getElementById('v-'+p);
+      if (ve) ve.textContent = fmtV(p, P[p].value, u);
+      applyParam(p, P[p].value);
+      if (p.match(/^eq\d(Freq|Gain)$/) || p==='hpf' || p==='lpf') drawEQ();
+    }
+    function down(e) {
+      e.preventDefault();
+      el.classList.add('dragging');
+      y0 = e.clientY ?? e.touches[0].clientY; n00 = P[p].norm;
+      const mm = ev => move(ev.clientY ?? ev.touches[0].clientY, ev.shiftKey);
+      const up = () => {
+        el.classList.remove('dragging');
+        window.removeEventListener('mousemove',mm); window.removeEventListener('mouseup',up);
+        window.removeEventListener('touchmove',mm); window.removeEventListener('touchend',up);
+      };
+      window.addEventListener('mousemove', mm); window.addEventListener('mouseup', up);
+      window.addEventListener('touchmove', mm, {passive:false}); window.addEventListener('touchend', up);
+    }
+    el.addEventListener('mousedown', down);
+    el.addEventListener('touchstart', down, {passive:false});
+    el.addEventListener('dblclick', () => {
+      P[p].value = dv; P[p].norm = v2n(dv,mn,mx,log);
+      setKnobAngle(el, P[p].norm);
+      const ve = document.getElementById('v-'+p); if (ve) ve.textContent = fmtV(p, dv, u);
+      applyParam(p, dv);
+      if (p.match(/^eq\d(Freq|Gain)$/) || p==='hpf' || p==='lpf') drawEQ();
+    });
+    el.addEventListener('wheel', e => {
+      e.preventDefault();
+      P[p].norm  = Math.max(0, Math.min(1, P[p].norm - e.deltaY * 0.001));
+      P[p].value = n2v(P[p].norm, mn, mx, log);
+      setKnobAngle(el, P[p].norm);
+      const ve = document.getElementById('v-'+p); if (ve) ve.textContent = fmtV(p, P[p].value, u);
+      applyParam(p, P[p].value);
+      if (p.match(/^eq\d(Freq|Gain)$/) || p==='hpf' || p==='lpf') drawEQ();
+    }, {passive:false});
+  });
+}
+
+// ── Slider setup ───────────────────────────────────────────────
+function setupSliders() {
+  document.querySelectorAll('.mk-slider[data-p]').forEach(el => {
+    const p   = el.dataset.p;
+    const mn  = parseFloat(el.dataset.min);
+    const mx  = parseFloat(el.dataset.max);
+    const dv  = parseFloat(el.dataset.val);
+    const u   = el.dataset.unit || '';
+    const log = !!el.dataset.log;
+    const n0  = v2n(dv, mn, mx, log);
+    P[p] = { min:mn, max:mx, norm:n0, value:dv, unit:u, log };
+    updateSlider(el, n0);
+
+    let y0, n00;
+    function move(cy2) {
+      const h = el.querySelector('.mk-slider-track').offsetHeight || 80;
+      P[p].norm  = Math.max(0, Math.min(1, n00 + (y0 - cy2) / h));
+      P[p].value = n2v(P[p].norm, mn, mx, log);
+      updateSlider(el, P[p].norm);
+      applyParam(p, P[p].value);
+      drawEQ();
+    }
+    function down(e) {
+      e.preventDefault();
+      y0 = e.clientY ?? e.touches[0].clientY; n00 = P[p].norm;
+      const mm = ev => move(ev.clientY ?? ev.touches[0].clientY);
+      const up = () => { window.removeEventListener('mousemove',mm); window.removeEventListener('mouseup',up); window.removeEventListener('touchmove',mm); window.removeEventListener('touchend',up); };
+      window.addEventListener('mousemove', mm); window.addEventListener('mouseup', up);
+      window.addEventListener('touchmove', mm, {passive:false}); window.addEventListener('touchend', up);
+    }
+    el.addEventListener('mousedown', down);
+    el.addEventListener('touchstart', down, {passive:false});
+    el.addEventListener('dblclick', () => {
+      P[p].value = dv; P[p].norm = v2n(dv,mn,mx,log);
+      updateSlider(el, P[p].norm); applyParam(p, dv); drawEQ();
+    });
+    el.addEventListener('wheel', e => {
+      e.preventDefault();
+      P[p].norm  = Math.max(0, Math.min(1, P[p].norm - e.deltaY * 0.001));
+      P[p].value = n2v(P[p].norm, mn, mx, log);
+      updateSlider(el, P[p].norm); applyParam(p, P[p].value); drawEQ();
+    }, {passive:false});
+  });
+}
+
+function redrawKnobs() {
+  document.querySelectorAll('.mk-knob[data-p]').forEach(el => {
+    if (P[el.dataset.p]) setKnobAngle(el, P[el.dataset.p].norm);
+  });
+}
+
+// ── Canvas sizing ──────────────────────────────────────────────
+function sizeCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const r = canvas.parentElement.getBoundingClientRect();
+  if (r.width < 1 || r.height < 1) return false;
+  if (canvas.width !== Math.round(r.width*dpr) || canvas.height !== Math.round(r.height*dpr)) {
+    canvas.width  = Math.round(r.width * dpr);
+    canvas.height = Math.round(r.height * dpr);
+  }
+  return true;
+}
+
+// ── EQ display ─────────────────────────────────────────────────
+function drawEQ() {
+  const canvas = document.getElementById('mk-eq-canvas');
+  if (!canvas || !sizeCanvas(canvas)) return;
+  const ctx = canvas.getContext('2d');
+  const c = C();
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.width, H = canvas.height, w = W/dpr, h = H/dpr;
+
+  ctx.clearRect(0,0,W,H); ctx.save(); ctx.scale(dpr,dpr);
+  ctx.fillStyle = c.screenBg; ctx.fillRect(0,0,w,h);
+
+  [-9,-6,-3,0,3,6,9].forEach(db => {
+    const y = h/2 - (db/12)*(h/2-4);
+    ctx.beginPath(); ctx.moveTo(db===0?0:20,y); ctx.lineTo(w,y);
+    ctx.strokeStyle = db===0 ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = db===0?1.5:1; ctx.stroke();
+    ctx.fillStyle = c.screenLabel; ctx.font = '6px DM Mono, monospace';
+    ctx.textAlign='left';
+    ctx.fillText((db>0?'+':'')+db, 2, y+2);
+  });
+  [50,100,500,1000,5000,10000,20000].forEach(f => {
+    const x = Math.log10(f/20) / Math.log10(22000/20) * w;
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h);
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = c.screenLabel; ctx.font = '6px DM Mono, monospace';
+    ctx.textAlign='center';
+    ctx.fillText(f>=1000?f/1000+'k':f, x, h-2);
+  });
+
+  if (!ac || !N.eq) {
+    ctx.beginPath(); ctx.moveTo(0,h/2); ctx.lineTo(w,h/2);
+    ctx.strokeStyle = c.accent; ctx.globalAlpha=0.3; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.globalAlpha=1; ctx.restore(); return;
+  }
+
+  const pts = Math.floor(w);
+  const freqs = new Float32Array(pts);
+  for (let i=0;i<pts;i++) freqs[i] = 20 * Math.pow(22000/20, i/(pts-1));
+  let mag = new Float32Array(pts).fill(1);
+  const tm = new Float32Array(pts), tp = new Float32Array(pts);
+  [N.hpf, N.lpf, ...N.eq].forEach(f => {
+    f.getFrequencyResponse(freqs, tm, tp);
+    for (let i=0;i<pts;i++) mag[i] *= tm[i];
+  });
+
+  ctx.beginPath();
+  for (let i=0;i<pts;i++) {
+    const db = Math.max(-12, Math.min(12, 20*Math.log10(Math.max(mag[i],1e-6))));
+    const y = h/2 - (db/12)*(h/2-4);
+    i===0 ? ctx.moveTo(i,y) : ctx.lineTo(i,y);
+  }
+  ctx.lineTo(pts-1,h/2); ctx.lineTo(0,h/2); ctx.closePath();
+  ctx.fillStyle = c.accent.startsWith('#') ? c.accent+'22' : c.accent.replace('rgb(','rgba(').replace(')',',0.12)');
+  ctx.fill();
+
+  ctx.beginPath(); ctx.strokeStyle = c.accent; ctx.lineWidth = 1.6; ctx.lineJoin = 'round';
+  for (let i=0;i<pts;i++) {
+    const db = Math.max(-12, Math.min(12, 20*Math.log10(Math.max(mag[i],1e-6))));
+    const y = h/2 - (db/12)*(h/2-4);
+    i===0 ? ctx.moveTo(i,y) : ctx.lineTo(i,y);
+  }
+  ctx.stroke(); ctx.restore();
+}
+
+// ── Spectrum bars ──────────────────────────────────────────────
+function drawSpec() {
+  const canvas = document.getElementById('mk-spec-canvas');
+  if (!canvas || !sizeCanvas(canvas)) return;
+  const ctx = canvas.getContext('2d');
+  const c = C();
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.width, H = canvas.height, w = W/dpr, h = H/dpr;
+
+  ctx.save(); ctx.scale(dpr,dpr);
+  ctx.fillStyle = c.screenBg; ctx.fillRect(0,0,w,h);
+
+  if (!ac || !N.specAn) {
+    ctx.beginPath(); ctx.moveTo(0,h*0.88); ctx.lineTo(w,h*0.88);
+    ctx.strokeStyle = c.accent; ctx.globalAlpha=0.12; ctx.lineWidth=1; ctx.stroke();
+    ctx.globalAlpha=1; ctx.restore(); return;
+  }
+
+  const data = new Uint8Array(N.specAn.frequencyBinCount);
+  N.specAn.getByteFrequencyData(data);
+  const bars = 56, bw = w / bars;
+  for (let i=0;i<bars;i++) {
+    const idx = Math.floor(Math.pow(i/bars,1.8) * data.length * 0.7);
+    const v = data[idx] / 255, bh = v * h * 0.92, x = i * bw;
+    if (bh > 0) {
+      const g = ctx.createLinearGradient(0,h-bh,0,h);
+      g.addColorStop(0, c.accentHi); g.addColorStop(1, c.accent);
+      ctx.fillStyle = g; ctx.globalAlpha=0.82;
+      ctx.fillRect(x, h-bh, bw-1, bh); ctx.globalAlpha=1;
+      ctx.fillStyle = c.accentHi; ctx.globalAlpha=0.5;
+      ctx.fillRect(x, h-bh-2, bw-1, 1.5); ctx.globalAlpha=1;
+    }
+  }
+  ctx.fillStyle = c.screenLabel; ctx.font = '6px DM Mono, monospace';
+  ctx.textAlign = 'center';
+  [[50,'50'],[100,'100'],[500,'500'],[1000,'1k'],[5000,'5k'],[10000,'10k'],[20000,'20k']].forEach(([f,lbl]) => {
+    const nyq = N.specAn.context.sampleRate/2;
+    const x = (Math.log10(f/20)/Math.log10(nyq/20))*w*0.72;
+    if (x > 10 && x < w-10) ctx.fillText(lbl, x, h-2);
+  });
+  ctx.restore();
+}
+
+// ── Freq response visualizer ───────────────────────────────────
+function drawViz() {
+  const canvas = document.getElementById('mk-viz-canvas');
+  if (!canvas || !sizeCanvas(canvas)) return;
+  const ctx = canvas.getContext('2d');
+  const c = C();
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.width, H = canvas.height, w = W/dpr, h = H/dpr;
+
+  ctx.save(); ctx.scale(dpr,dpr);
+  ctx.fillStyle = c.screenBg; ctx.fillRect(0,0,w,h);
+
+  const dbMin=-24, dbMax=0, fMin=20, fMax=20000;
+  [-18,-12,-6,0].forEach(db => {
+    const y = h - ((db-dbMin)/(dbMax-dbMin))*(h-8)-4;
+    ctx.beginPath(); ctx.moveTo(db===0?0:22,y); ctx.lineTo(w,y);
+    ctx.strokeStyle = db===0 ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.05)';
+    ctx.lineWidth=db===0?1.5:1; ctx.stroke();
+    ctx.fillStyle=c.screenLabel; ctx.font='6px DM Mono, monospace';
+    ctx.textAlign='left';
+    ctx.fillText((db===0?'0':db)+'dB', 2, y-2);
+  });
+  [50,100,500,1000,5000,10000,20000].forEach(f => {
+    const x = Math.log10(f/fMin)/Math.log10(fMax/fMin)*w;
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h);
+    ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle=c.screenLabel; ctx.font='6px DM Mono, monospace';
+    ctx.textAlign='center';
+    ctx.fillText(f>=1000?f/1000+'k':f, x, h-2);
+  });
+
+  if (!ac || !N.specAn) {
+    ctx.beginPath(); ctx.moveTo(0,h*0.95); ctx.lineTo(w,h*0.95);
+    ctx.strokeStyle=c.accent; ctx.globalAlpha=0.15; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.globalAlpha=1; ctx.restore(); return;
+  }
+
+  const data = new Uint8Array(N.specAn.frequencyBinCount);
+  N.specAn.getByteFrequencyData(data);
+  const nyq = ac.sampleRate/2, pts=200;
+  const xs = new Float32Array(pts), ys = new Float32Array(pts);
+  for (let i=0;i<pts;i++) {
+    const t = i/(pts-1);
+    const freq = fMin * Math.pow(fMax/fMin, t);
+    const bin = Math.round(freq/nyq*(data.length-1));
+    const raw = data[Math.min(bin,data.length-1)]/255;
+    const db = raw>0.001 ? 20*Math.log10(raw) : dbMin;
+    xs[i] = t*w;
+    ys[i] = h-((Math.max(dbMin,db)-dbMin)/(dbMax-dbMin))*(h-8)-4;
+  }
+
+  ctx.beginPath(); ctx.moveTo(xs[0],ys[0]);
+  for (let i=1;i<pts;i++) { const cpx=(xs[i-1]+xs[i])/2; ctx.bezierCurveTo(cpx,ys[i-1],cpx,ys[i],xs[i],ys[i]); }
+  ctx.lineTo(xs[pts-1],h); ctx.lineTo(xs[0],h); ctx.closePath();
+  const fg = ctx.createLinearGradient(0,0,0,h);
+  fg.addColorStop(0, c.accent.startsWith('#') ? c.accent+'28' : c.accent.replace('rgb(','rgba(').replace(')',',0.16)'));
+  fg.addColorStop(1, c.accent.startsWith('#') ? c.accent+'04' : c.accent.replace('rgb(','rgba(').replace(')',',0.02)'));
+  ctx.fillStyle=fg; ctx.fill();
+
+  ctx.beginPath(); ctx.moveTo(xs[0],ys[0]);
+  for (let i=1;i<pts;i++) { const cpx=(xs[i-1]+xs[i])/2; ctx.bezierCurveTo(cpx,ys[i-1],cpx,ys[i],xs[i],ys[i]); }
+  ctx.strokeStyle=c.accent; ctx.lineWidth=1.5; ctx.lineJoin='round'; ctx.stroke();
+  ctx.restore();
+}
+
+// ── Waveform ───────────────────────────────────────────────────
+function drawWaveform(buffer) {
+  const canvas = document.getElementById('mk-waveform');
+  if (!canvas || !buffer) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth, H = canvas.offsetHeight || 60;
+  canvas.width = W*dpr; canvas.height = H*dpr;
+  const ctx = canvas.getContext('2d');
+  const c = C();
+  ctx.scale(dpr,dpr);
+  ctx.fillStyle=c.screenBg; ctx.fillRect(0,0,W,H);
+  const data = buffer.getChannelData(0);
+  const step = Math.ceil(data.length/W);
+  ctx.strokeStyle=c.accent; ctx.globalAlpha=0.55; ctx.lineWidth=1;
+  ctx.beginPath();
+  for (let i=0;i<W;i++) {
+    let mn=1,mx=-1;
+    for (let j=0;j<step;j++){const v=data[i*step+j]||0;if(v<mn)mn=v;if(v>mx)mx=v;}
+    ctx.moveTo(i,(1-(mn+1)/2)*H); ctx.lineTo(i,(1-(mx+1)/2)*H);
+  }
+  ctx.stroke(); ctx.globalAlpha=1;
+}
+
+// ── Playback ───────────────────────────────────────────────────
+function play(offset) {
+  if (!ac||!buf) return;
+  if (ac.state==='suspended') ac.resume();
+  if (src) { try{src.stop();}catch(e){} }
+  src = ac.createBufferSource(); src.buffer=buf; src.loop=looping; src.connect(N.inGain);
+  src.start(0,offset||0); tStart=ac.currentTime-(offset||0); playing=true;
+  const playBtn = document.getElementById('mkPlay');
+  playBtn.classList.add('playing');
+  playBtn.querySelector('.icon-play').style.display='none';
+  playBtn.querySelector('.icon-pause').style.display='';
+  src.onended = () => {
+    if (!looping) { playing=false; playBtn.classList.remove('playing'); playBtn.querySelector('.icon-play').style.display=''; playBtn.querySelector('.icon-pause').style.display='none'; }
+  };
+}
+function stop() {
+  if (src){try{src.stop();}catch(e){}src=null;} playing=false; pauseAt=0;
+  const playBtn = document.getElementById('mkPlay');
+  playBtn.classList.remove('playing');
+  playBtn.querySelector('.icon-play').style.display='';
+  playBtn.querySelector('.icon-pause').style.display='none';
+  document.getElementById('mkSeekFill').style.width='0%';
+  document.getElementById('mkSeekThumb').style.left='0%';
+  document.getElementById('mkTimeCur').textContent='0:00';
+}
+function loadFile(file) {
+  if (!file||!file.type.startsWith('audio')) return;
+  initAudio();
+  const reader = new FileReader();
+  reader.onload = e => {
+    ac.decodeAudioData(e.target.result, decoded => {
+      buf=decoded;
+      document.getElementById('mkTimeTot').textContent=fmtT(decoded.duration);
+      document.getElementById('mk-track-name').textContent=file.name.replace(/\.[^.]+$/,'');
+      document.getElementById('mkUpload').style.display='none';
+      const pl=document.getElementById('mkPlayer'); pl.style.display='flex';
+      drawWaveform(decoded); drawEQ(); play(0);
+    }, err => console.error('Decode error', err));
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ── RAF loop ───────────────────────────────────────────────────
+function tick() {
+  requestAnimationFrame(tick); drawSpec(); drawViz();
+  if (!ac||!buf||!playing) return;
+  const elapsed = ac.currentTime-tStart;
+  const pct = Math.min(elapsed/buf.duration,1)*100;
+  document.getElementById('mkSeekFill').style.width=pct+'%';
+  document.getElementById('mkSeekThumb').style.left=pct+'%';
+  document.getElementById('mkTimeCur').textContent=fmtT(elapsed);
+  const ph=document.getElementById('mkPlayhead');
+  if(ph){ph.classList.add('visible');ph.style.left=pct+'%';}
+  if (N.comp) {
+    const gr=Math.abs(N.comp.reduction);
+    document.getElementById('grFill').style.width=Math.min(100,(gr/20)*100)+'%';
+    document.getElementById('grVal').textContent='-'+gr.toFixed(1);
+  }
+}
+
+// ── Init ───────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  setupHSliders(); setupKnobs(); setupSliders(); drawEQ();
+
+  const fileInput=document.getElementById('mkFileInput'), upload=document.getElementById('mkUpload');
+  upload.addEventListener('click', ()=>fileInput.click());
+  fileInput.addEventListener('change', e=>loadFile(e.target.files[0]));
+  upload.addEventListener('dragover', e=>{e.preventDefault();upload.classList.add('drag-over');});
+  upload.addEventListener('dragleave', ()=>upload.classList.remove('drag-over'));
+  upload.addEventListener('drop', e=>{e.preventDefault();upload.classList.remove('drag-over');loadFile(e.dataTransfer.files[0]);});
+
+  document.getElementById('mkPlay').addEventListener('click', ()=>{
+    if (!buf) return; initAudio();
+    if (playing){pauseAt=ac.currentTime-tStart;if(src){try{src.stop();}catch(e){}}playing=false;const pb=document.getElementById('mkPlay');pb.classList.remove('playing');pb.querySelector('.icon-play').style.display='';pb.querySelector('.icon-pause').style.display='none';}
+    else play(pauseAt);
+  });
+  document.getElementById('mkStop').addEventListener('click', stop);
+  document.getElementById('mkLoop').addEventListener('click', function(){looping=!looping;this.classList.toggle('active',looping);if(src)src.loop=looping;});
+  document.getElementById('mkSeek').addEventListener('click', e=>{
+    if (!buf) return;
+    const r=e.currentTarget.getBoundingClientRect(), pct=(e.clientX-r.left)/r.width;
+    pauseAt=pct*buf.duration;
+    if (playing) play(pauseAt);
+    else{document.getElementById('mkSeekFill').style.width=(pct*100)+'%';document.getElementById('mkSeekThumb').style.left=(pct*100)+'%';document.getElementById('mkTimeCur').textContent=fmtT(pauseAt);}
+  });
+
+  document.getElementById('mk-dark-toggle').addEventListener('click', ()=>{
+    const dark=document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme',dark?'dark':'light');
+    const moon=document.querySelector('#mk-dark-toggle .icon-moon'), sun=document.querySelector('#mk-dark-toggle .icon-sun');
+    if(moon)moon.style.display=dark?'none':''; if(sun)sun.style.display=dark?'':'none';
+    setTimeout(()=>{redrawKnobs();drawEQ();},20);
+  });
+
+  if (document.body.classList.contains('dark-mode')){
+    const moon=document.querySelector('#mk-dark-toggle .icon-moon'),sun=document.querySelector('#mk-dark-toggle .icon-sun');
+    if(moon)moon.style.display='none'; if(sun)sun.style.display='';
+  }
+
+  document.addEventListener('pointerdown', function once(){initAudio();document.removeEventListener('pointerdown',once);},{once:true});
+  requestAnimationFrame(tick);
+});
+
+})();
+</script>
+</body>
+</html>
