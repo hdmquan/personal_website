@@ -53,7 +53,6 @@ html, body { overscroll-behavior: none; }
 .search-wrap {
   display:flex; align-items:center; gap:.5rem; padding:.5rem .85rem; width:100%; min-width:0;
   background:var(--panel-inset); border-radius:.6rem;
-  box-shadow: inset 0 1px 3px var(--sh), 0 1px 0 var(--hi);
 }
 .search-wrap svg { width:15px; height:15px; color:var(--text-3); flex:none; }
 .search-wrap input {
@@ -83,7 +82,6 @@ html, body { overscroll-behavior: none; }
   background-image:linear-gradient(45deg,transparent 50%,var(--text-3) 50%),linear-gradient(135deg,var(--text-3) 50%,transparent 50%);
   background-position:calc(100% - 14px) 52%, calc(100% - 9px) 52%; background-size:5px 5px,5px 5px;
   background-repeat:no-repeat;
-  box-shadow: inset 0 1px 3px var(--sh), 0 1px 0 var(--hi);
 }
 .year-wrap select:focus { outline:none; color:var(--text); }
 
@@ -139,13 +137,32 @@ html, body { overscroll-behavior: none; }
 .alb-sub { font-size:.62rem; color:var(--text-3); margin:0; letter-spacing:.05em; }
 .empty { text-align:center; color:var(--text-3); grid-column:1/-1; padding:3rem; }
 
+/* ── Skeleton loading ──────────────────────────── */
+@keyframes shimmer { 0%{ background-position:200% 0 } 100%{ background-position:-200% 0 } }
+.sk {
+  background:linear-gradient(90deg, var(--panel-inset) 25%, var(--panel) 50%, var(--panel-inset) 75%);
+  background-size:200% 100%; animation:shimmer 1.4s linear infinite;
+}
+/* cover images fade in once loaded; shimmer shows behind until then */
+.alb-cover img, .ah-cover img { opacity:0; transition:opacity .35s ease; }
+.alb-cover img.loaded, .ah-cover img.loaded { opacity:1; }
+.alb-cover.sk:has(img.loaded), .ah-cover.sk:has(img.loaded) { animation:none; background:var(--panel-inset); }
+/* skeleton placeholder cards */
+.alb-card.skel { cursor:default; }
+.sk-line {
+  height:.78rem; border-radius:.35rem; margin-top:.55rem;
+  background:linear-gradient(90deg, var(--panel-inset) 25%, var(--panel) 50%, var(--panel-inset) 75%);
+  background-size:200% 100%; animation:shimmer 1.4s linear infinite;
+}
+.sk-line.short { width:55%; }
+
 /* ── Album detail ──────────────────────────────── */
 #album-view { max-width:760px; margin:0 auto; padding:clamp(1.25rem,4vw,2.5rem) clamp(1rem,3vw,1.5rem); }
 #back-btn {
   display:inline-flex; align-items:center; gap:.4rem; border:0; cursor:pointer; padding:.45rem .75rem;
   background:var(--panel-inset); border-radius:.5rem; color:var(--text-2);
   font-family:"DM Mono",monospace; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
-  box-shadow: inset 0 1px 2px var(--sh); margin-bottom:1.5rem;
+  margin-bottom:1.5rem;
 }
 #back-btn svg { width:14px; height:14px; }
 #back-btn:hover { color:var(--text); }
@@ -161,23 +178,15 @@ html, body { overscroll-behavior: none; }
 .ah-count { font-size:.68rem; color:var(--text-2); margin:0 0 1.1rem; }
 /* Play + Shuffle: equal width, extruded (no recessed style) */
 .ah-actions { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; max-width:24rem; }
+/* Flat album action buttons (Play / Shuffle) */
 .btn-ext {
   position:relative; width:100%; display:inline-flex; align-items:center; justify-content:center;
   gap:.45rem; cursor:pointer; border:0; color:var(--text-2);
   font-family:"DM Mono",monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
-  padding:.65rem 1.1rem; border-radius:.55rem; transition:transform .08s, color .15s;
-  background:var(--panel-raised);
-  box-shadow:
-    0 1px 0 var(--hi) inset, 0 -1px 0 rgba(0,0,0,0.12) inset,
-    0 0 0 1px rgba(0,0,0,0.12), 0 3px 0 var(--accent), 0 4px 6px var(--sh-deep);
+  padding:.65rem 1.1rem; border-radius:.55rem; transition:background .15s, color .15s;
+  background:var(--panel-inset);
 }
-.btn-ext:hover { color:var(--accent-hi); }
-.btn-ext:active {
-  transform:translateY(2px);
-  box-shadow:
-    0 1px 0 rgba(0,0,0,0.1) inset, 0 -1px 0 var(--hi) inset,
-    0 0 0 1px rgba(0,0,0,0.12), 0 1px 0 var(--accent), 0 2px 3px var(--sh);
-}
+.btn-ext:hover { background:var(--panel); color:var(--text); }
 .btn-ext svg { width:15px; height:15px; }
 /* LED dot (from top-9 play button) */
 .btn-ext-play::before {
@@ -207,7 +216,7 @@ html, body { overscroll-behavior: none; }
   .trk:hover:not(.playing) .trk-ic { display:flex; }
 }
 /* playing: highlight the row by background colour (no waveform) */
-.trk.playing { background:var(--panel-inset); box-shadow:inset 2px 0 0 var(--accent); }
+.trk.playing { background:var(--panel-inset); }
 .trk-title { font-size:.82rem; line-height:1.3; }
 .trk.playing .trk-title { color:var(--accent); }
 .inst {
@@ -222,7 +231,7 @@ html, body { overscroll-behavior: none; }
   position:fixed; left:50%; bottom:1rem; transform:translate(-50%,160%);
   width:min(680px,calc(100vw - 1.5rem));
   display:grid; grid-template-columns:auto 1fr auto; gap:.9rem; align-items:center;
-  padding:.7rem .9rem; border-radius:1rem;
+  padding:.7rem .9rem; border-radius:1rem; overflow:hidden;
   background:var(--panel-raised);
   box-shadow:0 10px 34px var(--sh-deep), 0 1px 0 var(--hi) inset, 0 0 0 1px var(--rule);
   transition:transform .35s cubic-bezier(.2,.8,.2,1); z-index:50;
@@ -246,10 +255,7 @@ html, body { overscroll-behavior: none; }
 .np-seek-buf { background:var(--text-3); opacity:.3; width:0; }
 .np-seek-fill { background:var(--accent); width:0; border-bottom-left-radius:1rem; transition:height .12s; }
 .np-seek:hover .np-seek-fill, #np-bar.seeking .np-seek-fill { height:5px; }
-.np-seek-thumb { position:absolute; bottom:0; left:0; width:11px; height:11px; border-radius:50%;
-  background:#fff; transform:translate(-50%,30%); box-shadow:0 1px 3px var(--sh-deep), 0 0 0 1px var(--rule);
-  opacity:0; transition:opacity .15s; }
-.np-seek:hover .np-seek-thumb, #np-bar.seeking .np-seek-thumb { opacity:1; }
+.np-seek-thumb { display:none; }
 .np-seek-tip { position:absolute; bottom:16px; left:0; transform:translateX(-50%);
   font-family:"DM Mono",monospace; font-size:.6rem; color:var(--text); white-space:nowrap; pointer-events:none;
   background:var(--panel-raised); padding:.2rem .45rem; border-radius:.35rem;
@@ -261,7 +267,7 @@ html, body { overscroll-behavior: none; }
   display:grid; place-items:center; transition:.15s; }
 .np-btn:hover { color:var(--text); }
 .np-btn svg { width:18px; height:18px; }
-.np-play { position:relative; background:var(--accent); color:#fff; width:38px; height:38px; border-radius:50%;
+.np-play { position:relative; background:var(--accent); color:#fff; width:38px; height:38px; border-radius:.5rem;
   box-shadow:0 2px 5px var(--sh-deep), 0 1px 0 var(--hi) inset; transition:.12s; }
 .np-play:hover { background:var(--accent-hi); color:#fff; }
 .np-play svg { width:20px; height:20px; }
