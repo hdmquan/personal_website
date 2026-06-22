@@ -333,9 +333,11 @@ permalink: /yura/
   audio.addEventListener('play',  () => setPlayingUI(true));
   audio.addEventListener('pause', () => setPlayingUI(false));
   audio.addEventListener('ended', next);
+  audio.addEventListener('loadedmetadata', updatePositionState);
   audio.addEventListener('timeupdate', () => {
     if (seeking || !audio.duration) return;
     setPct(audio.currentTime / audio.duration * 100);
+    updatePositionState();
   });
   audio.addEventListener('progress', () => {
     if (audio.buffered.length && audio.duration)
@@ -405,16 +407,33 @@ permalink: /yura/
   npSeek.addEventListener('pointerup',   e => { if (!seeking) return; const p = seekTo(e.clientX); audio.currentTime = p * audio.duration; seeking = false; npBar.classList.remove('seeking'); npTip.hidden = true; });
 
   /* ── Media Session (lock screen / AirPods) ─────── */
+  function updatePositionState() {
+    const ms = navigator.mediaSession;
+    if (!ms || !ms.setPositionState || !audio.duration || !isFinite(audio.duration)) return;
+    try {
+      ms.setPositionState({ duration: audio.duration,
+        position: Math.min(audio.currentTime, audio.duration), playbackRate: audio.playbackRate || 1 });
+    } catch (e) {}
+  }
   function setMediaSession(a, t) {
     if (!('mediaSession' in navigator)) return;
+    const art = a.cover_url;
     navigator.mediaSession.metadata = new MediaMetadata({
       title: disp(t) + (t.instrumental ? ' (inst)' : ''), artist: '葉月ゆら', album: a.title,
-      artwork: [{ src: a.cover_url, sizes: '1000x1000', type: 'image/jpeg' }]
+      // multiple sizes so Android/Chrome reliably picks notification + lock-screen art
+      artwork: ['256x256','512x512','1000x1000'].map(s => ({ src: art, sizes: s, type: 'image/jpeg' }))
     });
-    navigator.mediaSession.setActionHandler('play',  () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('nexttrack', next);
-    navigator.mediaSession.setActionHandler('previoustrack', prev);
+    const set = (action, fn) => { try { navigator.mediaSession.setActionHandler(action, fn); } catch (e) {} };
+    set('play',  () => audio.play());
+    set('pause', () => audio.pause());
+    set('nexttrack', next);
+    set('previoustrack', prev);
+    set('seekto', e => {
+      if (e.fastSeek && 'fastSeek' in audio) audio.fastSeek(e.seekTime);
+      else audio.currentTime = e.seekTime;
+      updatePositionState();
+    });
+    updatePositionState();
   }
 
   /* ── Routing ───────────────────────────────────── */

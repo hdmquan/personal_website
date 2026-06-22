@@ -267,15 +267,33 @@ html, body { overscroll-behavior: none; }
   display:grid; place-items:center; transition:.15s; }
 .np-btn:hover { color:var(--text); }
 .np-btn svg { width:18px; height:18px; }
-.np-play { position:relative; background:var(--accent); color:#fff; width:38px; height:38px; border-radius:.5rem;
-  box-shadow:0 2px 5px var(--sh-deep), 0 1px 0 var(--hi) inset; transition:.12s; }
-.np-play:hover { background:var(--accent-hi); color:#fff; }
-.np-play svg { width:20px; height:20px; }
-/* playing -> pressed variant with green LED */
-.np-play.playing { background:var(--panel-inset); color:var(--accent);
-  box-shadow:inset 0 2px 5px var(--sh-deep), inset 0 -1px 0 var(--hi); }
-.np-play.playing::after { content:""; position:absolute; top:5px; right:5px; width:6px; height:6px; border-radius:50%;
-  background:var(--led-on); box-shadow:0 0 5px var(--led-glow), 0 0 9px var(--led-glow); }
+/* Play button — identical to top-9 .top9-play / :active */
+.np-play {
+  position:relative; width:38px; height:38px; border-radius:.4rem;
+  display:grid; place-items:center; color:var(--text-2); background:var(--panel-raised);
+  transition:transform .08s ease;
+  box-shadow:
+    0 1px 0 var(--hi) inset, 0 -1px 0 rgba(0,0,0,0.12) inset,
+    0 0 0 1px rgba(0,0,0,0.12), 0 3px 0 var(--accent), 0 4px 6px var(--sh-deep);
+}
+.np-play:hover {
+  color:var(--accent-hi);
+  box-shadow:
+    0 1px 0 var(--hi) inset, 0 -1px 0 rgba(0,0,0,0.12) inset,
+    0 0 0 1px rgba(0,0,0,0.12), 0 3px 0 var(--accent-hi), 0 5px 8px var(--sh-deep);
+}
+.np-play:active, .np-play.playing {
+  transform:translateY(2px); color:var(--led-on);
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.1) inset, 0 -1px 0 var(--hi) inset,
+    0 0 0 1px rgba(0,0,0,0.12), 0 1px 0 var(--accent), 0 2px 3px var(--sh);
+}
+.np-play svg { width:16px; height:16px; }
+.np-play::before {
+  content:''; position:absolute; top:.28rem; right:.28rem; width:.3rem; height:.3rem; border-radius:50%;
+  background:var(--led-off); transition:background .15s, box-shadow .15s;
+}
+.np-play.playing::before { background:var(--led-on); box-shadow:0 0 5px var(--led-glow), 0 0 10px var(--led-glow); }
 .np-toggle.on { color:var(--accent); }
 .np-toggle.on::after { content:""; width:3px; height:3px; border-radius:50%; background:var(--accent); position:absolute; margin-top:20px; }
 #np-bar.muted .np-vol #vol-wave { opacity:.2; }
