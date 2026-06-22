@@ -20,7 +20,7 @@
     "metaDescription": "A streaming player for the Krik/Krak discography. Fan preservation.",
     "ogTitle": "Krik/Krak Fan Archive Player",
     "ogDescription": "A streaming player for the Krik/Krak discography — 15 albums, 113 tracks. Fan preservation.",
-    "preview": "/assets/images/krikkrak-preview.jpg",
+    "preview": "/assets/images/krikkrak-preview.jpg?v=2",
     "catalog": "/assets/catalogs/krikkrak.json",
     "mediaArtist": "Krik/Krak",
     "accent": "#44624a"
