@@ -39,7 +39,7 @@ permalink: /yura/
   <header id="yura-hero">
     <span class="badge">Fan Archive</span>
     <h1>葉月ゆら</h1>
-    <p class="sub">Hatsuki Yura &middot; La Bella Luna &mdash; <span id="stat-line">loading&hellip;</span><span id="stat-info" class="stat-info" tabindex="0" role="img" aria-label="Stats info" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span class="stat-tip" id="stat-tip"></span></span></p>
+    <p class="sub"><span id="stat-line">loading&hellip;</span><span id="stat-info" class="stat-info" tabindex="0" role="img" aria-label="Stats info" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span class="stat-tip" id="stat-tip"></span></span></p>
 
     <div class="shelf-controls" id="shelf-controls" hidden>
       <div class="search-wrap">
@@ -48,15 +48,17 @@ permalink: /yura/
         </svg>
         <input type="search" id="search" placeholder="Search album or track…" aria-label="Search" autocomplete="off" />
       </div>
-      <div class="year-wrap">
-        <select id="year-filter" aria-label="Filter by year">
-          <option value="">All years</option>
-        </select>
-      </div>
-      <div class="seg" role="group" aria-label="Sort">
-        <button class="seg-btn active" data-sort="new">Newest</button>
-        <button class="seg-btn" data-sort="old">Oldest</button>
-        <button class="seg-btn" data-sort="az">A–Z</button>
+      <div class="controls-row2">
+        <div class="year-wrap">
+          <select id="year-filter" aria-label="Filter by year">
+            <option value="">All years</option>
+          </select>
+        </div>
+        <div class="seg" role="group" aria-label="Sort">
+          <button class="seg-btn active" data-sort="new">Newest</button>
+          <button class="seg-btn" data-sort="old">Oldest</button>
+          <button class="seg-btn" data-sort="az">A–Z</button>
+        </div>
       </div>
     </div>
   </header>
@@ -111,6 +113,10 @@ permalink: /yura/
     </div>
   </div>
 </div>
+
+<a id="home-btn" href="/" aria-label="Home" title="Home">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>
+</a>
 
 <button id="dark-toggle" aria-label="Toggle dark mode">
   <svg class="i-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -247,18 +253,21 @@ permalink: /yura/
         <h2>${esc(a.title)}</h2>
         <p class="ah-count">${(a.tracks||[]).length} tracks</p>
         <div class="ah-actions">
-          <button class="btn-primary" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play album</button>
-          <button class="btn-ghost" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>
+          <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play album</button>
+          <button class="btn-ext" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>
         </div>
       </div>`;
     trackList.innerHTML = (a.tracks||[]).map((t, ti) => `
       <li class="trk" data-ai="${ai}" data-ti="${ti}">
-        <span class="trk-num">${esc(t.track)}</span>
-        <span class="trk-eq" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="trk-slot">
+          <span class="trk-num">${esc(t.track)}</span>
+          <span class="trk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="trk-eq" aria-hidden="true"><span></span><span></span><span></span></span>
+        </span>
         <span class="trk-title">${esc(disp(t))}${t.instrumental ? '<em class="inst">INST</em>' : ''}</span>
-        <button class="trk-play" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
       </li>`).join('');
     shelf.hidden = true; document.querySelector('#yura-hero').hidden = true;
+    document.querySelector('#home-btn').hidden = true;
     albumView.hidden = false;
     window.scrollTo(0, 0);
     highlightPlaying();
@@ -267,6 +276,7 @@ permalink: /yura/
   function backToShelf() {
     view = 'shelf'; openAlbum = -1; location.hash = '';
     albumView.hidden = true; shelf.hidden = false; document.querySelector('#yura-hero').hidden = false;
+    document.querySelector('#home-btn').hidden = false;
   }
   $('#back-btn').addEventListener('click', backToShelf);
 
