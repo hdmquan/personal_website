@@ -11,5 +11,18 @@
     "catalog": "/assets/catalogs/yura.json",
     "mediaArtist": "葉月ゆら",
     "accent": "#44624a"
+  },
+  {
+    "slug": "krikkrak",
+    "name": "Krik/Krak",
+    "badge": "Fan Archive",
+    "pageTitle": "Krik/Krak Fan Archive",
+    "metaDescription": "A streaming player for the Krik/Krak discography. Fan preservation.",
+    "ogTitle": "Krik/Krak Fan Archive Player",
+    "ogDescription": "A streaming player for the Krik/Krak discography — 15 albums, 113 tracks. Fan preservation.",
+    "preview": "/assets/images/krikkrak-preview.jpg",
+    "catalog": "/assets/catalogs/krikkrak.json",
+    "mediaArtist": "Krik/Krak",
+    "accent": "#44624a"
   }
 ]
