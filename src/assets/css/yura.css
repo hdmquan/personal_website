@@ -59,6 +59,32 @@ body { font-family: "DM Mono", monospace; }
   box-shadow: 0 1px 2px var(--sh), 0 1px 0 var(--hi) inset;
 }
 
+/* ── Year filter ───────────────────────────────── */
+.year-wrap select {
+  appearance:none; -webkit-appearance:none; cursor:pointer;
+  font-family:"DM Mono",monospace; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--text-2); border:0; border-radius:.6rem; padding:.5rem 1.8rem .5rem .85rem;
+  background:var(--panel-inset);
+  background-image:linear-gradient(45deg,transparent 50%,var(--text-3) 50%),linear-gradient(135deg,var(--text-3) 50%,transparent 50%);
+  background-position:calc(100% - 14px) 52%, calc(100% - 9px) 52%; background-size:5px 5px,5px 5px;
+  background-repeat:no-repeat;
+  box-shadow: inset 0 1px 3px var(--sh), 0 1px 0 var(--hi);
+}
+.year-wrap select:focus { outline:none; color:var(--text); }
+
+/* ── Stat info hover ───────────────────────────── */
+.stat-info { position:relative; display:inline-flex; vertical-align:-2px; margin-left:.4rem; cursor:help; }
+.stat-info svg { width:13px; height:13px; color:var(--text-3); }
+.stat-info:hover svg, .stat-info:focus svg { color:var(--accent); }
+.stat-tip {
+  position:absolute; bottom:calc(100% + 7px); left:50%; transform:translateX(-50%) translateY(3px);
+  white-space:nowrap; font-family:"DM Mono",monospace; font-size:.6rem; letter-spacing:.06em;
+  color:var(--text); background:var(--panel-raised); padding:.35rem .6rem; border-radius:.4rem;
+  box-shadow:0 3px 10px var(--sh-deep), 0 1px 0 var(--hi) inset;
+  opacity:0; pointer-events:none; transition:opacity .16s, transform .16s; z-index:5;
+}
+.stat-info:hover .stat-tip, .stat-info:focus .stat-tip { opacity:1; transform:translateX(-50%) translateY(0); }
+
 /* ── Shelf grid ────────────────────────────────── */
 #shelf {
   display:grid; gap:clamp(.9rem,2vw,1.5rem);

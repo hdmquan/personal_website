@@ -37,9 +37,9 @@ permalink: /yura/
 <div id="yura-page">
   <!-- ── Hero / shelf header ─────────────────────── -->
   <header id="yura-hero">
-    <span class="badge">Fan Preservation</span>
+    <span class="badge">Fan Archive</span>
     <h1>葉月ゆら</h1>
-    <p class="sub">Hatsuki Yura &middot; La Bella Luna &mdash; <span id="stat-line">loading&hellip;</span></p>
+    <p class="sub">Hatsuki Yura &middot; La Bella Luna &mdash; <span id="stat-line">loading&hellip;</span><span id="stat-info" class="stat-info" tabindex="0" role="img" aria-label="Stats info" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span class="stat-tip" id="stat-tip"></span></span></p>
 
     <div class="shelf-controls" id="shelf-controls" hidden>
       <div class="search-wrap">
@@ -47,6 +47,11 @@ permalink: /yura/
           <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>
         </svg>
         <input type="search" id="search" placeholder="Search album or track…" aria-label="Search" autocomplete="off" />
+      </div>
+      <div class="year-wrap">
+        <select id="year-filter" aria-label="Filter by year">
+          <option value="">All years</option>
+        </select>
       </div>
       <div class="seg" role="group" aria-label="Sort">
         <button class="seg-btn active" data-sort="new">Newest</button>
@@ -153,16 +158,36 @@ permalink: /yura/
   /* ── Boot ──────────────────────────────────────── */
   fetch(CATALOG).then(r => r.json()).then(data => {
     ALB = data.albums || [];
-    statLine.textContent = data.album_count + ' albums · ' + data.track_count + ' tracks · streamed';
+    const s = data.stats || {};
+    const tracks = s.tracks != null ? s.tracks : data.track_count;
+    const vocal  = s.vocal_tracks, mins = s.vocal_minutes;
+    let txt = tracks + ' tracks';
+    if (vocal != null) txt += ' · ' + vocal + ' non-instrumental';
+    if (mins  != null) txt += ' · ' + mins.toLocaleString() + ' min';
+    statLine.textContent = txt;
+    if (s.calculated_at) {
+      const info = $('#stat-info'), tip = $('#stat-tip');
+      tip.textContent = 'Last calculated ' + s.calculated_at;
+      info.title = 'Last calculated ' + s.calculated_at;
+      info.hidden = false;
+    }
+    buildYearFilter();
     controls.hidden = false;
     renderShelf();
     routeFromHash();
   }).catch(() => { statLine.textContent = 'failed to load catalog'; });
 
   /* ── Shelf rendering ───────────────────────────── */
-  let sortMode = 'new', filter = '';
+  let sortMode = 'new', filter = '', yearFilter = '';
+  function buildYearFilter() {
+    const sel = $('#year-filter');
+    const years = [...new Set(ALB.map(a => String(a.year)).filter(Boolean))].sort((a, b) => b - a);
+    sel.insertAdjacentHTML('beforeend', years.map(y => `<option value="${y}">${y}</option>`).join(''));
+    sel.addEventListener('change', () => { yearFilter = sel.value; renderShelf(); });
+  }
   function sortedIndices() {
     let idx = ALB.map((_, i) => i);
+    if (yearFilter) idx = idx.filter(i => String(ALB[i].year) === yearFilter);
     if (filter) {
       const f = filter.toLowerCase();
       idx = idx.filter(i => {
