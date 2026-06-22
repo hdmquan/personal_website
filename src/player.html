@@ -1,7 +1,9 @@
 ---
-title: "葉月ゆら Fan Archive"
-description: "A streaming player for the Hatsuki Yura discography."
-permalink: /yura/
+pagination:
+  data: artists
+  size: 1
+  alias: artist
+permalink: "/{{ artist.slug }}/"
 ---
 
 <!DOCTYPE html>
@@ -9,22 +11,22 @@ permalink: /yura/
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>葉月ゆら Fan Archive</title>
-  <meta name="description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography. Fan preservation." />
+  <title>{{ artist.pageTitle }}</title>
+  <meta name="description" content="{{ artist.metaDescription }}" />
   <link rel="stylesheet" href="/assets/css/root.css" />
   <link rel="stylesheet" href="/assets/css/yura.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
-  <meta property="og:title" content="Hatsuki Yura Fan Archive Player" />
-  <meta property="og:description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography — 107 albums, 1053 tracks. Fan preservation." />
+  <meta property="og:title" content="{{ artist.ogTitle }}" />
+  <meta property="og:description" content="{{ artist.ogDescription }}" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://alan-huynh.is-a.dev/yura/" />
-  <meta property="og:image" content="https://alan-huynh.is-a.dev/assets/images/yura-preview.jpg" />
+  <meta property="og:url" content="https://alan-huynh.is-a.dev/{{ artist.slug }}/" />
+  <meta property="og:image" content="https://alan-huynh.is-a.dev{{ artist.preview }}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hatsuki Yura Fan Archive Player" />
-  <meta name="twitter:description" content="Stream the Hatsuki Yura / La Bella Luna discography — 107 albums, 1053 tracks." />
-  <meta name="twitter:image" content="https://alan-huynh.is-a.dev/assets/images/yura-preview.jpg" />
+  <meta name="twitter:title" content="{{ artist.ogTitle }}" />
+  <meta name="twitter:description" content="{{ artist.ogDescription }}" />
+  <meta name="twitter:image" content="https://alan-huynh.is-a.dev{{ artist.preview }}" />
   <script>
     (function(){
       var t = localStorage.getItem('theme');
@@ -45,8 +47,8 @@ permalink: /yura/
 <div id="yura-page">
   <!-- ── Hero / shelf header ─────────────────────── -->
   <header id="yura-hero">
-    <span class="badge">Fan Archive</span>
-    <h1>葉月ゆら</h1>
+    <span class="badge">{{ artist.badge }}</span>
+    <h1>{{ artist.name }}</h1>
     <p class="sub"><span id="stat-line">loading&hellip;</span><span id="stat-info" class="stat-info" tabindex="0" role="img" aria-label="Stats info" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span class="stat-tip" id="stat-tip"></span></span></p>
 
     <div class="shelf-controls" id="shelf-controls" hidden>
@@ -128,13 +130,16 @@ permalink: /yura/
 
 <div id="kb-hint"><kbd>space</kbd> play <kbd>←→</kbd> seek <kbd>N/P</kbd> track <kbd>/</kbd> search <kbd>esc</kbd> back</div>
 
+<script>window.__ARTIST__ = {{ artist | dump | safe }};</script>
 <script>
 (function () {
   'use strict';
-  // Same-origin copy (R2 sends no CORS headers, so a cross-origin fetch is blocked).
+  // Per-artist config injected from src/_data/artists.json.
+  const ART = window.__ARTIST__ || {};
+  // Same-origin catalog copy (R2 sends no CORS headers, so a cross-origin fetch is blocked).
   // Audio/cover URLs inside still point at R2 and load fine as media elements.
-  // To refresh after adding releases: re-download catalog.json into src/assets/yura-catalog.json.
-  const CATALOG = '/assets/yura-catalog.json';
+  // To refresh after adding releases: update the catalog in src/assets/catalogs/<slug>.json.
+  const CATALOG = ART.catalog;
 
   /* ── State ─────────────────────────────────────── */
   let ALB = [];                 // albums (catalog order)
@@ -427,7 +432,7 @@ permalink: /yura/
     if (!('mediaSession' in navigator)) return;
     const art = a.cover_url;
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: disp(t) + (t.instrumental ? ' (inst)' : ''), artist: '葉月ゆら', album: a.title,
+      title: disp(t) + (t.instrumental ? ' (inst)' : ''), artist: ART.mediaArtist || ART.name || '', album: a.title,
       // multiple sizes so Android/Chrome reliably picks notification + lock-screen art
       artwork: ['256x256','512x512','1000x1000'].map(s => ({ src: art, sizes: s, type: 'image/jpeg' }))
     });
