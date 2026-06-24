@@ -67,6 +67,16 @@ permalink: /yura/
           <button class="seg-btn" data-sort="az">A–Z</button>
         </div>
       </div>
+      <div class="controls-row3">
+        <button id="shuffle-all-btn" class="pill" title="Shuffle the whole discography">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg>
+          Shuffle all
+        </button>
+        <button id="inst-toggle" class="pill" aria-pressed="true" title="Include or exclude instrumental tracks from playback">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          Instrumentals <b class="st"></b>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -99,6 +109,9 @@ permalink: /yura/
     <button class="np-btn" id="np-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6l9 6-9 6z"/></svg></button>
     <button class="np-btn np-toggle" id="np-shuffle" aria-label="Shuffle" title="Shuffle">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg>
+    </button>
+    <button class="np-btn np-toggle" id="np-loop" aria-label="Loop off" title="Loop off">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
     </button>
     <div class="np-vol">
       <button class="np-btn" id="np-mute" aria-label="Mute"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path id="vol-wave" d="M16 8a5 5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>

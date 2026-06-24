@@ -27,6 +27,8 @@
   let shuffle = false;
   let seeking = false;
   let wantPlay = false;         // user *intends* playback (for interruption resume)
+  let excludeInst = false;      // skip instrumental tracks in auto-generated queues
+  let loopMode = 0;             // 0 = off, 1 = loop all, 2 = loop one
 
   const audio = new Audio();
   audio.preload = 'none';
@@ -47,6 +49,14 @@
   const fmtDate = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso)); return m ? (+m[3]) + ' ' + MON[+m[2]-1] + ' ' + m[1] : String(iso); };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const disp = t => t.instrumental ? t.title.replace(/\s*\[Instrumental\]\s*$/i, '') : t.title;
+  // per-album purchase / source link (round icon) — only if the catalog provides one
+  function buyLink(a) {
+    const url = a.booth_url || a.source_url; if (!url) return '';
+    const label = a.booth_url ? 'Buy on BOOTH' : 'Official page';
+    return `<a class="ah-buy" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${label}" title="${label}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </a>`;
+  }
 
   /* ── Boot ──────────────────────────────────────── */
   renderSkeleton();
@@ -154,6 +164,7 @@
         <div class="ah-actions">
           <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
           <button class="btn-ext" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>
+          ${buyLink(a)}
         </div>
       </div>`;
     trackList.innerHTML = (a.tracks||[]).map((t, ti) => `
@@ -179,24 +190,40 @@
   $('#back-btn').addEventListener('click', backToShelf);
 
   albumView.addEventListener('click', e => {
+    if (e.target.closest('.ah-buy')) return;   // let the buy link navigate
     const li = e.target.closest('.trk');
-    if (li) { playAlbumFrom(+li.dataset.ai, +li.dataset.ti); return; }
-    if (e.target.closest('#play-all')) playAlbumFrom(openAlbum, 0, false);
-    if (e.target.closest('#shuffle-all')) playAlbumFrom(openAlbum, 0, true);
+    if (li) { playAlbumFrom(+li.dataset.ai, +li.dataset.ti, false, false); return; }
+    if (e.target.closest('#play-all')) playAlbumFrom(openAlbum, 0, false, true);
+    if (e.target.closest('#shuffle-all')) playAlbumFrom(openAlbum, 0, true, true);
   });
 
   /* ── Queue + playback ──────────────────────────── */
-  function buildQueue(ai) { return (ALB[ai].tracks||[]).map((_, ti) => ({ ai, ti })); }
+  function shuf(arr) { for (let i=arr.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+  function buildQueue(ai, respectFilter) {
+    let q = (ALB[ai].tracks||[]).map((t, ti) => ({ ai, ti, inst: !!t.instrumental }));
+    if (respectFilter && excludeInst) q = q.filter(x => !x.inst);
+    return q;
+  }
 
-  function playAlbumFrom(ai, ti, shuf) {
-    shuffle = !!shuf;
-    queue = buildQueue(ai);
-    if (shuffle) {
-      for (let i = queue.length - 1; i > 0; i--) { const j = (Math.random()*(i+1))|0; [queue[i],queue[j]]=[queue[j],queue[i]]; }
-      qi = queue.findIndex(q => q.ti === ti);
-      if (qi < 0) qi = 0;
-    } else qi = ti;
-    document.getElementById('np-shuffle').classList.toggle('on', shuffle);
+  function playAlbumFrom(ai, ti, shuffled, respectFilter) {
+    shuffle = !!shuffled;
+    queue = buildQueue(ai, respectFilter);
+    // a direct track click may target an instrumental even when excluded → keep it playable
+    if (!queue.some(q => q.ti === ti)) queue = buildQueue(ai, false);
+    if (shuffle) shuf(queue);
+    qi = queue.findIndex(q => q.ti === ti);
+    if (qi < 0) qi = 0;
+    syncShuffleBtn();
+    loadCurrent(true);
+  }
+
+  function shuffleAll() {
+    const q = [];
+    ALB.forEach((a, ai) => (a.tracks||[]).forEach((t, ti) => {
+      if (!(excludeInst && t.instrumental)) q.push({ ai, ti, inst: !!t.instrumental });
+    }));
+    if (!q.length) return;
+    queue = shuf(q); qi = 0; shuffle = true; syncShuffleBtn();
     loadCurrent(true);
   }
 
@@ -216,13 +243,20 @@
     highlightPlaying();
   }
 
-  function next() { if (qi < queue.length - 1) { qi++; loadCurrent(true); } else { queue=[]; qi=-1; wantPlay=false; setPlayingUI(false); } }
+  function next() {
+    if (qi < queue.length - 1) { qi++; loadCurrent(true); }
+    else if (loopMode === 1) { qi = 0; loadCurrent(true); }       // loop all → wrap
+    else { queue=[]; qi=-1; wantPlay=false; setPlayingUI(false); }
+  }
   function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; loadCurrent(true); } }
 
   /* ── Audio events ──────────────────────────────── */
   audio.addEventListener('play',  () => setPlayingUI(true));
   audio.addEventListener('pause', () => setPlayingUI(false));
-  audio.addEventListener('ended', next);
+  audio.addEventListener('ended', () => {
+    if (loopMode === 2) { audio.currentTime = 0; audio.play().catch(()=>{}); return; }  // loop one
+    next();
+  });
   audio.addEventListener('loadedmetadata', updatePositionState);
   audio.addEventListener('timeupdate', () => {
     if (seeking || !audio.duration) return;
@@ -268,15 +302,33 @@
   npPlay.addEventListener('click', togglePlay);
   $('#np-next').addEventListener('click', next);
   $('#np-prev').addEventListener('click', prev);
+  function syncShuffleBtn() { const b = document.getElementById('np-shuffle'); if (b) b.classList.toggle('on', shuffle); }
   $('#np-shuffle').addEventListener('click', () => {
-    shuffle = !shuffle; document.getElementById('np-shuffle').classList.toggle('on', shuffle);
-    if (queue.length) { const cur = queue[qi];
-      queue = buildQueue(cur.ai);
-      if (shuffle) { for (let i=queue.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[queue[i],queue[j]]=[queue[j],queue[i]];}
-        const k = queue.findIndex(q=>q.ti===cur.ti); [queue[0],queue[k]]=[queue[k],queue[0]]; qi=0; }
-      else qi = cur.ti;
+    shuffle = !shuffle; syncShuffleBtn();
+    if (!queue.length) return;
+    const cur = queue[qi];
+    if (shuffle) {
+      shuf(queue);
+      const k = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
+      [queue[0], queue[k]] = [queue[k], queue[0]]; qi = 0;
+    } else {
+      queue.sort((a, b) => a.ai === b.ai ? a.ti - b.ti : a.ai - b.ai);   // restore source order
+      qi = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
     }
   });
+
+  /* ── Shuffle-all, instrumental toggle, loop (optional buttons) ── */
+  document.getElementById('shuffle-all-btn')?.addEventListener('click', shuffleAll);
+
+  const instBtn = document.getElementById('inst-toggle');
+  function syncInstBtn() { if (!instBtn) return; instBtn.classList.toggle('off', excludeInst); instBtn.setAttribute('aria-pressed', String(!excludeInst)); }
+  instBtn?.addEventListener('click', () => { excludeInst = !excludeInst; syncInstBtn(); });
+  syncInstBtn();
+
+  const loopBtn = document.getElementById('np-loop');
+  function syncLoopBtn() { if (!loopBtn) return; loopBtn.classList.toggle('on', loopMode > 0); loopBtn.classList.toggle('one', loopMode === 2);
+    loopBtn.setAttribute('aria-label', ['Loop off','Loop all','Loop one'][loopMode]); loopBtn.title = ['Loop off','Loop all','Loop one'][loopMode]; }
+  loopBtn?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); });
 
   /* volume */
   const volSlider = $('#np-vol-slider');

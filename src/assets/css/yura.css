@@ -50,6 +50,20 @@ html, body { overscroll-behavior: none; }
   display:grid; justify-content:center; gap:.75rem; margin-top:1.6rem;
 }
 .controls-row2 { display:flex; gap:.75rem; align-items:center; }
+.controls-row3 { display:flex; gap:.6rem; align-items:center; justify-content:center; }
+.pill {
+  display:inline-flex; align-items:center; gap:.4rem; cursor:pointer; border:0;
+  background:var(--panel-inset); color:var(--text-2); border-radius:.6rem; padding:.5rem .85rem;
+  font-family:"DM Mono",monospace; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase;
+  transition:background .15s, color .15s;
+}
+.pill:hover { background:var(--panel); color:var(--text); }
+.pill svg { width:14px; height:14px; }
+#shuffle-all-btn { color:var(--accent); }
+#inst-toggle .st::after { content:"ON"; font-weight:700; }
+#inst-toggle.off { color:var(--text-3); }
+#inst-toggle.off svg { opacity:.5; }
+#inst-toggle.off .st::after { content:"OFF"; }
 .search-wrap {
   display:flex; align-items:center; gap:.5rem; padding:.5rem .85rem; width:100%; min-width:0;
   background:var(--panel-inset); border-radius:.6rem;
@@ -176,11 +190,11 @@ html, body { overscroll-behavior: none; }
 .ah-info h2 { font-family:"DM Serif Display",Georgia,serif; font-weight:400; font-size:clamp(1.5rem,4.5vw,2.4rem);
   line-height:1.1; margin:.25rem 0 .4rem; }
 .ah-count { font-size:.68rem; color:var(--text-2); margin:0 0 1.1rem; }
-/* Play + Shuffle: equal width, extruded (no recessed style) */
-.ah-actions { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; max-width:24rem; }
+/* Play + Shuffle: equal width; round buy icon sits beside them */
+.ah-actions { display:flex; align-items:stretch; gap:.6rem; max-width:26rem; }
 /* Flat album action buttons (Play / Shuffle) */
 .btn-ext {
-  position:relative; width:100%; display:inline-flex; align-items:center; justify-content:center;
+  position:relative; flex:1 1 0; min-width:0; display:inline-flex; align-items:center; justify-content:center;
   gap:.45rem; cursor:pointer; border:0; color:var(--text-2);
   font-family:"DM Mono",monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
   padding:.65rem 1.1rem; border-radius:.55rem; transition:background .15s, color .15s;
@@ -193,6 +207,16 @@ html, body { overscroll-behavior: none; }
   content:''; position:absolute; top:.4rem; right:.4rem; width:.34rem; height:.34rem;
   border-radius:50%; background:var(--led-off); transition:background .15s, box-shadow .15s;
 }
+/* round per-album buy / source link */
+.ah-buy {
+  flex:none; width:2.7rem; height:2.7rem; align-self:center; display:inline-flex; align-items:center; justify-content:center;
+  border-radius:50%; background:var(--accent); color:#fff; text-decoration:none;
+  box-shadow:0 2px 6px var(--sh-deep), 0 1px 0 var(--hi) inset; transition:background .15s, transform .08s;
+}
+.ah-buy:hover { background:var(--accent-hi); }
+.ah-buy:active { transform:translateY(1px); }
+.ah-buy svg { width:18px; height:18px; }
+
 .btn-ext-play.lit::before {
   background:#e0584f;
   box-shadow:0 0 5px rgba(224,88,79,0.7), 0 0 10px rgba(224,88,79,0.55);
@@ -296,6 +320,9 @@ html, body { overscroll-behavior: none; }
 .np-play.playing::before { background:var(--led-on); box-shadow:0 0 5px var(--led-glow), 0 0 10px var(--led-glow); }
 .np-toggle.on { color:var(--accent); }
 .np-toggle.on::after { content:""; width:3px; height:3px; border-radius:50%; background:var(--accent); position:absolute; margin-top:20px; }
+/* loop-one shows a "1" instead of the dot */
+#np-loop.one::after { content:"1"; width:auto; height:auto; background:none; border-radius:0;
+  font-family:"DM Mono",monospace; font-size:.5rem; font-weight:700; color:var(--accent); margin-top:18px; }
 #np-bar.muted .np-vol #vol-wave { opacity:.2; }
 .np-vol { display:flex; align-items:center; gap:.25rem; }
 #np-vol-slider { -webkit-appearance:none; appearance:none; width:64px; height:4px; border-radius:2px;
