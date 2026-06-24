@@ -208,7 +208,7 @@
         </div>
       </div>`;
     trackList.innerHTML = (a.tracks||[]).map((t, ti) => `
-      <li class="trk" data-ai="${ai}" data-ti="${ti}">
+      <li class="trk${t.instrumental ? ' is-inst' : ''}" data-ai="${ai}" data-ti="${ti}">
         <span class="trk-slot">
           <span class="trk-num">${esc(t.track)}</span>
           <span class="trk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
@@ -386,7 +386,14 @@
   document.getElementById('shuffle-all-btn')?.addEventListener('click', shuffleAll);
 
   const instBtn = document.getElementById('inst-toggle');
-  function syncInstBtn() { if (!instBtn) return; instBtn.classList.toggle('off', excludeInst); instBtn.setAttribute('aria-pressed', String(!excludeInst)); }
+  function syncInstBtn() {
+    document.body.classList.toggle('inst-off', excludeInst);   // greys + disables instrumental rows
+    if (!instBtn) return;
+    instBtn.classList.toggle('off', excludeInst);
+    instBtn.setAttribute('aria-pressed', String(!excludeInst));
+    const msg = excludeInst ? 'Instrumentals hidden — tap to show' : 'Instrumentals shown — tap to hide';
+    instBtn.title = msg; instBtn.setAttribute('aria-label', msg);
+  }
   instBtn?.addEventListener('click', () => { excludeInst = !excludeInst; syncInstBtn(); saveSettings(); });
   syncInstBtn();
 

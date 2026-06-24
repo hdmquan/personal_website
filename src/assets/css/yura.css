@@ -70,8 +70,9 @@ html, body { overscroll-behavior: none; }
 .float-btn:active { transform:translateY(1px); }
 .float-btn svg { width:18px; height:18px; }
 #inst-toggle.off { color:var(--text-3); }
-#inst-toggle.off::after { content:""; position:absolute; top:50%; left:50%; width:24px; height:2px;
-  border-radius:1px; background:currentColor; transform:translate(-50%,-50%) rotate(-45deg); }
+#inst-toggle.off::after { content:""; position:absolute; top:50%; left:50%; width:26px; height:2.5px;
+  border-radius:2px; background:var(--text); box-shadow:0 0 0 1.5px var(--panel-raised);
+  transform:translate(-50%,-50%) rotate(-45deg); }
 .search-wrap {
   display:flex; align-items:center; gap:.5rem; padding:.5rem .85rem; width:100%; min-width:0;
   background:var(--panel-inset); border-radius:.6rem;
@@ -413,3 +414,6 @@ body.dark-mode #dark-toggle .i-sun { display:block; }
   .np-title-in.marquee { animation:none !important; }
   html { scroll-behavior:auto !important; }
 }
+
+/* instrumentals hidden → grey out + disable those rows (keep the playing one usable) */
+body.inst-off .trk.is-inst:not(.playing) { opacity:.38; pointer-events:none; }

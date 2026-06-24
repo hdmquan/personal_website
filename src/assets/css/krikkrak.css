@@ -378,3 +378,6 @@ body.dark-mode #dark-toggle .i-sun { display:block; }
   .np-title-in.marquee { animation:none !important; }
   html { scroll-behavior:auto !important; }
 }
+
+/* instrumentals hidden → grey out + disable those rows (keep the playing one usable) */
+body.inst-off .trk.is-inst:not(.playing) { opacity:.38; pointer-events:none; }
