@@ -12,6 +12,12 @@ permalink: /krikkrak/
   <link rel="stylesheet" href="/assets/css/root.css" />
   <link rel="stylesheet" href="/assets/css/krikkrak.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <link rel="manifest" href="/assets/krikkrak.webmanifest" />
+  <meta name="theme-color" content="#eae6df" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#191e1a" media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" href="/assets/icons/krikkrak-180.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Krik/Krak" />
   <meta property="og:title" content="Krik/Krak Fan Archive Player" />
   <meta property="og:description" content="A streaming player for the Krik/Krak discography — 15 albums, 113 tracks. Fan preservation." />
   <meta property="og:type" content="website" />
@@ -86,7 +92,7 @@ permalink: /krikkrak/
   <div class="np-cover" id="np-cover"></div>
   <div class="np-main">
     <div class="np-text">
-      <p class="np-title" id="np-title">—</p>
+      <p class="np-title" id="np-title"><span class="np-title-in" id="np-title-in">—</span></p>
       <p class="np-meta" id="np-meta">—</p>
     </div>
   </div>
@@ -100,6 +106,9 @@ permalink: /krikkrak/
     <button class="np-btn np-toggle" id="np-shuffle" aria-label="Shuffle" title="Shuffle">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg>
     </button>
+    <button class="np-btn np-toggle" id="queue-btn" aria-label="Queue" title="Queue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h13M3 12h13M3 18h9M17 14v7l5-3z"/></svg>
+    </button>
     <div class="np-vol">
       <button class="np-btn" id="np-mute" aria-label="Mute"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path id="vol-wave" d="M16 8a5 5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
       <input type="range" id="np-vol-slider" min="0" max="100" value="85" aria-label="Volume" />
@@ -111,6 +120,11 @@ permalink: /krikkrak/
     <div class="np-seek-thumb" id="np-seek-thumb"></div>
     <div class="np-seek-tip" id="np-seek-tip" hidden>0:00</div>
   </div>
+</div>
+
+<div id="queue-panel" hidden>
+  <div class="q-head"><span>Up next</span><button id="queue-close" aria-label="Close queue">CLOSE ×</button></div>
+  <ol id="queue-list"></ol>
 </div>
 
 <a id="home-btn" href="/" aria-label="Home" title="Home">
@@ -126,5 +140,6 @@ permalink: /krikkrak/
 
 <script>window.__ARTIST__ = { name: "Krik/Krak", mediaArtist: "Krik/Krak", catalog: "/assets/catalogs/krikkrak.json" };</script>
 <script src="/assets/js/player.js"></script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script>
 </body>
 </html>

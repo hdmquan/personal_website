@@ -43,6 +43,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("./src/cbd-app");
     eleventyConfig.addPassthroughCopy("./src/admin");
     eleventyConfig.addPassthroughCopy("./src/_redirects");
+    eleventyConfig.addPassthroughCopy("./src/sw.js");
 
     // Add Filters
     eleventyConfig.addFilter("postDate", filterPostDate);

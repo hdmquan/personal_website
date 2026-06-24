@@ -29,10 +29,27 @@
   let wantPlay = false;         // user *intends* playback (for interruption resume)
   let excludeInst = false;      // skip instrumental tracks in auto-generated queues
   let loopMode = 0;             // 0 = off, 1 = loop all, 2 = loop one
+  let queueMode = 'album';      // 'album' (continue to next album on end) | 'all'
+  let pendingSeek = null;       // currentTime to apply once metadata loads (restore)
+  let shelfScroll = 0;          // remember scroll when entering an album
+
+  const SLUG = (location.pathname.match(/\/([^/]+)\//) || [])[1] || 'player';
+  const LS = 'fa:' + SLUG;      // localStorage namespace, per artist
+  const DEFAULT_TITLE = document.title;
 
   const audio = new Audio();
   audio.preload = 'none';
   audio.volume = 0.85;
+
+  /* ── Persistence ───────────────────────────────── */
+  const save = (k, v) => { try { localStorage.setItem(LS + ':' + k, JSON.stringify(v)); } catch (e) {} };
+  const load = (k) => { try { return JSON.parse(localStorage.getItem(LS + ':' + k)); } catch (e) { return null; } };
+  function saveSettings() { save('settings', { vol: Math.round(audio.volume * 100), muted: audio.muted, shuffle, loopMode, excludeInst }); }
+  let npSaveT = 0;
+  function saveNowPlaying() {
+    if (!queue.length || qi < 0) { save('np', null); return; }
+    save('np', { q: queue.map(x => [x.ai, x.ti]), qi, mode: queueMode, t: Math.floor(audio.currentTime || 0) });
+  }
 
   /* ── Elements ──────────────────────────────────── */
   const $ = s => document.querySelector(s);
@@ -40,11 +57,12 @@
         trackList = $('#track-list'), statLine = $('#stat-line'), controls = $('#shelf-controls'),
         searchEl = $('#search');
   const npBar = $('#np-bar'), npCover = $('#np-cover'), npTitle = $('#np-title'),
-        npMeta = $('#np-meta'), npTip = $('#np-seek-tip'),
+        npTitleIn = $('#np-title-in'), npMeta = $('#np-meta'), npTip = $('#np-seek-tip'),
         npSeek = $('#np-seek'), npFill = $('#np-seek-fill'), npThumb = $('#np-seek-thumb'),
         npBuf = $('#np-seek-buf'), npPlay = $('#np-play'), kbHint = $('#kb-hint');
 
   const fmt = s => { s = Math.max(0, Math.floor(s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+  const fmtLong = s => { s = Math.floor(s||0); const h = Math.floor(s/3600), m = Math.round((s%3600)/60); return h ? h+' hr '+m+' min' : m+' min'; };
   const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const fmtDate = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso)); return m ? (+m[3]) + ' ' + MON[+m[2]-1] + ' ' + m[1] : String(iso); };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -77,9 +95,29 @@
     }
     buildYearFilter();
     controls.hidden = false;
+    restoreSettings();
     renderShelf();
     routeFromHash();
+    restoreNowPlaying();
   }).catch(() => { statLine.textContent = 'failed to load catalog'; shelf.innerHTML = '<p class="empty">failed to load.</p>'; });
+
+  function restoreSettings() {
+    const s = load('settings'); if (!s) return;
+    if (typeof s.vol === 'number') { volSlider.value = s.vol; applyVol(s.vol); }
+    if (s.muted) { audio.muted = true; npBar.classList.add('muted'); }
+    excludeInst = !!s.excludeInst; syncInstBtn();
+    loopMode = s.loopMode|0; syncLoopBtn();
+    // shuffle flag is restored together with the saved queue below
+    shuffle = !!s.shuffle; syncShuffleBtn();
+  }
+  function restoreNowPlaying() {
+    const np = load('np'); if (!np || !np.q || !np.q.length) return;
+    queue = np.q.filter(([ai, ti]) => ALB[ai] && ALB[ai].tracks[ti]).map(([ai, ti]) => ({ ai, ti, inst: !!ALB[ai].tracks[ti].instrumental }));
+    if (!queue.length) return;
+    qi = Math.min(Math.max(np.qi|0, 0), queue.length - 1);
+    queueMode = np.mode === 'all' ? 'all' : 'album';
+    loadCurrent(false, np.t || 0);   // restore paused at saved position; user taps play to resume
+  }
 
   /* ── Shelf rendering ───────────────────────────── */
   let sortMode = 'new', filter = '', yearFilter = '';
@@ -138,7 +176,7 @@
   shelf.addEventListener('click', e => {
     const card = e.target.closest('.alb-card');
     if (!card) return;
-    if (e.target.closest('.alb-play')) { playAlbumFrom(+card.dataset.ai, 0, false); return; }
+    if (e.target.closest('.alb-play')) { playAlbumFrom(+card.dataset.ai, 0, false, true); return; }
     openAlbumView(+card.dataset.ai);
   });
 
@@ -152,15 +190,17 @@
 
   /* ── Album view ────────────────────────────────── */
   function openAlbumView(ai) {
+    if (view === 'shelf') shelfScroll = window.scrollY;   // remember for restore
     openAlbum = ai; view = 'album';
     const a = ALB[ai];
     location.hash = 'a=' + ai;
+    const secs = a.album_seconds || (a.tracks||[]).reduce((n, t) => n + (t.dur||0), 0);
     albumHead.innerHTML = `
       <div class="ah-cover sk"><img src="${esc(a.cover_url)}" alt="" decoding="async" onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/></div>
       <div class="ah-info">
         <span class="ah-year">${esc(fmtDate(a.date || a.year))}</span>
         <h2>${esc(a.title)}</h2>
-        <p class="ah-count">${(a.tracks||[]).length} tracks</p>
+        <p class="ah-count">${(a.tracks||[]).length} tracks${secs ? ' · ' + fmtLong(secs) : ''}</p>
         <div class="ah-actions">
           <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
           <button class="btn-ext" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>
@@ -174,6 +214,7 @@
           <span class="trk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
         </span>
         <span class="trk-title">${esc(disp(t))}${t.instrumental ? '<em class="inst">INST</em>' : ''}</span>
+        ${t.dur ? `<span class="trk-dur">${fmt(t.dur)}</span>` : '<span class="trk-dur"></span>'}
       </li>`).join('');
     shelf.hidden = true; document.querySelector('#yura-hero').hidden = true;
     document.querySelector('#home-btn').hidden = true;
@@ -186,6 +227,7 @@
     view = 'shelf'; openAlbum = -1; location.hash = '';
     albumView.hidden = true; shelf.hidden = false; document.querySelector('#yura-hero').hidden = false;
     document.querySelector('#home-btn').hidden = false;
+    window.scrollTo(0, shelfScroll);   // restore shelf position
   }
   $('#back-btn').addEventListener('click', backToShelf);
 
@@ -206,7 +248,7 @@
   }
 
   function playAlbumFrom(ai, ti, shuffled, respectFilter) {
-    shuffle = !!shuffled;
+    shuffle = !!shuffled; queueMode = 'album';
     queue = buildQueue(ai, respectFilter);
     // a direct track click may target an instrumental even when excluded → keep it playable
     if (!queue.some(q => q.ti === ti)) queue = buildQueue(ai, false);
@@ -223,45 +265,65 @@
       if (!(excludeInst && t.instrumental)) q.push({ ai, ti, inst: !!t.instrumental });
     }));
     if (!q.length) return;
-    queue = shuf(q); qi = 0; shuffle = true; syncShuffleBtn();
+    queue = shuf(q); qi = 0; shuffle = true; queueMode = 'all'; syncShuffleBtn();
     loadCurrent(true);
   }
 
-  function loadCurrent(autoplay) {
+  function loadCurrent(autoplay, startAt) {
     const q = queue[qi]; if (!q) return;
     const a = ALB[q.ai], t = a.tracks[q.ti];
     audio.src = t.url;            // setting src + play → R2 streams via range, no full download
+    pendingSeek = (startAt && startAt > 0) ? startAt : null;
     npBar.classList.add('show');
-    npTitle.textContent = disp(t) + (t.instrumental ? ' (inst)' : '');
+    (npTitleIn || npTitle).textContent = disp(t) + (t.instrumental ? ' (inst)' : '');
     npMeta.textContent = a.title + ' · ' + a.year;
     npCover.querySelector('img')?.remove();
     const img = document.createElement('img'); img.src = a.cover_url; img.alt = ''; img.className = 'np-cover-img';
     npCover.prepend(img);
     setPct(0); setBuf(0);
+    document.title = a.title + ' | ' + (ART.name || '');
+    applyMarquee();
     if (autoplay) { wantPlay = true; audio.play().catch(()=>{}); }
     setMediaSession(a, t);
     highlightPlaying();
+    renderQueue();
+    saveNowPlaying();
   }
 
+  function stopPlayback() { queue = []; qi = -1; wantPlay = false; queueMode = 'album'; setPlayingUI(false); document.title = DEFAULT_TITLE; renderQueue(); save('np', null); }
+
   function next() {
-    if (qi < queue.length - 1) { qi++; loadCurrent(true); }
-    else if (loopMode === 1) { qi = 0; loadCurrent(true); }       // loop all → wrap
-    else { queue=[]; qi=-1; wantPlay=false; setPlayingUI(false); }
+    if (qi < queue.length - 1) { qi++; loadCurrent(true); return; }
+    if (loopMode === 1) { qi = 0; loadCurrent(true); return; }            // loop all → wrap
+    if (queueMode === 'album') {                                          // continuous: next album in current sort order
+      const order = sortedIndices(), cur = queue[qi] ? queue[qi].ai : openAlbum;
+      const pos = order.indexOf(cur);
+      for (let k = pos + 1; k < order.length; k++) {
+        const nq = buildQueue(order[k], true);
+        if (nq.length) { queue = nq; qi = 0; shuffle = false; syncShuffleBtn(); loadCurrent(true); return; }
+      }
+    }
+    stopPlayback();
   }
   function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; loadCurrent(true); } }
 
   /* ── Audio events ──────────────────────────────── */
   audio.addEventListener('play',  () => setPlayingUI(true));
-  audio.addEventListener('pause', () => setPlayingUI(false));
+  audio.addEventListener('pause', () => { setPlayingUI(false); saveNowPlaying(); });
   audio.addEventListener('ended', () => {
     if (loopMode === 2) { audio.currentTime = 0; audio.play().catch(()=>{}); return; }  // loop one
     next();
   });
-  audio.addEventListener('loadedmetadata', updatePositionState);
+  audio.addEventListener('error', () => { if (queue.length && qi < queue.length - 1) { toast('Track unavailable — skipping'); next(); } });
+  audio.addEventListener('loadedmetadata', () => {
+    if (pendingSeek != null) { try { audio.currentTime = pendingSeek; } catch (e) {} pendingSeek = null; }
+    updatePositionState();
+  });
   audio.addEventListener('timeupdate', () => {
     if (seeking || !audio.duration) return;
     setPct(audio.currentTime / audio.duration * 100);
     updatePositionState();
+    if ((npSaveT = (npSaveT + 1) % 20) === 0) saveNowPlaying();   // persist position ~every 20 ticks
   });
   audio.addEventListener('progress', () => {
     if (audio.buffered.length && audio.duration)
@@ -305,16 +367,19 @@
   function syncShuffleBtn() { const b = document.getElementById('np-shuffle'); if (b) b.classList.toggle('on', shuffle); }
   $('#np-shuffle').addEventListener('click', () => {
     shuffle = !shuffle; syncShuffleBtn();
-    if (!queue.length) return;
-    const cur = queue[qi];
-    if (shuffle) {
-      shuf(queue);
-      const k = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
-      [queue[0], queue[k]] = [queue[k], queue[0]]; qi = 0;
-    } else {
-      queue.sort((a, b) => a.ai === b.ai ? a.ti - b.ti : a.ai - b.ai);   // restore source order
-      qi = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
+    if (queue.length) {
+      const cur = queue[qi];
+      if (shuffle) {
+        shuf(queue);
+        const k = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
+        [queue[0], queue[k]] = [queue[k], queue[0]]; qi = 0;
+      } else {
+        queue.sort((a, b) => a.ai === b.ai ? a.ti - b.ti : a.ai - b.ai);   // restore source order
+        qi = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
+      }
+      renderQueue(); saveNowPlaying();
     }
+    saveSettings();
   });
 
   /* ── Shuffle-all, instrumental toggle, loop (optional buttons) ── */
@@ -322,21 +387,79 @@
 
   const instBtn = document.getElementById('inst-toggle');
   function syncInstBtn() { if (!instBtn) return; instBtn.classList.toggle('off', excludeInst); instBtn.setAttribute('aria-pressed', String(!excludeInst)); }
-  instBtn?.addEventListener('click', () => { excludeInst = !excludeInst; syncInstBtn(); });
+  instBtn?.addEventListener('click', () => { excludeInst = !excludeInst; syncInstBtn(); saveSettings(); });
   syncInstBtn();
 
   const loopBtn = document.getElementById('np-loop');
   function syncLoopBtn() { if (!loopBtn) return; loopBtn.classList.toggle('on', loopMode > 0); loopBtn.classList.toggle('one', loopMode === 2);
     loopBtn.setAttribute('aria-label', ['Loop off','Loop all','Loop one'][loopMode]); loopBtn.title = ['Loop off','Loop all','Loop one'][loopMode]; }
-  loopBtn?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); });
+  loopBtn?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); saveSettings(); });
 
   /* volume */
   const volSlider = $('#np-vol-slider');
   function applyVol(v){ audio.volume = v/100; audio.muted = v==0;
     volSlider.style.background = `linear-gradient(90deg, var(--accent) ${v}%, var(--panel-inset) ${v}%)`; }
   applyVol(85);
-  volSlider.addEventListener('input', () => applyVol(+volSlider.value));
-  $('#np-mute').addEventListener('click', () => { audio.muted = !audio.muted; npBar.classList.toggle('muted', audio.muted); });
+  volSlider.addEventListener('input', () => { applyVol(+volSlider.value); saveSettings(); });
+  $('#np-mute').addEventListener('click', () => { audio.muted = !audio.muted; npBar.classList.toggle('muted', audio.muted); saveSettings(); });
+
+  /* ── Queue panel (optional) ────────────────────── */
+  const queuePanel = document.getElementById('queue-panel'), queueList = document.getElementById('queue-list');
+  function renderQueue() {
+    if (!queueList) return;
+    if (!queue.length) { queueList.innerHTML = '<li class="q-empty">Nothing queued</li>'; return; }
+    queueList.innerHTML = queue.map((q, i) => {
+      const a = ALB[q.ai], t = a.tracks[q.ti];
+      return `<li class="q-item${i === qi ? ' current' : ''}${i < qi ? ' past' : ''}" data-i="${i}">
+        <span class="q-i">${i === qi ? '▶' : (i + 1)}</span>
+        <span class="q-t">${esc(disp(t))}</span>
+        <span class="q-a">${esc(a.title)}</span>
+      </li>`;
+    }).join('');
+    const cur = queueList.querySelector('.q-item.current');
+    if (cur && queuePanel && !queuePanel.hidden) cur.scrollIntoView({ block: 'nearest' });
+  }
+  document.getElementById('queue-btn')?.addEventListener('click', () => {
+    if (!queuePanel) return; queuePanel.hidden = !queuePanel.hidden;
+    document.getElementById('queue-btn').classList.toggle('on', !queuePanel.hidden);
+    if (!queuePanel.hidden) renderQueue();
+  });
+  document.getElementById('queue-close')?.addEventListener('click', () => {
+    if (queuePanel) { queuePanel.hidden = true; document.getElementById('queue-btn')?.classList.remove('on'); }
+  });
+  queueList?.addEventListener('click', e => {
+    const li = e.target.closest('.q-item'); if (!li) return;
+    qi = +li.dataset.i; loadCurrent(true);
+  });
+
+  /* ── Marquee long now-playing title ────────────── */
+  function applyMarquee() {
+    if (!npTitleIn) return;
+    npTitleIn.classList.remove('marquee'); npTitleIn.style.removeProperty('--shift');
+    requestAnimationFrame(() => {
+      const over = npTitleIn.scrollWidth - npTitle.clientWidth;
+      if (over > 6) { npTitleIn.style.setProperty('--shift', '-' + over + 'px'); npTitleIn.classList.add('marquee'); }
+    });
+  }
+
+  /* ── Tap the now-playing bar → jump to that album/track ── */
+  function jumpToCurrent() {
+    const q = queue[qi]; if (!q) return;
+    openAlbumView(q.ai);
+    const li = trackList.querySelector(`.trk[data-ti="${q.ti}"]`);
+    if (li) li.scrollIntoView({ block: 'center' });
+  }
+  npCover.addEventListener('click', jumpToCurrent);
+  $('.np-main')?.addEventListener('click', jumpToCurrent);
+
+  /* ── Toast ─────────────────────────────────────── */
+  let toastT;
+  function toast(msg) {
+    let el = document.getElementById('toast');
+    if (!el) { el = document.createElement('div'); el.id = 'toast'; document.body.appendChild(el); }
+    el.textContent = msg; el.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 2600);
+  }
 
   /* seek (click + drag) */
   function seekTo(clientX) {
@@ -390,6 +513,7 @@
   document.addEventListener('visibilitychange', () => { if (!document.hidden) tryResume(); });
   window.addEventListener('focus', tryResume);
   window.addEventListener('pageshow', tryResume);
+  let rzT; window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(applyMarquee, 150); });
 
   /* ── Routing ───────────────────────────────────── */
   function routeFromHash() {

@@ -1,0 +1,14 @@
+{
+  "name": "葉月ゆら Fan Archive",
+  "short_name": "葉月ゆら",
+  "start_url": "/yura/",
+  "scope": "/yura/",
+  "display": "standalone",
+  "background_color": "#eae6df",
+  "theme_color": "#eae6df",
+  "icons": [
+    { "src": "/assets/icons/yura-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icons/yura-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icons/yura-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

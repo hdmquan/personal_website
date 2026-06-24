@@ -12,6 +12,12 @@ permalink: /yura/
   <link rel="stylesheet" href="/assets/css/root.css" />
   <link rel="stylesheet" href="/assets/css/yura.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <link rel="manifest" href="/assets/yura.webmanifest" />
+  <meta name="theme-color" content="#eae6df" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#191e1a" media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" href="/assets/icons/yura-180.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="葉月ゆら" />
   <meta property="og:title" content="Hatsuki Yura Fan Archive Player" />
   <meta property="og:description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography — 107 albums, 1053 tracks. Fan preservation." />
   <meta property="og:type" content="website" />
@@ -96,7 +102,7 @@ permalink: /yura/
   <div class="np-cover" id="np-cover"></div>
   <div class="np-main">
     <div class="np-text">
-      <p class="np-title" id="np-title">—</p>
+      <p class="np-title" id="np-title"><span class="np-title-in" id="np-title-in">—</span></p>
       <p class="np-meta" id="np-meta">—</p>
     </div>
   </div>
@@ -113,6 +119,9 @@ permalink: /yura/
     <button class="np-btn np-toggle" id="np-loop" aria-label="Loop off" title="Loop off">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
     </button>
+    <button class="np-btn np-toggle" id="queue-btn" aria-label="Queue" title="Queue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h13M3 12h13M3 18h9M17 14v7l5-3z"/></svg>
+    </button>
     <div class="np-vol">
       <button class="np-btn" id="np-mute" aria-label="Mute"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path id="vol-wave" d="M16 8a5 5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
       <input type="range" id="np-vol-slider" min="0" max="100" value="85" aria-label="Volume" />
@@ -124,6 +133,11 @@ permalink: /yura/
     <div class="np-seek-thumb" id="np-seek-thumb"></div>
     <div class="np-seek-tip" id="np-seek-tip" hidden>0:00</div>
   </div>
+</div>
+
+<div id="queue-panel" hidden>
+  <div class="q-head"><span>Up next</span><button id="queue-close" aria-label="Close queue">CLOSE ×</button></div>
+  <ol id="queue-list"></ol>
 </div>
 
 <a id="home-btn" href="/" aria-label="Home" title="Home">
@@ -139,5 +153,6 @@ permalink: /yura/
 
 <script>window.__ARTIST__ = { name: "葉月ゆら", mediaArtist: "葉月ゆら", catalog: "/assets/catalogs/yura.json" };</script>
 <script src="/assets/js/player.js"></script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script>
 </body>
 </html>
