@@ -1,0 +1,130 @@
+---
+permalink: /yura/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>葉月ゆら Fan Archive</title>
+  <meta name="description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography. Fan preservation." />
+  <link rel="stylesheet" href="/assets/css/root.css" />
+  <link rel="stylesheet" href="/assets/css/yura.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <meta property="og:title" content="Hatsuki Yura Fan Archive Player" />
+  <meta property="og:description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography — 107 albums, 1053 tracks. Fan preservation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alan-huynh.is-a.dev/yura/" />
+  <meta property="og:image" content="https://alan-huynh.is-a.dev/assets/images/yura-preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hatsuki Yura Fan Archive Player" />
+  <meta name="twitter:description" content="Stream the Hatsuki Yura / La Bella Luna discography — 107 albums, 1053 tracks." />
+  <meta name="twitter:image" content="https://alan-huynh.is-a.dev/assets/images/yura-preview.jpg" />
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches))
+        document.documentElement.classList.add('pre-dark');
+    })();
+  </script>
+</head>
+<body>
+<script>
+  (function(){
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches))
+      document.body.classList.add('dark-mode');
+  })();
+</script>
+
+<!-- Structural IDs/classes here are the player engine contract (assets/js/player.js).
+     Restyle freely; keep the ids the engine queries. -->
+<div id="yura-page">
+  <header id="yura-hero">
+    <span class="badge">Fan Archive</span>
+    <h1>葉月ゆら</h1>
+    <p class="sub"><span id="stat-line">loading&hellip;</span><span id="stat-info" class="stat-info" tabindex="0" role="img" aria-label="Stats info" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span class="stat-tip" id="stat-tip"></span></span></p>
+
+    <div class="shelf-controls" id="shelf-controls" hidden>
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>
+        </svg>
+        <input type="search" id="search" placeholder="Search album or track…" aria-label="Search" autocomplete="off" />
+      </div>
+      <div class="controls-row2">
+        <div class="year-wrap">
+          <select id="year-filter" aria-label="Filter by year">
+            <option value="">All years</option>
+          </select>
+        </div>
+        <div class="seg" role="group" aria-label="Sort">
+          <button class="seg-btn active" data-sort="new">Newest</button>
+          <button class="seg-btn" data-sort="old">Oldest</button>
+          <button class="seg-btn" data-sort="az">A–Z</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="shelf"></section>
+
+  <section id="album-view" hidden>
+    <button id="back-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      <span>All albums</span>
+    </button>
+    <div id="album-head"></div>
+    <ol id="track-list"></ol>
+  </section>
+</div>
+
+<div id="np-bar" aria-live="polite">
+  <div class="np-cover" id="np-cover"></div>
+  <div class="np-main">
+    <div class="np-text">
+      <p class="np-title" id="np-title">—</p>
+      <p class="np-meta" id="np-meta">—</p>
+    </div>
+  </div>
+  <div class="np-ctrls">
+    <button class="np-btn" id="np-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6v12l-9-6z"/></svg></button>
+    <button class="np-btn np-play" id="np-play" aria-label="Play/pause">
+      <svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+    <button class="np-btn" id="np-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6l9 6-9 6z"/></svg></button>
+    <button class="np-btn np-toggle" id="np-shuffle" aria-label="Shuffle" title="Shuffle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg>
+    </button>
+    <div class="np-vol">
+      <button class="np-btn" id="np-mute" aria-label="Mute"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path id="vol-wave" d="M16 8a5 5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      <input type="range" id="np-vol-slider" min="0" max="100" value="85" aria-label="Volume" />
+    </div>
+  </div>
+  <div class="np-seek" id="np-seek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+    <div class="np-seek-buf" id="np-seek-buf"></div>
+    <div class="np-seek-fill" id="np-seek-fill"></div>
+    <div class="np-seek-thumb" id="np-seek-thumb"></div>
+    <div class="np-seek-tip" id="np-seek-tip" hidden>0:00</div>
+  </div>
+</div>
+
+<a id="home-btn" href="/" aria-label="Home" title="Home">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>
+</a>
+
+<button id="dark-toggle" aria-label="Toggle dark mode">
+  <svg class="i-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="i-sun" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+</button>
+
+<div id="kb-hint"><kbd>space</kbd> play <kbd>←→</kbd> seek <kbd>N/P</kbd> track <kbd>/</kbd> search <kbd>esc</kbd> back</div>
+
+<script>window.__ARTIST__ = { name: "葉月ゆら", mediaArtist: "葉月ゆら", catalog: "/assets/catalogs/yura.json" };</script>
+<script src="/assets/js/player.js"></script>
+</body>
+</html>
