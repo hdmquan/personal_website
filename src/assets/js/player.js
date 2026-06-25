@@ -93,7 +93,7 @@
       info.title = 'Last calculated ' + fmtDate(s.calculated_at);
       info.hidden = false;
     }
-    buildYearFilter();
+    buildFilters();
     controls.hidden = false;
     restoreSettings();
     renderShelf();
@@ -120,16 +120,40 @@
   }
 
   /* ── Shelf rendering ───────────────────────────── */
-  let sortMode = 'new', filter = '', yearFilter = '';
-  function buildYearFilter() {
-    const sel = $('#year-filter');
+  let sortMode = 'new', filter = '', yearFilter = '', genreFilter = '';
+  const topGenre = g => String(g).split('---')[0];          // "Electronic---Ambient" → "Electronic"
+  function buildFilters() {
+    const ysel = $('#year-filter');
     const years = [...new Set(ALB.map(a => String(a.year)).filter(Boolean))].sort((a, b) => b - a);
-    sel.insertAdjacentHTML('beforeend', years.map(y => `<option value="${y}">${y}</option>`).join(''));
-    sel.addEventListener('change', () => { yearFilter = sel.value; renderShelf(); });
+    ysel.insertAdjacentHTML('beforeend', years.map(y => `<option value="${y}">${y}</option>`).join(''));
+    ysel.addEventListener('change', () => { yearFilter = ysel.value; updateFilterBadge(); renderShelf(); });
+
+    const gsel = $('#genre-filter');
+    if (gsel) {
+      const freq = {};
+      ALB.forEach(a => (a.tracks||[]).forEach(t => {
+        const seen = new Set();
+        (t.genres||[]).forEach(g => { const top = topGenre(g); if (!seen.has(top)) { seen.add(top); freq[top] = (freq[top]||0) + 1; } });
+      }));
+      const genres = Object.keys(freq).sort((a, b) => freq[b] - freq[a]);
+      gsel.insertAdjacentHTML('beforeend', genres.map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join(''));
+      gsel.addEventListener('change', () => { genreFilter = gsel.value; updateFilterBadge(); renderShelf(); });
+    }
+
+    const fbtn = $('#filter-btn'), fpop = $('#filter-pop');
+    fbtn?.addEventListener('click', e => { e.stopPropagation(); const open = fpop.hidden; fpop.hidden = !open; fbtn.setAttribute('aria-expanded', String(open)); });
+    document.addEventListener('click', e => { if (fpop && !fpop.hidden && !e.target.closest('.filter-wrap')) { fpop.hidden = true; fbtn.setAttribute('aria-expanded', 'false'); } });
+  }
+  function updateFilterBadge() {
+    const b = $('#filter-badge'), fbtn = $('#filter-btn');
+    const parts = [yearFilter, genreFilter].filter(Boolean);
+    if (b) { b.textContent = parts.join(' · '); b.hidden = !parts.length; }
+    fbtn?.classList.toggle('active', !!parts.length);
   }
   function sortedIndices() {
     let idx = ALB.map((_, i) => i);
     if (yearFilter) idx = idx.filter(i => String(ALB[i].year) === yearFilter);
+    if (genreFilter) idx = idx.filter(i => (ALB[i].tracks||[]).some(t => (t.genres||[]).some(g => topGenre(g) === genreFilter)));
     if (filter) {
       const f = filter.toLowerCase();
       idx = idx.filter(i => {

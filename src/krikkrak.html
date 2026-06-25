@@ -62,10 +62,19 @@ permalink: /krikkrak/
         <input type="search" id="search" placeholder="Search album or track…" aria-label="Search" autocomplete="off" />
       </div>
       <div class="controls-row2">
-        <div class="year-wrap">
-          <select id="year-filter" aria-label="Filter by year">
-            <option value="">All years</option>
-          </select>
+        <div class="filter-wrap">
+          <button id="filter-btn" class="pill" aria-haspopup="true" aria-expanded="false" title="Filter albums">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
+            Filter <b id="filter-badge" hidden></b>
+          </button>
+          <div id="filter-pop" class="filter-pop" hidden>
+            <label class="fp-row"><span>Year</span>
+              <select id="year-filter" aria-label="Filter by year"><option value="">All years</option></select>
+            </label>
+            <label class="fp-row"><span>Genre</span>
+              <select id="genre-filter" aria-label="Filter by genre"><option value="">All genres</option></select>
+            </label>
+          </div>
         </div>
         <div class="seg" role="group" aria-label="Sort">
           <button class="seg-btn active" data-sort="new">Newest</button>

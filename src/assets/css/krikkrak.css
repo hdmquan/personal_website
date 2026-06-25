@@ -381,3 +381,25 @@ body.dark-mode #dark-toggle .i-sun { display:block; }
 
 /* instrumentals hidden → grey out + disable those rows (keep the playing one usable) */
 body.inst-off .trk.is-inst:not(.playing) { opacity:.38; pointer-events:none; }
+/* ── Global filter popover (year + genre) ──────── */
+.filter-wrap { position:relative; }
+#filter-btn.active { color:var(--accent); }
+#filter-badge { font-weight:700; letter-spacing:0; text-transform:none; }
+.filter-pop {
+  position:absolute; top:calc(100% + .5rem); left:0; z-index:45; min-width:230px;
+  background:var(--panel-raised); border-radius:.7rem; padding:.7rem;
+  box-shadow:0 10px 30px var(--sh-deep), 0 0 0 1px var(--rule), 0 1px 0 var(--hi) inset;
+  display:flex; flex-direction:column; gap:.55rem;
+}
+.filter-pop[hidden] { display:none; }
+.fp-row { display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+  font-family:"DM Mono",monospace; font-size:.62rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-3); }
+.fp-row select {
+  appearance:none; -webkit-appearance:none; cursor:pointer; flex:1; max-width:62%;
+  font-family:"DM Mono",monospace; font-size:.66rem; letter-spacing:.04em;
+  color:var(--text-2); border:0; border-radius:.5rem; padding:.45rem 1.6rem .45rem .7rem;
+  background:var(--panel-inset);
+  background-image:linear-gradient(45deg,transparent 50%,var(--text-3) 50%),linear-gradient(135deg,var(--text-3) 50%,transparent 50%);
+  background-position:calc(100% - 13px) 52%, calc(100% - 8px) 52%; background-size:5px 5px,5px 5px; background-repeat:no-repeat;
+}
+.fp-row select:focus { outline:none; color:var(--text); }
