@@ -62,20 +62,6 @@ permalink: /yura/
         <input type="search" id="search" placeholder="Search album or track…" aria-label="Search" autocomplete="off" />
       </div>
       <div class="controls-row2">
-        <div class="filter-wrap">
-          <button id="filter-btn" class="pill" aria-haspopup="true" aria-expanded="false" title="Filter albums">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
-            Filter <b id="filter-badge" hidden></b>
-          </button>
-          <div id="filter-pop" class="filter-pop" hidden>
-            <label class="fp-row"><span>Year</span>
-              <select id="year-filter" aria-label="Filter by year"><option value="">All years</option></select>
-            </label>
-            <label class="fp-row"><span>Genre</span>
-              <select id="genre-filter" aria-label="Filter by genre"><option value="">All genres</option></select>
-            </label>
-          </div>
-        </div>
         <div class="seg" role="group" aria-label="Sort">
           <button class="seg-btn active" data-sort="new">Newest</button>
           <button class="seg-btn" data-sort="old">Oldest</button>
@@ -147,9 +133,25 @@ permalink: /yura/
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>
 </a>
 
-<button id="inst-toggle" class="float-btn" aria-pressed="true" aria-label="Toggle instrumental tracks" title="Instrumental tracks — on / off">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-</button>
+<div class="filter-wrap">
+  <button id="filter-btn" class="float-btn" aria-haspopup="true" aria-expanded="false" aria-label="Filter" title="Filter">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
+    <b id="filter-badge" hidden></b>
+  </button>
+  <div id="filter-pop" class="filter-pop" hidden>
+    <label class="fp-row"><span>Year</span>
+      <select id="year-filter" aria-label="Filter by year"><option value="">All years</option></select>
+    </label>
+    <label class="fp-row"><span>Genre</span>
+      <select id="genre-filter" aria-label="Filter by genre"><option value="">All genres</option></select>
+    </label>
+    <label class="fp-row fp-switch">
+      <span>Instrumentals</span>
+      <input type="checkbox" id="inst-toggle" checked aria-label="Show instrumental tracks" />
+      <span class="sw" aria-hidden="true"></span>
+    </label>
+  </div>
+</div>
 
 <button id="dark-toggle" aria-label="Toggle dark mode">
   <svg class="i-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>

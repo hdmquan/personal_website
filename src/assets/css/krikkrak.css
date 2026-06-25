@@ -381,14 +381,25 @@ body.dark-mode #dark-toggle .i-sun { display:block; }
 
 /* instrumentals hidden → grey out + disable those rows (keep the playing one usable) */
 body.inst-off .trk.is-inst:not(.playing) { opacity:.38; pointer-events:none; }
-/* ── Global filter popover (year + genre) ──────── */
-.filter-wrap { position:relative; }
+/* ── Floating filter FAB (bottom-left) + popover ── */
+.filter-wrap { position:fixed; left:1rem; bottom:1.25rem; z-index:60; }
+.float-btn {
+  position:relative; width:44px; height:44px; border-radius:50%;
+  border:0; cursor:pointer; background:var(--panel-raised); color:var(--text-2);
+  box-shadow:0 3px 12px var(--sh-deep), 0 1px 0 var(--hi) inset; display:grid; place-items:center;
+  transition:color .15s, transform .08s;
+}
+.float-btn:hover { color:var(--text); }
+.float-btn:active { transform:translateY(1px); }
+.float-btn svg { width:19px; height:19px; }
 #filter-btn.active { color:var(--accent); }
-#filter-badge { font-weight:700; letter-spacing:0; text-transform:none; }
+#filter-badge { position:absolute; top:5px; right:5px; width:9px; height:9px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 0 2px var(--panel-raised); }
+#filter-badge[hidden] { display:none; }
 .filter-pop {
-  position:absolute; top:calc(100% + .5rem); left:0; z-index:45; min-width:230px;
-  background:var(--panel-raised); border-radius:.7rem; padding:.7rem;
-  box-shadow:0 10px 30px var(--sh-deep), 0 0 0 1px var(--rule), 0 1px 0 var(--hi) inset;
+  position:absolute; bottom:calc(100% + .6rem); left:0; z-index:46; min-width:236px;
+  background:var(--panel-raised); border-radius:.8rem; padding:.75rem;
+  box-shadow:0 12px 34px var(--sh-deep), 0 0 0 1px var(--rule), 0 1px 0 var(--hi) inset;
   display:flex; flex-direction:column; gap:.55rem;
 }
 .filter-pop[hidden] { display:none; }
@@ -403,3 +414,13 @@ body.inst-off .trk.is-inst:not(.playing) { opacity:.38; pointer-events:none; }
   background-position:calc(100% - 13px) 52%, calc(100% - 8px) 52%; background-size:5px 5px,5px 5px; background-repeat:no-repeat;
 }
 .fp-row select:focus { outline:none; color:var(--text); }
+/* instrumentals switch */
+.fp-switch { cursor:pointer; position:relative; }
+.fp-switch input { position:absolute; opacity:0; width:0; height:0; pointer-events:none; }
+.fp-switch .sw { position:relative; width:34px; height:18px; border-radius:9px; flex:none;
+  background:var(--panel-inset); box-shadow:inset 0 1px 2px var(--sh); transition:background .15s; }
+.fp-switch .sw::after { content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%;
+  background:#fff; box-shadow:0 1px 2px var(--sh-deep); transition:transform .15s; }
+.fp-switch input:checked ~ .sw { background:var(--accent); }
+.fp-switch input:checked ~ .sw::after { transform:translateX(16px); }
+@media (max-width:560px) { .filter-wrap { bottom:6rem; } }   /* clear the now-playing bar */

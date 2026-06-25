@@ -121,7 +121,8 @@
 
   /* ── Shelf rendering ───────────────────────────── */
   let sortMode = 'new', filter = '', yearFilter = '', genreFilter = '';
-  const topGenre = g => String(g).split('---')[0];          // "Electronic---Ambient" → "Electronic"
+  const albGenres = a => a.genres || [];                    // album-level top-level genres
+  const trkHasGenre = t => !genreFilter || (t.genres||[]).includes(genreFilter);
   function buildFilters() {
     const ysel = $('#year-filter');
     const years = [...new Set(ALB.map(a => String(a.year)).filter(Boolean))].sort((a, b) => b - a);
@@ -130,14 +131,11 @@
 
     const gsel = $('#genre-filter');
     if (gsel) {
-      const freq = {};
-      ALB.forEach(a => (a.tracks||[]).forEach(t => {
-        const seen = new Set();
-        (t.genres||[]).forEach(g => { const top = topGenre(g); if (!seen.has(top)) { seen.add(top); freq[top] = (freq[top]||0) + 1; } });
-      }));
+      const freq = {};                                       // count by album presence
+      ALB.forEach(a => albGenres(a).forEach(g => { freq[g] = (freq[g]||0) + 1; }));
       const genres = Object.keys(freq).sort((a, b) => freq[b] - freq[a]);
       gsel.insertAdjacentHTML('beforeend', genres.map(g => `<option value="${esc(g)}">${esc(g)}</option>`).join(''));
-      gsel.addEventListener('change', () => { genreFilter = gsel.value; updateFilterBadge(); renderShelf(); });
+      gsel.addEventListener('change', () => { genreFilter = gsel.value; updateFilterBadge(); if (view === 'album') openAlbumView(openAlbum); renderShelf(); });
     }
 
     const fbtn = $('#filter-btn'), fpop = $('#filter-pop');
@@ -146,14 +144,14 @@
   }
   function updateFilterBadge() {
     const b = $('#filter-badge'), fbtn = $('#filter-btn');
-    const parts = [yearFilter, genreFilter].filter(Boolean);
-    if (b) { b.textContent = parts.join(' · '); b.hidden = !parts.length; }
-    fbtn?.classList.toggle('active', !!parts.length);
+    const active = !!(yearFilter || genreFilter);
+    if (b) b.hidden = !active;            // small accent dot on the FAB
+    fbtn?.classList.toggle('active', active);
   }
   function sortedIndices() {
     let idx = ALB.map((_, i) => i);
     if (yearFilter) idx = idx.filter(i => String(ALB[i].year) === yearFilter);
-    if (genreFilter) idx = idx.filter(i => (ALB[i].tracks||[]).some(t => (t.genres||[]).some(g => topGenre(g) === genreFilter)));
+    if (genreFilter) idx = idx.filter(i => albGenres(ALB[i]).includes(genreFilter));
     if (filter) {
       const f = filter.toLowerCase();
       idx = idx.filter(i => {
@@ -218,20 +216,21 @@
     openAlbum = ai; view = 'album';
     const a = ALB[ai];
     location.hash = 'a=' + ai;
-    const secs = a.album_seconds || (a.tracks||[]).reduce((n, t) => n + (t.dur||0), 0);
+    const shown = (a.tracks||[]).map((t, ti) => ({ t, ti })).filter(({ t }) => trkHasGenre(t));
+    const secs = shown.reduce((n, { t }) => n + (t.dur||0), 0);
     albumHead.innerHTML = `
       <div class="ah-cover sk"><img src="${esc(a.cover_url)}" alt="" decoding="async" onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/></div>
       <div class="ah-info">
         <span class="ah-year">${esc(fmtDate(a.date || a.year))}</span>
         <h2>${esc(a.title)}</h2>
-        <p class="ah-count">${(a.tracks||[]).length} tracks${secs ? ' · ' + fmtLong(secs) : ''}</p>
+        <p class="ah-count">${shown.length} tracks${secs ? ' · ' + fmtLong(secs) : ''}${genreFilter ? ' · ' + esc(genreFilter) : ''}</p>
         <div class="ah-actions">
           <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
           <button class="btn-ext" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>
           ${buyLink(a)}
         </div>
       </div>`;
-    trackList.innerHTML = (a.tracks||[]).map((t, ti) => `
+    trackList.innerHTML = shown.map(({ t, ti }) => `
       <li class="trk${t.instrumental ? ' is-inst' : ''}" data-ai="${ai}" data-ti="${ti}">
         <span class="trk-slot">
           <span class="trk-num">${esc(t.track)}</span>
@@ -267,6 +266,7 @@
   function shuf(arr) { for (let i=arr.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
   function buildQueue(ai, respectFilter) {
     let q = (ALB[ai].tracks||[]).map((t, ti) => ({ ai, ti, inst: !!t.instrumental }));
+    if (genreFilter) q = q.filter(x => (ALB[ai].tracks[x.ti].genres||[]).includes(genreFilter));
     if (respectFilter && excludeInst) q = q.filter(x => !x.inst);
     return q;
   }
@@ -286,7 +286,9 @@
   function shuffleAll() {
     const q = [];
     ALB.forEach((a, ai) => (a.tracks||[]).forEach((t, ti) => {
-      if (!(excludeInst && t.instrumental)) q.push({ ai, ti, inst: !!t.instrumental });
+      if (genreFilter && !(t.genres||[]).includes(genreFilter)) return;
+      if (excludeInst && t.instrumental) return;
+      q.push({ ai, ti, inst: !!t.instrumental });
     }));
     if (!q.length) return;
     queue = shuf(q); qi = 0; shuffle = true; queueMode = 'all'; syncShuffleBtn();
@@ -409,16 +411,15 @@
   /* ── Shuffle-all, instrumental toggle, loop (optional buttons) ── */
   document.getElementById('shuffle-all-btn')?.addEventListener('click', shuffleAll);
 
-  const instBtn = document.getElementById('inst-toggle');
+  const instEl = document.getElementById('inst-toggle');     // checkbox switch inside the filter popover
   function syncInstBtn() {
-    document.body.classList.toggle('inst-off', excludeInst);   // greys + disables instrumental rows
-    if (!instBtn) return;
-    instBtn.classList.toggle('off', excludeInst);
-    instBtn.setAttribute('aria-pressed', String(!excludeInst));
-    const msg = excludeInst ? 'Instrumentals hidden — tap to show' : 'Instrumentals shown — tap to hide';
-    instBtn.title = msg; instBtn.setAttribute('aria-label', msg);
+    document.body.classList.toggle('inst-off', excludeInst);  // greys + disables instrumental rows
+    if (instEl && 'checked' in instEl) instEl.checked = !excludeInst;   // checked = instrumentals shown
   }
-  instBtn?.addEventListener('click', () => { excludeInst = !excludeInst; syncInstBtn(); saveSettings(); });
+  instEl?.addEventListener('change', () => {
+    excludeInst = !instEl.checked; syncInstBtn(); saveSettings();
+    if (view === 'album') openAlbumView(openAlbum);           // re-render in case nothing else triggers it
+  });
   syncInstBtn();
 
   const loopBtn = document.getElementById('np-loop');
