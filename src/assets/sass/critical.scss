@@ -23,9 +23,9 @@
 
   .title {
     width: 100%;
-    font-family: 'DM Serif Display', Georgia, serif;
+    font-family: 'Nexa', sans-serif;
     font-size: clamp(5rem, 10vw, 8rem);
-    font-weight: 400;
+    font-weight: 800;
     color: var(--text);
     line-height: 1;
     margin-bottom: 1.5rem;
@@ -34,9 +34,9 @@
   }
 
   .text {
-    font-family: 'DM Serif Display', Georgia, serif;
+    font-family: 'Nexa', sans-serif;
     font-size: clamp(1.4rem, 3vw, 2.2rem);
-    font-weight: 400;
+    font-weight: 800;
     color: var(--text-2);
     max-width: 58.75rem;
     margin-left: auto;
@@ -46,7 +46,7 @@
   }
 
   .topper {
-    font-family: 'DM Mono', monospace;
+    font-family: 'Nexa', sans-serif;
     font-size: 0.65rem;
     font-weight: 300;
     letter-spacing: 0.25em;
@@ -85,7 +85,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-family: 'DM Mono', monospace;
+    font-family: 'Nexa', sans-serif;
     font-size: 0.72rem;
     font-weight: 400;
     letter-spacing: 0.12em;
@@ -203,7 +203,7 @@
 }
 
 .dial-legend {
-  font-family: 'DM Mono', monospace;
+  font-family: 'Nexa', sans-serif;
   font-size: 0.48rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -247,7 +247,7 @@
   }
 
   .arc-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'Nexa', sans-serif;
     font-size: 7px;
     letter-spacing: 0.12em;
     text-transform: uppercase;

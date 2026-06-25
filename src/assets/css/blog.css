@@ -16,7 +16,7 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.72rem;
     font-weight: 400;
     letter-spacing: 0.12em;
@@ -61,7 +61,8 @@
     font-size: clamp(24px, 4vw, 48px);
     line-height: 1.2em;
     font-weight: 700;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     color: var(--panel);
     text-align: left;
   }
@@ -121,16 +122,16 @@
   #int-hero h1 {
     width: 100%;
     color: var(--text);
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
     font-size: clamp(2.5rem, 8vw, 4rem);
     margin: 0 0 0.75rem;
     text-align: left;
-    font-weight: 200;
+    font-weight: 800;
   }
   #int-hero p {
     margin: 0;
     color: var(--text-2);
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: clamp(0.85rem, 1.5vw, 1rem);
     max-width: 58.75rem;
     font-weight: 400;
@@ -250,7 +251,7 @@
   }
   .recent-articles .blog-author,
   .recent-articles .blog-date {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.7rem;
     line-height: 1.5em;
     color: var(--text-3);
@@ -269,7 +270,8 @@
     font-size: clamp(1.1rem, 3vw, 1.5rem);
     line-height: 1.25em;
     font-weight: 400;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     color: var(--text);
     transition: color 0.2s;
   }
@@ -280,12 +282,12 @@
     margin: 0 0 1.25rem;
     font-size: 0.8rem;
     line-height: 1.65em;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     color: var(--text-3);
     flex-grow: 1;
   }
   .recent-articles .button {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.65rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -340,7 +342,7 @@
     position: relative;
     display: block;
     margin-bottom: 1.875rem;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 1.25em;
     font-weight: 400;
     letter-spacing: 0.1em;
@@ -397,15 +399,15 @@
     margin: 0;
     margin-bottom: 0.25rem;
     text-decoration: none;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
     font-size: 0.9375rem;
     line-height: 1.5em;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text);
   }
   .blog-sidebar .feature-date {
     display: block;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.875rem;
     line-height: 1.5em;
     color: var(--text-3);
@@ -467,7 +469,7 @@
   }
   .blog-article .blog-author,
   .blog-article .blog-date {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.875rem;
     line-height: 1.5em;
     color: var(--text-3);
@@ -485,7 +487,8 @@
     font-size: clamp(20px, 5vw, 39px);
     line-height: 1.4em;
     font-weight: 700;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     color: var(--text);
   }
   .blog-article #blog-content {
@@ -498,7 +501,8 @@
     font-size: 2.25rem;
     line-height: 1.75em;
     font-weight: 700;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     color: var(--text);
   }
   .blog-article #blog-content h2 {
@@ -506,7 +510,8 @@
     font-size: 1.75rem;
     line-height: 1.5em;
     font-weight: 700;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     color: var(--text);
   }
   .blog-article #blog-content h3 {
@@ -514,7 +519,8 @@
     font-size: 1.5rem;
     line-height: 1.5em;
     font-weight: 700;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     color: var(--text);
   }
   .blog-article #blog-content h4,
@@ -524,7 +530,8 @@
     font-size: 1.25rem;
     line-height: 1.5em;
     font-weight: 700;
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     color: var(--text);
   }
   .blog-article #blog-content p {
@@ -532,7 +539,7 @@
     margin-bottom: 1rem;
     font-size: 1rem;
     line-height: 1.6em;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     color: var(--text-2);
   }
   .blog-article #blog-content a {
@@ -551,7 +558,7 @@
     list-style: circle;
     font-size: 1rem;
     line-height: 1.6em;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     color: var(--text-2);
   }
   .blog-article #blog-content img {

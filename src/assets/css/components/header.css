@@ -330,7 +330,7 @@
     transition-delay: 0.45s;
   }
   #navigation .li-link {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.72rem;
     font-weight: 300;
     letter-spacing: 0.12em;
@@ -416,7 +416,7 @@
     list-style: none;
   }
   #navigation .li-link.drop-link {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: clamp(0.875rem, 2vw, 1.25rem);
     font-weight: 300;
     letter-spacing: 0.1em;
@@ -503,7 +503,7 @@
     transition-delay: 0.45s;
   }
   #navigation .li-link.drop-link {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.72rem;
     font-weight: 300;
     letter-spacing: 0.1em;
@@ -672,7 +672,7 @@
     flex: none;
   }
   #navigation .li-link {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.72rem;
     font-weight: 300;
     letter-spacing: 0.12em;

@@ -35,7 +35,7 @@
   width: 100%;
 }
 #contact .label {
-  font-family: "DM Mono", monospace;
+  font-family: "Nexa", sans-serif;
   font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.14em;
@@ -52,7 +52,7 @@
 }
 #contact .input,
 #contact .textarea {
-  font-family: "DM Mono", monospace;
+  font-family: "Nexa", sans-serif;
   font-size: 0.8rem;
   font-weight: 300;
   color: var(--text);
@@ -113,7 +113,7 @@
   margin-bottom: 0;
 }
 #contact .header {
-  font-family: "DM Mono", monospace;
+  font-family: "Nexa", sans-serif;
   font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.2em;
@@ -123,7 +123,8 @@
   display: block;
 }
 #contact .link {
-  font-family: "DM Serif Display", Georgia, serif;
+  font-family: "Nexa", sans-serif;
+  font-weight: 800;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   line-height: 1.3em;
   text-decoration: none;

@@ -261,7 +261,8 @@
     box-shadow: 0 2px 8px var(--sh-deep), 0 1px 0 var(--hi) inset;
   }
   #intro .service-button {
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     /* 16px - 20px */
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.2em;
@@ -524,7 +525,8 @@
     box-shadow: 0 2px 8px var(--sh-deep), 0 1px 0 var(--hi) inset;
   }
   #experience .service-button {
-    font-family: "DM Serif Display", Georgia, serif;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     /* 16px - 20px */
     font-size: clamp(1rem, 2vw, 1.25rem);
     line-height: 1.2em;
@@ -761,7 +763,7 @@
     flex-grow: 1;
   }
   #blog .topper-small {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.56rem;
     font-weight: 400;
     letter-spacing: 0.16em;
@@ -777,8 +779,8 @@
     opacity: 0.75;
   }
   #blog .h4 {
-    font-family: "DM Serif Display", Georgia, serif;
-    font-weight: 400;
+    font-family: "Nexa", sans-serif;
+    font-weight: 800;
     font-size: clamp(1.05rem, 2.2vw, 1.35rem);
     line-height: 1.2em;
     text-align: left;
@@ -790,7 +792,7 @@
     color: var(--accent);
   }
   #blog .desc {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.78rem;
     line-height: 1.65em;
     color: var(--text-3);
@@ -798,7 +800,7 @@
     flex-grow: 1;
   }
   #blog .button {
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-size: 0.65rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -898,7 +900,7 @@
     padding: 1.25rem;
     text-align: center;
     color: #e8ede8;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
     font-weight: 400;
   }
   #gallery .text {
@@ -1112,7 +1114,7 @@
     color: var(--accent);
     opacity: 0.12;
     display: block;
-    font-family: "DM Mono", monospace;
+    font-family: "Nexa", sans-serif;
   }
   #steps .h3 {
     /* 20px - 25px */

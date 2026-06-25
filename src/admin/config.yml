@@ -3,7 +3,6 @@ backend:
     branch: main
 
 local_backend: true
-logo_url: https://alan-huynh.is-a.dev/assets/images/Logo.jpeg
 
 media_folder: "src/assets/images/blog"
 public_folder: "/assets/images/blog"

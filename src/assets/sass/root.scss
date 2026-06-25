@@ -1,5 +1,18 @@
 /* ── Design tokens ───────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Serif+Display:ital@0;1&display=swap');
+@font-face {
+  font-family: 'Nexa';
+  src: url('/assets/fonts/Nexa-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nexa';
+  src: url('/assets/fonts/Nexa-Heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -51,7 +64,8 @@ body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'DM Serif Display', Georgia, serif;
+  font-family: 'Nexa', sans-serif;
+  font-weight: 200;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -75,7 +89,7 @@ body::before {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-family: 'DM Mono', monospace;
+  font-family: 'Nexa', sans-serif;
   font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 0.12em;
@@ -108,7 +122,7 @@ body::before {
 
 /* ── Topper label ────────────────────────────────── */
 .topper {
-  font-family: 'DM Mono', monospace;
+  font-family: 'Nexa', sans-serif;
   font-size: 0.65rem;
   font-weight: 300;
   letter-spacing: 0.25em;
@@ -118,27 +132,28 @@ body::before {
 
 /* ── Section title ───────────────────────────────── */
 .title {
-  font-family: 'DM Serif Display', Georgia, serif;
-  font-weight: 400;
+  font-family: 'Nexa', sans-serif;
+  font-weight: 800;
   color: var(--text);
   line-height: 1.2em;
 }
 
 /* ── Body text ───────────────────────────────────── */
 .text {
-  font-family: 'DM Mono', monospace;
+  font-family: 'Nexa', sans-serif;
   font-size: 1rem;
   line-height: 1.7em;
   color: var(--text-2);
 }
 
 p {
-  font-family: 'DM Mono', monospace;
+  font-family: 'Nexa', sans-serif;
   color: var(--text-2);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'DM Serif Display', Georgia, serif;
+  font-family: 'Nexa', sans-serif;
+  font-weight: 800;
   color: var(--text);
 }
 
