@@ -180,11 +180,14 @@
 
   function renderShelf() {
     const idx = sortedIndices();
-    shelf.innerHTML = idx.map(i => {
+    shelf.innerHTML = idx.map((i, pos) => {
       const a = ALB[i];
+      // Above-the-fold covers must not be lazy — the LCP element lives here. Eager-load the
+      // first rows and prioritise the very first so the LCP image starts fetching immediately.
+      const eager = pos < 8;
       return `<button class="alb-card" data-ai="${i}">
         <div class="alb-cover sk">
-          <img src="${esc(a.cover_url)}" alt="" loading="lazy" decoding="async" width="300" height="300"
+          <img src="${esc(a.cover_url)}" alt="" loading="${eager ? 'eager' : 'lazy'}" fetchpriority="${pos < 4 ? 'high' : 'auto'}" decoding="async" width="300" height="300"
                onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/>
           <span class="alb-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
         </div>
