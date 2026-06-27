@@ -41,7 +41,12 @@ const CATALOG = join(ROOT, 'src/assets/catalogs/yura.json');
 const LOCAL_DIR = join(ROOT, 'src/assets/images/yura/covers');   // shipped by 11ty passthrough
 const LOCAL_URL_PREFIX = '/assets/images/yura/covers';
 
-const slug = (s) => s.replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '').slice(0, 80).toLowerCase();
+// Reuse each cover's existing unique filename stem (covers/<name>.jpg → <name>) so the
+// optimized keys are guaranteed unique and 1:1 with the originals. Falls back to the index.
+const stemFor = (a, i) => {
+  const fromPath = (a.cover || a.cover_url || '').split('/').pop()?.replace(/\.[a-z0-9]+$/i, '');
+  return (fromPath && decodeURIComponent(fromPath)) || `cover-${i}`;
+};
 
 async function main() {
   const sharp = (await import('sharp').catch(() => {
@@ -71,28 +76,32 @@ async function main() {
   }
 
   let totalIn = 0, totalOut = 0, done = 0;
-  for (const a of albums) {
+  for (let i = 0; i < albums.length; i++) {
+    const a = albums[i];
     const src = a.cover_url;
     if (!src) continue;
     try {
-      const buf = Buffer.from(await (await fetch(src)).arrayBuffer());
+      const res = await fetch(src);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const buf = Buffer.from(await res.arrayBuffer());
       totalIn += buf.length;
 
-      const base = slug(a.title || a.album || String(done));
+      const base = stemFor(a, i);
       const img = sharp(buf).resize(SIZE, SIZE, { fit: 'cover' });
       const avif = await img.clone().avif({ quality: AVIF_QUALITY }).toBuffer();
       const webp = await img.clone().webp({ quality: WEBP_QUALITY }).toBuffer();
       totalOut += avif.length;
 
       if (WRITE) {
+        const enc = encodeURIComponent(`${base}.avif`);   // URL-safe; S3 key stays raw
         if (UPLOAD) {
           await putObject(`covers-opt/${base}.avif`, avif, 'image/avif');
           await putObject(`covers-opt/${base}.webp`, webp, 'image/webp');
-          a.cover_url = `${process.env.R2_PUBLIC_BASE}/covers-opt/${base}.avif`;
+          a.cover_url = `${process.env.R2_PUBLIC_BASE}/covers-opt/${enc}`;
         } else {
           await writeFile(join(LOCAL_DIR, `${base}.avif`), avif);
           await writeFile(join(LOCAL_DIR, `${base}.webp`), webp);
-          a.cover_url = `${LOCAL_URL_PREFIX}/${base}.avif`;
+          a.cover_url = `${LOCAL_URL_PREFIX}/${enc}`;
         }
       }
       done++;
