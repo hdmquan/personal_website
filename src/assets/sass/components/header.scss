@@ -146,6 +146,8 @@
         z-index: 10000;
         transform: none;
         transition: none;
+        padding: calc(10 / 16 * 1rem) 0;
+        padding-top: max(calc(10 / 16 * 1rem), env(safe-area-inset-top));
 
         &:before {
             content: "";

@@ -26,8 +26,8 @@
   --panel-raised: #eeebe5;
   --panel-inset:  #d6d2cb;
   --text:         #1e2a20;
-  --text-2:       #6b7d6d;
-  --text-3:       #9aaa9c;
+  --text-2:       #4e6150;
+  --text-3:       #566857;
   --accent:       #44624a;
   --accent-hi:    #5a7c60;
   --accent-sh:    var(--accent-sh);
@@ -46,7 +46,7 @@ body.dark-mode {
   --panel-inset:  #171c18;
   --text:         #e8ede8;
   --text-2:       #9aaa9c;
-  --text-3:       #5a6b5c;
+  --text-3:       #7e8f80;
   --accent:       #8ba888;
   --accent-hi:    #a0bfa0;
   --accent-sh:    #5a7c60;
@@ -180,4 +180,28 @@ img { max-width: 100%; display: block; }
 h2.title {
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 1rem;
+}
+
+/* ── Keyboard focus ──────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Respect reduced motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

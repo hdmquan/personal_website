@@ -91,6 +91,7 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
+    white-space: nowrap;
     color: var(--text-2);
     background: var(--panel-raised);
     border: 1px solid rgba(0,0,0,0.12);
@@ -119,6 +120,11 @@
       margin-right: 0.6rem;
     }
   }
+}
+
+/* Drop the "My" so the resume button stays on one line on small screens */
+@media only screen and (max-width: 30rem) {
+  #hero .button-transparent .optional-word { display: none; }
 }
 
 @media only screen and (min-width: 81.25em) {

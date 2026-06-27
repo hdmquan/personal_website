@@ -18,7 +18,19 @@
                     I’d love to hear from you.
                 </p>
             </div>
-            <form id="form" name="Contact Form" method="post">
+            <form
+                id="form"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+            >
+                <input type="hidden" name="form-name" value="contact" />
+                <p hidden>
+                    <label
+                        >Leave this empty: <input name="bot-field"
+                    /></label>
+                </p>
                 <label class="label">
                     Name
                     <input
@@ -45,8 +57,7 @@
                     Phone (optional)
                     <input
                         class="input"
-                        required
-                        type="text"
+                        type="tel"
                         id="phone"
                         name="phone"
                         placeholder="Can add if you prefer a call"
@@ -97,7 +108,11 @@
                     </div>
                     <div class="flex-group">
                         <span class="header">Address</span>
-                        <a href="" class="link"
+                        <a
+                            href="https://maps.google.com/?q=120+Spencer+St,+Melbourne,+VIC+3000"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="link"
                             >120 Spencer St, Melbourne, VIC 3000</a
                         >
                     </div>

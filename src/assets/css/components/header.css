@@ -119,6 +119,8 @@
     z-index: 10000;
     transform: none;
     transition: none;
+    padding: 0.625rem 0;
+    padding-top: max(0.625rem, env(safe-area-inset-top));
   }
   #navigation:before {
     content: "";

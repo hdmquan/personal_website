@@ -1537,7 +1537,9 @@
 }
 
 /* ── Dark mode social icon inversion ─ */
-body.dark-mode .social-icons img {
+/* #hero scopes these icons with an ID in critical.scss, so match that
+   specificity here or the inversion is overridden and the icons stay black. */
+body.dark-mode #hero .social-icons img {
     filter: invert(1) brightness(0.85);
 }
 
