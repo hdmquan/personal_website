@@ -61,6 +61,9 @@ html, body { overscroll-behavior: none; }
   font-family: var(--serif); font-optical-sizing: auto; font-weight: 600;
   font-size: clamp(3.1rem,17vw,6rem); line-height: .92; margin: 0;
   letter-spacing: .03em; color: var(--text);
+  /* the mincho glyphs carry more left side-bearing than right, so centered text reads
+     left-of-centre; a small leading pad optically re-centres the wordmark. */
+  padding-left: .1em;
   animation: riseIn .8s ease .06s both;
 }
 #yura-hero .romaji {
@@ -86,6 +89,9 @@ html, body { overscroll-behavior: none; }
   display: flex; flex-direction: column; align-items: center; gap: 1rem;
   margin-top: clamp(.5rem,2vw,1rem); padding: 0 1rem;
   animation: riseIn .8s ease .24s both;
+  /* riseIn leaves a transform → stacking context. Keep the controls (and the filter/sort
+     popovers that drop out of them) above the shelf cards, which come later in the DOM. */
+  position: relative; z-index: 30;
 }
 .search-wrap {
   display: flex; align-items: center; gap: .6rem; width: 100%; max-width: 30rem;
@@ -288,6 +294,10 @@ html, body { overscroll-behavior: none; }
 .btn-ext:not(.btn-ext-play) { border-color: var(--accent); color: var(--accent); }
 .btn-ext:not(.btn-ext-play):hover { border-color: var(--accent-hi); color: var(--accent-hi); background: transparent; }
 .btn-ext svg { width: 15px; height: 15px; }
+/* mobile: drop the icons, just centered labels (the buy link keeps its icon) */
+@media (max-width: 600px) {
+  .btn-ext svg { display: none; }
+}
 /* Play = primary, filled green (functional accent) */
 .btn-ext-play { background: var(--accent); border-color: var(--accent); color: #fff; }
 .btn-ext-play:hover { background: var(--accent-hi); border-color: var(--accent-hi); color: #fff; }
