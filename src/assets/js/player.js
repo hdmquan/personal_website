@@ -277,13 +277,41 @@
   function playAlbumFrom(ai, ti, shuffled, respectFilter) {
     shuffle = !!shuffled; queueMode = 'album';
     queue = buildQueue(ai, respectFilter);
-    // a direct track click may target an instrumental even when excluded → keep it playable
-    if (!queue.some(q => q.ti === ti)) queue = buildQueue(ai, false);
+    // Album-level Play/Shuffle pass ti=0; if track 0 is filtered out (e.g. it's an instrumental
+    // and instrumentals are hidden) we just start at the first surviving track — NOT rebuild the
+    // queue unfiltered, which would re-add every instrumental. A direct track click stays playable
+    // because it already passes respectFilter=false (its queue is unfiltered). Only fall back to
+    // the full album if the filter leaves nothing to play.
+    if (!queue.length) queue = buildQueue(ai, false);
     if (shuffle) shuf(queue);
     qi = queue.findIndex(q => q.ti === ti);
     if (qi < 0) qi = 0;
     syncShuffleBtn();
     loadCurrent(true);
+  }
+
+  // Turning instrumentals OFF must also drop them from whatever is queued right now, not just
+  // future plays. Keep the current track if it's vocal; if it's itself an instrumental, advance
+  // to the next vocal. Leaves the queue alone if removing instrumentals would empty it.
+  function pruneInstFromQueue() {
+    if (!excludeInst || !queue.length) return;
+    const pruned = queue.filter(x => !x.inst);
+    if (pruned.length === queue.length || !pruned.length) return;
+    const cur = queue[qi];
+    if (cur && !cur.inst) {                       // current track survives → keep playing it
+      queue = pruned;
+      qi = queue.findIndex(x => x.ai === cur.ai && x.ti === cur.ti);
+      if (qi < 0) qi = 0;
+      renderQueue(); saveNowPlaying();
+    } else {                                      // current track is an instrumental being removed
+      let target = null;
+      for (let j = qi + 1; j < queue.length; j++) if (!queue[j].inst) { target = queue[j]; break; }
+      if (!target) target = pruned[0];
+      queue = pruned;
+      qi = queue.findIndex(x => x.ai === target.ai && x.ti === target.ti);
+      if (qi < 0) qi = 0;
+      renderQueue(); loadCurrent(true);
+    }
   }
 
   function shuffleAll() {
@@ -422,6 +450,7 @@
   instEl?.addEventListener('change', () => {
     excludeInst = !instEl.checked; syncInstBtn(); saveSettings();
     if (view === 'album') openAlbumView(openAlbum);           // re-render in case nothing else triggers it
+    pruneInstFromQueue();                                     // drop instrumentals from the live queue too
   });
   syncInstBtn();
 
