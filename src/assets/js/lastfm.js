@@ -7,6 +7,41 @@
  * Login: Last.fm sends the listener back with ?token=…; the token is exchanged for a session key by
  * the signing function (/.netlify/functions/lastfm) so the shared secret never touches the client.
  */
+/* Scrobbler — player.js calls into this on track/playback events. Everything is gated by
+ * `enabled` (a live Last.fm session): when logged out nothing here runs and no requests fire,
+ * so there's zero scrobble cost for anonymous listeners. The signing function adds the secret. */
+(function () {
+  var FN = '/.netlify/functions/lastfm';
+  var LS = 'fa:yura:lastfm';
+  function session() { try { return JSON.parse(localStorage.getItem(LS)); } catch (e) { return null; } }
+  function post(payload) {
+    var s = session(); if (!s) return;
+    payload.session_key = s.session_key;
+    fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function () {});
+  }
+  var curKey = null, scrobbled = false;
+  function key(m) { return m ? (m.artist + '' + m.track + '' + (m.startedAt || 0)) : null; }
+
+  var S = {
+    enabled: !!session(),
+    refresh: function () { S.enabled = !!session(); },
+    track: function (m) { curKey = key(m); scrobbled = false; },        // new track loaded
+    playing: function (m) {                                             // playback started → now-playing ping
+      if (key(m) !== curKey) { curKey = key(m); scrobbled = false; }
+      post({ action: 'nowPlaying', artist: m.artist, track: m.track, album: m.album, duration: m.duration });
+    },
+    tick: function (m, cur, dur) {                                      // Last.fm rule: >30s, played ≥half or 4min
+      if (scrobbled || !m) return;
+      dur = dur || m.duration || 0;
+      if (dur > 30 && cur >= Math.min(dur / 2, 240)) {
+        scrobbled = true;
+        post({ action: 'scrobble', artist: m.artist, track: m.track, album: m.album, duration: m.duration, timestamp: m.startedAt || Math.floor(Date.now() / 1000 - cur) });
+      }
+    },
+  };
+  window.Scrobbler = S;
+})();
+
 (function () {
   var API_KEY = '3d4428c58350f5e4a0d38e4b9602919c';   // public key (used in the auth redirect)
   var FN = '/.netlify/functions/lastfm';
@@ -22,6 +57,7 @@
   function getSession() { try { return JSON.parse(localStorage.getItem(LS)); } catch (e) { return null; } }
   function setSession(s) {
     if (s) localStorage.setItem(LS, JSON.stringify(s)); else localStorage.removeItem(LS);
+    if (window.Scrobbler) window.Scrobbler.refresh();   // toggle scrobbling with login state
     render();
   }
 

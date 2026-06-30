@@ -328,9 +328,13 @@
     loadCurrent(true);
   }
 
+  let scrobbleMeta = null;
   function loadCurrent(autoplay, startAt) {
     const q = queue[qi]; if (!q) return;
     const a = ALB[q.ai], t = a.tracks[q.ti];
+    // scrobble metadata for the new track (no-op unless a Last.fm session is connected)
+    scrobbleMeta = { artist: ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: Math.floor(Date.now() / 1000) };
+    if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
     audio.src = t.url;            // setting src + play → R2 streams via range, no full download
     pendingSeek = (startAt && startAt > 0) ? startAt : null;
     npBar.classList.add('show');
@@ -342,7 +346,10 @@
     setPct(0); setBuf(0);
     document.title = a.title + ' | ' + (ART.name || '');
     applyMarquee();
-    if (autoplay) { wantPlay = true; audio.play().catch(()=>{}); }
+    if (autoplay) {
+      wantPlay = true; audio.play().catch(()=>{});
+      if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.playing(scrobbleMeta);   // now-playing ping
+    }
     setMediaSession(a, t);
     highlightPlaying();
     renderQueue();
@@ -382,6 +389,7 @@
     if (seeking || !audio.duration) return;
     setPct(audio.currentTime / audio.duration * 100);
     updatePositionState();
+    if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.tick(scrobbleMeta, audio.currentTime, audio.duration);
     if ((npSaveT = (npSaveT + 1) % 20) === 0) saveNowPlaying();   // persist position ~every 20 ticks
   });
   audio.addEventListener('progress', () => {

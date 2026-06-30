@@ -53,6 +53,21 @@ exports.handler = async (event) => {
       if (data.session) return { statusCode: 200, headers, body: JSON.stringify({ username: data.session.name, session_key: data.session.key }) };
       return { statusCode: 400, headers, body: JSON.stringify({ error: data.message || 'auth failed' }) };
     }
+
+    if (body.action === 'nowPlaying' || body.action === 'scrobble') {
+      if (!body.session_key || !body.artist || !body.track) return { statusCode: 400, headers, body: JSON.stringify({ error: 'missing fields' }) };
+      const params = {
+        method: body.action === 'scrobble' ? 'track.scrobble' : 'track.updateNowPlaying',
+        api_key: API_KEY, sk: body.session_key, artist: body.artist, track: body.track,
+      };
+      if (body.album) params.album = body.album;
+      if (body.duration) params.duration = String(Math.round(body.duration));
+      if (body.action === 'scrobble') params.timestamp = String(body.timestamp || Math.floor(Date.now() / 1000));
+      const data = await call(params);
+      if (data.error) return { statusCode: 400, headers, body: JSON.stringify({ error: data.message || 'lastfm error' }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
+    }
+
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'unknown action' }) };
   } catch (e) {
     return { statusCode: 502, headers, body: JSON.stringify({ error: 'upstream error' }) };
