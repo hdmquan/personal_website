@@ -32,23 +32,14 @@
         text-decoration: none;
         line-height: clamp(2.875em, 5.5vw, 3.5em);
         color: var(--text-2);
-        border: 1px solid rgba(0,0,0,0.12);
-        box-shadow:
-            0 1px 0 var(--hi) inset,
-            0 3px 0 var(--accent),
-            0 4px 8px var(--sh-deep);
-        transition: transform 0.08s ease, box-shadow 0.08s ease, color 0.15s;
+        border: 1px solid var(--rule);
+        box-shadow: none;
+        transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
         text-align: center;
 
-        &:hover { color: var(--accent); }
+        &:hover { color: var(--accent); border-color: var(--brass); }
 
-        &:active {
-            transform: translateY(2px);
-            box-shadow:
-                0 1px 0 rgba(0,0,0,0.08) inset,
-                0 1px 0 var(--accent),
-                0 2px 4px var(--sh);
-        }
+        &:active { background: var(--panel-inset); }
     }
 }
 
@@ -140,11 +131,12 @@
         h1 {
             width: 100%;
             color: var(--text);
-            font-family: 'Nexa', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-family: var(--serif);
+            font-size: clamp(2.75rem, 8vw, 4.5rem);
+            letter-spacing: -0.02em;
             margin: 0 0 0.75rem;
             text-align: left;
-            font-weight: 800;
+            font-weight: 400;
         }
 
         p {
@@ -212,16 +204,16 @@
         max-width: calc(795 / 16 * 1em);
         width: 100%;
         flex: none;
-        background: var(--panel);
+        background: var(--milled);
         border: 1px solid var(--rule);
+        border-top: 1px solid var(--brass-line);
         border-radius: 0.75rem;
         overflow: hidden;
-        box-shadow: 0 2px 10px var(--sh), 0 1px 0 var(--hi) inset;
-        transition: box-shadow 0.2s, transform 0.2s;
+        box-shadow: none;
+        transition: border-color 0.2s;
 
         &:hover {
-            box-shadow: 0 6px 24px var(--sh-deep), 0 1px 0 var(--hi) inset;
-            transform: translateY(-2px);
+            border-color: var(--brass-line);
         }
 
         .blog-mainImage {
@@ -303,11 +295,11 @@
 
         .blog-h1 {
             margin: 0 0 0.6rem;
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
-            line-height: 1.25em;
+            font-size: clamp(1.25rem, 3vw, 1.65rem);
+            line-height: 1.18em;
+            letter-spacing: -0.01em;
+            font-family: var(--serif);
             font-weight: 400;
-            font-family: 'Nexa', sans-serif;
-            font-weight: 800;
             color: var(--text);
             transition: color 0.2s;
         }
@@ -375,7 +367,7 @@
             align-items: center;
             background: var(--panel);
             border: 1px solid var(--rule);
-            box-shadow: 0 2px 8px var(--sh);
+            box-shadow: none;
             border-radius: calc(8 / 16 * 1em);
             width: 100%;
             padding: calc(35 / 16 * 1em) calc(30 / 16 * 1em);
@@ -449,10 +441,10 @@
             margin: 0;
             margin-bottom: calc(4 / 16 * 1rem);
             text-decoration: none;
-            font-family: 'Nexa', sans-serif;
-            font-size: calc(15 / 16 * 1rem);
-            line-height: 1.5em;
-            font-weight: 800;
+            font-family: var(--serif);
+            font-size: calc(17 / 16 * 1rem);
+            line-height: 1.4em;
+            font-weight: 400;
             color: var(--text);
         }
 
@@ -544,12 +536,12 @@
 
         .blog-h1 {
             margin: calc(16 / 16 * 1rem) 0;
-            max-width: calc(550 / 16 * 1rem);
-            font-size: clamp(20px, 5vw, 39px);
-            line-height: 1.4em;
-            font-weight: 700;
-            font-family: 'Nexa', sans-serif;
-            font-weight: 800;
+            max-width: calc(620 / 16 * 1rem);
+            font-size: clamp(28px, 5vw, 46px);
+            line-height: 1.2em;
+            letter-spacing: -0.02em;
+            font-family: var(--serif);
+            font-weight: 400;
             color: var(--text);
         }
 
@@ -560,31 +552,30 @@
 
             h1 {
                 margin-bottom: 1rem;
-                font-size: 2.25rem;
-                line-height: 1.75em;
-                font-weight: 700;
-                font-family: 'Nexa', sans-serif;
-                font-weight: 800;
+                font-size: 2.4rem;
+                line-height: 1.3em;
+                letter-spacing: -0.01em;
+                font-family: var(--serif);
+                font-weight: 400;
                 color: var(--text);
             }
 
             h2 {
                 margin-bottom: calc(16 / 16 * 1rem);
-                font-size: calc(28 / 16 * 1rem);
-                line-height: 1.5em;
-                font-weight: 700;
-                font-family: 'Nexa', sans-serif;
-                font-weight: 800;
+                font-size: calc(30 / 16 * 1rem);
+                line-height: 1.35em;
+                letter-spacing: -0.01em;
+                font-family: var(--serif);
+                font-weight: 400;
                 color: var(--text);
             }
 
             h3 {
                 margin-bottom: calc(16 / 16 * 1rem);
                 font-size: calc(24 / 16 * 1rem);
-                line-height: 1.5em;
-                font-weight: 700;
-                font-family: 'Nexa', sans-serif;
-                font-weight: 800;
+                line-height: 1.4em;
+                font-family: var(--serif);
+                font-weight: 400;
                 color: var(--text);
             }
 
@@ -594,9 +585,8 @@
                 margin-bottom: calc(16 / 16 * 1rem);
                 font-size: calc(20 / 16 * 1rem);
                 line-height: 1.5em;
-                font-weight: 700;
-                font-family: 'Nexa', sans-serif;
-                font-weight: 800;
+                font-family: var(--serif);
+                font-weight: 400;
                 color: var(--text);
             }
 

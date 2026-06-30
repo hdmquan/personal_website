@@ -4,6 +4,10 @@
 
 <header id="navigation">
   <div class="container">
+    <a href="/" class="nav-mark" aria-label="Alan Huynh — home">
+      <span class="nav-mark-name">Alan Huynh</span>
+      <span class="nav-mark-sub">ML &amp; Automation</span>
+    </a>
     <nav class="nav" role="navigation">
       <button class="toggle" aria-label="mobile menu toggle">
         <div class="box" aria-hidden="true">
@@ -46,7 +50,9 @@
   (function() {
     var path = window.location.pathname.replace(/\/$/, '') || '/';
     document.querySelectorAll('#navigation .li-link').forEach(function(a) {
-      var href = a.getAttribute('href').split('#')[0].replace(/\/$/, '') || '/';
+      var raw = a.getAttribute('href');
+      if (raw.indexOf('#') !== -1) return; // on-page section links don't flag the page
+      var href = raw.replace(/\/$/, '') || '/';
       if (href === path) a.classList.add('active');
     });
   })();

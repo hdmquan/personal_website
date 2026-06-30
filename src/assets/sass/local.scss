@@ -261,21 +261,16 @@
             border-radius: 0.5rem;
             padding: 0.875rem 1rem;
             box-sizing: border-box;
-            box-shadow: 0 1px 4px var(--sh), 0 1px 0 var(--hi) inset;
+            box-shadow: none;
             transition: box-shadow 0.2s, background 0.2s;
 
             &.active {
                 background: var(--panel-raised);
-                box-shadow: 0 2px 8px var(--sh), 0 1px 0 var(--hi) inset;
+                box-shadow: none;
 
                 .indicator {
-                    transform: translateY(2px);
-                    box-shadow:
-                        0 1px 0 rgba(0,0,0,0.1) inset,
-                        0 -1px 0 var(--hi) inset,
-                        0 0 0 1px rgba(0,0,0,0.12),
-                        0 1px 0 var(--accent),
-                        0 2px 3px var(--sh);
+                    transform: none;
+                    box-shadow: inset 0 0 0 1px var(--brass-line);
 
                     &:before {
                         transform: translate(-50%, -50%) rotate(360deg);
@@ -301,7 +296,7 @@
 
             &:hover {
                 cursor: pointer;
-                box-shadow: 0 2px 8px var(--sh-deep), 0 1px 0 var(--hi) inset;
+                border-color: var(--brass-line);
             }
         }
 
@@ -335,12 +330,7 @@
             border-radius: 0.4rem;
             border: none;
             background: var(--panel-raised);
-            box-shadow:
-                0 1px 0 var(--hi) inset,
-                0 -1px 0 rgba(0,0,0,0.12) inset,
-                0 0 0 1px rgba(0,0,0,0.12),
-                0 3px 0 var(--accent),
-                0 4px 6px var(--sh-deep);
+            box-shadow: inset 0 0 0 1px var(--rule);
             position: relative;
             z-index: 1;
             flex-shrink: 0;
@@ -574,21 +564,16 @@
             border-radius: 0.5rem;
             padding: 0.875rem 1rem;
             box-sizing: border-box;
-            box-shadow: 0 1px 4px var(--sh), 0 1px 0 var(--hi) inset;
+            box-shadow: none;
             transition: box-shadow 0.2s, background 0.2s;
 
             &.active {
                 background: var(--panel-raised);
-                box-shadow: 0 2px 8px var(--sh), 0 1px 0 var(--hi) inset;
+                box-shadow: none;
 
                 .indicator {
-                    transform: translateY(2px);
-                    box-shadow:
-                        0 1px 0 rgba(0,0,0,0.1) inset,
-                        0 -1px 0 var(--hi) inset,
-                        0 0 0 1px rgba(0,0,0,0.12),
-                        0 1px 0 var(--accent),
-                        0 2px 3px var(--sh);
+                    transform: none;
+                    box-shadow: inset 0 0 0 1px var(--brass-line);
 
                     &:before {
                         transform: translate(-50%, -50%) rotate(360deg);
@@ -614,7 +599,7 @@
 
             &:hover {
                 cursor: pointer;
-                box-shadow: 0 2px 8px var(--sh-deep), 0 1px 0 var(--hi) inset;
+                border-color: var(--brass-line);
             }
         }
 
@@ -648,12 +633,7 @@
             border-radius: 0.4rem;
             border: none;
             background: var(--panel-raised);
-            box-shadow:
-                0 1px 0 var(--hi) inset,
-                0 -1px 0 rgba(0,0,0,0.12) inset,
-                0 0 0 1px rgba(0,0,0,0.12),
-                0 3px 0 var(--accent),
-                0 4px 6px var(--sh-deep);
+            box-shadow: inset 0 0 0 1px var(--rule);
             position: relative;
             z-index: 1;
             flex-shrink: 0;
@@ -791,7 +771,8 @@
 
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-    #blog {
+    #blog,
+    #projects {
         padding: var(--sectionPadding);
         border-top: 1px solid var(--rule);
         position: relative;
@@ -831,20 +812,32 @@
         .error { grid-column: span 12; }
 
         .item {
+            position: relative;
             list-style: none;
             display: flex;
             flex-direction: column;
             grid-column: span 12;
-            background: var(--panel);
+            background: var(--milled);
             border: 1px solid var(--rule);
             border-radius: 0.75rem;
             overflow: hidden;
-            box-shadow: 0 2px 8px var(--sh), 0 1px 0 var(--hi) inset;
-            transition: box-shadow 0.2s, transform 0.2s;
+            box-shadow: none;
+            transition: border-color 0.25s;
+
+            /* brass keyline, lit on hover */
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 0.75rem;
+                border: 1px solid transparent;
+                pointer-events: none;
+                transition: border-color 0.25s;
+            }
 
             &:hover {
-                box-shadow: 0 6px 20px var(--sh-deep), 0 1px 0 var(--hi) inset;
-                transform: translateY(-2px);
+                border-color: var(--brass-line);
+                &::after { border-color: var(--brass-line); }
             }
         }
 
@@ -905,10 +898,11 @@
         }
 
         .h4 {
-            font-family: 'Nexa', sans-serif;
-            font-weight: 800;
-            font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-            line-height: 1.2em;
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+            line-height: 1.15em;
+            letter-spacing: -0.01em;
             text-align: left;
             margin: 0 0 0.6rem;
             color: var(--text);
@@ -957,7 +951,8 @@
 
 /* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
-    #blog {
+    #blog,
+    #projects {
         .content {
             flex-direction: row;
             justify-content: space-between;
@@ -969,7 +964,8 @@
 
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
-    #blog {
+    #blog,
+    #projects {
         .container { max-width: calc(1280 / 16 * 1rem); }
         .item { grid-column: span 4; }
     }
@@ -1099,7 +1095,7 @@
             position: relative;
             border-radius: 0.5rem;
             overflow: hidden;
-            box-shadow: 0 2px 10px var(--sh), 0 1px 0 var(--hi) inset;
+            box-shadow: none;
             border: 1px solid var(--rule);
 
             img {
@@ -1285,20 +1281,25 @@
         }
 
         .number {
-            /* 80px - 100px */
+            /* engraved index numeral — brass, pressed into the plate */
             font-size: clamp(5rem, 1vw, 6.25rem);
             font-weight: 400;
             line-height: 1.2em;
-            color: var(--accent);
-            opacity: 0.12;
+            color: var(--brass);
+            opacity: 0.32;
             display: block;
-            font-family: 'Nexa', sans-serif;
+            font-family: var(--serif);
+            font-style: italic;
+            letter-spacing: -0.02em;
+            text-shadow: 0 1px 0 var(--hi);
         }
 
         .h3 {
             /* 20px - 25px */
-            font-size: clamp(1.25rem, 2vw, 1.5625rem);
-            font-weight: 700;
+            font-family: var(--serif);
+            font-size: clamp(1.35rem, 2.2vw, 1.6875rem);
+            font-weight: 400;
+            letter-spacing: -0.01em;
             line-height: 1.2em;
             margin: calc(-32 / 16 * 1rem) 0 calc(16 / 16 * 1rem) 0;
             color: var(--text);
@@ -1543,18 +1544,20 @@ body.dark-mode #hero .social-icons img {
     filter: invert(1) brightness(0.85);
 }
 
-/* ── Image wrapper treatment ─────────────────────── */
+/* ── Image wrapper treatment — flat, framed by a hairline ─ */
 .picture,
 .image-group .picture {
     border-radius: 0.75rem;
     overflow: hidden;
-    box-shadow: 0 4px 24px var(--sh-deep), 0 1px 0 var(--hi) inset;
+    box-shadow: none;
+    border: 1px solid var(--rule);
 }
 
 /* About section — picture has a decorative bg behind it */
 #about .picture {
     border-radius: 0.75rem;
-    box-shadow: 0 8px 32px var(--sh-deep);
+    border: 1px solid var(--rule);
+    box-shadow: none;
 }
 #about .picture img {
     border-radius: 0.75rem;
@@ -1564,19 +1567,22 @@ body.dark-mode #hero .social-icons img {
 #experience .picture,
 #intro .picture {
     border-radius: 0.75rem;
-    box-shadow: 0 6px 28px var(--sh-deep);
+    border: 1px solid var(--rule);
+    box-shadow: none;
 }
 
-/* Gallery/projects grid images — already have their own treatment */
+/* Gallery grid images */
 #gallery .picture {
     border-radius: 0.5rem;
-    box-shadow: 0 4px 16px var(--sh-deep);
+    border: 1px solid var(--rule);
+    box-shadow: none;
 }
 
-/* Blog/project card image wrappers */
+/* Blog/project card image wrappers — already inside a framed card */
 #blog .picture,
 #projects .picture {
-    border-radius: 0.5rem;
+    border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 2px 12px var(--sh);
+    box-shadow: none;
+    border: none;
 }

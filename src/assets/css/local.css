@@ -229,16 +229,16 @@
     border-radius: 0.5rem;
     padding: 0.875rem 1rem;
     box-sizing: border-box;
-    box-shadow: 0 1px 4px var(--sh), 0 1px 0 var(--hi) inset;
+    box-shadow: none;
     transition: box-shadow 0.2s, background 0.2s;
   }
   #intro .faq-item.active {
     background: var(--panel-raised);
-    box-shadow: 0 2px 8px var(--sh), 0 1px 0 var(--hi) inset;
+    box-shadow: none;
   }
   #intro .faq-item.active .indicator {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) inset, 0 -1px 0 var(--hi) inset, 0 0 0 1px rgba(0, 0, 0, 0.12), 0 1px 0 var(--accent), 0 2px 3px var(--sh);
+    transform: none;
+    box-shadow: inset 0 0 0 1px var(--brass-line);
   }
   #intro .faq-item.active .indicator:before {
     transform: translate(-50%, -50%) rotate(360deg);
@@ -258,7 +258,7 @@
   }
   #intro .faq-item:hover {
     cursor: pointer;
-    box-shadow: 0 2px 8px var(--sh-deep), 0 1px 0 var(--hi) inset;
+    border-color: var(--brass-line);
   }
   #intro .service-button {
     font-family: "Nexa", sans-serif;
@@ -288,7 +288,7 @@
     border-radius: 0.4rem;
     border: none;
     background: var(--panel-raised);
-    box-shadow: 0 1px 0 var(--hi) inset, 0 -1px 0 rgba(0, 0, 0, 0.12) inset, 0 0 0 1px rgba(0, 0, 0, 0.12), 0 3px 0 var(--accent), 0 4px 6px var(--sh-deep);
+    box-shadow: inset 0 0 0 1px var(--rule);
     position: relative;
     z-index: 1;
     flex-shrink: 0;
@@ -493,16 +493,16 @@
     border-radius: 0.5rem;
     padding: 0.875rem 1rem;
     box-sizing: border-box;
-    box-shadow: 0 1px 4px var(--sh), 0 1px 0 var(--hi) inset;
+    box-shadow: none;
     transition: box-shadow 0.2s, background 0.2s;
   }
   #experience .experience-item.active {
     background: var(--panel-raised);
-    box-shadow: 0 2px 8px var(--sh), 0 1px 0 var(--hi) inset;
+    box-shadow: none;
   }
   #experience .experience-item.active .indicator {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1) inset, 0 -1px 0 var(--hi) inset, 0 0 0 1px rgba(0, 0, 0, 0.12), 0 1px 0 var(--accent), 0 2px 3px var(--sh);
+    transform: none;
+    box-shadow: inset 0 0 0 1px var(--brass-line);
   }
   #experience .experience-item.active .indicator:before {
     transform: translate(-50%, -50%) rotate(360deg);
@@ -522,7 +522,7 @@
   }
   #experience .experience-item:hover {
     cursor: pointer;
-    box-shadow: 0 2px 8px var(--sh-deep), 0 1px 0 var(--hi) inset;
+    border-color: var(--brass-line);
   }
   #experience .service-button {
     font-family: "Nexa", sans-serif;
@@ -552,7 +552,7 @@
     border-radius: 0.4rem;
     border: none;
     background: var(--panel-raised);
-    box-shadow: 0 1px 0 var(--hi) inset, 0 -1px 0 rgba(0, 0, 0, 0.12) inset, 0 0 0 1px rgba(0, 0, 0, 0.12), 0 3px 0 var(--accent), 0 4px 6px var(--sh-deep);
+    box-shadow: inset 0 0 0 1px var(--rule);
     position: relative;
     z-index: 1;
     flex-shrink: 0;
@@ -670,13 +670,15 @@
 <--- -------------------------- -*/
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-  #blog {
+  #blog,
+  #projects {
     padding: var(--sectionPadding);
     border-top: 1px solid var(--rule);
     position: relative;
     z-index: 1;
   }
-  #blog .container {
+  #blog .container,
+  #projects .container {
     width: 100%;
     max-width: 80rem;
     margin: auto;
@@ -685,7 +687,8 @@
     align-items: center;
     gap: 2rem;
   }
-  #blog .content {
+  #blog .content,
+  #projects .content {
     text-align: left;
     width: 100%;
     display: flex;
@@ -693,13 +696,16 @@
     align-items: flex-start;
     gap: 0.3rem;
   }
-  #blog .content .topper {
+  #blog .content .topper,
+  #projects .content .topper {
     margin-bottom: 0.25rem;
   }
-  #blog .content h2.title {
+  #blog .content h2.title,
+  #projects .content h2.title {
     margin-bottom: 0;
   }
-  #blog .card-group {
+  #blog .card-group,
+  #projects .card-group {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -707,33 +713,53 @@
     grid-template-columns: repeat(12, 1fr);
     gap: 1rem;
   }
-  #blog .error {
+  #blog .error,
+  #projects .error {
     grid-column: span 12;
   }
-  #blog .item {
+  #blog .item,
+  #projects .item {
+    position: relative;
     list-style: none;
     display: flex;
     flex-direction: column;
     grid-column: span 12;
-    background: var(--panel);
+    background: var(--milled);
     border: 1px solid var(--rule);
     border-radius: 0.75rem;
     overflow: hidden;
-    box-shadow: 0 2px 8px var(--sh), 0 1px 0 var(--hi) inset;
-    transition: box-shadow 0.2s, transform 0.2s;
+    box-shadow: none;
+    transition: border-color 0.25s;
+    /* brass keyline, lit on hover */
   }
-  #blog .item:hover {
-    box-shadow: 0 6px 20px var(--sh-deep), 0 1px 0 var(--hi) inset;
-    transform: translateY(-2px);
+  #blog .item::after,
+  #projects .item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    border: 1px solid transparent;
+    pointer-events: none;
+    transition: border-color 0.25s;
   }
-  #blog .link {
+  #blog .item:hover,
+  #projects .item:hover {
+    border-color: var(--brass-line);
+  }
+  #blog .item:hover::after,
+  #projects .item:hover::after {
+    border-color: var(--brass-line);
+  }
+  #blog .link,
+  #projects .link {
     text-decoration: none;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     gap: 0;
   }
-  #blog .picture {
+  #blog .picture,
+  #projects .picture {
     width: 100%;
     height: 13.75rem;
     margin: 0;
@@ -743,7 +769,8 @@
     overflow: hidden;
     border-bottom: 1px solid var(--rule);
   }
-  #blog .picture img {
+  #blog .picture img,
+  #projects .picture img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -752,17 +779,20 @@
     left: 0;
     transition: transform 0.3s ease;
   }
-  #blog .item:hover .picture img {
+  #blog .item:hover .picture img,
+  #projects .item:hover .picture img {
     transform: scale(1.04);
   }
-  #blog .item-text {
+  #blog .item-text,
+  #projects .item-text {
     padding: 1.1rem 1.25rem 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     flex-grow: 1;
   }
-  #blog .topper-small {
+  #blog .topper-small,
+  #projects .topper-small {
     font-family: "Nexa", sans-serif;
     font-size: 0.56rem;
     font-weight: 400;
@@ -778,20 +808,24 @@
     margin: 0 0 0.65rem;
     opacity: 0.75;
   }
-  #blog .h4 {
-    font-family: "Nexa", sans-serif;
-    font-weight: 800;
-    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
-    line-height: 1.2em;
+  #blog .h4,
+  #projects .h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+    line-height: 1.15em;
+    letter-spacing: -0.01em;
     text-align: left;
     margin: 0 0 0.6rem;
     color: var(--text);
     transition: color 0.25s;
   }
-  #blog .item:hover .h4 {
+  #blog .item:hover .h4,
+  #projects .item:hover .h4 {
     color: var(--accent);
   }
-  #blog .desc {
+  #blog .desc,
+  #projects .desc {
     font-family: "Nexa", sans-serif;
     font-size: 0.78rem;
     line-height: 1.65em;
@@ -799,7 +833,8 @@
     margin: 0 0 1rem;
     flex-grow: 1;
   }
-  #blog .button {
+  #blog .button,
+  #projects .button {
     font-family: "Nexa", sans-serif;
     font-size: 0.65rem;
     letter-spacing: 0.12em;
@@ -815,18 +850,21 @@
     opacity: 0.7;
     transition: opacity 0.2s, gap 0.2s;
   }
-  #blog .button::after {
+  #blog .button::after,
+  #projects .button::after {
     content: "→";
     font-size: 0.85rem;
   }
-  #blog .item:hover .button {
+  #blog .item:hover .button,
+  #projects .item:hover .button {
     opacity: 1;
     gap: 0.65rem;
   }
 }
 /* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
-  #blog .content {
+  #blog .content,
+  #projects .content {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
@@ -835,10 +873,12 @@
 }
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
-  #blog .container {
+  #blog .container,
+  #projects .container {
     max-width: 80rem;
   }
-  #blog .item {
+  #blog .item,
+  #projects .item {
     grid-column: span 4;
   }
 }
@@ -955,7 +995,7 @@
     position: relative;
     border-radius: 0.5rem;
     overflow: hidden;
-    box-shadow: 0 2px 10px var(--sh), 0 1px 0 var(--hi) inset;
+    box-shadow: none;
     border: 1px solid var(--rule);
   }
   #gallery .picture img {
@@ -1107,19 +1147,24 @@
     content: none;
   }
   #steps .number {
-    /* 80px - 100px */
+    /* engraved index numeral — brass, pressed into the plate */
     font-size: clamp(5rem, 1vw, 6.25rem);
     font-weight: 400;
     line-height: 1.2em;
-    color: var(--accent);
-    opacity: 0.12;
+    color: var(--brass);
+    opacity: 0.32;
     display: block;
-    font-family: "Nexa", sans-serif;
+    font-family: var(--serif);
+    font-style: italic;
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 0 var(--hi);
   }
   #steps .h3 {
     /* 20px - 25px */
-    font-size: clamp(1.25rem, 2vw, 1.5625rem);
-    font-weight: 700;
+    font-family: var(--serif);
+    font-size: clamp(1.35rem, 2.2vw, 1.6875rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
     line-height: 1.2em;
     margin: -2rem 0 1rem 0;
     color: var(--text);
@@ -1318,18 +1363,20 @@ body.dark-mode #hero .social-icons img {
   filter: invert(1) brightness(0.85);
 }
 
-/* ── Image wrapper treatment ─────────────────────── */
+/* ── Image wrapper treatment — flat, framed by a hairline ─ */
 .picture,
 .image-group .picture {
   border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 4px 24px var(--sh-deep), 0 1px 0 var(--hi) inset;
+  box-shadow: none;
+  border: 1px solid var(--rule);
 }
 
 /* About section — picture has a decorative bg behind it */
 #about .picture {
   border-radius: 0.75rem;
-  box-shadow: 0 8px 32px var(--sh-deep);
+  border: 1px solid var(--rule);
+  box-shadow: none;
 }
 
 #about .picture img {
@@ -1340,21 +1387,24 @@ body.dark-mode #hero .social-icons img {
 #experience .picture,
 #intro .picture {
   border-radius: 0.75rem;
-  box-shadow: 0 6px 28px var(--sh-deep);
+  border: 1px solid var(--rule);
+  box-shadow: none;
 }
 
-/* Gallery/projects grid images — already have their own treatment */
+/* Gallery grid images */
 #gallery .picture {
   border-radius: 0.5rem;
-  box-shadow: 0 4px 16px var(--sh-deep);
+  border: 1px solid var(--rule);
+  box-shadow: none;
 }
 
-/* Blog/project card image wrappers */
+/* Blog/project card image wrappers — already inside a framed card */
 #blog .picture,
 #projects .picture {
-  border-radius: 0.5rem;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 2px 12px var(--sh);
+  box-shadow: none;
+  border: none;
 }
 
 /*# sourceMappingURL=local.css.map */

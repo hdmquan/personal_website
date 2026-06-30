@@ -1,8 +1,8 @@
 /* ── Footer ─────────────────────────────────────── */
 #footer {
   padding-bottom: clamp(1rem, 3vw, 2rem);
-  background: var(--panel);
-  border-top: 1px solid var(--rule);
+  background: var(--milled);
+  border-top: 1px solid var(--brass-line);
 
   .container {
     width: 90%;

@@ -14,6 +14,15 @@
   font-style: normal;
   font-display: swap;
 }
+/* Baskervville — luxury display serif (mastheads, section titles).
+   Shipped locally as woff2 (18kb) so it costs nothing at runtime. */
+@font-face {
+  font-family: "Baskervville";
+  src: url("/assets/fonts/baskervville-v19-latin-regular.woff2") format("woff2"), url("/assets/fonts/baskervville-v19-latin-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -39,6 +48,21 @@
   --rule: rgba(0,0,0,0.07);
   --overlay: rgba(20,35,22,0.78);
   --sectionPadding: clamp(3.75rem, 7.82vw, 6.25rem) 1rem;
+  /* Type roles */
+  --sans: "Nexa", sans-serif;
+  --serif: "Baskervville", "Hoefler Text", Georgia, serif;
+  /* Brass — the luxury metal. Shared with the 葉月ゆら archive so the
+     whole site reads as one instrument. Used only as hairlines, ticks,
+     engraving and ornament — never as a fill. */
+  --brass: #ad864e;
+  --brass-hi: #e3c184;
+  --brass-deep: #8a6a3a;
+  --brass-line: rgba(173,134,78,0.55);
+  /* Flat surfaces — separation comes from hairline rules, not depth */
+  --milled: var(--panel-raised);
+  --milled-key: var(--panel-raised);
+  --plate: var(--panel);
+  --key-green: var(--g1);
 }
 
 body.dark-mode {
@@ -57,6 +81,14 @@ body.dark-mode {
   --sh-deep: rgba(0,0,0,0.5);
   --rule: rgba(255,255,255,0.05);
   --overlay: rgba(10,20,12,0.85);
+  --brass: #c2a36a;
+  --brass-hi: #e3c184;
+  --brass-deep: #a8884e;
+  --brass-line: rgba(194,163,106,0.5);
+  --milled: var(--panel-raised);
+  --milled-key: var(--panel-raised);
+  --plate: var(--panel);
+  --key-green: var(--g1);
 }
 
 html {
@@ -68,8 +100,10 @@ body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Nexa", sans-serif;
+  font-family: var(--sans);
   font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   transition: background 0.3s, color 0.3s;
 }
 
@@ -82,70 +116,85 @@ body::before {
   background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.015) 0px, rgba(0, 0, 0, 0.015) 1px, transparent 1px, transparent 3px);
 }
 
-/* ── Shared button styles ────────────────────────── */
+/* ── Shared button styles — flat green key ────────── */
 .button-solid {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-family: "Nexa", sans-serif;
+  font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 400;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #fff;
+  color: #f4f1ea;
   background: var(--g1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid color-mix(in srgb, var(--g1) 70%, #000);
   border-radius: 0.4rem;
   height: 2.6rem;
   padding: 0 1.5rem;
-  box-shadow: 0 1px 0 var(--hi) inset, 0 3px 0 var(--accent-sh), 0 4px 8px var(--sh-deep);
-  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   cursor: pointer;
   white-space: nowrap;
 }
 .button-solid:hover {
   background: var(--accent-hi);
+  border-color: var(--brass);
+}
+.button-solid:focus-visible {
+  border-color: var(--brass-hi);
 }
 .button-solid:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08) inset, 0 1px 0 var(--accent-sh), 0 2px 4px var(--sh);
+  background: color-mix(in srgb, var(--g1) 88%, #000);
 }
 
-/* ── Topper label ────────────────────────────────── */
+/* ── Topper label — engraved serial plate caption ── */
 .topper {
-  font-family: "Nexa", sans-serif;
+  font-family: var(--sans);
   font-size: 0.65rem;
   font-weight: 300;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--text-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  /* brass index tick */
+}
+.topper::before {
+  content: "";
+  width: 1.6em;
+  height: 1px;
+  flex: none;
+  background: linear-gradient(90deg, var(--brass), var(--brass-line));
 }
 
-/* ── Section title ───────────────────────────────── */
+/* ── Section title — luxury serif display ─────────── */
 .title {
-  font-family: "Nexa", sans-serif;
-  font-weight: 800;
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--text);
-  line-height: 1.2em;
+  line-height: 1.15em;
 }
 
 /* ── Body text ───────────────────────────────────── */
 .text {
-  font-family: "Nexa", sans-serif;
+  font-family: var(--sans);
   font-size: 1rem;
   line-height: 1.7em;
   color: var(--text-2);
 }
 
 p {
-  font-family: "Nexa", sans-serif;
+  font-family: var(--sans);
   color: var(--text-2);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Nexa", sans-serif;
-  font-weight: 800;
+  font-family: var(--serif);
+  font-weight: 400;
   color: var(--text);
 }
 
@@ -175,7 +224,7 @@ img {
 
 /* ── Section h2 titles ───────────────────────────── */
 h2.title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.1rem, 4.4vw, 3.25rem);
   margin-bottom: 1rem;
 }
 

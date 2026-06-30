@@ -98,10 +98,7 @@
 
         .calendly-badge-content {
             border-radius: 0.4rem;
-            box-shadow:
-                0 1px 0 rgba(255,255,255,0.15) inset,
-                0 3px 0 var(--accent-sh),
-                0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: none;
             color: #fff;
             cursor: pointer;
             display: table-cell;
@@ -119,11 +116,7 @@
             transition: transform 0.08s ease, box-shadow 0.08s ease;
 
             &:active {
-                transform: translateY(2px);
-                box-shadow:
-                    0 1px 0 rgba(0,0,0,0.08) inset,
-                    0 1px 0 var(--accent-sh),
-                    0 2px 4px rgba(0,0,0,0.2);
+                background: var(--accent-hi);
             }
 
             span { display: none; }

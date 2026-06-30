@@ -21,12 +21,9 @@
         margin: 0;
         padding: 0;
         background: var(--panel-raised);
-        border: 1px solid rgba(0,0,0,0.12);
+        border: 1px solid var(--rule);
         border-radius: 0.35rem;
-        box-shadow:
-            0 1px 0 var(--hi) inset,
-            0 2px 0 var(--accent),
-            0 3px 6px var(--sh-deep);
+        box-shadow: none;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -35,17 +32,13 @@
         position: relative;
         z-index: 1000;
         overflow: hidden;
-        transition: transform 0.08s ease, box-shadow 0.08s ease;
+        transition: border-color 0.15s ease, color 0.15s ease;
         cursor: pointer;
         color: var(--text-2);
 
-        &:active {
-            transform: translateY(1px);
-            box-shadow:
-                0 1px 0 rgba(0,0,0,0.08) inset,
-                0 1px 0 var(--accent),
-                0 1px 3px var(--sh);
-        }
+        &:hover { border-color: var(--brass); color: var(--accent); }
+
+        &:active { background: var(--panel-inset); }
 
         svg {
             width: 1rem;
@@ -213,27 +206,20 @@
             width: 2.2rem;
             height: 2.2rem;
             margin: 0 0 0 auto;
-            border: 1px solid rgba(0,0,0,0.12);
+            border: 1px solid var(--rule);
             border-radius: 0.4rem;
             background: var(--panel-raised);
-            box-shadow:
-                0 1px 0 var(--hi) inset,
-                0 2px 0 var(--accent),
-                0 3px 6px var(--sh-deep);
+            box-shadow: none;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             z-index: 1;
-            transition: transform 0.08s ease, box-shadow 0.08s ease, rotate 0.6s;
+            transition: border-color 0.15s ease, rotate 0.6s;
             cursor: pointer;
 
             &:active {
-                transform: translateY(1px);
-                box-shadow:
-                    0 1px 0 rgba(0,0,0,0.08) inset,
-                    0 1px 0 var(--accent),
-                    0 1px 3px var(--sh);
+                background: var(--panel-inset);
             }
         }
 
@@ -611,9 +597,9 @@
         height: calc(96 / 16 * 1rem);
         box-sizing: border-box;
         padding: clamp(0.75rem, 2vw, 1.5rem) 0;
-        background: var(--panel);
-        border-bottom: 1px solid var(--rule);
-        box-shadow: 0 2px 12px var(--sh);
+        background: var(--milled);
+        border-bottom: 1px solid var(--brass-line);
+        box-shadow: none;
         display: flex;
         align-items: center;
         position: fixed;
@@ -637,6 +623,34 @@
         .toggle {
             display: none;
         }
+
+        /* Engraved wordmark — instrument nameplate */
+        .nav-mark {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.05;
+            text-decoration: none;
+            margin: 0 auto 0 0;
+            z-index: 100;
+        }
+        .nav-mark-name {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            letter-spacing: 0.01em;
+            color: var(--text);
+            transition: color 0.2s;
+        }
+        .nav-mark-sub {
+            font-family: var(--sans);
+            font-weight: 400;
+            font-size: 0.5rem;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-top: 0.15rem;
+        }
+        .nav-mark:hover .nav-mark-name { color: var(--accent); }
 
         .logo {
             width: 18.4%;
@@ -765,8 +779,25 @@
             position: relative;
             transition: color 0.3s;
 
+            /* brass index tick under the active page */
+            &::after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                bottom: -0.55rem;
+                width: 0;
+                height: 2px;
+                border-radius: 2px;
+                background: linear-gradient(90deg, var(--brass-hi), var(--brass));
+                transform: translateX(-50%);
+                transition: width 0.25s ease;
+            }
+
             &:hover, &.active { color: var(--accent); }
-            &.active { font-weight: 400; }
+            &.active {
+                font-weight: 400;
+                &::after { width: 1.1rem; }
+            }
         }
 
         .button-solid {
@@ -782,4 +813,9 @@
             display: flex;
         }
     }
+}
+
+/* Wordmark is desktop-only; the hamburger owns the mobile bar */
+@media only screen and (max-width: 63.9375rem) {
+  #navigation .nav-mark { display: none; }
 }

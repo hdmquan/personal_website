@@ -64,14 +64,14 @@
   background: var(--panel-inset);
   border: 1px solid var(--rule);
   border-radius: 0.35rem;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12), 0 1px 0 var(--hi);
+  box-shadow: none;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 #contact .input:focus,
 #contact .textarea:focus {
   border-color: var(--accent);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 #contact .textarea {
   min-height: 7.5rem;
@@ -83,10 +83,11 @@
   width: 100%;
   box-sizing: border-box;
   padding: clamp(1.5rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2rem);
-  background: var(--panel);
+  background: var(--milled);
   border: 1px solid var(--rule);
+  border-top: 1px solid var(--brass-line);
   border-radius: 0.75rem;
-  box-shadow: 0 2px 8px var(--sh);
+  box-shadow: none;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -123,9 +124,9 @@
   display: block;
 }
 #contact .link {
-  font-family: "Nexa", sans-serif;
-  font-weight: 800;
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.3em;
   text-decoration: none;
   color: var(--text-2);
@@ -159,7 +160,7 @@
   background: var(--panel-raised);
   border: 1px solid var(--rule);
   border-radius: 0.4rem;
-  box-shadow: 0 1px 0 var(--hi) inset, 0 2px 0 var(--accent), 0 3px 6px var(--sh-deep);
+  box-shadow: none;
   transition: transform 0.3s;
   flex: none;
 }
