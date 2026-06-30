@@ -332,8 +332,10 @@
   function loadCurrent(autoplay, startAt) {
     const q = queue[qi]; if (!q) return;
     const a = ALB[q.ai], t = a.tracks[q.ti];
-    // scrobble metadata for the new track (no-op unless a Last.fm session is connected)
-    scrobbleMeta = { artist: ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: Math.floor(Date.now() / 1000) };
+    // scrobble metadata for the new track (no-op unless a Last.fm session is connected).
+    // a.artist overrides the default vocalist for circle/collab releases (e.g. La Bella Luna) so
+    // scrobbles match how Last.fm catalogues them and pick up the right page + cover art.
+    scrobbleMeta = { artist: a.artist || ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: Math.floor(Date.now() / 1000) };
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
     audio.src = t.url;            // setting src + play → R2 streams via range, no full download
     pendingSeek = (startAt && startAt > 0) ? startAt : null;
