@@ -477,16 +477,36 @@ html, body { overscroll-behavior: none; }
   box-shadow: 0 3px 12px var(--sh); display: grid; place-items: center;
   transition: color .15s, border-color .15s, transform .08s;
 }
-#home-btn { left: 1rem; text-decoration: none; }
+#home-btn { left: 1rem; }
 #dark-toggle { right: 1rem; }
 #home-btn:hover, #dark-toggle:hover { color: var(--accent); border-color: var(--gilt-soft); }
 #home-btn:active, #dark-toggle:active { transform: translateY(1px); }
 #home-btn[hidden] { display: none; }
 #home-btn svg, #dark-toggle svg { width: 17px; height: 17px; }
-/* home button doubles as back-to-top once scrolled */
+
+/* top-left button = Last.fm; goes red when connected, but stays neutral once it's the "^" */
+#home-btn.connected:not(.to-top) { color: #d51007; border-color: rgba(213,16,7,.45); }
+#home-btn.connected:not(.to-top):hover { color: #ef2417; border-color: rgba(213,16,7,.7); }
+/* Last.fm logo at the top, back-to-top chevron once scrolled */
 #home-btn .i-top { display: none; }
-#home-btn.to-top .i-home { display: none; }
+#home-btn.to-top .i-lastfm { display: none; }
 #home-btn.to-top .i-top { display: block; }
+
+/* sign-out confirm popover, anchored under the top-left button */
+.lastfm-pop {
+  position: fixed; top: 3.6rem; left: 1rem; z-index: 61; min-width: 11rem;
+  background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .7rem; padding: .85rem;
+  box-shadow: 0 14px 38px var(--sh-deep); display: flex; flex-direction: column; gap: .6rem;
+}
+.lastfm-pop[hidden] { display: none; }
+.lfm-line { margin: 0; font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; color: var(--text-3); }
+.lfm-line b { color: var(--text); font-weight: 500; }
+.lfm-signout {
+  border: 1px solid rgba(213,16,7,.5); background: transparent; color: #d51007; cursor: pointer;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase;
+  padding: .5rem; border-radius: .45rem; transition: background .15s, color .15s;
+}
+.lfm-signout:hover { background: #d51007; color: #fff; }
 #dark-toggle .i-sun { display: none; }
 body.dark-mode #dark-toggle .i-moon { display: none; }
 body.dark-mode #dark-toggle .i-sun { display: block; }
