@@ -43,7 +43,6 @@
 })();
 
 (function () {
-  var API_KEY = '3d4428c58350f5e4a0d38e4b9602919c';   // public key (used in the auth redirect)
   var FN = '/.netlify/functions/lastfm';
   var LS = 'fa:yura:lastfm';
   var SCROLL_AT = 400;
@@ -77,7 +76,13 @@
   }
 
   function login() {
-    location.href = 'https://www.last.fm/api/auth/?api_key=' + API_KEY + '&cb=' + encodeURIComponent(location.origin + location.pathname);
+    // fetch the public key from the function (it lives in env, not the build) then redirect
+    fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'config' }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && d.api_key) location.href = 'https://www.last.fm/api/auth/?api_key=' + d.api_key + '&cb=' + encodeURIComponent(location.origin + location.pathname);
+      })
+      .catch(function () {});
   }
   function exchange(token) {
     fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'getSession', token: token }) })

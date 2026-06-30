@@ -47,6 +47,12 @@ exports.handler = async (event) => {
   try { body = JSON.parse(event.body || '{}'); } catch { return { statusCode: 400, headers, body: JSON.stringify({ error: 'bad request' }) }; }
 
   try {
+    // The public api_key is served from here (env only) so it isn't hardcoded in the build output,
+    // which keeps Netlify's secret scanner happy and makes key rotation an env-var-only change.
+    if (body.action === 'config') {
+      return { statusCode: 200, headers, body: JSON.stringify({ api_key: API_KEY }) };
+    }
+
     if (body.action === 'getSession') {
       if (!body.token) return { statusCode: 400, headers, body: JSON.stringify({ error: 'missing token' }) };
       const data = await call({ method: 'auth.getSession', api_key: API_KEY, token: body.token });
