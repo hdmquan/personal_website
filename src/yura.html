@@ -173,7 +173,8 @@ permalink: /yura/
 </div>
 
 <a id="home-btn" href="/" aria-label="Home" title="Home">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>
+  <svg class="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg>
+  <svg class="i-top" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg>
 </a>
 
 <button id="dark-toggle" aria-label="Toggle dark mode">
@@ -199,6 +200,27 @@ permalink: /yura/
       if (b){ if (lbl) lbl.textContent = b.textContent; setOpen(false); }
     });
     document.addEventListener('click', function(e){ if (!e.target.closest('.sort-wrap')) setOpen(false); });
+  })();
+
+  /* Once scrolled, the top-left home button becomes a back-to-top control. */
+  (function(){
+    var btn = document.getElementById('home-btn');
+    if (!btn) return;
+    var THRESHOLD = 400;
+    function sync(){
+      var scrolled = window.scrollY > THRESHOLD;
+      btn.classList.toggle('to-top', scrolled);
+      btn.setAttribute('aria-label', scrolled ? 'Back to top' : 'Home');
+      btn.setAttribute('title', scrolled ? 'Back to top' : 'Home');
+    }
+    btn.addEventListener('click', function(e){
+      if (!btn.classList.contains('to-top')) return;        // at the top → act as the home link
+      e.preventDefault();
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
   })();
 </script>
 <script src="/assets/js/player.js"></script>

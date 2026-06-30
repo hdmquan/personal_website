@@ -483,6 +483,10 @@ html, body { overscroll-behavior: none; }
 #home-btn:active, #dark-toggle:active { transform: translateY(1px); }
 #home-btn[hidden] { display: none; }
 #home-btn svg, #dark-toggle svg { width: 17px; height: 17px; }
+/* home button doubles as back-to-top once scrolled */
+#home-btn .i-top { display: none; }
+#home-btn.to-top .i-home { display: none; }
+#home-btn.to-top .i-top { display: block; }
 #dark-toggle .i-sun { display: none; }
 body.dark-mode #dark-toggle .i-moon { display: none; }
 body.dark-mode #dark-toggle .i-sun { display: block; }
