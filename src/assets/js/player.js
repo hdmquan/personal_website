@@ -245,7 +245,9 @@
     shelf.hidden = true; document.querySelector('#yura-hero').hidden = true;
     document.querySelector('#home-btn').hidden = true;
     albumView.hidden = false;
-    window.scrollTo(0, 0);
+    // jump instantly — behavior:'instant' overrides html{scroll-behavior:smooth}, which would
+    // otherwise animate up from wherever the (much taller) shelf was scrolled to.
+    window.scrollTo({ top: 0, behavior: 'instant' });
     highlightPlaying();
   }
 
@@ -253,7 +255,7 @@
     view = 'shelf'; openAlbum = -1; location.hash = '';
     albumView.hidden = true; shelf.hidden = false; document.querySelector('#yura-hero').hidden = false;
     document.querySelector('#home-btn').hidden = false;
-    window.scrollTo(0, shelfScroll);   // restore shelf position
+    window.scrollTo({ top: shelfScroll, behavior: 'instant' });   // restore shelf position instantly
   }
   $('#back-btn').addEventListener('click', backToShelf);
 
