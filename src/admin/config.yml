@@ -78,6 +78,7 @@ collections:
             widget: "select"
             hint: "Pick the album this note is about."
             options:
+              # <album-options> regenerated from the catalog at build time — do not edit by hand
                     - "-The Clockwork Rose- 時計仕掛けの薔薇少女"
                     - "AQUA WAVE"
                     - "Abyss"
@@ -185,6 +186,7 @@ collections:
                     - "蜜薬ランガージュ"
                     - "金魚恋想歌"
                     - "闇童話工房"
+              # </album-options>
           - label: "Note"
             name: "body"
             widget: "markdown"

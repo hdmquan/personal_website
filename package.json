@@ -9,9 +9,10 @@
         "build:sass": "sass src/assets/sass:./src/assets/css",
         "watch:eleventy": "cross-env ELEVENTY_ENV=DEV eleventy --serve",
         "build:eleventy": "cross-env ELEVENTY_ENV=PROD eleventy",
+        "gen:decap": "node scripts/gen-decap-album-options.mjs",
         "watch:cms": "npx decap-server",
         "start": "del-cli ./public --force && npm-run-all --parallel watch:*",
-        "build": "npm cache clean --force && npm ci && run-s build:sass build:eleventy"
+        "build": "npm cache clean --force && npm ci && run-s gen:decap build:sass build:eleventy"
     },
     "engines": {
         "node": ">=16.0.0",
