@@ -139,7 +139,13 @@
     }
 
     const fbtn = $('#filter-btn'), fpop = $('#filter-pop');
-    fbtn?.addEventListener('click', e => { e.stopPropagation(); const open = fpop.hidden; fpop.hidden = !open; fbtn.setAttribute('aria-expanded', String(open)); });
+    fbtn?.addEventListener('click', e => {
+      e.stopPropagation(); const open = fpop.hidden; fpop.hidden = !open; fbtn.setAttribute('aria-expanded', String(open));
+      if (open) {   // opening the filter → close the sort dropdown so only one shows at a time
+        const sp = document.getElementById('sort-pop'), sb = document.getElementById('sort-btn');
+        if (sp) sp.classList.remove('open'); if (sb) sb.setAttribute('aria-expanded', 'false');
+      }
+    });
     document.addEventListener('click', e => { if (fpop && !fpop.hidden && !e.target.closest('.filter-wrap')) { fpop.hidden = true; fbtn.setAttribute('aria-expanded', 'false'); } });
   }
   function updateFilterBadge() {

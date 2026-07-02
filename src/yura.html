@@ -202,7 +202,13 @@ permalink: /yura/
         pop = document.getElementById('sort-pop'),
         lbl = document.getElementById('sort-label');
     if (!btn || !pop) return;
-    function setOpen(o){ pop.classList.toggle('open', o); btn.setAttribute('aria-expanded', String(o)); }
+    function setOpen(o){
+      pop.classList.toggle('open', o); btn.setAttribute('aria-expanded', String(o));
+      if (o){   // opening sort → close the filter popover so only one shows at a time
+        var fp = document.getElementById('filter-pop'), fb = document.getElementById('filter-btn');
+        if (fp) fp.hidden = true; if (fb) fb.setAttribute('aria-expanded', 'false');
+      }
+    }
     btn.addEventListener('click', function(e){ e.stopPropagation(); setOpen(!pop.classList.contains('open')); });
     pop.addEventListener('click', function(e){
       var b = e.target.closest('.seg-btn');
