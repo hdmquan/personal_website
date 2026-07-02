@@ -280,6 +280,12 @@ html, body { overscroll-behavior: none; }
 .ah-info h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.5rem,5.5vw,2.4rem);
   line-height: 1.12; margin: .35rem 0 .5rem; color: var(--text); }
 .ah-count { font-family: var(--mono); font-size: .74rem; letter-spacing: .04em; color: var(--text-2); margin: 0 0 1.2rem; }
+/* CMS-edited album note, shown in place of the track count */
+.ah-note { font-family: var(--serif); font-size: .92rem; line-height: 1.55; color: var(--text-2); margin: 0 0 1.2rem; max-width: 42rem; }
+.ah-note p { margin: 0 0 .5rem; }
+.ah-note p:last-child { margin-bottom: 0; }
+.ah-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.ah-note em { font-style: italic; }
 
 .ah-actions { display: flex; align-items: stretch; gap: .55rem; max-width: 26rem; }
 .btn-ext {

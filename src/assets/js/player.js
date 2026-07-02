@@ -78,6 +78,13 @@
 
   /* ── Boot ──────────────────────────────────────── */
   renderSkeleton();
+  // CMS-managed album notes (optional) → shown on the album page in place of the track count
+  let NOTES = {};
+  fetch('/assets/catalogs/album-notes.json')
+    .then(r => (r.ok ? r.json() : {}))
+    .then(n => { NOTES = n || {}; if (view === 'album' && openAlbum >= 0) openAlbumView(openAlbum); })
+    .catch(() => {});
+
   fetch(CATALOG).then(r => r.json()).then(data => {
     ALB = data.albums || [];
     const s = data.stats || {};
@@ -232,7 +239,9 @@
       <div class="ah-info">
         <span class="ah-year">${esc(fmtDate(a.date || a.year))}</span>
         <h2>${esc(a.title)}</h2>
-        <p class="ah-count">${shown.length} tracks${secs ? ' · ' + fmtLong(secs) : ''}${genreFilter ? ' · ' + esc(genreFilter) : ''}</p>
+        ${ NOTES[a.title]
+            ? `<div class="ah-note">${NOTES[a.title]}</div>`
+            : `<p class="ah-count">${shown.length} tracks${secs ? ' · ' + fmtLong(secs) : ''}${genreFilter ? ' · ' + esc(genreFilter) : ''}</p>` }
         <div class="ah-actions">
           <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
           <button class="btn-ext" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>

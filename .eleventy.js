@@ -69,6 +69,11 @@ module.exports = function (eleventyConfig) {
             .reverse(); // Reverse for newest first
     });
 
+    // Album notes (Decap-managed) → compiled to /assets/catalogs/album-notes.json for the player
+    eleventyConfig.addCollection("albumNotes", (collectionApi) => {
+        return collectionApi.getFilteredByGlob("src/content/album-notes/*.md");
+    });
+
     // Set Server Options
     eleventyConfig.setServerOptions(configServer);
 
