@@ -299,9 +299,10 @@
     state = S.IDLE;
     const sv = { id: uid(), ms: Math.round(ms), penalty: inspectPenalty, scramble: curScramble, puzzle: "333", ts: Date.now() };
     inspectStart = 0;
+    inputLockUntil = performance.now() + INPUT_LOCK_MS;   // ignore input briefly after a stop
     Store.add(sv);
     setTime(label(sv)); cls(sv.penalty === "dnf" ? "warn" : "");
-    hint("tap / space to inspect");
+    hint("any key / tap to inspect");
     renderStats();
     showPenaltyBar(sv.id);
     newScramble();
@@ -328,7 +329,7 @@
     clearTimeout(holdTimer);
     // released too early → back to prior state
     if (opts.inspection && inspectStart) { state = S.INSPECT; startInspectTick(); }
-    else { state = S.IDLE; cls(""); setTime("0.00"); hint("tap / space to inspect"); }
+    else { state = S.IDLE; cls(""); setTime("0.00"); hint("any key / tap to inspect"); }
   }
   function releaseHold() {
     clearTimeout(holdTimer);
@@ -337,8 +338,14 @@
   }
 
   // ---- input events ----
+  // brief lockout after a stop so the same frantic press can't instantly re-arm
+  const INPUT_LOCK_MS = 500;
+  let inputLockUntil = 0;
+  const locked = () => performance.now() < inputLockUntil;
+
   let pressState = S.IDLE;
   function onDown() {
+    if (locked()) return;
     pressState = state;
     if (state === S.RUNNING) { stopRun(); return; }
     if (state === S.IDLE) {
@@ -348,34 +355,45 @@
     if (state === S.INSPECT) { beginHold(); return; }
   }
   function onUp() {
+    if (locked()) return;
     if (state === S.HOLD) { releaseHold(); return; }
     // start inspection only on a press that began in IDLE — so the keyup that
     // accompanies stopping a solve (press began while RUNNING) does not re-arm.
     if (state === S.IDLE && pressState === S.IDLE && opts.inspection) { startInspect(); return; }
   }
 
-  // keyboard
-  let spaceDown = false;
+  // keyboard — ANY key drives the timer (space, letters, etc.). Mouse does NOT:
+  // left-click can't start/stop, so a misclick never ruins a solve. One key at a
+  // time; the exact key that pressed down is the one that releases.
+  const isTyping = (t) => t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
+  function isTimerKey(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return false;                 // leave browser shortcuts alone
+    if (["Escape", "Tab", "Shift", "Control", "Alt", "Meta"].includes(e.key)) return false;
+    if (/^F\d+$/.test(e.key)) return false;                               // F1..F12 (reload, devtools, …)
+    return true;
+  }
+  let downCode = null;
   document.addEventListener("keydown", (e) => {
-    if (e.code === "Space") {
-      if (isTyping(e.target)) return;
-      e.preventDefault();
-      if (spaceDown) return; spaceDown = true;
-      onDown();
-    } else if (e.key === "Escape") { closeAllPops(); }
+    if (e.key === "Escape") { closeAllPops(); return; }
+    if (isTyping(e.target) || !isTimerKey(e)) return;
+    e.preventDefault();
+    if (downCode !== null) return;      // ignore auto-repeat / a second key while one is held
+    downCode = e.code;
+    onDown();
   });
   document.addEventListener("keyup", (e) => {
-    if (e.code === "Space") { if (isTyping(e.target)) return; e.preventDefault(); spaceDown = false; onUp(); }
+    if (e.code !== downCode) return;    // only the key that started the press ends it
+    if (isTyping(e.target)) { downCode = null; return; }
+    e.preventDefault();
+    downCode = null;
+    onUp();
   });
-  const isTyping = (t) => t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
 
-  // touch — only the timer zone reacts, so panel/buttons stay tappable
+  // touch — only the timer zone reacts, so panel/buttons stay tappable. No mouse
+  // handlers on purpose: clicking the page never controls the timer.
   const zone = $("timer-zone");
   zone.addEventListener("touchstart", (e) => { e.preventDefault(); onDown(); }, { passive: false });
   zone.addEventListener("touchend", (e) => { e.preventDefault(); onUp(); }, { passive: false });
-  // mouse (desktop click on the time also works)
-  zone.addEventListener("mousedown", (e) => { if (e.button === 0) onDown(); });
-  zone.addEventListener("mouseup", (e) => { if (e.button === 0) onUp(); });
 
   // ---------- penalty bar ----------
   let lastSolveId = null;
@@ -534,7 +552,7 @@
     $("vs-turn").textContent = VS.players[VS.turn].name;
     $("vs-scramble").textContent = VS.scrambles[VS.round];
     $("vs-time").textContent = "0.00"; $("vs-time").className = "vs-time";
-    $("vs-hint").textContent = opts.inspection ? "tap / space to inspect" : "tap / space to start";
+    $("vs-hint").textContent = opts.inspection ? "any key / tap to inspect" : "any key / tap to start";
   }
   function vsAdvance() {
     VS.turn++;
@@ -572,6 +590,7 @@
   function vsStopRun() {
     cancelAnimationFrame(VS.raf);
     const ms = performance.now() - VS.startT; VS.state = S.IDLE;
+    inputLockUntil = performance.now() + INPUT_LOCK_MS;
     vsRecord(ms, VS.inspPen);
   }
   function vsBeginHold() {
@@ -587,30 +606,32 @@
   }
   let vsPressState = S.IDLE;
   function vsDown() {
+    if (locked()) return;
     vsPressState = VS.state;
     if (VS.state === S.RUNNING) { vsStopRun(); return; }
     if (VS.state === S.IDLE) { if (opts.inspection) return; vsBeginHold(); return; }
     if (VS.state === S.INSPECT) { vsBeginHold(); return; }
   }
   function vsUp() {
+    if (locked()) return;
     if (VS.state === S.HOLD) { vsReleaseHold(); return; }
     if (VS.state === S.IDLE && vsPressState === S.IDLE && opts.inspection) { vsStartInspect(); return; }
   }
   vsTimeEl.addEventListener("touchstart", (e) => { e.preventDefault(); vsDown(); }, { passive: false });
   vsTimeEl.addEventListener("touchend", (e) => { e.preventDefault(); vsUp(); }, { passive: false });
-  vsTimeEl.addEventListener("mousedown", () => vsDown());
-  vsTimeEl.addEventListener("mouseup", () => vsUp());
-  // when VS is open, space drives the VS timer instead of the main one
+  // when VS is open, ANY key drives the VS timer instead of the main one (no mouse)
+  let vsDownCode = null;
   document.addEventListener("keydown", (e) => {
-    if (!VS.open || e.code !== "Space" || isTyping(e.target)) return;
+    if (!VS.open || isTyping(e.target) || !isTimerKey(e)) return;
     e.preventDefault(); e.stopImmediatePropagation();
-    if (!vsKeyDown) { vsKeyDown = true; vsDown(); }
+    if (vsDownCode !== null) return;
+    vsDownCode = e.code; vsDown();
   }, true);
   document.addEventListener("keyup", (e) => {
-    if (!VS.open || e.code !== "Space" || isTyping(e.target)) return;
-    e.preventDefault(); e.stopImmediatePropagation(); vsKeyDown = false; vsUp();
+    if (!VS.open || e.code !== vsDownCode) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    vsDownCode = null; vsUp();
   }, true);
-  let vsKeyDown = false;
   // +2 / DNF mark a pending penalty applied when the current turn's solve is recorded
   $("vs-plus2").addEventListener("click", () => { VS.inspPen = VS.inspPen === "plus2" ? "ok" : "plus2"; flashVsPen("+2"); });
   $("vs-dnf").addEventListener("click", () => { VS.inspPen = VS.inspPen === "dnf" ? "ok" : "dnf"; flashVsPen("DNF"); });
@@ -647,7 +668,7 @@
   // ============================================================
   showScramble();
   renderStats();
-  setTime("0.00"); hint("tap / space to inspect");
+  setTime("0.00"); hint("any key / tap to inspect");
   setDot(Store.outbox.length ? "off" : "ok");
   syncPull();       // merge anything from other browsers
   syncFlush();      // push anything queued while offline
