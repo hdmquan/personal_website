@@ -1,0 +1,149 @@
+---
+permalink: /timer/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Timer</title>
+  <meta name="description" content="A minimal speedcube timer." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="/assets/css/timer.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <meta name="theme-color" content="#eef" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+</head>
+<body>
+
+<!-- Background image. Drop the artwork at /assets/images/timer-bg.jpg -->
+<div id="bg" aria-hidden="true"></div>
+
+<!-- ===== Main timer view ===== -->
+<main id="app">
+
+  <!-- Scramble -->
+  <div id="scramble-bar">
+    <button id="scramble-prev" class="mini-btn" title="Previous scramble" aria-label="Previous scramble">‹</button>
+    <div id="scramble" role="text" aria-live="polite"></div>
+    <button id="scramble-next" class="mini-btn" title="New scramble" aria-label="New scramble">↻</button>
+  </div>
+
+  <!-- Timer -->
+  <div id="timer-zone">
+    <div id="time">0.00</div>
+    <div id="hint">tap / space to inspect</div>
+  </div>
+
+  <!-- Stats panel (floating) -->
+  <aside id="panel" class="panel">
+    <div class="panel-head">
+      <span id="session-label">Session</span>
+      <button id="panel-collapse" class="mini-btn" title="Collapse" aria-label="Collapse panel">–</button>
+    </div>
+    <table id="stat-table">
+      <thead><tr><th></th><th>current</th><th>best</th></tr></thead>
+      <tbody>
+        <tr><th>time</th><td id="cur-time">–</td><td id="best-time">–</td></tr>
+        <tr><th>mo3</th> <td id="cur-mo3">–</td><td id="best-mo3">–</td></tr>
+        <tr><th>ao5</th> <td id="cur-ao5">–</td><td id="best-ao5">–</td></tr>
+        <tr><th>ao12</th><td id="cur-ao12">–</td><td id="best-ao12">–</td></tr>
+      </tbody>
+    </table>
+    <div id="solve-summary"></div>
+    <ol id="solve-list" aria-label="Solve history"></ol>
+    <div class="panel-foot">
+      <button id="btn-clear" class="text-btn" title="Clear this session">clear</button>
+      <span id="sync-dot" title="Sync status">●</span>
+    </div>
+  </aside>
+
+  <!-- Cube net preview -->
+  <div id="cube-wrap">
+    <div id="cube-net" class="net" aria-label="Scrambled cube preview"></div>
+  </div>
+
+  <!-- Bottom controls -->
+  <div id="controls">
+    <button id="btn-vs" class="pill">VS mode</button>
+    <button id="btn-settings" class="pill" aria-haspopup="true">settings</button>
+  </div>
+
+  <!-- Last-solve penalty bar (shows after a solve) -->
+  <div id="penalty-bar" hidden>
+    <button data-pen="ok"    class="pen">OK</button>
+    <button data-pen="plus2" class="pen">+2</button>
+    <button data-pen="dnf"   class="pen">DNF</button>
+    <button data-pen="del"   class="pen danger">delete</button>
+  </div>
+
+</main>
+
+<!-- ===== Settings popover ===== -->
+<div id="settings-pop" class="pop" hidden>
+  <label class="pop-row">
+    <span>Inspection (15s)</span>
+    <input type="checkbox" id="opt-inspection" checked />
+  </label>
+  <label class="pop-row">
+    <span>Hold to start</span>
+    <input type="checkbox" id="opt-hold" checked />
+  </label>
+  <label class="pop-row">
+    <span>Show cube preview</span>
+    <input type="checkbox" id="opt-cube" checked />
+  </label>
+</div>
+
+<!-- ===== VS mode overlay ===== -->
+<div id="vs" class="overlay" hidden>
+  <div class="vs-card">
+    <!-- setup -->
+    <div id="vs-setup" class="vs-panel">
+      <h2>VS mode</h2>
+      <p class="vs-sub">Everyone races the same scramble each round. Local only, never saved to your stats.</p>
+      <label class="vs-field"><span>Participants</span><input type="number" id="vs-n" min="2" max="12" value="2" /></label>
+      <div id="vs-names"></div>
+      <label class="vs-field"><span>Rounds</span><input type="number" id="vs-rounds" min="1" max="20" value="3" /></label>
+      <div class="vs-actions">
+        <button id="vs-start" class="pill accent">Start</button>
+        <button id="vs-cancel" class="pill">Cancel</button>
+      </div>
+    </div>
+
+    <!-- play -->
+    <div id="vs-play" class="vs-panel" hidden>
+      <div class="vs-meta">
+        <span id="vs-round">Round 1</span>
+        <span id="vs-turn">Player 1</span>
+      </div>
+      <div id="vs-scramble" class="vs-scramble"></div>
+      <div id="vs-time" class="vs-time">0.00</div>
+      <div id="vs-hint" class="hint">tap / space to start</div>
+      <div class="vs-actions">
+        <button id="vs-plus2" class="pill">+2</button>
+        <button id="vs-dnf" class="pill">DNF</button>
+        <button id="vs-quit" class="pill">Quit</button>
+      </div>
+    </div>
+
+    <!-- results -->
+    <div id="vs-results" class="vs-panel" hidden>
+      <h2>Results</h2>
+      <div id="vs-board"></div>
+      <div class="vs-actions">
+        <button id="vs-again" class="pill accent">Rematch</button>
+        <button id="vs-done" class="pill">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/timer.js"></script>
+</body>
+</html>
