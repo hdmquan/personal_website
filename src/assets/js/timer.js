@@ -372,20 +372,19 @@
     if (/^F\d+$/.test(e.key)) return false;                               // F1..F12 (reload, devtools, …)
     return true;
   }
-  let downCode = null;
+  // Every fresh keydown is judged by the live timer state, so it never gets
+  // "stuck": mashing several keys (which can drop keyup events on n-key-rollover
+  // keyboards) still stops the timer on the first keydown. e.repeat filters the
+  // OS auto-repeat of a held key; onDown/onUp already ignore redundant calls.
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { closeAllPops(); return; }
-    if (isTyping(e.target) || !isTimerKey(e)) return;
+    if (e.repeat || isTyping(e.target) || !isTimerKey(e)) return;
     e.preventDefault();
-    if (downCode !== null) return;      // ignore auto-repeat / a second key while one is held
-    downCode = e.code;
     onDown();
   });
   document.addEventListener("keyup", (e) => {
-    if (e.code !== downCode) return;    // only the key that started the press ends it
-    if (isTyping(e.target)) { downCode = null; return; }
+    if (isTyping(e.target) || !isTimerKey(e)) return;
     e.preventDefault();
-    downCode = null;
     onUp();
   });
 
@@ -619,18 +618,18 @@
   }
   vsTimeEl.addEventListener("touchstart", (e) => { e.preventDefault(); vsDown(); }, { passive: false });
   vsTimeEl.addEventListener("touchend", (e) => { e.preventDefault(); vsUp(); }, { passive: false });
-  // when VS is open, ANY key drives the VS timer instead of the main one (no mouse)
-  let vsDownCode = null;
+  // when VS is open, ANY key drives the VS timer instead of the main one (no mouse).
+  // Capture + stopImmediatePropagation so the main handler doesn't also fire.
   document.addEventListener("keydown", (e) => {
     if (!VS.open || isTyping(e.target) || !isTimerKey(e)) return;
     e.preventDefault(); e.stopImmediatePropagation();
-    if (vsDownCode !== null) return;
-    vsDownCode = e.code; vsDown();
+    if (e.repeat) return;
+    vsDown();
   }, true);
   document.addEventListener("keyup", (e) => {
-    if (!VS.open || e.code !== vsDownCode) return;
+    if (!VS.open || isTyping(e.target) || !isTimerKey(e)) return;
     e.preventDefault(); e.stopImmediatePropagation();
-    vsDownCode = null; vsUp();
+    vsUp();
   }, true);
   // +2 / DNF mark a pending penalty applied when the current turn's solve is recorded
   $("vs-plus2").addEventListener("click", () => { VS.inspPen = VS.inspPen === "plus2" ? "ok" : "plus2"; flashVsPen("+2"); });
