@@ -218,7 +218,7 @@
   // ============================================================
   // MAIN TIMER UI
   // ============================================================
-  const opts = Object.assign({ inspection: true, hold: true, cube: true }, load("cube_opts_v1", {}));
+  const opts = Object.assign({ inspection: true, hold: true, cube: true, hideTime: true }, load("cube_opts_v1", {}));
   const saveOpts = () => save("cube_opts_v1", opts);
 
   let curScramble = scramble();
@@ -285,13 +285,20 @@
     } else inspectPenalty = "ok";
     stopInspect();
     state = S.RUNNING; startT = performance.now();
+    // start-guard: ignore input for the first 0.5s so a fumbled start can't record a ~0.1s solve
+    inputLockUntil = performance.now() + INPUT_LOCK_MS;
     cls("running"); hint("");
-    const tick = () => {
-      if (state !== S.RUNNING) return;
-      setTime(fmt(performance.now() - startT));
+    if (opts.hideTime) {
+      // don't show the ticking count during the solve (less nerve-wracking)
+      setTime("solving"); timeEl.classList.add("solving");
+    } else {
+      const tick = () => {
+        if (state !== S.RUNNING) return;
+        setTime(fmt(performance.now() - startT));
+        raf = requestAnimationFrame(tick);
+      };
       raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
+    }
   }
   function stopRun() {
     cancelAnimationFrame(raf);
@@ -430,6 +437,12 @@
 
     // solve list (newest first), mark session best/worst
     const ol = $("solve-list"); ol.innerHTML = "";
+    if (!list.length) {
+      const empty = el("div", "solve-empty");
+      empty.textContent = "No solves yet — press any key to start.";
+      ol.appendChild(empty);
+      return;
+    }
     const effs = list.map(eff);
     const bestE = Math.min(...effs), worstE = Math.max(...effs.filter((x) => x !== Infinity), -1);
     for (let i = list.length - 1; i >= 0; i--) {
@@ -445,20 +458,48 @@
     }
   }
 
-  // click a past solve → cycle a small inline menu of actions
+  // click a past solve → on-theme inline menu (OK / +2 / DNF / delete)
+  let solveMenu = null;
+  function closeSolveMenu() {
+    if (!solveMenu) return;
+    solveMenu.remove(); solveMenu = null;
+    document.removeEventListener("mousedown", outsideSolveMenu, true);
+    document.removeEventListener("touchstart", outsideSolveMenu, true);
+  }
+  function outsideSolveMenu(e) { if (solveMenu && !solveMenu.contains(e.target)) closeSolveMenu(); }
   function openSolveMenu(sv, li) {
-    const choice = prompt(
-      `Solve #${Store.solves.indexOf(sv) + 1}: ${label(sv)}\n` +
-      `Scramble: ${sv.scramble}\n\n` +
-      `Type: ok / +2 / dnf / delete`, sv.penalty === "plus2" ? "+2" : sv.penalty
-    );
-    if (choice == null) return;
-    const c = choice.trim().toLowerCase();
-    if (c === "delete" || c === "del") { Store.remove(sv.id); }
-    else if (c === "+2" || c === "plus2") { sv.penalty = "plus2"; Store.update(sv); }
-    else if (c === "dnf") { sv.penalty = "dnf"; Store.update(sv); }
-    else if (c === "ok") { sv.penalty = "ok"; Store.update(sv); }
-    renderStats();
+    closeSolveMenu();
+    const m = el("div", "solve-menu");
+    const head = el("div", "sm-head"); head.textContent = `#${Store.solves.indexOf(sv) + 1} · ${label(sv)}`;
+    const scr = el("div", "sm-scramble"); scr.textContent = sv.scramble;
+    const row = el("div", "sm-row");
+    const mk = (a, txt, extra) => {
+      const b = el("button", extra); b.textContent = txt;
+      if ((sv.penalty || "ok") === a) b.classList.add("on");
+      b.addEventListener("click", () => {
+        if (a === "del") Store.remove(sv.id);
+        else { sv.penalty = a; Store.update(sv); }
+        closeSolveMenu(); renderStats();
+      });
+      return b;
+    };
+    row.appendChild(mk("ok", "OK"));
+    row.appendChild(mk("plus2", "+2"));
+    row.appendChild(mk("dnf", "DNF"));
+    row.appendChild(mk("del", "Delete", "danger"));
+    m.appendChild(head); m.appendChild(scr); m.appendChild(row);
+    document.body.appendChild(m);
+    // position near the clicked solve, clamped to the viewport
+    const r = li.getBoundingClientRect(), mw = m.offsetWidth, mh = m.offsetHeight, pad = 8;
+    let left = Math.min(Math.max(pad, r.left), window.innerWidth - mw - pad);
+    let top = r.bottom + 6;
+    if (top + mh > window.innerHeight - pad) top = Math.max(pad, r.top - mh - 6);
+    m.style.left = left + "px"; m.style.top = top + "px";
+    solveMenu = m;
+    setTimeout(() => {
+      document.addEventListener("mousedown", outsideSolveMenu, true);
+      document.addEventListener("touchstart", outsideSolveMenu, true);
+    }, 0);
   }
 
   // ---------- scramble nav ----------
@@ -486,16 +527,32 @@
   $("opt-inspection").checked = opts.inspection;
   $("opt-hold").checked = opts.hold;
   $("opt-cube").checked = opts.cube;
+  $("opt-hidetime").checked = opts.hideTime;
   function applyCubeVis() { $("cube-wrap").classList.toggle("hidden", !opts.cube); }
   applyCubeVis();
   $("btn-settings").addEventListener("click", (e) => { e.stopPropagation(); setPop.hidden = !setPop.hidden; });
   $("opt-inspection").addEventListener("change", (e) => { opts.inspection = e.target.checked; saveOpts(); });
   $("opt-hold").addEventListener("change", (e) => { opts.hold = e.target.checked; saveOpts(); });
   $("opt-cube").addEventListener("change", (e) => { opts.cube = e.target.checked; saveOpts(); applyCubeVis(); });
+  $("opt-hidetime").addEventListener("change", (e) => { opts.hideTime = e.target.checked; saveOpts(); });
   document.addEventListener("click", (e) => {
-    if (!setPop.hidden && !e.target.closest("#settings-pop") && e.target !== $("btn-settings")) setPop.hidden = true;
+    if (!setPop.hidden && !e.target.closest("#settings-pop") && e.target !== $("btn-settings") && !e.target.closest("#menu-settings")) setPop.hidden = true;
   });
-  function closeAllPops() { setPop.hidden = true; }
+
+  // ---------- mobile kebab menu (VS mode + settings) ----------
+  const menuPop = $("menu-pop"), menuBtn = $("menu-btn");
+  menuBtn.addEventListener("click", (e) => { e.stopPropagation(); setPop.hidden = true; menuPop.hidden = !menuPop.hidden; });
+  $("menu-vs").addEventListener("click", () => { menuPop.hidden = true; openVsSetup(); });
+  $("menu-settings").addEventListener("click", (e) => { e.stopPropagation(); menuPop.hidden = true; setPop.hidden = false; });
+  document.addEventListener("click", (e) => {
+    if (!menuPop.hidden && !e.target.closest("#menu-pop") && !menuBtn.contains(e.target)) menuPop.hidden = true;
+  });
+  function closeAllPops() {
+    setPop.hidden = true;
+    $("menu-pop").hidden = true;
+    closeSolveMenu();
+    if (VS.open && vsPlay.hidden) closeVs();   // Esc closes VS setup/results, not mid-solve
+  }
 
   // ============================================================
   // VS MODE  (local only — never touches Store / DB)
@@ -519,6 +576,8 @@
     VS.open = true; vsOverlay.hidden = false;
     vsSetup.hidden = false; vsPlay.hidden = true; vsResults.hidden = true;
     renderVsNames();
+    // focus the first field for keyboard users (skip on touch to avoid popping the keyboard)
+    if (!window.matchMedia("(pointer: coarse)").matches) { const n = $("vs-n"); n.focus(); n.select(); }
   }
   function closeVs() { VS.open = false; vsOverlay.hidden = true; clearInterval(VS.inspTick); cancelAnimationFrame(VS.raf); }
 
@@ -582,7 +641,9 @@
   }
   function vsStartRun() {
     clearInterval(VS.inspTick); VS.state = S.RUNNING; VS.startT = performance.now();
+    inputLockUntil = performance.now() + INPUT_LOCK_MS;   // 0.5s start-guard
     vsCls("running"); vsHint("");
+    if (opts.hideTime) { vsSetT("solving"); vsTimeEl.classList.add("solving"); return; }
     const tick = () => { if (VS.state !== S.RUNNING) return; vsSetT(fmt(performance.now() - VS.startT)); VS.raf = requestAnimationFrame(tick); };
     VS.raf = requestAnimationFrame(tick);
   }
