@@ -356,7 +356,8 @@ body {
     left: .6rem; right: auto; bottom: auto;
     top: max(3.6rem, calc(env(safe-area-inset-top) + 3rem));
   }
-  #penalty-bar { bottom: auto; top: 42%; }
+  /* sit the penalty bar just above the stats panel, not over the timer */
+  #penalty-bar { top: auto; bottom: calc(25vh + 1.2rem + env(safe-area-inset-bottom, 0px)); }
 }
 @media (max-height: 480px) {
   #time { font-size: clamp(3rem, 16vh, 6rem); }
