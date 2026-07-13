@@ -615,9 +615,8 @@
     for (let i = 0; i < n; i++) { const inp = el("input"); inp.type = "text"; inp.placeholder = "Player " + (i + 1); wrap.appendChild(inp); }
   }
   function startVs() {
-    const rounds = Math.max(1, Math.min(20, parseInt($("vs-rounds").value) || 1));
     const names = Array.from($("vs-names").querySelectorAll("input")).map((inp, i) => inp.value.trim() || ("Player " + (i + 1)));
-    buildVsGame(names, rounds);
+    buildVsGame(names, 1);   // one shared scramble, each player solves it once
     vsOverlay.hidden = true;
     enterVsPlay();
   }
@@ -628,7 +627,7 @@
     VS.results = names.map(() => Array(rounds).fill(undefined));
   }
 
-  const vsTurnHint = () => `Round ${VS.round + 1}/${VS.rounds} · ${VS.players[VS.turn].name}`;
+  const vsTurnHint = () => VS.players[VS.turn].name + " to solve";
 
   function enterVsPlay() {
     VS.active = true;
@@ -639,9 +638,8 @@
     setTime("0.00"); cls(""); hint(vsTurnHint());
   }
   function updateVsPanel() {
-    $("session-label").textContent = "VS mode";
+    $("session-label").textContent = "VS";
     const tl = $("vs-turn-line"); tl.innerHTML = "";
-    tl.appendChild(document.createTextNode(`Round ${VS.round + 1}/${VS.rounds} — `));
     const b = el("b"); b.textContent = VS.players[VS.turn].name; tl.appendChild(b);
     tl.appendChild(document.createTextNode(" to solve"));
     const sc = $("vs-scores"); sc.innerHTML = "";
