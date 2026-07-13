@@ -238,6 +238,7 @@
   const hint = (t) => { hintEl.textContent = t; };
 
   function newScramble() {
+    if (VS.active) return;   // VS controls the scramble per round
     curScramble = scramble();
     scrambleHistory.push(curScramble);
     if (scrambleHistory.length > 50) scrambleHistory.shift();
@@ -304,9 +305,19 @@
     cancelAnimationFrame(raf);
     const ms = performance.now() - startT;
     state = S.IDLE;
-    const sv = { id: uid(), ms: Math.round(ms), penalty: inspectPenalty, scramble: curScramble, puzzle: "333", ts: Date.now() };
+    const pen = inspectPenalty;
     inspectStart = 0;
     inputLockUntil = performance.now() + INPUT_LOCK_MS;   // ignore input briefly after a stop
+
+    if (VS.active) {
+      // show this solve's time, record it, advance to the next player
+      setTime(label({ ms: Math.round(ms), penalty: pen })); cls(pen === "dnf" ? "warn" : "");
+      vsRecord(ms, pen);
+      $("penalty-bar").hidden = false;   // OK/+2/DNF/delete edit this VS result
+      return;
+    }
+
+    const sv = { id: uid(), ms: Math.round(ms), penalty: pen, scramble: curScramble, puzzle: "333", ts: Date.now() };
     Store.add(sv);
     setTime(label(sv)); cls(sv.penalty === "dnf" ? "warn" : "");
     hint("any key / tap to inspect");
@@ -385,11 +396,13 @@
   // OS auto-repeat of a held key; onDown/onUp already ignore redundant calls.
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { closeAllPops(); return; }
+    if (!$("vs").hidden) return;   // setup/results overlay open → don't drive the timer
     if (e.repeat || isTyping(e.target) || !isTimerKey(e)) return;
     e.preventDefault();
     onDown();
   });
   document.addEventListener("keyup", (e) => {
+    if (!$("vs").hidden) return;
     if (isTyping(e.target) || !isTimerKey(e)) return;
     e.preventDefault();
     onUp();
@@ -406,14 +419,30 @@
   function showPenaltyBar(id) { lastSolveId = id; $("penalty-bar").hidden = false; }
   function hidePenaltyBar() { $("penalty-bar").hidden = true; lastSolveId = null; }
   $("penalty-bar").addEventListener("click", (e) => {
-    const b = e.target.closest(".pen"); if (!b || !lastSolveId) return;
+    const b = e.target.closest(".pen"); if (!b) return;
     const pen = b.dataset.pen;
+
+    if (VS.active) {
+      if (!VS.last) return;
+      const { turn, round } = VS.last;
+      if (pen === "del") {
+        // redo: clear the result and hand the turn back to that player
+        VS.results[turn][round] = undefined; VS.round = round; VS.turn = turn; VS.last = null;
+        curScramble = VS.scrambles[round]; showScramble();
+        updateVsPanel(); hint(vsTurnHint()); setTime("0.00"); cls(""); hidePenaltyBar();
+      } else {
+        const cell = VS.results[turn][round];
+        if (cell) { cell.penalty = pen; setTime(label(cell)); cls(pen === "dnf" ? "warn" : ""); updateVsPanel(); }
+      }
+      return;
+    }
+
+    if (!lastSolveId) return;
     const sv = Store.solves.find((s) => s.id === lastSolveId);
     if (!sv) return;
     if (pen === "del") { Store.remove(lastSolveId); hidePenaltyBar(); }
     else { sv.penalty = pen; Store.update(sv); }
-    renderStats(); setTime("–"); cls(""); hidePenaltyBar();
-    setTime("0.00");
+    renderStats(); hidePenaltyBar(); setTime("0.00"); cls("");
   });
 
   // ---------- stats render ----------
@@ -505,6 +534,7 @@
   // ---------- scramble nav ----------
   $("scramble-next").addEventListener("click", newScramble);
   $("scramble-prev").addEventListener("click", () => {
+    if (VS.active) return;
     if (scrambleIdx > 0) { scrambleIdx--; curScramble = scrambleHistory[scrambleIdx]; showScramble(); }
   });
   $("scramble").addEventListener("click", () => {
@@ -551,161 +581,117 @@
     setPop.hidden = true;
     $("menu-pop").hidden = true;
     closeSolveMenu();
-    if (VS.open && vsPlay.hidden) closeVs();   // Esc closes VS setup/results, not mid-solve
+    if (!$("vs").hidden) $("vs").hidden = true;   // Esc closes the setup/results overlay
   }
 
   // ============================================================
-  // VS MODE  (local only — never touches Store / DB)
+  // VS MODE — runs on the MAIN interface (real scramble, cube
+  // preview, timer, penalties). Only setup + final results use an
+  // overlay. Scores are local; never touches Store / DB.
+  //   results[player][round] = { ms, penalty } | undefined
   // ============================================================
   const VS = {
-    open: false, players: [], rounds: 0, round: 0, turn: 0,
-    scrambles: [], results: [],   // results[player] = [ms|null per round]; null=DNF
-    state: S.IDLE, startT: 0, raf: 0, inspStart: 0, inspPen: "ok", inspTick: 0, holdReady: false, holdTimer: 0, pending: 0,
+    active: false, players: [], rounds: 0, round: 0, turn: 0,
+    scrambles: [], results: [], last: null,   // last = {turn,round} of most recent solve
   };
-  const vsOverlay = $("vs"), vsSetup = $("vs-setup"), vsPlay = $("vs-play"), vsResults = $("vs-results");
+  const vsOverlay = $("vs"), vsSetup = $("vs-setup"), vsResults = $("vs-results");
 
   $("btn-vs").addEventListener("click", openVsSetup);
-  $("vs-cancel").addEventListener("click", closeVs);
-  $("vs-quit").addEventListener("click", closeVs);
-  $("vs-done").addEventListener("click", closeVs);
-  $("vs-again").addEventListener("click", () => { buildVsGame(VS.players.map((p) => p.name), VS.rounds); showVsPlay(); });
+  $("vs-cancel").addEventListener("click", () => { vsOverlay.hidden = true; });
   $("vs-start").addEventListener("click", startVs);
   $("vs-n").addEventListener("input", renderVsNames);
+  $("vs-again").addEventListener("click", () => { buildVsGame(VS.players.map((p) => p.name), VS.rounds); vsOverlay.hidden = true; enterVsPlay(); });
+  $("vs-done").addEventListener("click", () => { vsOverlay.hidden = true; });
+  $("vs-exit").addEventListener("click", exitVs);
 
   function openVsSetup() {
-    VS.open = true; vsOverlay.hidden = false;
-    vsSetup.hidden = false; vsPlay.hidden = true; vsResults.hidden = true;
+    vsOverlay.hidden = false; vsSetup.hidden = false; vsResults.hidden = true;
     renderVsNames();
-    // focus the first field for keyboard users (skip on touch to avoid popping the keyboard)
     if (!window.matchMedia("(pointer: coarse)").matches) { const n = $("vs-n"); n.focus(); n.select(); }
   }
-  function closeVs() { VS.open = false; vsOverlay.hidden = true; clearInterval(VS.inspTick); cancelAnimationFrame(VS.raf); }
-
   function renderVsNames() {
     const n = Math.max(2, Math.min(12, parseInt($("vs-n").value) || 2));
     const wrap = $("vs-names"); wrap.innerHTML = "";
-    for (let i = 0; i < n; i++) {
-      const inp = el("input"); inp.type = "text"; inp.placeholder = "Player " + (i + 1); inp.dataset.i = i;
-      wrap.appendChild(inp);
-    }
+    for (let i = 0; i < n; i++) { const inp = el("input"); inp.type = "text"; inp.placeholder = "Player " + (i + 1); wrap.appendChild(inp); }
   }
   function startVs() {
-    const n = Math.max(2, Math.min(12, parseInt($("vs-n").value) || 2));
     const rounds = Math.max(1, Math.min(20, parseInt($("vs-rounds").value) || 1));
     const names = Array.from($("vs-names").querySelectorAll("input")).map((inp, i) => inp.value.trim() || ("Player " + (i + 1)));
     buildVsGame(names, rounds);
-    showVsPlay();
+    vsOverlay.hidden = true;
+    enterVsPlay();
   }
   function buildVsGame(names, rounds) {
     VS.players = names.map((name) => ({ name }));
-    VS.rounds = rounds; VS.round = 0; VS.turn = 0;
+    VS.rounds = rounds; VS.round = 0; VS.turn = 0; VS.last = null;
     VS.scrambles = Array.from({ length: rounds }, () => scramble());
     VS.results = names.map(() => Array(rounds).fill(undefined));
   }
 
-  function showVsPlay() {
-    vsSetup.hidden = true; vsResults.hidden = true; vsPlay.hidden = false;
-    VS.state = S.IDLE; VS.inspStart = 0; VS.inspPen = "ok";
-    $("vs-round").textContent = `Round ${VS.round + 1} / ${VS.rounds}`;
-    $("vs-turn").textContent = VS.players[VS.turn].name;
-    $("vs-scramble").textContent = VS.scrambles[VS.round];
-    $("vs-time").textContent = "0.00"; $("vs-time").className = "vs-time";
-    $("vs-hint").textContent = opts.inspection ? "any key / tap to inspect" : "any key / tap to start";
+  const vsTurnHint = () => `Round ${VS.round + 1}/${VS.rounds} · ${VS.players[VS.turn].name}`;
+
+  function enterVsPlay() {
+    VS.active = true;
+    state = S.IDLE; inspectStart = 0; stopInspect(); hidePenaltyBar();
+    curScramble = VS.scrambles[VS.round]; showScramble();
+    $("panel").classList.add("vs");
+    updateVsPanel();
+    setTime("0.00"); cls(""); hint(vsTurnHint());
   }
-  function vsAdvance() {
+  function updateVsPanel() {
+    $("session-label").textContent = "VS mode";
+    const tl = $("vs-turn-line"); tl.innerHTML = "";
+    tl.appendChild(document.createTextNode(`Round ${VS.round + 1}/${VS.rounds} — `));
+    const b = el("b"); b.textContent = VS.players[VS.turn].name; tl.appendChild(b);
+    tl.appendChild(document.createTextNode(" to solve"));
+    const sc = $("vs-scores"); sc.innerHTML = "";
+    VS.players.forEach((p, i) => {
+      const cells = VS.results[i].filter((c) => c !== undefined);
+      const valid = cells.filter((c) => c.penalty !== "dnf").map((c) => c.ms + (c.penalty === "plus2" ? 2000 : 0));
+      const dnfs = cells.filter((c) => c.penalty === "dnf").length;
+      const best = valid.length ? Math.min(...valid) : null;
+      const row = el("div", "vs-score-row" + (i === VS.turn ? " cur" : ""));
+      const who = el("span", "who"); who.textContent = p.name;
+      const s = el("span", "sc");
+      s.textContent = cells.length ? (best != null ? fmt(best) : "DNF") + (dnfs ? ` · ${dnfs}DNF` : "") : "—";
+      row.appendChild(who); row.appendChild(s); sc.appendChild(row);
+    });
+  }
+  // record the current turn's solve, then advance turn / round
+  function vsRecord(rawMs, pen) {
+    VS.results[VS.turn][VS.round] = { ms: Math.round(rawMs), penalty: pen };
+    VS.last = { turn: VS.turn, round: VS.round };
     VS.turn++;
     if (VS.turn >= VS.players.length) { VS.turn = 0; VS.round++; }
-    if (VS.round >= VS.rounds) { showVsResults(); return; }
-    showVsPlay();
+    if (VS.round >= VS.rounds) { finishVs(); return; }
+    curScramble = VS.scrambles[VS.round]; showScramble();
+    updateVsPanel(); hint(vsTurnHint());
   }
-  function vsRecord(ms, pen) {
-    VS.results[VS.turn][VS.round] = pen === "dnf" ? null : Math.round(ms + (pen === "plus2" ? 2000 : 0));
-    vsAdvance();
+  function finishVs() {
+    VS.active = false;
+    $("panel").classList.remove("vs");
+    $("session-label").textContent = "Session";
+    renderStats();
+    hidePenaltyBar();
+    showVsResults();
+    newScramble(); setTime("0.00"); cls(""); hint("any key / tap to inspect");
   }
-
-  // VS timer (mirrors main, scoped to VS.state)
-  const vsTimeEl = $("vs-time");
-  function vsSetT(t) { vsTimeEl.textContent = t; }
-  function vsCls(c) { vsTimeEl.className = "vs-time" + (c ? " " + c : ""); }
-  function vsHint(t) { $("vs-hint").textContent = t; }
-
-  function vsStartInspect() {
-    VS.state = S.INSPECT; VS.inspStart = performance.now(); VS.inspPen = "ok";
-    vsCls("inspect"); vsHint("hold to start");
-    VS.inspTick = setInterval(() => {
-      const t = (performance.now() - VS.inspStart) / 1000, remain = 15 - t;
-      if (t > 17) { VS.inspPen = "dnf"; vsSetT("DNF"); vsCls("warn"); }
-      else if (t > 15) { VS.inspPen = "plus2"; vsSetT("+2"); vsCls("warn"); }
-      else { vsSetT(Math.max(0, Math.ceil(remain)).toString()); vsCls(remain <= 4 ? "warn" : "inspect"); }
-    }, 50);
+  function exitVs() {
+    if (VS.active && !confirm("Exit VS mode? Scores will be discarded.")) return;
+    VS.active = false;
+    $("panel").classList.remove("vs");
+    $("session-label").textContent = "Session";
+    renderStats(); hidePenaltyBar();
+    newScramble(); setTime("0.00"); cls(""); hint("any key / tap to inspect");
   }
-  function vsStartRun() {
-    clearInterval(VS.inspTick); VS.state = S.RUNNING; VS.startT = performance.now();
-    inputLockUntil = performance.now() + INPUT_LOCK_MS;   // 0.5s start-guard
-    vsCls("running"); vsHint("");
-    if (opts.hideTime) { vsSetT("solving"); vsTimeEl.classList.add("solving"); return; }
-    const tick = () => { if (VS.state !== S.RUNNING) return; vsSetT(fmt(performance.now() - VS.startT)); VS.raf = requestAnimationFrame(tick); };
-    VS.raf = requestAnimationFrame(tick);
-  }
-  function vsStopRun() {
-    cancelAnimationFrame(VS.raf);
-    const ms = performance.now() - VS.startT; VS.state = S.IDLE;
-    inputLockUntil = performance.now() + INPUT_LOCK_MS;
-    vsRecord(ms, VS.inspPen);
-  }
-  function vsBeginHold() {
-    VS.state = S.HOLD; VS.holdReady = false; vsCls("ready-hold");
-    vsTimeEl.classList.remove("ready"); vsTimeEl.classList.add("warn");
-    if (opts.hold) VS.holdTimer = setTimeout(() => { VS.holdReady = true; vsCls("ready"); }, 300);
-    else VS.holdReady = true;
-  }
-  function vsReleaseHold() {
-    clearTimeout(VS.holdTimer);
-    if (VS.holdReady) vsStartRun();
-    else { if (opts.inspection && VS.inspStart) { VS.state = S.INSPECT; vsCls("inspect"); } else { VS.state = S.IDLE; vsCls(""); vsSetT("0.00"); } }
-  }
-  let vsPressState = S.IDLE;
-  function vsDown() {
-    if (locked()) return;
-    vsPressState = VS.state;
-    if (VS.state === S.RUNNING) { vsStopRun(); return; }
-    if (VS.state === S.IDLE) { if (opts.inspection) return; vsBeginHold(); return; }
-    if (VS.state === S.INSPECT) { vsBeginHold(); return; }
-  }
-  function vsUp() {
-    if (locked()) return;
-    if (VS.state === S.HOLD) { vsReleaseHold(); return; }
-    if (VS.state === S.IDLE && vsPressState === S.IDLE && opts.inspection) { vsStartInspect(); return; }
-  }
-  vsTimeEl.addEventListener("touchstart", (e) => { e.preventDefault(); vsDown(); }, { passive: false });
-  vsTimeEl.addEventListener("touchend", (e) => { e.preventDefault(); vsUp(); }, { passive: false });
-  // when VS is open, ANY key drives the VS timer instead of the main one (no mouse).
-  // Capture + stopImmediatePropagation so the main handler doesn't also fire.
-  document.addEventListener("keydown", (e) => {
-    if (!VS.open || isTyping(e.target) || !isTimerKey(e)) return;
-    e.preventDefault(); e.stopImmediatePropagation();
-    if (e.repeat) return;
-    vsDown();
-  }, true);
-  document.addEventListener("keyup", (e) => {
-    if (!VS.open || isTyping(e.target) || !isTimerKey(e)) return;
-    e.preventDefault(); e.stopImmediatePropagation();
-    vsUp();
-  }, true);
-  // +2 / DNF mark a pending penalty applied when the current turn's solve is recorded
-  $("vs-plus2").addEventListener("click", () => { VS.inspPen = VS.inspPen === "plus2" ? "ok" : "plus2"; flashVsPen("+2"); });
-  $("vs-dnf").addEventListener("click", () => { VS.inspPen = VS.inspPen === "dnf" ? "ok" : "dnf"; flashVsPen("DNF"); });
-  function flashVsPen(t) { vsHint("penalty: " + (VS.inspPen === "ok" ? "none" : t)); }
 
   function showVsResults() {
-    vsPlay.hidden = true; vsResults.hidden = false;
-    // score = sum of effective times; DNF counts as a large penalty per missing solve
+    vsOverlay.hidden = false; vsSetup.hidden = true; vsResults.hidden = false;
     const board = VS.players.map((p, i) => {
-      const times = VS.results[i];
-      const done = times.filter((t) => t !== undefined);
-      const dnfs = done.filter((t) => t === null).length;
-      const valid = done.filter((t) => t !== null);
-      const sum = valid.reduce((a, b) => a + b, 0) + dnfs * 999999;
+      const cells = VS.results[i].filter((c) => c !== undefined);
+      const valid = cells.filter((c) => c.penalty !== "dnf").map((c) => c.ms + (c.penalty === "plus2" ? 2000 : 0));
+      const dnfs = cells.filter((c) => c.penalty === "dnf").length;
+      const sum = valid.reduce((a, b) => a + b, 0) + dnfs * 600000;
       const mean = valid.length ? valid.reduce((a, b) => a + b, 0) / valid.length : null;
       const best = valid.length ? Math.min(...valid) : null;
       return { name: p.name, sum, mean, best, dnfs, solved: valid.length };

@@ -198,7 +198,25 @@ body {
 .panel.collapsed #stat-table,
 .panel.collapsed #solve-summary,
 .panel.collapsed #solve-list,
-.panel.collapsed .panel-foot { display: none; }
+.panel.collapsed .panel-foot,
+.panel.collapsed #vs-standings { display: none; }
+
+/* VS standings — replace the normal panel body while a VS game runs */
+#vs-standings { display: none; }
+.panel.vs #stat-table,
+.panel.vs #solve-summary,
+.panel.vs #solve-list,
+.panel.vs .panel-foot { display: none; }
+.panel.vs #vs-standings { display: block; }
+.vs-turn-line { padding: .55rem .95rem; font-size: .86rem; color: var(--ink-2); border-bottom: var(--bw) solid var(--edge-soft); }
+.vs-turn-line b { color: var(--accent-ink); }
+.vs-scores { display: flex; flex-direction: column; padding: .3rem; gap: .12rem; overflow-y: auto; }
+.vs-score-row { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .45rem .6rem; border-radius: 9px; font-size: .86rem; }
+.vs-score-row.cur { background: rgba(100, 68, 255, .12); }
+.vs-score-row .who { color: var(--ink); font-weight: 500; }
+.vs-score-row.cur .who { color: var(--accent-ink); font-weight: 700; }
+.vs-score-row .sc { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+#vs-exit { display: block; width: 100%; text-align: center; padding: .55rem; border-top: var(--bw) solid var(--edge-soft); }
 
 /* inline solve editor */
 .solve-menu {

@@ -64,6 +64,12 @@ permalink: /timer/
       <button id="btn-clear" class="text-btn" title="Clear this session">clear</button>
       <span id="sync-dot" title="Sync status">●</span>
     </div>
+    <!-- VS standings (shown only while a VS game is running) -->
+    <div id="vs-standings">
+      <div id="vs-turn-line" class="vs-turn-line"></div>
+      <div id="vs-scores" class="vs-scores"></div>
+      <button id="vs-exit" class="text-btn">Exit VS</button>
+    </div>
   </aside>
 
   <!-- Cube net preview -->
@@ -129,21 +135,7 @@ permalink: /timer/
       </div>
     </div>
 
-    <!-- play -->
-    <div id="vs-play" class="vs-panel" hidden>
-      <div class="vs-meta">
-        <span id="vs-round">Round 1</span>
-        <span id="vs-turn">Player 1</span>
-      </div>
-      <div id="vs-scramble" class="vs-scramble"></div>
-      <div id="vs-time" class="vs-time">0.00</div>
-      <div id="vs-hint" class="hint">tap / space to start</div>
-      <div class="vs-actions">
-        <button id="vs-plus2" class="pill">+2</button>
-        <button id="vs-dnf" class="pill">DNF</button>
-        <button id="vs-quit" class="pill">Quit</button>
-      </div>
-    </div>
+    <!-- play happens on the main interface; standings render in the panel -->
 
     <!-- results -->
     <div id="vs-results" class="vs-panel" hidden>
