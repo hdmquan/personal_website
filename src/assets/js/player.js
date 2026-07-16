@@ -344,9 +344,14 @@
   }
 
   let scrobbleMeta = null;
+  let curDur = 0;          // catalog duration of the current track (authoritative when audio.duration is flaky)
+  let endHandled = false;  // a track advances exactly once (native 'ended' OR our fallback)
+  let endTimer = null;     // watchdog armed near the end in case 'ended' never fires (iOS streamed audio)
+  function clearEndTimer() { if (endTimer) { clearTimeout(endTimer); endTimer = null; } }
   function loadCurrent(autoplay, startAt) {
     const q = queue[qi]; if (!q) return;
     const a = ALB[q.ai], t = a.tracks[q.ti];
+    curDur = t.dur || 0; endHandled = false; clearEndTimer();
     // scrobble metadata for the new track (no-op unless a Last.fm session is connected).
     // a.artist overrides the default vocalist for circle/collab releases (e.g. La Bella Luna) so
     // scrobbles match how Last.fm catalogues them and pick up the right page + cover art.
@@ -393,16 +398,31 @@
   /* ── Audio events ──────────────────────────────── */
   audio.addEventListener('play',  () => setPlayingUI(true));
   audio.addEventListener('pause', () => { setPlayingUI(false); saveNowPlaying(); });
-  audio.addEventListener('ended', () => {
-    if (loopMode === 2) { audio.currentTime = 0; audio.play().catch(()=>{}); return; }  // loop one
+  function handleEnd() {
+    if (endHandled) return;
+    endHandled = true; clearEndTimer();
+    if (loopMode === 2) { endHandled = false; audio.currentTime = 0; audio.play().catch(()=>{}); return; }  // loop one
     next();
-  });
+  }
+  audio.addEventListener('ended', handleEnd);
   audio.addEventListener('error', () => { if (queue.length && qi < queue.length - 1) { toast('Track unavailable — skipping'); next(); } });
   audio.addEventListener('loadedmetadata', () => {
     if (pendingSeek != null) { try { audio.currentTime = pendingSeek; } catch (e) {} pendingSeek = null; }
     updatePositionState();
   });
   audio.addEventListener('timeupdate', () => {
+    // Safety net: iOS often doesn't fire 'ended' for streamed audio, so a track can stall at the
+    // end and never advance. Once we're at the very end, let the native 'ended' win if it fires;
+    // otherwise this watchdog advances ~2s later (only while playback is intended, so a deliberate
+    // pause near the end is respected).
+    const dur = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : curDur;
+    if (dur > 2 && !endHandled && !endTimer && audio.currentTime >= dur - 0.25) {
+      endTimer = setTimeout(() => {
+        endTimer = null;
+        const d = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : curDur;
+        if (!endHandled && wantPlay && d && audio.currentTime >= d - 0.6) handleEnd();
+      }, 2000);
+    }
     if (seeking || !audio.duration) return;
     setPct(audio.currentTime / audio.duration * 100);
     updatePositionState();
