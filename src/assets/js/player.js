@@ -573,18 +573,32 @@
   }
 
   /* seek (click + drag) */
+  // Prefer the real audio duration; fall back to the catalog's when it's Infinity/0 (some streams).
+  function effectiveDur() { return (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : curDur; }
+  // Seek, then confirm it landed — iOS streamed audio sometimes ignores the first currentTime set
+  // (UI jumps but playback stays put). If it didn't take, re-apply once.
+  function applySeek(sec) {
+    const dur = effectiveDur();
+    if (!dur) return;
+    const target = Math.max(0, Math.min(sec, dur - 0.1));
+    try { audio.currentTime = target; } catch (e) {}
+    const t = setTimeout(() => {
+      if (Math.abs(audio.currentTime - target) > 1.5) { try { audio.currentTime = target; } catch (e) {} }
+    }, 350);
+    audio.addEventListener('seeked', () => clearTimeout(t), { once: true });
+  }
   function seekTo(clientX) {
     const r = npSeek.getBoundingClientRect();
     const p = Math.min(1, Math.max(0, (clientX - r.left) / r.width));
     setPct(p*100);
     npTip.hidden = false;
-    npTip.textContent = fmt(p * (audio.duration||0));
+    npTip.textContent = fmt(p * effectiveDur());
     npTip.style.left = (p*100) + '%';
     return p;
   }
-  npSeek.addEventListener('pointerdown', e => { if (!audio.duration) return; seeking = true; npBar.classList.add('seeking'); npSeek.setPointerCapture(e.pointerId); seekTo(e.clientX); });
+  npSeek.addEventListener('pointerdown', e => { if (!effectiveDur()) return; seeking = true; npBar.classList.add('seeking'); npSeek.setPointerCapture(e.pointerId); seekTo(e.clientX); });
   npSeek.addEventListener('pointermove', e => { if (seeking) seekTo(e.clientX); });
-  npSeek.addEventListener('pointerup',   e => { if (!seeking) return; const p = seekTo(e.clientX); audio.currentTime = p * audio.duration; seeking = false; npBar.classList.remove('seeking'); npTip.hidden = true; });
+  npSeek.addEventListener('pointerup',   e => { if (!seeking) return; const p = seekTo(e.clientX); seeking = false; npBar.classList.remove('seeking'); npTip.hidden = true; applySeek(p * effectiveDur()); });
 
   /* ── Media Session (lock screen / AirPods) ─────── */
   function updatePositionState() {
@@ -607,11 +621,7 @@
     set('pause', () => { wantPlay = false; audio.pause(); });
     set('nexttrack', next);
     set('previoustrack', prev);
-    set('seekto', e => {
-      if (e.fastSeek && 'fastSeek' in audio) audio.fastSeek(e.seekTime);
-      else audio.currentTime = e.seekTime;
-      updatePositionState();
-    });
+    set('seekto', e => { applySeek(e.seekTime); updatePositionState(); });   // lock-screen / Control Center scrubber
     updatePositionState();
   }
 
@@ -650,8 +660,8 @@
     if (tag === 'INPUT' || tag === 'TEXTAREA') { if (e.key === 'Escape') document.activeElement.blur(); return; }
     switch (e.key) {
       case ' ': e.preventDefault(); togglePlay(); hint(); break;
-      case 'ArrowRight': if (audio.duration) { audio.currentTime = Math.min(audio.currentTime+10, audio.duration); hint(); } break;
-      case 'ArrowLeft':  if (audio.duration) { audio.currentTime = Math.max(audio.currentTime-10, 0); hint(); } break;
+      case 'ArrowRight': if (effectiveDur()) { applySeek(audio.currentTime + 10); hint(); } break;
+      case 'ArrowLeft':  if (effectiveDur()) { applySeek(audio.currentTime - 10); hint(); } break;
       case 'n': case 'N': next(); hint(); break;
       case 'p': case 'P': prev(); hint(); break;
       case 'm': case 'M': audio.muted = !audio.muted; npBar.classList.toggle('muted', audio.muted); hint(); break;
