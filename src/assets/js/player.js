@@ -397,7 +397,13 @@
 
   /* ── Audio events ──────────────────────────────── */
   audio.addEventListener('play',  () => setPlayingUI(true));
-  audio.addEventListener('pause', () => { setPlayingUI(false); saveNowPlaying(); });
+  audio.addEventListener('pause', () => {
+    setPlayingUI(false); saveNowPlaying();
+    // Some browsers pause at the very end instead of firing 'ended' (media control then sticks at
+    // the end). If we still intend to play and we're at the end, treat it as a finished track.
+    const d = effectiveDur();
+    if (wantPlay && !endHandled && d && audio.currentTime >= d - 1) handleEnd();
+  });
   function handleEnd() {
     if (endHandled) return;
     endHandled = true; clearEndTimer();
