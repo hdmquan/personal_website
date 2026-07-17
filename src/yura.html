@@ -171,8 +171,33 @@ permalink: /yura/
 </div>
 
 <div id="queue-panel" hidden>
-  <div class="q-head"><span>Up next</span><button id="queue-close" aria-label="Close queue">CLOSE ×</button></div>
+  <div class="q-head">
+    <div class="q-head-txt"><p class="q-title">Queue</p><p class="q-sub" id="q-sub"></p></div>
+    <button id="queue-close" aria-label="Close queue">Close</button>
+  </div>
+  <div id="q-now"></div>
   <ol id="queue-list"></ol>
+  <div class="q-foot">
+    <button class="q-fbtn" id="q-shuffle" aria-label="Shuffle queue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg><span>Shuffle</span>
+    </button>
+    <button class="q-fbtn" id="q-repeat" aria-label="Repeat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span id="q-repeat-lbl">Repeat</span>
+    </button>
+    <div class="q-timer-wrap">
+      <button class="q-fbtn" id="q-timer" aria-label="Sleep timer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg><span id="q-timer-lbl">Timer</span>
+      </button>
+      <div class="q-timer-pop" id="q-timer-pop" hidden>
+        <button data-min="15">15 min</button>
+        <button data-min="30">30 min</button>
+        <button data-min="45">45 min</button>
+        <button data-min="60">60 min</button>
+        <button data-min="track">End of track</button>
+        <button data-min="0">Off</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Top-left: Last.fm connect (login / sign-out); turns into a back-to-top chevron once scrolled. -->

@@ -448,26 +448,65 @@ html, body { overscroll-behavior: none; }
 
 /* ── Queue panel ───────────────────────────────────*/
 #queue-panel { position: fixed; left: 50%; transform: translateX(-50%); bottom: 6rem; z-index: 55;
-  width: min(680px, calc(100vw - 1.5rem)); max-height: 50vh; display: flex; flex-direction: column;
+  width: min(680px, calc(100vw - 1.5rem)); max-height: 62vh; display: flex; flex-direction: column;
   background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .85rem; overflow: hidden;
   box-shadow: 0 14px 44px var(--sh-deep); }
 #queue-panel[hidden] { display: none; }
-.q-head { display: flex; align-items: center; justify-content: space-between; padding: .75rem 1rem;
-  font-family: var(--mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--text-2);
-  border-bottom: 1px solid var(--rule); }
-#queue-close { border: 0; background: transparent; cursor: pointer; color: var(--text-3);
-  font-family: var(--mono); font-size: .64rem; letter-spacing: .12em; }
-#queue-close:hover { color: var(--accent); }
-#queue-list { list-style: none; margin: 0; padding: .4rem; overflow-y: auto; }
-.q-item { display: grid; grid-template-columns: 1.6rem minmax(0,1.2fr) minmax(0,1fr); gap: .7rem; align-items: center;
-  padding: .5rem .6rem; border-radius: .4rem; cursor: pointer; }
-.q-item:hover { background: var(--panel-inset); }
-.q-i { font-family: var(--mono); font-size: .68rem; color: var(--text-3); text-align: center; font-variant-numeric: tabular-nums; }
+.q-head { display: flex; align-items: center; justify-content: space-between; padding: .8rem 1rem .6rem; }
+.q-title { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; color: var(--text); }
+.q-sub { margin: .1rem 0 0; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
+#queue-close { border: 1px solid var(--rule); background: transparent; cursor: pointer; color: var(--text-2);
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .4rem .8rem; border-radius: 2rem; }
+#queue-close:hover { color: var(--accent); border-color: var(--gilt-soft); }
+
+/* now-playing row (pinned, not reorderable) */
+#q-now { padding: 0 .55rem; }
+.q-now-row { display: grid; grid-template-columns: 38px minmax(0,1fr) auto; gap: .7rem; align-items: center;
+  padding: .5rem .55rem; border-bottom: 1px solid var(--rule); margin-bottom: .35rem; }
+.q-cover { width: 38px; height: 38px; border-radius: .3rem; object-fit: cover; background: var(--panel-inset); flex: none; }
+.q-meta { min-width: 0; }
 .q-t { font-family: var(--serif); font-size: .9rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.q-a { font-family: var(--mono); font-size: .66rem; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; justify-self: end; text-align: right; }
-.q-item.current .q-t, .q-item.current .q-i { color: var(--accent); }
-.q-item.past { opacity: .5; }
-.q-empty { padding: 1.5rem; text-align: center; color: var(--text-3); font-family: var(--serif); font-style: italic; font-size: .85rem; }
+.q-a { font-family: var(--mono); font-size: .62rem; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.q-now-row .q-t { color: var(--accent); }
+.q-now-ic { color: var(--accent); display: grid; place-items: center; }
+.q-now-ic svg { width: 16px; height: 16px; }
+
+#queue-list { list-style: none; margin: 0; padding: .3rem .55rem .5rem; overflow-y: auto; flex: 1; }
+/* each item: sliding row over a trash layer revealed on swipe-left */
+.q-item { position: relative; border-radius: .45rem; overflow: hidden; touch-action: pan-y; }
+.q-del { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 1.1rem; background: #d5352b; color: #fff; }
+.q-del svg { width: 18px; height: 18px; }
+.q-row { position: relative; z-index: 1; display: grid; grid-template-columns: 38px minmax(0,1fr) auto; gap: .7rem;
+  align-items: center; padding: .45rem .55rem; background: var(--panel-raised); cursor: pointer;
+  transition: transform .18s ease; touch-action: pan-y; }
+.q-item:hover .q-row { background: var(--panel-inset); }
+.q-item.dragging { z-index: 3; }
+.q-item.dragging .q-row { background: var(--panel-inset); box-shadow: 0 8px 24px var(--sh-deep); transition: none; }
+.q-handle { border: 0; background: transparent; color: var(--text-3); cursor: grab; padding: .3rem .1rem;
+  display: grid; place-items: center; touch-action: none; }
+.q-handle:active { cursor: grabbing; }
+.q-handle svg { width: 18px; height: 18px; }
+.q-empty { padding: 1.75rem 1rem; text-align: center; color: var(--text-3); font-family: var(--serif); font-style: italic; font-size: .85rem; }
+
+/* footer controls */
+.q-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; padding: .6rem .7rem;
+  border-top: 1px solid var(--rule); }
+.q-fbtn { position: relative; display: flex; flex-direction: column; align-items: center; gap: .3rem;
+  border: 0; background: var(--panel-inset); color: var(--text-2); cursor: pointer; padding: .6rem .3rem; border-radius: .55rem;
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; transition: color .15s, background .15s; }
+.q-fbtn svg { width: 20px; height: 20px; }
+.q-fbtn:hover { color: var(--text); }
+.q-fbtn.on { color: var(--accent); }
+.q-timer-wrap { position: relative; display: flex; }
+.q-timer-wrap .q-fbtn { flex: 1; }
+.q-timer-pop { position: absolute; bottom: calc(100% + .5rem); right: 0; z-index: 3; min-width: 9rem;
+  background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .6rem; padding: .3rem;
+  box-shadow: 0 12px 34px var(--sh-deep); display: flex; flex-direction: column; }
+.q-timer-pop[hidden] { display: none; }
+.q-timer-pop button { border: 0; background: transparent; cursor: pointer; text-align: left; padding: .5rem .6rem;
+  border-radius: .4rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .06em; color: var(--text-2); }
+.q-timer-pop button:hover { background: var(--panel-inset); color: var(--text); }
 
 /* ── Toast ─────────────────────────────────────────*/
 #toast { position: fixed; left: 50%; bottom: 7rem; transform: translateX(-50%) translateY(8px); z-index: 70;

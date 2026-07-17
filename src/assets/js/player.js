@@ -29,6 +29,7 @@
   let wantPlay = false;         // user *intends* playback (for interruption resume)
   let excludeInst = false;      // skip instrumental tracks in auto-generated queues
   let loopMode = 0;             // 0 = off, 1 = loop all, 2 = loop one
+  let sleepTimer = null, sleepEndOfTrack = false;   // sleep timer (queue panel)
   let queueMode = 'album';      // 'album' (continue to next album on end) | 'all'
   let pendingSeek = null;       // currentTime to apply once metadata loads (restore)
   let shelfScroll = 0;          // remember scroll when entering an album
@@ -407,6 +408,7 @@
   function handleEnd() {
     if (endHandled) return;
     endHandled = true; clearEndTimer();
+    if (sleepEndOfTrack) { sleepEndOfTrack = false; syncQFoot(); wantPlay = false; audio.pause(); return; }  // sleep: stop after this track
     if (loopMode === 2) { endHandled = false; audio.currentTime = 0; audio.play().catch(()=>{}); return; }  // loop one
     next();
   }
@@ -489,7 +491,7 @@
       }
       renderQueue(); saveNowPlaying();
     }
-    saveSettings();
+    syncQFoot(); saveSettings();
   });
 
   /* ── Shuffle-all, instrumental toggle, loop (optional buttons) ── */
@@ -510,7 +512,7 @@
   const loopBtn = document.getElementById('np-loop');
   function syncLoopBtn() { if (!loopBtn) return; loopBtn.classList.toggle('on', loopMode > 0); loopBtn.classList.toggle('one', loopMode === 2);
     loopBtn.setAttribute('aria-label', ['Loop off','Loop all','Loop one'][loopMode]); loopBtn.title = ['Loop off','Loop all','Loop one'][loopMode]; }
-  loopBtn?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); saveSettings(); });
+  loopBtn?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
 
   /* volume */
   const volSlider = $('#np-vol-slider');
@@ -520,22 +522,39 @@
   volSlider.addEventListener('input', () => { applyVol(+volSlider.value); saveSettings(); });
   $('#np-mute').addEventListener('click', () => { audio.muted = !audio.muted; npBar.classList.toggle('muted', audio.muted); saveSettings(); });
 
-  /* ── Queue panel (optional) ────────────────────── */
-  const queuePanel = document.getElementById('queue-panel'), queueList = document.getElementById('queue-list');
+  /* ── Queue panel (Spotify-style: pinned now-playing + reorderable/removable upcoming) ── */
+  const queuePanel = document.getElementById('queue-panel'), queueList = document.getElementById('queue-list'),
+        qNow = document.getElementById('q-now'), qSub = document.getElementById('q-sub'), qTimerPop = document.getElementById('q-timer-pop');
+
+  const qCover = a => a && a.cover_url
+    ? `<img class="q-cover" src="${esc(a.cover_url)}" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"/>`
+    : '<span class="q-cover"></span>';
+
   function renderQueue() {
     if (!queueList) return;
-    if (!queue.length) { queueList.innerHTML = '<li class="q-empty">Nothing queued</li>'; return; }
-    queueList.innerHTML = queue.map((q, i) => {
-      const a = ALB[q.ai], t = a.tracks[q.ti];
-      return `<li class="q-item${i === qi ? ' current' : ''}${i < qi ? ' past' : ''}" data-i="${i}">
-        <span class="q-i">${i === qi ? '▶' : (i + 1)}</span>
-        <span class="q-t">${esc(disp(t))}</span>
-        <span class="q-a">${esc(a.title)}</span>
+    const cur = queue[qi];
+    if (qSub) qSub.textContent = cur ? ('Playing · ' + (ALB[cur.ai] ? ALB[cur.ai].title : '')) : '';
+    if (qNow) {
+      if (cur) { const a = ALB[cur.ai], t = a.tracks[cur.ti];
+        qNow.innerHTML = `<div class="q-now-row">${qCover(a)}<span class="q-meta"><span class="q-t">${esc(disp(t))}</span><span class="q-a">${esc(a.title)}</span></span><span class="q-now-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>`;
+      } else qNow.innerHTML = '';
+    }
+    const up = []; for (let i = qi + 1; i < queue.length; i++) up.push(i);
+    if (!up.length) { queueList.innerHTML = '<li class="q-empty">Nothing queued next</li>'; syncQFoot(); return; }
+    queueList.innerHTML = up.map(i => {
+      const q = queue[i], a = ALB[q.ai], t = a.tracks[q.ti];
+      return `<li class="q-item" data-i="${i}">
+        <div class="q-del" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M9 6V4h6v2M7 6l1 14h8l1-14"/></svg></div>
+        <div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${esc(disp(t))}</span><span class="q-a">${esc(a.title)}</span></span>
+          <button class="q-handle" aria-label="Drag to reorder" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></button></div>
       </li>`;
     }).join('');
-    const cur = queueList.querySelector('.q-item.current');
-    if (cur && queuePanel && !queuePanel.hidden) cur.scrollIntoView({ block: 'nearest' });
+    syncQFoot();
   }
+
+  // upcoming-only edits keep qi fixed (everything acted on is after the current track)
+  function removeFromQueue(i) { if (i <= qi || i >= queue.length) return; queue.splice(i, 1); renderQueue(); saveNowPlaying(); }
+
   document.getElementById('queue-btn')?.addEventListener('click', () => {
     if (!queuePanel) return; queuePanel.hidden = !queuePanel.hidden;
     document.getElementById('queue-btn').classList.toggle('on', !queuePanel.hidden);
@@ -544,10 +563,99 @@
   document.getElementById('queue-close')?.addEventListener('click', () => {
     if (queuePanel) { queuePanel.hidden = true; document.getElementById('queue-btn')?.classList.remove('on'); }
   });
+
+  /* tap an upcoming item → jump to it (suppressed right after a swipe/drag) */
+  let suppressClick = false;
   queueList?.addEventListener('click', e => {
+    if (suppressClick || e.target.closest('.q-handle')) return;
     const li = e.target.closest('.q-item'); if (!li) return;
     qi = +li.dataset.i; loadCurrent(true);
   });
+
+  /* swipe-left to remove (on the row); the handle is reserved for reordering */
+  let swipe = null;
+  queueList?.addEventListener('pointerdown', e => {
+    if (e.target.closest('.q-handle')) return;
+    const row = e.target.closest('.q-row'), item = e.target.closest('.q-item');
+    if (!row || !item) return;
+    swipe = { item, row, x0: e.clientX, y0: e.clientY, dx: 0, active: false, decided: false, id: e.pointerId };
+  });
+  queueList?.addEventListener('pointermove', e => {
+    if (!swipe || e.pointerId !== swipe.id) return;
+    const dx = e.clientX - swipe.x0, dy = e.clientY - swipe.y0;
+    if (!swipe.decided) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      swipe.decided = true; swipe.active = Math.abs(dx) > Math.abs(dy);   // horizontal → swipe, else let it scroll
+      if (swipe.active) { swipe.row.style.transition = 'none'; try { queueList.setPointerCapture(e.pointerId); } catch (_) {} }
+    }
+    if (!swipe.active) return;
+    swipe.dx = Math.min(0, dx);
+    swipe.row.style.transform = `translateX(${swipe.dx}px)`;
+  });
+  function endSwipe(e) {
+    if (!swipe || (e && e.pointerId !== swipe.id)) return;
+    const s = swipe; swipe = null;
+    if (!s.active) return;
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 320);
+    s.row.style.transition = '';
+    if (s.dx < -s.row.offsetWidth * 0.4) { s.row.style.transform = 'translateX(-100%)'; setTimeout(() => removeFromQueue(+s.item.dataset.i), 160); }
+    else s.row.style.transform = '';
+  }
+  queueList?.addEventListener('pointerup', endSwipe);
+  queueList?.addEventListener('pointercancel', endSwipe);
+
+  /* drag the handle to reorder (live) */
+  let drag = null;
+  queueList?.addEventListener('pointerdown', e => {
+    const handle = e.target.closest('.q-handle'); if (!handle) return;
+    e.preventDefault();
+    drag = { item: handle.closest('.q-item'), id: e.pointerId };
+    drag.item.classList.add('dragging');
+    try { queueList.setPointerCapture(e.pointerId); } catch (_) {}
+  });
+  queueList?.addEventListener('pointermove', e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const y = e.clientY, prev = drag.item.previousElementSibling, nextEl = drag.item.nextElementSibling;
+    if (prev && y < prev.getBoundingClientRect().top + prev.offsetHeight / 2) queueList.insertBefore(drag.item, prev);
+    else if (nextEl && y > nextEl.getBoundingClientRect().top + nextEl.offsetHeight / 2) queueList.insertBefore(nextEl, drag.item);
+  });
+  function endDrag(e) {
+    if (!drag || (e && e.pointerId !== drag.id)) return;
+    const d = drag; drag = null; d.item.classList.remove('dragging');
+    suppressClick = true; setTimeout(() => { suppressClick = false; }, 320);
+    const order = [...queueList.querySelectorAll('.q-item')].map(li => queue[+li.dataset.i]);
+    queue.splice(qi + 1, order.length, ...order);   // replace the upcoming slice with the new order
+    renderQueue(); saveNowPlaying();
+  }
+  queueList?.addEventListener('pointerup', endDrag);
+  queueList?.addEventListener('pointercancel', endDrag);
+
+  /* ── Footer: shuffle / repeat / timer ── */
+  function syncQFoot() {
+    const sh = document.getElementById('q-shuffle'), rp = document.getElementById('q-repeat'),
+          rl = document.getElementById('q-repeat-lbl'), tm = document.getElementById('q-timer'), tl = document.getElementById('q-timer-lbl');
+    if (sh) sh.classList.toggle('on', shuffle);
+    if (rp) rp.classList.toggle('on', loopMode > 0);
+    if (rl) rl.textContent = ['Repeat', 'Repeat all', 'Repeat one'][loopMode];
+    const on = !!sleepTimer || sleepEndOfTrack;
+    if (tm) tm.classList.toggle('on', on);
+    if (tl) tl.textContent = on ? 'Timer on' : 'Timer';
+  }
+  document.getElementById('q-shuffle')?.addEventListener('click', () => {   // reshuffle upcoming + turn shuffle on
+    const up = queue.slice(qi + 1); shuf(up); queue.splice(qi + 1, up.length, ...up);
+    shuffle = true; syncShuffleBtn(); renderQueue(); saveNowPlaying(); saveSettings();
+  });
+  document.getElementById('q-repeat')?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
+
+  function setSleep(v) {
+    clearTimeout(sleepTimer); sleepTimer = null; sleepEndOfTrack = false;
+    if (v === 'track') sleepEndOfTrack = true;
+    else if (v > 0) sleepTimer = setTimeout(() => { sleepTimer = null; wantPlay = false; audio.pause(); toast('Sleep timer — paused'); syncQFoot(); }, v * 60000);
+    syncQFoot();
+  }
+  document.getElementById('q-timer')?.addEventListener('click', e => { e.stopPropagation(); if (qTimerPop) qTimerPop.hidden = !qTimerPop.hidden; });
+  qTimerPop?.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const v = b.dataset.min; setSleep(v === 'track' ? 'track' : +v); qTimerPop.hidden = true; });
+  document.addEventListener('click', e => { if (qTimerPop && !qTimerPop.hidden && !e.target.closest('.q-timer-wrap')) qTimerPop.hidden = true; });
 
   /* ── Marquee long now-playing title ────────────── */
   function applyMarquee() {
