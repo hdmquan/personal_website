@@ -472,7 +472,8 @@ html, body { overscroll-behavior: none; }
 .q-now-ic { color: var(--accent); display: grid; place-items: center; }
 .q-now-ic svg { width: 16px; height: 16px; }
 
-#queue-list { list-style: none; margin: 0; padding: .3rem .55rem .5rem; overflow-y: auto; flex: 1 1 auto; min-height: 0; -webkit-overflow-scrolling: touch; }
+#queue-list { list-style: none; margin: 0; padding: .3rem .55rem .5rem; flex: 1 1 auto; min-height: 0;
+  max-height: 44vh; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 /* each item: sliding row over a trash layer revealed on swipe-left */
 .q-item { position: relative; border-radius: .45rem; overflow: hidden; touch-action: pan-y; }
 .q-del { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end;
