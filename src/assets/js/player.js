@@ -614,11 +614,20 @@
     drag.item.classList.add('dragging');
     try { queueList.setPointerCapture(e.pointerId); } catch (_) {}
   });
+  // FLIP: slide a displaced neighbour from its old spot to its new one instead of jumping
+  function flipSwap(sibling, move) {
+    const y0 = sibling.getBoundingClientRect().top;
+    move();
+    const dy = y0 - sibling.getBoundingClientRect().top;
+    if (!dy) return;
+    sibling.style.transition = 'none'; sibling.style.transform = `translateY(${dy}px)`;
+    requestAnimationFrame(() => { sibling.style.transition = 'transform .2s ease'; sibling.style.transform = ''; });
+  }
   queueList?.addEventListener('pointermove', e => {
     if (!drag || e.pointerId !== drag.id) return;
     const y = e.clientY, prev = drag.item.previousElementSibling, nextEl = drag.item.nextElementSibling;
-    if (prev && y < prev.getBoundingClientRect().top + prev.offsetHeight / 2) queueList.insertBefore(drag.item, prev);
-    else if (nextEl && y > nextEl.getBoundingClientRect().top + nextEl.offsetHeight / 2) queueList.insertBefore(nextEl, drag.item);
+    if (prev && y < prev.getBoundingClientRect().top + prev.offsetHeight / 2) flipSwap(prev, () => queueList.insertBefore(drag.item, prev));
+    else if (nextEl && y > nextEl.getBoundingClientRect().top + nextEl.offsetHeight / 2) flipSwap(nextEl, () => queueList.insertBefore(nextEl, drag.item));
   });
   function endDrag(e) {
     if (!drag || (e && e.pointerId !== drag.id)) return;
