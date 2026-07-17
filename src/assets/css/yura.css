@@ -449,8 +449,11 @@ html, body { overscroll-behavior: none; }
 /* ── Queue panel ───────────────────────────────────*/
 #queue-panel { position: fixed; left: 50%; transform: translateX(-50%); bottom: 6rem; z-index: 55;
   width: min(680px, calc(100vw - 1.5rem));
+  max-height: calc(100vh - 8rem); max-height: calc(100dvh - 8rem);   /* bound to the viewport so it never clips */
+  display: flex; flex-direction: column;
   background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .85rem; overflow: hidden;
   box-shadow: 0 14px 44px var(--sh-deep); }
+.q-head, #q-now, .q-foot { flex: none; }   /* fixed parts don't shrink; the list gets the rest */
 #queue-panel[hidden] { display: none; }
 .q-head { display: flex; align-items: center; justify-content: space-between; padding: .8rem 1rem .6rem; }
 .q-title { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; color: var(--text); }
@@ -472,7 +475,7 @@ html, body { overscroll-behavior: none; }
 .q-now-ic { color: var(--accent); display: grid; place-items: center; }
 .q-now-ic svg { width: 16px; height: 16px; }
 
-#queue-list { list-style: none; margin: 0; padding: .3rem .55rem .5rem; max-height: 42vh;
+#queue-list { list-style: none; margin: 0; padding: .3rem .55rem .5rem; flex: 1 1 0; min-height: 0;
   overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 /* each item: sliding row over a trash layer revealed on swipe-left */
 .q-item { position: relative; border-radius: .45rem; overflow: hidden; touch-action: pan-y; }
