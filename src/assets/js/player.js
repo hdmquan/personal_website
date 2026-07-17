@@ -477,7 +477,7 @@
   $('#np-next').addEventListener('click', next);
   $('#np-prev').addEventListener('click', prev);
   function syncShuffleBtn() { const b = document.getElementById('np-shuffle'); if (b) b.classList.toggle('on', shuffle); }
-  $('#np-shuffle').addEventListener('click', () => {
+  function toggleShuffle() {
     shuffle = !shuffle; syncShuffleBtn();
     if (queue.length) {
       const cur = queue[qi];
@@ -492,7 +492,8 @@
       renderQueue(); saveNowPlaying();
     }
     syncQFoot(); saveSettings();
-  });
+  }
+  $('#np-shuffle').addEventListener('click', toggleShuffle);
 
   /* ── Shuffle-all, instrumental toggle, loop (optional buttons) ── */
   document.getElementById('shuffle-all-btn')?.addEventListener('click', shuffleAll);
@@ -641,10 +642,7 @@
     if (tm) tm.classList.toggle('on', on);
     if (tl) tl.textContent = on ? 'Timer on' : 'Timer';
   }
-  document.getElementById('q-shuffle')?.addEventListener('click', () => {   // reshuffle upcoming + turn shuffle on
-    const up = queue.slice(qi + 1); shuf(up); queue.splice(qi + 1, up.length, ...up);
-    shuffle = true; syncShuffleBtn(); renderQueue(); saveNowPlaying(); saveSettings();
-  });
+  document.getElementById('q-shuffle')?.addEventListener('click', toggleShuffle);   // on = shuffled · off = source order
   document.getElementById('q-repeat')?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
 
   function setSleep(v) {
