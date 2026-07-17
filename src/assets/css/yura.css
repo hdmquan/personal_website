@@ -449,6 +449,7 @@ html, body { overscroll-behavior: none; }
 /* ── Queue panel ───────────────────────────────────*/
 #queue-panel { position: fixed; left: 50%; transform: translateX(-50%); bottom: 6rem; z-index: 55;
   width: min(680px, calc(100vw - 1.5rem));
+  height: min(60dvh, 620px);                                         /* a proper sheet so the list fills it */
   max-height: calc(100vh - 8rem); max-height: calc(100dvh - 8rem);   /* bound to the viewport so it never clips */
   display: flex; flex-direction: column;
   background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .85rem; overflow: hidden;
