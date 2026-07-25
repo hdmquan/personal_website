@@ -38,6 +38,11 @@ body.dark-mode .btn-ext-play:hover,
 body.dark-mode .ah-buy:hover { color: #16140e; }
 
 body { font-family: var(--mono); font-weight: 400; }
+/* app-like: don't let long-press select text or pop the iOS callout; keep the search box usable */
+#yura-page, #np-bar, #queue-panel, #home-btn, #dark-toggle, .filter-wrap, #kb-hint {
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+.search-wrap input { -webkit-user-select: text; user-select: text; }
 
 /* [hidden] must beat the id/class display rules below */
 #shelf[hidden], #album-view[hidden], .shelf-controls[hidden] { display: none !important; }
@@ -447,15 +452,18 @@ html, body { overscroll-behavior: none; }
 @keyframes marq { 0%,12%{ transform: translateX(0); } 88%,100%{ transform: translateX(var(--shift,0)); } }
 
 /* ── Queue panel ───────────────────────────────────*/
-#queue-panel { position: fixed; left: 50%; transform: translateX(-50%); bottom: 6rem; z-index: 55;
+#queue-panel { position: fixed; left: 50%; bottom: 6rem; z-index: 55;
   width: min(680px, calc(100vw - 1.5rem));
   height: min(60dvh, 620px);                                         /* a proper sheet so the list fills it */
   max-height: calc(100vh - 8rem); max-height: calc(100dvh - 8rem);   /* bound to the viewport so it never clips */
   display: flex; flex-direction: column;
   background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .85rem; overflow: hidden;
-  box-shadow: 0 14px 44px var(--sh-deep); }
+  box-shadow: 0 14px 44px var(--sh-deep);
+  transform: translateX(-50%) translateY(14px); opacity: 0; visibility: hidden; pointer-events: none;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), opacity .28s, visibility .28s; }
+#queue-panel.open { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
 .q-head, #q-now, .q-foot { flex: none; }   /* fixed parts don't shrink; the list gets the rest */
-#queue-panel[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { #queue-panel { transition: opacity .01s, visibility .01s; } }
 .q-head { display: flex; align-items: center; justify-content: space-between; padding: .8rem 1rem .6rem; }
 .q-title { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 1.05rem; color: var(--text); }
 .q-sub { margin: .1rem 0 0; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }

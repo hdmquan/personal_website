@@ -278,7 +278,7 @@
   albumView.addEventListener('click', e => {
     if (e.target.closest('.ah-buy')) return;   // let the buy link navigate
     const li = e.target.closest('.trk');
-    if (li) { playAlbumFrom(+li.dataset.ai, +li.dataset.ti, false, false); return; }
+    if (li) { playAlbumFrom(+li.dataset.ai, +li.dataset.ti, false, true); return; }
     if (e.target.closest('#play-all')) playAlbumFrom(openAlbum, 0, false, true);
     if (e.target.closest('#shuffle-all')) playAlbumFrom(openAlbum, 0, true, true);
   });
@@ -294,15 +294,18 @@
 
   function playAlbumFrom(ai, ti, shuffled, respectFilter) {
     shuffle = !!shuffled; queueMode = 'album';
-    queue = buildQueue(ai, respectFilter);
-    // Album-level Play/Shuffle pass ti=0; if track 0 is filtered out (e.g. it's an instrumental
-    // and instrumentals are hidden) we just start at the first surviving track — NOT rebuild the
-    // queue unfiltered, which would re-add every instrumental. A direct track click stays playable
-    // because it already passes respectFilter=false (its queue is unfiltered). Only fall back to
-    // the full album if the filter leaves nothing to play.
-    if (!queue.length) queue = buildQueue(ai, false);
+    let q = buildQueue(ai, respectFilter);
+    // If the tapped track was filtered out (an instrumental while instrumentals are hidden), add
+    // just THAT track back so it still plays — the rest of the album stays filtered. Previously a
+    // track click built a fully unfiltered queue, so instrumentals played even with the filter on.
+    if (respectFilter && ti != null && !q.some(x => x.ti === ti) && ALB[ai].tracks[ti]) {
+      q.push({ ai, ti, inst: !!ALB[ai].tracks[ti].instrumental });
+      q.sort((a, b) => a.ti - b.ti);
+    }
+    if (!q.length) q = buildQueue(ai, false);   // filter left nothing → play the album unfiltered
+    queue = q;
     if (shuffle) shuf(queue);
-    qi = queue.findIndex(q => q.ti === ti);
+    qi = queue.findIndex(x => x.ti === ti);
     if (qi < 0) qi = 0;
     syncShuffleBtn();
     loadCurrent(true);
@@ -401,9 +404,9 @@
   audio.addEventListener('pause', () => {
     setPlayingUI(false); saveNowPlaying();
     // Some browsers pause at the very end instead of firing 'ended' (media control then sticks at
-    // the end). If we still intend to play and we're at the end, treat it as a finished track.
-    const d = effectiveDur();
-    if (wantPlay && !endHandled && d && audio.currentTime >= d - 1) handleEnd();
+    // the end). Require the REAL finite duration here — during a track change audio.duration is
+    // NaN, so a stale currentTime can't be mistaken for "at the end" and skip the new track.
+    if (wantPlay && !endHandled && isFinite(audio.duration) && audio.duration > 0 && audio.currentTime >= audio.duration - 1) handleEnd();
   });
   function handleEnd() {
     if (endHandled) return;
@@ -556,14 +559,17 @@
   // upcoming-only edits keep qi fixed (everything acted on is after the current track)
   function removeFromQueue(i) { if (i <= qi || i >= queue.length) return; queue.splice(i, 1); renderQueue(); saveNowPlaying(); }
 
-  document.getElementById('queue-btn')?.addEventListener('click', () => {
-    if (!queuePanel) return; queuePanel.hidden = !queuePanel.hidden;
-    document.getElementById('queue-btn').classList.toggle('on', !queuePanel.hidden);
-    if (!queuePanel.hidden) renderQueue();
+  const queueBtn = document.getElementById('queue-btn');
+  const queueOpen = () => !!queuePanel && queuePanel.classList.contains('open');
+  function openQueue() { if (!queuePanel) return; renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); }
+  function closeQueue() { if (!queuePanel) return; queuePanel.classList.remove('open'); queueBtn?.classList.remove('on'); }
+  queueBtn?.addEventListener('click', e => { e.stopPropagation(); queueOpen() ? closeQueue() : openQueue(); });
+  document.getElementById('queue-close')?.addEventListener('click', closeQueue);
+  // close when tapping/clicking anywhere outside the panel (or scrolling the page behind it)
+  document.addEventListener('click', e => {
+    if (queueOpen() && !e.target.closest('#queue-panel') && !e.target.closest('#queue-btn')) closeQueue();
   });
-  document.getElementById('queue-close')?.addEventListener('click', () => {
-    if (queuePanel) { queuePanel.hidden = true; document.getElementById('queue-btn')?.classList.remove('on'); }
-  });
+  window.addEventListener('scroll', () => { if (queueOpen()) closeQueue(); }, { passive: true });
 
   /* tap an upcoming item → jump to it (suppressed right after a swipe/drag) */
   let suppressClick = false;
