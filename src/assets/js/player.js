@@ -445,6 +445,20 @@
       setBuf(audio.buffered.end(audio.buffered.length-1) / audio.duration * 100);
   });
 
+  /* Stall recovery: if playback should be running but currentTime hasn't advanced for a while
+     (e.g. the network dropped near the end and the last bytes never arrived, or after a reconnect),
+     advance when we're at the end, otherwise nudge playback to resume. */
+  let lastCT = -1, lastCTAt = Date.now();
+  setInterval(() => {
+    if (!wantPlay || !queue.length) { lastCT = audio.currentTime; lastCTAt = Date.now(); return; }
+    if (Math.abs(audio.currentTime - lastCT) > 0.1) { lastCT = audio.currentTime; lastCTAt = Date.now(); return; }  // progressing
+    if (Date.now() - lastCTAt < 8000) return;                 // give a reconnect a few seconds first
+    lastCTAt = Date.now();
+    const d = effectiveDur();
+    if (d && audio.currentTime >= d - 3) handleEnd();          // stuck at/near the end → move on
+    else audio.play().catch(() => {});                         // buffering / interrupted mid-track → nudge resume
+  }, 2500);
+
   function setPct(p){ npFill.style.width=p+'%'; npThumb.style.left=p+'%'; npSeek.setAttribute('aria-valuenow', Math.round(p)); }
   function setBuf(p){ npBuf.style.width=p+'%'; }
   function setPlayingUI(playing) {
