@@ -151,6 +151,9 @@
         "Stage & Screen",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -244,6 +247,9 @@
         "Electronic",
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -395,6 +401,9 @@
         "Pop",
         "Electronic",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -543,6 +552,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -692,6 +704,9 @@
         "Pop",
         "Electronic",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -841,6 +856,9 @@
         "Electronic",
         "Rock",
         "Classical"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -992,6 +1010,9 @@
         "Latin",
         "Folk, World, & Country",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -1165,6 +1186,9 @@
         "Pop",
         "Rock",
         "Classical"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -1269,6 +1293,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -1419,6 +1446,9 @@
         "Electronic",
         "Pop",
         "Jazz"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -1625,6 +1655,9 @@
         "Children's",
         "Non-Music",
         "Folk, World, & Country"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -1719,6 +1752,9 @@
         "Stage & Screen",
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -1868,6 +1904,9 @@
         "Pop",
         "Rock",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -1971,6 +2010,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -2065,6 +2107,9 @@
         "Electronic",
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -2215,6 +2260,9 @@
         "Pop",
         "Electronic",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -2297,6 +2345,9 @@
       "genres": [
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -2472,6 +2523,9 @@
         "Stage & Screen",
         "Classical",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -2623,6 +2677,9 @@
         "Pop",
         "Children's",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -2773,6 +2830,9 @@
         "Rock",
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -2910,7 +2970,10 @@
         "Electronic",
         "Pop"
       ],
-      "artist": "La Bella Luna"
+      "artist": "La Bella Luna",
+      "release_types": [
+        "albums"
+      ]
     },
     {
       "album": "Garnet Bride",
@@ -3015,6 +3078,9 @@
         "Classical",
         "Stage & Screen",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -3166,6 +3232,9 @@
         "Rock",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -3261,6 +3330,9 @@
         "Electronic",
         "Pop",
         "Jazz"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -3355,6 +3427,9 @@
         "Pop",
         "Rock",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -3484,6 +3559,9 @@
         "Electronic",
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -3600,6 +3678,9 @@
         "Folk, World, & Country",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -3704,6 +3785,9 @@
         "Folk, World, & Country",
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -3800,6 +3884,9 @@
         "Jazz",
         "Stage & Screen",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -4007,6 +4094,9 @@
         "Rock",
         "Children's",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -4210,6 +4300,9 @@
         "Rock",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -4359,6 +4452,9 @@
         "Pop",
         "Folk, World, & Country",
         "Latin"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -4510,6 +4606,9 @@
         "Pop",
         "Electronic",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -4661,6 +4760,9 @@
         "Electronic",
         "Pop",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -4812,6 +4914,9 @@
         "Pop",
         "Electronic",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -4905,6 +5010,9 @@
       "genres": [
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5055,6 +5163,9 @@
         "Electronic",
         "Stage & Screen",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5203,6 +5314,9 @@
       "genres": [
         "Classical",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5274,6 +5388,9 @@
       "genres": [
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5427,6 +5544,9 @@
         "Classical",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5575,6 +5695,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5724,6 +5847,9 @@
         "Folk, World, & Country",
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5816,6 +5942,9 @@
       "genres": [
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -5965,6 +6094,9 @@
         "Rock",
         "Pop",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6059,6 +6191,9 @@
         "Rock",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6211,6 +6346,9 @@
         "Pop",
         "Classical",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6362,6 +6500,9 @@
         "Classical",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6469,6 +6610,9 @@
         "Pop",
         "Rock",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6564,6 +6708,9 @@
         "Pop",
         "Rock",
         "Classical"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6658,6 +6805,9 @@
         "Pop",
         "Rock",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6806,6 +6956,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -6900,6 +7053,9 @@
         "Rock",
         "Pop",
         "Jazz"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -7002,6 +7158,9 @@
       "album_seconds": 2539,
       "genres": [
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -7155,6 +7314,9 @@
         "Electronic",
         "Rock",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -7249,6 +7411,9 @@
         "Rock",
         "Pop",
         "Jazz"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -7400,7 +7565,10 @@
         "Rock",
         "Stage & Screen"
       ],
-      "artist": "La Bella Luna"
+      "artist": "La Bella Luna",
+      "release_types": [
+        "albums"
+      ]
     },
     {
       "album": "Shadows 影色妖精絵本",
@@ -7496,6 +7664,9 @@
         "Pop",
         "Folk, World, & Country",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -7649,6 +7820,9 @@
         "Stage & Screen",
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -7800,6 +7974,9 @@
         "Pop",
         "Electronic",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -7905,6 +8082,9 @@
         "Pop",
         "Electronic",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8054,6 +8234,9 @@
         "Electronic",
         "Pop",
         "Blues"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8205,6 +8388,9 @@
         "Pop",
         "Electronic",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8276,6 +8462,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8425,6 +8614,9 @@
         "Electronic",
         "Stage & Screen",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8576,6 +8768,9 @@
         "Classical",
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8668,6 +8863,9 @@
       "genres": [
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8766,6 +8964,9 @@
         "Electronic",
         "Rock",
         "Jazz"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -8862,6 +9063,9 @@
         "Pop",
         "Rock",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -9035,6 +9239,9 @@
         "Pop",
         "Jazz",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -9185,6 +9392,9 @@
         "Pop",
         "Jazz",
         "Non-Music"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -9312,7 +9522,10 @@
         "Rock",
         "Electronic"
       ],
-      "artist": "La Bella Luna"
+      "artist": "La Bella Luna",
+      "release_types": [
+        "albums"
+      ]
     },
     {
       "album": "はつ恋",
@@ -9483,6 +9696,9 @@
         "Pop",
         "Electronic",
         "Children's"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -9589,6 +9805,9 @@
       "genres": [
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -9697,6 +9916,9 @@
         "Pop",
         "Electronic",
         "Folk, World, & Country"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -9825,6 +10047,9 @@
         "Pop",
         "Classical",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -9951,6 +10176,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10036,6 +10264,9 @@
         "Jazz",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10143,6 +10374,9 @@
         "Stage & Screen",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10325,6 +10559,9 @@
         "Jazz",
         "Children's",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10440,6 +10677,9 @@
       "genres": [
         "Jazz",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10532,6 +10772,9 @@
       "genres": [
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10683,6 +10926,9 @@
         "Stage & Screen",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10834,6 +11080,9 @@
         "Rock",
         "Folk, World, & Country",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -10918,6 +11167,9 @@
         "Children's",
         "Non-Music",
         "Folk, World, & Country"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11069,6 +11321,9 @@
         "Electronic",
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11199,6 +11454,9 @@
         "Rock",
         "Electronic",
         "Folk, World, & Country"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11294,6 +11552,9 @@
         "Pop",
         "Jazz",
         "Classical"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11389,6 +11650,9 @@
         "Pop",
         "Stage & Screen",
         "Children's"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11483,6 +11747,9 @@
         "Rock",
         "Pop",
         "Hip Hop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11586,6 +11853,9 @@
       "genres": [
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11681,6 +11951,9 @@
         "Electronic",
         "Pop",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -11777,7 +12050,10 @@
         "Pop",
         "Classical"
       ],
-      "artist": "銀色星砂糖楽団"
+      "artist": "銀色星砂糖楽団",
+      "release_types": [
+        "albums"
+      ]
     },
     {
       "album": "昏黒Raptor",
@@ -11927,6 +12203,9 @@
         "Pop",
         "Rock",
         "Stage & Screen"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12075,6 +12354,9 @@
         "Folk, World, & Country",
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12169,6 +12451,9 @@
         "Pop",
         "Electronic",
         "Jazz"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12283,6 +12568,9 @@
       "genres": [
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12379,6 +12667,9 @@
         "Stage & Screen",
         "Jazz",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12530,6 +12821,9 @@
         "Jazz",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12624,6 +12918,9 @@
         "Electronic",
         "Folk, World, & Country",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12719,6 +13016,9 @@
         "Classical",
         "Pop",
         "Electronic"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12813,6 +13113,9 @@
         "Electronic",
         "Pop",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12860,6 +13163,9 @@
       "album_seconds": 928,
       "genres": [
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -12956,6 +13262,9 @@
         "Stage & Screen",
         "Electronic",
         "Rock"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -13107,6 +13416,9 @@
         "Pop",
         "Rock",
         "Folk, World, & Country"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -13199,6 +13511,9 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -13383,6 +13698,9 @@
         "Rock",
         "Reggae",
         "Children's"
+      ],
+      "release_types": [
+        "albums"
       ]
     },
     {
@@ -13476,6 +13794,2162 @@
       "genres": [
         "Electronic",
         "Pop"
+      ],
+      "release_types": [
+        "albums"
+      ]
+    },
+    {
+      "album": "Clepsydra -Vocal CD-",
+      "title": "Clepsydra -Vocal CD-",
+      "artist": "清風明月",
+      "year": "2008",
+      "date": "2008-12-15",
+      "catalog": "TMCD-003",
+      "cover": "covers/others/Clepsydra -Vocal CD-.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Clepsydra%20-Vocal%20CD-.jpg",
+      "release_types": [
+        "others"
+      ],
+      "archive_collab": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Santuario ~Prelude~ ",
+          "instrumental": false,
+          "file": "others/Clepsydra -Vocal CD-/1. Santuario ~Prelude~ .mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/1.%20Santuario%20~Prelude~%20.mp3",
+          "dur": 36,
+          "genres": []
+        },
+        {
+          "track": "02",
+          "title": "Clepsydra ~Opening theme of clepsydra~",
+          "instrumental": false,
+          "file": "others/Clepsydra -Vocal CD-/2. Clepsydra ~Opening theme of clepsydra~.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/2.%20Clepsydra%20~Opening%20theme%20of%20clepsydra~.mp3",
+          "dur": 235,
+          "genres": []
+        },
+        {
+          "track": "03",
+          "title": "Fairyland th 13 ~ Ending theme of clepsydra ~",
+          "instrumental": false,
+          "file": "others/Clepsydra -Vocal CD-/3. Fairyland th 13 ~ Ending theme of clepsydra ~.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/3.%20Fairyland%20th%2013%20~%20Ending%20theme%20of%20clepsydra%20~.mp3",
+          "dur": 229,
+          "genres": []
+        },
+        {
+          "track": "04",
+          "title": "Santuario ~Clepsydra remix ~ ",
+          "instrumental": false,
+          "file": "others/Clepsydra -Vocal CD-/4. Santuario ~Clepsydra remix ~ .mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/4.%20Santuario%20~Clepsydra%20remix%20~%20.mp3",
+          "dur": 265,
+          "genres": []
+        },
+        {
+          "track": "05",
+          "title": "Aphradisiac ~ aphrodisiac ~ ",
+          "instrumental": false,
+          "file": "others/Clepsydra -Vocal CD-/5. Aphradisiac ~ aphrodisiac ~ .mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/5.%20Aphradisiac%20~%20aphrodisiac%20~%20.mp3",
+          "dur": 203,
+          "genres": []
+        },
+        {
+          "track": "06",
+          "title": "Clepsydra ~intrumental~ ",
+          "instrumental": true,
+          "file": "others/Clepsydra -Vocal CD-/6. Clepsydra ~intrumental~ .mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/6.%20Clepsydra%20~intrumental~%20.mp3",
+          "dur": 235,
+          "genres": []
+        },
+        {
+          "track": "07",
+          "title": "Fairyland th 13 ~ intrumental~ ",
+          "instrumental": true,
+          "file": "others/Clepsydra -Vocal CD-/7. Fairyland th 13 ~ intrumental~ .mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/7.%20Fairyland%20th%2013%20~%20intrumental~%20.mp3",
+          "dur": 229,
+          "genres": []
+        },
+        {
+          "track": "08",
+          "title": "Clepsydra remix ～instrumental~",
+          "instrumental": true,
+          "file": "others/Clepsydra -Vocal CD-/8. Clepsydra remix ～instrumental~.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/8.%20Clepsydra%20remix%20%EF%BD%9Einstrumental~.mp3",
+          "dur": 233,
+          "genres": []
+        },
+        {
+          "track": "09",
+          "title": "Aphradisiac ~intrumental~",
+          "instrumental": true,
+          "file": "others/Clepsydra -Vocal CD-/9. Aphradisiac ~intrumental~.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Clepsydra%20-Vocal%20CD-/9.%20Aphradisiac%20~intrumental~.mp3",
+          "dur": 201,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "album": "Lost Omen",
+      "title": "Lost Omen",
+      "artist": "Label Liberta",
+      "year": "2008",
+      "date": "2008-10-13",
+      "catalog": "Label Liberta",
+      "cover": "covers/others/Lost Omen.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Lost%20Omen.jpg",
+      "release_types": [
+        "others"
+      ],
+      "archive_collab": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Kei",
+          "instrumental": false,
+          "file": "others/Lost Omen/1. Kei.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/1.%20Kei.mp3",
+          "dur": 56,
+          "genres": []
+        },
+        {
+          "track": "02",
+          "title": "Tsukamenu Taiyou [vo. Arai Kazuhiro]",
+          "instrumental": false,
+          "file": "others/Lost Omen/2. Tsukamenu Taiyou [vo. Arai Kazuhiro].mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/2.%20Tsukamenu%20Taiyou%20%5Bvo.%20Arai%20Kazuhiro%5D.mp3",
+          "dur": 308,
+          "genres": []
+        },
+        {
+          "track": "03",
+          "title": "Hagoromo [vo. au, Hoshimi Aoto]",
+          "instrumental": false,
+          "file": "others/Lost Omen/3. Hagoromo [vo. au, Hoshimi Aoto].mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/3.%20Hagoromo%20%5Bvo.%20au%2C%20Hoshimi%20Aoto%5D.mp3",
+          "dur": 305,
+          "genres": []
+        },
+        {
+          "track": "04",
+          "title": "Rapunzel",
+          "instrumental": false,
+          "file": "others/Lost Omen/4. Rapunzel.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/4.%20Rapunzel.mp3",
+          "dur": 657,
+          "genres": []
+        },
+        {
+          "track": "05",
+          "title": "One Thousand and One [vo. Nagi Kaiji, Hoshimi Aoto]",
+          "instrumental": false,
+          "file": "others/Lost Omen/5. One Thousand and One [vo. Nagi Kaiji, Hoshimi Aoto].mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/5.%20One%20Thousand%20and%20One%20%5Bvo.%20Nagi%20Kaiji%2C%20Hoshimi%20Aoto%5D.mp3",
+          "dur": 300,
+          "genres": []
+        },
+        {
+          "track": "06",
+          "title": "Gense no Yume ~Cantarella~",
+          "instrumental": false,
+          "file": "others/Lost Omen/6. Gense no Yume ~Cantarella~.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/6.%20Gense%20no%20Yume%20~Cantarella~.mp3",
+          "dur": 464,
+          "genres": []
+        },
+        {
+          "track": "07",
+          "title": "Cantarella [vo. Hoshimi Aoto]",
+          "instrumental": false,
+          "file": "others/Lost Omen/7. Cantarella [vo. Hoshimi Aoto].mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/7.%20Cantarella%20%5Bvo.%20Hoshimi%20Aoto%5D.mp3",
+          "dur": 179,
+          "genres": []
+        },
+        {
+          "track": "08",
+          "title": "Tsukiyo no Akai Kutsu [vo. au]",
+          "instrumental": false,
+          "file": "others/Lost Omen/8. Tsukiyo no Akai Kutsu [vo. au].mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/8.%20Tsukiyo%20no%20Akai%20Kutsu%20%5Bvo.%20au%5D.mp3",
+          "dur": 273,
+          "genres": []
+        },
+        {
+          "track": "09",
+          "title": "Kae",
+          "instrumental": false,
+          "file": "others/Lost Omen/9. Kae.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/9.%20Kae.mp3",
+          "dur": 76,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "album": "君のいる景色",
+      "title": "君のいる景色",
+      "artist": "葉月ゆら",
+      "year": "2009",
+      "date": "2009-09-02",
+      "category": "External collection",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=BbqWsamVMnc",
+      "cover": "covers/others/君のいる景色.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/%E5%90%9B%E3%81%AE%E3%81%84%E3%82%8B%E6%99%AF%E8%89%B2.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "最後の女王",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/001 最後の女王.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/001%20%E6%9C%80%E5%BE%8C%E3%81%AE%E5%A5%B3%E7%8E%8B.mp3",
+          "dur": 189,
+          "genres": [
+            "Commercial album guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; composition and lyrics 黒うさP"
+        },
+        {
+          "track": "02",
+          "title": "東京バベル",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/002 東京バベル.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/002%20%E6%9D%B1%E4%BA%AC%E3%83%90%E3%83%99%E3%83%AB.mp3",
+          "dur": 213,
+          "genres": [
+            "Commercial album guest vocal"
+          ],
+          "credit": "Lyrics and vocals 葉月ゆら; composition 黒うさP"
+        }
+      ]
+    },
+    {
+      "album": "Sea Story compilation album",
+      "title": "Sea Story compilation album",
+      "artist": "葉月ゆら",
+      "year": "2007–2010",
+      "date": "2010",
+      "category": "External collection",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=DCOgqeyIedw",
+      "cover": "covers/others/Sea Story compilation album.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Sea%20Story%20compilation%20album.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Summer Days",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/003 Summer Days.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/003%20Summer%20Days.mp3",
+          "dur": 142,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン"
+        },
+        {
+          "track": "02",
+          "title": "Dance & Chance",
+          "artist": "葉月ゆら & ワリン",
+          "instrumental": false,
+          "file": "singles/004 Dance & Chance.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/004%20Dance%20%26%20Chance.mp3",
+          "dur": 223,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン; duet with ワリン (human performer identity open)"
+        },
+        {
+          "track": "03",
+          "title": "「だいすき」って気持ち",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/005 「だいすき」って気持ち.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/005%20%E3%80%8C%E3%81%A0%E3%81%84%E3%81%99%E3%81%8D%E3%80%8D%E3%81%A3%E3%81%A6%E6%B0%97%E6%8C%81%E3%81%A1.mp3",
+          "dur": 144,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン"
+        },
+        {
+          "track": "04",
+          "title": "「だいすき」って気持ち ～ハワイアンバージョン～",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/006 「だいすき」って気持ち ～ハワイアンバージョン～.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/006%20%E3%80%8C%E3%81%A0%E3%81%84%E3%81%99%E3%81%8D%E3%80%8D%E3%81%A3%E3%81%A6%E6%B0%97%E6%8C%81%E3%81%A1%20%EF%BD%9E%E3%83%8F%E3%83%AF%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%EF%BD%9E.mp3",
+          "dur": 131,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン"
+        },
+        {
+          "track": "05",
+          "title": "シュガシュガ・マリン・クルージング",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/007 シュガシュガ・マリン・クルージング.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/007%20%E3%82%B7%E3%83%A5%E3%82%AC%E3%82%B7%E3%83%A5%E3%82%AC%E3%83%BB%E3%83%9E%E3%83%AA%E3%83%B3%E3%83%BB%E3%82%AF%E3%83%AB%E3%83%BC%E3%82%B8%E3%83%B3%E3%82%B0.mp3",
+          "dur": 200,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン"
+        },
+        {
+          "track": "06",
+          "title": "ラブ☆ダッシュ",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/008 ラブ☆ダッシュ.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/008%20%E3%83%A9%E3%83%96%E2%98%86%E3%83%80%E3%83%83%E3%82%B7%E3%83%A5.mp3",
+          "dur": 153,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン"
+        },
+        {
+          "track": "07",
+          "title": "ミラクルダイブ",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/009 ミラクルダイブ.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/009%20%E3%83%9F%E3%83%A9%E3%82%AF%E3%83%AB%E3%83%80%E3%82%A4%E3%83%96.mp3",
+          "dur": 174,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン"
+        },
+        {
+          "track": "08",
+          "title": "光さす美らの海",
+          "artist": "葉月ゆら & ワリン",
+          "instrumental": false,
+          "file": "singles/010 光さす美らの海.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/010%20%E5%85%89%E3%81%95%E3%81%99%E7%BE%8E%E3%82%89%E3%81%AE%E6%B5%B7.mp3",
+          "dur": 198,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Vocals as マリン; duet with ワリン (human performer identity open)"
+        },
+        {
+          "track": "09",
+          "title": "フルスロットル・ラブ",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/011 フルスロットル・ラブ.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/011%20%E3%83%95%E3%83%AB%E3%82%B9%E3%83%AD%E3%83%83%E3%83%88%E3%83%AB%E3%83%BB%E3%83%A9%E3%83%96.mp3",
+          "dur": 221,
+          "genres": [
+            "Pachislot / 海物語"
+          ],
+          "credit": "Vocals as マリン"
+        }
+      ]
+    },
+    {
+      "album": "CRギンギラパラダイス クジラッキーと砂漠の国",
+      "title": "CRギンギラパラダイス クジラッキーと砂漠の国",
+      "artist": "葉月ゆら",
+      "year": "2016",
+      "date": "2016",
+      "category": "Pachinko / 海物語",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=A6tTHGPzRR8",
+      "cover": "covers/singles/012 ラブ☆ダッシュ ≪Remix≫.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/012%20%E3%83%A9%E3%83%96%E2%98%86%E3%83%80%E3%83%83%E3%82%B7%E3%83%A5%20%E2%89%AARemix%E2%89%AB.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "ラブ☆ダッシュ ≪Remix≫",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/012 ラブ☆ダッシュ ≪Remix≫.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/012%20%E3%83%A9%E3%83%96%E2%98%86%E3%83%80%E3%83%83%E3%82%B7%E3%83%A5%20%E2%89%AARemix%E2%89%AB.mp3",
+          "dur": 254,
+          "genres": [
+            "Pachinko / 海物語"
+          ],
+          "credit": "Original song vocal associated with 葉月ゆら; whether this remix reuses her vocal remains open"
+        }
+      ]
+    },
+    {
+      "album": "Escu:de BEST VOCAL on PEACH",
+      "title": "Escu:de BEST VOCAL on PEACH",
+      "artist": "葉月ゆら",
+      "year": "2023",
+      "date": "2023-11-24",
+      "category": "External collection",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=k_wMCQMH5io",
+      "cover": "covers/others/Escu:de BEST VOCAL on PEACH.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Escu%3Ade%20BEST%20VOCAL%20on%20PEACH.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Dark Testament",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/013 Dark Testament.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/013%20Dark%20Testament.mp3",
+          "dur": 238,
+          "genres": [
+            "Visual novel / eroge"
+          ],
+          "credit": "Vocals and lyrics"
+        },
+        {
+          "track": "02",
+          "title": "Dark Testament (Short Version)",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/014 Dark Testament (Short Version).mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/014%20Dark%20Testament%20(Short%20Version).mp3",
+          "dur": 99,
+          "genres": [
+            "Visual novel / eroge"
+          ],
+          "credit": "Vocals and lyrics"
+        }
+      ]
+    },
+    {
+      "album": "Memento Mori: Lament Collection Vol.1",
+      "title": "Memento Mori: Lament Collection Vol.1",
+      "artist": "葉月ゆら",
+      "year": "2022",
+      "date": "2022",
+      "category": "Mobile game",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=ZXA3x_hSrWk",
+      "cover": "covers/others/Memento Mori: Lament Collection Vol.1.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Memento%20Mori%3A%20Lament%20Collection%20Vol.1.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "まっかっか",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/015 まっかっか.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/015%20%E3%81%BE%E3%81%A3%E3%81%8B%E3%81%A3%E3%81%8B.mp3",
+          "dur": 255,
+          "genres": [
+            "Mobile game"
+          ],
+          "credit": "Vocals"
+        }
+      ]
+    },
+    {
+      "album": "The Cursed Doll",
+      "title": "The Cursed Doll",
+      "artist": "葉月ゆら",
+      "year": "2024",
+      "date": "2024-08-02",
+      "category": "Rhythm game / maimai",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=t9YWN0ZqjYk",
+      "cover": "covers/others/The Cursed Doll.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/The%20Cursed%20Doll.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "The Cursed Doll",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/016 The Cursed Doll.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/016%20The%20Cursed%20Doll.mp3",
+          "dur": 143,
+          "genres": [
+            "Rhythm game / maimai"
+          ],
+          "credit": "Vocals and lyrics; 清風明月 (Drop×葉月ゆら)"
+        }
+      ]
+    },
+    {
+      "album": "Taiko no Tatsujin Collection",
+      "title": "Taiko no Tatsujin Collection",
+      "artist": "葉月ゆら",
+      "year": "2011–2025",
+      "date": "2025-06-06",
+      "category": "External collection",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=brVI1_Q0WOE",
+      "cover": "covers/others/Taiko no Tatsujin Collection.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Taiko%20no%20Tatsujin%20Collection.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Nosferatu",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/017 Nosferatu.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/017%20Nosferatu.mp3",
+          "dur": 150,
+          "genres": [
+            "Rhythm game / 太鼓の達人"
+          ],
+          "credit": "Vocals; 清風明月 (Drop×葉月ゆら)"
+        },
+        {
+          "track": "02",
+          "title": "SoulStone -闇喰イサァカス団-",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/018 SoulStone -闇喰イサァカス団-.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/018%20SoulStone%20-%E9%97%87%E5%96%B0%E3%82%A4%E3%82%B5%E3%82%A1%E3%82%AB%E3%82%B9%E5%9B%A3-.mp3",
+          "dur": 150,
+          "genres": [
+            "Rhythm game / 太鼓の達人"
+          ],
+          "credit": "Vocals; 清風明月 (Drop×葉月ゆら)"
+        },
+        {
+          "track": "03",
+          "title": "女神な世界 Ⅱ",
+          "artist": "葉月ゆら & 翡翠",
+          "instrumental": false,
+          "file": "singles/019 女神な世界 Ⅱ.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/019%20%E5%A5%B3%E7%A5%9E%E3%81%AA%E4%B8%96%E7%95%8C%20%E2%85%A1.mp3",
+          "dur": 160,
+          "genres": [
+            "Rhythm game / 太鼓の達人"
+          ],
+          "credit": "Vocals with 翡翠; lyrics credited to 祇羽"
+        },
+        {
+          "track": "04",
+          "title": "Sweet Sweet Magic",
+          "artist": "葉月ゆら & 月子",
+          "instrumental": false,
+          "file": "singles/039 Sweet Sweet Magic.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/039%20Sweet%20Sweet%20Magic.mp3",
+          "dur": 126,
+          "genres": [
+            "Rhythm game / compilation"
+          ],
+          "credit": "Duet vocals 葉月ゆら and 月子"
+        },
+        {
+          "track": "05",
+          "title": "豊穣弥生",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/047 豊穣弥生.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/047%20%E8%B1%8A%E7%A9%A3%E5%BC%A5%E7%94%9F.mp3",
+          "dur": 121,
+          "genres": [
+            "Rhythm game / compilation"
+          ],
+          "credit": "Vocals and lyrics 葉月ゆら; co-lyrics 祇羽; composition/arrangement 翡翠"
+        }
+      ]
+    },
+    {
+      "album": "Geheime Musikbuch: Himitsu no Ongakujou",
+      "title": "Geheime Musikbuch: Himitsu no Ongakujou",
+      "artist": "葉月ゆら",
+      "year": "2020",
+      "date": "2020-12-01",
+      "category": "Video game soundtrack",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=Q6OT0Q3eIPg",
+      "cover": "covers/others/Geheime Musikbuch: Himitsu no Ongakujou.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Geheime%20Musikbuch%3A%20Himitsu%20no%20Ongakujou.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "いにしえの鐘の音 (Dramatic Ver. by 樋口秀樹)",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/020 いにしえの鐘の音 (Dramatic Ver. by 樋口秀樹).mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/020%20%E3%81%84%E3%81%AB%E3%81%97%E3%81%88%E3%81%AE%E9%90%98%E3%81%AE%E9%9F%B3%20(Dramatic%20Ver.%20by%20%E6%A8%8B%E5%8F%A3%E7%A7%80%E6%A8%B9).mp3",
+          "dur": 396,
+          "genres": [
+            "Video game soundtrack"
+          ],
+          "credit": "Chorus"
+        }
+      ]
+    },
+    {
+      "album": "Black Swan Lake",
+      "title": "Black Swan Lake",
+      "artist": "葉月ゆら",
+      "year": "2019",
+      "date": "2019-09-05",
+      "category": "Rhythm game / CHUNITHM",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=uaaOb-6-kns",
+      "cover": "covers/singles/021 Black Swan Lake [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/021%20Black%20Swan%20Lake%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Black Swan Lake",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/021 Black Swan Lake.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/021%20Black%20Swan%20Lake.mp3",
+          "dur": 144,
+          "genres": [
+            "Rhythm game / CHUNITHM"
+          ],
+          "credit": "Vocals; further arrangement-credit wording needs booklet/game-credit confirmation"
+        }
+      ]
+    },
+    {
+      "album": "Atelier Lulua Arland Arrange CD",
+      "title": "Atelier Lulua Arland Arrange CD",
+      "artist": "葉月ゆら",
+      "year": "2019",
+      "date": "2019-03-20",
+      "category": "Video game soundtrack",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=l81mTYE3AX4",
+      "cover": "covers/singles/022 滲む景色 (Lyrical Ver. by 樋口秀樹).jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/022%20%E6%BB%B2%E3%82%80%E6%99%AF%E8%89%B2%20(Lyrical%20Ver.%20by%20%E6%A8%8B%E5%8F%A3%E7%A7%80%E6%A8%B9).jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "滲む景色 (Lyrical Ver. by 樋口秀樹)",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/022 滲む景色 (Lyrical Ver. by 樋口秀樹).mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/022%20%E6%BB%B2%E3%82%80%E6%99%AF%E8%89%B2%20(Lyrical%20Ver.%20by%20%E6%A8%8B%E5%8F%A3%E7%A7%80%E6%A8%B9).mp3",
+          "dur": 235,
+          "genres": [
+            "Video game soundtrack"
+          ],
+          "credit": "Vocals; user-confirmed identification"
+        }
+      ]
+    },
+    {
+      "album": "Cleave Spark",
+      "title": "Cleave Spark",
+      "artist": "葉月ゆら",
+      "year": "2018",
+      "date": "2018-08-10",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=8F_t7fwYqOQ",
+      "cover": "covers/singles/023 endless repeat [clean-v2].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/023%20endless%20repeat%20%5Bclean-v2%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "endless repeat",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/023 endless repeat.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/023%20endless%20repeat.mp3",
+          "dur": 198,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals"
+        }
+      ]
+    },
+    {
+      "album": "Valiant Blade",
+      "title": "Valiant Blade",
+      "artist": "葉月ゆら",
+      "year": "2018",
+      "date": "2018-05-06",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=aGm1-948TSM",
+      "cover": "covers/singles/024 終焉のセレナーデ.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/024%20%E7%B5%82%E7%84%89%E3%81%AE%E3%82%BB%E3%83%AC%E3%83%8A%E3%83%BC%E3%83%87.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "終焉のセレナーデ",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/024 終焉のセレナーデ.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/024%20%E7%B5%82%E7%84%89%E3%81%AE%E3%82%BB%E3%83%AC%E3%83%8A%E3%83%BC%E3%83%87.mp3",
+          "dur": 265,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals; lyrics くまりす; arrangement 黒鳥"
+        }
+      ]
+    },
+    {
+      "album": "VOCAL BEST Vol.001",
+      "title": "VOCAL BEST Vol.001",
+      "artist": "葉月ゆら",
+      "year": "2017",
+      "date": "2017-12-29",
+      "category": "Touhou guest vocal remix",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=l3a78_6oCSw",
+      "cover": "covers/singles/025 Drivi'n greedy - Nhato Remix -.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/025%20Drivi'n%20greedy%20-%20Nhato%20Remix%20-.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Drivi'n greedy - Nhato Remix -",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/025 Drivi'n greedy - Nhato Remix -.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/025%20Drivi'n%20greedy%20-%20Nhato%20Remix%20-.mp3",
+          "dur": 319,
+          "genres": [
+            "Touhou guest vocal remix"
+          ],
+          "credit": "Vocals 葉月ゆら; lyrics ヤヤネヒロコ; arrangement RUON; remix Nhato"
+        }
+      ]
+    },
+    {
+      "album": "REFLEC BEAT THE REFLESIA OF ETERNITY + REFLEC BEAT VOLZZA ORIGINAL SOUNDTRACK",
+      "title": "REFLEC BEAT THE REFLESIA OF ETERNITY + REFLEC BEAT VOLZZA ORIGINAL SOUNDTRACK",
+      "artist": "葉月ゆら",
+      "year": "2017",
+      "date": "2017-04-12",
+      "category": "Rhythm game / REFLEC BEAT",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=Nw8N5CPbEjE",
+      "cover": "covers/singles/026 刹那のカーリギッド ～セトリオスの6の赦罪より～ [clean-v2].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/026%20%E5%88%B9%E9%82%A3%E3%81%AE%E3%82%AB%E3%83%BC%E3%83%AA%E3%82%AE%E3%83%83%E3%83%89%20%EF%BD%9E%E3%82%BB%E3%83%88%E3%83%AA%E3%82%AA%E3%82%B9%E3%81%AE6%E3%81%AE%E8%B5%A6%E7%BD%AA%E3%82%88%E3%82%8A%EF%BD%9E%20%5Bclean-v2%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "刹那のカーリギッド ～セトリオスの6の赦罪より～",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/026 刹那のカーリギッド ～セトリオスの6の赦罪より～.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/026%20%E5%88%B9%E9%82%A3%E3%81%AE%E3%82%AB%E3%83%BC%E3%83%AA%E3%82%AE%E3%83%83%E3%83%89%20%EF%BD%9E%E3%82%BB%E3%83%88%E3%83%AA%E3%82%AA%E3%82%B9%E3%81%AE6%E3%81%AE%E8%B5%A6%E7%BD%AA%E3%82%88%E3%82%8A%EF%BD%9E.mp3",
+          "dur": 230,
+          "genres": [
+            "Rhythm game / REFLEC BEAT"
+          ],
+          "credit": "Lyrics and vocals; credited as UNVEIL et 葉月ゆら"
+        }
+      ]
+    },
+    {
+      "album": "残念な姉とのラブコメディ Original Soundtrack",
+      "title": "残念な姉とのラブコメディ Original Soundtrack",
+      "artist": "葉月ゆら",
+      "year": "2016",
+      "date": "2016-12-22",
+      "category": "Visual novel / eroge",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=keekdKRwkV8",
+      "cover": "covers/singles/027 ふいっち！Do you Love？ [clean-v2].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/027%20%E3%81%B5%E3%81%84%E3%81%A3%E3%81%A1%EF%BC%81Do%20you%20Love%EF%BC%9F%20%5Bclean-v2%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "ふいっち！Do you Love？",
+          "artist": "葉月ゆら & 安田みずほ",
+          "instrumental": false,
+          "file": "singles/027 ふいっち！Do you Love？.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/027%20%E3%81%B5%E3%81%84%E3%81%A3%E3%81%A1%EF%BC%81Do%20you%20Love%EF%BC%9F.mp3",
+          "dur": 240,
+          "genres": [
+            "Visual novel / eroge"
+          ],
+          "credit": "Duet vocals: 葉月ゆら and 安田みずほ; lyrics composition and arrangement Cielo*youth*k"
+        }
+      ]
+    },
+    {
+      "album": "Tragical Garnet",
+      "title": "Tragical Garnet",
+      "artist": "葉月ゆら",
+      "year": "2016",
+      "date": "2016-08-13",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=RJ4BhzR4DLk",
+      "cover": "covers/singles/028 不思議の国のお姫様.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/028%20%E4%B8%8D%E6%80%9D%E8%AD%B0%E3%81%AE%E5%9B%BD%E3%81%AE%E3%81%8A%E5%A7%AB%E6%A7%98.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "不思議の国のお姫様",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/028 不思議の国のお姫様.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/028%20%E4%B8%8D%E6%80%9D%E8%AD%B0%E3%81%AE%E5%9B%BD%E3%81%AE%E3%81%8A%E5%A7%AB%E6%A7%98.mp3",
+          "dur": 236,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement MARIN; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "Blind Emotion",
+      "title": "Blind Emotion",
+      "artist": "葉月ゆら",
+      "year": "2016",
+      "date": "2016-05-08",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=AWmdmtwjYZE",
+      "cover": "covers/singles/029 locus.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/029%20locus.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "locus",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/029 locus.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/029%20locus.mp3",
+          "dur": 241,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement Kirin; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "Yggdrasill Leaf",
+      "title": "Yggdrasill Leaf",
+      "artist": "葉月ゆら",
+      "year": "2007",
+      "date": "2007-10-08",
+      "category": "Doujin guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/02.%20Layrinth%20I%20-%20The%20Green%20Green%20Woodlands.mp3",
+      "cover": "covers/singles/030 Layrinth I - The Green Green Woodlands.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/030%20Layrinth%20I%20-%20The%20Green%20Green%20Woodlands.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Layrinth I - The Green Green Woodlands",
+          "artist": "ARA & 葉月ゆら",
+          "instrumental": false,
+          "file": "singles/030 Layrinth I - The Green Green Woodlands.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/030%20Layrinth%20I%20-%20The%20Green%20Green%20Woodlands.mp3",
+          "dur": 350,
+          "genres": [
+            "Doujin guest vocal"
+          ],
+          "credit": "Performer/vocals with ARA"
+        }
+      ]
+    },
+    {
+      "album": "Claymore",
+      "title": "Claymore",
+      "artist": "葉月ゆら",
+      "year": "2007",
+      "date": "2007-09-30",
+      "category": "Commercial guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/11.%20saMsAra%20~Facing%20the%20Circle%20of%20Life~.mp3",
+      "cover": "covers/singles/031 saMsAra ~Facing the Circle of Life~ [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/031%20saMsAra%20~Facing%20the%20Circle%20of%20Life~%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "saMsAra ~Facing the Circle of Life~",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/031 saMsAra ~Facing the Circle of Life~.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/031%20saMsAra%20~Facing%20the%20Circle%20of%20Life~.mp3",
+          "dur": 268,
+          "genres": [
+            "Commercial guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; lyrics and composition 九十九百太郎"
+        }
+      ]
+    },
+    {
+      "album": "Winter Mix vol.04",
+      "title": "Winter Mix vol.04",
+      "artist": "葉月ゆら",
+      "year": "2007",
+      "date": "2007-02-14",
+      "category": "Compilation guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/2-06.%20A%20Lullaby%20Singing%20to%20the%20Night%20Sky.mp3",
+      "cover": "covers/singles/032 夜空に歌う子守唄 [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/032%20%E5%A4%9C%E7%A9%BA%E3%81%AB%E6%AD%8C%E3%81%86%E5%AD%90%E5%AE%88%E5%94%84%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "夜空に歌う子守唄",
+          "artist": "九十九百太郎 feat. 葉月ゆら",
+          "instrumental": false,
+          "file": "singles/032 夜空に歌う子守唄.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/032%20%E5%A4%9C%E7%A9%BA%E3%81%AB%E6%AD%8C%E3%81%86%E5%AD%90%E5%AE%88%E5%94%84.mp3",
+          "dur": 386,
+          "genres": [
+            "Compilation guest vocal"
+          ],
+          "credit": "Vocals; 九十九百太郎 feat. 葉月ゆら"
+        }
+      ]
+    },
+    {
+      "album": "admiration",
+      "title": "admiration",
+      "artist": "葉月ゆら",
+      "year": "2006",
+      "date": "2006-08-11",
+      "category": "External collection",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/07%20-%20Color%20Of%20Happiness.mp3",
+      "cover": "covers/singles/033 Color Of Happiness [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/033%20Color%20Of%20Happiness%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Color Of Happiness",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/033 Color Of Happiness.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/033%20Color%20Of%20Happiness.mp3",
+          "dur": 272,
+          "genres": [
+            "Doujin guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement BLUE HAWAII"
+        },
+        {
+          "track": "02",
+          "title": "Love Flavor",
+          "artist": "Various Artists",
+          "instrumental": false,
+          "file": "singles/034 Love Flavor.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/034%20Love%20Flavor.mp3",
+          "dur": 215,
+          "genres": [
+            "Doujin ensemble vocal"
+          ],
+          "credit": "Ensemble vocals including 葉月ゆら"
+        }
+      ]
+    },
+    {
+      "album": "R.U.R.U.R Original Sound Track",
+      "title": "R.U.R.U.R Original Sound Track",
+      "artist": "葉月ゆら",
+      "year": "2007",
+      "date": "2007-08-17",
+      "category": "Visual novel / eroge",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=DfMdaonKxKw",
+      "cover": "covers/singles/035 Rose!Rose!Rose! [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/035%20Rose!Rose!Rose!%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Rose!Rose!Rose!",
+          "artist": "Rin",
+          "instrumental": false,
+          "file": "singles/035 Rose!Rose!Rose!.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/035%20Rose!Rose!Rose!.mp3",
+          "dur": 280,
+          "genres": [
+            "Visual novel / eroge"
+          ],
+          "credit": "Chorus 葉月ゆら; lead vocal Rin; composition and arrangement 樋口秀樹"
+        }
+      ]
+    },
+    {
+      "album": "Winter Mix vol.05",
+      "title": "Winter Mix vol.05",
+      "artist": "葉月ゆら",
+      "year": "2008",
+      "date": "2008-02-14",
+      "category": "Compilation guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/2-01.%20Girls%20love%20winter.mp3",
+      "cover": "covers/singles/036 少女冬恋 [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/036%20%E5%B0%91%E5%A5%B3%E5%86%AC%E6%81%8B%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "少女冬恋",
+          "artist": "Drop feat. 葉月ゆら",
+          "instrumental": false,
+          "file": "singles/036 少女冬恋.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/036%20%E5%B0%91%E5%A5%B3%E5%86%AC%E6%81%8B.mp3",
+          "dur": 251,
+          "genres": [
+            "Compilation guest vocal"
+          ],
+          "credit": "Vocals and lyrics 葉月ゆら; composition/arrangement Drop"
+        }
+      ]
+    },
+    {
+      "album": "THE BMS OF FIGHTERS 2010",
+      "title": "THE BMS OF FIGHTERS 2010",
+      "artist": "葉月ゆら",
+      "year": "2010",
+      "date": "2010-09-24",
+      "category": "BMS / rhythm game",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=TEKk60SFaBw",
+      "cover": "covers/singles/037 Caterpillar Song (BOF2010 BMS version).jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/037%20Caterpillar%20Song%20(BOF2010%20BMS%20version).jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Caterpillar Song (BOF2010 BMS version)",
+          "artist": "Bitplane feat. 葉月ゆら",
+          "instrumental": false,
+          "file": "singles/037 Caterpillar Song (BOF2010 BMS version).mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/037%20Caterpillar%20Song%20(BOF2010%20BMS%20version).mp3",
+          "dur": 118,
+          "genres": [
+            "BMS / rhythm game"
+          ],
+          "credit": "Vocals 葉月ゆら; composition/BMS Bitplane (愛新覚羅溥儀)"
+        }
+      ]
+    },
+    {
+      "album": "Solitude Blossom",
+      "title": "Solitude Blossom",
+      "artist": "葉月ゆら",
+      "year": "2011",
+      "date": "2011-08-02",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=dEYRuw_HZk4",
+      "cover": "covers/singles/038 Intense desire [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/038%20Intense%20desire%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Intense desire",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/038 Intense desire.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/038%20Intense%20desire.mp3",
+          "dur": 259,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "Dione Aggregation",
+      "title": "Dione Aggregation",
+      "artist": "葉月ゆら",
+      "year": "2011",
+      "date": "2011-12-30",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/10.%20%E6%99%82%E3%81%AE%E6%AA%BB.mp3",
+      "cover": "covers/singles/040 時の檻 [clean].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/040%20%E6%99%82%E3%81%AE%E6%AA%BB%20%5Bclean%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "時の檻",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/040 時の檻.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/040%20%E6%99%82%E3%81%AE%E6%AA%BB.mp3",
+          "dur": 266,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "Uncanny Instinct",
+      "title": "Uncanny Instinct",
+      "artist": "葉月ゆら",
+      "year": "2011",
+      "date": "2011-12-30",
+      "category": "Original guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=U5Mzipm7rSo",
+      "cover": "covers/singles/041 フタリゴト.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/041%20%E3%83%95%E3%82%BF%E3%83%AA%E3%82%B4%E3%83%88.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "フタリゴト",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/041 フタリゴト.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/041%20%E3%83%95%E3%82%BF%E3%83%AA%E3%82%B4%E3%83%88.mp3",
+          "dur": 393,
+          "genres": [
+            "Original guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; composition 黒鳥; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "Blaze Out",
+      "title": "Blaze Out",
+      "artist": "葉月ゆら",
+      "year": "2012",
+      "date": "2012-08-11",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=ZL6DoFVAmy4",
+      "cover": "covers/singles/042 Colorless night.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/042%20Colorless%20night.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Colorless night",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/042 Colorless night.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/042%20Colorless%20night.mp3",
+          "dur": 290,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "Auxiliary Brightness",
+      "title": "Auxiliary Brightness",
+      "artist": "葉月ゆら",
+      "year": "2012",
+      "date": "2012-12-30",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/02.%20Replay%20%26%20Review.mp3",
+      "cover": "covers/singles/043 Replay&Review.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/043%20Replay%26Review.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Replay&Review",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/043 Replay&Review.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/043%20Replay%26Review.mp3",
+          "dur": 235,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement Tracy; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "Rewind Amnesia",
+      "title": "Rewind Amnesia",
+      "artist": "葉月ゆら",
+      "year": "2013",
+      "date": "2013-08-12",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=bVBLHnxSrRk",
+      "cover": "covers/singles/044 夢～KAGEROU～.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/044%20%E5%A4%A2%EF%BD%9EKAGEROU%EF%BD%9E.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "夢～KAGEROU～",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/044 夢～KAGEROU～.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/044%20%E5%A4%A2%EF%BD%9EKAGEROU%EF%BD%9E.mp3",
+          "dur": 306,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement 天音; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "Spectral Rejection",
+      "title": "Spectral Rejection",
+      "artist": "葉月ゆら",
+      "year": "2013",
+      "date": "2013-12-30",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=rTHqCIk9hwE",
+      "cover": "covers/singles/045 Rainy Blue.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/045%20Rainy%20Blue.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Rainy Blue",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/045 Rainy Blue.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/045%20Rainy%20Blue.mp3",
+          "dur": 318,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "Perpetual Devotion",
+      "title": "Perpetual Devotion",
+      "artist": "葉月ゆら",
+      "year": "2014",
+      "date": "2014-08-16",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=GZT8z1qoKwQ",
+      "cover": "covers/singles/046 Lunicode.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/046%20Lunicode.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Lunicode",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/046 Lunicode.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/046%20Lunicode.mp3",
+          "dur": 169,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "EMOTIONAL CHAOS",
+      "title": "EMOTIONAL CHAOS",
+      "artist": "葉月ゆら",
+      "year": "2014",
+      "date": "2014-12-29",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=VZVQmD5uSO0",
+      "cover": "covers/singles/048 vanish out of one's sight.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/048%20vanish%20out%20of%20one's%20sight.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "vanish out of one's sight",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/048 vanish out of one's sight.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/048%20vanish%20out%20of%20one's%20sight.mp3",
+          "dur": 267,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement RUON; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "Proof Presence",
+      "title": "Proof Presence",
+      "artist": "葉月ゆら",
+      "year": "2014",
+      "date": "2014-12-29",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/10.%20irreplaceable.mp3",
+      "cover": "covers/singles/049 irreplaceable.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/049%20irreplaceable.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "irreplaceable",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/049 irreplaceable.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/049%20irreplaceable.mp3",
+          "dur": 221,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement Tomoya; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "Sprout Intention",
+      "title": "Sprout Intention",
+      "artist": "葉月ゆら",
+      "year": "2015",
+      "date": "2015-08-14",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/04.%20%E6%B0%B8%E9%81%A0%E3%81%AE%E6%B0%B4%E9%9D%A2.mp3",
+      "cover": "covers/singles/050 永遠の水面.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/050%20%E6%B0%B8%E9%81%A0%E3%81%AE%E6%B0%B4%E9%9D%A2.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "永遠の水面",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/050 永遠の水面.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/050%20%E6%B0%B8%E9%81%A0%E3%81%AE%E6%B0%B4%E9%9D%A2.mp3",
+          "dur": 186,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "Innocent Abyss",
+      "title": "Innocent Abyss",
+      "artist": "葉月ゆら",
+      "year": "2015",
+      "date": "2015-12-30",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=4rYAJRZQ6Uk",
+      "cover": "covers/singles/051 夢と光 [clean-v2].jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/051%20%E5%A4%A2%E3%81%A8%E5%85%89%20%5Bclean-v2%5D.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "夢と光",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/051 夢と光.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/051%20%E5%A4%A2%E3%81%A8%E5%85%89.mp3",
+          "dur": 295,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "PLATONIC SOUL",
+      "title": "PLATONIC SOUL",
+      "artist": "葉月ゆら",
+      "year": "2015",
+      "date": "2015-08-14",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=ehOCtACrKHA",
+      "cover": "covers/singles/052 バタフライディルージョン.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/052%20%E3%83%90%E3%82%BF%E3%83%95%E3%83%A9%E3%82%A4%E3%83%87%E3%82%A3%E3%83%AB%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "バタフライディルージョン",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/052 バタフライディルージョン.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/052%20%E3%83%90%E3%82%BF%E3%83%95%E3%83%A9%E3%82%A4%E3%83%87%E3%82%A3%E3%83%AB%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3.mp3",
+          "dur": 255,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement RUON; lyrics 海兎"
+        }
+      ]
+    },
+    {
+      "album": "東方万能飲薬",
+      "title": "東方万能飲薬",
+      "artist": "葉月ゆら",
+      "year": "2010",
+      "date": "2010-03-14",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=BhjpUVihDxI",
+      "cover": "covers/singles/053 戒律の炎と蒼星姫.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/053%20%E6%88%92%E5%BE%8B%E3%81%AE%E7%82%8E%E3%81%A8%E8%92%BC%E6%98%9F%E5%A7%AB.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "戒律の炎と蒼星姫",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/053 戒律の炎と蒼星姫.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/053%20%E6%88%92%E5%BE%8B%E3%81%AE%E7%82%8E%E3%81%A8%E8%92%BC%E6%98%9F%E5%A7%AB.mp3",
+          "dur": 222,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals and lyrics 葉月ゆら; arrangement Drop"
+        }
+      ]
+    },
+    {
+      "album": "Felsic Mirage",
+      "title": "Felsic Mirage",
+      "artist": "葉月ゆら",
+      "year": "2010",
+      "date": "2010-08-14",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=pYWbE4Jhc0o",
+      "cover": "covers/singles/054 nothing guilty.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/054%20nothing%20guilty.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "nothing guilty",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/054 nothing guilty.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/054%20nothing%20guilty.mp3",
+          "dur": 310,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす"
+        }
+      ]
+    },
+    {
+      "album": "Brilliant Orange",
+      "title": "Brilliant Orange",
+      "artist": "葉月ゆら",
+      "year": "2010",
+      "date": "2010-05-05",
+      "category": "Doujin guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/%28M3-25%29%20stretta%20di%20mano%20-%20Brilliant%20Orange.rar",
+      "cover": "covers/singles/055 絶対love×love宣言!! (Brilliant Orange arrange cover).jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/055%20%E7%B5%B6%E5%AF%BElove%C3%97love%E5%AE%A3%E8%A8%80!!%20(Brilliant%20Orange%20arrange%20cover).jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "絶対love×love宣言!! (Brilliant Orange arrange cover)",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/055 絶対love×love宣言!! (Brilliant Orange arrange cover).mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/055%20%E7%B5%B6%E5%AF%BElove%C3%97love%E5%AE%A3%E8%A8%80!!%20(Brilliant%20Orange%20arrange%20cover).mp3",
+          "dur": 213,
+          "genres": [
+            "Doujin guest vocal"
+          ],
+          "credit": "Guest vocal 葉月ゆら; chorus lovelove少女隊; lyrics 渡邊亜希子 and 葉月ゆら; composition 江並哲志; arrangement じゅん"
+        }
+      ]
+    },
+    {
+      "album": "東方年柄年中",
+      "title": "東方年柄年中",
+      "artist": "葉月ゆら",
+      "year": "2009",
+      "date": "2009-08-15",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=deAOs_59pvo",
+      "cover": "covers/singles/056 Candid Telling You.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/056%20Candid%20Telling%20You.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Candid Telling You",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/056 Candid Telling You.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/056%20Candid%20Telling%20You.mp3",
+          "dur": 256,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement ぼいど; lyrics 夕野ヨシミ"
+        }
+      ]
+    },
+    {
+      "album": "FAR EAST OF EAST",
+      "title": "FAR EAST OF EAST",
+      "artist": "葉月ゆら",
+      "year": "2009",
+      "date": "2009-08-15",
+      "category": "Touhou-adjacent original guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=NuptO3FK9TY",
+      "cover": "covers/singles/057 幻想の空.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/057%20%E5%B9%BB%E6%83%B3%E3%81%AE%E7%A9%BA.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "幻想の空",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/057 幻想の空.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/057%20%E5%B9%BB%E6%83%B3%E3%81%AE%E7%A9%BA.mp3",
+          "dur": 368,
+          "genres": [
+            "Touhou-adjacent original guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; composition/arrangement Tatsh; lyrics 愛羽薫"
+        }
+      ]
+    },
+    {
+      "album": "Forget Me Not",
+      "title": "Forget Me Not",
+      "artist": "葉月ゆら",
+      "year": "2009",
+      "date": "2009-10-11",
+      "category": "Doujin guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=PljZBR8dDnI",
+      "cover": "covers/singles/058 Divine Memories.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/058%20Divine%20Memories.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Divine Memories",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/058 Divine Memories.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/058%20Divine%20Memories.mp3",
+          "dur": 314,
+          "genres": [
+            "Doujin guest vocal"
+          ],
+          "credit": "Lead vocals 葉月ゆら; chorus 花たん; music and lyrics リト (einherjer)"
+        }
+      ]
+    },
+    {
+      "album": "FAR EAST OF EAST II",
+      "title": "FAR EAST OF EAST II",
+      "artist": "葉月ゆら",
+      "year": "2009",
+      "date": "2009-12-30",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "https://www.youtube.com/watch?v=xNJ9rl6Dhfw",
+      "cover": "covers/singles/059 Eternal Wind.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/059%20Eternal%20Wind.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Eternal Wind",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/059 Eternal Wind.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/059%20Eternal%20Wind.mp3",
+          "dur": 260,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement Tatsh; lyrics 愛羽薫"
+        }
+      ]
+    },
+    {
+      "album": "thousand mirage",
+      "title": "thousand mirage",
+      "artist": "葉月ゆら",
+      "year": "2013",
+      "date": "2013-08-12",
+      "category": "Touhou guest vocal",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Downloads/%2808%29%20%5B%E8%91%89%E6%9C%88%E3%82%86%E3%82%89%5D%20Act-TWO.mp3",
+      "cover": "covers/singles/060 Act-TWO.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/singles/060%20Act-TWO.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "Act-TWO",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/060 Act-TWO.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/060%20Act-TWO.mp3",
+          "dur": 224,
+          "genres": [
+            "Touhou guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら; arrangement and lyrics NYO"
+        }
+      ]
+    },
+    {
+      "album": "Unknown Archive",
+      "title": "Unknown Archive",
+      "artist": "葉月ゆら",
+      "year": "2006–2011",
+      "date": "2011-07-30",
+      "category": "External collection",
+      "verification_status": "Release-level archive grouping; per-track credits and provenance are retained in the acquisition index.",
+      "source_url": "local-file:///Users/symphie/Documents/GitHub/yura-research/sources/recovered/audio/h1__osakasong.mp3",
+      "cover": "covers/others/Unknown Archive.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers/others/Unknown%20Archive.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "大阪ソング",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/061 大阪ソング.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/061%20%E5%A4%A7%E9%98%AA%E3%82%BD%E3%83%B3%E3%82%B0.mp3",
+          "dur": 36,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "02",
+          "title": "BrokenFrame",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/062 BrokenFrame.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/062%20BrokenFrame.mp3",
+          "dur": 225,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; collaboration with ポリッツ"
+        },
+        {
+          "track": "03",
+          "title": "こねこのおさんぽ",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/063 こねこのおさんぽ.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/063%20%E3%81%93%E3%81%AD%E3%81%93%E3%81%AE%E3%81%8A%E3%81%95%E3%82%93%E3%81%BD.mp3",
+          "dur": 65,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "04",
+          "title": "Magical ゆらンわーるど",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/064 Magical ゆらンわーるど.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/064%20Magical%20%E3%82%86%E3%82%89%E3%83%B3%E3%82%8F%E3%83%BC%E3%82%8B%E3%81%A9.mp3",
+          "dur": 257,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; composition Ryou"
+        },
+        {
+          "track": "05",
+          "title": "Chant",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/065 Chant.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/065%20Chant.mp3",
+          "dur": 56,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "06",
+          "title": "Apra la giuntura ～綻び～",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/066 Apra la giuntura ～綻び～.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/066%20Apra%20la%20giuntura%20%EF%BD%9E%E7%B6%BB%E3%81%B3%EF%BD%9E.mp3",
+          "dur": 250,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "07",
+          "title": "愛の歌 ～Red Amaryllis～",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/067 愛の歌 ～Red Amaryllis～.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/067%20%E6%84%9B%E3%81%AE%E6%AD%8C%20%EF%BD%9ERed%20Amaryllis%EF%BD%9E.mp3",
+          "dur": 235,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "08",
+          "title": "愛の歌 ～Red Amaryllis～ REMIX",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/068 愛の歌 ～Red Amaryllis～ REMIX.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/068%20%E6%84%9B%E3%81%AE%E6%AD%8C%20%EF%BD%9ERed%20Amaryllis%EF%BD%9E%20REMIX.mp3",
+          "dur": 350,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; remix BLUEHAWAII"
+        },
+        {
+          "track": "09",
+          "title": "陰",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/069 陰.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/069%20%E9%99%B0.mp3",
+          "dur": 93,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "10",
+          "title": "陰 打ち込みver",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/070 陰 打ち込みver.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/070%20%E9%99%B0%20%E6%89%93%E3%81%A1%E8%BE%BC%E3%81%BFver.mp3",
+          "dur": 94,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; programmed version 高見"
+        },
+        {
+          "track": "11",
+          "title": "Sweet Snow Story",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/071 Sweet Snow Story.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/071%20Sweet%20Snow%20Story.mp3",
+          "dur": 222,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "12",
+          "title": "tears (web version)",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/072 tears (web version).mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/072%20tears%20(web%20version).mp3",
+          "dur": 272,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "13",
+          "title": "ウンディーネの悲劇 short version",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/073 ウンディーネの悲劇 short version.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/073%20%E3%82%A6%E3%83%B3%E3%83%87%E3%82%A3%E3%83%BC%E3%83%8D%E3%81%AE%E6%82%B2%E5%8A%87%20short%20version.mp3",
+          "dur": 173,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "14",
+          "title": "哀愁姫君",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/074 哀愁姫君.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/074%20%E5%93%80%E6%84%81%E5%A7%AB%E5%90%9B.mp3",
+          "dur": 263,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "15",
+          "title": "無言峠",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/075 無言峠.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/075%20%E7%84%A1%E8%A8%80%E5%B3%A0.mp3",
+          "dur": 294,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; collaboration The Spring Beach Works."
+        },
+        {
+          "track": "16",
+          "title": "アヒル大作戦のテーマ",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/076 アヒル大作戦のテーマ.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/076%20%E3%82%A2%E3%83%92%E3%83%AB%E5%A4%A7%E4%BD%9C%E6%88%A6%E3%81%AE%E3%83%86%E3%83%BC%E3%83%9E.mp3",
+          "dur": 265,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; composition スパーイ大作"
+        },
+        {
+          "track": "17",
+          "title": "ナイトクラブ 葉と月",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/077 ナイトクラブ 葉と月.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/077%20%E3%83%8A%E3%82%A4%E3%83%88%E3%82%AF%E3%83%A9%E3%83%96%20%E8%91%89%E3%81%A8%E6%9C%88.mp3",
+          "dur": 71,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; narration 星見蒼人"
+        },
+        {
+          "track": "18",
+          "title": "Temptation preview",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/078 Temptation preview.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/078%20Temptation%20preview.mp3",
+          "dur": 31,
+          "genres": [
+            "Web single / archival recovery"
+          ],
+          "credit": "Vocals 葉月ゆら; live guitar Northern Brastorm"
+        },
+        {
+          "track": "19",
+          "title": "Rose Tattoo",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/079 Rose Tattoo.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/079%20Rose%20Tattoo.mp3",
+          "dur": 220,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Vocals 葉月ゆら"
+        },
+        {
+          "track": "20",
+          "title": "ゆらじお1",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/080 ゆらじお1.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/080%20%E3%82%86%E3%82%89%E3%81%98%E3%81%8A1.mp3",
+          "dur": 473,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら"
+        },
+        {
+          "track": "21",
+          "title": "ゆらじお20",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/081 ゆらじお20.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/081%20%E3%82%86%E3%82%89%E3%81%98%E3%81%8A20.mp3",
+          "dur": 2083,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら"
+        },
+        {
+          "track": "22",
+          "title": "ゆらじお22",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/082 ゆらじお22.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/082%20%E3%82%86%E3%82%89%E3%81%98%E3%81%8A22.mp3",
+          "dur": 1965,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら"
+        },
+        {
+          "track": "23",
+          "title": "ゆらじお24",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/083 ゆらじお24.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/083%20%E3%82%86%E3%82%89%E3%81%98%E3%81%8A24.mp3",
+          "dur": 3722,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら; guest 月子"
+        },
+        {
+          "track": "24",
+          "title": "ゆらじお25",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/084 ゆらじお25.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/084%20%E3%82%86%E3%82%89%E3%81%98%E3%81%8A25.mp3",
+          "dur": 1272,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら"
+        },
+        {
+          "track": "25",
+          "title": "7月のゆらじお",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/085 7月のゆらじお.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/085%207%E6%9C%88%E3%81%AE%E3%82%86%E3%82%89%E3%81%98%E3%81%8A.mp3",
+          "dur": 1100,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら"
+        },
+        {
+          "track": "26",
+          "title": "nyurajio",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/086 nyurajio.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/086%20nyurajio.mp3",
+          "dur": 833,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら"
+        },
+        {
+          "track": "27",
+          "title": "たまゆら パンドラ☆ナイト",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "singles/087 たまゆら パンドラ☆ナイト.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/singles/087%20%E3%81%9F%E3%81%BE%E3%82%86%E3%82%89%20%E3%83%91%E3%83%B3%E3%83%89%E3%83%A9%E2%98%86%E3%83%8A%E3%82%A4%E3%83%88.mp3",
+          "dur": 9072,
+          "genres": [
+            "Unknown archive / radio"
+          ],
+          "credit": "Radio performance 葉月ゆら"
+        }
       ]
     }
   ],
@@ -13484,5 +15958,10 @@
     "vocal_tracks": 807,
     "vocal_minutes": 2849,
     "calculated_at": "2026-06-22"
+  },
+  "release_counts": {
+    "albums": 107,
+    "singles": 0,
+    "others": 48
   }
 }

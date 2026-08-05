@@ -88,6 +88,27 @@ html, body { overscroll-behavior: none; }
 .fleuron .fl-rule:last-child { background: linear-gradient(270deg, transparent, var(--gilt) 90%); }
 .fleuron svg { width: 14px; height: 14px; flex: none; opacity: 1; }
 
+/* primary shelf switch: restrained tabs that keep the archive's antiquarian tone */
+.release-tabs {
+  display: flex; justify-content: center; align-items: stretch; gap: clamp(1.4rem, 5vw, 3.2rem);
+  width: min(100% - 2rem, 34rem); margin: 0 auto clamp(1.15rem, 3vw, 1.7rem);
+  border-bottom: 1px solid var(--rule); animation: riseIn .8s ease .21s both;
+}
+.release-tab {
+  position: relative; border: 0; background: transparent; cursor: pointer;
+  padding: .55rem .1rem .8rem; color: var(--text-3);
+  font-family: var(--serif); font-size: clamp(.96rem, 2.4vw, 1.12rem); letter-spacing: .01em;
+  transition: color .18s ease;
+}
+.release-tab:hover { color: var(--text-2); }
+.release-tab::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--gilt); transform: scaleX(0); transform-origin: center; transition: transform .2s ease;
+}
+.release-tab.active { color: var(--text); }
+.release-tab.active::after { transform: scaleX(1); }
+.release-tab:focus-visible { outline: 1px solid var(--gilt); outline-offset: 5px; border-radius: 2px; }
+
 /* ── Shelf controls ────────────────────────────────
    search on its own line; one quiet row of controls beneath. */
 .shelf-controls {

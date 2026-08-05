@@ -1,7 +1,6 @@
 /* ===========================================================================
    Shared fan-archive player engine.
-   Used by both /yura/ and /krikkrak/ — design/layout live in each page's
-   own HTML + CSS; this file is the behaviour only.
+   Design/layout live in the page's own HTML + CSS; this file is the behaviour only.
 
    Page contract (elements this engine requires):
      #shelf #album-view #album-head #track-list #stat-line #stat-info #stat-tip
@@ -128,7 +127,7 @@
   }
 
   /* ── Shelf rendering ───────────────────────────── */
-  let sortMode = 'new', filter = '', yearFilter = '', genreFilter = '';
+  let sortMode = 'new', filter = '', yearFilter = '', genreFilter = '', releaseType = 'albums';
   const albGenres = a => a.genres || [];                    // album-level top-level genres
   const trkHasGenre = t => !genreFilter || (t.genres||[]).includes(genreFilter);
   function buildFilters() {
@@ -164,6 +163,7 @@
   }
   function sortedIndices() {
     let idx = ALB.map((_, i) => i);
+    idx = idx.filter(i => (ALB[i].release_types || ['albums']).includes(releaseType));
     if (yearFilter) idx = idx.filter(i => String(ALB[i].year) === yearFilter);
     if (genreFilter) idx = idx.filter(i => albGenres(ALB[i]).includes(genreFilter));
     if (filter) {
@@ -206,17 +206,74 @@
           <span class="alb-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
         </div>
         <p class="alb-title">${esc(a.title)}</p>
-        <p class="alb-sub">${esc(a.year)} · ${ (a.tracks||[]).length } tracks</p>
+        <p class="alb-sub">${esc(a.year)}${a.source_release ? ' · ' + esc(a.source_release) : ' · ' + (a.tracks||[]).length + ' tracks'}</p>
       </button>`;
     }).join('');
     if (!idx.length) shelf.innerHTML = '<p class="empty">No matches.</p>';
+    requestAnimationFrame(syncShelfTitleHeights);
   }
+
+  /* Keep metadata aligned without reserving two lines in rows where every title fits on one.
+     Grid items cannot share an intrinsic inner-row height, so group the rendered cards by their
+     physical row and apply that row's tallest clamped title height to its neighbours. */
+  function syncShelfTitleHeights() {
+    const cards = Array.from(shelf.querySelectorAll('.alb-card:not(.skel)'));
+    const rows = new Map();
+    cards.forEach(card => { const title = card.querySelector('.alb-title'); if (title) title.style.minHeight = ''; });
+    cards.forEach(card => {
+      const title = card.querySelector('.alb-title');
+      if (!title) return;
+      const row = Math.round(card.offsetTop);
+      if (!rows.has(row)) rows.set(row, []);
+      rows.get(row).push(title);
+    });
+    rows.forEach(titles => {
+      const height = Math.max(...titles.map(title => title.getBoundingClientRect().height));
+      titles.forEach(title => { title.style.minHeight = `${height}px`; });
+    });
+  }
+
+  let shelfResizeFrame = 0;
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(shelfResizeFrame);
+    shelfResizeFrame = requestAnimationFrame(syncShelfTitleHeights);
+  });
 
   shelf.addEventListener('click', e => {
     const card = e.target.closest('.alb-card');
     if (!card) return;
+    const album = ALB[+card.dataset.ai];
+    if (album.card_mode === 'track') { playAlbumFrom(+card.dataset.ai, 0, false, true); return; }
     if (e.target.closest('.alb-play')) { playAlbumFrom(+card.dataset.ai, 0, false, true); return; }
     openAlbumView(+card.dataset.ai);
+  });
+
+  /* ── Release type tabs ─────────────────────────── */
+  const releaseTabs = Array.from(document.querySelectorAll('.release-tab'));
+  function selectReleaseType(next, focusTab) {
+    if (!['albums', 'others'].includes(next)) return;
+    releaseType = next;
+    releaseTabs.forEach(tab => {
+      const selected = tab.dataset.releaseType === next;
+      tab.classList.toggle('active', selected);
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      if (selected && focusTab) tab.focus();
+    });
+    renderShelf();
+  }
+  releaseTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectReleaseType(tab.dataset.releaseType, false));
+    tab.addEventListener('keydown', e => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+      e.preventDefault();
+      let next = index;
+      if (e.key === 'ArrowLeft') next = (index - 1 + releaseTabs.length) % releaseTabs.length;
+      if (e.key === 'ArrowRight') next = (index + 1) % releaseTabs.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End') next = releaseTabs.length - 1;
+      selectReleaseType(releaseTabs[next].dataset.releaseType, true);
+    });
   });
 
   /* ── Sort + search ─────────────────────────────── */
@@ -338,6 +395,7 @@
   function shuffleAll() {
     const q = [];
     ALB.forEach((a, ai) => (a.tracks||[]).forEach((t, ti) => {
+      if (!(a.release_types || ['albums']).includes(releaseType)) return;
       if (genreFilter && !(t.genres||[]).includes(genreFilter)) return;
       if (excludeInst && t.instrumental) return;
       q.push({ ai, ti, inst: !!t.instrumental });
