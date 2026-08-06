@@ -176,14 +176,33 @@ permalink: /yura/
   </div>
 </div>
 
-<div id="queue-panel">
-  <div class="q-head">
-    <div class="q-head-txt"><p class="q-title">Queue</p><p class="q-sub" id="q-sub"></p></div>
-    <button id="queue-close" aria-label="Close queue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<div id="np-scrim" aria-hidden="true"></div>
+<div id="queue-panel" class="np-sheet" role="dialog" aria-modal="false" aria-label="Now playing">
+  <div class="np-sheet-head">
+    <button id="queue-close" aria-label="Collapse now playing" title="Collapse">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <p class="q-sub" id="q-sub"></p>
+    <span class="np-sheet-head-sp" aria-hidden="true"></span>
   </div>
-  <div id="q-now"></div>
-  <ol id="queue-list"></ol>
-  <div class="q-foot">
+
+  <div class="np-hero">
+    <div class="np-hero-cover sk"><img id="np-hero-img" alt="" decoding="async" onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/></div>
+    <p class="np-hero-title" id="np-hero-title">—</p>
+    <button class="np-hero-sub" id="np-hero-sub" type="button" aria-label="Go to this album">—</button>
+  </div>
+
+  <div class="np-tabs" role="tablist" aria-label="Now playing views">
+    <button class="np-tab active" id="np-tab-upnext" role="tab" aria-selected="true" aria-controls="np-panel-upnext" data-tab="upnext">Up next</button>
+    <button class="np-tab" id="np-tab-lyrics" role="tab" aria-selected="false" aria-controls="np-panel-lyrics" data-tab="lyrics" tabindex="-1">Lyrics</button>
+    <span class="np-tab-ink" aria-hidden="true"></span>
+  </div>
+
+  <div class="np-panels">
+   <div class="np-panel active" id="np-panel-upnext" role="tabpanel" aria-labelledby="np-tab-upnext">
+    <div id="q-now"></div>
+    <ol id="queue-list"></ol>
+    <div class="q-foot">
     <button class="q-fbtn" id="q-shuffle" aria-label="Shuffle queue">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg><span>Shuffle</span>
     </button>
@@ -203,6 +222,15 @@ permalink: /yura/
         <button data-min="0">Off</button>
       </div>
     </div>
+    </div>
+   </div>
+   <div class="np-panel" id="np-panel-lyrics" role="tabpanel" aria-labelledby="np-tab-lyrics" hidden>
+     <div class="np-lyrics-empty">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+       <p>Lyrics aren&rsquo;t available yet.</p>
+       <span>They&rsquo;ll appear here once transcribed.</span>
+     </div>
+   </div>
   </div>
 </div>
 
@@ -246,6 +274,41 @@ permalink: /yura/
       if (b){ if (lbl) lbl.textContent = b.textContent; setOpen(false); }
     });
     document.addEventListener('click', function(e){ if (!e.target.closest('.sort-wrap')) setOpen(false); });
+  })();
+</script>
+<script>
+  /* Now-playing sheet tabs (Up next / Lyrics). Pure UI — the queue engine owns the panels' content.
+     The sliding ink underline is positioned from the active tab so it needs no fixed widths. */
+  (function(){
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.np-tab')),
+        ink  = document.querySelector('.np-tab-ink');
+    if (!tabs.length) return;
+    function moveInk(t){ if (ink && t){ ink.style.width = t.offsetWidth + 'px'; ink.style.transform = 'translateX(' + t.offsetLeft + 'px)'; } }
+    function select(name, focus){
+      tabs.forEach(function(t){
+        var on = t.dataset.tab === name;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById('np-panel-' + t.dataset.tab);
+        if (panel){ panel.classList.toggle('active', on); panel.hidden = !on; }
+        if (on){ moveInk(t); if (focus) t.focus(); }
+      });
+    }
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ select(t.dataset.tab, false); });
+      t.addEventListener('keydown', function(e){
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        e.preventDefault();
+        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+        select(tabs[n].dataset.tab, true);
+      });
+    });
+    // Ink needs a correct starting position once fonts settle and when the sheet first opens.
+    window.addEventListener('load', function(){ var a = document.querySelector('.np-tab.active'); if (a) moveInk(a); });
+    document.getElementById('queue-btn')?.addEventListener('click', function(){
+      requestAnimationFrame(function(){ var a = document.querySelector('.np-tab.active'); if (a) moveInk(a); });
+    });
   })();
 </script>
 <script src="/assets/js/lastfm.js"></script>

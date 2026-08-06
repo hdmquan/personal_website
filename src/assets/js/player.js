@@ -427,6 +427,10 @@
     npCover.querySelector('img')?.remove();
     const img = document.createElement('img'); img.src = a.cover_url; img.alt = ''; img.className = 'np-cover-img';
     npCover.prepend(img);
+    // Mirror into the expanded now-playing sheet's hero (optional elements — no-op if absent).
+    const heroImg = $('#np-hero-img'); if (heroImg && heroImg.src !== a.cover_url) { heroImg.classList.remove('loaded'); heroImg.src = a.cover_url; }
+    const heroT = $('#np-hero-title'); if (heroT) heroT.textContent = disp(t) + (t.instrumental ? ' (inst)' : '');
+    const heroS = $('#np-hero-sub'); if (heroS) heroS.textContent = a.title + ' · ' + a.year;
     setPct(0); setBuf(0);
     document.title = DEFAULT_TITLE + ' | ' + a.title;
     applyMarquee();
@@ -633,13 +637,13 @@
 
   const queueBtn = document.getElementById('queue-btn');
   const queueOpen = () => !!queuePanel && queuePanel.classList.contains('open');
-  function openQueue() { if (!queuePanel) return; renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); }
-  function closeQueue() { if (!queuePanel) return; queuePanel.classList.remove('open'); queueBtn?.classList.remove('on'); }
+  function openQueue() { if (!queuePanel) return; renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open'); }
+  function closeQueue() { if (!queuePanel) return; queuePanel.classList.remove('open'); queueBtn?.classList.remove('on'); document.body.classList.remove('np-open'); }
   queueBtn?.addEventListener('click', e => { e.stopPropagation(); queueOpen() ? closeQueue() : openQueue(); });
   document.getElementById('queue-close')?.addEventListener('click', closeQueue);
   // close when tapping/clicking anywhere outside the panel (or scrolling the page behind it)
   document.addEventListener('click', e => {
-    if (queueOpen() && !e.target.closest('#queue-panel') && !e.target.closest('#queue-btn')) closeQueue();
+    if (queueOpen() && !e.target.closest('#queue-panel') && !e.target.closest('#queue-btn') && !e.target.closest('#np-bar')) closeQueue();
   });
   window.addEventListener('scroll', () => { if (queueOpen()) closeQueue(); }, { passive: true });
 
@@ -759,8 +763,11 @@
     const li = trackList.querySelector(`.trk[data-ti="${q.ti}"]`);
     if (li) li.scrollIntoView({ block: 'center' });
   }
-  npCover.addEventListener('click', jumpToCurrent);
-  $('.np-main')?.addEventListener('click', jumpToCurrent);
+  // Tapping the mini-player expands the now-playing sheet (YouTube-Music style).
+  npCover.addEventListener('click', () => { if (queue.length) openQueue(); });
+  $('.np-main')?.addEventListener('click', () => { if (queue.length) openQueue(); });
+  // "Jump to this album" moves onto the sheet's album line, preserving the old behaviour.
+  $('#np-hero-sub')?.addEventListener('click', () => { closeQueue(); jumpToCurrent(); });
 
   /* ── Toast ─────────────────────────────────────── */
   let toastT;
