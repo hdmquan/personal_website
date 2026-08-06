@@ -44,6 +44,7 @@ const dates = new Map(Object.entries({
   'tears (web version)': '2006-04-19', 'ウンディーネの悲劇 short version': '2006-08-16',
   '哀愁姫君': '2008-02-07', '無言峠': '2008-01-13', 'アヒル大作戦のテーマ': '2008-06-18',
   'ナイトクラブ 葉と月': '2007-07', 'Temptation preview': '2007-06',
+  '番凩 (歌ってみた)': '2013-09-26',
   'ゆらじお1': '2006-01-14', 'ゆらじお20': '2007-04-18', 'ゆらじお24': '2008-12-25',
   'ゆらじお25': '2010-06', '7月のゆらじお': '2011-07-30', 'たまゆら パンドラ☆ナイト': '2008-10-25',
   'Summer Days': '2007', 'Dance & Chance': '2007', '「だいすき」って気持ち': '2008',
@@ -72,6 +73,14 @@ const dates = new Map(Object.entries({
   'Candid Telling You': '2009-08-15', '幻想の空': '2009-08-15',
   'Divine Memories': '2009-10-11', 'Eternal Wind': '2009-12-30',
   'Act-TWO': '2013-08-12',
+  '季節の雫': '2006-12-31', 'Take me high': '2006-08-13', 'Joker': '2009-12-30',
+  'Snow Mirage': '2010', 'セレナード': '2025-01-09',
+  '天城心中': '2025-02-08', 'ヴェルヴェット・リフレイン': '2025-02-08',
+  'Special Colors!!': '2016-08-13', '流れ星に願いを込めて...': '2010-08-14',
+  '落葉ぼれろ': '2007-09-30', '花のささやき': '2011-12-30', 'ブルーウォーター': '2011-12-30',
+  '迷宮ノ小鳥': '2007-10-08', '愚者転生': '2008-08-01',
+  'card format': '2016-12-29', 'Ash and Snow': '2010-12-30', 'Caterpillar Song (extended)': '2012-04-30',
+  '東方妖怪小町': '2005-05-04', '恋色マスタースパーク': '2005-05-04',
 }));
 
 const artists = new Map(Object.entries({
@@ -127,10 +136,14 @@ const groupDefinitions = [
   { id: 'geheime-musikbuch', title: 'Geheime Musikbuch: Himitsu no Ongakujou', year: '2020', date: '2020-12-01',
     cover: 'images/groups/Geheime Musikbuch - Himitsu no Ongakujou.jpg',
     tracks: new Set(['いにしえの鐘の音 (Dramatic Ver. by 樋口秀樹)']) },
+  { id: 'yura-radio', title: 'Yura Radio', year: '2006–2011', date: '2006-01-14',
+    cover: 'images/groups/Unknown Archive.jpg', tracks: new Set([
+      'ゆらじお1', 'ゆらじお20', 'ゆらじお22', 'ゆらじお24', 'ゆらじお25',
+      '7月のゆらじお', 'nyurajio', 'たまゆら パンドラ☆ナイト',
+    ]) },
   { id: 'unknown-archive', title: 'Unknown Archive', year: '2006–2011', date: '2011-07-30',
     cover: 'images/groups/Unknown Archive.jpg', tracks: new Set([
-      'Rose Tattoo', 'ゆらじお1', 'ゆらじお20', 'ゆらじお22', 'ゆらじお24', 'ゆらじお25',
-      '7月のゆらじお', 'nyurajio', 'たまゆら パンドラ☆ナイト',
+      'Rose Tattoo',
     ]), match: row => row.category === 'Web single / archival recovery' },
 ];
 
