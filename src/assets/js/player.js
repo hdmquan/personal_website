@@ -428,7 +428,7 @@
     const img = document.createElement('img'); img.src = a.cover_url; img.alt = ''; img.className = 'np-cover-img';
     npCover.prepend(img);
     setPct(0); setBuf(0);
-    document.title = a.title + ' | ' + (ART.name || '');
+    document.title = DEFAULT_TITLE + ' | ' + a.title;
     applyMarquee();
     if (autoplay) {
       wantPlay = true; audio.play().catch(()=>{});
