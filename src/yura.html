@@ -194,7 +194,7 @@ permalink: /yura/
 
   <div class="np-views">
    <section class="np-view np-view-player active" id="np-view-player">
-    <div class="np-top">
+    <div class="np-stage" id="np-stage">
      <div class="np-hero" id="np-hero">
        <div class="np-hero-cover sk"><img id="np-hero-img" alt="" decoding="async" onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/></div>
      </div>
@@ -222,9 +222,15 @@ permalink: /yura/
          <button class="np-c np-c-sm np-c-toggle" id="np2-loop" aria-label="Repeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></button>
        </div>
      </div>
-     <p class="np-fromline">Playing from <b id="np-from">—</b></p>
+     <button class="np-queue-cue" id="np-queue-cue" type="button" aria-label="Show queue">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+       <span>Queue</span>
+     </button>
     </div>
     <div class="np-scroll" id="np-scroll">
+     <div class="np-spacer" aria-hidden="true"></div>
+     <div class="np-queuewrap">
+     <p class="np-queue-hd">Queue<b id="np-from"></b></p>
      <div id="q-now"></div>
     <ol id="queue-list"></ol>
     <div class="q-foot">
@@ -246,6 +252,7 @@ permalink: /yura/
         <button data-min="track">End of track</button>
         <button data-min="0">Off</button>
       </div>
+    </div>
     </div>
     </div>
     </div>
@@ -343,13 +350,17 @@ permalink: /yura/
       });
     });
 
-    /* (c) Scroll-morph — drives --np-p (0 at rest → 1 fully scrolled). CSS interpolates the cover.
-       rAF-throttled; respects reduced-motion by simply not animating (the value still clamps). */
+    /* (c) Swipe-up reveal — the queue is hidden below a full-height spacer; scrolling it up drives
+       --np-p (0 rest → 1 revealed), which collapses the overlay 'stage' so the queue emerges behind.
+       RANGE = the scroll distance that collapses the stage to its 360px compact height. */
     var scroller = document.getElementById('np-scroll'), sheet = document.getElementById('queue-panel');
     if (scroller && sheet){
-      var RANGE = 220, ticking = false;
-      function apply(){ ticking = false; var p = Math.min(1, Math.max(0, scroller.scrollTop / RANGE)); sheet.style.setProperty('--np-p', p.toFixed(3)); }
+      var COMPACT = 360, ticking = false;
+      function range(){ return Math.max(1, scroller.clientHeight - COMPACT); }
+      function apply(){ ticking = false; var p = Math.min(1, Math.max(0, scroller.scrollTop / range())); sheet.style.setProperty('--np-p', p.toFixed(3)); }
       scroller.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(apply); } }, { passive: true });
+      /* the "Queue" cue scrolls the queue into view; tapping again (via close) returns to top */
+      document.getElementById('np-queue-cue')?.addEventListener('click', function(){ scroller.scrollTo({ top: range(), behavior: 'smooth' }); });
       /* reset when the screen (re)opens */
       document.getElementById('queue-btn')?.addEventListener('click', function(){ scroller.scrollTop = 0; sheet.style.setProperty('--np-p', '0'); });
     }

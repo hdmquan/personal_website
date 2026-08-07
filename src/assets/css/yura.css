@@ -513,17 +513,37 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
 .np-view[hidden] { display: none; }
 
 /* PLAYER view — one scroll region; the cover morphs via --np-p */
-.np-top { flex: none; }
-.np-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
-.np-hero { display: grid; place-items: center; background: var(--bg); padding: 1rem 0 .2rem; }
-.np-hero-cover {                                 /* zooms out to fill the width on scroll (constant height → no jitter) */
+.np-view-player { position: relative; overflow: hidden; }
+/* the queue sits in the scroller behind a full-height spacer → hidden until you swipe up */
+.np-scroll { position: absolute; inset: 0; z-index: 1; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.np-spacer { height: 100%; }
+.np-queuewrap { background: var(--bg); min-height: 100%; padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+.np-queue-hd { margin: 0; padding: .85rem 1.15rem .5rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--text-2); display: flex; align-items: baseline; gap: .5rem; }
+.np-queue-hd b { font-weight: 400; font-size: .58rem; color: var(--text-3); letter-spacing: .04em; text-transform: none; }
+
+/* the player 'stage' overlays the top and shrinks as --np-p rises, revealing the queue behind it */
+.np-stage { position: absolute; top: 0; left: 0; right: 0; z-index: 3; overflow: hidden; pointer-events: none;
+  height: calc(100% - (100% - 360px) * var(--np-p));
+  background: var(--bg); display: flex; flex-direction: column; justify-content: center; }
+.np-stage .np-nowinfo-main, .np-stage .np-controls, .np-stage .np-seek2, .np-queue-cue { pointer-events: auto; }
+.np-hero { display: grid; place-items: center; background: var(--bg); padding: .2rem 0; }
+.np-hero-cover {                                 /* zooms out to fill the width + flattens to a banner as you scroll */
   position: relative; overflow: hidden; background: var(--panel-inset);
   width: calc(66vw + (100vw - 66vw) * var(--np-p));
   max-width: calc(300px + (2000px - 300px) * var(--np-p));
-  height: min(66vw, 300px);
+  height: calc(min(66vw, 300px) * (1 - var(--np-p)) + 30vh * var(--np-p));
+  max-height: calc(300px * (1 - var(--np-p)) + 190px * var(--np-p));
   border-radius: calc(.8rem * (1 - var(--np-p)));
   box-shadow: 0 calc(14px * (1 - var(--np-p))) 34px var(--sh-deep); }
+/* swipe-up cue pinned at the resting stage's bottom; fades out as the stage collapses */
+.np-queue-cue { position: absolute; left: 50%; bottom: calc(1rem + env(safe-area-inset-bottom)); transform: translateX(-50%);
+  display: inline-flex; flex-direction: column; align-items: center; gap: .15rem;
+  border: 0; background: transparent; cursor: pointer; color: var(--text-3);
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+  opacity: calc(1 - var(--np-p) * 5); transition: color .15s; }
+.np-queue-cue svg { width: 20px; height: 20px; }
+.np-queue-cue:hover { color: var(--accent); }
 .np-hero-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
 .np-hero-cover img.loaded { opacity: 1; }
 
@@ -564,11 +584,6 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
 .np-c-play:hover { box-shadow: 0 6px 20px var(--sh-deep); }
 body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
 
-/* playing-from line */
-.np-fromline { flex: none; margin: 0; padding: .35rem 1.15rem 1.1rem; font-family: var(--mono); font-size: .62rem;
-  letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
-.np-fromline b { color: var(--text-2); font-weight: 500; }
-
 /* queue shares the player scroll — do not nest a second scroller */
 body.np-open #queue-list { flex: none; overflow: visible; padding: 0; }
 body.np-open #q-now { padding: 0; }
@@ -592,8 +607,10 @@ body.np-open .q-fbtn:not(:last-child) { border-right: 1px solid var(--rule); }
 .np-lang { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(1rem + env(safe-area-inset-bottom));
   display: inline-flex; gap: 2px; padding: 4px; border-radius: 2rem; background: var(--panel-raised);
   border: 1px solid var(--gilt-hair); box-shadow: 0 8px 26px var(--sh-deep); }
-.np-lang-btn { border: 0; background: transparent; cursor: pointer; color: var(--text-3); padding: .45rem .95rem; border-radius: 2rem;
-  font-family: var(--mono); font-size: .66rem; letter-spacing: .04em; transition: background .15s, color .15s; }
+.np-lang-btn { border: 0; background: transparent; cursor: pointer; color: var(--text-3);
+  height: 34px; padding: 0 1rem; border-radius: 2rem; white-space: nowrap; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .04em; transition: background .15s, color .15s; }
 .np-lang-btn.active { background: var(--accent); color: var(--bg); }
 body.dark-mode .np-lang-btn.active { color: #16140e; }
 
