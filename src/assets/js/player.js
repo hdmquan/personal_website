@@ -701,8 +701,9 @@
     if (!queuePanel || !queue.length) return;
     renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open');
     npScreen = true;
-    // open on the player view, queue at rest (cover square), queue tab (not lyrics)
-    queuePanel.classList.remove('show-lyrics'); queuePanel.style.setProperty('--np-p', '0');
+    // open on the player view, at rest (full player, queue hidden until swiped up), queue tab (not lyrics)
+    queuePanel.classList.remove('show-lyrics');
+    document.getElementById('np-view-player')?.classList.remove('q-up');
     const qs = document.getElementById('np-queue-scroll'); if (qs) qs.scrollTop = 0;
     document.getElementById('np-seg-song')?.click();
     if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
@@ -710,6 +711,7 @@
   function closeQueue(popHash) {
     if (!queuePanel) return;
     queuePanel.classList.remove('open'); queueBtn?.classList.remove('on'); document.body.classList.remove('np-open');
+    document.getElementById('np-view-player')?.classList.remove('q-up');
     npScreen = false;
     if (popHash && /^#np/.test(location.hash)) location.hash = (view === 'album' && openAlbum >= 0) ? ('a=' + openAlbum) : '';
   }

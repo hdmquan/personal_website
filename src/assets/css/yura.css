@@ -521,17 +521,76 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
 .np-view.active { display: flex; }
 .np-view[hidden] { display: none; }
 
-/* PLAYER view (mobile) — cover (square) + controls fixed up top; the queue scrolls BELOW them and
-   never covers them. Cover zooms out to fill the width as the queue scrolls up (constant height). */
-.np-view-player { position: relative; overflow: hidden; min-height: 0; }
-.np-stage { flex: none; display: flex; flex-direction: column; align-items: center; padding: .2rem 0 .4rem; }
-.np-hero { display: grid; place-items: center; width: 100%; padding: .2rem 0; }
-.np-hero-cover { --cr: min(64vw, 42vh, 300px); position: relative; overflow: hidden; background: var(--panel-inset); cursor: default;
-  width: calc(var(--cr) + (100vw - var(--cr)) * var(--np-p)); max-width: 100vw; height: var(--cr);
-  border-radius: calc(.8rem * (1 - var(--np-p))); box-shadow: 0 10px 30px var(--sh-deep); }
+/* PLAYER view — shared cosmetics. Mobile two-state layout is in the max-width:759px block below;
+   tablet/desktop web layout is in the min-width:760px block. */
+.np-view-player { position: relative; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+.np-stage { display: flex; flex-direction: column; align-items: center; }
+.np-hero { display: grid; place-items: center; width: 100%; }
+.np-hero-cover { position: relative; overflow: hidden; background: var(--panel-inset); cursor: pointer; }
 .np-hero-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
 .np-hero-cover img.loaded { opacity: 1; }
+/* bottom fade — transparent at rest, fades the art into the UI below once the queue is up */
+.np-hero-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: linear-gradient(to bottom, transparent 45%, var(--bg) 100%); }
 .np-nowinfo, .np-transport { position: relative; z-index: 1; width: 100%; }
+
+/* ═══ Mobile: full-screen player at rest (NO queue). Swipe the grip up → cover fills the width and
+   fades into the controls, and the queue rises anchored at the current track. ═══ */
+@media (max-width: 759px) {
+  /* two-state: row1 = player, row2 = queue. Animating grid-template-rows drives the whole morph. */
+  .np-view-player.active { display: grid; grid-template-rows: 1fr 0fr; height: 100%; min-height: 0;
+    transition: grid-template-rows .42s cubic-bezier(.2,.8,.2,1); }
+  .np-view-player.active.q-up { grid-template-rows: auto 1fr; }
+  @media (prefers-reduced-motion: reduce) { .np-view-player.active { transition: none; } }
+
+  /* rest: cover near the top (clear of the header), controls parked at the BOTTOM. On q-up the
+     stage shrinks to content (outer row → auto) and the free space above the controls collapses,
+     so the whole control block slides up to sit right under the full-width cover. */
+  /* rest: a large near-full-width cover high up (below the header), title/artist left-aligned right
+     under it, then a big gap, and the controls parked at the BOTTOM. On q-up the stage shrinks to
+     content and that gap collapses, sliding the controls up to sit right under the full-width cover. */
+  .np-stage { min-height: 0; overflow: hidden; display: flex; flex-direction: column;
+    padding: calc(env(safe-area-inset-top) + 3.4rem) 0 calc(.6rem + env(safe-area-inset-bottom));
+    transition: padding .42s cubic-bezier(.2,.8,.2,1); }
+  .q-up .np-stage { padding-top: 0; padding-bottom: 0; }
+  .np-hero { flex: none; padding: 0 1.15rem; }
+  .q-up .np-hero { padding: 0; }
+  .np-stage .np-nowinfo { text-align: left; padding-top: 1rem; }   /* title right below the cover, left-aligned */
+  .np-stage .np-nowinfo-main { max-width: 100%; }
+  .np-stage .np-transport { margin-top: auto; }     /* the big gap: pushes seek + controls to the bottom */
+  .np-hero-cover { width: 100%; aspect-ratio: 1 / 1; height: auto; max-height: 58vh;
+    border-radius: .8rem; box-shadow: 0 10px 30px var(--sh-deep);
+    transition: width .42s cubic-bezier(.2,.8,.2,1), height .42s cubic-bezier(.2,.8,.2,1),
+      max-height .42s cubic-bezier(.2,.8,.2,1), border-radius .42s; }
+  .q-up .np-hero-cover { width: 100vw; aspect-ratio: auto; height: min(30vh, 280px); max-height: none;
+    border-radius: 0; box-shadow: none; }
+  .q-up .np-hero-cover::after { opacity: 1; }
+
+  /* the grip — swipe up / tap to reveal the queue; hidden once the queue is up */
+  .np-grip { display: flex; flex-direction: column; align-items: center; gap: .35rem;
+    border: 0; background: transparent; cursor: pointer; padding: .5rem 1rem calc(.4rem + env(safe-area-inset-bottom));
+    color: var(--text-3); touch-action: none; transition: opacity .2s; }
+  .np-grip-bar { width: 34px; height: 4px; border-radius: 2px; background: var(--text-3); opacity: .5; }
+  .np-grip-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; }
+  .np-grip:hover .np-grip-bar { opacity: .8; }
+  .q-up .np-grip { opacity: 0; pointer-events: none; height: 0; padding: 0; margin: 0; overflow: hidden; }
+
+  /* queue — collapsed (hidden) at rest; fills row 2 when up */
+  .np-queue-sheet { min-height: 0; overflow: hidden; opacity: 0; transition: opacity .3s .08s; }
+  .q-up .np-queue-sheet { opacity: 1; }
+  .np-queue-hd { border-top: 1px solid var(--rule); }
+
+  /* flat rows — no cards, no borders, sit flush on the page background (YouTube-Music-style) */
+  #q-history, #queue-list { padding-left: 0; padding-right: 0; }
+  #q-now { padding: 0; }
+  .q-row, .q-now-row, #q-history .q-row,
+  .q-item:hover .q-row, #q-history .q-item:hover .q-row { background: transparent; border-radius: 0; box-shadow: none;
+    grid-template-columns: 44px minmax(0,1fr) auto; gap: .8rem; padding: .5rem 1.15rem; }
+  .q-item, .q-item.dragging .q-row { border-radius: 0; box-shadow: none; }
+  .q-now-row { border-bottom: 0; margin-bottom: 0; }
+  .q-cover { width: 44px; height: 44px; }
+  .q-foot { border-top: 1px solid var(--rule); }
+}
 
 /* now-info — title (+ go-to-album chevron) and artist */
 .np-nowinfo { flex: none; padding: .7rem 1.15rem .1rem; text-align: center; }

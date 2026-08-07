@@ -222,6 +222,10 @@ permalink: /yura/
          <button class="np-c np-c-sm np-c-toggle" id="np2-loop" aria-label="Repeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></button>
        </div>
      </div>
+     <button class="np-grip" id="np-grip" type="button" aria-label="Show queue">
+       <span class="np-grip-bar"></span>
+       <span class="np-grip-label">Queue</span>
+     </button>
     </div>
     <div class="np-queue-sheet" id="np-queue-sheet">
      <div class="np-tabs" role="tablist" aria-label="Now playing panels">
@@ -375,15 +379,46 @@ permalink: /yura/
       });
     });
 
-    /* (c) Mobile: the cover zooms out to fill the width as the queue scrolls up (jitter-free,
-       constant height). The queue sits below the controls and never covers them. */
-    var scroller = document.getElementById('np-queue-scroll'), sheet = document.getElementById('queue-panel');
-    if (scroller && sheet) {
-      var RANGE = 150, ticking = false;
-      function apply(){ ticking = false; var p = Math.min(1, Math.max(0, scroller.scrollTop / RANGE)); sheet.style.setProperty('--np-p', p.toFixed(3)); }
-      scroller.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(apply); } }, { passive: true });
-      document.getElementById('queue-btn')?.addEventListener('click', function(){ scroller.scrollTop = 0; sheet.style.setProperty('--np-p', '0'); });
+    /* (c) Mobile: the player fills the screen at rest with NO queue. Swipe the grip up (or tap it) →
+       the cover fills the width and fades into the controls while the queue rises, anchored at the
+       current track (played tracks scroll up above it). Swipe/tap the cover down to go back. */
+    var playerView = document.getElementById('np-view-player'),
+        grip       = document.getElementById('np-grip'),
+        hero       = document.querySelector('.np-hero-cover'),
+        scroller   = document.getElementById('np-queue-scroll');
+    function qUp(){ return !!playerView && playerView.classList.contains('q-up'); }
+    function anchorQueue(){                                    // current track to the top; history above
+      if (!scroller) return;
+      var now = document.getElementById('q-now');
+      if (!now) { scroller.scrollTop = 0; return; }
+      var delta = now.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+      scroller.scrollTop = Math.max(0, scroller.scrollTop + delta - 4);
     }
+    window.__npEnterQueue = function(){
+      if (!playerView || qUp()) return;
+      playerView.classList.add('q-up');
+      setTimeout(anchorQueue, 430);                           // after the row-morph settles
+    };
+    window.__npExitQueue = function(){ if (playerView) playerView.classList.remove('q-up'); };
+    grip && grip.addEventListener('click', window.__npEnterQueue);
+    hero && hero.addEventListener('click', function(){ qUp() ? window.__npExitQueue() : window.__npEnterQueue(); });
+
+    /* vertical swipe: up anywhere on the stage opens the queue; down (when the queue is scrolled to
+       the top) closes it. Tracks a single touch and only acts past a small threshold. */
+    var stage = document.getElementById('np-stage'), y0 = null, tracking = false;
+    function onStart(e){ if (e.touches.length !== 1) return; y0 = e.touches[0].clientY; tracking = true; }
+    function onEnd(e){
+      if (!tracking || y0 == null) { tracking = false; return; }
+      var dy = (e.changedTouches[0].clientY - y0); tracking = false; y0 = null;
+      if (dy < -40 && !qUp()) window.__npEnterQueue();
+      else if (dy > 55 && qUp() && scroller && scroller.scrollTop <= 2) window.__npExitQueue();
+    }
+    [grip, stage].forEach(function(el){ if (!el) return;
+      el.addEventListener('touchstart', onStart, { passive: true });
+      el.addEventListener('touchend', onEnd, { passive: true });
+    });
+    scroller && scroller.addEventListener('touchstart', onStart, { passive: true });
+    scroller && scroller.addEventListener('touchend', onEnd, { passive: true });
   })();
 </script>
 <script src="/assets/js/lastfm.js"></script>
