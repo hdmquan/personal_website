@@ -736,7 +736,7 @@ body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
 
 /* played history — dimmed rows above the now-playing; tap to jump back */
 #q-history { list-style: none; margin: 0; padding: 0 .55rem; }
-#q-history .q-item { border-radius: .45rem; overflow: hidden; }
+#q-history .q-item { border-radius: 0; overflow: hidden; }
 #q-history .q-row { display: grid; grid-template-columns: 38px minmax(0,1fr); gap: .7rem; align-items: center;
   padding: .45rem .55rem; background: transparent; cursor: pointer; opacity: .5; transition: opacity .15s; }
 #q-history .q-item:hover .q-row { opacity: .85; background: var(--panel-inset); }
@@ -757,8 +757,9 @@ body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
 /* the queue list flows inside .np-queue-scroll — it is NOT its own scroll container (a nested
    scroller breaks touch/desktop scrolling); .np-queue-scroll owns the single scroll. */
 #queue-list { list-style: none; margin: 0; padding: .3rem .55rem .5rem; flex: none; min-height: 0; }
-/* each item: sliding row over a trash layer revealed on swipe-left */
-.q-item { position: relative; border-radius: .45rem; overflow: hidden; touch-action: pan-y; }
+/* each item: sliding row over a trash layer revealed on swipe-left. Square corners — a rounded
+   item with overflow:hidden bleeds a red fringe from the trash layer at the rounded edges. */
+.q-item { position: relative; border-radius: 0; overflow: hidden; touch-action: pan-y; }
 .q-del { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end;
   padding-right: 1.1rem; background: #d5352b; color: #fff; }
 .q-del svg { width: 18px; height: 18px; }
