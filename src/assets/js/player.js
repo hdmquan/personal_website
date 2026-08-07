@@ -30,6 +30,7 @@
   let loopMode = 0;             // 0 = off, 1 = loop all, 2 = loop one
   let sleepTimer = null, sleepEndOfTrack = false;   // sleep timer (queue panel)
   let queueMode = 'album';      // 'album' (continue to next album on end) | 'all'
+  let npScreen = false;         // the full-screen now-playing view is open (own route #np=ai.ti)
   let pendingSeek = null;       // currentTime to apply once metadata loads (restore)
   let shelfScroll = 0;          // remember scroll when entering an album
 
@@ -104,8 +105,8 @@
     controls.hidden = false;
     restoreSettings();
     renderShelf();
-    routeFromHash();
     restoreNowPlaying();
+    applyRoute();
   }).catch(() => { statLine.textContent = 'failed to load catalog'; shelf.innerHTML = '<p class="empty">failed to load.</p>'; });
 
   function restoreSettings() {
@@ -442,6 +443,9 @@
     highlightPlaying();
     renderQueue();
     saveNowPlaying();
+    // Keep the URL pointing at the current track so it stays shareable; replaceState avoids
+    // history spam on auto-advance and doesn't re-fire the router.
+    if (npScreen) { const h = trackHash(); if (location.hash.slice(1) !== h) history.replaceState(null, '', '#' + h); }
   }
 
   function stopPlayback() { queue = []; qi = -1; wantPlay = false; queueMode = 'album'; setPlayingUI(false); document.title = DEFAULT_TITLE; renderQueue(); save('np', null); }
@@ -637,15 +641,22 @@
 
   const queueBtn = document.getElementById('queue-btn');
   const queueOpen = () => !!queuePanel && queuePanel.classList.contains('open');
-  function openQueue() { if (!queuePanel) return; renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open'); }
-  function closeQueue() { if (!queuePanel) return; queuePanel.classList.remove('open'); queueBtn?.classList.remove('on'); document.body.classList.remove('np-open'); }
-  queueBtn?.addEventListener('click', e => { e.stopPropagation(); queueOpen() ? closeQueue() : openQueue(); });
-  document.getElementById('queue-close')?.addEventListener('click', closeQueue);
-  // close when tapping/clicking anywhere outside the panel (or scrolling the page behind it)
-  document.addEventListener('click', e => {
-    if (queueOpen() && !e.target.closest('#queue-panel') && !e.target.closest('#queue-btn') && !e.target.closest('#np-bar')) closeQueue();
-  });
-  window.addEventListener('scroll', () => { if (queueOpen()) closeQueue(); }, { passive: true });
+  // The now-playing screen is a real route: #np=<album>.<track> (shareable per track).
+  function trackHash() { const q = queue[qi]; return q ? ('np=' + q.ai + '.' + q.ti) : 'np'; }
+  function openQueue(pushHash) {
+    if (!queuePanel || !queue.length) return;
+    renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open');
+    npScreen = true;
+    if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
+  }
+  function closeQueue(popHash) {
+    if (!queuePanel) return;
+    queuePanel.classList.remove('open'); queueBtn?.classList.remove('on'); document.body.classList.remove('np-open');
+    npScreen = false;
+    if (popHash && /^#np/.test(location.hash)) location.hash = (view === 'album' && openAlbum >= 0) ? ('a=' + openAlbum) : '';
+  }
+  queueBtn?.addEventListener('click', e => { e.stopPropagation(); queueOpen() ? closeQueue(true) : openQueue(true); });
+  document.getElementById('queue-close')?.addEventListener('click', () => closeQueue(true));
 
   /* tap an upcoming item → jump to it (suppressed right after a swipe/drag) */
   let suppressClick = false;
@@ -763,11 +774,11 @@
     const li = trackList.querySelector(`.trk[data-ti="${q.ti}"]`);
     if (li) li.scrollIntoView({ block: 'center' });
   }
-  // Tapping the mini-player expands the now-playing sheet (YouTube-Music style).
-  npCover.addEventListener('click', () => { if (queue.length) openQueue(); });
-  $('.np-main')?.addEventListener('click', () => { if (queue.length) openQueue(); });
-  // "Jump to this album" moves onto the sheet's album line, preserving the old behaviour.
-  $('#np-hero-sub')?.addEventListener('click', () => { closeQueue(); jumpToCurrent(); });
+  // Tapping the mini-player opens the now-playing screen (its own route, YouTube-Music style).
+  npCover.addEventListener('click', () => openQueue(true));
+  $('.np-main')?.addEventListener('click', () => openQueue(true));
+  // "Jump to this album" moves onto the screen's album line, preserving the old behaviour.
+  $('#np-hero-sub')?.addEventListener('click', () => { closeQueue(true); jumpToCurrent(); });
 
   /* ── Toast ─────────────────────────────────────── */
   let toastT;
@@ -843,15 +854,30 @@
   let rzT; window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(applyMarquee, 150); });
 
   /* ── Routing ───────────────────────────────────── */
-  function routeFromHash() {
-    const m = location.hash.match(/a=(\d+)/);
-    if (m && ALB[+m[1]]) openAlbumView(+m[1]);
+  // Load a specific track paused (autoplay is blocked before a user gesture) — for shared #np links.
+  function cueTrack(ai, ti) {
+    queue = buildQueue(ai, false);
+    qi = queue.findIndex(x => x.ti === ti); if (qi < 0) qi = 0;
+    queueMode = 'album'; shuffle = false; syncShuffleBtn();
+    loadCurrent(false);
   }
-  window.addEventListener('hashchange', () => {
-    const m = location.hash.match(/a=(\d+)/);
-    if (m && ALB[+m[1]]) { if (openAlbum !== +m[1]) openAlbumView(+m[1]); }
+  function applyRoute() {
+    const h = location.hash;
+    const npm = h.match(/^#np(?:=(\d+)\.(\d+))?/);
+    if (npm) {                                   // now-playing screen (optionally a specific shared track)
+      if (npm[1] != null) {
+        const ai = +npm[1], ti = +npm[2], cur = queue[qi];
+        if (!(cur && cur.ai === ai && cur.ti === ti) && ALB[ai] && ALB[ai].tracks[ti]) cueTrack(ai, ti);
+      }
+      queue.length ? openQueue(false) : closeQueue(false);
+      return;
+    }
+    if (npScreen) closeQueue(false);             // navigated away from #np → leave the screen
+    const m = h.match(/a=(\d+)/);
+    if (m && ALB[+m[1]]) { if (openAlbum !== +m[1] || view !== 'album') openAlbumView(+m[1]); }
     else if (view === 'album') backToShelf();
-  });
+  }
+  window.addEventListener('hashchange', applyRoute);
 
   /* ── Dark mode ─────────────────────────────────── */
   $('#dark-toggle').addEventListener('click', () => {
@@ -872,7 +898,7 @@
       case 'p': case 'P': prev(); hint(); break;
       case 'm': case 'M': audio.muted = !audio.muted; npBar.classList.toggle('muted', audio.muted); hint(); break;
       case '/': e.preventDefault(); if (view==='shelf') searchEl.focus(); hint(); break;
-      case 'Escape': if (view === 'album') backToShelf(); break;
+      case 'Escape': if (npScreen) closeQueue(true); else if (view === 'album') backToShelf(); break;
     }
   });
 })();
