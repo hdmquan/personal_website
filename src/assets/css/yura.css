@@ -43,6 +43,10 @@ body { font-family: var(--mono); font-weight: 400; }
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
 }
 .search-wrap input { -webkit-user-select: text; user-select: text; }
+/* no blue tap flash on touch; text selection tinted to the gilt aesthetic (not browser blue) */
+* { -webkit-tap-highlight-color: transparent; }
+::selection { background: var(--gilt-soft); color: var(--text); }
+::-moz-selection { background: var(--gilt-soft); color: var(--text); }
 
 /* [hidden] must beat the id/class display rules below */
 #shelf[hidden], #album-view[hidden], .shelf-controls[hidden] { display: none !important; }
@@ -396,7 +400,7 @@ html, body { overscroll-behavior: none; }
 .ctx-item { border: 0; background: transparent; cursor: pointer; text-align: left; width: 100%;
   padding: .6rem .7rem; border-radius: .4rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .02em;
   color: var(--text-2); white-space: nowrap; transition: background .12s, color .12s; }
-.ctx-item:hover, .ctx-item:focus-visible { background: var(--panel-inset); color: var(--text); outline: none; }
+.ctx-item:hover, .ctx-item:focus-visible, .ctx-item.active { background: var(--panel-inset); color: var(--text); outline: none; }
 
 /* touch: suppress the native long-press callout / text selection on copy-target surfaces so our
    long-press menu is the only thing that appears (desktop keeps normal text selection) */

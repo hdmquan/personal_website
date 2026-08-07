@@ -1036,60 +1036,94 @@
     }
 
     // menu element
-    let menuEl;
-    function hideMenu(){ if (menuEl && !menuEl.hidden) { menuEl.hidden = true; menuEl.innerHTML = ''; menuEl._items = null; } }
-    function showMenu(x, y, items){
+    let menuEl, autoTimer = null;
+    function hideMenu(){
+      if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
+      if (menuEl && !menuEl.hidden) { menuEl.hidden = true; menuEl.innerHTML = ''; menuEl._items = null; }
+    }
+    function showMenu(x, y, items, viaTouch){
       if (!items.length) return;
       if (!menuEl) { menuEl = document.createElement('div'); menuEl.className = 'ctx-menu'; menuEl.setAttribute('role', 'menu'); menuEl.hidden = true; document.body.appendChild(menuEl); }
       menuEl._items = items;
       menuEl.innerHTML = items.map((it, i) => `<button class="ctx-item" type="button" role="menuitem" data-i="${i}">${esc(it.label)}</button>`).join('');
       menuEl.hidden = false;
       const mw = menuEl.offsetWidth, mh = menuEl.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
-      menuEl.style.left = Math.max(8, Math.min(x, vw - mw - 8)) + 'px';
-      menuEl.style.top  = Math.max(8, Math.min(y, vh - mh - 8)) + 'px';
-      const first = menuEl.querySelector('.ctx-item'); if (first) first.focus();
+      // touch opens the menu just above the finger (with a gap) so a straight lift dismisses and you
+      // must drag onto an item to pick it; mouse opens at the cursor.
+      let px = viaTouch ? (x - mw / 2) : x;
+      let py = viaTouch ? (y - mh - 14 >= 8 ? y - mh - 14 : y + 14) : y;
+      menuEl.style.left = Math.max(8, Math.min(px, vw - mw - 8)) + 'px';
+      menuEl.style.top  = Math.max(8, Math.min(py, vh - mh - 8)) + 'px';
+      if (!viaTouch) {                                   // mouse/keyboard: focus + auto-dismiss after 5s
+        const first = menuEl.querySelector('.ctx-item'); if (first) first.focus();
+        autoTimer = setTimeout(hideMenu, 5000);
+      }
+    }
+    // highlight the item under a point while dragging; return it
+    function itemAt(x, y){
+      if (!menuEl || menuEl.hidden) return null;
+      const el = document.elementFromPoint(x, y), it = el && el.closest ? el.closest('.ctx-item') : null;
+      menuEl.querySelectorAll('.ctx-item').forEach(b => b.classList.toggle('active', b === it));
+      return it;
+    }
+    function runItem(it){
+      const items = menuEl && menuEl._items, idx = it ? +it.dataset.i : -1;
+      hideMenu();
+      if (items && idx >= 0 && items[idx]) items[idx].run();
     }
 
-    // right-click (desktop)
+    // right-click (desktop) — click an item; auto-dismisses after 5s
     document.addEventListener('contextmenu', e => {
       const items = itemsFor(resolve(e.target));
       if (!items.length) { hideMenu(); return; }   // let the native menu show elsewhere
       e.preventDefault();
-      showMenu(e.clientX, e.clientY, items);
+      showMenu(e.clientX, e.clientY, items, false);
     });
 
-    // long-press (touch)
-    let lpTimer = null, lpXY = null, suppressTap = false;
+    // long-press (touch) — hold to open, drag onto an item, lift to choose (lift with nothing under
+    // the finger just dismisses). The menu lives only for the duration of the hold.
+    let lpTimer = null, lpXY = null, lpOpen = false, suppressTap = false;
     const clearLP = () => { if (lpTimer) { clearTimeout(lpTimer); lpTimer = null; } lpXY = null; };
     document.addEventListener('touchstart', e => {
       clearLP();
+      if (lpOpen) { lpOpen = false; hideMenu(); }
       if (e.touches.length !== 1) return;
       const items = itemsFor(resolve(e.target));
       if (!items.length) return;
       const tch = e.touches[0]; lpXY = { x: tch.clientX, y: tch.clientY };
       lpTimer = setTimeout(() => {
-        lpTimer = null; suppressTap = true;
+        lpTimer = null; lpOpen = true; suppressTap = true;
         if (navigator.vibrate) { try { navigator.vibrate(8); } catch (_) {} }
-        showMenu(lpXY.x, lpXY.y, items);
-      }, 480);
+        showMenu(lpXY.x, lpXY.y, items, true);
+      }, 450);
     }, { passive: true });
     document.addEventListener('touchmove', e => {
+      if (lpOpen) { if (e.cancelable) e.preventDefault(); const tch = e.touches[0]; if (tch) itemAt(tch.clientX, tch.clientY); return; }
       if (!lpXY) return;
       const tch = e.touches[0];
       if (Math.abs(tch.clientX - lpXY.x) > 10 || Math.abs(tch.clientY - lpXY.y) > 10) clearLP();
+    }, { passive: false });   // non-passive so scroll is locked while dragging in the menu
+    document.addEventListener('touchend', e => {
+      if (lpOpen) {
+        lpOpen = false;
+        const tch = e.changedTouches && e.changedTouches[0];
+        const el = tch ? document.elementFromPoint(tch.clientX, tch.clientY) : null;
+        runItem(el && el.closest ? el.closest('.ctx-item') : null);
+        return;
+      }
+      clearLP();
     }, { passive: true });
-    document.addEventListener('touchend', clearLP, { passive: true });
-    document.addEventListener('touchcancel', clearLP, { passive: true });
+    document.addEventListener('touchcancel', () => { clearLP(); if (lpOpen) { lpOpen = false; hideMenu(); } }, { passive: true });
     // swallow the click/tap that fires right after a long-press so it doesn't play/open
     document.addEventListener('click', e => {
       if (suppressTap) { suppressTap = false; e.stopPropagation(); e.preventDefault(); }
     }, true);
 
-    // menu interactions + dismissal
+    // menu interactions (mouse) + dismissal
     document.addEventListener('click', e => {
       if (!menuEl || menuEl.hidden) return;
       const it = e.target.closest('.ctx-item');
-      if (it && menuEl._items) { const item = menuEl._items[+it.dataset.i]; hideMenu(); if (item) item.run(); return; }
+      if (it) { runItem(it); return; }
       if (!e.target.closest('.ctx-menu')) hideMenu();
     });
     window.addEventListener('scroll', hideMenu, true);
