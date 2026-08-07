@@ -473,88 +473,135 @@ html, body { overscroll-behavior: none; }
 @keyframes marq { 0%,12%{ transform: translateX(0); } 88%,100%{ transform: translateX(var(--shift,0)); } }
 
 /* ── Queue panel ───────────────────────────────────*/
-/* Now-playing screen (own route #np=<album>.<track>, shareable): a full view — cover hero →
-   Up next / Lyrics tabs → the queue. Not an overlay; it replaces the browse page. Reuses the queue engine. */
+/* ============================================================================
+   Now-playing SCREEN (own route #np=<album>.<track>, shareable) — YouTube-Music-style.
+   Header = Player/Lyrics segmented toggle. The cover zooms out to fill the width as the
+   player view scrolls up (--np-p, set by a rAF scroll handler). In-screen transport; the
+   queue lives in the same scroll. Lyrics has a floating JP/Romaji/English selector.
+   Full screen; replaces the browse page. Reuses the queue engine (ids preserved).
+   ========================================================================== */
 #queue-panel.np-sheet {
-  position: fixed; z-index: 55; left: 0; right: 0; width: 100%;
-  top: 0; bottom: calc(4.9rem + env(safe-area-inset-bottom));         /* full screen; leaves room for the transport bar */
-  display: flex; flex-direction: column; align-items: center;
-  padding-top: max(.2rem, env(safe-area-inset-top));
+  --np-p: 0;                                    /* 0 at rest → 1 fully scrolled */
+  position: fixed; z-index: 55; inset: 0;
+  display: flex; flex-direction: column;
   background: var(--bg); overflow: hidden;
   transform: translateY(100%); visibility: hidden; pointer-events: none;
   transition: transform .34s cubic-bezier(.2,.8,.2,1), visibility .34s; }
 #queue-panel.np-sheet.open { transform: translateY(0); visibility: visible; pointer-events: auto; }
-.np-sheet-head, .np-hero, .np-tabs, #q-now, .q-foot { flex: none; }  /* fixed parts don't shrink; the list scrolls */
-.np-sheet-head, .np-hero, .np-tabs, .np-panels { width: 100%; }  /* fill the width — flat, edge-to-edge screen */
-body.np-open { overflow: hidden; }                                   /* it's a screen — freeze + hide the page behind it */
+body.np-open { overflow: hidden; }              /* it's a screen — freeze + hide everything behind it */
 body.np-open #yura-page { visibility: hidden; }
-body.np-open #home-btn, body.np-open #dark-toggle { display: none; }
-/* on the now-playing screen the transport docks flat to the bottom edge — full-width, no float/pill */
-body.np-open #np-bar { left: 0; right: 0; bottom: 0; width: 100%; max-width: none; transform: none;
-  border-radius: 0; border: 0; border-top: 1px solid var(--gilt-hair); box-shadow: none;
-  padding-bottom: calc(.65rem + env(safe-area-inset-bottom)); }
-/* the queue rows + footer flatten to edge-to-edge list rows too — nothing floats on this screen */
-body.np-open #queue-list, body.np-open #q-now { padding: 0; }
+body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { display: none; }
+@media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: visibility .01s; } }
+
+/* header — collapse chevron · Player/Lyrics toggle · spacer */
+.np-sheet-head { flex: none; display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;
+  padding: max(.3rem, env(safe-area-inset-top)) .55rem .35rem; }
+.np-icon-btn { border: 0; background: transparent; cursor: pointer; color: var(--text-2);
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; transition: color .15s, background .15s; }
+.np-icon-btn:hover { color: var(--accent); background: var(--panel-inset); }
+.np-icon-btn svg { width: 24px; height: 24px; }
+.np-seg { justify-self: center; display: inline-flex; gap: 2px; padding: 3px; border-radius: 2rem; background: var(--panel-inset); }
+.np-seg-btn { border: 0; background: transparent; cursor: pointer; color: var(--text-3);
+  width: 54px; height: 34px; border-radius: 2rem; display: grid; place-items: center; transition: background .18s, color .18s; }
+.np-seg-btn svg { width: 19px; height: 19px; }
+.np-seg-btn.active { background: var(--panel-raised); color: var(--accent); box-shadow: 0 1px 3px var(--sh); }
+
+/* views */
+.np-views { flex: 1 1 0; min-height: 0; display: flex; }
+.np-view { flex: 1 1 0; min-width: 0; display: none; flex-direction: column; }
+.np-view.active { display: flex; }
+.np-view[hidden] { display: none; }
+
+/* PLAYER view — one scroll region; the cover morphs via --np-p */
+.np-top { flex: none; }
+.np-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+.np-hero { display: grid; place-items: center; background: var(--bg); padding: 1rem 0 .2rem; }
+.np-hero-cover {                                 /* zooms out to fill the width on scroll (constant height → no jitter) */
+  position: relative; overflow: hidden; background: var(--panel-inset);
+  width: calc(66vw + (100vw - 66vw) * var(--np-p));
+  max-width: calc(300px + (2000px - 300px) * var(--np-p));
+  height: min(66vw, 300px);
+  border-radius: calc(.8rem * (1 - var(--np-p)));
+  box-shadow: 0 calc(14px * (1 - var(--np-p))) 34px var(--sh-deep); }
+.np-hero-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
+.np-hero-cover img.loaded { opacity: 1; }
+
+/* now-info — title (+ go-to-album chevron) and artist */
+.np-nowinfo { flex: none; padding: .85rem 1.15rem .2rem; text-align: center; }
+.np-nowinfo-main { display: inline-flex; align-items: center; gap: .3rem; max-width: 100%;
+  border: 0; background: transparent; cursor: pointer; padding: 0; color: var(--text); }
+.np-hero-title { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; line-height: 1.25; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.np-nowinfo-chev { width: 20px; height: 20px; color: var(--text-3); flex: none; }
+.np-nowinfo-main:hover .np-hero-title, .np-nowinfo-main:hover .np-nowinfo-chev { color: var(--accent); }
+.np-hero-artist { margin: .2rem 0 0; font-family: var(--mono); font-size: .8rem; letter-spacing: .03em; color: var(--text-3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* transport — seek + big controls */
+.np-transport { flex: none; padding: .6rem 1.15rem .3rem; }
+.np-seekrow { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .7rem; }
+.np-time { font-family: var(--mono); font-size: .66rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.np-seek2 { position: relative; height: 18px; display: flex; align-items: center; cursor: pointer; touch-action: none; }
+.np-seek2::before { content: ""; position: absolute; left: 0; right: 0; height: 3px; border-radius: 2px; background: var(--panel-inset); }
+.np-seek2-fill { position: absolute; left: 0; height: 3px; border-radius: 2px; background: var(--accent); width: 0; }
+.np-seek2-thumb { position: absolute; left: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--accent);
+  transform: translateX(-50%); box-shadow: 0 1px 3px var(--sh-deep); }
+.np-controls { display: flex; align-items: center; justify-content: space-between; gap: .4rem; padding: .9rem .2rem .2rem; }
+.np-c { position: relative; border: 0; background: transparent; cursor: pointer; color: var(--text);
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; transition: color .15s, transform .08s; }
+.np-c:active { transform: scale(.92); }
+.np-c svg { width: 30px; height: 30px; }
+.np-c-sm { color: var(--text-3); } .np-c-sm svg { width: 24px; height: 24px; }
+.np-c-sm:hover { color: var(--text); }
+.np-c-toggle.on { color: var(--accent); }
+.np-c-toggle.on::after { content: ""; width: 3px; height: 3px; border-radius: 50%; background: var(--accent);
+  position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); }
+#np2-loop.one::after { content: "1"; width: auto; height: auto; background: none; font-family: var(--mono);
+  font-size: .5rem; font-weight: 500; color: var(--accent); bottom: 4px; }
+.np-c-play { width: 66px; height: 66px; background: var(--text); color: var(--bg); }
+.np-c-play svg { width: 30px; height: 30px; }
+.np-c-play:hover { box-shadow: 0 6px 20px var(--sh-deep); }
+body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
+
+/* playing-from line */
+.np-fromline { flex: none; margin: 0; padding: .35rem 1.15rem 1.1rem; font-family: var(--mono); font-size: .62rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
+.np-fromline b { color: var(--text-2); font-weight: 500; }
+
+/* queue shares the player scroll — do not nest a second scroller */
+body.np-open #queue-list { flex: none; overflow: visible; padding: 0; }
+body.np-open #q-now { padding: 0; }
 body.np-open .q-item { border-radius: 0; }
-body.np-open .q-now-row, body.np-open .q-row { border-radius: 0; padding: .6rem 1.1rem; }
+body.np-open .q-now-row, body.np-open .q-row { border-radius: 0; padding: .6rem 1.15rem; }
 body.np-open .q-now-row { margin-bottom: 0; }
 body.np-open .q-item:not(:last-child) .q-row { border-bottom: 1px solid var(--rule); }
 body.np-open .q-foot { padding: 0; gap: 0; border-top: 1px solid var(--rule); }
-body.np-open .q-fbtn { border-radius: 0; background: transparent; padding: .9rem .3rem; }
+body.np-open .q-fbtn { border-radius: 0; background: transparent; padding: .95rem .3rem; }
 body.np-open .q-fbtn:not(:last-child) { border-right: 1px solid var(--rule); }
-@media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: visibility .01s; } }
-@media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: opacity .01s, visibility .01s; } }
 
-/* header — collapse chevron + centred eyebrow */
-.np-sheet-head { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: .5rem .55rem .1rem; }
-.np-sheet-head .q-sub { margin: 0; text-align: center; font-family: var(--mono); font-size: .58rem; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#queue-close { border: 0; background: transparent; cursor: pointer; color: var(--text-2);
-  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; }
-#queue-close svg { width: 22px; height: 22px; }
-#queue-close:hover { color: var(--accent); background: var(--panel-inset); }
-
-/* hero — large cover, title, album link */
-.np-hero { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .5rem; padding: .25rem 1.2rem .7rem; }
-.np-hero-cover { width: clamp(140px, 32dvh, 300px); aspect-ratio: 1; border-radius: .7rem; overflow: hidden;
-  background: var(--panel-inset); box-shadow: 0 12px 32px var(--sh-deep), inset 0 0 0 1px var(--rule); }
-.np-hero-cover img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
-.np-hero-cover img.loaded { opacity: 1; }
-.np-hero-title { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 1.2rem; line-height: 1.25; color: var(--text);
-  max-width: 100%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.np-hero-sub { border: 0; background: transparent; cursor: pointer; padding: .15rem .35rem; border-radius: .4rem; max-width: 100%;
-  font-family: var(--mono); font-size: .72rem; letter-spacing: .03em; color: var(--text-3);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .15s; }
-.np-hero-sub:hover { color: var(--accent); }
-
-/* tabs — Up next / Lyrics with a sliding gilt underline */
-.np-tabs { position: relative; display: flex; gap: .15rem; padding: 0 .9rem; border-bottom: 1px solid var(--rule); }
-.np-tab { border: 0; background: transparent; cursor: pointer; padding: .55rem .85rem; min-height: 44px;
-  font-family: var(--mono); font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3);
-  transition: color .15s; }
-.np-tab:hover { color: var(--text-2); }
-.np-tab.active { color: var(--text); }
-.np-tab-ink { position: absolute; bottom: -1px; left: 0; height: 2px; width: 0; background: var(--accent);
-  transition: transform .25s cubic-bezier(.2,.8,.2,1), width .25s cubic-bezier(.2,.8,.2,1); }
-@media (prefers-reduced-motion: reduce) { .np-tab-ink { transition: none; } }
-
-/* panels */
-.np-panels { position: relative; flex: 1 1 0; min-height: 0; display: flex; }
-.np-panel { display: none; flex-direction: column; flex: 1 1 0; min-height: 0; width: 100%; }
-.np-panel.active { display: flex; }
-.np-panel[hidden] { display: none; }
-
-/* lyrics — empty state (feature lands later) */
-.np-lyrics-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; gap: .55rem; padding: 2rem 1.5rem; }
+/* LYRICS view — scroll + floating JP/Romaji/English selector */
+.np-view-lyrics { position: relative; }
+.np-lyrics-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  padding: 1rem 1.4rem calc(4.6rem + env(safe-area-inset-bottom)); }
+.np-lyrics-empty { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: .55rem; }
 .np-lyrics-empty svg { width: 34px; height: 34px; color: var(--gilt-soft); }
 .np-lyrics-empty p { margin: 0; font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--text-2); }
 .np-lyrics-empty span { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; color: var(--text-3); }
+.np-lang { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(1rem + env(safe-area-inset-bottom));
+  display: inline-flex; gap: 2px; padding: 4px; border-radius: 2rem; background: var(--panel-raised);
+  border: 1px solid var(--gilt-hair); box-shadow: 0 8px 26px var(--sh-deep); }
+.np-lang-btn { border: 0; background: transparent; cursor: pointer; color: var(--text-3); padding: .45rem .95rem; border-radius: 2rem;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .04em; transition: background .15s, color .15s; }
+.np-lang-btn.active { background: var(--accent); color: var(--bg); }
+body.dark-mode .np-lang-btn.active { color: #16140e; }
 
-/* mobile */
-@media (max-width: 560px) {
-  #queue-panel.np-sheet { bottom: calc(4.4rem + env(safe-area-inset-bottom)); }
-  .np-hero-cover { width: clamp(160px, 38dvh, 320px); }
+/* desktop — centre the content column; hold the cover steady (no scroll-zoom) */
+@media (min-width: 640px) {
+  .np-hero, .np-nowinfo, .np-transport, .np-fromline, #q-now, #queue-list, .q-foot { width: 100%; max-width: 620px; margin-inline: auto; }
+  .np-hero { position: static; padding: 1.2rem 0 .4rem; }
+  .np-hero-cover { width: 300px; max-width: 300px; height: 300px; max-height: 300px; border-radius: .8rem; }
 }
 
 /* now-playing row (pinned, not reorderable) */

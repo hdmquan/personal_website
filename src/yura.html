@@ -178,28 +178,54 @@ permalink: /yura/
 
 <div id="queue-panel" class="np-sheet" role="region" aria-label="Now playing">
   <div class="np-sheet-head">
-    <button id="queue-close" aria-label="Collapse now playing" title="Collapse">
+    <button id="queue-close" class="np-icon-btn" aria-label="Collapse now playing" title="Collapse">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
     </button>
-    <p class="q-sub" id="q-sub"></p>
-    <span class="np-sheet-head-sp" aria-hidden="true"></span>
+    <div class="np-seg" role="tablist" aria-label="View">
+      <button class="np-seg-btn active" id="np-seg-song" data-view="song" role="tab" aria-selected="true" aria-label="Player">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3z"/></svg>
+      </button>
+      <button class="np-seg-btn" id="np-seg-lyrics" data-view="lyrics" role="tab" aria-selected="false" aria-label="Lyrics" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h9M4 17h7"/><path d="M16 15l2.2 2.2L23 12"/></svg>
+      </button>
+    </div>
+    <span class="np-icon-btn" aria-hidden="true"></span>
   </div>
 
-  <div class="np-hero">
-    <div class="np-hero-cover sk"><img id="np-hero-img" alt="" decoding="async" onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/></div>
-    <p class="np-hero-title" id="np-hero-title">—</p>
-    <button class="np-hero-sub" id="np-hero-sub" type="button" aria-label="Go to this album">—</button>
-  </div>
-
-  <div class="np-tabs" role="tablist" aria-label="Now playing views">
-    <button class="np-tab active" id="np-tab-upnext" role="tab" aria-selected="true" aria-controls="np-panel-upnext" data-tab="upnext">Up next</button>
-    <button class="np-tab" id="np-tab-lyrics" role="tab" aria-selected="false" aria-controls="np-panel-lyrics" data-tab="lyrics" tabindex="-1">Lyrics</button>
-    <span class="np-tab-ink" aria-hidden="true"></span>
-  </div>
-
-  <div class="np-panels">
-   <div class="np-panel active" id="np-panel-upnext" role="tabpanel" aria-labelledby="np-tab-upnext">
-    <div id="q-now"></div>
+  <div class="np-views">
+   <section class="np-view np-view-player active" id="np-view-player">
+    <div class="np-top">
+     <div class="np-hero" id="np-hero">
+       <div class="np-hero-cover sk"><img id="np-hero-img" alt="" decoding="async" onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/></div>
+     </div>
+     <div class="np-nowinfo">
+       <button class="np-nowinfo-main" id="np-hero-sub" type="button" aria-label="Go to this album">
+         <span class="np-hero-title" id="np-hero-title">—</span>
+         <svg class="np-nowinfo-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+       </button>
+       <p class="np-hero-artist" id="np-hero-artist">—</p>
+     </div>
+     <div class="np-transport">
+       <div class="np-seekrow">
+         <span class="np-time" id="np2-cur">0:00</span>
+         <div class="np-seek2" id="np2-seek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="np-seek2-fill" id="np2-fill"></div><div class="np-seek2-thumb" id="np2-thumb"></div></div>
+         <span class="np-time" id="np2-dur">0:00</span>
+       </div>
+       <div class="np-controls">
+         <button class="np-c np-c-sm np-c-toggle" id="np2-shuffle" aria-label="Shuffle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg></button>
+         <button class="np-c" id="np2-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6v12l-9-6z"/></svg></button>
+         <button class="np-c np-c-play" id="np2-play" aria-label="Play/pause">
+           <svg class="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+           <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+         </button>
+         <button class="np-c" id="np2-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6l9 6-9 6z"/></svg></button>
+         <button class="np-c np-c-sm np-c-toggle" id="np2-loop" aria-label="Repeat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></button>
+       </div>
+     </div>
+     <p class="np-fromline">Playing from <b id="np-from">—</b></p>
+    </div>
+    <div class="np-scroll" id="np-scroll">
+     <div id="q-now"></div>
     <ol id="queue-list"></ol>
     <div class="q-foot">
     <button class="q-fbtn" id="q-shuffle" aria-label="Shuffle queue">
@@ -222,14 +248,22 @@ permalink: /yura/
       </div>
     </div>
     </div>
-   </div>
-   <div class="np-panel" id="np-panel-lyrics" role="tabpanel" aria-labelledby="np-tab-lyrics" hidden>
-     <div class="np-lyrics-empty">
-       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-       <p>Lyrics aren&rsquo;t available yet.</p>
-       <span>They&rsquo;ll appear here once transcribed.</span>
+    </div>
+   </section>
+   <section class="np-view np-view-lyrics" id="np-view-lyrics" hidden>
+     <div class="np-lyrics-scroll" id="np-lyrics-scroll">
+       <div class="np-lyrics-empty">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+         <p>Lyrics aren&rsquo;t available yet.</p>
+         <span>They&rsquo;ll appear here once added.</span>
+       </div>
      </div>
-   </div>
+     <div class="np-lang" role="tablist" aria-label="Lyrics language">
+       <button class="np-lang-btn active" data-lang="jp" role="tab" aria-selected="true">日本語</button>
+       <button class="np-lang-btn" data-lang="romaji" role="tab" aria-selected="false" tabindex="-1">Romaji</button>
+       <button class="np-lang-btn" data-lang="en" role="tab" aria-selected="false" tabindex="-1">English</button>
+     </div>
+   </section>
   </div>
 </div>
 
@@ -276,38 +310,49 @@ permalink: /yura/
   })();
 </script>
 <script>
-  /* Now-playing sheet tabs (Up next / Lyrics). Pure UI — the queue engine owns the panels' content.
-     The sliding ink underline is positioned from the active tab so it needs no fixed widths. */
+  /* Now-playing screen UI — pure presentation; the queue engine (player.js) owns playback + queue.
+     (a) Player / Lyrics segmented toggle in the header.
+     (b) Lyrics language selector (JP / Romaji / English) — the pill is wired; content lands later.
+     (c) Scroll-morph: the cover zooms out to fill the width as the player view scrolls up. */
   (function(){
-    var tabs = Array.prototype.slice.call(document.querySelectorAll('.np-tab')),
-        ink  = document.querySelector('.np-tab-ink');
-    if (!tabs.length) return;
-    function moveInk(t){ if (ink && t){ ink.style.width = t.offsetWidth + 'px'; ink.style.transform = 'translateX(' + t.offsetLeft + 'px)'; } }
-    function select(name, focus){
-      tabs.forEach(function(t){
-        var on = t.dataset.tab === name;
-        t.classList.toggle('active', on);
-        t.setAttribute('aria-selected', String(on));
-        t.tabIndex = on ? 0 : -1;
-        var panel = document.getElementById('np-panel-' + t.dataset.tab);
-        if (panel){ panel.classList.toggle('active', on); panel.hidden = !on; }
-        if (on){ moveInk(t); if (focus) t.focus(); }
+    /* (a) Player ⇄ Lyrics */
+    var seg = Array.prototype.slice.call(document.querySelectorAll('.np-seg-btn')),
+        views = { song: document.getElementById('np-view-player'), lyrics: document.getElementById('np-view-lyrics') };
+    function showView(name, focus){
+      seg.forEach(function(b){
+        var on = b.dataset.view === name;
+        b.classList.toggle('active', on); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
+        if (on && focus) b.focus();
       });
+      Object.keys(views).forEach(function(k){ var v = views[k]; if (!v) return; var on = k === name; v.classList.toggle('active', on); v.hidden = !on; });
     }
-    tabs.forEach(function(t, i){
-      t.addEventListener('click', function(){ select(t.dataset.tab, false); });
-      t.addEventListener('keydown', function(e){
-        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-        e.preventDefault();
-        var n = (i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
-        select(tabs[n].dataset.tab, true);
+    seg.forEach(function(b, i){
+      b.addEventListener('click', function(){ showView(b.dataset.view, false); });
+      b.addEventListener('keydown', function(e){
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; e.preventDefault();
+        showView(seg[(i + (e.key === 'ArrowRight' ? 1 : seg.length - 1)) % seg.length].dataset.view, true);
       });
     });
-    // Ink needs a correct starting position once fonts settle and when the sheet first opens.
-    window.addEventListener('load', function(){ var a = document.querySelector('.np-tab.active'); if (a) moveInk(a); });
-    document.getElementById('queue-btn')?.addEventListener('click', function(){
-      requestAnimationFrame(function(){ var a = document.querySelector('.np-tab.active'); if (a) moveInk(a); });
+
+    /* (b) Lyrics language */
+    var langs = Array.prototype.slice.call(document.querySelectorAll('.np-lang-btn'));
+    langs.forEach(function(b){
+      b.addEventListener('click', function(){
+        langs.forEach(function(x){ var on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+        /* content swap will read data-lang when lyrics exist */
+      });
     });
+
+    /* (c) Scroll-morph — drives --np-p (0 at rest → 1 fully scrolled). CSS interpolates the cover.
+       rAF-throttled; respects reduced-motion by simply not animating (the value still clamps). */
+    var scroller = document.getElementById('np-scroll'), sheet = document.getElementById('queue-panel');
+    if (scroller && sheet){
+      var RANGE = 220, ticking = false;
+      function apply(){ ticking = false; var p = Math.min(1, Math.max(0, scroller.scrollTop / RANGE)); sheet.style.setProperty('--np-p', p.toFixed(3)); }
+      scroller.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(apply); } }, { passive: true });
+      /* reset when the screen (re)opens */
+      document.getElementById('queue-btn')?.addEventListener('click', function(){ scroller.scrollTop = 0; sheet.style.setProperty('--np-p', '0'); });
+    }
   })();
 </script>
 <script src="/assets/js/lastfm.js"></script>

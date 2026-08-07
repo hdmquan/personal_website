@@ -431,7 +431,10 @@
     // Mirror into the expanded now-playing sheet's hero (optional elements — no-op if absent).
     const heroImg = $('#np-hero-img'); if (heroImg && heroImg.src !== a.cover_url) { heroImg.classList.remove('loaded'); heroImg.src = a.cover_url; }
     const heroT = $('#np-hero-title'); if (heroT) heroT.textContent = disp(t) + (t.instrumental ? ' (inst)' : '');
-    const heroS = $('#np-hero-sub'); if (heroS) heroS.textContent = a.title + ' · ' + a.year;
+    const heroA = $('#np-hero-artist'); if (heroA) heroA.textContent = a.artist || ART.name || '';
+    const npFrom = $('#np-from'); if (npFrom) npFrom.textContent = a.title;
+    const np2c = $('#np2-cur'); if (np2c) np2c.textContent = '0:00';
+    const np2d = $('#np2-dur'); if (np2d) np2d.textContent = fmt(t.dur || 0);
     setPct(0); setBuf(0);
     document.title = DEFAULT_TITLE + ' | ' + a.title;
     applyMarquee();
@@ -502,6 +505,9 @@
     }
     if (seeking || !audio.duration) return;
     setPct(audio.currentTime / audio.duration * 100);
+    const c2 = document.getElementById('np2-cur'), d2 = document.getElementById('np2-dur');
+    if (c2) c2.textContent = fmt(audio.currentTime);
+    if (d2) d2.textContent = fmt(effectiveDur());
     updatePositionState();
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.tick(scrobbleMeta, audio.currentTime, audio.duration);
     if ((npSaveT = (npSaveT + 1) % 20) === 0) saveNowPlaying();   // persist position ~every 20 ticks
@@ -525,12 +531,18 @@
     else audio.play().catch(() => {});                         // buffering / interrupted mid-track → nudge resume
   }, 2500);
 
-  function setPct(p){ npFill.style.width=p+'%'; npThumb.style.left=p+'%'; npSeek.setAttribute('aria-valuenow', Math.round(p)); }
+  function setPct(p){ npFill.style.width=p+'%'; npThumb.style.left=p+'%'; npSeek.setAttribute('aria-valuenow', Math.round(p));
+    const f=document.getElementById('np2-fill'), th=document.getElementById('np2-thumb');
+    if(f) f.style.width=p+'%'; if(th) th.style.left=p+'%'; }
   function setBuf(p){ npBuf.style.width=p+'%'; }
   function setPlayingUI(playing) {
     npPlay.classList.toggle('playing', playing);
     npPlay.querySelector('.i-play').style.display  = playing ? 'none' : '';
     npPlay.querySelector('.i-pause').style.display = playing ? '' : 'none';
+    const p2 = document.getElementById('np2-play');
+    if (p2) { p2.classList.toggle('playing', playing);
+      p2.querySelector('.i-play').style.display = playing ? 'none' : '';
+      p2.querySelector('.i-pause').style.display = playing ? '' : 'none'; }
     npBar.classList.toggle('is-playing', playing);
     if ('mediaSession' in navigator) navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
     highlightPlaying();
@@ -559,7 +571,8 @@
   npPlay.addEventListener('click', togglePlay);
   $('#np-next').addEventListener('click', next);
   $('#np-prev').addEventListener('click', prev);
-  function syncShuffleBtn() { const b = document.getElementById('np-shuffle'); if (b) b.classList.toggle('on', shuffle); }
+  function syncShuffleBtn() { const b = document.getElementById('np-shuffle'); if (b) b.classList.toggle('on', shuffle);
+    document.getElementById('np2-shuffle')?.classList.toggle('on', shuffle); }
   function toggleShuffle() {
     shuffle = !shuffle; syncShuffleBtn();
     if (queue.length) {
@@ -594,7 +607,10 @@
   syncInstBtn();
 
   const loopBtn = document.getElementById('np-loop');
-  function syncLoopBtn() { if (!loopBtn) return; loopBtn.classList.toggle('on', loopMode > 0); loopBtn.classList.toggle('one', loopMode === 2);
+  function syncLoopBtn() {
+    const l2 = document.getElementById('np2-loop');
+    if (l2) { l2.classList.toggle('on', loopMode > 0); l2.classList.toggle('one', loopMode === 2); }
+    if (!loopBtn) return; loopBtn.classList.toggle('on', loopMode > 0); loopBtn.classList.toggle('one', loopMode === 2);
     loopBtn.setAttribute('aria-label', ['Loop off','Loop all','Loop one'][loopMode]); loopBtn.title = ['Loop off','Loop all','Loop one'][loopMode]; }
   loopBtn?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
 
@@ -605,6 +621,22 @@
   applyVol(85);
   volSlider.addEventListener('input', () => { applyVol(+volSlider.value); saveSettings(); });
   $('#np-mute').addEventListener('click', () => { audio.muted = !audio.muted; npBar.classList.toggle('muted', audio.muted); saveSettings(); });
+
+  /* ── In-screen (full player) transport — mirrors the mini-bar; every element optional ── */
+  $('#np2-play')?.addEventListener('click', togglePlay);
+  $('#np2-prev')?.addEventListener('click', prev);
+  $('#np2-next')?.addEventListener('click', next);
+  $('#np2-shuffle')?.addEventListener('click', toggleShuffle);
+  $('#np2-loop')?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
+  const np2Seek = $('#np2-seek'), np2Fill = $('#np2-fill'), np2Thumb = $('#np2-thumb');
+  if (np2Seek) {
+    const to = cx => { const r = np2Seek.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (cx - r.left) / r.width));
+      if (np2Fill) np2Fill.style.width = (p*100) + '%'; if (np2Thumb) np2Thumb.style.left = (p*100) + '%';
+      np2Seek.setAttribute('aria-valuenow', Math.round(p*100)); return p; };
+    np2Seek.addEventListener('pointerdown', e => { if (!effectiveDur()) return; seeking = true; try { np2Seek.setPointerCapture(e.pointerId); } catch (_) {} to(e.clientX); });
+    np2Seek.addEventListener('pointermove', e => { if (seeking) to(e.clientX); });
+    np2Seek.addEventListener('pointerup', e => { if (!seeking) return; const p = to(e.clientX); seeking = false; applySeek(p * effectiveDur()); });
+  }
 
   /* ── Queue panel (Spotify-style: pinned now-playing + reorderable/removable upcoming) ── */
   const queuePanel = document.getElementById('queue-panel'), queueList = document.getElementById('queue-list'),
@@ -647,6 +679,10 @@
     if (!queuePanel || !queue.length) return;
     renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open');
     npScreen = true;
+    // open on the player view, scrolled to top (cover un-zoomed)
+    const sc = document.getElementById('np-scroll'); if (sc) sc.scrollTop = 0;
+    queuePanel.style.setProperty('--np-p', '0');
+    document.getElementById('np-seg-song')?.click();
     if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
   }
   function closeQueue(popHash) {
