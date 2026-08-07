@@ -226,8 +226,14 @@ permalink: /yura/
     </div>
     <div class="np-queue-sheet" id="np-queue-sheet">
      <button class="np-sheet-grip" id="np-sheet-grip" type="button" aria-label="Hide queue"><span></span></button>
+     <div class="np-tabs" role="tablist" aria-label="Now playing panels">
+       <button class="np-tab active" id="np-tab-upnext" data-webtab="upnext" role="tab" aria-selected="true">Up next</button>
+       <button class="np-tab" id="np-tab-lyrics" data-webtab="lyrics" role="tab" aria-selected="false" tabindex="-1">Lyrics</button>
+       <button class="np-tab np-tab-off" type="button" disabled aria-disabled="true">Comments</button>
+       <button class="np-tab np-tab-off" type="button" disabled aria-disabled="true">Related</button>
+     </div>
      <div class="np-queue-scroll" id="np-queue-scroll">
-     <p class="np-queue-hd">Queue<b id="np-from"></b></p>
+     <p class="np-queue-hd">Queue</p>
      <div id="q-now"></div>
     <ol id="queue-list"></ol>
     <div class="q-foot">
@@ -252,6 +258,18 @@ permalink: /yura/
     </div>
     </div>
     </div>
+     <div class="np-sheet-lyrics" id="np-sheet-lyrics" hidden>
+       <div class="np-lyrics-empty">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+         <p>Lyrics aren&rsquo;t available yet.</p>
+         <span>They&rsquo;ll appear here once added.</span>
+       </div>
+       <div class="np-lang" role="tablist" aria-label="Lyrics language">
+         <button class="np-lang-btn active" data-lang="jp" role="tab" aria-selected="true">日本語</button>
+         <button class="np-lang-btn" data-lang="romaji" role="tab" aria-selected="false" tabindex="-1">Romaji</button>
+         <button class="np-lang-btn" data-lang="en" role="tab" aria-selected="false" tabindex="-1">English</button>
+       </div>
+     </div>
     </div>
    </section>
    <section class="np-view np-view-lyrics" id="np-view-lyrics" hidden>
@@ -338,12 +356,25 @@ permalink: /yura/
       });
     });
 
-    /* (b) Lyrics language */
-    var langs = Array.prototype.slice.call(document.querySelectorAll('.np-lang-btn'));
-    langs.forEach(function(b){
+    /* (b) Lyrics language — scoped to its own pill (mobile view + web sheet have separate ones) */
+    Array.prototype.forEach.call(document.querySelectorAll('.np-lang-btn'), function(b){
       b.addEventListener('click', function(){
-        langs.forEach(function(x){ var on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+        Array.prototype.forEach.call(b.parentNode.querySelectorAll('.np-lang-btn'), function(x){
+          var on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1;
+        });
         /* content swap will read data-lang when lyrics exist */
+      });
+    });
+
+    /* (d) Web tabs (Up next / Lyrics) — tablet & desktop only. Switch the side panel between the
+       queue and the lyrics while the cover stays put (YouTube-web behaviour). */
+    var webtabs = Array.prototype.slice.call(document.querySelectorAll('.np-tab[data-webtab]')),
+        qpanel = document.getElementById('queue-panel');
+    webtabs.forEach(function(t){
+      t.addEventListener('click', function(){
+        var name = t.dataset.webtab;
+        webtabs.forEach(function(x){ var on = x === t; x.classList.toggle('active', on); x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+        if (qpanel) qpanel.classList.toggle('show-lyrics', name === 'lyrics');
       });
     });
 

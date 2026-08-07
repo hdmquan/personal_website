@@ -679,8 +679,8 @@
     if (!queuePanel || !queue.length) return;
     renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open');
     npScreen = true;
-    // open on the player view, in the collapsed (queue-down) state
-    queuePanel.classList.remove('q-up');
+    // open on the player view, in the collapsed (queue-down) state, queue tab (not lyrics)
+    queuePanel.classList.remove('q-up'); queuePanel.classList.remove('show-lyrics');
     const qs = document.getElementById('np-queue-scroll'); if (qs) qs.scrollTop = 0;
     document.getElementById('np-seg-song')?.click();
     if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
