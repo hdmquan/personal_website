@@ -1003,12 +1003,13 @@
     }
 
     // text builders (read live state)
-    const trackName = (ai, ti) => { const a = ALB[ai], t = a && a.tracks && a.tracks[ti]; return t ? disp(t) : ''; };
+    // copy uses the FULL title (keeps the "[Instrumental]" suffix) — disp() strips it for display only
+    const trackName = (ai, ti) => { const a = ALB[ai], t = a && a.tracks && a.tracks[ti]; return t ? t.title : ''; };
     const albumName = ai => { const a = ALB[ai]; return a ? a.title : ''; };
     function albumDetail(ai){
       const a = ALB[ai]; if (!a) return '';
       const date = fmtDate(a.date || a.year) || '';
-      const lines = (a.tracks || []).map((t, i) => `${t.track != null && t.track !== '' ? t.track : (i + 1)}. ${disp(t)}`);
+      const lines = (a.tracks || []).map((t, i) => `${t.track != null && t.track !== '' ? t.track : (i + 1)}. ${t.title}`);
       return [a.title, date, '', ...lines].join('\n').replace(/\n{3,}/g, '\n\n');
     }
 
@@ -1046,6 +1047,8 @@
       if (!menuEl) { menuEl = document.createElement('div'); menuEl.className = 'ctx-menu'; menuEl.setAttribute('role', 'menu'); menuEl.hidden = true; document.body.appendChild(menuEl); }
       menuEl._items = items;
       menuEl.innerHTML = items.map((it, i) => `<button class="ctx-item" type="button" role="menuitem" data-i="${i}">${esc(it.label)}</button>`).join('');
+      // measure while invisible, position, THEN reveal — so it never paints at the wrong spot first
+      menuEl.style.visibility = 'hidden';
       menuEl.hidden = false;
       const mw = menuEl.offsetWidth, mh = menuEl.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
       // touch opens the menu just above the finger (with a gap) so a straight lift dismisses and you
@@ -1054,6 +1057,7 @@
       let py = viaTouch ? (y - mh - 14 >= 8 ? y - mh - 14 : y + 14) : y;
       menuEl.style.left = Math.max(8, Math.min(px, vw - mw - 8)) + 'px';
       menuEl.style.top  = Math.max(8, Math.min(py, vh - mh - 8)) + 'px';
+      menuEl.style.visibility = '';
       if (!viaTouch) {                                   // mouse/keyboard: focus + auto-dismiss after 5s
         const first = menuEl.querySelector('.ctx-item'); if (first) first.focus();
         autoTimer = setTimeout(hideMenu, 5000);
@@ -1072,8 +1076,17 @@
       if (items && idx >= 0 && items[idx]) items[idx].run();
     }
 
-    // right-click (desktop) — click an item; auto-dismisses after 5s
+    // track the pointer type so a touch long-press (which ALSO fires contextmenu on Android / device
+    // emulation) doesn't double-trigger the menu — the touch flow owns it there.
+    let lastTouch = false;
+    document.addEventListener('pointerdown', e => { lastTouch = e.pointerType === 'touch'; }, true);
+
+    // right-click (mouse) — click an item; auto-dismisses after 5s
     document.addEventListener('contextmenu', e => {
+      if (lastTouch || lpOpen) {                    // touch long-press handles its own menu
+        if (itemsFor(resolve(e.target)).length) e.preventDefault();   // still suppress the native menu
+        return;
+      }
       const items = itemsFor(resolve(e.target));
       if (!items.length) { hideMenu(); return; }   // let the native menu show elsewhere
       e.preventDefault();
@@ -1126,8 +1139,9 @@
       if (it) { runItem(it); return; }
       if (!e.target.closest('.ctx-menu')) hideMenu();
     });
-    window.addEventListener('scroll', hideMenu, true);
-    window.addEventListener('resize', hideMenu);
+    // don't let incidental scroll (iOS URL-bar animation, momentum) dismiss the touch menu mid-hold
+    window.addEventListener('scroll', () => { if (!lpOpen) hideMenu(); }, true);
+    window.addEventListener('resize', () => { if (!lpOpen) hideMenu(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') hideMenu(); });
 
     // inline copy buttons + click-to-copy the album name (album view; capture so it beats play)
