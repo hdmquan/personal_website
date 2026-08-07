@@ -485,7 +485,7 @@ html, body { overscroll-behavior: none; }
   transition: transform .34s cubic-bezier(.2,.8,.2,1), visibility .34s; }
 #queue-panel.np-sheet.open { transform: translateY(0); visibility: visible; pointer-events: auto; }
 .np-sheet-head, .np-hero, .np-tabs, #q-now, .q-foot { flex: none; }  /* fixed parts don't shrink; the list scrolls */
-.np-sheet-head, .np-hero, .np-tabs, .np-panels { width: 100%; max-width: 680px; }  /* centre content on wide screens */
+.np-sheet-head, .np-hero, .np-tabs, .np-panels { width: 100%; }  /* fill the width — flat, edge-to-edge screen */
 body.np-open { overflow: hidden; }                                   /* it's a screen — freeze + hide the page behind it */
 body.np-open #yura-page { visibility: hidden; }
 body.np-open #home-btn, body.np-open #dark-toggle { display: none; }
@@ -493,6 +493,15 @@ body.np-open #home-btn, body.np-open #dark-toggle { display: none; }
 body.np-open #np-bar { left: 0; right: 0; bottom: 0; width: 100%; max-width: none; transform: none;
   border-radius: 0; border: 0; border-top: 1px solid var(--gilt-hair); box-shadow: none;
   padding-bottom: calc(.65rem + env(safe-area-inset-bottom)); }
+/* the queue rows + footer flatten to edge-to-edge list rows too — nothing floats on this screen */
+body.np-open #queue-list, body.np-open #q-now { padding: 0; }
+body.np-open .q-item { border-radius: 0; }
+body.np-open .q-now-row, body.np-open .q-row { border-radius: 0; padding: .6rem 1.1rem; }
+body.np-open .q-now-row { margin-bottom: 0; }
+body.np-open .q-item:not(:last-child) .q-row { border-bottom: 1px solid var(--rule); }
+body.np-open .q-foot { padding: 0; gap: 0; border-top: 1px solid var(--rule); }
+body.np-open .q-fbtn { border-radius: 0; background: transparent; padding: .9rem .3rem; }
+body.np-open .q-fbtn:not(:last-child) { border-right: 1px solid var(--rule); }
 @media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: visibility .01s; } }
 @media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: opacity .01s, visibility .01s; } }
 
