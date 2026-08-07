@@ -645,6 +645,27 @@ body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
 .np-queue-hd { margin: 0; padding: .5rem 1.15rem .4rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .16em;
   text-transform: uppercase; color: var(--text-2); }
 
+/* ── Lyrics view (full-screen on mobile) + the shared JP / Romaji / English selector ── */
+.np-view-lyrics { position: relative; }
+.np-lyrics-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  display: flex; flex-direction: column;
+  padding: calc(env(safe-area-inset-top) + 3.6rem) 1.4rem calc(5rem + env(safe-area-inset-bottom)); }
+.np-lyrics-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: .6rem; }
+.np-lyrics-empty svg { width: 40px; height: 40px; color: var(--gilt-soft); }
+.np-lyrics-empty p { margin: 0; font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--text-2); }
+.np-lyrics-empty span { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; color: var(--text-3); }
+
+/* floating pill selector (shared by the mobile lyrics view and the web lyrics sheet) */
+.np-lang { position: absolute; left: 50%; bottom: calc(1.1rem + env(safe-area-inset-bottom)); transform: translateX(-50%);
+  z-index: 5; display: inline-flex; gap: 2px; padding: 3px; border-radius: 2rem;
+  background: var(--panel-raised); box-shadow: 0 4px 18px var(--sh-deep); border: 1px solid var(--gilt-hair); }
+.np-lang-btn { border: 0; background: transparent; cursor: pointer; white-space: nowrap; height: 32px; padding: 0 .85rem;
+  border-radius: 2rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .04em; color: var(--text-3);
+  display: inline-flex; align-items: center; transition: background .18s, color .18s; }
+.np-lang-btn:hover { color: var(--text); }
+.np-lang-btn.active { background: var(--panel-inset); color: var(--accent); }
+
 /* ═══ Tablet & desktop: YouTube-web layout — cover · top tabs · queue · transport bar ═══ */
 @media (min-width: 760px) {
   /* the transport bar returns flat at the bottom; no in-screen controls */
