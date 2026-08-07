@@ -537,11 +537,10 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
 /* ═══ Mobile: full-screen player at rest (NO queue). Swipe the grip up → cover fills the width and
    fades into the controls, and the queue rises anchored at the current track. ═══ */
 @media (max-width: 759px) {
-  /* two-state: row1 = player, row2 = queue. Animating grid-template-rows drives the whole morph. */
-  .np-view-player.active { display: grid; grid-template-rows: 1fr 0fr; height: 100%; min-height: 0;
-    transition: grid-template-rows .42s cubic-bezier(.2,.8,.2,1); }
-  .np-view-player.active.q-up { grid-template-rows: auto 1fr; }
-  @media (prefers-reduced-motion: reduce) { .np-view-player.active { transition: none; } }
+  /* two-state: player (flex:1, fills) + queue (flex-basis animates 0 → 46vh). grid-template-rows
+     can't be transitioned in every engine (Chromium/older iOS Safari freeze it), but flex-basis is
+     a plain length and animates everywhere, so the queue rises and the player shrinks smoothly. */
+  .np-view-player.active { display: flex; flex-direction: column; height: 100%; min-height: 0; }
 
   /* rest: cover near the top (clear of the header), controls parked at the BOTTOM. On q-up the
      stage shrinks to content (outer row → auto) and the free space above the controls collapses,
@@ -549,15 +548,15 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
   /* rest: a large near-full-width cover high up (below the header), title/artist left-aligned right
      under it, then a big gap, and the controls parked at the BOTTOM. On q-up the stage shrinks to
      content and that gap collapses, sliding the controls up to sit right under the full-width cover. */
-  .np-stage { min-height: 0; overflow: hidden; display: flex; flex-direction: column;
+  .np-stage { flex: 1 1 auto; min-height: 0; overflow: hidden; display: flex; flex-direction: column;
     padding: calc(env(safe-area-inset-top) + 3.4rem) 0 calc(.6rem + env(safe-area-inset-bottom));
     transition: padding .42s cubic-bezier(.2,.8,.2,1); }
   .q-up .np-stage { padding-top: 0; padding-bottom: 0; }
-  .np-hero { flex: none; padding: 0 1.15rem; }
+  .np-hero { flex: none; padding: 1.15rem 1.15rem 0; }
   .q-up .np-hero { padding: 0; }
   .np-stage .np-nowinfo { text-align: left; padding-top: 1rem; }   /* title right below the cover, left-aligned */
   .np-stage .np-nowinfo-main { max-width: 100%; }
-  .np-stage .np-transport { margin-top: auto; }     /* the big gap: pushes seek + controls to the bottom */
+  .np-stage .np-transport { margin-bottom: auto; }   /* free space sits below the controls; grip at the very bottom */
   .np-hero-cover { width: 100%; aspect-ratio: 1 / 1; height: auto; max-height: 58vh;
     border-radius: .8rem; box-shadow: 0 10px 30px var(--sh-deep);
     transition: width .42s cubic-bezier(.2,.8,.2,1), height .42s cubic-bezier(.2,.8,.2,1),
@@ -568,28 +567,37 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
 
   /* the grip — swipe up / tap to reveal the queue; hidden once the queue is up */
   .np-grip { display: flex; flex-direction: column; align-items: center; gap: .35rem;
-    border: 0; background: transparent; cursor: pointer; padding: .5rem 1rem calc(.4rem + env(safe-area-inset-bottom));
+    border: 0; background: transparent; cursor: pointer; padding: .5rem 1rem calc(1rem + env(safe-area-inset-bottom));
     color: var(--text-3); touch-action: none; transition: opacity .2s; }
   .np-grip-bar { width: 34px; height: 4px; border-radius: 2px; background: var(--text-3); opacity: .5; }
   .np-grip-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; }
   .np-grip:hover .np-grip-bar { opacity: .8; }
   .q-up .np-grip { opacity: 0; pointer-events: none; height: 0; padding: 0; margin: 0; overflow: hidden; }
 
-  /* queue — collapsed (hidden) at rest; fills row 2 when up */
-  .np-queue-sheet { min-height: 0; overflow: hidden; opacity: 0; transition: opacity .3s .08s; }
-  .q-up .np-queue-sheet { opacity: 1; }
+  /* queue — collapsed (flex-basis 0) at rest; animates up to 46vh when the grip is swiped up.
+     Scoped under .np-view-player so it beats the base .np-queue-sheet flex rule later in the file. */
+  .np-view-player .np-queue-sheet { flex: 0 0 0px; min-height: 0; overflow: hidden; opacity: 0;
+    transition: flex-basis .42s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+  .np-view-player.q-up .np-queue-sheet { flex-basis: 46vh; opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .np-view-player .np-queue-sheet { transition: opacity .1s; } }
   .np-queue-hd { border-top: 1px solid var(--rule); }
 
+  /* single scroll container — #queue-list must NOT have its own overflow (nested scrollers break
+     touch scrolling on iOS). .np-queue-scroll owns the scroll; the list just flows inside it.
+     (Scoped under .np-queue-sheet so these outrank the base rules that appear later in the file.) */
+  .np-queue-sheet #queue-list { overflow: visible; flex: none; padding-left: 0; padding-right: 0; }
+  .np-queue-scroll { touch-action: pan-y; }
+  .np-queue-sheet #q-history { padding-left: 0; padding-right: 0; }
+  .np-queue-sheet #q-now { padding: 0; }
+
   /* flat rows — no cards, no borders, sit flush on the page background (YouTube-Music-style) */
-  #q-history, #queue-list { padding-left: 0; padding-right: 0; }
-  #q-now { padding: 0; }
-  .q-row, .q-now-row, #q-history .q-row,
-  .q-item:hover .q-row, #q-history .q-item:hover .q-row { background: transparent; border-radius: 0; box-shadow: none;
+  .np-queue-sheet .q-row, .np-queue-sheet .q-now-row, .np-queue-sheet #q-history .q-row,
+  .np-queue-sheet .q-item:hover .q-row { background: var(--bg); border-radius: 0; box-shadow: none;
     grid-template-columns: 44px minmax(0,1fr) auto; gap: .8rem; padding: .5rem 1.15rem; }
-  .q-item, .q-item.dragging .q-row { border-radius: 0; box-shadow: none; }
-  .q-now-row { border-bottom: 0; margin-bottom: 0; }
-  .q-cover { width: 44px; height: 44px; }
-  .q-foot { border-top: 1px solid var(--rule); }
+  .np-queue-sheet .q-item, .np-queue-sheet .q-item.dragging .q-row { border-radius: 0; box-shadow: none; }
+  .np-queue-sheet .q-now-row { border-bottom: 0; margin-bottom: 0; }
+  .np-queue-sheet .q-cover { width: 44px; height: 44px; }
+  .np-queue-sheet .q-foot { display: none; }        /* remove shuffle / repeat / timer footer on mobile */
 }
 
 /* now-info — title (+ go-to-album chevron) and artist */
@@ -604,7 +612,7 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* transport — seek + big controls */
-.np-transport { flex: none; padding: .4rem 1.15rem .2rem; }
+.np-transport { flex: none; padding: 1rem 1.15rem .2rem; }
 .np-seekrow { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .7rem; }
 .np-time { font-family: var(--mono); font-size: .66rem; color: var(--text-3); font-variant-numeric: tabular-nums; }
 .np-seek2 { position: relative; height: 18px; display: flex; align-items: center; cursor: pointer; touch-action: none; }

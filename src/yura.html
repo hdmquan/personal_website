@@ -389,6 +389,8 @@ permalink: /yura/
     function qUp(){ return !!playerView && playerView.classList.contains('q-up'); }
     function anchorQueue(){                                    // current track to the top; history above
       if (!scroller) return;
+      // iOS: force the scroll container to recompute its scrollable area after the grid-rows animation
+      scroller.style.overflowY = 'hidden'; void scroller.offsetHeight; scroller.style.overflowY = '';
       var now = document.getElementById('q-now');
       if (!now) { scroller.scrollTop = 0; return; }
       var delta = now.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
@@ -405,20 +407,20 @@ permalink: /yura/
 
     /* vertical swipe: up anywhere on the stage opens the queue; down (when the queue is scrolled to
        the top) closes it. Tracks a single touch and only acts past a small threshold. */
+    /* Swipe only on the grip + the player stage (cover/controls) — NEVER on the queue scroller, so
+       queue scrolling stays fully native. Up opens; down (on the banner) closes. */
     var stage = document.getElementById('np-stage'), y0 = null, tracking = false;
     function onStart(e){ if (e.touches.length !== 1) return; y0 = e.touches[0].clientY; tracking = true; }
     function onEnd(e){
       if (!tracking || y0 == null) { tracking = false; return; }
       var dy = (e.changedTouches[0].clientY - y0); tracking = false; y0 = null;
       if (dy < -40 && !qUp()) window.__npEnterQueue();
-      else if (dy > 55 && qUp() && scroller && scroller.scrollTop <= 2) window.__npExitQueue();
+      else if (dy > 50 && qUp()) window.__npExitQueue();
     }
     [grip, stage].forEach(function(el){ if (!el) return;
       el.addEventListener('touchstart', onStart, { passive: true });
       el.addEventListener('touchend', onEnd, { passive: true });
     });
-    scroller && scroller.addEventListener('touchstart', onStart, { passive: true });
-    scroller && scroller.addEventListener('touchend', onEnd, { passive: true });
   })();
 </script>
 <script src="/assets/js/lastfm.js"></script>
