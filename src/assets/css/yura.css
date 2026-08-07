@@ -489,6 +489,10 @@ html, body { overscroll-behavior: none; }
 body.np-open { overflow: hidden; }                                   /* it's a screen — freeze + hide the page behind it */
 body.np-open #yura-page { visibility: hidden; }
 body.np-open #home-btn, body.np-open #dark-toggle { display: none; }
+/* on the now-playing screen the transport docks flat to the bottom edge — full-width, no float/pill */
+body.np-open #np-bar { left: 0; right: 0; bottom: 0; width: 100%; max-width: none; transform: none;
+  border-radius: 0; border: 0; border-top: 1px solid var(--gilt-hair); box-shadow: none;
+  padding-bottom: calc(.65rem + env(safe-area-inset-bottom)); }
 @media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: visibility .01s; } }
 @media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: opacity .01s, visibility .01s; } }
 
