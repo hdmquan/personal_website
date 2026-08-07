@@ -396,6 +396,7 @@ permalink: /yura/
       var delta = now.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
       scroller.scrollTop = Math.max(0, scroller.scrollTop + delta - 4);
     }
+    window.__npAnchorQueue = anchorQueue;   // player.js calls this from openQueue (web + tablet start at the current track)
     window.__npEnterQueue = function(){
       if (!playerView || qUp()) return;
       playerView.classList.add('q-up');

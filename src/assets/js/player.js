@@ -706,6 +706,8 @@
     document.getElementById('np-view-player')?.classList.remove('q-up');
     const qs = document.getElementById('np-queue-scroll'); if (qs) qs.scrollTop = 0;
     document.getElementById('np-seg-song')?.click();
+    // start the queue at the currently-playing track (web/tablet show it immediately; mobile re-anchors on swipe-up)
+    requestAnimationFrame(() => window.__npAnchorQueue && window.__npAnchorQueue());
     if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
   }
   function closeQueue(popHash) {
