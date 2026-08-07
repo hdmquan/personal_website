@@ -691,6 +691,14 @@ body.dark-mode .np-lang-btn.active { color: #16140e; }
   .np-hero-cover { width: min(100%, 620px); }
 }
 
+/* played history — dimmed rows above the now-playing; tap to jump back */
+#q-history { list-style: none; margin: 0; padding: 0 .55rem; }
+#q-history .q-item { border-radius: .45rem; overflow: hidden; }
+#q-history .q-row { display: grid; grid-template-columns: 38px minmax(0,1fr); gap: .7rem; align-items: center;
+  padding: .45rem .55rem; background: transparent; cursor: pointer; opacity: .5; transition: opacity .15s; }
+#q-history .q-item:hover .q-row { opacity: .85; background: var(--panel-inset); }
+body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
+
 /* now-playing row (pinned, not reorderable) */
 #q-now { padding: 0 .55rem; }
 .q-now-row { display: grid; grid-template-columns: 38px minmax(0,1fr) auto; gap: .7rem; align-items: center;

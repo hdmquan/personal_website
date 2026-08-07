@@ -21,8 +21,11 @@
   let ALB = [];
   let view = 'shelf';
   let openAlbum = -1;
-  let queue = [];
+  let queue = [];               // the live window: capped history · now · upcoming
   let qi = -1;
+  let stream = [];              // full ordered backing list (sort order, or shuffled) the window slides over
+  let streamStart = 0;         // index in `stream` of queue[0]
+  const Q_AHEAD = 30, Q_BEHIND = 30;   // rolling window — keep ~30 upcoming (auto-extend) and ~30 played
   let shuffle = false;
   let seeking = false;
   let wantPlay = false;         // user *intends* playback (for interruption resume)
@@ -49,7 +52,7 @@
   let npSaveT = 0;
   function saveNowPlaying() {
     if (!queue.length || qi < 0) { save('np', null); return; }
-    save('np', { q: queue.map(x => [x.ai, x.ti]), qi, mode: queueMode, t: Math.floor(audio.currentTime || 0) });
+    save('np', { q: queue.map(x => [x.ai, x.ti]), qi, sh: shuffle, t: Math.floor(audio.currentTime || 0) });
   }
 
   /* ── Elements ──────────────────────────────────── */
@@ -123,7 +126,14 @@
     queue = np.q.filter(([ai, ti]) => ALB[ai] && ALB[ai].tracks[ti]).map(([ai, ti]) => ({ ai, ti, inst: !!ALB[ai].tracks[ti].instrumental }));
     if (!queue.length) return;
     qi = Math.min(Math.max(np.qi|0, 0), queue.length - 1);
-    queueMode = np.mode === 'all' ? 'all' : 'album';
+    shuffle = !!np.sh; syncShuffleBtn();
+    // Rebuild the backing stream so playback can auto-extend past the saved window. When shuffled
+    // (order can't be reproduced) the saved window itself becomes the stream.
+    const cur = queue[qi];
+    if (!shuffle) {
+      const s = eligibleStream(); const idx = s.findIndex(x => keyOf(x) === keyOf(cur));
+      if (idx >= 0 && idx - qi >= 0) { stream = s; streamStart = idx - qi; } else { stream = queue.slice(); streamStart = 0; }
+    } else { stream = queue.slice(); streamStart = 0; }
     loadCurrent(false, np.t || 0);   // restore paused at saved position; user taps play to resume
   }
 
@@ -349,60 +359,66 @@
     if (respectFilter && excludeInst) q = q.filter(x => !x.inst);
     return q;
   }
+  // The whole discography as one flat track list, in the current sort/filter order — the backing
+  // list a queue slides over so playback continues seamlessly past the end of an album.
+  function eligibleStream() {
+    const s = [];
+    sortedIndices().forEach(ai => buildQueue(ai, true).forEach(x => s.push(x)));
+    return s;
+  }
+  // Point the window at `startIdx` in `full`: current at qi=0, ~Q_AHEAD upcoming, no history yet.
+  function setWindow(full, startIdx) {
+    stream = full; streamStart = Math.max(0, Math.min(startIdx, full.length - 1));
+    queue = stream.slice(streamStart, streamStart + 1 + Q_AHEAD); qi = 0;
+  }
+  // After qi moves: top up the upcoming side to ~Q_AHEAD and trim history to ~Q_BEHIND.
+  function reconcileWindow() {
+    if (!stream.length) return;
+    const target = Math.min(stream.length - streamStart, qi + 1 + Q_AHEAD);
+    while (queue.length < target) queue.push(stream[streamStart + queue.length]);
+    if (qi > Q_BEHIND) { const r = qi - Q_BEHIND; queue.splice(0, r); streamStart += r; qi -= r; }
+  }
+  const keyOf = x => x.ai + '.' + x.ti;
 
   function playAlbumFrom(ai, ti, shuffled, respectFilter) {
-    shuffle = !!shuffled; queueMode = 'album';
-    let q = buildQueue(ai, respectFilter);
-    // If the tapped track was filtered out (an instrumental while instrumentals are hidden), add
-    // just THAT track back so it still plays — the rest of the album stays filtered. Previously a
-    // track click built a fully unfiltered queue, so instrumentals played even with the filter on.
-    if (respectFilter && ti != null && !q.some(x => x.ti === ti) && ALB[ai].tracks[ti]) {
-      q.push({ ai, ti, inst: !!ALB[ai].tracks[ti].instrumental });
-      q.sort((a, b) => a.ti - b.ti);
+    shuffle = !!shuffled;
+    const track = (ALB[ai] && ALB[ai].tracks[ti]) ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
+    if (shuffle) {                                   // shuffle button on an album → that album, shuffled
+      let q = buildQueue(ai, respectFilter); if (!q.length) q = buildQueue(ai, false);
+      shuf(q);
+      if (track) { const k = q.findIndex(x => x.ti === ti); if (k > 0) { q.splice(k, 1); q.unshift(track); } else if (k < 0) q.unshift(track); }
+      setWindow(q, 0);
+    } else {                                          // normal → continuous stream in sort order from here
+      const s = eligibleStream();
+      let idx = s.findIndex(x => x.ai === ai && x.ti === ti);
+      if (idx < 0 && track) { let ins = s.findIndex(y => y.ai === ai); if (ins < 0) ins = 0; s.splice(ins, 0, track); idx = ins; }
+      setWindow(s, idx < 0 ? 0 : idx);
     }
-    if (!q.length) q = buildQueue(ai, false);   // filter left nothing → play the album unfiltered
-    queue = q;
-    if (shuffle) shuf(queue);
-    qi = queue.findIndex(x => x.ti === ti);
-    if (qi < 0) qi = 0;
     syncShuffleBtn();
     loadCurrent(true);
   }
 
-  // Turning instrumentals OFF must also drop them from whatever is queued right now, not just
-  // future plays. Keep the current track if it's vocal; if it's itself an instrumental, advance
-  // to the next vocal. Leaves the queue alone if removing instrumentals would empty it.
+  // Turning instrumentals off drops them from the live window/stream too; if the current track was
+  // an instrumental, resume at the nearest surviving track.
   function pruneInstFromQueue() {
     if (!excludeInst || !queue.length) return;
-    const pruned = queue.filter(x => !x.inst);
-    if (pruned.length === queue.length || !pruned.length) return;
     const cur = queue[qi];
-    if (cur && !cur.inst) {                       // current track survives → keep playing it
-      queue = pruned;
-      qi = queue.findIndex(x => x.ai === cur.ai && x.ti === cur.ti);
-      if (qi < 0) qi = 0;
-      renderQueue(); saveNowPlaying();
-    } else {                                      // current track is an instrumental being removed
-      let target = null;
+    let target = cur;
+    if (cur && cur.inst) {
+      target = null;
       for (let j = qi + 1; j < queue.length; j++) if (!queue[j].inst) { target = queue[j]; break; }
-      if (!target) target = pruned[0];
-      queue = pruned;
-      qi = queue.findIndex(x => x.ai === target.ai && x.ti === target.ti);
-      if (qi < 0) qi = 0;
-      renderQueue(); loadCurrent(true);
+      if (!target) for (let j = qi - 1; j >= 0; j--) if (!queue[j].inst) { target = queue[j]; break; }
     }
+    const s = shuffle ? stream.filter(x => !x.inst) : eligibleStream();
+    let idx = target ? s.findIndex(x => keyOf(x) === keyOf(target)) : -1;
+    setWindow(s, idx < 0 ? 0 : idx);
+    if (cur && !cur.inst) { renderQueue(); saveNowPlaying(); } else loadCurrent(true);
   }
 
   function shuffleAll() {
-    const q = [];
-    ALB.forEach((a, ai) => (a.tracks||[]).forEach((t, ti) => {
-      if (!(a.release_types || ['albums']).includes(releaseType)) return;
-      if (genreFilter && !(t.genres||[]).includes(genreFilter)) return;
-      if (excludeInst && t.instrumental) return;
-      q.push({ ai, ti, inst: !!t.instrumental });
-    }));
-    if (!q.length) return;
-    queue = shuf(q); qi = 0; shuffle = true; queueMode = 'all'; syncShuffleBtn();
+    const s = eligibleStream(); if (!s.length) return;
+    shuf(s); shuffle = true; syncShuffleBtn();
+    setWindow(s, 0);
     loadCurrent(true);
   }
 
@@ -451,22 +467,14 @@
     if (npScreen) { const h = trackHash(); if (location.hash.slice(1) !== h) history.replaceState(null, '', '#' + h); }
   }
 
-  function stopPlayback() { queue = []; qi = -1; wantPlay = false; queueMode = 'album'; setPlayingUI(false); document.title = DEFAULT_TITLE; renderQueue(); save('np', null); }
+  function stopPlayback() { queue = []; qi = -1; stream = []; streamStart = 0; wantPlay = false; setPlayingUI(false); document.title = DEFAULT_TITLE; renderQueue(); save('np', null); }
 
   function next() {
-    if (qi < queue.length - 1) { qi++; loadCurrent(true); return; }
-    if (loopMode === 1) { qi = 0; loadCurrent(true); return; }            // loop all → wrap
-    if (queueMode === 'album') {                                          // continuous: next album in current sort order
-      const order = sortedIndices(), cur = queue[qi] ? queue[qi].ai : openAlbum;
-      const pos = order.indexOf(cur);
-      for (let k = pos + 1; k < order.length; k++) {
-        const nq = buildQueue(order[k], true);
-        if (nq.length) { queue = nq; qi = 0; shuffle = false; syncShuffleBtn(); loadCurrent(true); return; }
-      }
-    }
+    if (stream.length && streamStart + qi + 1 < stream.length) { qi++; reconcileWindow(); loadCurrent(true); return; }
+    if (loopMode === 1 && stream.length) { setWindow(stream, 0); loadCurrent(true); return; }   // loop all → wrap
     stopPlayback();
   }
-  function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; loadCurrent(true); } }
+  function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; reconcileWindow(); loadCurrent(true); } }
 
   /* ── Audio events ──────────────────────────────── */
   audio.addEventListener('play',  () => setPlayingUI(true));
@@ -575,16 +583,14 @@
     document.getElementById('np2-shuffle')?.classList.toggle('on', shuffle); }
   function toggleShuffle() {
     shuffle = !shuffle; syncShuffleBtn();
-    if (queue.length) {
+    if (queue.length && stream.length) {
       const cur = queue[qi];
-      if (shuffle) {
-        shuf(queue);
-        const k = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
-        [queue[0], queue[k]] = [queue[k], queue[0]]; qi = 0;
-      } else {
-        queue.sort((a, b) => a.ai === b.ai ? a.ti - b.ti : a.ai - b.ai);   // restore source order
-        qi = queue.findIndex(q => q.ai === cur.ai && q.ti === cur.ti);
-      }
+      const played = queue.slice(0, qi);                                  // keep what's already been played
+      const seen = new Set(queue.slice(0, qi + 1).map(keyOf));
+      let rest = eligibleStream().filter(x => !seen.has(keyOf(x)));       // everything not yet played, in sort order
+      if (shuffle) shuf(rest);                                            // ...shuffled, or left in order
+      stream = played.concat([cur], rest); streamStart = 0; qi = played.length;
+      queue = stream.slice(0, qi + 1 + Q_AHEAD); reconcileWindow();
       renderQueue(); saveNowPlaying();
     }
     syncQFoot(); saveSettings();
@@ -646,10 +652,19 @@
     ? `<img class="q-cover" src="${esc(a.cover_url)}" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"/>`
     : '<span class="q-cover"></span>';
 
+  const qHistory = document.getElementById('q-history');
   function renderQueue() {
     if (!queueList) return;
     const cur = queue[qi];
     if (qSub) qSub.textContent = cur ? ('Playing · ' + (ALB[cur.ai] ? ALB[cur.ai].title : '')) : '';
+    // played history (above the now-playing) — dimmed, tap to jump back; not reorderable
+    if (qHistory) {
+      let h = '';
+      for (let i = 0; i < qi; i++) { const q = queue[i], a = ALB[q.ai], t = a.tracks[q.ti];
+        h += `<li class="q-item q-played" data-i="${i}"><div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${esc(disp(t))}</span><span class="q-a">${esc(a.title)}</span></span></div></li>`;
+      }
+      qHistory.innerHTML = h;
+    }
     if (qNow) {
       if (cur) { const a = ALB[cur.ai], t = a.tracks[cur.ti];
         qNow.innerHTML = `<div class="q-now-row">${qCover(a)}<span class="q-meta"><span class="q-t">${esc(disp(t))}</span><span class="q-a">${esc(a.title)}</span></span><span class="q-now-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>`;
@@ -668,8 +683,13 @@
     syncQFoot();
   }
 
-  // upcoming-only edits keep qi fixed (everything acted on is after the current track)
-  function removeFromQueue(i) { if (i <= qi || i >= queue.length) return; queue.splice(i, 1); renderQueue(); saveNowPlaying(); }
+  // upcoming-only edits keep qi fixed (everything acted on is after the current track); mirror to the stream
+  function removeFromQueue(i) { if (i <= qi || i >= queue.length) return;
+    queue.splice(i, 1); if (stream.length) stream.splice(streamStart + i, 1);
+    reconcileWindow(); renderQueue(); saveNowPlaying(); }
+  // tap a played track (history) → jump back to it
+  qHistory?.addEventListener('click', e => { const li = e.target.closest('.q-item'); if (!li) return;
+    qi = +li.dataset.i; reconcileWindow(); loadCurrent(true); });
 
   const queueBtn = document.getElementById('queue-btn');
   const queueOpen = () => !!queuePanel && queuePanel.classList.contains('open');
@@ -763,7 +783,8 @@
     const d = drag; drag = null; d.item.classList.remove('dragging');
     suppressClick = true; setTimeout(() => { suppressClick = false; }, 320);
     const order = [...queueList.querySelectorAll('.q-item')].map(li => queue[+li.dataset.i]);
-    queue.splice(qi + 1, order.length, ...order);   // replace the upcoming slice with the new order
+    queue.splice(qi + 1, order.length, ...order);                        // replace the upcoming slice
+    if (stream.length) stream.splice(streamStart + qi + 1, order.length, ...order);   // keep the stream in sync
     renderQueue(); saveNowPlaying();
   }
   queueList?.addEventListener('pointerup', endDrag);
@@ -892,9 +913,12 @@
   /* ── Routing ───────────────────────────────────── */
   // Load a specific track paused (autoplay is blocked before a user gesture) — for shared #np links.
   function cueTrack(ai, ti) {
-    queue = buildQueue(ai, false);
-    qi = queue.findIndex(x => x.ti === ti); if (qi < 0) qi = 0;
-    queueMode = 'album'; shuffle = false; syncShuffleBtn();
+    const track = (ALB[ai] && ALB[ai].tracks[ti]) ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
+    const s = eligibleStream();
+    let idx = s.findIndex(x => x.ai === ai && x.ti === ti);
+    if (idx < 0 && track) { let ins = s.findIndex(y => y.ai === ai); if (ins < 0) ins = 0; s.splice(ins, 0, track); idx = ins; }
+    shuffle = false; syncShuffleBtn();
+    setWindow(s, idx < 0 ? 0 : idx);
     loadCurrent(false);
   }
   function applyRoute() {
