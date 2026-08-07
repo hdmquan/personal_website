@@ -651,6 +651,8 @@
   const qCover = a => a && a.cover_url
     ? `<img class="q-cover" src="${esc(a.cover_url)}" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"/>`
     : '<span class="q-cover"></span>';
+  // instrumental versions share a title with their vocal track — mark them so the queue reads clearly
+  const qName = t => esc(disp(t)) + (t.instrumental ? ' <em class="q-inst">inst</em>' : '');
 
   const qHistory = document.getElementById('q-history');
   function renderQueue() {
@@ -661,13 +663,13 @@
     if (qHistory) {
       let h = '';
       for (let i = 0; i < qi; i++) { const q = queue[i], a = ALB[q.ai], t = a.tracks[q.ti];
-        h += `<li class="q-item q-played" data-i="${i}"><div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${esc(disp(t))}</span><span class="q-a">${esc(a.title)}</span></span></div></li>`;
+        h += `<li class="q-item q-played" data-i="${i}"><div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${qName(t)}</span><span class="q-a">${esc(a.title)}</span></span></div></li>`;
       }
       qHistory.innerHTML = h;
     }
     if (qNow) {
       if (cur) { const a = ALB[cur.ai], t = a.tracks[cur.ti];
-        qNow.innerHTML = `<div class="q-now-row">${qCover(a)}<span class="q-meta"><span class="q-t">${esc(disp(t))}</span><span class="q-a">${esc(a.title)}</span></span><span class="q-now-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>`;
+        qNow.innerHTML = `<div class="q-now-row">${qCover(a)}<span class="q-meta"><span class="q-t">${qName(t)}</span><span class="q-a">${esc(a.title)}</span></span><span class="q-now-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>`;
       } else qNow.innerHTML = '';
     }
     const up = []; for (let i = qi + 1; i < queue.length; i++) up.push(i);
@@ -676,7 +678,7 @@
       const q = queue[i], a = ALB[q.ai], t = a.tracks[q.ti];
       return `<li class="q-item" data-i="${i}">
         <div class="q-del" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M9 6V4h6v2M7 6l1 14h8l1-14"/></svg></div>
-        <div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${esc(disp(t))}</span><span class="q-a">${esc(a.title)}</span></span>
+        <div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${qName(t)}</span><span class="q-a">${esc(a.title)}</span></span>
           <button class="q-handle" aria-label="Drag to reorder" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></button></div>
       </li>`;
     }).join('');
@@ -699,8 +701,8 @@
     if (!queuePanel || !queue.length) return;
     renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open');
     npScreen = true;
-    // open on the player view, in the collapsed (queue-down) state, queue tab (not lyrics)
-    queuePanel.classList.remove('q-up'); queuePanel.classList.remove('show-lyrics');
+    // open on the player view, queue at rest (cover square), queue tab (not lyrics)
+    queuePanel.classList.remove('show-lyrics'); queuePanel.style.setProperty('--np-p', '0');
     const qs = document.getElementById('np-queue-scroll'); if (qs) qs.scrollTop = 0;
     document.getElementById('np-seg-song')?.click();
     if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
