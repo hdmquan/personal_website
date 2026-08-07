@@ -493,18 +493,28 @@ body.np-open #yura-page { visibility: hidden; }
 body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { display: none; }
 @media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: visibility .01s; } }
 
-/* header — collapse chevron · Player/Lyrics toggle · spacer */
-.np-sheet-head { flex: none; display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;
-  padding: max(.3rem, env(safe-area-inset-top)) .55rem .35rem; }
-.np-icon-btn { border: 0; background: transparent; cursor: pointer; color: var(--text-2);
-  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; transition: color .15s, background .15s; }
-.np-icon-btn:hover { color: var(--accent); background: var(--panel-inset); }
-.np-icon-btn svg { width: 24px; height: 24px; }
-.np-seg { justify-self: center; display: inline-flex; gap: 2px; padding: 3px; border-radius: 2rem; background: var(--panel-inset); }
+/* two-state morph: --np-p 0 (player) → 1 (queue up); @property lets it animate smoothly */
+@property --np-p { syntax: '<number>'; inherits: true; initial-value: 0; }
+#queue-panel.np-sheet { transition: transform .34s cubic-bezier(.2,.8,.2,1), visibility .34s, --np-p .42s cubic-bezier(.2,.8,.2,1); }
+#queue-panel.np-sheet.q-up { --np-p: 1; }
+@media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: visibility .01s; } }
+
+/* header — floating buttons over the cover (chevron + Player/Lyrics toggle) */
+.np-sheet-head { position: absolute; top: 0; left: 0; right: 0; z-index: 8; pointer-events: none;
+  display: grid; grid-template-columns: 40px 1fr 40px; align-items: center;
+  padding: max(.45rem, env(safe-area-inset-top)) .7rem .4rem; }
+.np-sheet-head > * { pointer-events: auto; }
+.np-icon-btn { border: 0; cursor: pointer; color: var(--text); background: var(--panel-raised);
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  box-shadow: 0 2px 10px var(--sh-deep); transition: color .15s; }
+.np-icon-btn:hover { color: var(--accent); }
+.np-icon-btn svg { width: 23px; height: 23px; }
+.np-seg { justify-self: center; display: inline-flex; gap: 2px; padding: 3px; border-radius: 2rem;
+  background: var(--panel-raised); box-shadow: 0 2px 10px var(--sh-deep); }
 .np-seg-btn { border: 0; background: transparent; cursor: pointer; color: var(--text-3);
   width: 54px; height: 34px; border-radius: 2rem; display: grid; place-items: center; transition: background .18s, color .18s; }
 .np-seg-btn svg { width: 19px; height: 19px; }
-.np-seg-btn.active { background: var(--panel-raised); color: var(--accent); box-shadow: 0 1px 3px var(--sh); }
+.np-seg-btn.active { background: var(--panel-inset); color: var(--accent); }
 
 /* views */
 .np-views { flex: 1 1 0; min-height: 0; display: flex; }
@@ -512,38 +522,43 @@ body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { displa
 .np-view.active { display: flex; }
 .np-view[hidden] { display: none; }
 
-/* PLAYER view — one scroll region; the cover morphs via --np-p */
+/* PLAYER view — a collapsing 'stage' + a queue sheet that slides up over the play button */
 .np-view-player { position: relative; overflow: hidden; }
-/* the queue sits in the scroller behind a full-height spacer → hidden until you swipe up */
-.np-scroll { position: absolute; inset: 0; z-index: 1; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
-.np-spacer { height: 100%; }
-.np-queuewrap { background: var(--bg); min-height: 100%; padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
-.np-queue-hd { margin: 0; padding: .85rem 1.15rem .5rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .16em;
+.np-stage { position: absolute; top: 0; left: 0; right: 0; z-index: 3; overflow: hidden;
+  height: calc(100% - 34% * var(--np-p));         /* 100% → 66% as the queue comes up */
+  display: flex; flex-direction: column; justify-content: center; }
+.np-hero { display: grid; place-items: center; padding: .2rem 0; }
+.np-hero-cover {                                  /* zooms out to fill the width + fades into the UI as the queue rises */
+  position: relative; overflow: hidden; background: var(--panel-inset);
+  width: calc(72vw + (100vw - 72vw) * var(--np-p));
+  max-width: calc(300px + (2000px - 300px) * var(--np-p));
+  height: calc(min(72vw, 300px) * (1 - var(--np-p)) + 24vh * var(--np-p));
+  max-height: calc(300px * (1 - var(--np-p)) + 200px * var(--np-p));
+  border-radius: calc(.8rem * (1 - var(--np-p)));
+  box-shadow: 0 calc(14px * (1 - var(--np-p))) 34px var(--sh-deep);
+  cursor: pointer; }
+.np-hero-cover::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, transparent 42%, var(--bg)); opacity: var(--np-p); }
+
+/* grabber — rounded bar at the resting stage's bottom; swipe up / tap to reveal the queue */
+.np-grabber { position: absolute; left: 50%; bottom: calc(.7rem + env(safe-area-inset-bottom)); transform: translateX(-50%);
+  border: 0; background: transparent; cursor: pointer; padding: 10px; opacity: calc(1 - var(--np-p) * 5); }
+.np-grabber span { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--text-3); transition: background .15s; }
+.np-grabber:hover span { background: var(--accent); }
+
+/* queue sheet — slides up from the bottom, its top edge covering the bottom of the play button */
+.np-queue-sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
+  height: 46%; background: var(--bg); border-radius: 1.1rem 1.1rem 0 0;
+  box-shadow: 0 -14px 40px var(--sh-deep); border-top: 1px solid var(--gilt-hair);
+  transform: translateY(calc((1 - var(--np-p)) * 106%)); display: flex; flex-direction: column; }
+.np-sheet-grip { flex: none; align-self: center; border: 0; background: transparent; cursor: pointer; padding: 10px 44px 4px; }
+.np-sheet-grip span { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--text-3); transition: background .15s; }
+.np-sheet-grip:hover span { background: var(--accent); }
+.np-queue-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+.np-queue-hd { margin: 0; padding: .1rem 1.15rem .5rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .16em;
   text-transform: uppercase; color: var(--text-2); display: flex; align-items: baseline; gap: .5rem; }
 .np-queue-hd b { font-weight: 400; font-size: .58rem; color: var(--text-3); letter-spacing: .04em; text-transform: none; }
-
-/* the player 'stage' overlays the top and shrinks as --np-p rises, revealing the queue behind it */
-.np-stage { position: absolute; top: 0; left: 0; right: 0; z-index: 3; overflow: hidden; pointer-events: none;
-  height: calc(100% - (100% - 360px) * var(--np-p));
-  background: var(--bg); display: flex; flex-direction: column; justify-content: center; }
-.np-stage .np-nowinfo-main, .np-stage .np-controls, .np-stage .np-seek2, .np-queue-cue { pointer-events: auto; }
-.np-hero { display: grid; place-items: center; background: var(--bg); padding: .2rem 0; }
-.np-hero-cover {                                 /* zooms out to fill the width + flattens to a banner as you scroll */
-  position: relative; overflow: hidden; background: var(--panel-inset);
-  width: calc(66vw + (100vw - 66vw) * var(--np-p));
-  max-width: calc(300px + (2000px - 300px) * var(--np-p));
-  height: calc(min(66vw, 300px) * (1 - var(--np-p)) + 30vh * var(--np-p));
-  max-height: calc(300px * (1 - var(--np-p)) + 190px * var(--np-p));
-  border-radius: calc(.8rem * (1 - var(--np-p)));
-  box-shadow: 0 calc(14px * (1 - var(--np-p))) 34px var(--sh-deep); }
-/* swipe-up cue pinned at the resting stage's bottom; fades out as the stage collapses */
-.np-queue-cue { position: absolute; left: 50%; bottom: calc(1rem + env(safe-area-inset-bottom)); transform: translateX(-50%);
-  display: inline-flex; flex-direction: column; align-items: center; gap: .15rem;
-  border: 0; background: transparent; cursor: pointer; color: var(--text-3);
-  font-family: var(--mono); font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
-  opacity: calc(1 - var(--np-p) * 5); transition: color .15s; }
-.np-queue-cue svg { width: 20px; height: 20px; }
-.np-queue-cue:hover { color: var(--accent); }
 .np-hero-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
 .np-hero-cover img.loaded { opacity: 1; }
 
@@ -614,11 +629,37 @@ body.np-open .q-fbtn:not(:last-child) { border-right: 1px solid var(--rule); }
 .np-lang-btn.active { background: var(--accent); color: var(--bg); }
 body.dark-mode .np-lang-btn.active { color: #16140e; }
 
-/* desktop — centre the content column; hold the cover steady (no scroll-zoom) */
-@media (min-width: 640px) {
-  .np-hero, .np-nowinfo, .np-transport, .np-fromline, #q-now, #queue-list, .q-foot { width: 100%; max-width: 620px; margin-inline: auto; }
-  .np-hero { position: static; padding: 1.2rem 0 .4rem; }
-  .np-hero-cover { width: 300px; max-width: 300px; height: 300px; max-height: 300px; border-radius: .8rem; }
+/* ── Tablet & desktop: YouTube-web two-column — cover left · queue right · transport bar below ── */
+@media (min-width: 820px) {
+  /* the persistent transport bar returns at the bottom (flat, full-width) */
+  body.np-open #np-bar { display: grid; left: 0; right: 0; bottom: 0; width: 100%; max-width: none;
+    transform: none; border-radius: 0; border: 0; border-top: 1px solid var(--gilt-hair); box-shadow: none;
+    padding-bottom: calc(.65rem + env(safe-area-inset-bottom)); z-index: 60; }
+  #queue-panel.np-sheet { top: 0; bottom: calc(4.9rem + env(safe-area-inset-bottom)); }
+  .np-sheet-head { padding-top: 1rem; }
+
+  /* player becomes two columns */
+  .np-view-player.active { display: grid; grid-template-columns: minmax(0,1fr) min(460px, 40vw);
+    align-items: stretch; gap: clamp(1.5rem, 4vw, 3.5rem); padding: clamp(2rem, 5vh, 4rem) clamp(2rem, 5vw, 5rem) 1.5rem; }
+
+  /* left column: the cover only (title + controls live in the transport bar) */
+  .np-stage { position: static; z-index: auto; height: auto; overflow: visible;
+    display: flex; align-items: center; justify-content: center; }
+  .np-stage .np-nowinfo, .np-stage .np-transport, .np-grabber { display: none; }
+  .np-hero { display: flex; justify-content: center; padding: 0; width: 100%; }
+  .np-hero-cover { width: min(100%, 620px); height: auto; aspect-ratio: 1 / 1; max-width: none; max-height: none;
+    border-radius: 1rem; box-shadow: 0 24px 60px var(--sh-deep); cursor: default; }
+  .np-hero-cover::after { display: none; }
+
+  /* right column: the queue as a static panel (no bottom-sheet) */
+  .np-queue-sheet { position: static; transform: none; height: auto; z-index: auto; min-height: 0;
+    background: transparent; border: 0; border-radius: 0; box-shadow: none; display: flex; flex-direction: column; }
+  .np-sheet-grip { display: none; }
+  .np-queue-scroll { padding-bottom: 1rem; }
+  .np-queue-hd { padding-left: .2rem; font-size: .72rem; }
+
+  /* lyrics stays centred but narrower */
+  .np-lyrics-scroll { padding-inline: max(2rem, 14vw); }
 }
 
 /* now-playing row (pinned, not reorderable) */

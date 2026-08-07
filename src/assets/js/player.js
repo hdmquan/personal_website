@@ -679,9 +679,9 @@
     if (!queuePanel || !queue.length) return;
     renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open');
     npScreen = true;
-    // open on the player view, scrolled to top (cover un-zoomed)
-    const sc = document.getElementById('np-scroll'); if (sc) sc.scrollTop = 0;
-    queuePanel.style.setProperty('--np-p', '0');
+    // open on the player view, in the collapsed (queue-down) state
+    queuePanel.classList.remove('q-up');
+    const qs = document.getElementById('np-queue-scroll'); if (qs) qs.scrollTop = 0;
     document.getElementById('np-seg-song')?.click();
     if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
   }
