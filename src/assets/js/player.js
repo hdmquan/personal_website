@@ -71,6 +71,7 @@
   const fmtDate = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso)); return m ? (+m[3]) + ' ' + MON[+m[2]-1] + ' ' + m[1] : String(iso); };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const disp = t => t.instrumental ? t.title.replace(/\s*\[Instrumental\]\s*$/i, '') : t.title;
+  const COPY_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
   // per-album purchase / source link (round icon) — only if the catalog provides one
   function buyLink(a) {
     const url = a.booth_url || a.source_url; if (!url) return '';
@@ -307,7 +308,7 @@
       <div class="ah-cover sk"><img src="${esc(a.cover_url)}" alt="" decoding="async" onload="this.classList.add('loaded')" onerror="this.style.visibility='hidden'"/></div>
       <div class="ah-info">
         <span class="ah-year">${esc(fmtDate(a.date || a.year))}</span>
-        <h2>${esc(a.title)}</h2>
+        <h2 class="ah-title">${esc(a.title)}<button class="copy-inline" data-copy="album" type="button" aria-label="Copy album name" title="Copy album name">${COPY_SVG}</button></h2>
         ${ NOTES[a.title]
             ? `<div class="ah-note">${NOTES[a.title]}</div>`
             : `<p class="ah-count">${shown.length} tracks${secs ? ' · ' + fmtLong(secs) : ''}${genreFilter ? ' · ' + esc(genreFilter) : ''}</p>` }
@@ -324,6 +325,7 @@
           <span class="trk-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
         </span>
         <span class="trk-title">${esc(disp(t))}${t.instrumental ? '<em class="inst">INST</em>' : ''}</span>
+        <button class="copy-inline trk-copy" data-copy="track" type="button" aria-label="Copy track name" title="Copy track name">${COPY_SVG}</button>
         ${t.dur ? `<span class="trk-dur">${fmt(t.dur)}</span>` : '<span class="trk-dur"></span>'}
       </li>`).join('');
     shelf.hidden = true; document.querySelector('#yura-hero').hidden = true;
@@ -967,4 +969,143 @@
       case 'Escape': if (npScreen) closeQueue(true); else if (view === 'album') backToShelf(); break;
     }
   });
+
+  /* ── Copy toolkit ──────────────────────────────────
+     Long-press (mobile) or right-click (desktop) on any track/album surface → a small menu with
+     copy actions. In album view, desktop hover also shows an inline copy button on the album name
+     and each track; clicking the album name copies it too. Clipboard has a legacy fallback. */
+  (function(){
+    const hoverCapable = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+
+    // clipboard (secure-context API + execCommand fallback for http/file)
+    function copyText(text){
+      if (!text) return;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => toast('Copied'), () => legacyCopy(text));
+      } else legacyCopy(text);
+    }
+    function legacyCopy(text){
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+        document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+        const ok = document.execCommand('copy'); document.body.removeChild(ta);
+        toast(ok ? 'Copied' : 'Copy failed');
+      } catch (_) { toast('Copy failed'); }
+    }
+    // toast
+    let toastEl, toastTimer;
+    function toast(msg){
+      if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'copy-toast'; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl); }
+      toastEl.textContent = msg;
+      requestAnimationFrame(() => toastEl.classList.add('show'));
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1400);
+    }
+
+    // text builders (read live state)
+    const trackName = (ai, ti) => { const a = ALB[ai], t = a && a.tracks && a.tracks[ti]; return t ? disp(t) : ''; };
+    const albumName = ai => { const a = ALB[ai]; return a ? a.title : ''; };
+    function albumDetail(ai){
+      const a = ALB[ai]; if (!a) return '';
+      const date = fmtDate(a.date || a.year) || '';
+      const lines = (a.tracks || []).map((t, i) => `${t.track != null && t.track !== '' ? t.track : (i + 1)}. ${disp(t)}`);
+      return [a.title, date, '', ...lines].join('\n').replace(/\n{3,}/g, '\n\n');
+    }
+
+    // resolve a DOM node to a copy target
+    function resolve(el){
+      if (!el || !el.closest) return null;
+      const trk = el.closest('.trk');
+      if (trk && trk.dataset.ai != null) return { kind: 'track', ai: +trk.dataset.ai, ti: +trk.dataset.ti };
+      const card = el.closest('.alb-card');
+      if (card && card.dataset.ai != null && !card.classList.contains('skel')) return { kind: 'album', ai: +card.dataset.ai };
+      const qi2 = el.closest('#queue-list .q-item, #q-history .q-item');
+      if (qi2 && qi2.dataset.i != null && queue[+qi2.dataset.i]) { const q = queue[+qi2.dataset.i]; return { kind: 'track', ai: q.ai, ti: q.ti }; }
+      if (el.closest('#q-now, #np-hero, #np-view-player .np-nowinfo, #np-bar')) { const q = queue[qi]; if (q) return { kind: 'track', ai: q.ai, ti: q.ti }; }
+      if (view === 'album' && openAlbum >= 0 && el.closest('#album-view')) return { kind: 'album', ai: openAlbum, inAlbumView: true };
+      return null;
+    }
+    function itemsFor(t){
+      if (!t || !ALB[t.ai]) return [];
+      if (t.kind === 'track') return [{ label: 'Copy Name', run: () => copyText(trackName(t.ai, t.ti)) }];
+      if (t.inAlbumView) return [
+        { label: 'Copy album name', run: () => copyText(albumName(t.ai)) },
+        { label: 'Copy album detail', run: () => copyText(albumDetail(t.ai)) },
+      ];
+      return [{ label: 'Copy Name', run: () => copyText(albumName(t.ai)) }];
+    }
+
+    // menu element
+    let menuEl;
+    function hideMenu(){ if (menuEl && !menuEl.hidden) { menuEl.hidden = true; menuEl.innerHTML = ''; menuEl._items = null; } }
+    function showMenu(x, y, items){
+      if (!items.length) return;
+      if (!menuEl) { menuEl = document.createElement('div'); menuEl.className = 'ctx-menu'; menuEl.setAttribute('role', 'menu'); menuEl.hidden = true; document.body.appendChild(menuEl); }
+      menuEl._items = items;
+      menuEl.innerHTML = items.map((it, i) => `<button class="ctx-item" type="button" role="menuitem" data-i="${i}">${esc(it.label)}</button>`).join('');
+      menuEl.hidden = false;
+      const mw = menuEl.offsetWidth, mh = menuEl.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
+      menuEl.style.left = Math.max(8, Math.min(x, vw - mw - 8)) + 'px';
+      menuEl.style.top  = Math.max(8, Math.min(y, vh - mh - 8)) + 'px';
+      const first = menuEl.querySelector('.ctx-item'); if (first) first.focus();
+    }
+
+    // right-click (desktop)
+    document.addEventListener('contextmenu', e => {
+      const items = itemsFor(resolve(e.target));
+      if (!items.length) { hideMenu(); return; }   // let the native menu show elsewhere
+      e.preventDefault();
+      showMenu(e.clientX, e.clientY, items);
+    });
+
+    // long-press (touch)
+    let lpTimer = null, lpXY = null, suppressTap = false;
+    const clearLP = () => { if (lpTimer) { clearTimeout(lpTimer); lpTimer = null; } lpXY = null; };
+    document.addEventListener('touchstart', e => {
+      clearLP();
+      if (e.touches.length !== 1) return;
+      const items = itemsFor(resolve(e.target));
+      if (!items.length) return;
+      const tch = e.touches[0]; lpXY = { x: tch.clientX, y: tch.clientY };
+      lpTimer = setTimeout(() => {
+        lpTimer = null; suppressTap = true;
+        if (navigator.vibrate) { try { navigator.vibrate(8); } catch (_) {} }
+        showMenu(lpXY.x, lpXY.y, items);
+      }, 480);
+    }, { passive: true });
+    document.addEventListener('touchmove', e => {
+      if (!lpXY) return;
+      const tch = e.touches[0];
+      if (Math.abs(tch.clientX - lpXY.x) > 10 || Math.abs(tch.clientY - lpXY.y) > 10) clearLP();
+    }, { passive: true });
+    document.addEventListener('touchend', clearLP, { passive: true });
+    document.addEventListener('touchcancel', clearLP, { passive: true });
+    // swallow the click/tap that fires right after a long-press so it doesn't play/open
+    document.addEventListener('click', e => {
+      if (suppressTap) { suppressTap = false; e.stopPropagation(); e.preventDefault(); }
+    }, true);
+
+    // menu interactions + dismissal
+    document.addEventListener('click', e => {
+      if (!menuEl || menuEl.hidden) return;
+      const it = e.target.closest('.ctx-item');
+      if (it && menuEl._items) { const item = menuEl._items[+it.dataset.i]; hideMenu(); if (item) item.run(); return; }
+      if (!e.target.closest('.ctx-menu')) hideMenu();
+    });
+    window.addEventListener('scroll', hideMenu, true);
+    window.addEventListener('resize', hideMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') hideMenu(); });
+
+    // inline copy buttons + click-to-copy the album name (album view; capture so it beats play)
+    albumView.addEventListener('click', e => {
+      const cb = e.target.closest('.copy-inline');
+      if (cb) {
+        e.preventDefault(); e.stopPropagation();
+        if (cb.dataset.copy === 'album') copyText(albumName(openAlbum));
+        else { const trk = cb.closest('.trk'); if (trk) copyText(trackName(+trk.dataset.ai, +trk.dataset.ti)); }
+        return;
+      }
+      if (hoverCapable && e.target.closest('.ah-title')) { e.stopPropagation(); copyText(albumName(openAlbum)); }
+    }, true);
+  })();
 })();

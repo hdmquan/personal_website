@@ -350,6 +350,8 @@ html, body { overscroll-behavior: none; }
   display: grid; grid-template-columns: 2rem 1fr auto; align-items: center; gap: .7rem;
   padding: .7rem .25rem; border-bottom: 1px solid var(--rule); cursor: pointer; transition: background .15s;
 }
+/* cursor devices get an extra column for the inline copy button (touch hides it → 3 columns) */
+@media (hover: hover) and (pointer: fine) { .trk { grid-template-columns: 2rem 1fr auto auto; } }
 .trk:hover { background: var(--panel-inset); }
 .trk-slot { position: relative; display: grid; place-items: center; width: 2rem; height: 1.4rem; }
 .trk-slot > * { grid-area: 1/1; }
@@ -371,6 +373,45 @@ html, body { overscroll-behavior: none; }
 }
 .trk-dur { font-family: var(--mono); font-size: .76rem; color: var(--text-3); font-variant-numeric: tabular-nums; padding-left: .6rem; }
 .trk.playing .trk-dur { color: var(--accent); }
+
+/* ── Copy affordances ──────────────────────────────────
+   Inline copy button (album name + tracks in album view, cursor devices only) and the
+   right-click / long-press context menu + confirmation toast. */
+.copy-inline { display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 1.7rem; height: 1.7rem; padding: 0; border: 0; border-radius: .35rem; background: transparent;
+  color: var(--text-3); cursor: pointer; opacity: 0; transition: opacity .15s, color .15s, background .15s;
+  vertical-align: middle; }
+.copy-inline svg { width: 15px; height: 15px; }
+.copy-inline:hover, .copy-inline:focus-visible { color: var(--accent); background: var(--panel-inset); }
+.ah-title .copy-inline { margin-left: .5rem; }
+.ah-title:hover .copy-inline, .trk:hover .copy-inline, .copy-inline:focus-visible { opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .ah-title { cursor: pointer; } }
+@media (hover: none), (pointer: coarse) { .copy-inline { display: none; } }   /* touch → long-press instead */
+
+/* context menu */
+.ctx-menu { position: fixed; z-index: 200; min-width: 172px; padding: .35rem; border-radius: .6rem;
+  background: var(--panel-raised); border: 1px solid var(--gilt-hair); box-shadow: 0 14px 38px var(--sh-deep);
+  display: flex; flex-direction: column; gap: 2px; }
+.ctx-menu[hidden] { display: none; }
+.ctx-item { border: 0; background: transparent; cursor: pointer; text-align: left; width: 100%;
+  padding: .6rem .7rem; border-radius: .4rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .02em;
+  color: var(--text-2); white-space: nowrap; transition: background .12s, color .12s; }
+.ctx-item:hover, .ctx-item:focus-visible { background: var(--panel-inset); color: var(--text); outline: none; }
+
+/* touch: suppress the native long-press callout / text selection on copy-target surfaces so our
+   long-press menu is the only thing that appears (desktop keeps normal text selection) */
+@media (pointer: coarse) {
+  .trk, .alb-card, .ah-title, .q-item, #q-now, .np-hero-cover,
+  #np-hero-title, #np-hero-artist, #np-title, #np-meta { -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; }
+}
+
+/* copy confirmation toast */
+.copy-toast { position: fixed; left: 50%; bottom: calc(5.6rem + env(safe-area-inset-bottom)); z-index: 210;
+  transform: translate(-50%, 8px); padding: .55rem 1.05rem; border-radius: 2rem;
+  background: var(--panel-raised); border: 1px solid var(--gilt-hair); box-shadow: 0 8px 24px var(--sh-deep);
+  color: var(--text); font-family: var(--mono); font-size: .7rem; letter-spacing: .04em;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+.copy-toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ── Colophon footer (the relocated stats) ─────────*/
 #yura-colophon { text-align: center; padding: clamp(2.5rem,7vw,4rem) 1.5rem 1rem; max-width: 40rem; margin: 0 auto; }
