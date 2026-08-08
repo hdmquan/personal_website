@@ -717,6 +717,22 @@ body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
 .np-lang-btn:hover { color: var(--text); }
 .np-lang-btn.active { background: var(--panel-inset); color: var(--accent); }
 
+/* rendered lyric lines (shared by mobile view + web sheet) */
+.np-lyrics-body { display: flex; flex-direction: column; }
+.np-lyrics-body[hidden] { display: none; }
+.np-lyrics-lines { display: flex; flex-direction: column; }
+.np-lyrics-lines .ll { font-family: var(--serif); font-size: 1.02rem; line-height: 1.85; color: var(--text); }
+.np-lyrics-lines .ll:lang(ja), .np-lyrics-lines .ll { word-break: break-word; }
+.np-lyrics-lines .ll-gap { height: .9rem; }
+.np-lyrics-credit { margin-top: 1.1rem; padding-top: .8rem; border-top: 1px solid var(--gilt-hair);
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .06em; color: var(--text-3); }
+.np-lyrics-credit span { color: var(--text-2); }
+.np-lyrics-credit em { font-style: normal; color: var(--gilt); }
+/* mobile: the parent (#np-lyrics-scroll) is the scroller — body flows naturally */
+#np-lyrics-scroll .np-lyrics-body { padding-bottom: 3.4rem; }
+/* web sheet: body itself scrolls so the floating pill stays put */
+.np-sheet-lyrics .np-lyrics-body { flex: 1 1 0; min-height: 0; overflow-y: auto; padding: .2rem 1.5rem 3.6rem; }
+
 /* ═══ Tablet & desktop: YouTube-web layout — cover · top tabs · queue · transport bar ═══ */
 @media (min-width: 760px) {
   /* the transport bar returns flat at the bottom; no in-screen controls */

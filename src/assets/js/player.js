@@ -90,6 +90,14 @@
     .then(n => { NOTES = n || {}; if (view === 'album' && openAlbum >= 0) openAlbumView(openAlbum); })
     .catch(() => {});
 
+  // Per-track lyrics (optional) → shown in the now-playing lyrics view. Keyed album title → track number,
+  // each language an attributed block { lines, by, kind, src }. See scripts/lyrics/SCHEMA.md.
+  let LYRICS = {};
+  fetch('/assets/catalogs/lyrics.json')
+    .then(r => (r.ok ? r.json() : {}))
+    .then(n => { LYRICS = n || {}; renderLyrics(); })
+    .catch(() => {});
+
   fetch(CATALOG).then(r => r.json()).then(data => {
     ALB = data.albums || [];
     const s = data.stats || {};
@@ -463,6 +471,7 @@
     setMediaSession(a, t);
     highlightPlaying();
     renderQueue();
+    renderLyrics();
     saveNowPlaying();
     // Keep the URL pointing at the current track so it stays shareable; replaceState avoids
     // history spam on auto-advance and doesn't re-fire the router.
@@ -470,6 +479,60 @@
   }
 
   function stopPlayback() { queue = []; qi = -1; stream = []; streamStart = 0; wantPlay = false; setPlayingUI(false); document.title = DEFAULT_TITLE; renderQueue(); save('np', null); }
+
+  /* ── Lyrics ─────────────────────────────────────────
+     Render the current track's lyrics into the mobile (#np-lyrics-scroll) and web
+     (#np-sheet-lyrics) views. Data is optional; absent → the existing empty-state shows.
+     Language (jp/romaji/en) is shared across both floating .np-lang pills. */
+  let curLang = 'jp';
+  function lyricsRec() {
+    const q = queue[qi]; if (!q) return null;
+    const a = ALB[q.ai]; if (!a) return null;
+    const t = a.tracks[q.ti]; if (!t) return null;
+    const alb = LYRICS[a.title]; if (!alb) return null;
+    // keys match the catalog's own track value ("02"); fall back to unpadded / position
+    return alb[t.track] || alb[String(Number(t.track))] || alb[String(q.ti + 1)] || null;
+  }
+  function lyricsBody(container) {
+    let b = container.querySelector('.np-lyrics-body');
+    if (!b) {
+      b = document.createElement('div'); b.className = 'np-lyrics-body';
+      const pill = container.querySelector('.np-lang');
+      if (pill) container.insertBefore(b, pill); else container.appendChild(b);
+    }
+    return b;
+  }
+  function renderInto(container) {
+    if (!container) return;
+    const empty = container.querySelector('.np-lyrics-empty');
+    const body = lyricsBody(container);
+    const rec = lyricsRec();
+    const blk = rec && rec[curLang];
+    if (!blk || !blk.lines || !blk.lines.length) {
+      body.hidden = true; body.innerHTML = '';
+      if (empty) empty.hidden = false;
+      return;
+    }
+    if (empty) empty.hidden = true;
+    body.hidden = false;
+    const langName = curLang === 'jp' ? 'Japanese' : curLang === 'romaji' ? 'Romaji' : 'English';
+    const rows = blk.lines.map(l => l === '' ? '<span class="ll-gap"></span>' : `<span class="ll">${esc(l)}</span>`).join('');
+    const who = blk.by || 'unknown';
+    const credit = `<div class="np-lyrics-credit"><span>${esc(langName)}</span> · ${esc(who)}${blk.kind === 'ai' ? ' <em>· AI draft</em>' : ''}</div>`;
+    body.innerHTML = `<div class="np-lyrics-lines">${rows}</div>${credit}`;
+  }
+  function renderLyrics() { renderInto($('#np-lyrics-scroll')); renderInto($('#np-sheet-lyrics')); }
+  // Language switch — keep both pills (mobile + web) in sync and re-render.
+  Array.prototype.forEach.call(document.querySelectorAll('.np-lang-btn'), function (b) {
+    b.addEventListener('click', function () {
+      curLang = b.dataset.lang || 'jp';
+      Array.prototype.forEach.call(document.querySelectorAll('.np-lang-btn'), function (x) {
+        var on = x.dataset.lang === curLang;
+        x.classList.toggle('active', on); x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1;
+      });
+      renderLyrics();
+    });
+  });
 
   function next() {
     if (stream.length && streamStart + qi + 1 < stream.length) { qi++; reconcileWindow(); loadCurrent(true); return; }
