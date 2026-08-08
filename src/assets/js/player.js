@@ -768,6 +768,12 @@
     npScreen = true;
     // open on the player view, at rest (full player, queue hidden until swiped up), queue tab (not lyrics)
     queuePanel.classList.remove('show-lyrics');
+    // keep the web Up-next/Lyrics tab buttons in sync with the panel reset (else "Lyrics" stays
+    // highlighted while the queue is shown after switching tracks — desktop bug)
+    queuePanel.querySelectorAll('.np-tab[data-webtab]').forEach(function (t) {
+      var on = t.dataset.webtab === 'upnext';
+      t.classList.toggle('active', on); t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
+    });
     document.getElementById('np-view-player')?.classList.remove('q-up');
     const qs = document.getElementById('np-queue-scroll'); if (qs) qs.scrollTop = 0;
     document.getElementById('np-seg-song')?.click();
