@@ -23,11 +23,14 @@ const ocrIndex = fs.existsSync(OCR_INDEX_PATH) ? JSON.parse(fs.readFileSync(OCR_
 // track number to the catalog's exact `.track` value so the player can look it up directly.
 const CAT = JSON.parse(fs.readFileSync('src/assets/catalogs/yura.json', 'utf8'));
 const trackKeyMap = {};   // album -> { <numeric>: <catalog .track string> }
+const trackTitleMap = {}; // album -> { <numeric>: <catalog title> }
 for (const a of (CAT.albums || [])) {
-  const m = {}; for (const t of (a.tracks || [])) if (t.track != null) m[Number(t.track)] = t.track;
-  trackKeyMap[a.title] = m;
+  const m = {}, tm = {};
+  for (const t of (a.tracks || [])) if (t.track != null) { m[Number(t.track)] = t.track; tm[Number(t.track)] = t.title; }
+  trackKeyMap[a.title] = m; trackTitleMap[a.title] = tm;
 }
 const catKey = (album, tno) => (trackKeyMap[album] && trackKeyMap[album][Number(tno)]) || String(tno);
+const catTitle = (album, tno) => (trackTitleMap[album] && trackTitleMap[album][Number(tno)]);
 
 const existing = fs.existsSync(LYR) ? JSON.parse(fs.readFileSync(LYR, 'utf8')) : {};
 const out = existing;   // merge in place, preserve human work
@@ -72,7 +75,7 @@ for (const f of fs.readdirSync(OUTDIR).filter(x => x.endsWith('.json'))) {
     }
     const key = catKey(album, tno);
     const rec = out[album][key] ??= { title: t.title };
-    rec.title = t.title || rec.title;
+    rec.title = catTitle(album, tno) || t.title || rec.title;   // catalog title is authoritative
     // JP: use preformed block if given, else wrap as official booklet text
     place(rec, 'jp', t.jp?.lines ? { ...t.jp, lines: clean(t.jp.lines) } : block(jp, 'official booklet', 'official', `archive text lyrics (${album})`));
     if (ro) place(rec, 'romaji', t.romaji?.lines ? { ...t.romaji, lines: clean(t.romaji.lines) } : block(ro, 'Claude (Opus 4.8)', 'ai', 'jp→romaji AI pass'));
