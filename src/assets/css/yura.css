@@ -703,6 +703,8 @@ body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
   padding: calc(env(safe-area-inset-top) + 3.6rem) 1.4rem calc(5rem + env(safe-area-inset-bottom)); }
 .np-lyrics-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; gap: .6rem; }
+/* `hidden` must win over the display:flex above (and the web-sheet variant) when lyrics are present */
+.np-lyrics-empty[hidden] { display: none !important; }
 .np-lyrics-empty svg { width: 40px; height: 40px; color: var(--gilt-soft); }
 .np-lyrics-empty p { margin: 0; font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--text-2); }
 .np-lyrics-empty span { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; color: var(--text-3); }

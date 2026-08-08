@@ -518,7 +518,7 @@
     const langName = curLang === 'jp' ? 'Japanese' : curLang === 'romaji' ? 'Romaji' : 'English';
     const rows = blk.lines.map(l => l === '' ? '<span class="ll-gap"></span>' : `<span class="ll">${esc(l)}</span>`).join('');
     const who = blk.by || 'unknown';
-    const credit = `<div class="np-lyrics-credit"><span>${esc(langName)}</span> · ${esc(who)}${blk.kind === 'ai' ? ' <em>· AI draft</em>' : ''}</div>`;
+    const credit = `<div class="np-lyrics-credit"><span>${esc(langName)}</span> · ${esc(who)}</div>`;
     body.innerHTML = `<div class="np-lyrics-lines">${rows}</div>${credit}`;
   }
   function renderLyrics() { renderInto($('#np-lyrics-scroll')); renderInto($('#np-sheet-lyrics')); }

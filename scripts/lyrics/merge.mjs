@@ -33,8 +33,15 @@ const existing = fs.existsSync(LYR) ? JSON.parse(fs.readFileSync(LYR, 'utf8')) :
 const out = existing;   // merge in place, preserve human work
 
 const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+// Strip a dangling booklet "v"/"ｖ" emoticon left at a line end (kept by OCR, e.g. "…のｖ" → "…の",
+// "…no v" → "…no"). Only when it's after whitespace, line start, or a non-ASCII char — never inside a word.
+function cleanLine(s) {
+  if (typeof s !== 'string') return s;
+  return s.replace(/(^|[\s　]|[^\x00-\x7F])[vｖ][\s　]*$/u, '$1').replace(/[\s　]+$/u, '');
+}
+const clean = arr => Array.isArray(arr) ? arr.map(cleanLine) : arr;
 function block(lines, by, kind, src) {
-  return { lines, by, kind, src, date: DATE };
+  return { lines: clean(lines), by, kind, src, date: DATE };
 }
 // only replace a block if the target is empty or itself an ai placeholder
 function place(track, lang, blk) {
@@ -67,9 +74,9 @@ for (const f of fs.readdirSync(OUTDIR).filter(x => x.endsWith('.json'))) {
     const rec = out[album][key] ??= { title: t.title };
     rec.title = t.title || rec.title;
     // JP: use preformed block if given, else wrap as official booklet text
-    place(rec, 'jp', t.jp?.lines ? t.jp : block(jp, 'official booklet', 'official', `archive text lyrics (${album})`));
-    if (ro) place(rec, 'romaji', t.romaji?.lines ? t.romaji : block(ro, 'Claude (Opus 4.8)', 'ai', 'jp→romaji AI pass'));
-    if (en) place(rec, 'en',     t.en?.lines     ? t.en     : block(en, 'Claude (Opus 4.8)', 'ai', 'jp→en AI pass'));
+    place(rec, 'jp', t.jp?.lines ? { ...t.jp, lines: clean(t.jp.lines) } : block(jp, 'official booklet', 'official', `archive text lyrics (${album})`));
+    if (ro) place(rec, 'romaji', t.romaji?.lines ? { ...t.romaji, lines: clean(t.romaji.lines) } : block(ro, 'Claude (Opus 4.8)', 'ai', 'jp→romaji AI pass'));
+    if (en) place(rec, 'en',     t.en?.lines     ? { ...t.en, lines: clean(t.en.lines) }         : block(en, 'Claude (Opus 4.8)', 'ai', 'jp→en AI pass'));
     if (t.flags?.length) rec.flags = t.flags;
     tracks++;
   }
