@@ -52,7 +52,11 @@ body { font-family: var(--mono); font-weight: 400; }
 #shelf[hidden], #album-view[hidden], .shelf-controls[hidden] { display: none !important; }
 
 html, body { overscroll-behavior: none; }
-#yura-page { min-height: 100vh; padding-bottom: 8.5rem; overscroll-behavior: none; }
+#yura-page { min-height: 100vh; padding-top: env(safe-area-inset-top); padding-bottom: 8.5rem; overscroll-behavior: none; }
+/* translucent iOS status bar (PWA) → dark scrim over the status-bar strip so the white clock/battery
+   stays legible on light screens. Height 0 where there's no safe-area inset (desktop), so it's invisible there. */
+body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top);
+  z-index: 65; pointer-events: none; background: linear-gradient(to bottom, rgba(0,0,0,.34), rgba(0,0,0,.10)); }
 
 /* ── Page-load reveal (one orchestrated moment) ──── */
 @keyframes riseIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
@@ -871,7 +875,7 @@ body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
 
 /* ── Floating corner buttons (home / dark) ─────────*/
 #home-btn, #dark-toggle {
-  position: fixed; top: 1rem; z-index: 60; width: 38px; height: 38px; border-radius: 50%;
+  position: fixed; top: calc(1rem + env(safe-area-inset-top)); z-index: 60; width: 38px; height: 38px; border-radius: 50%;
   border: 1px solid var(--gilt-hair); cursor: pointer; background: var(--panel-raised); color: var(--text-3);
   box-shadow: 0 3px 12px var(--sh); display: grid; place-items: center;
   transition: color .15s, border-color .15s, transform .08s;
