@@ -2992,7 +2992,18 @@
           "dur": 218,
           "genres": [
             "Classical"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         },
         {
           "track": "02",
@@ -3003,7 +3014,21 @@
           "dur": 330,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         },
         {
           "track": "03",
@@ -3014,7 +3039,21 @@
           "dur": 318,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         },
         {
           "track": "04",
@@ -3025,7 +3064,21 @@
           "dur": 318,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         },
         {
           "track": "05",
@@ -3036,7 +3089,21 @@
           "dur": 313,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         },
         {
           "track": "06",
@@ -3047,7 +3114,21 @@
           "dur": 351,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         },
         {
           "track": "07",
@@ -3058,7 +3139,21 @@
           "dur": 357,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         },
         {
           "track": "08",
@@ -3069,7 +3164,21 @@
           "dur": 541,
           "genres": [
             "Pop Rock"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "荒芳樹"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "趣味工房にんじんわいん"
+            ]
+          }
         }
       ],
       "album_seconds": 2746,
@@ -5717,7 +5826,15 @@
           "dur": 99,
           "genres": [
             "Folk, World, & Country"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -5728,7 +5845,18 @@
           "dur": 256,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "オッカ"
+            ],
+            "lyrics": [
+              "海兎"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -5739,7 +5867,21 @@
           "dur": 236,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "矢野トモ"
+            ],
+            "lyrics": [
+              "7chi子♪"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "WIZARD ODYSSEY"
+            ]
+          }
         },
         {
           "track": "04",
@@ -5750,7 +5892,21 @@
           "dur": 236,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "アメディオ"
+            ],
+            "lyrics": [
+              "夕野ヨシミ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "IOSYS"
+            ]
+          }
         },
         {
           "track": "05",
@@ -5761,7 +5917,18 @@
           "dur": 290,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "とろまる"
+            ],
+            "lyrics": [
+              "海兎"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -5772,7 +5939,21 @@
           "dur": 220,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "塚越雄一朗"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "NanosizeMir"
+            ]
+          }
         },
         {
           "track": "07",
@@ -5783,7 +5964,15 @@
           "dur": 70,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -9718,7 +9907,15 @@
           "dur": 49,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -9729,7 +9926,18 @@
           "dur": 220,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -9741,7 +9949,18 @@
           "genres": [
             "Pop",
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -9752,7 +9971,18 @@
           "dur": 264,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -9763,7 +9993,15 @@
           "dur": 83,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",

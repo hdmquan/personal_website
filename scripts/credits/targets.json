@@ -1,0 +1,1034 @@
+{
+  "Abyss": {
+    "year": "2025",
+    "date": "2025-12-31",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "魔陣",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "プリマ",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "敬虔なる背信者の聖典",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "無垢なる聖約",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Desert Rose",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "FAKE LAND",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "黒憧の光",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "プリマ [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "敬虔なる背信者の聖典 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "無垢なる聖約 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "Desert Rose [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "FAKE LAND [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Achroite": {
+    "year": "2022",
+    "date": "2022-12-30",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "白の明空",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "乙女ノヂシャ",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "ありふれた心酔",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "まどろみ",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "SNOW WHITE",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "黄昏の禁忌",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "夢の果て",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "乙女ノヂシャ [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "ありふれた心酔 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "まどろみ [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "SNOW WHITE [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "黄昏の禁忌 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Garnet Bride": {
+    "year": "2010",
+    "date": "2010-05-05",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "Coffin [愛の棺]",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "Innocence [白い少女]",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "Sacrifice_s [華嫁は紅い羊の夢を見る]",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "Intelligence [楽園追放の果実]",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Nocturne [月の舞踏会]",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "Pieta buio [闇の悲壮]",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "Labyrinth [迷えし者に闇を]",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "Garnet Bride [血婚葬送曲]",
+        "inst": false
+      }
+    ]
+  },
+  "Gothika ～赤羊音戯箱～": {
+    "year": "2009",
+    "date": "2009-05-03",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "始まりの童話",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "狼の血族",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "ガラスのステップ",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "Carmilla",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "最果ての月",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "The Others",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "パンズ.ラビリンス",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "DARK LUNACY",
+        "inst": false
+      },
+      {
+        "track": "09",
+        "title": "CHILD_S PLAY",
+        "inst": false
+      },
+      {
+        "track": "10",
+        "title": "終りの童話",
+        "inst": false
+      }
+    ]
+  },
+  "La Fata": {
+    "year": "2025",
+    "date": "2025-08-17",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "Oberon",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "嘘吐きのエインセル",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "舞影と風の歌",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "うたかた",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "友情",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "白羽の乙女と滅びの村",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "黄昏菫",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "Oberon [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "嘘吐きのエインセル [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "うたかた [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "友情 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "白羽の乙女と滅びの村 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Labyrinth": {
+    "year": "2023",
+    "date": "2023-04-30",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "白動",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "Fairest",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "あくまでヤミつき",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "歓迎",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "薄氷の恋",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "Labyrinth -死の神と少女-",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "黒静",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "Fairest [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "あくまでヤミつき [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "歓迎 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "薄氷の恋 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "Labyrinth -死の神と少女 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Laura Bitter": {
+    "year": "2023",
+    "date": "2023-12-30",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "時の傷痕",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "SorciereNoire 惑いの黒い魔女",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "ヒロイン-ヴァイオレット",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "Minusmaker",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "煤けた羽",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "眠りの薔薇城と魔導の書",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "黒の蜜糸",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "SorciereNoire 惑いの黒い魔女 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "ヒロイン-ヴァイオレット [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "Minusmaker [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "煤けた羽 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "眠りの薔薇城と魔導の書 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Luminous": {
+    "year": "2025",
+    "date": "2025-12-31",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "聖架",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "コレオを追って",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "放浪たる忠誠者の青天",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "燦爛たる約束",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Iblis",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "Never Land",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "純潔の灰",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "コレオを追って [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "放浪たる忠誠者の青天 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "燦爛たる約束 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "Iblis [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "Never Land [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Mistletoe -黄昏の妖精歌-": {
+    "year": "2022",
+    "date": "2022-04-24",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "Mistletoe",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "ライアローグ",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "ブルーベルの森",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "契約の花束",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "新世界へ",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "王と精霊の剣",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "小さな隣人",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "ライアローグ [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "ブルーベルの森 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "契約の花束 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "新世界へ [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "王と精霊の剣 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Shamanite": {
+    "year": "2022",
+    "date": "2022-12-30",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "黒の潜花",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "マーシュの沼",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "人魚のなみだ",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "Order",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Who is the villain",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "蛇と華",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "夢の痕",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "マーシュの沼 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "人魚のなみだ [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "Order [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "Who is the villain [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "蛇と華 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "Spooktacular": {
+    "year": "2023",
+    "date": "2023-10-29",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "選ばれた悪夢",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "心臓裁判",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "ツギハギ男爵と欲張りメイド",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "My Little Lady",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "マリッジ.トゥルー",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "Spooktacular",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "眠りの時間",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "心臓裁判 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "ツギハギ男爵と欲張りメイド [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "My Little Lady [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "マリッジ.トゥルー [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "Spooktacular [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "ばらいろのあくむ": {
+    "year": "2022",
+    "date": "2022-10-30",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "よふかしなばら",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "The Mad Hatter",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "Auberge[Fantôme]",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "薔薇色の悪夢",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "ねむらないもり",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "The Mad Hatter [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "07",
+        "title": "Auberge[Fantôme] [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "08",
+        "title": "薔薇色の悪夢 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "まおうのしろ": {
+    "year": "2024",
+    "date": "2024-08-12",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "まおうのしろ",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "今は亡き、令嬢ロクサーヌ",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "金色の羊",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "あかいばら -Le Petit Prince-",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "ななしのゆうしゃ",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "今は亡き、令嬢ロクサーヌ [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "07",
+        "title": "金色の羊 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "08",
+        "title": "あかいばら -Le Petit Prince- [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "まほうのはな": {
+    "year": "2026",
+    "date": "2026-04-26",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "ちいさなふしぎ",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "Living doll",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "まほうのはな",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "勇者と海の魔女",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Phantasm",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "きせきのたまご",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "Living doll [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "08",
+        "title": "まほうのはな [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "勇者と海の魔女 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "Phantasm [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "まぼろしせかい": {
+    "year": "2025",
+    "date": "2025-04-27",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "だれもしらない",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "まぼろしせかい-魔女の繭",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "ボタンの瞳の騎士",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "真珠の初恋",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Shadow Shape まぼろしver",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "おいしいつき",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "まぼろしせかい-魔女の繭 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "08",
+        "title": "ボタンの瞳の騎士 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "真珠の初恋 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "Shadow Shape まぼろしver [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "昏黒Raptor": {
+    "year": "2024",
+    "date": "2024-12-30",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "黒の天秤",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "あなたが憎い",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "Cried Crime",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "嘘偽",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Unknown Pleasure",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "血解の渇望",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "侵食",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "あなたが憎い [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "Cried Crime [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "嘘偽 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "Unknown Pleasure [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "血解の渇望 [Instrumental]",
+        "inst": true
+      }
+    ]
+  },
+  "灰白Apostle": {
+    "year": "2024",
+    "date": "2024-12-30",
+    "tracks": [
+      {
+        "track": "01",
+        "title": "白の罠",
+        "inst": false
+      },
+      {
+        "track": "02",
+        "title": "拝啓、お姉さま。",
+        "inst": false
+      },
+      {
+        "track": "03",
+        "title": "Bounty Bunny",
+        "inst": false
+      },
+      {
+        "track": "04",
+        "title": "点綴",
+        "inst": false
+      },
+      {
+        "track": "05",
+        "title": "Blue Medicine",
+        "inst": false
+      },
+      {
+        "track": "06",
+        "title": "純潔の贖罪",
+        "inst": false
+      },
+      {
+        "track": "07",
+        "title": "背離",
+        "inst": false
+      },
+      {
+        "track": "08",
+        "title": "拝啓、お姉さま。 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "09",
+        "title": "Bounty Bunny [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "10",
+        "title": "点綴 [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "11",
+        "title": "Blue Medicine [Instrumental]",
+        "inst": true
+      },
+      {
+        "track": "12",
+        "title": "純潔の贖罪 [Instrumental]",
+        "inst": true
+      }
+    ]
+  }
+}
