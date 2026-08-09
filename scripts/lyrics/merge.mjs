@@ -19,6 +19,7 @@ const PREFORMED = {
   'meriole-garnet.json': 'Garnet Bride',
   'meriole-mistletoe.json': 'Mistletoe -黄昏の妖精歌-',
   'meriole-lafata.json': 'La Fata',
+  'meriole-labellaluna.json': 'ばらいろのあくむ',
 };
 // OCR outputs (jp = preformed OCR block, romaji/en = ai arrays) -> album title
 const OCR_INDEX_PATH = 'scripts/lyrics/work/ocr-tasks/ocr-index.json';
