@@ -269,7 +269,18 @@
           "dur": 67,
           "genres": [
             "Classical"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -280,7 +291,21 @@
           "dur": 208,
           "genres": [
             "Symphonic Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -291,7 +316,21 @@
           "dur": 182,
           "genres": [
             "Symphonic Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn"
+            ],
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -302,7 +341,21 @@
           "dur": 260,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -313,7 +366,21 @@
           "dur": 207,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "松岡美弥子"
+            ],
+            "arrange": [
+              "松岡美弥子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -324,7 +391,21 @@
           "dur": 213,
           "genres": [
             "Trance"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "アメディオ"
+            ],
+            "arrange": [
+              "アメディオ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -335,7 +416,18 @@
           "dur": 93,
           "genres": [
             "Soundtrack"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -423,7 +515,18 @@
           "dur": 53,
           "genres": [
             "Classical"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -434,7 +537,21 @@
           "dur": 228,
           "genres": [
             "Synth Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn(創作堂さくら紅葉)"
+            ],
+            "music": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "arrange": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -445,7 +562,21 @@
           "dur": 221,
           "genres": [
             "Pop Rock"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -456,7 +587,21 @@
           "dur": 230,
           "genres": [
             "Folk Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "アメディオ"
+            ],
+            "arrange": [
+              "アメディオ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -467,7 +612,21 @@
           "dur": 251,
           "genres": [
             "Folk Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "7chi子♪"
+            ],
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -478,7 +637,21 @@
           "dur": 227,
           "genres": [
             "Cinematic pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -489,7 +662,18 @@
           "dur": 67,
           "genres": [
             "Classical"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -3558,7 +3742,15 @@
           "dur": 94,
           "genres": [
             "Non-Music"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "キラ星ひかる"
+            ],
+            "vocals": [
+              "荻野晴朗"
+            ]
+          }
         },
         {
           "track": "02",
@@ -3569,7 +3761,18 @@
           "dur": 256,
           "genres": [
             "Cinematic pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "スパーイ大作"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -3580,7 +3783,18 @@
           "dur": 294,
           "genres": [
             "House"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "江並哲志"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -3591,7 +3805,18 @@
           "dur": 288,
           "genres": [
             "House"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "KTG"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -3602,7 +3827,21 @@
           "dur": 213,
           "genres": [
             "Drum & Bass"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "マチゲリータ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "このり"
+            ]
+          }
         },
         {
           "track": "06",
@@ -3613,7 +3852,21 @@
           "dur": 280,
           "genres": [
             "House"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "黒うさP"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "ゴム"
+            ]
+          }
         },
         {
           "track": "07",
@@ -3624,7 +3877,18 @@
           "dur": 296,
           "genres": [
             "House"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "KTG"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -3635,7 +3899,18 @@
           "dur": 184,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "キラ星ひかる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "09",
@@ -3646,7 +3921,21 @@
           "dur": 167,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "黒うさP"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "nayuta"
+            ]
+          }
         },
         {
           "track": "10",
@@ -3657,7 +3946,15 @@
           "dur": 115,
           "genres": [
             "Non-Music"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "キラ星ひかる"
+            ],
+            "vocals": [
+              "荻野晴朗"
+            ]
+          }
         }
       ],
       "booth_url": "https://hatukiyura.booth.pm/items/77880",
@@ -4431,7 +4728,21 @@
           "dur": 191,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -4442,7 +4753,21 @@
           "dur": 246,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn"
+            ],
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -4453,7 +4778,18 @@
           "dur": 94,
           "genres": [
             "Folk, World, & Country"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -4464,7 +4800,21 @@
           "dur": 264,
           "genres": [
             "Latin"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -4475,7 +4825,21 @@
           "dur": 204,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -4486,7 +4850,21 @@
           "dur": 253,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -4497,7 +4875,18 @@
           "dur": 95,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -4737,7 +5126,18 @@
           "dur": 51,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -4749,7 +5149,21 @@
           "genres": [
             "Pop",
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -4760,7 +5174,21 @@
           "dur": 207,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn(創作堂さくら紅葉)"
+            ],
+            "music": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "arrange": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -4771,7 +5199,21 @@
           "dur": 235,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -4782,7 +5224,21 @@
           "dur": 279,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -4793,7 +5249,21 @@
           "dur": 229,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -4804,7 +5274,18 @@
           "dur": 55,
           "genres": [
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -4891,7 +5372,18 @@
           "dur": 60,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -4902,7 +5394,21 @@
           "dur": 234,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -4913,7 +5419,21 @@
           "dur": 195,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -4925,7 +5445,21 @@
           "genres": [
             "Pop",
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn(創作堂さくら紅葉)"
+            ],
+            "music": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "arrange": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -4936,7 +5470,21 @@
           "dur": 256,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -4947,7 +5495,21 @@
           "dur": 185,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "松岡美弥子（未来古代楽団）"
+            ],
+            "arrange": [
+              "松岡美弥子（未来古代楽団）"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -4958,7 +5520,18 @@
           "dur": 64,
           "genres": [
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -5294,7 +5867,18 @@
           "dur": 68,
           "genres": [
             "Classical"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -5305,7 +5889,21 @@
           "dur": 221,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -5316,7 +5914,21 @@
           "dur": 211,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn"
+            ],
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -5327,7 +5939,21 @@
           "dur": 255,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -5338,7 +5964,21 @@
           "dur": 196,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "松岡美弥子"
+            ],
+            "arrange": [
+              "松岡美弥子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -5349,7 +5989,21 @@
           "dur": 224,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "アメディオ"
+            ],
+            "arrange": [
+              "アメディオ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -5360,7 +6014,18 @@
           "dur": 73,
           "genres": [
             "Classical"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -7875,7 +8540,18 @@
           "dur": 76,
           "genres": [
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -7887,7 +8563,21 @@
           "genres": [
             "Electronic",
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn(創作堂さくら紅葉)"
+            ],
+            "music": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "arrange": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -7898,7 +8588,21 @@
           "dur": 225,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -7910,7 +8614,21 @@
           "genres": [
             "Electronic",
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "アメディオ"
+            ],
+            "arrange": [
+              "アメディオ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -7921,7 +8639,21 @@
           "dur": 250,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "7chi子♪"
+            ],
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -7932,7 +8664,21 @@
           "dur": 243,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -7943,7 +8689,18 @@
           "dur": 80,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "とろまる"
+            ],
+            "arrange": [
+              "とろまる"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -8445,7 +9202,18 @@
           "dur": 74,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -8456,7 +9224,21 @@
           "dur": 226,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn(創作堂さくら紅葉)"
+            ],
+            "music": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "arrange": [
+              "やっすん(創作堂さくら紅葉)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -8468,7 +9250,21 @@
           "genres": [
             "Electronic",
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -8479,7 +9275,21 @@
           "dur": 257,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -8490,7 +9300,21 @@
           "dur": 213,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -8501,7 +9325,21 @@
           "dur": 227,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -8512,7 +9350,18 @@
           "dur": 61,
           "genres": [
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -10065,7 +10914,18 @@
           "dur": 148,
           "genres": [
             "Rock"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "02",
@@ -10076,7 +10936,27 @@
           "dur": 260,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "03",
@@ -10087,7 +10967,27 @@
           "dur": 263,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "04",
@@ -10099,7 +10999,27 @@
           "genres": [
             "Electronic",
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "05",
@@ -10110,7 +11030,18 @@
           "dur": 57,
           "genres": [
             "Folk, World, & Country"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "06",
@@ -10176,7 +11107,18 @@
           "dur": 37,
           "genres": [
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "02",
@@ -10187,7 +11129,27 @@
           "dur": 300,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "03",
@@ -10198,7 +11160,27 @@
           "dur": 250,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "04",
@@ -10209,7 +11191,27 @@
           "dur": 269,
           "genres": [
             "Classical"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "05",
@@ -10220,7 +11222,27 @@
           "dur": 157,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "06",
@@ -10231,7 +11253,18 @@
           "dur": 45,
           "genres": [
             "Rock"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "07",
@@ -10307,7 +11340,18 @@
           "dur": 41,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "02",
@@ -10318,7 +11362,27 @@
           "dur": 279,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "03",
@@ -10329,7 +11393,27 @@
           "dur": 255,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "04",
@@ -10340,7 +11424,27 @@
           "dur": 242,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "05",
@@ -10351,7 +11455,27 @@
           "dur": 258,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "06",
@@ -10362,7 +11486,18 @@
           "dur": 78,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "07",
@@ -12310,7 +13445,18 @@
           "dur": 97,
           "genres": [
             "Jazz"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -12321,7 +13467,21 @@
           "dur": 193,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -12332,7 +13492,21 @@
           "dur": 241,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn"
+            ],
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -12343,7 +13517,21 @@
           "dur": 268,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -12354,7 +13542,18 @@
           "dur": 232,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "松岡美弥子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -12365,7 +13564,21 @@
           "dur": 189,
           "genres": [
             "Rock"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -12376,7 +13589,18 @@
           "dur": 92,
           "genres": [
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -12928,7 +14152,18 @@
           "genres": [
             "Stage & Screen",
             "Jazz"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -12939,7 +14174,21 @@
           "dur": 186,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "あ子"
+            ],
+            "music": [
+              "あ子"
+            ],
+            "arrange": [
+              "あ子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -12950,7 +14199,21 @@
           "dur": 217,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "sioborn"
+            ],
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -12961,7 +14224,21 @@
           "dur": 279,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "海兎"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -12972,7 +14249,18 @@
           "dur": 195,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "松岡美弥子"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -12983,7 +14271,21 @@
           "dur": 192,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -12994,7 +14296,18 @@
           "dur": 100,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",

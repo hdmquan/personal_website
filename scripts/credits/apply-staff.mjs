@@ -21,6 +21,7 @@ for (const f of files) {
   const abs = path.isAbsolute(f) ? f : path.join(ROOT, 'scripts/credits', f);
   const map = JSON.parse(fs.readFileSync(abs, 'utf8'));
   for (const [album, tracks] of Object.entries(map)) {
+    if (album.startsWith('_')) continue;              // metadata keys (e.g. _sources)
     const alb = byTitle.get(album);
     if (!alb) { missAlbum++; console.warn('  ! album not in catalog:', album); continue; }
     for (const [tk, staff] of Object.entries(tracks)) {
