@@ -1,0 +1,74 @@
+{
+  "Iconostasis": {
+    "01": {"lyrics":["夕野ヨシミ（IOSYS）"],"music":["Tatsh"],"arrange":["Tatsh"],"vocals":["葉月ゆら","月子"]},
+    "02": {"lyrics":["夕野ヨシミ（IOSYS）"],"music":["白戸佑輔"],"arrange":["白戸佑輔"],"vocals":["月子"]},
+    "03": {"lyrics":["夕野ヨシミ（IOSYS）"],"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "04": {"lyrics":["夕野ヨシミ（IOSYS）"],"music":["K-MASERA"],"arrange":["K-MASERA"],"vocals":["月子"]},
+    "05": {"lyrics":["夕野ヨシミ（IOSYS）"],"music":["藤田真梨"],"arrange":["奥山明"],"vocals":["葉月ゆら"]},
+    "06": {"lyrics":["夕野ヨシミ（IOSYS）"],"music":["小池修也"],"arrange":["小池修也"],"vocals":["月子"]},
+    "07": {"lyrics":["葉月ゆら"],"music":["Drop"],"arrange":["Drop"],"vocals":["葉月ゆら"]},
+    "08": {"lyrics":["夕野ヨシミ（IOSYS）"],"music":["高橋菜々"],"arrange":["SOUND HOLIC"],"vocals":["葉月ゆら"],"chorus":["月子"]},
+    "09": {"lyrics":["中村咲"],"music":["K-MASERA"],"arrange":["K-MASERA"],"vocals":["葉月ゆら","月子"]}
+  },
+  "幻恋楼閣談集": {
+    "01": {"music":["キラ星ひかる"],"arrange":["キラ星ひかる"]},
+    "02": {"lyrics":["葉月ゆら"],"music":["キラ星ひかる"],"arrange":["キラ星ひかる"],"vocals":["葉月ゆら"]},
+    "03": {"lyrics":["葉月ゆら","たまごまご"],"music":["キラ星ひかる"],"arrange":["キラ星ひかる"],"vocals":["葉月ゆら"]},
+    "04": {"lyrics":["葉月ゆら"],"music":["キラ星ひかる"],"arrange":["キラ星ひかる"],"vocals":["葉月ゆら"]},
+    "05": {"lyrics":["葉月ゆら"],"music":["キラ星ひかる"],"arrange":["キラ星ひかる"],"vocals":["葉月ゆら"]},
+    "06": {"lyrics":["葉月ゆら"],"music":["キラ星ひかる"],"arrange":["キラ星ひかる"],"vocals":["葉月ゆら"]},
+    "07": {"music":["キラ星ひかる"],"arrange":["キラ星ひかる"]}
+  },
+  "Dragon Slayer -黒竜の騎士編-": {
+    "06": {"music":["Drop"],"arrange":["Drop"],"vocals":["葉月ゆら"]}
+  },
+  "RAPT AQUARIUM": {
+    "01": {"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "02": {"lyrics":["くろみん"],"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "03": {"lyrics":["くろみん"],"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "04": {"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "05": {"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "06": {"lyrics":["葉月ゆら"],"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "07": {"lyrics":["くろみん"],"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]},
+    "08": {"lyrics":["くろみん"],"music":["Tetsushi"],"arrange":["Tetsushi"],"vocals":["葉月ゆら"]}
+  },
+  "少女標本-maiden collector-": {
+    "01": {"lyrics":["葉月ゆら"],"music":["はりい"],"arrange":["はりい"],"vocals":["葉月ゆら"]},
+    "02": {"lyrics":["葉月ゆら"],"music":["しゃな"],"arrange":["米光亮"],"vocals":["葉月ゆら"]},
+    "03": {"lyrics":["葉月ゆら"],"music":["TATSH"],"arrange":["TATSH"],"vocals":["葉月ゆら"]},
+    "04": {"lyrics":["葉月ゆら"],"music":["樋口秀樹"],"arrange":["bice"],"vocals":["葉月ゆら"]},
+    "05": {"lyrics":["葉月ゆら"],"music":["キラ星ひかる"],"arrange":["キラ星ひかる"],"vocals":["葉月ゆら"]},
+    "06": {"lyrics":["葉月ゆら"],"music":["スパーイ大作"],"arrange":["スパーイ大作"],"vocals":["葉月ゆら"]},
+    "07": {"lyrics":["湯川れい子"],"music":["諌山実生"],"arrange":["スパーイ大作"],"vocals":["葉月ゆら"]},
+    "08": {"lyrics":["葉月ゆら"],"music":["高見龍"],"vocals":["葉月ゆら"]}
+  },
+  "Lost Omen": {
+    "02": {"lyrics":["新井和広"],"music":["Tetsushi"],"vocals":["新井和広"]},
+    "03": {"lyrics":["星見蒼人"],"music":["星見蒼人"],"vocals":["星見蒼人","au"]},
+    "04": {"lyrics":["星見蒼人"],"music":["星見蒼人"],"vocals":["葉月ゆら"]},
+    "05": {"lyrics":["星見蒼人"],"music":["星見蒼人"],"vocals":["星見蒼人","凪佳二"]},
+    "06": {"lyrics":["星見蒼人"],"music":["星見蒼人"],"vocals":["葉月ゆら"]},
+    "07": {"lyrics":["しゃな"],"music":["しゃな"],"vocals":["星見蒼人"]},
+    "08": {"lyrics":["葉月ゆら"],"music":["はりい"],"vocals":["au"]}
+  },
+  "聖童話工房": {
+    "01": {"lyrics":["Mifkha*"],"music":["キラ星ひかる"],"vocals":["葉月ゆら"],"circle":["Roses Epicurean"]},
+    "02": {"lyrics":["葉月ゆら"],"music":["キラ星ひかる"],"vocals":["葉月ゆら"],"circle":["Roses Epicurean"]},
+    "03": {"lyrics":["葉月ゆら"],"music":["キラ星ひかる"],"vocals":["葉月ゆら"],"circle":["Roses Epicurean"]}
+  },
+  "まよなかのうた": {
+    "01": {"music":["Drop"],"arrange":["Drop"]},
+    "02": {"lyrics":["葉月ゆら"],"music":["Drop"],"arrange":["Drop"],"vocals":["葉月ゆら"]},
+    "03": {"lyrics":["葉月ゆら"],"music":["Drop"],"arrange":["Drop"],"vocals":["葉月ゆら"]}
+  },
+  "_sources": {
+    "まよなかのうた": "http://hatukiyura.sakura.ne.jp/mayonaka_no_uta/",
+    "聖童話工房": "https://www.dojin-music.info/cd/1580",
+    "少女標本-maiden collector-": "https://www.team-e.co.jp/kdsd-00298/",
+    "Lost Omen": "https://www.dojin-music.info/cd/1344",
+    "Iconostasis": "http://hatukiyura.sakura.ne.jp/icono/",
+    "幻恋楼閣談集": "http://hatukiyura.sakura.ne.jp/genren/",
+    "Dragon Slayer -黒竜の騎士編-": "http://hatukiyura.sakura.ne.jp/dragonslayer/",
+    "RAPT AQUARIUM": "http://hatukiyura.sakura.ne.jp/rapt/"
+  }
+}

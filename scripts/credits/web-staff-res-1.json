@@ -1,0 +1,96 @@
+{
+  "The Beautiful World": {
+    "01": {"lyrics": ["leonn"], "music": ["leonn"], "arrange": ["スパーイ大作"], "vocals": ["葉月ゆら"]},
+    "02": {"lyrics": ["leonn"], "music": ["岩見正明"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["葉月ゆら"], "music": ["スパーイ大作"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "06": {"music": ["スパーイ大作"]},
+    "07": {"music": ["Drop"]}
+  },
+  "Lunna＊Musique": {},
+  "金魚恋想歌": {
+    "01": {"lyrics": ["vin-PRAD"], "music": ["vin-PRAD"], "arrange": ["vin-PRAD"], "vocals": ["葉月ゆら"], "chorus": ["RIKO"]},
+    "02": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["葉月ゆら", "たまごまご"], "music": ["友蔵"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["tetsushi"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["harunosuke"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["新堂いつき"], "music": ["虹音"], "vocals": ["葉月ゆら"]},
+    "07": {"lyrics": ["葉月ゆら"], "music": ["K-MASERA"], "vocals": ["葉月ゆら"]},
+    "08": {"lyrics": ["葉月ゆら"], "music": ["Tsukasa（矢鴇つかさ）"], "vocals": ["葉月ゆら"]},
+    "09": {"lyrics": ["葉月ゆら"], "music": ["スパーイ大作"], "vocals": ["葉月ゆら"]},
+    "10": {"lyrics": ["星見蒼人"], "music": ["星見蒼人"], "vocals": ["葉月ゆら", "樹詩音"]},
+    "11": {"lyrics": ["葉月ゆら"], "music": ["小池修也"], "vocals": ["葉月ゆら"]},
+    "12": {"vocals": ["葉月ゆら"]},
+    "13": {"lyrics": ["安藤浩二"], "music": ["安藤浩二"], "vocals": ["葉月ゆら"]},
+    "14": {"lyrics": ["葉月ゆら"], "music": ["葉月ゆら"], "vocals": ["葉月ゆら"]},
+    "15": {"vocals": ["葉月ゆら"]}
+  },
+  "Strawberry Paradox": {},
+  "幻燈パレード ～phantasm parade～": {
+    "01": {"music": ["マチゲリータ"], "arrange": ["マチゲリータ"]},
+    "02": {"lyrics": ["マチゲリータ"], "music": ["マチゲリータ"], "arrange": ["マチゲリータ"], "vocals": ["このり"]},
+    "03": {"lyrics": ["マチゲリータ"], "music": ["マチゲリータ"], "arrange": ["マチゲリータ"], "vocals": ["このり", "葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["マチゲリータ"], "arrange": ["マチゲリータ"], "vocals": ["このり", "葉月ゆら"]},
+    "05": {"lyrics": ["マチゲリータ"], "music": ["マチゲリータ"], "arrange": ["マチゲリータ"], "vocals": ["このり", "葉月ゆら"]},
+    "06": {"lyrics": ["マチゲリータ"], "music": ["マチゲリータ"], "arrange": ["マチゲリータ"], "vocals": ["このり", "葉月ゆら"]},
+    "07": {"music": ["マチゲリータ"], "arrange": ["マチゲリータ"]}
+  },
+  "La Pucelle": {
+    "12": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]}
+  },
+  "Gothika 2 ~御伽影牢館~": {
+    "01": {"music": ["Drop"], "arrange": ["Drop"]},
+    "02": {"lyrics": ["葉月ゆら"], "music": ["love solfege"], "arrange": ["love solfege"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["一斗まる"], "music": ["オッカ"], "arrange": ["オッカ"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["bitplane"], "music": ["bitplane"], "arrange": ["bitplane"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["藤田真梨"], "arrange": ["奥山明"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "07": {"music": ["Drop"], "arrange": ["Drop"]}
+  },
+  "BABEL": {
+    "01": {"music": ["オッカ"], "arrange": ["オッカ"]},
+    "02": {"lyrics": ["葉月ゆら"], "music": ["オッカ"], "arrange": ["オッカ"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["一斗まる"], "music": ["オッカ"], "arrange": ["オッカ"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["オッカ"], "arrange": ["オッカ"], "vocals": ["葉月ゆら", "このり"]},
+    "05": {"lyrics": ["未羽"], "music": ["オッカ"], "arrange": ["オッカ"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["オッカ"], "arrange": ["オッカ"], "vocals": ["葉月ゆら"]},
+    "07": {"music": ["オッカ"], "arrange": ["オッカ"]}
+  },
+  "夢、麗しく闇を奏でる": {
+    "01": {"music": ["甲斐ユウ"], "arrange": ["甲斐ユウ"], "circle": ["Carnaval Papillon"]},
+    "02": {"lyrics": ["葉月ゆら"], "music": ["甲斐ユウ"], "arrange": ["甲斐ユウ"], "vocals": ["このり", "凪 佳ニ", "月子", "葉月ゆら"], "circle": ["Carnaval Papillon"]},
+    "03": {"vocals": ["月子"], "circle": ["Carnaval Papillon"]},
+    "04": {"vocals": ["凪 佳ニ"], "circle": ["Carnaval Papillon"]}
+  },
+  "Silver Blanchette": {
+    "05": {"lyrics": ["一斗まる"], "music": ["とろまる"], "arrange": ["とろまる"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "07": {"music": ["光ノ巣"], "arrange": ["光ノ巣"], "vocals": ["葉月ゆら"]}
+  },
+  "Fluorite": {
+    "06": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "07": {"music": ["とろまる"], "arrange": ["とろまる"], "vocals": ["葉月ゆら"]}
+  },
+  "夜想陽炎": {
+    "01": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "chorus": ["葉月ゆら"]},
+    "02": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "chorus": ["葉月ゆら"]},
+    "03": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "chorus": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "chorus": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "chorus": ["葉月ゆら"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "chorus": ["葉月ゆら"]},
+    "07": {"lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "chorus": ["葉月ゆら"]}
+  },
+  "_sources": {
+    "The Beautiful World": "https://www.dojin-music.info/cd/545",
+    "金魚恋想歌": "https://utaitedb.net/api/albums/11372 + https://www.dojin-music.info/cd/546",
+    "幻燈パレード ～phantasm parade～": "https://utaitedb.net/api/albums/11377",
+    "La Pucelle": "https://utaitedb.net/api/songs/51822 (+ http://hatukiyura.sakura.ne.jp/lapucelle/)",
+    "Gothika 2 ~御伽影牢館~": "https://www.dojin-music.info/cd/3775",
+    "BABEL": "http://hatukiyura.sakura.ne.jp/babel/",
+    "夢、麗しく闇を奏でる": "http://hatukiyura.sakura.ne.jp/yumegoth/",
+    "Silver Blanchette": "http://hatukiyura.sakura.ne.jp/si_blanchette/",
+    "Fluorite": "http://hatukiyura.sakura.ne.jp/fluorite/",
+    "夜想陽炎": "http://hatukiyura.sakura.ne.jp/yasou_kagerou/"
+  }
+}

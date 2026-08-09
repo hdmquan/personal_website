@@ -1,0 +1,63 @@
+{
+  "闇童話工房": {
+    "01": {"music": ["キラ星ひかる"]},
+    "02": {"music": ["キラ星ひかる"], "vocals": ["葉月ゆら"]},
+    "03": {"music": ["キラ星ひかる"], "vocals": ["葉月ゆら"]},
+    "04": {"music": ["キラ星ひかる"], "vocals": ["葉月ゆら"]},
+    "05": {"music": ["キラ星ひかる"], "vocals": ["葉月ゆら"]},
+    "06": {"music": ["キラ星ひかる"], "vocals": ["葉月ゆら"]},
+    "07": {"music": ["キラ星ひかる"], "vocals": ["葉月ゆら"]}
+  },
+  "東方来夢来人": {
+    "01": {"lyrics": ["夕野ヨシミ(イオシス)"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["ぼいど(イオシス)"], "vocals": ["葉月ゆら"]},
+    "02": {"lyrics": ["Blue E"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["SOUND HOLIC"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["Blue E"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["SWING HOLIC"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["岸田教団"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["岸田教団"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["NYO（Silver Forest）"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["鳥宮小吉（シークレット作家）"], "vocals": ["葉月ゆら"]},
+    "07": {"lyrics": ["Haruka (Alstroemeria Records)"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["Masayoshi Minoshima (Alstroemeria Records)"], "vocals": ["葉月ゆら"]}
+  },
+  "東方幻想奇談 ～闇色硝子～": {
+    "02": {"lyrics": ["このり", "葉月ゆら"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["Drop"], "vocals": ["葉月ゆら", "このり"]},
+    "03": {"lyrics": ["葉月ゆら"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["このり", "葉月ゆら"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["Drop"], "vocals": ["葉月ゆら", "このり"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["ZUN(上海アリス幻樂団)"], "arrange": ["Drop"], "vocals": ["葉月ゆら"]}
+  },
+  "宵闇恋想奇譚": {
+    "01": {"music": ["どろっぷ"], "arrange": ["どろっぷ"], "vocals": ["葉月ゆら"]},
+    "02": {"music": ["どろっぷ"], "arrange": ["どろっぷ"], "vocals": ["葉月ゆら"]},
+    "03": {"music": ["どろっぷ"], "arrange": ["どろっぷ"], "vocals": ["葉月ゆら"]},
+    "04": {"music": ["どろっぷ"], "arrange": ["どろっぷ"], "vocals": ["葉月ゆら"]},
+    "05": {"music": ["どろっぷ"], "arrange": ["どろっぷ"], "vocals": ["葉月ゆら"]},
+    "06": {"music": ["どろっぷ"], "arrange": ["どろっぷ"], "vocals": ["葉月ゆら"]}
+  },
+  "White Princess": {
+    "05": {"lyrics": ["海兎"], "music": ["とろまる"], "arrange": ["とろまる"], "vocals": ["葉月ゆら"]}
+  },
+  "Cherry Melody": {
+    "02": {"lyrics": ["月棘苑子"], "music": ["Tetsushi"], "arrange": ["Tetsushi"], "vocals": ["葉月ゆら"]}
+  },
+  "Mell Sweet": {
+    "02": {"lyrics": ["葉月ゆら"], "music": ["塚越雄一朗(NanosizeMir)"], "arrange": ["塚越雄一朗(NanosizeMir)"], "vocals": ["葉月ゆら"]}
+  },
+  "Queen A’rcadia": {
+    "01": {"music": ["胡桃坂 庵"]},
+    "02": {"lyrics": ["葉月ゆら"], "music": ["胡桃坂 庵"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["海兎"], "music": ["Paspal"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["海兎"], "music": ["Paspal"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["海兎"], "music": ["胡桃坂 庵"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["胡桃坂 庵", "Paspal"], "vocals": ["葉月ゆら", "このり"]},
+    "07": {"music": ["Paspal"]}
+  },
+  "_sources": {
+    "闇童話工房": "https://utaitedb.net/Al/11315",
+    "東方来夢来人": "http://hatukiyura.sakura.ne.jp/th_lime/",
+    "東方幻想奇談 ～闇色硝子～": "https://touhou.arrangement-chronicle.com/vocalist/葉月ゆら + http://hatukiyura.sakura.ne.jp/tohogensou/",
+    "宵闇恋想奇譚": "http://hatukiyura.sakura.ne.jp/yoiyami/",
+    "White Princess": "http://hatukiyura.sakura.ne.jp/whiteprincess/",
+    "Cherry Melody": "http://hatukiyura.sakura.ne.jp/cherrymelody/",
+    "Mell Sweet": "http://hatukiyura.sakura.ne.jp/mellsweet/",
+    "Queen A’rcadia": "http://queenarcadia.12-i.net/"
+  }
+}
