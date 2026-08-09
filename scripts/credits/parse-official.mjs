@@ -60,7 +60,7 @@ function parseCreditLine(line, staff, notes) {
     const roles = rolesOf(label);
     // non-role labels (Guitar/Bass/MIX/Mastering/シナリオ/…) → note, don't fabricate roles
     if (!roles.size) { if (/[A-Za-zぁ-んァ-ヶ一-龠]/.test(val)) notes.push(label + ': ' + val); continue; }
-    const names = splitNames(val);
+    const names = splitNames(val).map(n => (n === 'ゆら' || n === '葉月') ? '葉月ゆら' : n);   // short form on old pages
     for (const role of roles) { staff[role] = staff[role] || []; for (const n of names) if (!staff[role].includes(n)) staff[role].push(n); }
   }
 }

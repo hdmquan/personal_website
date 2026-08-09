@@ -1,4 +1,202 @@
 {
+  "はつ恋": {
+    "10": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "友蔵"
+      ],
+      "arrange": [
+        "友蔵"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "11": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "虹音（Rock'n' Banana Artist）"
+      ],
+      "arrange": [
+        "虹音（Rock'n' Banana Artist）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "12": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "13": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "BLUEHAWAII"
+      ],
+      "arrange": [
+        "BLUEHAWAII"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "14": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "スパーイ大作"
+      ],
+      "arrange": [
+        "スパーイ大作"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "01": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "BLUEHAWAII"
+      ],
+      "arrange": [
+        "BLUEHAWAII"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "harunosuke"
+      ],
+      "arrange": [
+        "harunosuke"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "スパーイ大作"
+      ],
+      "arrange": [
+        "スパーイ大作"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "葉月ゆら"
+      ],
+      "arrange": [
+        "スパーイ大作"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "BLUEHAWAII"
+      ],
+      "arrange": [
+        "BLUEHAWAII"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "BLUEHAWAII"
+      ],
+      "arrange": [
+        "BLUEHAWAII"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "まつ"
+      ],
+      "arrange": [
+        "まつ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "08": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Northern Brastorm"
+      ],
+      "arrange": [
+        "Northern Brastorm"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "09": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "ゆら&BLUEHAWAII"
+      ],
+      "arrange": [
+        "BLUEHAWAII"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
   "ELECTRIC GIRL": {
     "01": {
       "music": [
@@ -5692,6 +5890,7 @@
     }
   },
   "_sources": {
+    "はつ恋": "http://hatukiyura.sakura.ne.jp/hatsukoi/",
     "ELECTRIC GIRL": "http://hatukiyura.sakura.ne.jp/elg/",
     "La Pucelle": "http://hatukiyura.sakura.ne.jp/lapucelle/",
     "サロン・ド・シャノワール": "http://hatukiyura.sakura.ne.jp/chatnoir/",
