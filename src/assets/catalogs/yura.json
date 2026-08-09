@@ -1613,7 +1613,21 @@
           "dur": 255,
           "genres": [
             "Symphonic Rock"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "光ノ巣"
+            ],
+            "music": [
+              "光ノ巣"
+            ],
+            "arrange": [
+              "光ノ巣"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -3092,7 +3106,22 @@
           "dur": 301,
           "genres": [
             "House"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Tetsushi"
+            ],
+            "arrange": [
+              "Tetsushi"
+            ],
+            "vocals": [
+              "葉月ゆら",
+              "月子"
+            ]
+          }
         }
       ],
       "album_seconds": 2173,
@@ -4572,7 +4601,19 @@
           "dur": 261,
           "genres": [
             "Techno"
-          ]
+          ],
+          "staff": {
+            "vocals": [
+              "月子"
+            ],
+            "lyrics": [
+              "山口理恵"
+            ],
+            "music": [
+              "manzo"
+            ],
+            "notes": "アレンジ: KAISE"
+          }
         },
         {
           "track": "06",
@@ -11695,7 +11736,21 @@
           "dur": 198,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -19699,7 +19754,21 @@
           "dur": 250,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "夕野ヨシミ"
+            ],
+            "music": [
+              "光ノ巣"
+            ],
+            "arrange": [
+              "光ノ巣"
+            ],
+            "vocals": [
+              "葉月ゆら＆海紅"
+            ]
+          }
         },
         {
           "track": "03",

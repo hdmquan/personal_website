@@ -13,11 +13,14 @@ const PAGES = '/tmp/hy_pages';
 const map = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/credits/slug-map.json'), 'utf8'));
 const work = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/credits/all-remaining.json'), 'utf8'));
 
-// aggressive normalize for title matching: drop whitespace + decorative punctuation/brackets
-// so catalog "深哀 クロの魔女とクロい猫" matches page "深哀 〜クロの魔女とクロい猫〜".
+// aggressive normalize for title matching: NFKD-fold (fullwidth→ascii, strip accents é→e),
+// drop the word "and"/"＆", whitespace, and decorative punctuation/brackets — so catalog
+// "深哀 クロの魔女とクロい猫" matches "深哀 〜クロの魔女とクロい猫〜" and "Ｔ_Ｔ" matches "T_T".
 const norm = s => (s || '')
+  .normalize('NFKD').replace(/[̀-ͯ]/g, '')
+  .replace(/&|＆|\band\b/gi, '')
   .replace(/[\s　]+/g, '')
-  .replace(/[’'"”“〜～:：・\-—–ー/／|｜()（）\[\]［］「」『』【】,、，.。!！?？＊*&＆＝=+～]/g, '')
+  .replace(/[’'"”“〜～~:：・\-—–ー_/／|｜()（）\[\]［］「」『』【】,、，.。!！?？＊*＝=+]/g, '')
   .toLowerCase();
 
 // a page line that starts a track: "1 : fleur" / "1.眠れる森の王子" / "01. entrance：降誕" /

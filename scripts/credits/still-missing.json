@@ -31,19 +31,7 @@
         "t": "Abel"
       }
     ],
-    "have": 0,
     "voc": 7
-  },
-  "Black Princess": {
-    "year": "2017",
-    "miss": [
-      {
-        "n": "02",
-        "t": "Quand Reines ~幽閉王女~"
-      }
-    ],
-    "have": 7,
-    "voc": 8
   },
   "Cherry Melody": {
     "year": "2020",
@@ -53,7 +41,6 @@
         "t": "桜色Air"
       }
     ],
-    "have": 6,
     "voc": 7
   },
   "Clover": {
@@ -128,7 +115,6 @@
         "t": "ふりーだむ!"
       }
     ],
-    "have": 0,
     "voc": 17
   },
   "Dragon Slayer -黒竜の騎士編-": {
@@ -139,18 +125,6 @@
         "t": "Dragon Slayer 黒竜の騎士編"
       }
     ],
-    "have": 7,
-    "voc": 8
-  },
-  "ELECTRIC GIRL": {
-    "year": "2010",
-    "miss": [
-      {
-        "n": "08",
-        "t": "kiss me kiss me(T_s Electro mix)"
-      }
-    ],
-    "have": 7,
     "voc": 8
   },
   "Fluorite": {
@@ -165,22 +139,16 @@
         "t": "マグノリアの揺らぎ"
       }
     ],
-    "have": 5,
     "voc": 7
   },
   "Fromage": {
     "year": "2012",
     "miss": [
       {
-        "n": "05",
-        "t": "恋のビギナーなんです(Ｔ_Ｔ)"
-      },
-      {
         "n": "10",
         "t": "ゆらと月子のおしゃべり"
       }
     ],
-    "have": 9,
     "voc": 11
   },
   "Gothika 2 ~御伽影牢館~": {
@@ -215,7 +183,6 @@
         "t": "晩期Ｍ"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "Halloween of the Dead": {
@@ -250,7 +217,6 @@
         "t": "Ruin"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "Honey Bee": {
@@ -325,7 +291,6 @@
         "t": "Honey Bee"
       }
     ],
-    "have": 0,
     "voc": 17
   },
   "Iconostasis": {
@@ -368,7 +333,6 @@
         "t": "遠くへ"
       }
     ],
-    "have": 0,
     "voc": 9
   },
   "La Pucelle": {
@@ -379,7 +343,6 @@
         "t": "Amadeus(はつ恋ver)"
       }
     ],
-    "have": 11,
     "voc": 12
   },
   "Lunna＊Musique": {
@@ -406,7 +369,6 @@
         "t": "Lunna Musique"
       }
     ],
-    "have": 0,
     "voc": 5
   },
   "Mell Sweet": {
@@ -417,7 +379,6 @@
         "t": "Petite Sorcire -小さな白い魔女-"
       }
     ],
-    "have": 6,
     "voc": 7
   },
   "Origin Notes": {
@@ -456,7 +417,6 @@
         "t": "蝶の懺悔"
       }
     ],
-    "have": 0,
     "voc": 8
   },
   "Queen A’rcadia": {
@@ -491,7 +451,6 @@
         "t": "Ideal"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "RAPT AQUARIUM": {
@@ -530,19 +489,7 @@
         "t": "Enchant Plantarium"
       }
     ],
-    "have": 0,
     "voc": 8
-  },
-  "Shadow Shape": {
-    "year": "2024",
-    "miss": [
-      {
-        "n": "03",
-        "t": "おそろいの秘密 -Hansel and Gretel-"
-      }
-    ],
-    "have": 6,
-    "voc": 7
   },
   "Silver Blanchette": {
     "year": "2016",
@@ -560,7 +507,6 @@
         "t": "甘美な呪い"
       }
     ],
-    "have": 4,
     "voc": 7
   },
   "Snow Flower": {
@@ -599,7 +545,6 @@
         "t": "Moreover"
       }
     ],
-    "have": 0,
     "voc": 8
   },
   "Strawberry Paradox": {
@@ -626,7 +571,6 @@
         "t": "Everyday Love You (pliom remix)"
       }
     ],
-    "have": 0,
     "voc": 5
   },
   "The Beautiful World": {
@@ -661,7 +605,6 @@
         "t": "Amadeus God Bless -Jeune fille musique II-"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "White Princess": {
@@ -672,7 +615,6 @@
         "t": "insomina parade"
       }
     ],
-    "have": 7,
     "voc": 8
   },
   "a la mode": {
@@ -719,7 +661,6 @@
         "t": "月のワルツ"
       }
     ],
-    "have": 0,
     "voc": 10
   },
   "はつ恋": {
@@ -782,7 +723,6 @@
         "t": "小さな恋の物語"
       }
     ],
-    "have": 0,
     "voc": 14
   },
   "まよなかのうた": {
@@ -805,7 +745,6 @@
         "t": "ぼくらのせかい"
       }
     ],
-    "have": 0,
     "voc": 4
   },
   "ゆらわーるど -Honey Bee-": {
@@ -872,7 +811,6 @@
         "t": "Ghost Dance"
       }
     ],
-    "have": 0,
     "voc": 15
   },
   "夜想陽炎": {
@@ -907,7 +845,6 @@
         "t": "竜胆"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "夢、麗しく闇を奏でる": {
@@ -930,7 +867,6 @@
         "t": "凪の言葉(Bonus talk)"
       }
     ],
-    "have": 2,
     "voc": 6
   },
   "宵闇恋想奇譚": {
@@ -961,7 +897,6 @@
         "t": "六，とおりゃんせ"
       }
     ],
-    "have": 0,
     "voc": 6
   },
   "少女標本-maiden collector-": {
@@ -1000,7 +935,6 @@
         "t": "白い風"
       }
     ],
-    "have": 0,
     "voc": 8
   },
   "幻恋楼閣談集": {
@@ -1035,7 +969,6 @@
         "t": "儚き華達の終焉"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "幻燈パレード ～phantasm parade～": {
@@ -1070,7 +1003,6 @@
         "t": "outroduction"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "東方幻想奇談 ～闇色硝子～": {
@@ -1105,7 +1037,6 @@
         "t": "廃虚の森"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "東方来夢来人": {
@@ -1140,7 +1071,6 @@
         "t": "Moon Struck"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "東方来夢来人Ⅱ～ポップン・ティアラ～": {
@@ -1183,19 +1113,7 @@
         "t": "[こんなに綺麗な月夜だからきっと甘いミルク味]"
       }
     ],
-    "have": 0,
     "voc": 9
-  },
-  "紅夜に詠う少女の禁忌": {
-    "year": "2016",
-    "miss": [
-      {
-        "n": "02",
-        "t": "血宴 -Vampire_s Banquet-"
-      }
-    ],
-    "have": 6,
-    "voc": 7
   },
   "聖童話工房": {
     "year": "2008",
@@ -1213,7 +1131,6 @@
         "t": "聖童話工房"
       }
     ],
-    "have": 0,
     "voc": 3
   },
   "金魚恋想歌": {
@@ -1280,7 +1197,6 @@
         "t": "デパチカ(北海道物産展ver)"
       }
     ],
-    "have": 0,
     "voc": 15
   },
   "闇童話工房": {
@@ -1315,7 +1231,6 @@
         "t": "夜の子供たち"
       }
     ],
-    "have": 0,
     "voc": 7
   },
   "Clepsydra -Vocal CD-": {
@@ -1342,7 +1257,6 @@
         "t": "Aphradisiac ~ aphrodisiac ~ "
       }
     ],
-    "have": 0,
     "voc": 5
   },
   "Lost Omen": {
@@ -1385,7 +1299,6 @@
         "t": "Kae"
       }
     ],
-    "have": 0,
     "voc": 9
   }
 }
