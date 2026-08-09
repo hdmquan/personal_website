@@ -788,7 +788,14 @@
     npScreen = false;
     if (popHash && /^#np/.test(location.hash)) location.hash = (view === 'album' && openAlbum >= 0) ? ('a=' + openAlbum) : '';
   }
-  queueBtn?.addEventListener('click', e => { e.stopPropagation(); queueOpen() ? closeQueue(true) : openQueue(true); });
+  // The queue button opens the now-playing screen AND rides straight up into the queue
+  // (the grip's reveal animation), rather than landing at rest. rAF so the q-up transition plays.
+  queueBtn?.addEventListener('click', e => {
+    e.stopPropagation();
+    if (queueOpen()) { closeQueue(true); return; }
+    openQueue(true);
+    requestAnimationFrame(() => requestAnimationFrame(() => window.__npEnterQueue && window.__npEnterQueue()));
+  });
   document.getElementById('queue-close')?.addEventListener('click', () => closeQueue(true));
 
   /* tap an upcoming item → jump to it (suppressed right after a swipe/drag) */
