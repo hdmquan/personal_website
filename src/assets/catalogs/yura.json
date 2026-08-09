@@ -6442,7 +6442,24 @@
           "dur": 251,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "02",
@@ -6453,7 +6470,24 @@
           "dur": 263,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "03",
@@ -6465,7 +6499,21 @@
           "genres": [
             "Jazz",
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "04",
@@ -6476,7 +6524,24 @@
           "dur": 203,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "05",
@@ -6487,7 +6552,24 @@
           "dur": 247,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "06",
@@ -6498,7 +6580,24 @@
           "dur": 252,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "07",
@@ -6509,7 +6608,21 @@
           "dur": 42,
           "genres": [
             "Rock"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         }
       ],
       "booth_url": "https://hatukiyura.booth.pm/items/374955",
@@ -6522,7 +6635,8 @@
       ],
       "release_types": [
         "albums"
-      ]
+      ],
+      "artist": "清風明月"
     },
     {
       "album": "Honey Bee",
@@ -20401,7 +20515,18 @@
           "dur": 256,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "yohine(Innocent Key)"
+            ],
+            "lyrics": [
+              "溝口ゆうま (Innocent Key)"
+            ],
+            "vocals": [
+              "ココ(Innocent Key)"
+            ]
+          }
         },
         {
           "track": "02",
@@ -20412,7 +20537,19 @@
           "dur": 249,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "MiYAMO(こなぐすり)"
+            ],
+            "lyrics": [
+              "夕野ヨシミ(IOSYS)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "Mix: Drop(Dropの小屋。)"
+          }
         },
         {
           "track": "03",
@@ -20423,7 +20560,18 @@
           "dur": 315,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "Tetsushi（REd Hot HouSe）"
+            ],
+            "lyrics": [
+              "夕野ヨシミ（IOSYS）"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -20434,7 +20582,18 @@
           "dur": 215,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "CHEEBOW（くじら音楽部）"
+            ],
+            "lyrics": [
+              "夕野ヨシミ（IOSYS）"
+            ],
+            "vocals": [
+              "月子（stretta di mano）"
+            ]
+          }
         },
         {
           "track": "05",
@@ -20445,7 +20604,18 @@
           "dur": 299,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "天音（Rolling Contact）"
+            ],
+            "lyrics": [
+              "たまごまご（たまごまごごはん）"
+            ],
+            "vocals": [
+              "都築きせの"
+            ]
+          }
         },
         {
           "track": "06",
@@ -20456,7 +20626,18 @@
           "dur": 263,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "KAISE（Fine Feeling）"
+            ],
+            "lyrics": [
+              "めらみぽっぷ（こすもぽりたん）"
+            ],
+            "vocals": [
+              "めらみぽっぷ（こすもぽりたん）"
+            ]
+          }
         },
         {
           "track": "07",
@@ -20467,7 +20648,22 @@
           "dur": 210,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "MiYAMO(こなぐすり)"
+            ],
+            "lyrics": [
+              "夕野ヨシミ(IOSYS)"
+            ],
+            "vocals": [
+              "ココ(Innocent Key)",
+              "月子(stretta di mano)",
+              "都築きせの",
+              "葉月ゆら"
+            ],
+            "notes": "Mix: Tetsushi(REd Hot HouSe)"
+          }
         },
         {
           "track": "08",
@@ -20478,7 +20674,19 @@
           "dur": 215,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "MiYAMO（こなぐすり）"
+            ],
+            "lyrics": [
+              "夕野ヨシミ（IOSYS）"
+            ],
+            "vocals": [
+              "砂吹・凪圭二・森井ケンシロウ"
+            ],
+            "notes": "※お詫び: 裏ジャケットでの編曲様のお名前記載及び、7曲目歌い手様のお名前記載で; ☆誤: 7曲目歌い手様「月子(stretta di mano), 都築きせの, 葉月ゆら」"
+          }
         },
         {
           "track": "09",
@@ -20489,7 +20697,22 @@
           "dur": 393,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "MiYAMO(こなぐすり)"
+            ],
+            "lyrics": [
+              "夕野ヨシミ(IOSYS)"
+            ],
+            "vocals": [
+              "ココ(Innocent Key)",
+              "月子(stretta di mano)",
+              "都築きせの",
+              "葉月ゆら"
+            ],
+            "notes": "Mix: Tetsushi(REd Hot HouSe)"
+          }
         }
       ],
       "album_seconds": 2415,

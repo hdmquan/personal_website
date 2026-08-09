@@ -1,0 +1,12 @@
+{
+  "Halloween of the Dead": {
+    "01": { "lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "02": { "lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "03": { "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "04": { "lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "05": { "lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "06": { "lyrics": ["葉月ゆら"], "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "07": { "music": ["Drop"], "arrange": ["Drop"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] }
+  },
+  "_sources": { "Halloween of the Dead": "http://hatukiyura.sakura.ne.jp/halloweenofthedead/" }
+}

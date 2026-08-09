@@ -25,7 +25,7 @@ const norm = s => (s || '')
 
 // a page line that starts a track: "1 : fleur" / "1.眠れる森の王子" / "01. entrance：降誕" /
 // "Ⅰ，魔笛の男Ⅰ" / "[1] TRICK or TREAT" / "［１］title"
-const TRACK_RE = /^\s*[\[［]?\s*(\d{1,2}|[０-９]{1,2}|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+|[IVXLC]{1,5})\s*[\.:：，、）\)\]］]\s*(\S.*)$/;
+const TRACK_RE = /^\s*(?:[MmＭ]|track|Track|No\.?)?\s*[\[［]?\s*(\d{1,2}|[０-９]{1,2}|[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+|[IVXLC]{1,5})\s*[\.:：，、）\)\]］]\s*(\S.*)$/;
 // a line that carries credits (has a role label + fullwidth/halfwidth colon)
 const hasCredit = l => /[：:]/.test(l) && /(作詞|作曲|編曲|作編曲|[Vv]ocal|ボーカル|歌|[Cc]horus|コーラス)/.test(l);
 
@@ -42,6 +42,8 @@ function rolesOf(label) {
 }
 function splitNames(v) {
   return v.split(/[,，、\/／･]| and /i)
+    // a following role-label sometimes glues onto a name with no space ("天音（…）MIX：Est") — cut it off
+    .map(s => s.replace(/(MIX|Mix|Guitar|Bass|Vocal|Chorus|コーラス|ギター|ベース|作詞|作曲|編曲)\s*[：:].*$/,''))
     .map(s => s.replace(/^[\s：:・,、，.。]+|[\s：:・,、，]+$/g, '').trim())
     .filter(Boolean);
 }

@@ -492,6 +492,117 @@
       ]
     }
   },
+  "東方来夢来人Ⅱ～ポップン・ティアラ～": {
+    "01": {
+      "arrange": [
+        "yohine(Innocent Key)"
+      ],
+      "lyrics": [
+        "溝口ゆうま (Innocent Key)"
+      ],
+      "vocals": [
+        "ココ(Innocent Key)"
+      ]
+    },
+    "02": {
+      "arrange": [
+        "MiYAMO(こなぐすり)"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Mix: Drop(Dropの小屋。)"
+    },
+    "03": {
+      "arrange": [
+        "Tetsushi（REd Hot HouSe）"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "arrange": [
+        "CHEEBOW（くじら音楽部）"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "月子（stretta di mano）"
+      ]
+    },
+    "05": {
+      "arrange": [
+        "天音（Rolling Contact）"
+      ],
+      "lyrics": [
+        "たまごまご（たまごまごごはん）"
+      ],
+      "vocals": [
+        "都築きせの"
+      ]
+    },
+    "06": {
+      "arrange": [
+        "KAISE（Fine Feeling）"
+      ],
+      "lyrics": [
+        "めらみぽっぷ（こすもぽりたん）"
+      ],
+      "vocals": [
+        "めらみぽっぷ（こすもぽりたん）"
+      ]
+    },
+    "07": {
+      "arrange": [
+        "MiYAMO(こなぐすり)"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "ココ(Innocent Key)",
+        "月子(stretta di mano)",
+        "都築きせの",
+        "葉月ゆら"
+      ],
+      "notes": "Mix: Tetsushi(REd Hot HouSe)"
+    },
+    "08": {
+      "arrange": [
+        "MiYAMO（こなぐすり）"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "砂吹・凪圭二・森井ケンシロウ"
+      ],
+      "notes": "※お詫び: 裏ジャケットでの編曲様のお名前記載及び、7曲目歌い手様のお名前記載で; ☆誤: 7曲目歌い手様「月子(stretta di mano), 都築きせの, 葉月ゆら」"
+    },
+    "09": {
+      "arrange": [
+        "MiYAMO(こなぐすり)"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "ココ(Innocent Key)",
+        "月子(stretta di mano)",
+        "都築きせの",
+        "葉月ゆら"
+      ],
+      "notes": "Mix: Tetsushi(REd Hot HouSe)"
+    }
+  },
   "Mystic Girl": {
     "01": {
       "arrange": [
@@ -2315,10 +2426,10 @@
     },
     "02": {
       "music": [
-        "塚越雄一朗（NanosizeMir） 作詞：葉月ゆら"
+        "塚越雄一朗（NanosizeMir）"
       ],
       "arrange": [
-        "塚越雄一朗（NanosizeMir） 作詞：葉月ゆら"
+        "塚越雄一朗（NanosizeMir）"
       ],
       "vocals": [
         "葉月ゆら"
@@ -2595,7 +2706,7 @@
     },
     "02": {
       "lyrics": [
-        "夕野ヨシミ(IOSYS) 作編曲・Guitar：とろまる"
+        "夕野ヨシミ(IOSYS) 作編曲"
       ],
       "vocals": [
         "葉月ゆら"
@@ -2606,7 +2717,7 @@
         "葉月ゆら"
       ],
       "music": [
-        "Tetsushi（REd Hot HouSe） Guitar：松葉由行"
+        "Tetsushi（REd Hot HouSe）"
       ],
       "vocals": [
         "葉月ゆら"
@@ -2614,7 +2725,7 @@
     },
     "04": {
       "lyrics": [
-        "夕野ヨシミ(IOSYS) 作編曲：光ノ巣"
+        "夕野ヨシミ(IOSYS) 作"
       ],
       "vocals": [
         "葉月ゆら"
@@ -2648,7 +2759,7 @@
     },
     "07": {
       "lyrics": [
-        "夕野ヨシミ（IOSYS） 作曲：神馬譲"
+        "夕野ヨシミ（IOSYS）"
       ],
       "arrange": [
         "Pegasus Arts Project（神馬譲",
@@ -5585,6 +5696,7 @@
     "La Pucelle": "http://hatukiyura.sakura.ne.jp/lapucelle/",
     "サロン・ド・シャノワール": "http://hatukiyura.sakura.ne.jp/chatnoir/",
     "少女の秘密と鍵穴": "http://hatukiyura.sakura.ne.jp/key/",
+    "東方来夢来人Ⅱ～ポップン・ティアラ～": "http://hatukiyura.sakura.ne.jp/lime2/",
     "Mystic Girl": "http://hatukiyura.sakura.ne.jp/mystic/",
     "少女と背徳の欠片": "http://hatukiyura.sakura.ne.jp/haitoku/",
     "Fromage": "http://hatukiyura.sakura.ne.jp/fromage/",
