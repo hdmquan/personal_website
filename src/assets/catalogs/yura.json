@@ -17674,7 +17674,27 @@
           "dur": 46,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "清風明月"
+            ]
+          }
         },
         {
           "track": "05",
