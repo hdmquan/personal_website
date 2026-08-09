@@ -495,9 +495,7 @@ html, body { overscroll-behavior: none; }
 .np-toggle.on::after { content: ""; width: 3px; height: 3px; border-radius: 50%; background: var(--accent);
   position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); }
 #np-loop.one::after { content: "1"; width: auto; height: auto; background: none; border-radius: 0;
-  font-family: var(--mono); font-size: .5rem; font-weight: 500; color: var(--accent); bottom: 1px; }
-/* loop-one: lift + shrink the glyph so the "1" sits just below it with a gap, not stuck to it */
-#np-loop.one svg { transform: translateY(-3.5px) scale(.84); }
+  font-family: var(--mono); font-size: .5rem; font-weight: 500; color: var(--accent); bottom: -3px; }
 #np-bar.muted .np-vol #vol-wave { opacity: .2; }
 .np-vol { display: flex; align-items: center; gap: .25rem; }
 #np-vol-slider { -webkit-appearance: none; appearance: none; width: 62px; height: 3px; border-radius: 2px;
