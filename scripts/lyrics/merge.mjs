@@ -14,7 +14,12 @@ const LYR = path.resolve('src/assets/catalogs/lyrics.json');
 const idIndex = JSON.parse(fs.readFileSync(INDEX, 'utf8'));   // [{id, album, outPath}]
 const idToAlbum = Object.fromEntries(idIndex.map(x => [x.id, x.album]));
 // preformed files (already-attributed blocks, e.g. human sets) -> album title
-const PREFORMED = { 'gothika.json': 'Gothika ～赤羊音戯箱～' };
+const PREFORMED = {
+  'gothika.json': 'Gothika ～赤羊音戯箱～',
+  'meriole-garnet.json': 'Garnet Bride',
+  'meriole-mistletoe.json': 'Mistletoe -黄昏の妖精歌-',
+  'meriole-lafata.json': 'La Fata',
+};
 // OCR outputs (jp = preformed OCR block, romaji/en = ai arrays) -> album title
 const OCR_INDEX_PATH = 'scripts/lyrics/work/ocr-tasks/ocr-index.json';
 const ocrIndex = fs.existsSync(OCR_INDEX_PATH) ? JSON.parse(fs.readFileSync(OCR_INDEX_PATH, 'utf8')) : {};
