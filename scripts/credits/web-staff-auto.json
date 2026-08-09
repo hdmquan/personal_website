@@ -1,0 +1,5576 @@
+{
+  "ELECTRIC GIRL": {
+    "01": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "Tetsushi"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "La Pucelle": {
+    "10": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "11": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "MOZ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "森井ケンシロウ"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "森井ケンシロウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "08": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "MOZ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "09": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "サロン・ド・シャノワール": {
+    "01": {
+      "music": [
+        "山崎亘"
+      ],
+      "arrange": [
+        "山崎亘"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Drums: DR studio"
+    },
+    "03": {
+      "music": [
+        "高橋菜々"
+      ],
+      "arrange": [
+        "SOUND HOLIC"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "chorus": [
+        "月子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "E.Guitar: Josh; Mix: SOUND HOLIC"
+    },
+    "04": {
+      "music": [
+        "田村信二"
+      ],
+      "arrange": [
+        "田村信二"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "はりい"
+      ],
+      "arrange": [
+        "はりい"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Piano: 足立ナオタカ."
+    },
+    "08": {
+      "music": [
+        "山崎亘"
+      ],
+      "arrange": [
+        "山崎亘"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "09": {
+      "music": [
+        "山崎亘"
+      ],
+      "arrange": [
+        "山崎亘"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "chorus": [
+        "月子 (M3)"
+      ]
+    }
+  },
+  "少女の秘密と鍵穴": {
+    "01": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "藤田真梨・奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Mystic Girl": {
+    "01": {
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "新井和広"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "少女と背徳の欠片": {
+    "01": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "藤田真梨・奥山明"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "くろみん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "くろみん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "くろみん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "arrange": [
+        "藤田真梨"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Fromage": {
+    "11": {
+      "vocals": [
+        "葉月ゆら・月子"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "CHEEBOW"
+      ],
+      "notes": "アレンジ: CHEEBOW"
+    },
+    "01": {
+      "music": [
+        "KAISE"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "vocals": [
+        "葉月ゆら・月子"
+      ],
+      "lyrics": [
+        "GABRIELA ROBIN"
+      ],
+      "music": [
+        "菅野よう子"
+      ],
+      "notes": "アレンジ: 華飯"
+    },
+    "03": {
+      "vocals": [
+        "月子"
+      ],
+      "lyrics": [
+        "川田まみ"
+      ],
+      "music": [
+        "中沢伴行"
+      ],
+      "notes": "アレンジ: cittan*"
+    },
+    "04": {
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "lyrics": [
+        "有森聡美"
+      ],
+      "music": [
+        "佐藤英敏"
+      ],
+      "notes": "アレンジ: X-kai-"
+    },
+    "06": {
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "lyrics": [
+        "石川智晶"
+      ],
+      "music": [
+        "石川智晶"
+      ],
+      "notes": "アレンジ: Drop"
+    },
+    "07": {
+      "vocals": [
+        "月子"
+      ],
+      "lyrics": [
+        "北川勝利"
+      ],
+      "music": [
+        "北川勝利"
+      ],
+      "notes": "アレンジ: 鶏"
+    },
+    "08": {
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "lyrics": [
+        "岡崎律子"
+      ],
+      "music": [
+        "岡崎律子"
+      ],
+      "notes": "08: AGAPE（「円盤皇女ワるきゅーレ」挿入歌）; アレンジ: Drop"
+    },
+    "09": {
+      "music": [
+        "KAISE"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Le Bijoux": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "YAICHI"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "YAICHI"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "夢、麗しく闇を奏でる": {
+    "05": {
+      "vocals": [
+        "このり"
+      ],
+      "notes": "◆ 子爵: 凪 佳ニ"
+    },
+    "06": {
+      "vocals": [
+        "このり"
+      ],
+      "notes": "◆ 子爵: 凪 佳ニ"
+    }
+  },
+  "流転の巫女 ～魂ノ緒～": {
+    "01": {
+      "lyrics": [
+        "翡翠"
+      ],
+      "music": [
+        "翡翠"
+      ],
+      "arrange": [
+        "翡翠"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "翡翠"
+      ],
+      "arrange": [
+        "翡翠"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "翡翠"
+      ],
+      "arrange": [
+        "翡翠"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "翡翠"
+      ],
+      "arrange": [
+        "翡翠"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "翡翠"
+      ],
+      "arrange": [
+        "翡翠"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "翡翠"
+      ],
+      "arrange": [
+        "翡翠"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "翡翠"
+      ],
+      "arrange": [
+        "翡翠"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "蜜薬ランガージュ": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "小池修也"
+      ],
+      "arrange": [
+        "小池修也"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "青田新名"
+      ],
+      "arrange": [
+        "青田新名"
+      ],
+      "lyrics": [
+        "くろみん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "lyrics": [
+        "くろみん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "Tetsushi(REd Hot HouSe)"
+      ],
+      "arrange": [
+        "Tetsushi(REd Hot HouSe)"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: psycho"
+    },
+    "06": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "AQUA WAVE": {
+    "01": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "Hiroyo"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "夕野ヨシミ (IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Gothika III": {
+    "01": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "白戸佑輔"
+      ],
+      "arrange": [
+        "白戸佑輔"
+      ],
+      "chorus": [
+        "白戸佑輔"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "いーえるＰ"
+      ],
+      "music": [
+        "いーえるＰ"
+      ],
+      "arrange": [
+        "いーえるＰ"
+      ],
+      "vocals": [
+        "このり・葉月ゆら"
+      ],
+      "notes": "語り: 凪佳二"
+    },
+    "04": {
+      "lyrics": [
+        "海兎(EastNewSound)"
+      ],
+      "music": [
+        "黒鳥(EastNewSound)"
+      ],
+      "arrange": [
+        "黒鳥(EastNewSound)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "甲斐ユウ"
+      ],
+      "arrange": [
+        "甲斐ユウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 音冶（Resonecia）"
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "甲斐ユウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "松本慎一郎"
+      ],
+      "arrange": [
+        "松本慎一郎"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "PLATINUM": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "上月幻夜"
+      ],
+      "arrange": [
+        "上月幻夜"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "甲斐ユウ"
+      ],
+      "arrange": [
+        "甲斐ユウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "白戸佑輔"
+      ],
+      "arrange": [
+        "白戸佑輔"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 奈良悠樹"
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "ヴァルプルギスの夜の夢": {
+    "01": {
+      "music": [
+        "甲斐ユウ"
+      ],
+      "arrange": [
+        "甲斐ユウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "甲斐ユウ"
+      ],
+      "arrange": [
+        "甲斐ユウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 上月幻夜"
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "上月幻夜"
+      ],
+      "arrange": [
+        "上月幻夜"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "上月幻夜"
+      ],
+      "arrange": [
+        "上月幻夜"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "甲斐ユウ"
+      ],
+      "arrange": [
+        "甲斐ユウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 上月幻夜"
+    },
+    "06": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "甲斐ユウ"
+      ],
+      "arrange": [
+        "甲斐ユウ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 上月幻夜"
+    },
+    "07": {
+      "music": [
+        "甲斐ユウ",
+        "上月幻夜"
+      ],
+      "arrange": [
+        "甲斐ユウ",
+        "上月幻夜"
+      ],
+      "lyrics": [
+        "月棘苑子",
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "少女と儚き薔薇の葬列": {
+    "01": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "藤田真梨"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "MIX: 奥山明"
+    },
+    "02": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "奥山明"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "藤田真梨"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "MIX: 奥山明"
+    },
+    "07": {
+      "music": [
+        "藤田真梨"
+      ],
+      "arrange": [
+        "藤田真梨"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "MIX: 奥山明"
+    }
+  },
+  "竜と炎の物語": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Eclipse Parade": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "WICKED": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "光ノ巣"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 佐々木 慧"
+    },
+    "03": {
+      "lyrics": [
+        "胡桃坂庵"
+      ],
+      "music": [
+        "胡桃坂庵"
+      ],
+      "arrange": [
+        "胡桃坂庵"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "Paspal"
+      ],
+      "arrange": [
+        "Paspal"
+      ],
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "蒼炎の姫君": {
+    "01": {
+      "music": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "Irori"
+      ],
+      "vocals": [
+        "葉月ゆら",
+        "海紅"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら",
+        "海紅"
+      ],
+      "notes": "Guitar: 佐々木 慧"
+    },
+    "05": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "Irori"
+      ],
+      "vocals": [
+        "海紅"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "ＡＫＩＲＡ"
+      ],
+      "music": [
+        "Irori"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら",
+        "海紅"
+      ]
+    },
+    "07": {
+      "music": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Dark Matter": {
+    "01": {
+      "music": [
+        "梨山虎次郎"
+      ],
+      "arrange": [
+        "梨山虎次郎"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "白戸佑輔"
+      ],
+      "arrange": [
+        "白戸佑輔"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: しらっし〜"
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "梨山虎次郎"
+      ],
+      "arrange": [
+        "梨山虎次郎"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "神馬譲"
+      ],
+      "arrange": [
+        "神馬譲"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Programming Supported: 大久保晶文"
+    }
+  },
+  "Phantom of the Flame": {
+    "01": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Secret de Chat Noir": {
+    "01": {
+      "music": [
+        "梨山虎次郎"
+      ],
+      "arrange": [
+        "梨山虎次郎"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "白戸佑輔"
+      ],
+      "arrange": [
+        "白戸佑輔"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "E.Guitar: 馬渕直純"
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ"
+      ],
+      "music": [
+        "はりい"
+      ],
+      "arrange": [
+        "はりい"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "小池修也"
+      ],
+      "arrange": [
+        "小池修也"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "白戸佑輔"
+      ],
+      "arrange": [
+        "白戸佑輔"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "E.Guitar: 奈良悠樹"
+    },
+    "07": {
+      "music": [
+        "梨山虎次郎"
+      ],
+      "arrange": [
+        "梨山虎次郎"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Vanilla Mode": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "このり"
+      ],
+      "arrange": [
+        "このり"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "キラ星ひかる"
+      ],
+      "arrange": [
+        "キラ星ひかる"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "はりい"
+      ],
+      "arrange": [
+        "はりい"
+      ],
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "RUON（ESQUARIA）"
+      ],
+      "arrange": [
+        "RUON（ESQUARIA）"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "白戸佑輔"
+      ],
+      "arrange": [
+        "白戸佑輔"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "罪に濡れた魔女": {
+    "01": {
+      "music": [
+        "梨山虎次郎"
+      ],
+      "arrange": [
+        "梨山虎次郎"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "塚越雄一朗（NanosizeMir） 作詞：葉月ゆら"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir） 作詞：葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "白戸佑輔"
+      ],
+      "arrange": [
+        "白戸佑輔"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "キラ星ひかる"
+      ],
+      "arrange": [
+        "キラ星ひかる"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "梨山虎次郎"
+      ],
+      "arrange": [
+        "梨山虎次郎"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "-The Clockwork Rose- 時計仕掛けの薔薇少女": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "塚越雄一朗"
+      ],
+      "arrange": [
+        "塚越雄一朗"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "光ノ巣"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Drum: 麻生 悟志"
+    },
+    "05": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Emerald Alice": {
+    "01": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "lyrics": [
+        "一斗まる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "塚越雄一朗"
+      ],
+      "arrange": [
+        "塚越雄一朗"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "ORGIA": {
+    "01": {
+      "music": [
+        "Paspal（Xorsizer）"
+      ],
+      "arrange": [
+        "Paspal（Xorsizer）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS) 作編曲・Guitar：とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi（REd Hot HouSe） Guitar：松葉由行"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS) 作編曲：光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 逸見崇博"
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗"
+      ],
+      "arrange": [
+        "塚越雄一朗"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Paspal（Xorsizer）"
+      ],
+      "arrange": [
+        "Paspal（Xorsizer）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS） 作曲：神馬譲"
+      ],
+      "arrange": [
+        "Pegasus Arts Project（神馬譲",
+        "YOU",
+        "大久保晶文）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Shadows ～影色妖精絵本～": {
+    "01": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗"
+      ],
+      "arrange": [
+        "塚越雄一朗"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "一斗まる"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Silver Blanchette": {
+    "01": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 逸見崇博"
+    },
+    "03": {
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "紅夜に詠う少女の禁忌": {
+    "01": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら＆海紅"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら＆海紅"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "光ノ巣"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら＆海紅"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "海紅"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら＆海紅"
+      ]
+    },
+    "07": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Black Princess": {
+    "01": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "樋口秀樹"
+      ],
+      "arrange": [
+        "樋口秀樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Special Vocal: 塚越雄一朗（NanosizeMir）"
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "08": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "FairiA ～幻想妖精絵本～": {
+    "01": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "chorus": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "chorus": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "鈴葉ユミ"
+      ],
+      "arrange": [
+        "鈴葉ユミ"
+      ],
+      "chorus": [
+        "鈴葉ユミ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "08": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Ghost Sense": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "神馬譲"
+      ],
+      "arrange": [
+        "ペガサスアーツプロジェクト"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "White Princess": {
+    "01": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "オッカ（Mamyukka）"
+      ],
+      "arrange": [
+        "オッカ（Mamyukka）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "樋口秀樹"
+      ],
+      "arrange": [
+        "樋口秀樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "08": {
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "妖華語り": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "五十嵐芳樹"
+      ],
+      "arrange": [
+        "五十嵐芳樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Dragon Slayer -黒竜の騎士編-": {
+    "01": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘 苑子"
+      ],
+      "music": [
+        "五十嵐芳樹"
+      ],
+      "arrange": [
+        "五十嵐芳樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "08": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Onyx Veil": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 松葉由行"
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Snow Veil": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "樋口秀樹"
+      ],
+      "arrange": [
+        "樋口秀樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Sweet Halloween": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "五十嵐芳樹"
+      ],
+      "arrange": [
+        "五十嵐芳樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "樋口秀樹"
+      ],
+      "arrange": [
+        "樋口秀樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "虚構の楽園": {
+    "01": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "arrange": [
+        "塚越雄一朗（NanosizeMir）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "光ノ巣"
+      ],
+      "music": [
+        "光ノ巣"
+      ],
+      "arrange": [
+        "光ノ巣"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ（IOSYS）"
+      ],
+      "music": [
+        "五十嵐芳樹"
+      ],
+      "arrange": [
+        "五十嵐芳樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Cauchemar": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Fairy Ring": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "矢野トモ(WIZARD ODYSSEY)"
+      ],
+      "arrange": [
+        "矢野トモ(WIZARD ODYSSEY)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "樋口秀樹"
+      ],
+      "arrange": [
+        "樋口秀樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "vocals": [
+        "05-"
+      ],
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Fluorite": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 松葉由行"
+    },
+    "04": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Mirage Dolls": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "五十嵐芳樹"
+      ],
+      "arrange": [
+        "五十嵐芳樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Tanzanite": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 松葉由行"
+    },
+    "04": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "夢幻妖夜行": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "塚越雄一朗(NanosizeMir)"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 松葉由行"
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Asymmetry": {
+    "01": {
+      "music": [
+        "とろまる・minase.io"
+      ],
+      "arrange": [
+        "minase.io"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "HINODE(Pratanallis)"
+      ],
+      "arrange": [
+        "HINODE(Pratanallis)"
+      ],
+      "vocals": [
+        "葉月ゆら＆海紅"
+      ],
+      "notes": "MIX: Drop・HINODE(Pratanallis)"
+    },
+    "03": {
+      "lyrics": [
+        "海紅"
+      ],
+      "music": [
+        "Irori"
+      ],
+      "arrange": [
+        "Irori"
+      ],
+      "vocals": [
+        "海紅"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら＆海紅"
+      ],
+      "notes": "MIX: Drop"
+    },
+    "05": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar・MIX: Drop"
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Paspal(Symholic)"
+      ],
+      "arrange": [
+        "minase.io"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Cherry Melody": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "五十嵐芳樹"
+      ],
+      "arrange": [
+        "五十嵐芳樹"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Secret Rose Garden": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "矢野トモ(WIZARD ODYSSEY)"
+      ],
+      "arrange": [
+        "矢野トモ(WIZARD ODYSSEY)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Arcana -The Blood of Fortune-": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "sioborn"
+      ],
+      "music": [
+        "やっすん"
+      ],
+      "arrange": [
+        "やっすん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "MIX: Drop"
+    },
+    "03": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "矢野トモ(WIZARD ODYSSEY)"
+      ],
+      "arrange": [
+        "矢野トモ(WIZARD ODYSSEY)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "あ子"
+      ],
+      "music": [
+        "あ子"
+      ],
+      "arrange": [
+        "あ子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "MIX: 梨山虎次郎"
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 松葉由行"
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Oracle": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "namae."
+      ],
+      "arrange": [
+        "namae."
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Witchcraft": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "INN"
+      ],
+      "arrange": [
+        "INN"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "夕野ヨシミ(IOSYS)"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Lost Eden": {
+    "01": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "あ子"
+      ],
+      "music": [
+        "あ子"
+      ],
+      "arrange": [
+        "あ子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Mix: Drop"
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Tetsushi"
+      ],
+      "arrange": [
+        "Tetsushi"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ],
+      "notes": "Guitar: 松葉由行"
+    },
+    "04": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "とろまる(Parasol Pig)"
+      ],
+      "arrange": [
+        "とろまる(Parasol Pig)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "海兎＆葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "塚越雄一朗(NanosizeMir)"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Enchanté": {
+    "01": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "sioborn(創作堂さくら紅葉)"
+      ],
+      "music": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "arrange": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "あ子"
+      ],
+      "music": [
+        "あ子"
+      ],
+      "arrange": [
+        "あ子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Mell Sweet": {
+    "01": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "あ子"
+      ],
+      "music": [
+        "あ子"
+      ],
+      "arrange": [
+        "あ子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "sioborn(創作堂さくら紅葉)"
+      ],
+      "music": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "arrange": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "松岡美弥子（未来古代楽団）"
+      ],
+      "arrange": [
+        "松岡美弥子（未来古代楽団）"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "やみのものがたり": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Precious Blood": {
+    "01": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "sioborn(創作堂さくら紅葉)"
+      ],
+      "music": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "arrange": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "あ子"
+      ],
+      "music": [
+        "あ子"
+      ],
+      "arrange": [
+        "あ子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "lyrics": [
+        "月棘苑子"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Shadow Shape": {
+    "01": {
+      "lyrics": [
+        "sioborn(創作堂さくら紅葉)"
+      ],
+      "music": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "arrange": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "music": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "arrange": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "とろまる"
+      ],
+      "arrange": [
+        "とろまる"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "arrange": [
+        "塚越雄一朗(NanosizeMir)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "arrange": [
+        "やっすん(創作堂さくら紅葉)"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "Night Bloom": {
+    "01": {
+      "music": [
+        "やっすん"
+      ],
+      "arrange": [
+        "やっすん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "02": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "Drop"
+      ],
+      "arrange": [
+        "Drop"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "03": {
+      "lyrics": [
+        "あ子"
+      ],
+      "music": [
+        "あ子"
+      ],
+      "arrange": [
+        "あ子"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "04": {
+      "lyrics": [
+        "海兎"
+      ],
+      "music": [
+        "オッカ"
+      ],
+      "arrange": [
+        "オッカ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "05": {
+      "lyrics": [
+        "葉月ゆら"
+      ],
+      "music": [
+        "アメディオ"
+      ],
+      "arrange": [
+        "アメディオ"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "06": {
+      "music": [
+        "やっすん"
+      ],
+      "arrange": [
+        "やっすん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    },
+    "07": {
+      "lyrics": [
+        "sioborn"
+      ],
+      "music": [
+        "やっすん"
+      ],
+      "arrange": [
+        "やっすん"
+      ],
+      "vocals": [
+        "葉月ゆら"
+      ]
+    }
+  },
+  "_sources": {
+    "ELECTRIC GIRL": "http://hatukiyura.sakura.ne.jp/elg/",
+    "La Pucelle": "http://hatukiyura.sakura.ne.jp/lapucelle/",
+    "サロン・ド・シャノワール": "http://hatukiyura.sakura.ne.jp/chatnoir/",
+    "少女の秘密と鍵穴": "http://hatukiyura.sakura.ne.jp/key/",
+    "Mystic Girl": "http://hatukiyura.sakura.ne.jp/mystic/",
+    "少女と背徳の欠片": "http://hatukiyura.sakura.ne.jp/haitoku/",
+    "Fromage": "http://hatukiyura.sakura.ne.jp/fromage/",
+    "Le Bijoux": "http://hatukiyura.sakura.ne.jp/lebijoux/",
+    "夢、麗しく闇を奏でる": "http://hatukiyura.sakura.ne.jp/yumegoth/",
+    "流転の巫女 ～魂ノ緒～": "http://hatukiyura.sakura.ne.jp/rutenmik/",
+    "蜜薬ランガージュ": "http://hatukiyura.sakura.ne.jp/mitsuyaku/",
+    "AQUA WAVE": "http://hatukiyura.sakura.ne.jp/aquawave/",
+    "Gothika III": "http://hatukiyura.sakura.ne.jp/gothikanew/",
+    "PLATINUM": "http://hatukiyura.sakura.ne.jp/platinum/",
+    "ヴァルプルギスの夜の夢": "http://hatukiyura.sakura.ne.jp/walpurgis/",
+    "少女と儚き薔薇の葬列": "http://hatukiyura.sakura.ne.jp/hakanaki/",
+    "竜と炎の物語": "http://hatukiyura.sakura.ne.jp/dragonflame/",
+    "Eclipse Parade": "http://hatukiyura.sakura.ne.jp/eparade/",
+    "WICKED": "http://hatukiyura.sakura.ne.jp/wicked/",
+    "蒼炎の姫君": "http://hatukiyura.sakura.ne.jp/souenno/",
+    "Dark Matter": "http://hatukiyura.sakura.ne.jp/darkmatter/",
+    "Phantom of the Flame": "http://hatukiyura.sakura.ne.jp/phantomflame/",
+    "Secret de Chat Noir": "http://hatukiyura.sakura.ne.jp/s_chatnoir/",
+    "Vanilla Mode": "http://hatukiyura.sakura.ne.jp/vanillamode/",
+    "罪に濡れた魔女": "http://hatukiyura.sakura.ne.jp/tumiwi/",
+    "-The Clockwork Rose- 時計仕掛けの薔薇少女": "http://hatukiyura.sakura.ne.jp/clockworkrose/",
+    "Emerald Alice": "http://hatukiyura.sakura.ne.jp/emalice/",
+    "ORGIA": "http://hatukiyura.sakura.ne.jp/orgia/",
+    "Shadows ～影色妖精絵本～": "http://hatukiyura.sakura.ne.jp/shadows/",
+    "Silver Blanchette": "http://hatukiyura.sakura.ne.jp/si_blanchette/",
+    "紅夜に詠う少女の禁忌": "http://hatukiyura.sakura.ne.jp/utaushojo/",
+    "Black Princess": "http://hatukiyura.sakura.ne.jp/blackprincess/",
+    "FairiA ～幻想妖精絵本～": "http://hatukiyura.sakura.ne.jp/fairia/",
+    "Ghost Sense": "http://hatukiyura.sakura.ne.jp/ghostsense/",
+    "White Princess": "http://hatukiyura.sakura.ne.jp/whiteprincess/",
+    "妖華語り": "http://hatukiyura.sakura.ne.jp/ayakashibana/",
+    "Dragon Slayer -黒竜の騎士編-": "http://hatukiyura.sakura.ne.jp/dragonslayer/",
+    "Onyx Veil": "http://hatukiyura.sakura.ne.jp/onyxveil/",
+    "Snow Veil": "http://hatukiyura.sakura.ne.jp/snowveil/",
+    "Sweet Halloween": "http://hatukiyura.sakura.ne.jp/sweeth/",
+    "虚構の楽園": "http://hatukiyura.sakura.ne.jp/kyokourak/",
+    "Cauchemar": "http://hatukiyura.sakura.ne.jp/cauchemar_seifu/",
+    "Fairy Ring": "http://hatukiyura.sakura.ne.jp/fairyring/",
+    "Fluorite": "http://hatukiyura.sakura.ne.jp/fluorite/",
+    "Mirage Dolls": "http://hatukiyura.sakura.ne.jp/miragedolls/",
+    "Tanzanite": "http://hatukiyura.sakura.ne.jp/tanzanite/",
+    "夢幻妖夜行": "http://hatukiyura.sakura.ne.jp/mugen_a_yakou/",
+    "Asymmetry": "http://hatukiyura.sakura.ne.jp/asymmetry/",
+    "Cherry Melody": "http://hatukiyura.sakura.ne.jp/cherrymelody/",
+    "Secret Rose Garden": "http://hatukiyura.sakura.ne.jp/secretrosegarden/",
+    "Arcana -The Blood of Fortune-": "http://hatukiyura.sakura.ne.jp/arcana/",
+    "Oracle": "http://hatukiyura.sakura.ne.jp/oracle/",
+    "Witchcraft": "http://hatukiyura.sakura.ne.jp/witchcraft/",
+    "Lost Eden": "http://hatukiyura.sakura.ne.jp/losteden/",
+    "Enchanté": "http://hatukiyura.sakura.ne.jp/enchantehp/",
+    "Mell Sweet": "http://hatukiyura.sakura.ne.jp/mellsweet/",
+    "やみのものがたり": "http://hatukiyura.sakura.ne.jp/yamino_monogatari/",
+    "Precious Blood": "http://hatukiyura.sakura.ne.jp/p_blood/",
+    "Shadow Shape": "http://hatukiyura.sakura.ne.jp/shadowshape_luna/",
+    "Night Bloom": "http://hatukiyura.sakura.ne.jp/nightbloom/"
+  }
+}

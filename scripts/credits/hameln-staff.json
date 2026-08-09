@@ -1,0 +1,24 @@
+{
+  "HAMELN": {
+    "01": { "music": ["Drop"], "arrange": ["Drop"], "circle": ["清風明月"], "notes": "narration ハーメルン: 石井一貴 / scenario: 一斗まる" },
+    "02": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "03": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "04": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "05": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "06": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "07": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "08": { "music": ["Drop"], "arrange": ["Drop"], "circle": ["清風明月"], "notes": "narration ハーメルン: 石井一貴 / scenario: 一斗まる" },
+    "09": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] }
+  },
+  "HAMELN Limitedver": {
+    "01": { "music": ["Drop"], "arrange": ["Drop"], "circle": ["清風明月"], "notes": "narration ハーメルン: 石井一貴 / scenario: 一斗まる" },
+    "02": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "03": { "music": ["Drop"], "arrange": ["Drop"], "circle": ["清風明月"], "notes": "narration ハーメルン: 石井一貴 / scenario: 一斗まる" },
+    "04": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] },
+    "05": { "music": ["Drop"], "arrange": ["Drop"], "lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"], "circle": ["清風明月"] }
+  },
+  "_sources": {
+    "HAMELN": "http://hatukiyura.sakura.ne.jp/hameln/",
+    "HAMELN Limitedver": "http://hatukiyura.sakura.ne.jp/hameln/"
+  }
+}
