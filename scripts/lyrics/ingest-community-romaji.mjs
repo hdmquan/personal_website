@@ -9,7 +9,7 @@ const SP = '/private/tmp/claude-501/-Users-symphie-Documents-GitHub/e73c6820-af8
 const LYR = 'src/assets/catalogs/lyrics.json';
 const lyr = JSON.parse(fs.readFileSync(LYR, 'utf8'));
 const DATE = '2026-08-08';
-const CREDIT = { by: 'community transliteration', kind: 'human' };
+const CREDIT = { by: 'Suzuyo', kind: 'human' };   // transliterations (Mahou / Abyss / 拝啓 docx) are Suzuyo's work
 const isRom = s => /[A-Za-z]/.test(s) && !/[぀-ヿ一-鿿]/.test(s); // Latin, no kana/kanji
 
 // --- collect community romaji line lists, keyed by album/track ---
