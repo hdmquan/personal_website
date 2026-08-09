@@ -14020,7 +14020,18 @@
           "genres": [
             "Commercial album guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; composition and lyrics 黒うさP"
+          "credit": "Vocals 葉月ゆら; composition and lyrics 黒うさP",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "黒うさP"
+            ],
+            "lyrics": [
+              "黒うさP"
+            ]
+          }
         },
         {
           "track": "02",
@@ -14033,7 +14044,18 @@
           "genres": [
             "Commercial album guest vocal"
           ],
-          "credit": "Lyrics and vocals 葉月ゆら; composition 黒うさP"
+          "credit": "Lyrics and vocals 葉月ゆら; composition 黒うさP",
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "黒うさP"
+            ]
+          }
         }
       ]
     },
@@ -14064,7 +14086,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン"
+          "credit": "Vocals as マリン",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン"
+          }
         },
         {
           "track": "02",
@@ -14077,7 +14105,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン; duet with ワリン (human performer identity open)"
+          "credit": "Vocals as マリン; duet with ワリン (human performer identity open)",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン; duet with ワリン (human performer identity open)"
+          }
         },
         {
           "track": "03",
@@ -14090,7 +14124,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン"
+          "credit": "Vocals as マリン",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン"
+          }
         },
         {
           "track": "04",
@@ -14103,7 +14143,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン"
+          "credit": "Vocals as マリン",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン"
+          }
         },
         {
           "track": "05",
@@ -14116,7 +14162,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン"
+          "credit": "Vocals as マリン",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン"
+          }
         },
         {
           "track": "06",
@@ -14129,7 +14181,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン"
+          "credit": "Vocals as マリン",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン"
+          }
         },
         {
           "track": "07",
@@ -14142,7 +14200,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン"
+          "credit": "Vocals as マリン",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン"
+          }
         },
         {
           "track": "08",
@@ -14155,7 +14219,13 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Vocals as マリン; duet with ワリン (human performer identity open)"
+          "credit": "Vocals as マリン; duet with ワリン (human performer identity open)",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン; duet with ワリン (human performer identity open)"
+          }
         },
         {
           "track": "09",
@@ -14168,7 +14238,13 @@
           "genres": [
             "Pachislot / 海物語"
           ],
-          "credit": "Vocals as マリン"
+          "credit": "Vocals as マリン",
+          "staff": {
+            "vocals": [
+              "マリン"
+            ],
+            "notes": "performs as マリン"
+          }
         }
       ]
     },
@@ -14199,7 +14275,10 @@
           "genres": [
             "Pachinko / 海物語"
           ],
-          "credit": "Original song vocal associated with 葉月ゆら; whether this remix reuses her vocal remains open"
+          "credit": "Original song vocal associated with 葉月ゆら; whether this remix reuses her vocal remains open",
+          "staff": {
+            "notes": "Original song vocal associated with 葉月ゆら; whether this remix reuses her vocal remains open"
+          }
         }
       ]
     },
@@ -14230,7 +14309,15 @@
           "genres": [
             "Visual novel / eroge"
           ],
-          "credit": "Vocals and lyrics"
+          "credit": "Vocals and lyrics",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -14243,7 +14330,15 @@
           "genres": [
             "Visual novel / eroge"
           ],
-          "credit": "Vocals and lyrics"
+          "credit": "Vocals and lyrics",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -14274,7 +14369,12 @@
           "genres": [
             "Mobile game"
           ],
-          "credit": "Vocals"
+          "credit": "Vocals",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -14305,7 +14405,16 @@
           "genres": [
             "Rhythm game / maimai"
           ],
-          "credit": "Vocals and lyrics; 清風明月 (Drop×葉月ゆら)"
+          "credit": "Vocals and lyrics; 清風明月 (Drop×葉月ゆら)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "notes": "清風明月 (Drop×葉月ゆら)"
+          }
         }
       ]
     },
@@ -14336,7 +14445,13 @@
           "genres": [
             "Rhythm game / 太鼓の達人"
           ],
-          "credit": "Vocals; 清風明月 (Drop×葉月ゆら)"
+          "credit": "Vocals; 清風明月 (Drop×葉月ゆら)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "清風明月 (Drop×葉月ゆら)"
+          }
         },
         {
           "track": "02",
@@ -14349,7 +14464,13 @@
           "genres": [
             "Rhythm game / 太鼓の達人"
           ],
-          "credit": "Vocals; 清風明月 (Drop×葉月ゆら)"
+          "credit": "Vocals; 清風明月 (Drop×葉月ゆら)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "清風明月 (Drop×葉月ゆら)"
+          }
         },
         {
           "track": "03",
@@ -14362,7 +14483,16 @@
           "genres": [
             "Rhythm game / 太鼓の達人"
           ],
-          "credit": "Vocals with 翡翠; lyrics credited to 祇羽"
+          "credit": "Vocals with 翡翠; lyrics credited to 祇羽",
+          "staff": {
+            "vocals": [
+              "葉月ゆら",
+              "翡翠"
+            ],
+            "lyrics": [
+              "祇羽"
+            ]
+          }
         },
         {
           "track": "04",
@@ -14375,7 +14505,13 @@
           "genres": [
             "Rhythm game / compilation"
           ],
-          "credit": "Duet vocals 葉月ゆら and 月子"
+          "credit": "Duet vocals 葉月ゆら and 月子",
+          "staff": {
+            "vocals": [
+              "葉月ゆら",
+              "月子"
+            ]
+          }
         },
         {
           "track": "05",
@@ -14388,7 +14524,22 @@
           "genres": [
             "Rhythm game / compilation"
           ],
-          "credit": "Vocals and lyrics 葉月ゆら; co-lyrics 祇羽; composition/arrangement 翡翠"
+          "credit": "Vocals and lyrics 葉月ゆら; co-lyrics 祇羽; composition/arrangement 翡翠",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "葉月ゆら",
+              "祇羽"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "arrange": [
+              "翡翠"
+            ]
+          }
         },
         {
           "track": "06",
@@ -14401,7 +14552,17 @@
           "genres": [
             "太鼓の達人 vocal"
           ],
-          "credit": "Vocals 葉月ゆら; composed 祇羽 & Drop (清風明月)"
+          "credit": "Vocals 葉月ゆら; composed 祇羽 & Drop (清風明月)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "祇羽",
+              "Drop"
+            ],
+            "notes": "清風明月"
+          }
         },
         {
           "track": "07",
@@ -14414,7 +14575,12 @@
           "genres": [
             "太鼓の達人 vocal"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -14427,7 +14593,12 @@
           "genres": [
             "太鼓の達人 vocal"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "09",
@@ -14440,7 +14611,15 @@
           "genres": [
             "太鼓の達人 vocal"
           ],
-          "credit": "Vocals 葉月ゆら; music Drop"
+          "credit": "Vocals 葉月ゆら; music Drop",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ]
+          }
         },
         {
           "track": "10",
@@ -14453,7 +14632,12 @@
           "genres": [
             "太鼓の達人 vocal"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "11",
@@ -14466,7 +14650,12 @@
           "genres": [
             "太鼓の達人 vocal"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -14497,7 +14686,12 @@
           "genres": [
             "Video game soundtrack"
           ],
-          "credit": "Chorus"
+          "credit": "Chorus",
+          "staff": {
+            "chorus": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -14528,7 +14722,13 @@
           "genres": [
             "Rhythm game / CHUNITHM"
           ],
-          "credit": "Vocals; further arrangement-credit wording needs booklet/game-credit confirmation"
+          "credit": "Vocals; further arrangement-credit wording needs booklet/game-credit confirmation",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "further arrangement-credit wording needs booklet/game-credit confirmation"
+          }
         }
       ]
     },
@@ -14559,7 +14759,13 @@
           "genres": [
             "Video game soundtrack"
           ],
-          "credit": "Vocals; user-confirmed identification"
+          "credit": "Vocals; user-confirmed identification",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "user-confirmed identification"
+          }
         }
       ]
     },
@@ -14590,7 +14796,12 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals"
+          "credit": "Vocals",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -14621,7 +14832,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals; lyrics くまりす; arrangement 黒鳥"
+          "credit": "Vocals; lyrics くまりす; arrangement 黒鳥",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "くまりす"
+            ],
+            "arrange": [
+              "黒鳥"
+            ]
+          }
         }
       ]
     },
@@ -14652,7 +14874,21 @@
           "genres": [
             "Touhou guest vocal remix"
           ],
-          "credit": "Vocals 葉月ゆら; lyrics ヤヤネヒロコ; arrangement RUON; remix Nhato"
+          "credit": "Vocals 葉月ゆら; lyrics ヤヤネヒロコ; arrangement RUON; remix Nhato",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "ヤヤネヒロコ"
+            ],
+            "arrange": [
+              "RUON"
+            ],
+            "remix": [
+              "Nhato"
+            ]
+          }
         }
       ]
     },
@@ -14683,7 +14919,16 @@
           "genres": [
             "Rhythm game / REFLEC BEAT"
           ],
-          "credit": "Lyrics and vocals; credited as UNVEIL et 葉月ゆら"
+          "credit": "Lyrics and vocals; credited as UNVEIL et 葉月ゆら",
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "credited as UNVEIL et 葉月ゆら"
+          }
         }
       ]
     },
@@ -14714,7 +14959,17 @@
           "genres": [
             "Visual novel / eroge"
           ],
-          "credit": "Duet vocals: 葉月ゆら and 安田みずほ; lyrics composition and arrangement Cielo*youth*k"
+          "credit": "Duet vocals: 葉月ゆら and 安田みずほ; lyrics composition and arrangement Cielo*youth*k",
+          "staff": {
+            "vocals": [
+              ": 葉月ゆら",
+              "安田みずほ"
+            ],
+            "lyrics": [
+              "composition",
+              "arrangement Cielo*youth*k"
+            ]
+          }
         }
       ]
     },
@@ -14745,7 +15000,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement MARIN; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement MARIN; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "MARIN"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -14776,7 +15042,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement Kirin; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement Kirin; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "Kirin"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -14807,7 +15084,10 @@
           "genres": [
             "Doujin guest vocal"
           ],
-          "credit": "Performer/vocals with ARA"
+          "credit": "Performer/vocals with ARA",
+          "staff": {
+            "notes": "Performer/vocals with ARA"
+          }
         },
         {
           "track": "02",
@@ -14820,7 +15100,12 @@
           "genres": [
             "Guest vocal — doujin"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -14851,7 +15136,18 @@
           "genres": [
             "Commercial guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; lyrics and composition 九十九百太郎"
+          "credit": "Vocals 葉月ゆら; lyrics and composition 九十九百太郎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "九十九百太郎"
+            ],
+            "music": [
+              "九十九百太郎"
+            ]
+          }
         }
       ]
     },
@@ -14882,7 +15178,13 @@
           "genres": [
             "Compilation guest vocal"
           ],
-          "credit": "Vocals; 九十九百太郎 feat. 葉月ゆら"
+          "credit": "Vocals; 九十九百太郎 feat. 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "九十九百太郎 feat. 葉月ゆら"
+          }
         }
       ]
     },
@@ -14913,7 +15215,15 @@
           "genres": [
             "Doujin guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement BLUE HAWAII"
+          "credit": "Vocals 葉月ゆら; arrangement BLUE HAWAII",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "BLUE HAWAII"
+            ]
+          }
         },
         {
           "track": "02",
@@ -14926,7 +15236,12 @@
           "genres": [
             "Doujin ensemble vocal"
           ],
-          "credit": "Ensemble vocals including 葉月ゆら"
+          "credit": "Ensemble vocals including 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "including 葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -14957,7 +15272,21 @@
           "genres": [
             "Visual novel / eroge"
           ],
-          "credit": "Chorus 葉月ゆら; lead vocal Rin; composition and arrangement 樋口秀樹"
+          "credit": "Chorus 葉月ゆら; lead vocal Rin; composition and arrangement 樋口秀樹",
+          "staff": {
+            "chorus": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "Rin"
+            ],
+            "music": [
+              "樋口秀樹"
+            ],
+            "arrange": [
+              "樋口秀樹"
+            ]
+          }
         }
       ]
     },
@@ -14988,7 +15317,21 @@
           "genres": [
             "Compilation guest vocal"
           ],
-          "credit": "Vocals and lyrics 葉月ゆら; composition/arrangement Drop"
+          "credit": "Vocals and lyrics 葉月ゆら; composition/arrangement Drop",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ]
+          }
         }
       ]
     },
@@ -15019,7 +15362,16 @@
           "genres": [
             "BMS / rhythm game"
           ],
-          "credit": "Vocals 葉月ゆら; composition/BMS Bitplane (愛新覚羅溥儀)"
+          "credit": "Vocals 葉月ゆら; composition/BMS Bitplane (愛新覚羅溥儀)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BMS Bitplane"
+            ],
+            "notes": "愛新覚羅溥儀"
+          }
         }
       ]
     },
@@ -15050,7 +15402,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "黒鳥"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -15081,7 +15444,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "きりん"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -15112,7 +15486,18 @@
           "genres": [
             "Original guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; composition 黒鳥; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; composition 黒鳥; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "黒鳥"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15143,7 +15528,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "きりん"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15174,7 +15570,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement Tracy; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement Tracy; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "Tracy"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -15205,7 +15612,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement 天音; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; arrangement 天音; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "天音"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15236,7 +15654,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "黒鳥"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15267,7 +15696,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "きりん"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15298,7 +15738,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement RUON; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; arrangement RUON; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "RUON"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15329,7 +15780,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement Tomoya; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; arrangement Tomoya; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "Tomoya"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15360,7 +15822,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement きりん; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "きりん"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -15391,7 +15864,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "黒鳥"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -15422,7 +15906,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement RUON; lyrics 海兎"
+          "credit": "Vocals 葉月ゆら; arrangement RUON; lyrics 海兎",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "RUON"
+            ],
+            "lyrics": [
+              "海兎"
+            ]
+          }
         }
       ]
     },
@@ -15453,7 +15948,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals and lyrics 葉月ゆら; arrangement Drop"
+          "credit": "Vocals and lyrics 葉月ゆら; arrangement Drop",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "Drop"
+            ]
+          }
         }
       ]
     },
@@ -15484,7 +15990,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす"
+          "credit": "Vocals 葉月ゆら; arrangement 黒鳥; lyrics くまりす",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "黒鳥"
+            ],
+            "lyrics": [
+              "くまりす"
+            ]
+          }
         }
       ]
     },
@@ -15515,7 +16032,25 @@
           "genres": [
             "Doujin guest vocal"
           ],
-          "credit": "Guest vocal 葉月ゆら; chorus lovelove少女隊; lyrics 渡邊亜希子 and 葉月ゆら; composition 江並哲志; arrangement じゅん"
+          "credit": "Guest vocal 葉月ゆら; chorus lovelove少女隊; lyrics 渡邊亜希子 and 葉月ゆら; composition 江並哲志; arrangement じゅん",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "lovelove少女隊"
+            ],
+            "lyrics": [
+              "渡邊亜希子",
+              "葉月ゆら"
+            ],
+            "music": [
+              "江並哲志"
+            ],
+            "arrange": [
+              "じゅん"
+            ]
+          }
         }
       ]
     },
@@ -15546,7 +16081,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement ぼいど; lyrics 夕野ヨシミ"
+          "credit": "Vocals 葉月ゆら; arrangement ぼいど; lyrics 夕野ヨシミ",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "ぼいど"
+            ],
+            "lyrics": [
+              "夕野ヨシミ"
+            ]
+          }
         }
       ]
     },
@@ -15577,7 +16123,21 @@
           "genres": [
             "Touhou-adjacent original guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; composition/arrangement Tatsh; lyrics 愛羽薫"
+          "credit": "Vocals 葉月ゆら; composition/arrangement Tatsh; lyrics 愛羽薫",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Tatsh"
+            ],
+            "arrange": [
+              "Tatsh"
+            ],
+            "lyrics": [
+              "愛羽薫"
+            ]
+          }
         }
       ]
     },
@@ -15608,7 +16168,22 @@
           "genres": [
             "Doujin guest vocal"
           ],
-          "credit": "Lead vocals 葉月ゆら; chorus 花たん; music and lyrics リト (einherjer)"
+          "credit": "Lead vocals 葉月ゆら; chorus 花たん; music and lyrics リト (einherjer)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "chorus": [
+              "花たん"
+            ],
+            "music": [
+              "リト"
+            ],
+            "lyrics": [
+              "リト"
+            ],
+            "notes": "einherjer"
+          }
         }
       ]
     },
@@ -15639,7 +16214,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement Tatsh; lyrics 愛羽薫"
+          "credit": "Vocals 葉月ゆら; arrangement Tatsh; lyrics 愛羽薫",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "Tatsh"
+            ],
+            "lyrics": [
+              "愛羽薫"
+            ]
+          }
         }
       ]
     },
@@ -15670,7 +16256,18 @@
           "genres": [
             "Touhou guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; arrangement and lyrics NYO"
+          "credit": "Vocals 葉月ゆら; arrangement and lyrics NYO",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "NYO"
+            ],
+            "lyrics": [
+              "NYO"
+            ]
+          }
         }
       ]
     },
@@ -15701,7 +16298,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -15714,7 +16316,13 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; collaboration with ポリッツ"
+          "credit": "Vocals 葉月ゆら; collaboration with ポリッツ",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "collaboration with ポリッツ"
+          }
         },
         {
           "track": "03",
@@ -15727,7 +16335,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -15740,7 +16353,15 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; composition Ryou"
+          "credit": "Vocals 葉月ゆら; composition Ryou",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Ryou"
+            ]
+          }
         },
         {
           "track": "05",
@@ -15753,7 +16374,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -15766,7 +16392,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -15779,7 +16410,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -15792,7 +16428,15 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; remix BLUEHAWAII"
+          "credit": "Vocals 葉月ゆら; remix BLUEHAWAII",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "remix": [
+              "BLUEHAWAII"
+            ]
+          }
         },
         {
           "track": "09",
@@ -15805,7 +16449,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "10",
@@ -15818,7 +16467,13 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; programmed version 高見"
+          "credit": "Vocals 葉月ゆら; programmed version 高見",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "programmed version 高見"
+          }
         },
         {
           "track": "11",
@@ -15831,7 +16486,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "12",
@@ -15844,7 +16504,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "13",
@@ -15857,7 +16522,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "14",
@@ -15870,7 +16540,12 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "15",
@@ -15883,7 +16558,13 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; collaboration The Spring Beach Works."
+          "credit": "Vocals 葉月ゆら; collaboration The Spring Beach Works.",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "collaboration The Spring Beach Works."
+          }
         },
         {
           "track": "16",
@@ -15896,7 +16577,15 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; composition スパーイ大作"
+          "credit": "Vocals 葉月ゆら; composition スパーイ大作",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "スパーイ大作"
+            ]
+          }
         },
         {
           "track": "17",
@@ -15909,7 +16598,13 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; narration 星見蒼人"
+          "credit": "Vocals 葉月ゆら; narration 星見蒼人",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "narration 星見蒼人"
+          }
         },
         {
           "track": "18",
@@ -15922,7 +16617,13 @@
           "genres": [
             "Web single / archival recovery"
           ],
-          "credit": "Vocals 葉月ゆら; live guitar Northern Brastorm"
+          "credit": "Vocals 葉月ゆら; live guitar Northern Brastorm",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "live guitar Northern Brastorm"
+          }
         },
         {
           "track": "19",
@@ -15935,7 +16636,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -15966,7 +16672,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら"
+          "credit": "Radio performance 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -15979,7 +16690,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら"
+          "credit": "Radio performance 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -15992,7 +16708,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら"
+          "credit": "Radio performance 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -16005,7 +16726,13 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら; guest 月子"
+          "credit": "Radio performance 葉月ゆら; guest 月子",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "guest 月子"
+          }
         },
         {
           "track": "05",
@@ -16018,7 +16745,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら"
+          "credit": "Radio performance 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -16031,7 +16763,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら"
+          "credit": "Radio performance 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -16044,7 +16781,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら"
+          "credit": "Radio performance 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -16057,7 +16799,12 @@
           "genres": [
             "Unknown archive / radio"
           ],
-          "credit": "Radio performance 葉月ゆら"
+          "credit": "Radio performance 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -16088,7 +16835,15 @@
           "genres": [
             "Guest vocal — doujin"
           ],
-          "credit": "Vocals 葉月ゆら; arrange Tsukasa"
+          "credit": "Vocals 葉月ゆら; arrange Tsukasa",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "Tsukasa"
+            ]
+          }
         }
       ]
     },
@@ -16119,7 +16874,15 @@
           "genres": [
             "Guest vocal — doujin"
           ],
-          "credit": "Vocals 葉月ゆら; arrange BLUE HAWAII"
+          "credit": "Vocals 葉月ゆら; arrange BLUE HAWAII",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "arrange": [
+              "BLUE HAWAII"
+            ]
+          }
         }
       ]
     },
@@ -16150,7 +16913,15 @@
           "genres": [
             "Guest vocal — Tatsh"
           ],
-          "credit": "Vocals 葉月ゆら; music Tatsh"
+          "credit": "Vocals 葉月ゆら; music Tatsh",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Tatsh"
+            ]
+          }
         }
       ]
     },
@@ -16181,7 +16952,16 @@
           "genres": [
             "Guest vocal — Tatsh"
           ],
-          "credit": "Vocals 葉月ゆら; music Tatsh; with SisA"
+          "credit": "Vocals 葉月ゆら; music Tatsh; with SisA",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Tatsh"
+            ],
+            "notes": "with SisA"
+          }
         }
       ]
     },
@@ -16212,7 +16992,12 @@
           "genres": [
             "Guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -16243,7 +17028,16 @@
           "genres": [
             "Guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; circle 時の漆黒 (Toki no Shikkoku)"
+          "credit": "Vocals 葉月ゆら; circle 時の漆黒 (Toki no Shikkoku)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "時の漆黒"
+            ],
+            "notes": "Toki no Shikkoku"
+          }
         },
         {
           "track": "02",
@@ -16256,7 +17050,15 @@
           "genres": [
             "Guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; circle 時の漆黒"
+          "credit": "Vocals 葉月ゆら; circle 時の漆黒",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "時の漆黒"
+            ]
+          }
         }
       ]
     },
@@ -16287,7 +17089,12 @@
           "genres": [
             "Guest vocal — EastNewSound"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -16318,7 +17125,15 @@
           "genres": [
             "Guest vocal — Tatsh"
           ],
-          "credit": "Vocals 葉月ゆら; circle TatshMusicCircle"
+          "credit": "Vocals 葉月ゆら; circle TatshMusicCircle",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "TatshMusicCircle"
+            ]
+          }
         }
       ]
     },
@@ -16349,7 +17164,15 @@
           "genres": [
             "Guest vocal — doujin"
           ],
-          "credit": "Vocals 葉月ゆら; circle RomariaCrusade"
+          "credit": "Vocals 葉月ゆら; circle RomariaCrusade",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "RomariaCrusade"
+            ]
+          }
         }
       ]
     },
@@ -16380,7 +17203,13 @@
           "genres": [
             "Guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら (Melodic Taste guest); orig. Princess Sara"
+          "credit": "Vocals 葉月ゆら (Melodic Taste guest); orig. Princess Sara",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "Melodic Taste guest; orig. Princess Sara"
+          }
         },
         {
           "track": "02",
@@ -16393,7 +17222,13 @@
           "genres": [
             "Guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら (Melodic Taste guest); orig. Nadia Blue Water"
+          "credit": "Vocals 葉月ゆら (Melodic Taste guest); orig. Nadia Blue Water",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "Melodic Taste guest; orig. Nadia Blue Water"
+          }
         }
       ]
     },
@@ -16424,7 +17259,12 @@
           "genres": [
             "Guest vocal — doujin"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -16455,7 +17295,15 @@
           "genres": [
             "Guest vocal"
           ],
-          "credit": "Vocals 葉月ゆら; music Bitplane"
+          "credit": "Vocals 葉月ゆら; music Bitplane",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "Bitplane"
+            ]
+          }
         }
       ]
     },
@@ -16486,7 +17334,12 @@
           "genres": [
             "Guest vocal — EastNewSound"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -16517,7 +17370,12 @@
           "genres": [
             "Guest vocal — EastNewSound"
           ],
-          "credit": "Vocals 葉月ゆら"
+          "credit": "Vocals 葉月ゆら",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ]
     },
@@ -16548,7 +17406,19 @@
           "genres": [
             "Guest vocal — doujin"
           ],
-          "credit": "Vocals 葉月ゆら; circle FragileOnline; arrange YS (下田祐)"
+          "credit": "Vocals 葉月ゆら; circle FragileOnline; arrange YS (下田祐)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "FragileOnline"
+            ],
+            "arrange": [
+              "YS"
+            ],
+            "notes": "下田祐"
+          }
         },
         {
           "track": "02",
@@ -16561,7 +17431,19 @@
           "genres": [
             "Guest vocal — doujin"
           ],
-          "credit": "Vocals 葉月ゆら; circle FragileOnline; arrange YS (下田祐)"
+          "credit": "Vocals 葉月ゆら; circle FragileOnline; arrange YS (下田祐)",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "circle": [
+              "FragileOnline"
+            ],
+            "arrange": [
+              "YS"
+            ],
+            "notes": "下田祐"
+          }
         }
       ]
     },
@@ -16592,7 +17474,13 @@
           "genres": [
             "Niconico cover (歌ってみた)"
           ],
-          "credit": "Vocals 葉月ゆら; duet 凪佳二"
+          "credit": "Vocals 葉月ゆら; duet 凪佳二",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "notes": "duet 凪佳二"
+          }
         }
       ]
     }

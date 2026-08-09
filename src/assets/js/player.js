@@ -502,6 +502,25 @@
     }
     return b;
   }
+  // Per-song staff, rendered under the lyrics (independent of language / lyric availability).
+  // Roles come from the catalog track's structured `staff`; falls back to the raw `credit` string.
+  const STAFF_ROLES = [['lyrics','Lyrics'],['music','Music'],['arrange','Arrange'],['vocals','Vocals'],['chorus','Chorus'],['remix','Remix'],['circle','Circle']];
+  function curTrack() { const q = queue[qi]; if (!q) return null; const a = ALB[q.ai]; if (!a) return null; return a.tracks[q.ti] || null; }
+  function creditsHTML() {
+    const t = curTrack(); if (!t) return '';
+    const s = t.staff;
+    const rows = [];
+    if (s) {
+      for (const [k, label] of STAFF_ROLES) {
+        if (s[k] && s[k].length) rows.push(`<div class="np-cr-row"><span class="np-cr-role">${label}</span><span class="np-cr-name">${esc(s[k].join(' · '))}</span></div>`);
+      }
+      if (s.notes) rows.push(`<div class="np-cr-note">${esc(s.notes)}</div>`);
+    } else if (t.credit) {
+      rows.push(`<div class="np-cr-note">${esc(t.credit)}</div>`);
+    }
+    if (!rows.length) return '';
+    return `<div class="np-credits"><div class="np-cr-h">Credits</div>${rows.join('')}</div>`;
+  }
   function renderInto(container) {
     if (!container) return;
     const empty = container.querySelector('.np-lyrics-empty');
@@ -511,15 +530,23 @@
     if (!blk || !blk.lines || !blk.lines.length) {
       body.hidden = true; body.innerHTML = '';
       if (empty) empty.hidden = false;
-      return;
+    } else {
+      if (empty) empty.hidden = true;
+      body.hidden = false;
+      const langName = curLang === 'jp' ? 'Japanese' : curLang === 'romaji' ? 'Romaji' : 'English';
+      const rows = blk.lines.map(l => l === '' ? '<span class="ll-gap"></span>' : `<span class="ll">${esc(l)}</span>`).join('');
+      const who = blk.by || 'unknown';
+      const credit = `<div class="np-lyrics-credit"><span>${esc(langName)}</span> · ${esc(who)}</div>`;
+      body.innerHTML = `<div class="np-lyrics-lines">${rows}</div>${credit}`;
     }
-    if (empty) empty.hidden = true;
-    body.hidden = false;
-    const langName = curLang === 'jp' ? 'Japanese' : curLang === 'romaji' ? 'Romaji' : 'English';
-    const rows = blk.lines.map(l => l === '' ? '<span class="ll-gap"></span>' : `<span class="ll">${esc(l)}</span>`).join('');
-    const who = blk.by || 'unknown';
-    const credit = `<div class="np-lyrics-credit"><span>${esc(langName)}</span> · ${esc(who)}</div>`;
-    body.innerHTML = `<div class="np-lyrics-lines">${rows}</div>${credit}`;
+    // Song staff credits — always reflect the current track, even with no lyrics.
+    let cw = container.querySelector('.np-credits-wrap');
+    if (!cw) {
+      cw = document.createElement('div'); cw.className = 'np-credits-wrap';
+      const pill = container.querySelector('.np-lang');
+      if (pill) container.insertBefore(cw, pill); else container.appendChild(cw);
+    }
+    cw.innerHTML = creditsHTML();
   }
   function renderLyrics() { renderInto($('#np-lyrics-scroll')); renderInto($('#np-sheet-lyrics')); }
   // Language switch — keep both pills (mobile + web) in sync and re-render.
