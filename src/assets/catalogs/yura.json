@@ -2392,7 +2392,18 @@
           "dur": 153,
           "genres": [
             "Rock"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -2414,7 +2425,18 @@
           "dur": 127,
           "genres": [
             "Folk"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "北原白秋"
+            ],
+            "music": [
+              "草川信"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -2436,7 +2458,18 @@
           "dur": 63,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -2447,7 +2480,19 @@
           "dur": 252,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "スパーイ大作",
+              "葉月ゆら"
+            ],
+            "music": [
+              "スパーイ大作"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -2469,7 +2514,18 @@
           "dur": 234,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "09",
@@ -2480,7 +2536,18 @@
           "dur": 142,
           "genres": [
             "Trance"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "10",
@@ -2502,7 +2569,15 @@
           "dur": 50,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "12",
@@ -2513,7 +2588,15 @@
           "dur": 75,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "13",
@@ -2524,7 +2607,18 @@
           "dur": 74,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "14",
@@ -2557,7 +2651,21 @@
           "dur": 261,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "arrange": [
+              "安藤浩二"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "17",
@@ -6667,7 +6775,18 @@
           "genres": [
             "Jazz",
             "Rock"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -6678,7 +6797,18 @@
           "dur": 289,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -6689,7 +6819,18 @@
           "dur": 54,
           "genres": [
             "Children's"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -6756,7 +6897,22 @@
           "genres": [
             "Pop",
             "Children's"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "葉月ゆら",
+              "BLUEHAWAII"
+            ],
+            "arrange": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "11",
@@ -6822,7 +6978,21 @@
           "dur": 190,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "arrange": [
+              "三輪悟"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "17",
@@ -6833,7 +7003,15 @@
           "dur": 82,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "harunosuke"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ],
       "album_seconds": 3405,
@@ -8940,7 +9118,15 @@
           "genres": [
             "Pop",
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "K-MASERA"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -8951,7 +9137,15 @@
           "dur": 227,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "K-MASERA"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -8962,7 +9156,15 @@
           "dur": 232,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "K-MASERA"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -8973,7 +9175,15 @@
           "dur": 222,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "K-MASERA"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -8984,7 +9194,15 @@
           "dur": 375,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "K-MASERA"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ],
       "album_seconds": 1374,
@@ -10814,7 +11032,18 @@
           "dur": 43,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -10826,7 +11055,18 @@
           "genres": [
             "Folk, World, & Country",
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -10837,7 +11077,18 @@
           "dur": 246,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -10848,7 +11099,18 @@
           "dur": 164,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -10859,7 +11121,18 @@
           "dur": 362,
           "genres": [
             "Rock"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -10870,7 +11143,18 @@
           "dur": 252,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -10881,7 +11165,18 @@
           "dur": 158,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -10892,7 +11187,18 @@
           "dur": 556,
           "genres": [
             "Stage & Screen"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "翡翠"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ],
       "album_seconds": 2226,
@@ -13290,7 +13596,18 @@
           "dur": 227,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "しゃな"
+            ],
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -13301,7 +13618,15 @@
           "dur": 147,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -13312,7 +13637,18 @@
           "dur": 163,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -13323,7 +13659,15 @@
           "dur": 270,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -13334,7 +13678,18 @@
           "dur": 292,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "06",
@@ -13346,7 +13701,15 @@
           "genres": [
             "Pop",
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "07",
@@ -13357,7 +13720,15 @@
           "dur": 241,
           "genres": [
             "Rock"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "08",
@@ -13368,7 +13739,15 @@
           "dur": 306,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "music": [
+              "しゃな"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ],
       "album_seconds": 1902,
@@ -13888,7 +14267,18 @@
           "dur": 266,
           "genres": [
             "Electronic"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "CHEEBOW"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "02",
@@ -13933,7 +14323,15 @@
           "genres": [
             "Electronic",
             "Pop"
-          ]
+          ],
+          "staff": {
+            "arrange": [
+              "Yoshinoli Abe (pliom)"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         }
       ],
       "album_seconds": 1320,
@@ -17163,7 +17561,18 @@
           "dur": 165,
           "genres": [
             "Jazz"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "03",
@@ -17174,7 +17583,18 @@
           "dur": 297,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "04",
@@ -17185,7 +17605,18 @@
           "dur": 60,
           "genres": [
             "Children's"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "葉月ゆら"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "05",
@@ -17251,7 +17682,22 @@
           "dur": 165,
           "genres": [
             "Pop"
-          ]
+          ],
+          "staff": {
+            "lyrics": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "葉月ゆら",
+              "BLUEHAWAII"
+            ],
+            "arrange": [
+              "BLUEHAWAII"
+            ],
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
         },
         {
           "track": "11",

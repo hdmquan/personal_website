@@ -1,0 +1,68 @@
+{
+  "Clover": {
+    "01": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["北原白秋"], "music": ["草川信"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["葉月ゆら"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["スパーイ大作", "葉月ゆら"], "music": ["スパーイ大作"], "vocals": ["葉月ゆら"]},
+    "08": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "09": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "11": {"lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"]},
+    "12": {"lyrics": ["葉月ゆら"], "vocals": ["葉月ゆら"]},
+    "13": {"lyrics": ["葉月ゆら"], "music": ["葉月ゆら"], "vocals": ["葉月ゆら"]},
+    "16": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "arrange": ["安藤浩二"], "vocals": ["葉月ゆら"]}
+  },
+  "Honey Bee": {
+    "02": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["葉月ゆら"], "vocals": ["葉月ゆら"]},
+    "10": {"lyrics": ["葉月ゆら"], "music": ["葉月ゆら", "BLUEHAWAII"], "arrange": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "16": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "arrange": ["三輪悟"], "vocals": ["葉月ゆら"]},
+    "17": {"music": ["harunosuke"], "vocals": ["葉月ゆら"]}
+  },
+  "ゆらわーるど -Honey Bee-": {
+    "02": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["葉月ゆら"], "music": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["葉月ゆら"], "vocals": ["葉月ゆら"]},
+    "10": {"lyrics": ["葉月ゆら"], "music": ["葉月ゆら", "BLUEHAWAII"], "arrange": ["BLUEHAWAII"], "vocals": ["葉月ゆら"]}
+  },
+  "Snow Flower": {
+    "01": {"lyrics": ["しゃな"], "music": ["しゃな"], "vocals": ["葉月ゆら"]},
+    "02": {"music": ["しゃな"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["葉月ゆら"], "music": ["しゃな"], "vocals": ["葉月ゆら"]},
+    "04": {"music": ["しゃな"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["しゃな"], "vocals": ["葉月ゆら"]},
+    "06": {"music": ["しゃな"], "vocals": ["葉月ゆら"]},
+    "07": {"music": ["しゃな"], "vocals": ["葉月ゆら"]},
+    "08": {"music": ["しゃな"], "vocals": ["葉月ゆら"]}
+  },
+  "Origin Notes": {
+    "01": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]},
+    "02": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]},
+    "03": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]},
+    "04": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]},
+    "05": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]},
+    "06": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]},
+    "07": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]},
+    "08": {"lyrics": ["葉月ゆら"], "music": ["翡翠"], "vocals": ["葉月ゆら"]}
+  },
+  "Lunna＊Musique": {
+    "01": {"music": ["K-MASERA"], "vocals": ["葉月ゆら"]},
+    "02": {"music": ["K-MASERA"], "vocals": ["葉月ゆら"]},
+    "03": {"music": ["K-MASERA"], "vocals": ["葉月ゆら"]},
+    "04": {"music": ["K-MASERA"], "vocals": ["葉月ゆら"]},
+    "05": {"music": ["K-MASERA"], "vocals": ["葉月ゆら"]}
+  },
+  "Strawberry Paradox": {
+    "01": {"lyrics": ["葉月ゆら"], "music": ["CHEEBOW"], "vocals": ["葉月ゆら"]},
+    "05": {"arrange": ["Yoshinoli Abe (pliom)"], "vocals": ["葉月ゆら"]}
+  },
+  "_sources": {
+    "Clover": "http://web.archive.org/web/2009id_/http://hatukiyura.sakura.ne.jp/songs.html (per-track) + cdworks.html (arrange/tracklist)",
+    "Honey Bee": "http://web.archive.org/web/2009id_/http://hatukiyura.sakura.ne.jp/songs.html (per-track) + cdworks.html (arrange versions, title track) + music.html (遠恋の歌)",
+    "ゆらわーるど -Honey Bee-": "http://web.archive.org/web/2009id_/http://hatukiyura.sakura.ne.jp/songs.html (shared tracklist with Honey Bee)",
+    "Snow Flower": "http://web.archive.org/web/2012id_/http://hatukiyura.sakura.ne.jp/circle.html (album 作曲：しゃな) + songs.html/music.html (胡蝶蘭・雪と花のエチュード・☆Precious X`mas☆)",
+    "Origin Notes": "http://web.archive.org/web/2012id_/http://hatukiyura.sakura.ne.jp/circle.html (album 作詞：葉月ゆら / 作曲：翡翠)",
+    "Lunna＊Musique": "http://web.archive.org/web/2012id_/http://hatukiyura.sakura.ne.jp/circle.html (album 作曲：K-MASERA)",
+    "Strawberry Paradox": "http://web.archive.org/web/2012id_/http://hatukiyura.sakura.ne.jp/circle.html (nano*pico) + songs.html (フェルミ☆パラドックス)"
+  }
+}
