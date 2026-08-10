@@ -687,7 +687,7 @@ body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
 
 /* the queue: its own scroll region below the controls */
 .np-queue-sheet { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; background: var(--bg); }
-.np-tabs, .np-sheet-lyrics { display: none; }        /* web only */
+.np-tabs, .np-sheet-lyrics, .np-sheet-info { display: none; }        /* web only */
 .np-queue-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
   padding-bottom: calc(1rem + env(safe-area-inset-bottom));
   scrollbar-width: thin; scrollbar-color: var(--gilt-hair) transparent; }
@@ -748,6 +748,20 @@ body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
   color: var(--text-3); text-transform: uppercase; }
 .np-cr-name { font-size: .84rem; color: var(--text); word-break: break-word; }
 .np-cr-note { margin-top: .5rem; font-size: .72rem; line-height: 1.5; color: var(--text-3); font-style: italic; }
+
+/* Info panel — track metadata + credits (web Info tab, mobile Info-button view) */
+.np-info-scroll { flex: 1 1 0; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.np-info { display: flex; flex-direction: column; }
+.np-info-hd { margin-bottom: 1.1rem; }
+.np-info-title { font-family: var(--serif); font-size: 1.32rem; line-height: 1.25; color: var(--text); }
+.np-info-inst { color: var(--text-3); font-size: .8em; }
+.np-info-artist { margin-top: .32rem; font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; color: var(--gilt); }
+.np-info-meta { display: flex; flex-direction: column; }
+.np-info-row { display: flex; gap: .8rem; align-items: baseline; padding: .42rem 0; border-bottom: 1px solid var(--gilt-hair); }
+.np-info-k { flex: 0 0 4.6rem; font-family: var(--mono); font-size: .6rem; letter-spacing: .09em; text-transform: uppercase; color: var(--text-3); }
+.np-info-v { font-size: .9rem; color: var(--text); word-break: break-word; }
+/* mobile Info view sits under the floating head — clear it (web Info tab padding is set in the min-width block) */
+#np-view-info .np-info-scroll { padding: calc(env(safe-area-inset-top) + 3.8rem) 1.4rem calc(2rem + env(safe-area-inset-bottom)); }
 .np-sheet-lyrics .np-credits-wrap { padding: 0 1.5rem; }
 
 /* ═══ Tablet & desktop: YouTube-web layout — cover · top tabs · queue · transport bar ═══ */
@@ -783,6 +797,11 @@ body.dark-mode .np-c-play { background: var(--accent); color: #16140e; }
   .np-sheet-lyrics { display: none; flex: 1 1 0; min-height: 0; position: relative; }
   #queue-panel.show-lyrics .np-queue-scroll { display: none; }
   #queue-panel.show-lyrics .np-sheet-lyrics { display: flex; flex-direction: column; }
+  #np-info-btn { display: none; }                     /* web uses the Info tab, not the floating button */
+  .np-sheet-info { display: none; flex: 1 1 0; min-height: 0; }
+  #queue-panel.show-info .np-queue-scroll { display: none; }
+  #queue-panel.show-info .np-sheet-info { display: flex; flex-direction: column; }
+  .np-sheet-info .np-info-scroll { padding: .9rem 1.5rem 1.5rem; }
   .np-sheet-lyrics .np-lyrics-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .55rem; }
   .np-sheet-lyrics .np-lyrics-empty svg { width: 34px; height: 34px; color: var(--gilt-soft); }
   .np-sheet-lyrics .np-lyrics-empty p { margin: 0; font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--text-2); }

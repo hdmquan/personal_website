@@ -472,6 +472,7 @@
     highlightPlaying();
     renderQueue();
     renderLyrics();
+    renderInfo();
     saveNowPlaying();
     // Keep the URL pointing at the current track so it stays shareable; replaceState avoids
     // history spam on auto-advance and doesn't re-fire the router.
@@ -539,16 +540,33 @@
       const credit = `<div class="np-lyrics-credit"><span>${esc(langName)}</span> · ${esc(who)}</div>`;
       body.innerHTML = `<div class="np-lyrics-lines">${rows}</div>${credit}`;
     }
-    // Song staff credits — always reflect the current track, even with no lyrics.
-    let cw = container.querySelector('.np-credits-wrap');
-    if (!cw) {
-      cw = document.createElement('div'); cw.className = 'np-credits-wrap';
-      const pill = container.querySelector('.np-lang');
-      if (pill) container.insertBefore(cw, pill); else container.appendChild(cw);
-    }
-    cw.innerHTML = creditsHTML();
+    // credits used to live under the lyrics — they now render in the Info panel (renderInfo)
+    const cw = container.querySelector('.np-credits-wrap'); if (cw) cw.remove();
   }
   function renderLyrics() { renderInto($('#np-lyrics-scroll')); renderInto($('#np-sheet-lyrics')); }
+
+  // Info panel — track metadata + the song staff credits. Rendered into the mobile Info view
+  // (#np-info-scroll, opened by the top-right Info button) and the web Info tab (#np-sheet-info-scroll).
+  function infoHTML() {
+    const q = queue[qi]; if (!q) return '';
+    const a = ALB[q.ai]; if (!a) return '';
+    const t = a.tracks[q.ti]; if (!t) return '';
+    const genres = (t.genres && t.genres.length ? t.genres : a.genres) || [];
+    const rows = [];
+    rows.push(`<div class="np-info-row"><span class="np-info-k">Album</span><span class="np-info-v">${esc(a.title)}</span></div>`);
+    if (a.year) rows.push(`<div class="np-info-row"><span class="np-info-k">Year</span><span class="np-info-v">${esc(a.year)}</span></div>`);
+    rows.push(`<div class="np-info-row"><span class="np-info-k">Track</span><span class="np-info-v">${Number(t.track) || t.track} of ${a.tracks.length}</span></div>`);
+    if (t.dur) rows.push(`<div class="np-info-row"><span class="np-info-k">Duration</span><span class="np-info-v">${fmt(t.dur)}</span></div>`);
+    if (genres.length) rows.push(`<div class="np-info-row"><span class="np-info-k">Genre</span><span class="np-info-v">${esc(genres.join(' · '))}</span></div>`);
+    const head = `<div class="np-info-hd"><div class="np-info-title">${esc(disp(t))}${t.instrumental ? ' <span class="np-info-inst">(inst)</span>' : ''}</div>`
+      + `<div class="np-info-artist">${esc(a.artist || ART.name || '')}</div></div>`;
+    return `<div class="np-info">${head}<div class="np-info-meta">${rows.join('')}</div>${creditsHTML()}</div>`;
+  }
+  function renderInfo() {
+    const html = infoHTML();
+    const m = $('#np-info-scroll'); if (m) m.innerHTML = html;
+    const w = $('#np-sheet-info-scroll'); if (w) w.innerHTML = html;
+  }
   // Language switch — keep both pills (mobile + web) in sync and re-render.
   Array.prototype.forEach.call(document.querySelectorAll('.np-lang-btn'), function (b) {
     b.addEventListener('click', function () {

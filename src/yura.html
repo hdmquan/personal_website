@@ -189,7 +189,9 @@ permalink: /yura/
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h9M4 17h7"/><path d="M16 15l2.2 2.2L23 12"/></svg>
       </button>
     </div>
-    <span aria-hidden="true"></span>
+    <button id="np-info-btn" class="np-icon-btn np-info-btn" type="button" aria-label="Track info" title="Info" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg>
+    </button>
   </div>
 
   <div class="np-views">
@@ -231,6 +233,7 @@ permalink: /yura/
      <div class="np-tabs" role="tablist" aria-label="Now playing panels">
        <button class="np-tab active" id="np-tab-upnext" data-webtab="upnext" role="tab" aria-selected="true">Up next</button>
        <button class="np-tab" id="np-tab-lyrics" data-webtab="lyrics" role="tab" aria-selected="false" tabindex="-1">Lyrics</button>
+       <button class="np-tab" id="np-tab-info" data-webtab="info" role="tab" aria-selected="false" tabindex="-1">Info</button>
      </div>
      <div class="np-queue-scroll" id="np-queue-scroll">
      <p class="np-queue-hd">Queue</p>
@@ -271,6 +274,9 @@ permalink: /yura/
          <button class="np-lang-btn" data-lang="en" role="tab" aria-selected="false" tabindex="-1">English</button>
        </div>
      </div>
+     <div class="np-sheet-info" id="np-sheet-info" hidden>
+       <div class="np-info-scroll" id="np-sheet-info-scroll"></div>
+     </div>
     </div>
    </section>
    <section class="np-view np-view-lyrics" id="np-view-lyrics" hidden>
@@ -286,6 +292,9 @@ permalink: /yura/
        <button class="np-lang-btn" data-lang="romaji" role="tab" aria-selected="false" tabindex="-1">Romaji</button>
        <button class="np-lang-btn" data-lang="en" role="tab" aria-selected="false" tabindex="-1">English</button>
      </div>
+   </section>
+   <section class="np-view np-view-info" id="np-view-info" hidden>
+     <div class="np-info-scroll" id="np-info-scroll"></div>
    </section>
   </div>
 </div>
@@ -340,13 +349,15 @@ permalink: /yura/
   (function(){
     /* (a) Player ⇄ Lyrics */
     var seg = Array.prototype.slice.call(document.querySelectorAll('.np-seg-btn')),
-        views = { song: document.getElementById('np-view-player'), lyrics: document.getElementById('np-view-lyrics') };
+        infoBtn = document.getElementById('np-info-btn'),
+        views = { song: document.getElementById('np-view-player'), lyrics: document.getElementById('np-view-lyrics'), info: document.getElementById('np-view-info') };
     function showView(name, focus){
       seg.forEach(function(b){
         var on = b.dataset.view === name;
         b.classList.toggle('active', on); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
         if (on && focus) b.focus();
       });
+      if (infoBtn) { var oni = name === 'info'; infoBtn.classList.toggle('active', oni); infoBtn.setAttribute('aria-pressed', String(oni)); }
       Object.keys(views).forEach(function(k){ var v = views[k]; if (!v) return; var on = k === name; v.classList.toggle('active', on); v.hidden = !on; });
     }
     seg.forEach(function(b, i){
@@ -356,6 +367,8 @@ permalink: /yura/
         showView(seg[(i + (e.key === 'ArrowRight' ? 1 : seg.length - 1)) % seg.length].dataset.view, true);
       });
     });
+    // Top-right Info button (mobile): toggle the Info view ⇄ Player.
+    infoBtn && infoBtn.addEventListener('click', function(){ showView(infoBtn.classList.contains('active') ? 'song' : 'info', false); });
 
     /* (b) Lyrics language — scoped to its own pill (mobile view + web sheet have separate ones) */
     Array.prototype.forEach.call(document.querySelectorAll('.np-lang-btn'), function(b){
@@ -375,7 +388,7 @@ permalink: /yura/
       t.addEventListener('click', function(){
         var name = t.dataset.webtab;
         webtabs.forEach(function(x){ var on = x === t; x.classList.toggle('active', on); x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
-        if (qpanel) qpanel.classList.toggle('show-lyrics', name === 'lyrics');
+        if (qpanel) { qpanel.classList.toggle('show-lyrics', name === 'lyrics'); qpanel.classList.toggle('show-info', name === 'info'); }
       });
     });
 
