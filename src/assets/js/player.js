@@ -534,11 +534,13 @@
     } else {
       if (empty) empty.hidden = true;
       body.hidden = false;
-      const langName = curLang === 'jp' ? 'Japanese' : curLang === 'romaji' ? 'Romaji' : 'English';
       const rows = blk.lines.map(l => l === '' ? '<span class="ll-gap"></span>' : `<span class="ll">${esc(l)}</span>`).join('');
-      const who = blk.by || 'unknown';
-      const credit = `<div class="np-lyrics-credit"><span>${esc(langName)}</span> · ${esc(who)}</div>`;
-      body.innerHTML = `<div class="np-lyrics-lines">${rows}</div>${credit}`;
+      // "By: <author>" — plus "· edited by <editors>" once a proofreader/editor is credited
+      // (e.g. Suzuyo editing meriole's older transliterations). `editors` is an optional string[].
+      const eds = Array.isArray(blk.editors) ? blk.editors.filter(Boolean) : [];
+      let credit = `By: <span>${esc(blk.by || 'unknown')}</span>`;
+      if (eds.length) credit += ` · edited by <span>${esc(eds.join(', '))}</span>`;
+      body.innerHTML = `<div class="np-lyrics-lines">${rows}</div><div class="np-lyrics-credit">${credit}</div>`;
     }
     // credits used to live under the lyrics — they now render in the Info panel (renderInfo)
     const cw = container.querySelector('.np-credits-wrap'); if (cw) cw.remove();

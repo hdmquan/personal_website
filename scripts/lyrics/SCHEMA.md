@@ -31,7 +31,9 @@ is machine- or human-made.
   "by":    "Claude (Opus 4.8)",                    // display credit — a person's handle, a site, or the AI model
   "kind":  "ai",                                   // one of: official | transcription | ai | human
   "src":   "歌詞/03.txt (community booklet transcription)", // provenance, free text or URL
-  "date":  "2026-08-07"                            // ISO date the block was produced/added
+  "date":  "2026-08-07",                           // ISO date the block was produced/added
+  "editors": ["Suzuyo"]                            // OPTIONAL string[] — proofreaders/editors of this block.
+                                                   // Renders "By: <by> · edited by <editors>" (e.g. Suzuyo editing meriole's romaji)
 }
 ```
 
