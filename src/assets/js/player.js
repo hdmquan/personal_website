@@ -30,7 +30,7 @@
   let seeking = false;
   let wantPlay = false;         // user *intends* playback (for interruption resume)
   let excludeInst = false;      // skip instrumental tracks in auto-generated queues
-  let loopMode = 0;             // 0 = off, 1 = loop all, 2 = loop one
+  let loopMode = 0;             // 0 = off, 1 = loop album (dot — confines queue to the current album), 2 = loop one track
   let sleepTimer = null, sleepEndOfTrack = false;   // sleep timer (queue panel)
   let queueMode = 'album';      // 'album' (continue to next album on end) | 'all'
   let npScreen = false;         // the full-screen now-playing view is open (own route #np=ai.ti)
@@ -376,10 +376,19 @@
     sortedIndices().forEach(ai => buildQueue(ai, true).forEach(x => s.push(x)));
     return s;
   }
-  // Point the window at `startIdx` in `full`: current at qi=0, ~Q_AHEAD upcoming, no history yet.
-  function setWindow(full, startIdx) {
-    stream = full; streamStart = Math.max(0, Math.min(startIdx, full.length - 1));
-    queue = stream.slice(streamStart, streamStart + 1 + Q_AHEAD); qi = 0;
+  // Point the window at `startIdx` in `full`. With `withHistory`, the earlier tracks of the SAME
+  // album (up to the album boundary) are kept above as history — so starting mid-album shows the
+  // tracks you skipped past (e.g. play track 3 → tracks 1 & 2 sit in the queue above it).
+  function setWindow(full, startIdx, withHistory) {
+    stream = full;
+    const s = Math.max(0, Math.min(startIdx, full.length - 1));
+    let from = s;
+    if (withHistory && full[s]) {
+      const ai = full[s].ai;
+      while (from > 0 && full[from - 1] && full[from - 1].ai === ai && s - from < Q_BEHIND) from--;
+    }
+    streamStart = from; qi = s - from;
+    queue = stream.slice(from, s + 1 + Q_AHEAD);
   }
   // After qi moves: top up the upcoming side to ~Q_AHEAD and trim history to ~Q_BEHIND.
   function reconcileWindow() {
@@ -398,11 +407,15 @@
       shuf(q);
       if (track) { const k = q.findIndex(x => x.ti === ti); if (k > 0) { q.splice(k, 1); q.unshift(track); } else if (k < 0) q.unshift(track); }
       setWindow(q, 0);
-    } else {                                          // normal → continuous stream in sort order from here
-      const s = eligibleStream();
+    } else {
+      // dot/album-loop mode → confine the queue to THIS album; otherwise the whole discography
+      // in sort order from here. Either way keep the album's earlier tracks as history.
+      const s = (loopMode === 1)
+        ? (buildQueue(ai, respectFilter).length ? buildQueue(ai, respectFilter) : buildQueue(ai, false))
+        : eligibleStream();
       let idx = s.findIndex(x => x.ai === ai && x.ti === ti);
       if (idx < 0 && track) { let ins = s.findIndex(y => y.ai === ai); if (ins < 0) ins = 0; s.splice(ins, 0, track); idx = ins; }
-      setWindow(s, idx < 0 ? 0 : idx);
+      setWindow(s, idx < 0 ? 0 : idx, true);
     }
     syncShuffleBtn();
     loadCurrent(true);
@@ -583,7 +596,7 @@
 
   function next() {
     if (stream.length && streamStart + qi + 1 < stream.length) { qi++; reconcileWindow(); loadCurrent(true); return; }
-    if (loopMode === 1 && stream.length) { setWindow(stream, 0); loadCurrent(true); return; }   // loop all → wrap
+    if (loopMode === 1 && stream.length) { setWindow(stream, 0); loadCurrent(true); return; }   // loop album/queue → wrap
     stopPlayback();
   }
   function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; reconcileWindow(); loadCurrent(true); } }
@@ -729,8 +742,25 @@
     const l2 = document.getElementById('np2-loop');
     if (l2) { l2.classList.toggle('on', loopMode > 0); l2.classList.toggle('one', loopMode === 2); }
     if (!loopBtn) return; loopBtn.classList.toggle('on', loopMode > 0); loopBtn.classList.toggle('one', loopMode === 2);
-    loopBtn.setAttribute('aria-label', ['Loop off','Loop all','Loop one'][loopMode]); loopBtn.title = ['Loop off','Loop all','Loop one'][loopMode]; }
-  loopBtn?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
+    loopBtn.setAttribute('aria-label', ['Loop off','Loop album','Loop track'][loopMode]); loopBtn.title = ['Loop off','Loop album','Loop track'][loopMode]; }
+  // Cycle off → album(dot) → track(1). Entering album mode confines the live queue to the current
+  // track's album (and it loops within it); leaving it restores the full-discography queue. The
+  // current track keeps playing — only the surrounding queue is reshaped.
+  function cycleLoop() {
+    const prev = loopMode;
+    loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings();
+    const cur = queue[qi]; if (!cur) return;
+    if (loopMode === 1) {                                    // → album mode: confine to this album
+      let s = buildQueue(cur.ai, true); if (!s.length) s = buildQueue(cur.ai, false);
+      let idx = s.findIndex(x => keyOf(x) === keyOf(cur)); if (idx < 0) { s.unshift(cur); idx = 0; }
+      setWindow(s, idx, true); renderQueue(); saveNowPlaying();
+    } else if (prev === 1 && !shuffle) {                     // left album mode: back to the whole discography
+      const s = eligibleStream();
+      let idx = s.findIndex(x => keyOf(x) === keyOf(cur));
+      setWindow(s, idx < 0 ? 0 : idx, true); renderQueue(); saveNowPlaying();
+    }
+  }
+  loopBtn?.addEventListener('click', cycleLoop);
 
   /* volume */
   const volSlider = $('#np-vol-slider');
@@ -745,7 +775,7 @@
   $('#np2-prev')?.addEventListener('click', prev);
   $('#np2-next')?.addEventListener('click', next);
   $('#np2-shuffle')?.addEventListener('click', toggleShuffle);
-  $('#np2-loop')?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
+  $('#np2-loop')?.addEventListener('click', cycleLoop);
   const np2Seek = $('#np2-seek'), np2Fill = $('#np2-fill'), np2Thumb = $('#np2-thumb');
   if (np2Seek) {
     const to = cx => { const r = np2Seek.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (cx - r.left) / r.width));
@@ -927,13 +957,13 @@
           rl = document.getElementById('q-repeat-lbl'), tm = document.getElementById('q-timer'), tl = document.getElementById('q-timer-lbl');
     if (sh) sh.classList.toggle('on', shuffle);
     if (rp) rp.classList.toggle('on', loopMode > 0);
-    if (rl) rl.textContent = ['Repeat', 'Repeat all', 'Repeat one'][loopMode];
+    if (rl) rl.textContent = ['Repeat', 'Repeat album', 'Repeat track'][loopMode];
     const on = !!sleepTimer || sleepEndOfTrack;
     if (tm) tm.classList.toggle('on', on);
     if (tl) tl.textContent = on ? 'Timer on' : 'Timer';
   }
   document.getElementById('q-shuffle')?.addEventListener('click', toggleShuffle);   // on = shuffled · off = source order
-  document.getElementById('q-repeat')?.addEventListener('click', () => { loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings(); });
+  document.getElementById('q-repeat')?.addEventListener('click', cycleLoop);
 
   function setSleep(v) {
     clearTimeout(sleepTimer); sleepTimer = null; sleepEndOfTrack = false;
