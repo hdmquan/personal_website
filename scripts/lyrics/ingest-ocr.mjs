@@ -17,11 +17,15 @@ const IDX = JSON.parse(fs.readFileSync(path.join(HERE, 'work/ocr-tasks/index.jso
 const byId = new Map(IDX.map(e => [e.id, e]));
 
 function loadResult(id) {
-  for (const dir of ['work/ocr-removed', 'work/out']) {
+  // A fresh run writes work/out; the original stash is in ocr-removed. Prefer whichever actually
+  // has track data (an empty stashed {} must not shadow a fresh non-empty result).
+  const cands = [];
+  for (const dir of ['work/out', 'work/ocr-removed']) {
     const p = path.join(HERE, dir, id + '.json');
-    if (fs.existsSync(p)) return { data: JSON.parse(fs.readFileSync(p, 'utf8')), from: dir };
+    if (fs.existsSync(p)) { try { cands.push({ data: JSON.parse(fs.readFileSync(p, 'utf8')), from: dir }); } catch {} }
   }
-  return null;
+  cands.sort((a, b) => Object.keys(b.data).length - Object.keys(a.data).length);
+  return cands[0] || null;
 }
 const AI_KINDS = new Set(['ai']);                 // may overwrite these; keep human/official/transcription
 const isProtected = b => b && b.kind && !AI_KINDS.has(b.kind);
