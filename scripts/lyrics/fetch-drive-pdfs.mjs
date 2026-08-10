@@ -20,13 +20,15 @@ const norm = s => (s || '').normalize('NFKC')
   .replace(/[\s　’'"”“〜～~:：・\-—–ー_/／|｜()（）\[\]［］「」『』【】,、，.。!！?？＊*＆&＝=+Ⅱ]/gi, '')
   .replace(/\bii\b/gi, '').toLowerCase();
 
-// which catalog albums still have zero lyric tracks (3+ vocal tracks only)
+// catalog albums (3+ vocal tracks) that are still missing 3+ vocal tracks' lyrics — this catches
+// both zero-coverage albums AND partially-covered ones (e.g. Arcana had only Suzuyo's ジゼル, so
+// its earlier zero-check skipped it even though the sheet PDF holds the other 6 songs).
 const missing = [];
 for (const a of CAT.albums) {
   const voc = a.tracks.filter(t => !t.instrumental);
   if (voc.length < 3) continue;
   const have = voc.filter(t => (LYR[a.title]?.[t.track]?.jp?.lines?.length)).length;
-  if (have === 0) missing.push(a.title);
+  if (voc.length - have >= 3) missing.push(a.title);
 }
 
 // build a normalized index of the sheet's drive links

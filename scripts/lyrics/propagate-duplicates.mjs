@@ -17,7 +17,7 @@ const LYR = JSON.parse(fs.readFileSync(LYR_PATH, 'utf8'));
 // strip version markers + punctuation so "UFO☆UFO -ボクのともだち-" == "Ufo☆Ufo -ボクのともだち-",
 // and "薔薇と弾丸(ノーマルver)" core == "薔薇と弾丸(アレンジver)" core == "薔薇と弾丸".
 const core = s => (s || '').normalize('NFKC')
-  .replace(/\[[^\]]*\]|\([^)]*ver[^)]*\)|[-‐-—~〜][^-~〜]*version[^-~〜]*[-‐-—~〜]?|full\s*version|instrumental|オリジナル|ノーマル|アレンジ|remix|ver\.?/gi, '')
+  .replace(/\[[^\]]*\]|\([^)]*ver[^)]*\)|[-‐-—~〜][^-~〜]*version[^-~〜]*[-‐-—~〜]?|[a-zé]*\s*version|instrumental|オリジナル|ノーマル|アレンジ|remix|ver\.?/gi, '')
   .replace(/[\s　’'"”“〜～~:：・\-—–ー_/／|｜()（）\[\]［］「」『』【】,、，.。!！?？＊*＆&＝=+☆★]/g, '')
   .toLowerCase();
 
