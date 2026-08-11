@@ -27943,6 +27943,41 @@
           }
         }
       ]
+    },
+    {
+      "album": "もじもじ ちびっ子魔法学園 ～痛くしちゃイヤだョ～",
+      "title": "もじもじ ちびっ子魔法学園 ～痛くしちゃイヤだョ～",
+      "artist": "葉月ゆら",
+      "year": "2004",
+      "date": "2004-08-24",
+      "category": "Commercial guest vocal — eroge OP",
+      "source_url": "https://web.archive.org/web/20041031005223/http://www.oz-game.jp/carol/mojimoji.html",
+      "cover": "assets/covers/mojimoji.jpg",
+      "cover_url": "/assets/covers/mojimoji.jpg",
+      "release_types": [
+        "others"
+      ],
+      "external_archive": true,
+      "tracks": [
+        {
+          "track": "01",
+          "title": "どきどきぱたぱた",
+          "artist": "葉月ゆら",
+          "instrumental": false,
+          "file": "assets/audio/mojimoji-dokidoki-patapata.mp3",
+          "url": "/assets/audio/mojimoji-dokidoki-patapata.mp3",
+          "dur": 91,
+          "genres": [
+            "Commercial guest vocal"
+          ],
+          "credit": "Vocals 葉月ゆら — OP theme for the eroge『もじもじ ちびっ子魔法学園 ～痛くしちゃイヤだョ～』(brand きゃろる/Carol), 2004-08-24 — her earliest commercial credit",
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ]
+          }
+        }
+      ]
     }
   ],
   "stats": {

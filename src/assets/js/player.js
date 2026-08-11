@@ -21,7 +21,9 @@
   // bytes readable for offline download / auto-cache. Empty → audio streams straight from R2 and the
   // offline UI stays disabled. mediaURL() rewrites only the host, keeping the object path intact.
   const MEDIA = (ART.media || '').replace(/\/+$/, '');
-  const mediaURL = u => { if (!MEDIA || !u) return u; try { return MEDIA + new URL(u, location.href).pathname; } catch (e) { return u; } };
+  // Route R2 (cross-origin) audio through the media proxy; leave same-origin files (e.g. a track
+  // hosted in /assets) untouched so they play directly.
+  const mediaURL = u => { if (!MEDIA || !u) return u; try { const p = new URL(u, location.href); return p.origin === location.origin ? u : MEDIA + p.pathname; } catch (e) { return u; } };
 
   /* ── State ─────────────────────────────────────── */
   let ALB = [];
