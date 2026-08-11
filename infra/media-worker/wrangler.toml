@@ -1,0 +1,9 @@
+name = "hatsuki-yura-media"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+
+# Binds the R2 bucket into the Worker as `env.MEDIA`. The bucket must be on the same
+# Cloudflare account you deploy this Worker to.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "hatsuki-yura"

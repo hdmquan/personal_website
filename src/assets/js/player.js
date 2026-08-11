@@ -16,6 +16,12 @@
   // Same-origin catalog copy (R2 sends no CORS headers, so a cross-origin fetch
   // is blocked). Audio/cover URLs inside still point at R2 and load as media.
   const CATALOG = ART.catalog;
+  // Optional media proxy: a Cloudflare Worker that fronts R2 with CORS + byte-range (see
+  // infra/media-worker). When ART.media is set, audio is routed through it — which is what makes the
+  // bytes readable for offline download / auto-cache. Empty → audio streams straight from R2 and the
+  // offline UI stays disabled. mediaURL() rewrites only the host, keeping the object path intact.
+  const MEDIA = (ART.media || '').replace(/\/+$/, '');
+  const mediaURL = u => { if (!MEDIA || !u) return u; try { return MEDIA + new URL(u, location.href).pathname; } catch (e) { return u; } };
 
   /* ── State ─────────────────────────────────────── */
   let ALB = [];
@@ -95,13 +101,15 @@
   let autoCache = false;             // "Download offline when I play" setting
   const dlState = {};                // ai → { total, done, active, abort }
   const openC = n => caches.open(n);
-  async function inCache(name, url) { try { return !!(await (await openC(name)).match(url, { ignoreVary: true })); } catch (e) { return false; } }
-  const albumUrls = ai => (ALB[ai]?.tracks || []).filter(t => t.url).map(t => t.url);
+  // Audio cache keys are the exact URLs the <audio> element fetches — i.e. the proxied media URLs —
+  // so the SW's cache lookups match what the page stores.
+  const albumUrls = ai => (ALB[ai]?.tracks || []).filter(t => t.url).map(t => mediaURL(t.url));
 
   async function probeOffline() {
     if (!('caches' in window) || !('serviceWorker' in navigator)) { offlineOK = false; syncOfflineUI(); return; }
+    if (!MEDIA) { offlineOK = false; syncOfflineUI(); return; }   // no proxy configured → no offline
     let sample = null;
-    for (const a of ALB) { const t = (a.tracks || []).find(x => x.url); if (t) { sample = t.url; break; } }
+    for (const a of ALB) { const t = (a.tracks || []).find(x => x.url); if (t) { sample = mediaURL(t.url); break; } }
     if (!sample) { offlineOK = false; syncOfflineUI(); return; }
     try {
       const r = await fetch(sample, { method: 'GET', headers: { Range: 'bytes=0-1' }, mode: 'cors', cache: 'no-store' });
@@ -134,8 +142,9 @@
     const need = [];
     for (const u of urls) { if (await saved.match(u, { ignoreVary: true })) st.done++; else need.push(u); }   // dedup: already saved
     syncTopBtn();
+    // cover stays on R2 (no proxy); it's only for display, so an opaque no-cors copy is fine
     const cover = ALB[ai].cover_url;
-    if (cover) { try { const cr = await fetch(cover, { mode: 'cors', signal: abort.signal }); if (cr.ok) await saved.put(cover, cr.clone()); } catch (e) {} }
+    if (cover) { try { const cr = await fetch(cover, { mode: 'no-cors', signal: abort.signal }); if (cr) await saved.put(cover, cr.clone()); } catch (e) {} }
     let idx = 0;
     const worker = async () => {
       while (idx < need.length && st.active) {
@@ -610,7 +619,7 @@
     // scrobbles match how Last.fm catalogues them and pick up the right page + cover art.
     scrobbleMeta = { artist: a.artist || ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: Math.floor(Date.now() / 1000) };
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
-    audio.src = t.url;            // setting src + play → R2 streams via range, no full download
+    audio.src = mediaURL(t.url);  // via the media proxy when configured (enables offline); else direct R2
     pendingSeek = (startAt && startAt > 0) ? startAt : null;
     npBar.classList.add('show');
     (npTitleIn || npTitle).textContent = disp(t) + (t.instrumental ? ' (inst)' : '');

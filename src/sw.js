@@ -129,6 +129,8 @@ self.addEventListener('fetch', e => {
     if (isAudio(req, u)) { if (req.mode === 'cors') { e.respondWith(handleAudio(e)); } return; }
     if (req.destination === 'image') {
       e.respondWith((async () => {
+        const saved = await (await caches.open(AUDIO_SAVED)).match(req, { ignoreVary: true });   // offline album covers
+        if (saved) return saved;
         const c = await caches.open(IMG_C);
         const hit = await c.match(req);
         if (hit) return hit;

@@ -325,7 +325,7 @@ permalink: /yura/
   <label class="set-row"><span>Download offline when I play</span>
     <input type="checkbox" id="set-autocache" aria-label="Download offline when I play" /><span class="sw" aria-hidden="true"></span>
   </label>
-  <p class="set-note" id="set-offline-note" hidden>Offline saving needs media CORS on the audio host — not enabled yet.</p>
+  <p class="set-note" id="set-offline-note" hidden>Offline saving isn't set up yet.</p>
   <div class="set-foot">
     <span class="set-storage" id="set-storage"></span>
     <button type="button" class="set-clear" id="set-clear" hidden>Clear</button>
@@ -339,7 +339,9 @@ permalink: /yura/
 
 <div id="kb-hint"><kbd>space</kbd> play <kbd>←→</kbd> seek <kbd>N/P</kbd> track <kbd>/</kbd> search <kbd>esc</kbd> back</div>
 
-<script>window.__ARTIST__ = { name: "葉月ゆら", mediaArtist: "葉月ゆら", catalog: "/assets/catalogs/yura.json" };</script>
+<!-- `media`: Cloudflare Worker origin that fronts R2 with CORS + range (see infra/media-worker/README.md).
+     Set it to the deployed worker URL to switch on offline playback; leave "" to stream straight from R2. -->
+<script>window.__ARTIST__ = { name: "葉月ゆら", mediaArtist: "葉月ゆら", catalog: "/assets/catalogs/yura.json", media: "" };</script>
 <script>
   /* Mobile-only: collapse the sort tabs into a "Sort" dropdown.
      Engine keeps its own .seg-btn listeners; this only toggles the popover + label. */
