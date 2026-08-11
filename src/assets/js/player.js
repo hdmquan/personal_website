@@ -761,7 +761,8 @@
       const eds = Array.isArray(blk.editors) ? blk.editors.filter(Boolean) : [];
       let credit = `By: <span>${esc(blk.by || 'unknown')}</span>`;
       if (eds.length) credit += ` · edited by <span>${esc(eds.join(', '))}</span>`;
-      body.innerHTML = `<div class="np-lyrics-lines">${rows}</div><div class="np-lyrics-credit">${credit}</div>`;
+      body.innerHTML = `<div class="np-lyrics-lines">${rows}</div><div class="np-lyrics-credit">${credit}</div>`
+        + `<button class="np-lyrics-copy" type="button" aria-label="Copy lyrics">${COPY_SVG}<span>Copy lyrics</span></button>`;
     }
     // credits used to live under the lyrics — they now render in the Info panel (renderInfo)
     const cw = container.querySelector('.np-credits-wrap'); if (cw) cw.remove();
@@ -1589,6 +1590,16 @@
         return;
       }
       if (hoverCapable && e.target.closest('.ah-title')) { e.stopPropagation(); copyText(albumName(openAlbum)); }
+    }, true);
+
+    // "Copy lyrics" — grab the whole lyric of the currently-shown language from the now-playing view
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.np-lyrics-copy');
+      if (!btn) return;
+      e.preventDefault(); e.stopPropagation();
+      const rec = lyricsRec(), blk = rec && rec[curLang];
+      const text = blk && blk.lines ? blk.lines.join('\n').replace(/\n{3,}/g, '\n\n').trim() : '';
+      if (text) copyText(text); else toast('No lyrics to copy');
     }, true);
   })();
 })();

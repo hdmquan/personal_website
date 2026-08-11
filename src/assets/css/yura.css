@@ -767,6 +767,13 @@ html::-webkit-scrollbar-thumb:hover,
   font-family: var(--mono); font-size: .6rem; letter-spacing: .06em; color: var(--text-3); }
 .np-lyrics-credit span { color: var(--text-2); }
 .np-lyrics-credit em { font-style: normal; color: var(--gilt); }
+.np-lyrics-copy { align-self: flex-start; display: inline-flex; align-items: center; gap: .42rem; margin-top: .9rem;
+  cursor: pointer; border: 1px solid var(--rule); background: transparent; color: var(--text-3); border-radius: 2rem;
+  padding: .45rem .95rem; font-family: var(--mono); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  transition: color .15s, border-color .15s, transform .08s; }
+.np-lyrics-copy:hover { color: var(--accent); border-color: var(--gilt-soft); }
+.np-lyrics-copy:active { transform: translateY(1px); }
+.np-lyrics-copy svg { width: 13px; height: 13px; }
 /* mobile: the parent (#np-lyrics-scroll) is the scroller and already pads the bottom
    to clear the floating language pill — body + credits flow naturally under the lyrics */
 /* web sheet: body itself scrolls so the floating pill stays put */
