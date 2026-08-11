@@ -148,6 +148,9 @@
 
   /* ── Shelf rendering ───────────────────────────── */
   let sortMode = 'new', filter = '', yearFilter = '', genreFilter = '', releaseType = 'albums';
+  // A single 4-digit year for filtering. Most albums have a plain year, but a few compilations carry
+  // a range (e.g. "2006–2011") — collapse those to their release-date year so the grid stays single-year.
+  const yearOf = a => (String(a.date || a.year || '').match(/\d{4}/) || [''])[0];
   const albGenres = a => a.genres || [];                    // album-level top-level genres
   const trkHasGenre = t => !genreFilter || (t.genres||[]).includes(genreFilter);
   function buildFilters() {
@@ -155,7 +158,7 @@
     // scroll through and every year is one tap away. "All" clears the filter.
     const ygrid = $('#year-grid');
     if (ygrid) {
-      const years = [...new Set(ALB.map(a => String(a.year)).filter(Boolean))].sort((a, b) => b - a);
+      const years = [...new Set(ALB.map(yearOf).filter(Boolean))].sort((a, b) => b - a);
       ygrid.innerHTML = `<button type="button" class="year-cell active" data-year="">All</button>` +
         years.map(y => `<button type="button" class="year-cell" data-year="${y}">${y}</button>`).join('');
       ygrid.addEventListener('click', e => {
@@ -194,7 +197,7 @@
   function sortedIndices() {
     let idx = ALB.map((_, i) => i);
     idx = idx.filter(i => (ALB[i].release_types || ['albums']).includes(releaseType));
-    if (yearFilter) idx = idx.filter(i => String(ALB[i].year) === yearFilter);
+    if (yearFilter) idx = idx.filter(i => yearOf(ALB[i]) === yearFilter);
     if (genreFilter) idx = idx.filter(i => albGenres(ALB[i]).includes(genreFilter));
     if (filter) {
       const f = filter.toLowerCase();
