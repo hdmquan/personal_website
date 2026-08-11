@@ -616,12 +616,12 @@ body.np-open #home-btn, body.np-open #top-btn, body.np-open #np-bar { display: n
   .np-stage .np-nowinfo { text-align: left; padding-top: 1rem; }   /* title right below the cover, left-aligned */
   .np-stage .np-nowinfo-main { max-width: 100%; }
   .np-stage .np-transport { margin-bottom: auto; }   /* free space sits below the controls; grip at the very bottom */
-  .np-hero-cover { width: 100%; aspect-ratio: 1 / 1; height: auto; max-height: 58vh;
+  .np-hero-cover { width: 100%; aspect-ratio: 1 / 1; height: auto; max-height: 58vh; max-height: 58dvh;
     border-radius: .8rem; box-shadow: 0 10px 30px var(--sh-deep);
     transition: width .42s cubic-bezier(.2,.8,.2,1), height .42s cubic-bezier(.2,.8,.2,1),
       max-height .42s cubic-bezier(.2,.8,.2,1), border-radius .42s; }
   /* queue-up only: the cover becomes a top strip — fade its top edge up into the header */
-  .q-up .np-hero-cover { width: 100vw; aspect-ratio: auto; height: min(30vh, 280px); max-height: none;
+  .q-up .np-hero-cover { width: 100vw; aspect-ratio: auto; height: min(30vh, 280px); height: min(30dvh, 280px); max-height: none;
     border-radius: 0; box-shadow: none;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3.4rem);
     mask-image: linear-gradient(to bottom, transparent 0, #000 3.4rem); }
@@ -640,7 +640,7 @@ body.np-open #home-btn, body.np-open #top-btn, body.np-open #np-bar { display: n
      Scoped under .np-view-player so it beats the base .np-queue-sheet flex rule later in the file. */
   .np-view-player .np-queue-sheet { flex: 0 0 0px; min-height: 0; overflow: hidden; opacity: 0;
     transition: flex-basis .42s cubic-bezier(.2,.8,.2,1), opacity .3s; }
-  .np-view-player.q-up .np-queue-sheet { flex-basis: 46vh; opacity: 1; }
+  .np-view-player.q-up .np-queue-sheet { flex-basis: 46vh; flex-basis: 46dvh; opacity: 1; }
   @media (prefers-reduced-motion: reduce) { .np-view-player .np-queue-sheet { transition: opacity .1s; } }
   .np-queue-hd { border-top: 1px solid var(--rule); }
 
@@ -724,6 +724,12 @@ html::-webkit-scrollbar-thumb:hover,
 .np-queue-scroll::-webkit-scrollbar-thumb:hover, .np-lyrics-scroll::-webkit-scrollbar-thumb:hover,
 .np-sheet-lyrics .np-lyrics-body::-webkit-scrollbar-thumb:hover, .np-info-scroll::-webkit-scrollbar-thumb:hover {
   background: var(--text-3); background-clip: padding-box; }
+/* iOS Safari ignores ::-webkit-scrollbar styling, so the now-playing scrollers show a native bar that
+   clashes with the design. On phones, hide it entirely for a clean look (desktop keeps the custom one). */
+@media (max-width: 759px) {
+  .np-queue-scroll, .np-lyrics-scroll, .np-info-scroll { scrollbar-width: none; }
+  .np-queue-scroll::-webkit-scrollbar, .np-lyrics-scroll::-webkit-scrollbar, .np-info-scroll::-webkit-scrollbar { display: none; width: 0; height: 0; }
+}
 .np-queue-hd { margin: 0; padding: .5rem 1.15rem .4rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .16em;
   text-transform: uppercase; color: var(--text-2); }
 
