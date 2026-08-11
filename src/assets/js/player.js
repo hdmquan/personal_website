@@ -151,10 +151,20 @@
   const albGenres = a => a.genres || [];                    // album-level top-level genres
   const trkHasGenre = t => !genreFilter || (t.genres||[]).includes(genreFilter);
   function buildFilters() {
-    const ysel = $('#year-filter');
-    const years = [...new Set(ALB.map(a => String(a.year)).filter(Boolean))].sort((a, b) => b - a);
-    ysel.insertAdjacentHTML('beforeend', years.map(y => `<option value="${y}">${y}</option>`).join(''));
-    ysel.addEventListener('change', () => { yearFilter = ysel.value; updateFilterBadge(); renderShelf(); });
+    // Year — our own tap grid (5 across) instead of a native <select>, so there's no OS picker to
+    // scroll through and every year is one tap away. "All" clears the filter.
+    const ygrid = $('#year-grid');
+    if (ygrid) {
+      const years = [...new Set(ALB.map(a => String(a.year)).filter(Boolean))].sort((a, b) => b - a);
+      ygrid.innerHTML = `<button type="button" class="year-cell active" data-year="">All</button>` +
+        years.map(y => `<button type="button" class="year-cell" data-year="${y}">${y}</button>`).join('');
+      ygrid.addEventListener('click', e => {
+        const btn = e.target.closest('.year-cell'); if (!btn) return;
+        yearFilter = btn.dataset.year;
+        ygrid.querySelectorAll('.year-cell').forEach(b => b.classList.toggle('active', b.dataset.year === yearFilter));
+        updateFilterBadge(); renderShelf();
+      });
+    }
 
     const gsel = $('#genre-filter');
     if (gsel) {
@@ -302,7 +312,12 @@
     b.classList.add('active'); sortMode = b.dataset.sort; renderShelf();
   }));
   let st;
-  searchEl.addEventListener('input', () => { clearTimeout(st); st = setTimeout(() => { filter = searchEl.value.trim(); renderShelf(); }, 120); });
+  const searchClear = $('#search-clear');
+  const syncClear = () => { if (searchClear) searchClear.hidden = !searchEl.value; };
+  searchEl.addEventListener('input', () => { syncClear(); clearTimeout(st); st = setTimeout(() => { filter = searchEl.value.trim(); renderShelf(); }, 120); });
+  searchClear?.addEventListener('click', () => {
+    searchEl.value = ''; filter = ''; syncClear(); renderShelf(); searchEl.focus();
+  });
 
   /* ── Album view ────────────────────────────────── */
   function openAlbumView(ai) {

@@ -6,7 +6,7 @@ permalink: /yura/
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Yura Archive</title>
   <meta name="description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography. Fan preservation." />
   <!-- Japanese album/track titles are proper nouns, not text to translate; the page is mostly
@@ -83,7 +83,10 @@ permalink: /yura/
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
           <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>
         </svg>
-        <input type="search" id="search" placeholder="Search album or track…" aria-label="Search" autocomplete="off" />
+        <input type="search" id="search" placeholder="Search album or track…" aria-label="Search" autocomplete="off" enterkeyhint="search" />
+        <button id="search-clear" type="button" aria-label="Clear search" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
       </div>
       <div class="controls-row2">
         <div class="sort-wrap">
@@ -103,9 +106,10 @@ permalink: /yura/
             <span>Filter</span><b id="filter-badge" hidden></b>
           </button>
           <div id="filter-pop" class="filter-pop" hidden>
-            <label class="fp-row"><span>Year</span>
-              <select id="year-filter" aria-label="Filter by year"><option value="">All years</option></select>
-            </label>
+            <div class="fp-block">
+              <span class="fp-label">Year</span>
+              <div id="year-grid" class="year-grid" role="group" aria-label="Filter by year"></div>
+            </div>
             <label class="fp-row fp-switch">
               <span>Instrumentals</span>
               <input type="checkbox" id="inst-toggle" checked aria-label="Show instrumental tracks" />

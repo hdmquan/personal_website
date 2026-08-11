@@ -15,7 +15,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const DL = path.join(os.homedir(), 'Downloads');
 const CAT = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/assets/catalogs/yura.json'), 'utf8'));
 const LYR_PATH = path.join(ROOT, 'src/assets/catalogs/lyrics.json');
-const DATE = '2026-08-10';
+const DATE = '2026-08-11';
 
 // the Aug-10 per-track batch (Abyss / Mahou / 拝啓 were ingested earlier via ingest-community-romaji.mjs)
 const FILES = [
@@ -139,8 +139,11 @@ if (write) {
     if (!top) { console.log(`skip (no match): ${r.fn}`); continue; }
     LYR[top.album] = LYR[top.album] || {};
     const rec = LYR[top.album][top.track] = LYR[top.album][top.track] || { title: top.title, flags: [] };
-    if (!rec.jp || !rec.jp.lines || !rec.jp.lines.length)
-      rec.jp = { lines: r.cols.jp, by: 'official booklet', kind: 'official', src: r.fn, date: DATE };
+    // Suzuyo's JP transcribes the SUNG version (more reliable than the printed booklet) → overrides
+    // official/transcription/ai; only another person's human JP is protected.
+    const jpBlocked = rec.jp && rec.jp.kind === 'human' && rec.jp.by !== 'Suzuyo';
+    if (r.cols.jp.some(Boolean) && !jpBlocked)
+      rec.jp = { lines: r.cols.jp, by: 'Suzuyo', kind: 'human', src: r.fn, date: DATE };
     rec.romaji = { lines: r.cols.romaji, by: 'Suzuyo', kind: 'human', src: r.fn, date: DATE };
     if (r.cols.hasEn) rec.en = { lines: r.cols.en, by: 'Suzuyo', kind: 'human', src: r.fn, date: DATE };
     n++;

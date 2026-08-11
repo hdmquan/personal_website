@@ -135,6 +135,17 @@ html, body { overscroll-behavior: none; }
   font-family: var(--serif); font-size: .95rem; color: var(--text); letter-spacing: .01em;
 }
 .search-wrap input::placeholder { color: var(--text-3); font-style: italic; opacity: .85; }
+/* hide the native clear affordance (WebKit) — we render our own so it can sit inside the rule */
+.search-wrap input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+#search-clear {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; padding: 0; margin: 0; cursor: pointer;
+  border: 0; border-radius: 50%; background: transparent; color: var(--text-3);
+  transition: color .15s, background .15s; touch-action: manipulation;
+}
+#search-clear:hover { color: var(--text); background: var(--panel-inset); }
+#search-clear svg { width: 13px; height: 13px; }
+#search-clear[hidden] { display: none; }
 
 .controls-row2 { display: flex; gap: .55rem; align-items: center; flex-wrap: wrap; justify-content: center; }
 
@@ -194,7 +205,7 @@ html, body { overscroll-behavior: none; }
 #filter-badge[hidden] { display: none; }
 #filter-btn.active { color: var(--accent); border-color: var(--accent); }
 .filter-pop {
-  position: absolute; top: calc(100% + .55rem); left: 50%; transform: translateX(-50%); z-index: 46; min-width: 15rem;
+  position: absolute; top: calc(100% + .55rem); left: 50%; transform: translateX(-50%); z-index: 46; min-width: 16.5rem;
   background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .7rem; padding: .85rem;
   box-shadow: 0 14px 38px var(--sh-deep);
   display: flex; flex-direction: column; gap: .7rem;
@@ -204,15 +215,18 @@ html, body { overscroll-behavior: none; }
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3);
 }
-.fp-row select {
-  appearance: none; -webkit-appearance: none; cursor: pointer; flex: 1; max-width: 58%;
-  font-family: var(--mono); font-size: .72rem; letter-spacing: .04em;
-  color: var(--text); border: 0; border-bottom: 1px solid var(--gilt-soft); border-radius: 0; padding: .35rem 1.4rem .35rem .1rem;
-  background: transparent;
-  background-image: linear-gradient(45deg,transparent 50%,var(--text-3) 50%),linear-gradient(135deg,var(--text-3) 50%,transparent 50%);
-  background-position: calc(100% - 11px) 54%, calc(100% - 6px) 54%; background-size: 5px 5px,5px 5px; background-repeat: no-repeat;
+/* Year — our own tap grid (5 across) instead of the OS <select> */
+.fp-block { display: flex; flex-direction: column; gap: .55rem; }
+.fp-label { font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+.year-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .3rem; }
+.year-cell {
+  border: 1px solid var(--rule); background: transparent; color: var(--text-2); cursor: pointer;
+  padding: .42rem .15rem; border-radius: .4rem; text-align: center;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .01em; font-variant-numeric: tabular-nums;
+  transition: border-color .15s, color .15s, background .15s; touch-action: manipulation;
 }
-.fp-row select:focus { outline: none; border-bottom-color: var(--accent); }
+.year-cell:hover { border-color: var(--gilt-soft); color: var(--text); }
+.year-cell.active { border-color: var(--accent); color: var(--accent); background: var(--panel-inset); }
 .fp-switch { cursor: pointer; position: relative; }
 .fp-switch input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
 .fp-switch .sw { position: relative; width: 34px; height: 18px; border-radius: 9px; flex: none;

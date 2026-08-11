@@ -40,13 +40,17 @@ for (const line of paras) {
 const LYR = JSON.parse(fs.readFileSync(LYR_PATH, 'utf8'));
 LYR[album] = LYR[album] || {};
 const protectedBlk = b => b && b.kind && b.kind !== 'ai';
+// Suzuyo's JP is a by-ear transcription of what's actually SUNG (the singer often departs from the
+// printed booklet), so it's treated as the more reliable source: it overrides official/transcription/ai
+// JP. Only another person's HUMAN JP is protected (a re-run by Suzuyo still refreshes her own).
+const jpBlocked = b => b && b.kind === 'human' && b.by !== 'Suzuyo';
 let nJp = 0, nRo = 0, nEn = 0;
 for (const t of Object.values(tracks)) {
   ['jp', 'romaji', 'en'].forEach(k => trim(t[k]));
   if (!t.romaji.length && !t.jp.length) continue;
   const rec = LYR[album][t.n] = LYR[album][t.n] || { title: t.title, flags: [] };
   if (!rec.title) rec.title = t.title;
-  if (t.jp.length && !protectedBlk(rec.jp)) { rec.jp = { lines: t.jp, by: 'official booklet', kind: 'official', src: path.basename(docx), date: DATE }; nJp++; }
+  if (t.jp.length && !jpBlocked(rec.jp)) { rec.jp = { lines: t.jp, by: 'Suzuyo', kind: 'human', src: path.basename(docx), date: DATE }; nJp++; }
   if (t.romaji.length && (!rec.romaji || !protectedBlk(rec.romaji))) { rec.romaji = { lines: t.romaji, by: 'Suzuyo', kind: 'human', src: path.basename(docx), date: DATE }; nRo++; }
   if (t.en.length && (!rec.en || !protectedBlk(rec.en))) { rec.en = { lines: t.en, by: 'Suzuyo', kind: 'human', src: path.basename(docx), date: DATE }; nEn++; }
 }
