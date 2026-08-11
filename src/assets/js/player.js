@@ -90,13 +90,32 @@
     .then(n => { NOTES = n || {}; if (view === 'album' && openAlbum >= 0) openAlbumView(openAlbum); })
     .catch(() => {});
 
-  // Per-track lyrics (optional) → shown in the now-playing lyrics view. Keyed album title → track number,
-  // each language an attributed block { lines, by, kind, src }. See scripts/lyrics/SCHEMA.md.
-  let LYRICS = {};
-  fetch('/assets/catalogs/lyrics.json')
-    .then(r => (r.ok ? r.json() : {}))
-    .then(n => { LYRICS = n || {}; renderLyrics(); })
-    .catch(() => {});
+  // Per-track lyrics (optional) → shown in the now-playing lyrics view. Loaded LAZILY, one album at a
+  // time: the full set is multiple MB, so instead of fetching it all on page load we fetch a tiny index
+  // (album title → shard id) once, then each album's lyrics shard only when a track from it first
+  // plays / its lyrics are viewed. Both are memoized. Shards keyed album title → track number, each
+  // language an attributed block { lines, by, kind, src }. See scripts/lyrics/SCHEMA.md.
+  let LYRICS = {};                 // album title → { track → block }, filled on demand ({} = known-empty)
+  let lyricsIndex = null;          // { album title → shard id } once loaded
+  let lyricsIndexP = null;         // in-flight index fetch (memoized)
+  const lyricsAlbumP = {};         // in-flight per-album fetches (memoized), title → Promise
+  function loadLyricsIndex() {
+    if (lyricsIndexP) return lyricsIndexP;
+    lyricsIndexP = fetch('/assets/catalogs/lyrics/index.json')
+      .then(r => (r.ok ? r.json() : {})).then(n => (lyricsIndex = n || {})).catch(() => (lyricsIndex = {}));
+    return lyricsIndexP;
+  }
+  function ensureAlbumLyrics(title) {
+    if (!title || LYRICS[title] || lyricsAlbumP[title]) return;   // loaded or already fetching
+    lyricsAlbumP[title] = loadLyricsIndex().then(() => {
+      const id = lyricsIndex && lyricsIndex[title];
+      if (!id) { LYRICS[title] = {}; return; }                    // album has no lyrics → mark empty, no fetch
+      return fetch('/assets/catalogs/lyrics/' + id + '.json')
+        .then(r => (r.ok ? r.json() : {}))
+        .then(block => { LYRICS[title] = block || {}; renderLyrics(); })
+        .catch(() => { LYRICS[title] = LYRICS[title] || {}; delete lyricsAlbumP[title]; });
+    });
+  }
 
   fetch(CATALOG).then(r => r.json()).then(data => {
     ALB = data.albums || [];
@@ -119,6 +138,9 @@
     renderShelf();
     restoreNowPlaying();
     applyRoute();
+    // warm the tiny lyrics index during idle so the first lyrics view has no lookup latency
+    const warm = () => loadLyricsIndex();
+    if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 4000 }); else setTimeout(warm, 2500);
   }).catch(() => { statLine.textContent = 'failed to load catalog'; shelf.innerHTML = '<p class="empty">failed to load.</p>'; });
 
   function restoreSettings() {
@@ -502,6 +524,7 @@
     setMediaSession(a, t);
     highlightPlaying();
     renderQueue();
+    ensureAlbumLyrics(a.title);   // lazy-load this album's lyrics shard (re-renders when it arrives)
     renderLyrics();
     renderInfo();
     saveNowPlaying();

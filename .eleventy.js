@@ -10,6 +10,7 @@ const configCss = require("./src/config/css");
 const configJs = require("./src/config/javascript");
 const configSitemap = require("./src/config/sitemap");
 const configServer = require("./src/config/server");
+const catalogBuild = require("./src/config/catalog-build");
 
 // Other
 const filterPostDate = require("./src/config/postDate");
@@ -72,6 +73,11 @@ module.exports = function (eleventyConfig) {
     // Album notes (Decap-managed) → compiled to /assets/catalogs/album-notes.json for the player
     eleventyConfig.addCollection("albumNotes", (collectionApi) => {
         return collectionApi.getFilteredByGlob("src/content/album-notes/*.md");
+    });
+
+    // After each build: shard lyrics.json into lazy-loaded per-album files + minify served catalogs.
+    eleventyConfig.on("eleventy.after", ({ dir }) => {
+        catalogBuild.build((dir && dir.output) || "public");
     });
 
     // Set Server Options
