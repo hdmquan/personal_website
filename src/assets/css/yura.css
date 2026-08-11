@@ -39,7 +39,7 @@ body.dark-mode .ah-buy:hover { color: #16140e; }
 
 body { font-family: var(--mono); font-weight: 400; }
 /* app-like: don't let long-press select text or pop the iOS callout; keep the search box usable */
-#yura-page, #np-bar, #queue-panel, #home-btn, #dark-toggle, .filter-wrap, #kb-hint {
+#yura-page, #np-bar, #queue-panel, #home-btn, #top-btn, .filter-wrap, #kb-hint {
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
 }
 .search-wrap input { -webkit-user-select: text; user-select: text; }
@@ -549,7 +549,7 @@ html, body { overscroll-behavior: none; }
 #queue-panel.np-sheet.open { transform: translateY(0); visibility: visible; pointer-events: auto; }
 body.np-open { overflow: hidden; }              /* it's a screen — freeze + hide everything behind it */
 body.np-open #yura-page { visibility: hidden; }
-body.np-open #home-btn, body.np-open #dark-toggle, body.np-open #np-bar { display: none; }
+body.np-open #home-btn, body.np-open #top-btn, body.np-open #np-bar { display: none; }
 @media (prefers-reduced-motion: reduce) { #queue-panel.np-sheet { transition: visibility .01s; } }
 
 /* the cover-fill morph is scroll-driven (mobile); @property lets the calc() interpolate cleanly */
@@ -928,18 +928,18 @@ body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ── Floating corner buttons (home / dark) ─────────*/
-#home-btn, #dark-toggle {
+#home-btn, #top-btn {
   position: fixed; top: 1rem; z-index: 60; width: 38px; height: 38px; border-radius: 50%;
   border: 1px solid var(--gilt-hair); cursor: pointer; background: var(--panel-raised); color: var(--text-3);
   box-shadow: 0 3px 12px var(--sh); display: grid; place-items: center;
   transition: color .15s, border-color .15s, transform .08s;
 }
 #home-btn { left: 1rem; }
-#dark-toggle { right: 1rem; }
-#home-btn:hover, #dark-toggle:hover { color: var(--accent); border-color: var(--gilt-soft); }
-#home-btn:active, #dark-toggle:active { transform: translateY(1px); }
+#top-btn { right: 1rem; }
+#home-btn:hover, #top-btn:hover { color: var(--accent); border-color: var(--gilt-soft); }
+#home-btn:active, #top-btn:active { transform: translateY(1px); }
 #home-btn[hidden] { display: none; }
-#home-btn svg, #dark-toggle svg { width: 17px; height: 17px; }
+#home-btn svg, #top-btn svg { width: 17px; height: 17px; }
 
 /* top-left button = Last.fm; goes red when connected, but stays neutral once it's the "^" */
 #home-btn.connected:not(.to-top) { color: #d51007; border-color: rgba(213,16,7,.45); }
@@ -964,9 +964,54 @@ body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
   padding: .5rem; border-radius: .45rem; transition: background .15s, color .15s;
 }
 .lfm-signout:hover { background: #d51007; color: #fff; }
-#dark-toggle .i-sun { display: none; }
-body.dark-mode #dark-toggle .i-moon { display: none; }
-body.dark-mode #dark-toggle .i-sun { display: block; }
+/* Top-right button is contextual: Settings (gear) on the shelf, album Download inside an album.
+   Icons are stacked; visibility is driven by data-mode + state classes. */
+#top-btn .i-gear, #top-btn .i-dl, #top-btn .i-dl-done { grid-area: 1 / 1; }   /* stack in the same cell */
+#top-btn .i-dl, #top-btn .i-dl-done { display: none; }
+#top-btn[data-mode="download"] .i-gear { display: none; }
+#top-btn[data-mode="download"] .i-dl { display: block; }
+#top-btn[data-mode="download"].state-done .i-dl { display: none; }
+#top-btn[data-mode="download"].state-done .i-dl-done { display: block; color: var(--accent); }
+#top-btn[data-mode="download"].state-dl .i-dl { display: none; }              /* ring shows instead */
+#top-btn.state-done { border-color: var(--gilt-soft); }
+/* progress ring while downloading — conic sweep driven by --dl (0–100) */
+#top-btn .dl-ring { display: none; grid-area: 1 / 1; width: 24px; height: 24px; border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--dl, 0) * 1%), var(--rule) 0);
+  -webkit-mask: radial-gradient(circle 6.5px at center, transparent 98%, #000 100%);
+          mask: radial-gradient(circle 6.5px at center, transparent 98%, #000 100%); }
+#top-btn[data-mode="download"].state-dl .dl-ring { display: block; }
+
+/* ── Settings popover (anchored under the top-right button) ── */
+.settings-pop {
+  position: fixed; top: 3.6rem; right: 1rem; z-index: 61; min-width: 15rem; max-width: min(20rem, calc(100vw - 2rem));
+  background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .7rem; padding: .85rem;
+  box-shadow: 0 14px 38px var(--sh-deep); display: flex; flex-direction: column; gap: .55rem;
+}
+.settings-pop[hidden] { display: none; }
+.set-head { margin: 0 0 .1rem; font-family: var(--mono); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); }
+.set-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; position: relative;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; color: var(--text-2);
+}
+.set-row input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.set-row .sw { position: relative; width: 34px; height: 18px; border-radius: 9px; flex: none;
+  background: var(--panel-inset); box-shadow: inset 0 1px 2px var(--sh); transition: background .15s; }
+.set-row .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 2px var(--sh-deep); transition: transform .15s; }
+.set-row input:checked ~ .sw { background: var(--accent); }
+.set-row input:checked ~ .sw::after { transform: translateX(16px); }
+.set-row input:disabled ~ .sw { opacity: .4; }
+.set-row:has(input:disabled) { color: var(--text-3); cursor: default; }
+.set-note { margin: 0; font-family: var(--mono); font-size: .58rem; line-height: 1.5; letter-spacing: .02em; color: var(--gilt); }
+.set-note[hidden] { display: none; }
+.set-foot { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin-top: .2rem;
+  padding-top: .55rem; border-top: 1px solid var(--rule); }
+.set-storage { font-family: var(--mono); font-size: .58rem; letter-spacing: .02em; color: var(--text-3); }
+.set-clear { border: 1px solid var(--rule); background: transparent; color: var(--text-3); cursor: pointer;
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .6rem;
+  border-radius: .35rem; transition: color .15s, border-color .15s; flex: none; }
+.set-clear:hover { color: var(--accent); border-color: var(--gilt-soft); }
+.set-clear[hidden] { display: none; }
 
 /* ── Keyboard hint ─────────────────────────────────*/
 #kb-hint {

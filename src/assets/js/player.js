@@ -48,7 +48,7 @@
   /* ── Persistence ───────────────────────────────── */
   const save = (k, v) => { try { localStorage.setItem(LS + ':' + k, JSON.stringify(v)); } catch (e) {} };
   const load = (k) => { try { return JSON.parse(localStorage.getItem(LS + ':' + k)); } catch (e) { return null; } };
-  function saveSettings() { save('settings', { vol: Math.round(audio.volume * 100), muted: audio.muted, shuffle, loopMode, excludeInst }); }
+  function saveSettings() { save('settings', { vol: Math.round(audio.volume * 100), muted: audio.muted, shuffle, loopMode, excludeInst, autoCache }); }
   let npSaveT = 0;
   function saveNowPlaying() {
     if (!queue.length || qi < 0) { save('np', null); return; }
@@ -79,6 +79,112 @@
     return `<a class="ah-buy" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${label}" title="${label}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
     </a>`;
+  }
+
+  /* ── Offline / downloads ───────────────────────────────────────────────────────
+     Audio can be saved for offline playback in two Cache-Storage buckets that the service worker
+     serves back with byte-range support: SAVED (explicit per-album downloads — kept until removed)
+     and AUTO (opportunistic cache-on-play, LRU-capped in the SW). We only WRITE to SAVED here and
+     read state; the SW owns AUTO. All of this needs the R2 media to send CORS headers so the bytes
+     are readable — probed once at boot; until it's available the download UI stays disabled and
+     playback just streams as before (no behaviour change). */
+  const AUDIO_SAVED = 'fa-audio-saved-v1';
+  const AUDIO_AUTO  = 'fa-audio-auto-v1';
+  const DL_CONC = 2;                 // throttle: at most N parallel track fetches, to protect R2
+  let offlineOK = null;              // null = probing, true/false after probe resolves
+  let autoCache = false;             // "Download offline when I play" setting
+  const dlState = {};                // ai → { total, done, active, abort }
+  const openC = n => caches.open(n);
+  async function inCache(name, url) { try { return !!(await (await openC(name)).match(url, { ignoreVary: true })); } catch (e) { return false; } }
+  const albumUrls = ai => (ALB[ai]?.tracks || []).filter(t => t.url).map(t => t.url);
+
+  async function probeOffline() {
+    if (!('caches' in window) || !('serviceWorker' in navigator)) { offlineOK = false; syncOfflineUI(); return; }
+    let sample = null;
+    for (const a of ALB) { const t = (a.tracks || []).find(x => x.url); if (t) { sample = t.url; break; } }
+    if (!sample) { offlineOK = false; syncOfflineUI(); return; }
+    try {
+      const r = await fetch(sample, { method: 'GET', headers: { Range: 'bytes=0-1' }, mode: 'cors', cache: 'no-store' });
+      offlineOK = !!(r && (r.ok || r.status === 206));
+    } catch (e) { offlineOK = false; }
+    if (offlineOK) audio.crossOrigin = 'anonymous';   // readable media requests → SW can cache + range-serve
+    sendAutoCache(); syncOfflineUI(); syncTopBtn();
+  }
+  function sendAutoCache() {
+    try { navigator.serviceWorker?.ready.then(reg => reg.active?.postMessage({ type: 'autocache', on: !!(autoCache && offlineOK) })); } catch (e) {}
+  }
+  async function requestPersist() {
+    try { if (navigator.storage?.persist && !(await navigator.storage.persisted())) await navigator.storage.persist(); } catch (e) {}
+  }
+
+  const savedKey = ai => ALB[ai]?.title || String(ai);
+  const loadSavedList = () => new Set(load('offline') || []);
+  function markSaved(ai, on) { const s = loadSavedList(); on ? s.add(savedKey(ai)) : s.delete(savedKey(ai)); save('offline', [...s]); }
+  async function albumSavedState(ai) {
+    const urls = albumUrls(ai), c = await openC(AUDIO_SAVED);
+    let done = 0; for (const u of urls) if (await c.match(u, { ignoreVary: true })) done++;
+    return { total: urls.length, done };
+  }
+  async function downloadAlbum(ai) {
+    if (!offlineOK || dlState[ai]?.active) return;
+    const urls = albumUrls(ai);
+    const saved = await openC(AUDIO_SAVED), auto = await openC(AUDIO_AUTO);
+    const abort = new AbortController();
+    const st = dlState[ai] = { total: urls.length, done: 0, active: true, abort };
+    const need = [];
+    for (const u of urls) { if (await saved.match(u, { ignoreVary: true })) st.done++; else need.push(u); }   // dedup: already saved
+    syncTopBtn();
+    const cover = ALB[ai].cover_url;
+    if (cover) { try { const cr = await fetch(cover, { mode: 'cors', signal: abort.signal }); if (cr.ok) await saved.put(cover, cr.clone()); } catch (e) {} }
+    let idx = 0;
+    const worker = async () => {
+      while (idx < need.length && st.active) {
+        const u = need[idx++];
+        let ok = false;
+        try {
+          const fromAuto = await auto.match(u, { ignoreVary: true });          // dedup: reuse an auto-cached copy (no R2 hit)
+          if (fromAuto) { await saved.put(u, fromAuto.clone()); ok = true; }
+          else { const res = await fetch(u, { mode: 'cors', signal: abort.signal, cache: 'no-store' }); if (res && res.ok) { await saved.put(u, res.clone()); ok = true; } }
+        } catch (e) { if (abort.signal.aborted) return; }   // failed track → skip, keep going
+        if (ok) { st.done++; syncTopBtn(); }                 // only real saves count toward progress
+      }
+    };
+    await Promise.all(Array.from({ length: DL_CONC }, worker));
+    st.active = false;
+    // completion reflects ACTUAL cache state, so a partial/failed run never claims "downloaded"
+    const s = await albumSavedState(ai);
+    markSaved(ai, s.total > 0 && s.done >= s.total);
+    if (abort.signal.aborted) delete dlState[ai];
+    syncTopBtn(); updateStorageInfo();
+  }
+  function cancelDownload(ai) { const st = dlState[ai]; if (st) { st.active = false; st.abort.abort(); delete dlState[ai]; } syncTopBtn(); }
+  async function removeAlbum(ai) {
+    const saved = await openC(AUDIO_SAVED);
+    for (const u of albumUrls(ai)) await saved.delete(u, { ignoreVary: true });
+    if (ALB[ai].cover_url) await saved.delete(ALB[ai].cover_url, { ignoreVary: true });
+    markSaved(ai, false); delete dlState[ai];
+    syncTopBtn(); updateStorageInfo();
+  }
+  async function updateStorageInfo() {
+    const el = $('#set-storage'); if (!el) return;
+    try {
+      const n = loadSavedList().size;
+      const est = navigator.storage?.estimate ? await navigator.storage.estimate() : null;
+      const mb = est?.usage ? Math.round(est.usage / 1048576) : null;
+      el.textContent = n ? `${n} album${n > 1 ? 's' : ''} saved${mb != null ? ' · ~' + mb + ' MB on device' : ''}` : 'No albums saved offline';
+      const clr = $('#set-clear'); if (clr) clr.hidden = !n;
+    } catch (e) {}
+  }
+  async function clearAllDownloads() {
+    try { await caches.delete(AUDIO_SAVED); } catch (e) {}
+    save('offline', []); Object.keys(dlState).forEach(k => delete dlState[k]);
+    syncTopBtn(); updateStorageInfo();
+  }
+  function syncOfflineUI() {
+    const note = $('#set-offline-note'), tog = $('#set-autocache');
+    if (note) { note.hidden = offlineOK !== false; }
+    if (tog) tog.disabled = !offlineOK;
+    updateStorageInfo();
   }
 
   /* ── Boot ──────────────────────────────────────── */
@@ -141,6 +247,8 @@
     // warm the tiny lyrics index during idle so the first lyrics view has no lookup latency
     const warm = () => loadLyricsIndex();
     if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 4000 }); else setTimeout(warm, 2500);
+    probeOffline();   // check whether R2 media is CORS-readable → enables offline downloads
+    updateStorageInfo();
   }).catch(() => { statLine.textContent = 'failed to load catalog'; shelf.innerHTML = '<p class="empty">failed to load.</p>'; });
 
   function restoreSettings() {
@@ -151,6 +259,7 @@
     loopMode = s.loopMode|0; syncLoopBtn();
     // shuffle flag is restored together with the saved queue below
     shuffle = !!s.shuffle; syncShuffleBtn();
+    autoCache = !!s.autoCache; const acx = $('#set-autocache'); if (acx) acx.checked = autoCache; sendAutoCache();
   }
   function restoreNowPlaying() {
     const np = load('np'); if (!np || !np.q || !np.q.length) return;
@@ -383,6 +492,7 @@
     // otherwise animate up from wherever the (much taller) shelf was scrolled to.
     window.scrollTo({ top: 0, behavior: 'instant' });
     highlightPlaying();
+    syncTopBtn();   // top-right button becomes the album's download control
   }
 
   function backToShelf() {
@@ -390,6 +500,7 @@
     albumView.hidden = true; shelf.hidden = false; document.querySelector('#yura-hero').hidden = false;
     document.querySelector('#home-btn').hidden = false;
     window.scrollTo({ top: shelfScroll, behavior: 'instant' });   // restore shelf position instantly
+    syncTopBtn();   // back to Settings
   }
   $('#back-btn').addEventListener('click', backToShelf);
 
@@ -1141,10 +1252,56 @@
   }
   window.addEventListener('hashchange', applyRoute);
 
-  /* ── Dark mode ─────────────────────────────────── */
-  $('#dark-toggle').addEventListener('click', () => {
-    const d = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', d ? 'dark' : 'light');
+  /* ── Top-right button: Settings on the shelf, album Download in album view ── */
+  const topBtn = $('#top-btn'), setPop = $('#settings-pop');
+  function setDark(on) { document.body.classList.toggle('dark-mode', on); localStorage.setItem('theme', on ? 'dark' : 'light'); const c = $('#set-dark'); if (c) c.checked = on; }
+  // reflect current theme into the settings switch
+  { const c = $('#set-dark'); if (c) c.checked = document.body.classList.contains('dark-mode'); }
+  async function syncTopBtn() {
+    if (!topBtn) return;
+    if (view === 'album' && openAlbum >= 0 && offlineOK) {
+      topBtn.dataset.mode = 'download';
+      const st = dlState[openAlbum];
+      if (st?.active) {
+        const pct = st.total ? Math.round(st.done / st.total * 100) : 0;
+        topBtn.classList.add('state-dl'); topBtn.classList.remove('state-done');
+        topBtn.style.setProperty('--dl', pct);
+        topBtn.setAttribute('aria-label', `Downloading ${pct}% — tap to cancel`); topBtn.title = `Downloading ${pct}% — tap to cancel`;
+      } else {
+        const s = await albumSavedState(openAlbum);
+        const done = s.total > 0 && s.done >= s.total;
+        topBtn.classList.remove('state-dl'); topBtn.classList.toggle('state-done', done);
+        topBtn.setAttribute('aria-label', done ? 'Downloaded — tap to remove' : 'Download album for offline');
+        topBtn.title = done ? 'Saved offline — tap to remove' : (s.done ? `Download album (${s.done}/${s.total} already cached)` : 'Download album for offline');
+      }
+    } else {
+      topBtn.dataset.mode = 'settings';
+      topBtn.classList.remove('state-dl', 'state-done');
+      topBtn.setAttribute('aria-label', 'Settings'); topBtn.title = 'Settings';
+    }
+  }
+  topBtn?.addEventListener('click', async e => {
+    e.stopPropagation();
+    if (topBtn.dataset.mode === 'download') {
+      const ai = openAlbum;
+      if (dlState[ai]?.active) { cancelDownload(ai); return; }
+      const s = await albumSavedState(ai);
+      if (s.total > 0 && s.done >= s.total) removeAlbum(ai);
+      else { requestPersist(); downloadAlbum(ai); }
+      return;
+    }
+    const open = setPop.hidden; setPop.hidden = !open; topBtn.setAttribute('aria-expanded', String(open));
+  });
+  $('#set-dark')?.addEventListener('change', e => setDark(e.target.checked));
+  $('#set-autocache')?.addEventListener('change', e => {
+    autoCache = e.target.checked; saveSettings(); sendAutoCache();
+    if (autoCache) requestPersist();
+  });
+  $('#set-clear')?.addEventListener('click', () => clearAllDownloads());
+  document.addEventListener('click', e => {
+    if (setPop && !setPop.hidden && !e.target.closest('#settings-pop') && !e.target.closest('#top-btn')) {
+      setPop.hidden = true; topBtn.setAttribute('aria-expanded', 'false');
+    }
   });
 
   /* ── Keyboard ──────────────────────────────────── */
