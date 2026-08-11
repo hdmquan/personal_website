@@ -1266,6 +1266,29 @@
   function setDark(on) { document.body.classList.toggle('dark-mode', on); localStorage.setItem('theme', on ? 'dark' : 'light'); const c = $('#set-dark'); if (c) c.checked = on; }
   // reflect current theme into the settings switch
   { const c = $('#set-dark'); if (c) c.checked = document.body.classList.contains('dark-mode'); }
+
+  // Styled confirm dialog for destructive actions (removing offline downloads). Returns a Promise<bool>.
+  const cModal = $('#confirm-modal');
+  function confirmDialog({ title, body, ok = 'Remove' }) {
+    return new Promise(resolve => {
+      if (!cModal) { resolve(window.confirm(body || title)); return; }
+      $('#confirm-title').textContent = title; $('#confirm-body').textContent = body || '';
+      const okBtn = $('#confirm-ok'), cancelBtn = $('#confirm-cancel'); okBtn.textContent = ok;
+      cModal.hidden = false; okBtn.focus();
+      const done = v => {
+        cModal.hidden = true;
+        okBtn.removeEventListener('click', onOk); cancelBtn.removeEventListener('click', onCancel);
+        cModal.removeEventListener('click', onBack); document.removeEventListener('keydown', onKey, true);
+        resolve(v);
+      };
+      const onOk = () => done(true), onCancel = () => done(false);
+      const onBack = e => { if (e.target === cModal) done(false); };
+      const onKey = e => { if (e.key === 'Escape') { e.stopPropagation(); done(false); } else if (e.key === 'Enter') { e.stopPropagation(); done(true); } else { e.stopPropagation(); } };
+      okBtn.addEventListener('click', onOk); cancelBtn.addEventListener('click', onCancel);
+      cModal.addEventListener('click', onBack); document.addEventListener('keydown', onKey, true);   // capture: keep player shortcuts from firing
+    });
+  }
+
   async function syncTopBtn() {
     if (!topBtn) return;
     if (view === 'album' && openAlbum >= 0 && offlineOK) {
@@ -1295,8 +1318,9 @@
       const ai = openAlbum;
       if (dlState[ai]?.active) { cancelDownload(ai); return; }
       const s = await albumSavedState(ai);
-      if (s.total > 0 && s.done >= s.total) removeAlbum(ai);
-      else { requestPersist(); downloadAlbum(ai); }
+      if (s.total > 0 && s.done >= s.total) {
+        if (await confirmDialog({ title: 'Remove download?', body: `“${ALB[ai].title}” will be removed from this device. You can download it again anytime.`, ok: 'Remove' })) removeAlbum(ai);
+      } else { requestPersist(); downloadAlbum(ai); }
       return;
     }
     const open = setPop.hidden; setPop.hidden = !open; topBtn.setAttribute('aria-expanded', String(open));
@@ -1306,7 +1330,10 @@
     autoCache = e.target.checked; saveSettings(); sendAutoCache();
     if (autoCache) requestPersist();
   });
-  $('#set-clear')?.addEventListener('click', () => clearAllDownloads());
+  $('#set-clear')?.addEventListener('click', async () => {
+    const n = loadSavedList().size;
+    if (await confirmDialog({ title: 'Clear all downloads?', body: `${n} saved album${n > 1 ? 's' : ''} will be removed from this device.`, ok: 'Clear all' })) clearAllDownloads();
+  });
   document.addEventListener('click', e => {
     if (setPop && !setPop.hidden && !e.target.closest('#settings-pop') && !e.target.closest('#top-btn')) {
       setPop.hidden = true; topBtn.setAttribute('aria-expanded', 'false');

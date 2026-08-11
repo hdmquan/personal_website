@@ -1013,6 +1013,24 @@ body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
 .set-clear:hover { color: var(--accent); border-color: var(--gilt-soft); }
 .set-clear[hidden] { display: none; }
 
+/* ── Confirm dialog (destructive actions) ── */
+.confirm-modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 1.2rem;
+  background: rgba(0,0,0,.5); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
+.confirm-modal[hidden] { display: none; }
+.confirm-card { width: min(21rem, 100%); background: var(--panel-raised); border: 1px solid var(--gilt-hair);
+  border-radius: .8rem; padding: 1.15rem 1.15rem 1rem; box-shadow: 0 24px 60px var(--sh-deep);
+  animation: confirm-in .16s ease-out; }
+@keyframes confirm-in { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+.confirm-title { margin: 0 0 .45rem; font-family: var(--serif); font-size: 1.02rem; font-weight: 600; color: var(--text); }
+.confirm-body { margin: 0 0 1rem; font-family: var(--mono); font-size: .68rem; line-height: 1.6; letter-spacing: .02em; color: var(--text-2); }
+.confirm-actions { display: flex; gap: .55rem; justify-content: flex-end; }
+.confirm-cancel, .confirm-ok { cursor: pointer; font-family: var(--mono); font-size: .64rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: .55rem .95rem; border-radius: .45rem; border: 1px solid var(--rule); background: transparent; transition: color .15s, background .15s, border-color .15s; }
+.confirm-cancel { color: var(--text-2); }
+.confirm-cancel:hover { color: var(--text); border-color: var(--gilt-soft); }
+.confirm-ok { color: #d51007; border-color: rgba(213,16,7,.5); }
+.confirm-ok:hover { background: #d51007; color: #fff; border-color: #d51007; }
+
 /* ── Keyboard hint ─────────────────────────────────*/
 #kb-hint {
   position: fixed; left: 50%; bottom: .4rem; transform: translateX(-50%); z-index: 40;

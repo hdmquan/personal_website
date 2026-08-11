@@ -337,6 +337,18 @@ permalink: /yura/
   <button id="lastfm-signout" class="lfm-signout">Sign out</button>
 </div>
 
+<!-- Reusable confirm dialog for destructive actions (removing offline downloads). -->
+<div id="confirm-modal" class="confirm-modal" hidden>
+  <div class="confirm-card" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-body">
+    <p class="confirm-title" id="confirm-title"></p>
+    <p class="confirm-body" id="confirm-body"></p>
+    <div class="confirm-actions">
+      <button type="button" class="confirm-cancel" id="confirm-cancel">Cancel</button>
+      <button type="button" class="confirm-ok" id="confirm-ok">Remove</button>
+    </div>
+  </div>
+</div>
+
 <div id="kb-hint"><kbd>space</kbd> play <kbd>←→</kbd> seek <kbd>N/P</kbd> track <kbd>/</kbd> search <kbd>esc</kbd> back</div>
 
 <!-- `media`: Cloudflare Worker origin that fronts R2 with CORS + range (see infra/media-worker/README.md).
