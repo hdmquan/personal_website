@@ -1,9 +1,11 @@
 /* Fan-archive service worker.
 
-   Static + data + covers (unchanged from v2):
-   - App shell (css/js) precached; static assets stale-while-revalidate.
-   - Catalog / lyrics shards / navigations: network-first with cache fallback.
+   Static + data + covers:
+   - App shell (css/js) + catalog + navigations: network-first with cache fallback → always the
+     latest code when online (no stale-cache "quit and reopen to see changes"); still works offline.
    - R2 covers (cross-origin images): cache-first + LRU, so re-browsing doesn't re-download art.
+   - BUILD is stamped at deploy time so every deploy ships a byte-changed worker → the browser detects
+     the update, and the page reloads to it when safe (see player.js).
 
    Audio (offline playback) — the new part:
    - Two caches: SAVED (explicit per-album downloads written by the page; never auto-evicted) and
@@ -14,6 +16,7 @@
      runs for it, so behaviour is exactly as before.
    - Auto-cache is gated by a flag the page posts in (persisted so a worker restart recovers it), and
      it reuses the STREAMING bytes (tee) — playing a track caches it with no extra R2 request. */
+const BUILD = '__BUILD__';                   // replaced with a timestamp at build (busts the SW each deploy)
 const SHELL_C = 'fa-shell-v2';
 const DATA_C  = 'fa-data-v2';
 const IMG_C   = 'fa-img-v2';
@@ -153,9 +156,12 @@ self.addEventListener('fetch', e => {
     return;
   }
   e.respondWith((async () => {
-    const c = await caches.open(SHELL_C);
-    const hit = await c.match(req);
-    const net = fetch(req).then(res => { if (res && res.ok) c.put(req, res.clone()); return res; }).catch(() => null);
-    return hit || (await net) || Response.error();
+    try {
+      const res = await fetch(req);                     // network-first: latest code when online
+      if (res && res.ok) { const c = await caches.open(SHELL_C); c.put(req, res.clone()); }
+      return res;
+    } catch (err) {
+      return (await caches.match(req)) || Response.error();   // offline → cached shell
+    }
   })());
 });

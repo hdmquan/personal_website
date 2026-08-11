@@ -49,6 +49,10 @@ function build(outDir) {
     }
     minifyJSONFile(path.join(catDir, 'yura.json'));
     minifyJSONFile(path.join(catDir, 'album-notes.json'));
+    // stamp the service worker with a unique build id so every deploy ships a byte-changed worker
+    // → the browser detects the update and the page reloads to the new code (see player.js).
+    const sw = path.join(outDir, 'sw.js');
+    if (fs.existsSync(sw)) fs.writeFileSync(sw, fs.readFileSync(sw, 'utf8').replace(/__BUILD__/g, String(Date.now())));
   } catch (e) { console.warn('[catalog-build] skipped —', e.message); }
 }
 

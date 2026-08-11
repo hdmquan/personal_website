@@ -1602,4 +1602,22 @@
       if (text) copyText(text); else toast('No lyrics to copy');
     }, true);
   })();
+
+  /* ── Stay current across deploys (no manual quit/reopen) ──
+     A new service worker taking control means a new deploy is live. Reload to pick up the new code —
+     but never mid-playback: if a track is playing, defer until it's paused or the app is refocused. */
+  if ('serviceWorker' in navigator) {
+    const sw = navigator.serviceWorker;
+    const check = () => sw.getRegistration().then(r => r && r.update()).catch(() => {});
+    setInterval(check, 30 * 60 * 1000);
+    let pending = false, reloaded = false;
+    const apply = () => {
+      if (!pending || reloaded) return;
+      if (wantPlay && !audio.paused) return;          // playing → wait for a pause
+      reloaded = true; location.reload();
+    };
+    audio.addEventListener('pause', apply);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) { check(); apply(); } });
+    if (sw.controller) sw.addEventListener('controllerchange', () => { pending = true; apply(); });   // skip first install
+  }
 })();
