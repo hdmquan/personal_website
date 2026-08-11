@@ -326,6 +326,10 @@ permalink: /yura/
     <input type="checkbox" id="set-autocache" aria-label="Download offline when I play" /><span class="sw" aria-hidden="true"></span>
   </label>
   <p class="set-note" id="set-offline-note" hidden>Offline saving isn't set up yet.</p>
+  <button type="button" class="set-install" id="set-install" hidden>
+    <span>Install app</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+  </button>
   <div class="set-foot">
     <span class="set-storage" id="set-storage"></span>
     <button type="button" class="set-clear" id="set-clear" hidden>Clear</button>
@@ -347,6 +351,14 @@ permalink: /yura/
       <button type="button" class="confirm-ok" id="confirm-ok">Remove</button>
     </div>
   </div>
+</div>
+
+<!-- Install-to-home-screen nudge — phone-only, shown once after the first download (see player.js). -->
+<div id="install-nudge" class="install-nudge" hidden>
+  <button type="button" class="in-x" id="in-dismiss" aria-label="Dismiss">✕</button>
+  <p class="in-title" id="in-title"></p>
+  <p class="in-sub" id="in-sub"></p>
+  <button type="button" class="in-go btn-ext btn-ext-play" id="in-go">Install</button>
 </div>
 
 <div id="kb-hint"><kbd>space</kbd> play <kbd>←→</kbd> seek <kbd>N/P</kbd> track <kbd>/</kbd> search <kbd>esc</kbd> back</div>

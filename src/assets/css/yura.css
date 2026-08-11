@@ -1031,6 +1031,27 @@ body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
 .confirm-ok { color: #d51007; border-color: rgba(213,16,7,.5); }
 .confirm-ok:hover { background: #d51007; color: #fff; border-color: #d51007; }
 
+/* ── Install (Add to Home Screen) — settings row + one-time nudge ── */
+.set-install { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%;
+  cursor: pointer; background: transparent; border: 0; padding: 0; text-align: left;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; color: var(--accent); transition: color .15s; }
+.set-install:hover { color: var(--text); }
+.set-install svg { width: 15px; height: 15px; flex: none; }
+.set-install[hidden] { display: none; }
+
+.install-nudge { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 1rem); transform: translateX(-50%);
+  z-index: 90; width: min(23rem, calc(100vw - 1.4rem)); background: var(--panel-raised); border: 1px solid var(--gilt-hair);
+  border-radius: .8rem; padding: .95rem 1rem 1rem; box-shadow: 0 20px 50px var(--sh-deep); animation: confirm-in .2s ease-out; }
+.install-nudge[hidden] { display: none; }
+body.np-open .install-nudge { display: none; }
+.in-title { margin: 0 1.8rem .3rem 0; font-family: var(--serif); font-weight: 600; font-size: .98rem; color: var(--text); }
+.in-sub { margin: 0 0 .85rem; font-family: var(--mono); font-size: .63rem; line-height: 1.6; letter-spacing: .02em; color: var(--text-2); }
+.in-go { font-size: .64rem; padding: .5rem 1.1rem; }
+.in-go[hidden] { display: none; }
+.in-x { position: absolute; top: .45rem; right: .5rem; width: 26px; height: 26px; display: grid; place-items: center;
+  border: 0; background: transparent; cursor: pointer; color: var(--text-3); font-size: .78rem; border-radius: 50%; transition: color .15s, background .15s; }
+.in-x:hover { color: var(--text); background: var(--panel-inset); }
+
 /* ── Keyboard hint ─────────────────────────────────*/
 #kb-hint {
   position: fixed; left: 50%; bottom: .4rem; transform: translateX(-50%); z-index: 40;

@@ -162,9 +162,11 @@
     st.active = false;
     // completion reflects ACTUAL cache state, so a partial/failed run never claims "downloaded"
     const s = await albumSavedState(ai);
-    markSaved(ai, s.total > 0 && s.done >= s.total);
+    const complete = s.total > 0 && s.done >= s.total;
+    markSaved(ai, complete);
     if (abort.signal.aborted) delete dlState[ai];
     syncTopBtn(); updateStorageInfo();
+    if (complete && !abort.signal.aborted) maybeOfferInstall();   // nudge to install after a full download
   }
   function cancelDownload(ai) { const st = dlState[ai]; if (st) { st.active = false; st.abort.abort(); delete dlState[ai]; } syncTopBtn(); }
   async function removeAlbum(ai) {
@@ -195,6 +197,51 @@
     if (tog) tog.disabled = !offlineOK;
     updateStorageInfo();
   }
+
+  /* ── Install (Add to Home Screen) — PHONE ONLY, offered once after the first download ───────────
+     Skips desktop/tablet and anything already installed. Android/Chromium gives a real prompt; iOS
+     has no programmatic install, so we show the Share → Add to Home Screen steps instead. */
+  let deferredInstall = null, installOffered = false;
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; syncInstallRow(); });
+  window.addEventListener('appinstalled', () => { save('installDone', true); hideInstall(); syncInstallRow(); });
+  const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  const isIPhone = () => /iPhone|iPod/.test(navigator.userAgent);
+  function installEligible() {                          // phone, not already installed
+    if (isStandalone() || load('installDone')) return false;
+    if (!matchMedia('(pointer: coarse)').matches || !matchMedia('(hover: none)').matches) return false;   // has a mouse → desktop
+    const m = navigator.userAgentData ? navigator.userAgentData.mobile : undefined;
+    if (m === true) return true;
+    if (m === false) return false;                     // Chromium says tablet/desktop
+    const isIPad = /iPad/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    return !isIPad && Math.min(screen.width, screen.height) <= 500;   // phone-sized, not an iPad
+  }
+  const canInstall = () => installEligible() && (deferredInstall || isIPhone());
+  function showInstall() {
+    const n = $('#install-nudge'); if (!n) return;
+    if (isIPhone() && !deferredInstall) {
+      $('#in-title').textContent = 'Add to Home Screen';
+      $('#in-sub').textContent = 'Tap the Share button, then “Add to Home Screen” — your downloads stay safe and it opens like an app.';
+      $('#in-go').hidden = true;                       // iOS: no button, just the steps
+    } else {
+      $('#in-title').textContent = 'Install the app';
+      $('#in-sub').textContent = 'Add 葉月ゆら to your home screen so your offline downloads stay put and it launches like a real app.';
+      $('#in-go').hidden = false;
+    }
+    n.hidden = false;
+  }
+  function hideInstall() { const n = $('#install-nudge'); if (n) n.hidden = true; }
+  function syncInstallRow() { const row = $('#set-install'); if (row) row.hidden = !canInstall(); }
+  async function doInstall() {
+    if (deferredInstall) { deferredInstall.prompt(); try { await deferredInstall.userChoice; } catch (e) {} deferredInstall = null; hideInstall(); syncInstallRow(); }
+    else if (isIPhone()) showInstall();                // iOS steps
+  }
+  function maybeOfferInstall() {                        // called once a download finishes
+    if (installOffered || load('installDismissed') || !canInstall()) return;
+    installOffered = true; showInstall();
+  }
+  $('#in-go')?.addEventListener('click', doInstall);
+  $('#in-dismiss')?.addEventListener('click', () => { save('installDismissed', true); hideInstall(); });
+  $('#set-install')?.addEventListener('click', () => { const p = $('#settings-pop'); if (p) p.hidden = true; doInstall(); });
 
   /* ── Boot ──────────────────────────────────────── */
   renderSkeleton();
@@ -1324,6 +1371,7 @@
       return;
     }
     const open = setPop.hidden; setPop.hidden = !open; topBtn.setAttribute('aria-expanded', String(open));
+    if (open) syncInstallRow();   // refresh "Install app" visibility when the menu opens
   });
   $('#set-dark')?.addEventListener('change', e => setDark(e.target.checked));
   $('#set-autocache')?.addEventListener('change', e => {
