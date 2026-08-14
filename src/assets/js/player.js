@@ -669,6 +669,10 @@
     scrobbleMeta = { artist: a.artist || ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: Math.floor(Date.now() / 1000) };
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
     audio.src = mediaURL(t.url);  // via the media proxy when configured (enables offline); else direct R2
+    // Keep the active track fully buffered so iOS retains the media element (and its live audio
+    // route) through a background pause; that lets a plain play() resume with sound instead of
+    // iOS freeing it and forcing a silent reload.
+    audio.preload = 'auto';
     pendingSeek = (startAt && startAt > 0) ? startAt : null;
     npBar.classList.add('show');
     (npTitleIn || npTitle).textContent = disp(t) + (t.instrumental ? ' (inst)' : '');
@@ -907,26 +911,15 @@
   }
 
   /* ── NP controls ───────────────────────────────── */
-  // Robust resume. On iOS, a backgrounded standalone PWA gets suspended while
-  // paused and the <audio> resource is torn down (preload='none' keeps nothing).
-  // A plain audio.play() then rejects and the lock-screen controls die. So if
-  // play() rejects, rebuild the media resource at the saved position and retry,
-  // and re-assert the media session iOS may have dropped.
+  // Resume for iOS lock-screen / background. Do a PLAIN play() of the existing,
+  // still-loaded element: that lets iOS re-attach the audio route to the speaker.
+  // Do NOT reload the src here — reloading in the background makes iOS start the
+  // media as a silent background load (timeline advances, no sound).
   function resumePlayback() {
     if (!queue.length) return;
     wantPlay = true;
     if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-    const p = audio.play();
-    if (p && p.catch) p.catch(() => {
-      const q = queue[qi]; if (!q) return;
-      const a = ALB[q.ai], t = a.tracks[q.ti]; if (!a || !t) return;
-      const pos = audio.currentTime || 0;
-      audio.src = mediaURL(t.url);
-      pendingSeek = pos > 0 ? pos : null;   // re-seek once metadata loads (loadedmetadata handler)
-      try { audio.load(); } catch (e) {}
-      audio.play().catch(() => {});
-      setMediaSession(a, t);                // re-register metadata + action handlers
-    });
+    audio.play().catch(() => {});
   }
   function togglePlay() {
     if (!queue.length) return;
