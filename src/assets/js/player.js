@@ -907,9 +907,30 @@
   }
 
   /* ── NP controls ───────────────────────────────── */
+  // Robust resume. On iOS, a backgrounded standalone PWA gets suspended while
+  // paused and the <audio> resource is torn down (preload='none' keeps nothing).
+  // A plain audio.play() then rejects and the lock-screen controls die. So if
+  // play() rejects, rebuild the media resource at the saved position and retry,
+  // and re-assert the media session iOS may have dropped.
+  function resumePlayback() {
+    if (!queue.length) return;
+    wantPlay = true;
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+    const p = audio.play();
+    if (p && p.catch) p.catch(() => {
+      const q = queue[qi]; if (!q) return;
+      const a = ALB[q.ai], t = a.tracks[q.ti]; if (!a || !t) return;
+      const pos = audio.currentTime || 0;
+      audio.src = mediaURL(t.url);
+      pendingSeek = pos > 0 ? pos : null;   // re-seek once metadata loads (loadedmetadata handler)
+      try { audio.load(); } catch (e) {}
+      audio.play().catch(() => {});
+      setMediaSession(a, t);                // re-register metadata + action handlers
+    });
+  }
   function togglePlay() {
     if (!queue.length) return;
-    if (audio.paused) { wantPlay = true; audio.play(); }
+    if (audio.paused) resumePlayback();
     else { wantPlay = false; audio.pause(); }
   }
   npPlay.addEventListener('click', togglePlay);
@@ -1263,8 +1284,9 @@
       artwork: ['256x256','512x512','1000x1000'].map(s => ({ src: art, sizes: s, type: 'image/jpeg' }))
     });
     const set = (action, fn) => { try { navigator.mediaSession.setActionHandler(action, fn); } catch (e) {} };
-    set('play',  () => { wantPlay = true; audio.play(); });
-    set('pause', () => { wantPlay = false; audio.pause(); });
+    set('play',  () => resumePlayback());
+    set('pause', () => { wantPlay = false; audio.pause();
+      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; });
     set('nexttrack', next);
     set('previoustrack', prev);
     set('seekto', e => { applySeek(e.seekTime); updatePositionState(); });   // lock-screen / Control Center scrubber
@@ -1276,7 +1298,7 @@
      auto-resume. If the user still intends playback, retry when the page
      becomes visible/focused again. iOS may still block this without a
      gesture, so it is best-effort and silently no-ops on failure. */
-  function tryResume() { if (wantPlay && audio.paused && audio.src) audio.play().catch(()=>{}); }
+  function tryResume() { if (wantPlay && audio.paused && audio.src) resumePlayback(); }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) tryResume(); });
   window.addEventListener('focus', tryResume);
   window.addEventListener('pageshow', tryResume);
