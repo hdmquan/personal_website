@@ -123,6 +123,12 @@
   display: block;
   margin-right: 0.6rem;
 }
+#hero .button-transparent .optional-word {
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
 
 /* Drop the "My" so the resume button stays on one line on small screens */
 @media only screen and (max-width: 30rem) {

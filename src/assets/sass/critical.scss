@@ -117,6 +117,14 @@
       display: block;
       margin-right: 0.6rem;
     }
+
+    // Override the italic serif accent applied to every #hero span
+    .optional-word {
+      font-family: inherit;
+      font-style: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
   }
 }
 

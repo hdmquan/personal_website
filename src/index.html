@@ -65,18 +65,11 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
                 </a>
             </div>
             <a
-                href="https://calendly.com/hdmquan/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="button-solid"
-                >Book a call</a
-            >
-            <a
                 href="/assets/images/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="button-transparent"
-                ><span class="optional-word">My </span>Resume</a
+                ><span class="optional-word">My&nbsp;</span>Resume</a
             >
         </div>
     </div>
@@ -310,7 +303,9 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
                     </p>
                 </li>
             </ul>
-            <a href="/#contact" class="button-solid">Work with me</a>
+            <a href="mailto:hdmquan@outlook.com" class="button-solid"
+                >Work with me</a
+            >
         </div>
     </div>
 </section>
@@ -515,61 +510,6 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
     </div>
 </section>
 
-<section id="steps">
-    <div class="container">
-        <div class="content">
-            <span class="topper">Process</span>
-            <h2 class="title">How I Work</h2>
-            <p class="text">
-                I like building useful things. Most of the work starts with
-                data, but the goal is always a system that solves something real
-                for business, climate, or just making life easier.
-            </p>
-        </div>
-        <ul class="card-group">
-            <li class="item">
-                <span class="number">01</span>
-                <h3 class="h3">Discovery</h3>
-                <p class="item-text">
-                    First step is to figure out what the system really has to
-                    do, and why; and talk to whoever knows the domain best, not
-                    just staring at the data.
-                </p>
-            </li>
-            <li class="item">
-                <span class="number">02</span>
-                <h3 class="h3">Design</h3>
-                <p class="item-text">
-                    Next is to sketch out a system that fits, technically and
-                    practically. No matter if it’s automation or data workflows,
-                    I choose tools based on fit - I'm too old for trends :) .
-                </p>
-            </li>
-            <li class="item">
-                <span class="number">03</span>
-                <h3 class="h3">Build & Iterate</h3>
-                <p class="item-text">
-                    I build in steps. Each part must be tested, with room to
-                    change direction. I keep things clean and share progress
-                    early and often.
-                </p>
-            </li>
-            <li class="item">
-                <span class="number">04</span>
-                <h3 class="h3">Deliver & Support</h3>
-                <p class="item-text">
-                    I write things down and keep handovers simple. If you need
-                    support later — fixing bugs, adding features, I'll stick
-                    around.
-                </p>
-            </li>
-        </ul>
-        <a href="#contact" class="button-solid" style="align-self: center"
-            >Have a project in mind? Let's talk</a
-        >
-    </div>
-</section>
-
 <section id="about">
     <div class="container">
         <picture class="picture">
@@ -618,4 +558,4 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
     </picture>
 </section>
 
-{% include "components/contact.html" %} {% endblock %}
+{% endblock %}
