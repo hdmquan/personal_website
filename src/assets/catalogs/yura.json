@@ -22,7 +22,7 @@
         {
           "track": "01",
           "title": "AquaTear",
-          "instrumental": true,
+          "instrumental": false,
           "file": "audio/Aqua Forest/1-01 AquaTear.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-01%20AquaTear.mp3",
           "dur": 82,
@@ -151,7 +151,7 @@
         {
           "track": "07",
           "title": "Phantom Spring",
-          "instrumental": true,
+          "instrumental": false,
           "file": "audio/Aqua Forest/1-07 Phantom Spring.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-07%20Phantom%20Spring.mp3",
           "dur": 99,
