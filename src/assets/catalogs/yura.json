@@ -5,6 +5,266 @@
   "track_count": 1053,
   "albums": [
     {
+      "album": "Aqua Forest",
+      "title": "Aqua Forest",
+      "year": "2026",
+      "date": "2026-08-16",
+      "cover": "covers/Aqua Forest.jpg",
+      "cover_url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/covers-opt/Aqua%20Forest.avif",
+      "album_seconds": 2508,
+      "genres": [
+        "Pop"
+      ],
+      "release_types": [
+        "albums"
+      ],
+      "tracks": [
+        {
+          "track": "01",
+          "title": "AquaTear",
+          "instrumental": true,
+          "file": "audio/Aqua Forest/1-01 AquaTear.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-01%20AquaTear.mp3",
+          "dur": 82,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ]
+          }
+        },
+        {
+          "track": "02",
+          "title": "水の贄花",
+          "instrumental": false,
+          "file": "audio/Aqua Forest/1-02 水の贄花.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-02%20%E6%B0%B4%E3%81%AE%E8%B4%84%E8%8A%B1.mp3",
+          "dur": 203,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ]
+          }
+        },
+        {
+          "track": "03",
+          "title": "幸せな少女",
+          "instrumental": false,
+          "file": "audio/Aqua Forest/1-03 幸せな少女.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-03%20%E5%B9%B8%E3%81%9B%E3%81%AA%E5%B0%91%E5%A5%B3.mp3",
+          "dur": 251,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "vocals": [
+              "あ子"
+            ],
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ]
+          }
+        },
+        {
+          "track": "04",
+          "title": "海月姫と底闇の魔女",
+          "instrumental": false,
+          "file": "audio/Aqua Forest/1-04 海月姫と底闇の魔女.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-04%20%E6%B5%B7%E6%9C%88%E5%A7%AB%E3%81%A8%E5%BA%95%E9%97%87%E3%81%AE%E9%AD%94%E5%A5%B3.mp3",
+          "dur": 215,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ]
+          }
+        },
+        {
+          "track": "05",
+          "title": "Over Dolls",
+          "instrumental": false,
+          "file": "audio/Aqua Forest/1-05 Over Dolls.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-05%20Over%20Dolls.mp3",
+          "dur": 198,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "vocals": [
+              "sioborn"
+            ],
+            "music": [
+              "やっすん・Drop"
+            ],
+            "arrange": [
+              "やっすん・Drop"
+            ]
+          }
+        },
+        {
+          "track": "06",
+          "title": "Water Priestess",
+          "instrumental": false,
+          "file": "audio/Aqua Forest/1-06 Water Priestess.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-06%20Water%20Priestess.mp3",
+          "dur": 297,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "vocals": [
+              "葉月ゆら"
+            ],
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ]
+          }
+        },
+        {
+          "track": "07",
+          "title": "Phantom Spring",
+          "instrumental": true,
+          "file": "audio/Aqua Forest/1-07 Phantom Spring.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-07%20Phantom%20Spring.mp3",
+          "dur": 99,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ]
+          }
+        },
+        {
+          "track": "08",
+          "title": "水の贄花",
+          "instrumental": true,
+          "file": "audio/Aqua Forest/1-08 水の贄花 - Instrumental Version -.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-08%20%E6%B0%B4%E3%81%AE%E8%B4%84%E8%8A%B1%20-%20Instrumental%20Version%20-.mp3",
+          "dur": 203,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "music": [
+              "塚越雄一朗(NanosizeMir)"
+            ],
+            "arrange": [
+              "塚越雄一朗(NanosizeMir)"
+            ]
+          }
+        },
+        {
+          "track": "09",
+          "title": "幸せな少女",
+          "instrumental": true,
+          "file": "audio/Aqua Forest/1-09 幸せな少女 - Instrumental Version -.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-09%20%E5%B9%B8%E3%81%9B%E3%81%AA%E5%B0%91%E5%A5%B3%20-%20Instrumental%20Version%20-.mp3",
+          "dur": 252,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "music": [
+              "Drop"
+            ],
+            "arrange": [
+              "Drop"
+            ]
+          }
+        },
+        {
+          "track": "10",
+          "title": "海月姫と底闇の魔女",
+          "instrumental": true,
+          "file": "audio/Aqua Forest/1-10 海月姫と底闇の魔女 - Instrumental Version -.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-10%20%E6%B5%B7%E6%9C%88%E5%A7%AB%E3%81%A8%E5%BA%95%E9%97%87%E3%81%AE%E9%AD%94%E5%A5%B3%20-%20Instrumental%20Version%20-.mp3",
+          "dur": 214,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "music": [
+              "オッカ"
+            ],
+            "arrange": [
+              "オッカ"
+            ]
+          }
+        },
+        {
+          "track": "11",
+          "title": "Over Dolls",
+          "instrumental": true,
+          "file": "audio/Aqua Forest/1-11 Over Dolls - Instrumental Version -.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-11%20Over%20Dolls%20-%20Instrumental%20Version%20-.mp3",
+          "dur": 198,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "music": [
+              "やっすん・Drop"
+            ],
+            "arrange": [
+              "やっすん・Drop"
+            ]
+          }
+        },
+        {
+          "track": "12",
+          "title": "Water Priestess",
+          "instrumental": true,
+          "file": "audio/Aqua Forest/1-12 Water Priestess - Instrumental Version -.mp3",
+          "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Aqua%20Forest/1-12%20Water%20Priestess%20-%20Instrumental%20Version%20-.mp3",
+          "dur": 296,
+          "genres": [
+            "Pop"
+          ],
+          "staff": {
+            "music": [
+              "やっすん"
+            ],
+            "arrange": [
+              "やっすん"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "album": "-The Clockwork Rose- 時計仕掛けの薔薇少女",
       "title": "-The Clockwork Rose- 時計仕掛けの薔薇少女",
       "year": "2016",
@@ -27987,7 +28247,7 @@
     "calculated_at": "2026-06-22"
   },
   "release_counts": {
-    "albums": 107,
+    "albums": 108,
     "singles": 0,
     "others": 65
   }
