@@ -530,6 +530,7 @@
         <div class="ah-actions">
           <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
           <button class="btn-ext" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>
+          <button class="btn-ext" id="share-album" aria-label="Copy link to this album"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg> Share</button>
           ${buyLink(a)}
         </div>
       </div>`;
@@ -1597,8 +1598,18 @@
     window.addEventListener('resize', () => { if (!lpOpen) hideMenu(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') hideMenu(); });
 
+    // Shareable link for social previews. In production catalog-build injects share_slug and emits
+    // a static /yura/a/<slug> (and /yura/t/<slug>/<ti>) page carrying the album cover as og:image,
+    // which then redirects into the player. Falls back to the deep-link hash URL when no slug (dev).
+    function shareUrl(ai, ti) {
+      const a = ALB[ai]; if (!a) return location.href;
+      if (a.share_slug) return location.origin + '/yura/' + (ti == null ? 'a/' + a.share_slug : 't/' + a.share_slug + '/' + ti);
+      return location.origin + location.pathname + (ti == null ? '#a=' + ai : '#np=' + ai + '.' + ti);
+    }
+
     // inline copy buttons + click-to-copy the album name (album view; capture so it beats play)
     albumView.addEventListener('click', e => {
+      if (e.target.closest('#share-album')) { e.preventDefault(); e.stopPropagation(); copyText(shareUrl(openAlbum)); return; }
       const cb = e.target.closest('.copy-inline');
       if (cb) {
         e.preventDefault(); e.stopPropagation();
@@ -1608,6 +1619,11 @@
       }
       if (hoverCapable && e.target.closest('.ah-title')) { e.stopPropagation(); copyText(albumName(openAlbum)); }
     }, true);
+
+    // Now-playing "copy link" → link to the current track (album cover preview)
+    document.getElementById('np-share-btn')?.addEventListener('click', () => {
+      const q = queue[qi]; if (q) copyText(shareUrl(q.ai, q.ti)); else toast('Nothing playing');
+    });
 
     // "Copy lyrics" — grab the whole lyric of the currently-shown language from the now-playing view
     document.addEventListener('click', e => {
