@@ -193,12 +193,21 @@ permalink: /yura/
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h9M4 17h7"/><path d="M16 15l2.2 2.2L23 12"/></svg>
       </button>
     </div>
-    <button id="np-share-btn" class="np-icon-btn" type="button" aria-label="Copy link to this track" title="Copy link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-    </button>
-    <button id="np-info-btn" class="np-icon-btn np-info-btn" type="button" aria-label="Track info" title="Info" aria-pressed="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg>
-    </button>
+    <div class="np-menu-wrap">
+      <button id="np-menu-btn" class="np-icon-btn" type="button" aria-label="More" title="More" aria-haspopup="true" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+      </button>
+      <div id="np-menu" class="np-menu" role="menu" aria-label="Track actions" hidden>
+        <button id="np-menu-share" class="np-menu-item" role="menuitem" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+          <span>Share</span>
+        </button>
+        <button id="np-menu-info" class="np-menu-item np-info-btn" role="menuitem" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg>
+          <span>Info</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="np-views">
@@ -400,7 +409,7 @@ permalink: /yura/
   (function(){
     /* (a) Player ⇄ Lyrics */
     var seg = Array.prototype.slice.call(document.querySelectorAll('.np-seg-btn')),
-        infoBtn = document.getElementById('np-info-btn'),
+        infoBtn = document.getElementById('np-menu-info'),
         views = { song: document.getElementById('np-view-player'), lyrics: document.getElementById('np-view-lyrics'), info: document.getElementById('np-view-info') };
     function showView(name, focus){
       seg.forEach(function(b){
@@ -418,8 +427,21 @@ permalink: /yura/
         showView(seg[(i + (e.key === 'ArrowRight' ? 1 : seg.length - 1)) % seg.length].dataset.view, true);
       });
     });
-    // Top-right Info button (mobile): toggle the Info view ⇄ Player.
+    // Info menu item: toggle the Info view ⇄ Player.
     infoBtn && infoBtn.addEventListener('click', function(){ showView(infoBtn.classList.contains('active') ? 'song' : 'info', false); });
+
+    // Kebab menu (Share / Info). Share action itself is wired in player.js; both items close the menu.
+    var menuBtn = document.getElementById('np-menu-btn'), menu = document.getElementById('np-menu');
+    function closeMenu(){ if (menu) menu.hidden = true; if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false'); }
+    menuBtn && menuBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = menu.hidden; menu.hidden = !open; menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    menu && menu.addEventListener('click', function(){ closeMenu(); });
+    document.addEventListener('click', function(e){
+      if (menu && !menu.hidden && !e.target.closest('.np-menu-wrap')) closeMenu();
+    });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
 
     /* (b) Lyrics language — scoped to its own pill (mobile view + web sheet have separate ones) */
     Array.prototype.forEach.call(document.querySelectorAll('.np-lang-btn'), function(b){

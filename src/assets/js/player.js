@@ -852,11 +852,13 @@
         if (!endHandled && wantPlay && d && audio.currentTime >= d - 0.6) handleEnd();
       }, 2000);
     }
-    if (seeking || !audio.duration) return;
-    setPct(audio.currentTime / audio.duration * 100);
+    if (seeking) return;
     const c2 = document.getElementById('np2-cur'), d2 = document.getElementById('np2-dur');
     if (c2) c2.textContent = fmt(audio.currentTime);
-    if (d2) d2.textContent = fmt(effectiveDur());
+    // Progress fill needs a duration; streamed R2 audio often reports audio.duration as NaN, which
+    // used to freeze the bar at 0:00. Fall back to the catalog duration (curDur) via effectiveDur().
+    const eDur = effectiveDur();
+    if (eDur > 0) { setPct(Math.min(audio.currentTime, eDur) / eDur * 100); if (d2) d2.textContent = fmt(eDur); }
     updatePositionState();
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.tick(scrobbleMeta, audio.currentTime, audio.duration);
     if ((npSaveT = (npSaveT + 1) % 20) === 0) saveNowPlaying();   // persist position ~every 20 ticks
@@ -1620,8 +1622,8 @@
       if (hoverCapable && e.target.closest('.ah-title')) { e.stopPropagation(); copyText(albumName(openAlbum)); }
     }, true);
 
-    // Now-playing "copy link" → link to the current track (album cover preview)
-    document.getElementById('np-share-btn')?.addEventListener('click', () => {
+    // Now-playing kebab → "Share" → copy a link to the current track (album cover preview)
+    document.getElementById('np-menu-share')?.addEventListener('click', () => {
       const q = queue[qi]; if (q) copyText(shareUrl(q.ai, q.ti)); else toast('Nothing playing');
     });
 

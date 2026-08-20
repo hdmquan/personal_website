@@ -838,7 +838,7 @@ html::-webkit-scrollbar-thumb:hover,
   .np-sheet-lyrics { display: none; flex: 1 1 0; min-height: 0; position: relative; }
   #queue-panel.show-lyrics .np-queue-scroll { display: none; }
   #queue-panel.show-lyrics .np-sheet-lyrics { display: flex; flex-direction: column; }
-  #np-info-btn { display: none; }                     /* web uses the Info tab, not the floating button */
+  .np-menu-wrap { display: none; }                    /* web uses the Info tab + album Share; kebab is mobile-only */
   .np-sheet-info { display: none; flex: 1 1 0; min-height: 0; }
   #queue-panel.show-info .np-queue-scroll { display: none; }
   #queue-panel.show-info .np-sheet-info { display: flex; flex-direction: column; }
@@ -1086,3 +1086,23 @@ body.inst-off .trk.is-inst:not(.playing) { opacity: .35; pointer-events: none; }
   #yura-hero .eyebrow, #yura-hero h1, #yura-hero .romaji, .fleuron, .shelf-controls { animation: none !important; }
   html { scroll-behavior: auto !important; }
 }
+
+/* Now-playing kebab menu (Share / Info) */
+.np-menu-wrap { position: relative; display: inline-flex; }
+.np-menu {
+  position: absolute; top: calc(100% + .4rem); right: 0; z-index: 60;
+  min-width: 9.5rem; padding: .3rem; border-radius: .55rem;
+  background: var(--panel-raised); border: 1px solid var(--rule);
+  box-shadow: 0 14px 38px var(--sh-deep);
+  display: flex; flex-direction: column; gap: .1rem;
+}
+.np-menu[hidden] { display: none; }
+.np-menu-item {
+  display: flex; align-items: center; gap: .6rem;
+  width: 100%; padding: .5rem .6rem; border: 0; border-radius: .4rem;
+  background: transparent; color: var(--text); font: inherit; font-size: .9rem;
+  text-align: left; cursor: pointer; white-space: nowrap;
+}
+.np-menu-item svg { width: 18px; height: 18px; flex: 0 0 auto; opacity: .85; }
+.np-menu-item:hover, .np-menu-item:focus-visible { background: var(--panel-inset); outline: none; }
+.np-menu-item.active { color: var(--accent); }
