@@ -774,7 +774,21 @@
     // credits used to live under the lyrics — they now render in the Info panel (renderInfo)
     const cw = container.querySelector('.np-credits-wrap'); if (cw) cw.remove();
   }
-  function renderLyrics() { renderInto($('#np-lyrics-scroll')); renderInto($('#np-sheet-lyrics')); }
+  function renderLyrics() {
+    // Vietnamese (systina2642) exists only for some tracks — show the タブ only when present,
+    // and if we're on it when switching to a track without it, fall back to Japanese.
+    const rec = lyricsRec();
+    const hasVi = !!(rec && rec.vi && rec.vi.lines && rec.vi.lines.length);
+    document.querySelectorAll('.np-lang-vi').forEach(b => { b.hidden = !hasVi; });
+    if (!hasVi && curLang === 'vi') {
+      curLang = 'jp';
+      document.querySelectorAll('.np-lang-btn').forEach(x => {
+        const on = x.dataset.lang === 'jp';
+        x.classList.toggle('active', on); x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1;
+      });
+    }
+    renderInto($('#np-lyrics-scroll')); renderInto($('#np-sheet-lyrics'));
+  }
 
   // Info panel — track metadata + the song staff credits. Rendered into the mobile Info view
   // (#np-info-scroll, opened by the top-right Info button) and the web Info tab (#np-sheet-info-scroll).
