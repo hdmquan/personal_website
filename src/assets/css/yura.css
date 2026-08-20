@@ -755,6 +755,9 @@ html::-webkit-scrollbar-thumb:hover,
   display: inline-flex; align-items: center; transition: background .18s, color .18s; }
 .np-lang-btn:hover { color: var(--text); }
 .np-lang-btn.active { background: var(--panel-inset); color: var(--accent); }
+/* honour the `hidden` attribute — .np-lang-btn's display:inline-flex would otherwise override it,
+   leaving the Tiếng Việt tab visible on tracks that have no Vietnamese layer. */
+.np-lang-btn[hidden] { display: none !important; }
 
 /* rendered lyric lines (shared by mobile view + web sheet) */
 .np-lyrics-body { display: flex; flex-direction: column; }
