@@ -1106,3 +1106,7 @@ body.inst-off .trk.is-inst:not(.playing) { opacity: .35; pointer-events: none; }
 .np-menu-item svg { width: 18px; height: 18px; flex: 0 0 auto; opacity: .85; }
 .np-menu-item:hover, .np-menu-item:focus-visible { background: var(--panel-inset); outline: none; }
 .np-menu-item.active { color: var(--accent); }
+
+/* Kebab is mobile-only. This must come AFTER the base .np-menu-wrap rule so it wins on desktop
+   (the earlier min-width:760px hide was being overridden by the later base display:inline-flex). */
+@media (min-width: 760px) { .np-menu-wrap { display: none !important; } }
