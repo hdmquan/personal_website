@@ -662,7 +662,7 @@
   function loadCurrent(autoplay, startAt) {
     const q = queue[qi]; if (!q) return;
     const a = ALB[q.ai], t = a.tracks[q.ti];
-    curDur = t.dur || 0; endHandled = false; clearEndTimer();
+    curDur = t.dur || 0; endHandled = false; seeking = false; clearEndTimer();
     // scrobble metadata for the new track (no-op unless a Last.fm session is connected).
     // a.artist overrides the default vocalist for circle/collab releases (e.g. La Bella Luna) so
     // scrobbles match how Last.fm catalogues them and pick up the right page + cover art.
@@ -832,6 +832,8 @@
 
   /* ── Audio events ──────────────────────────────── */
   audio.addEventListener('play',  () => setPlayingUI(true));
+  // 'playing' = audio is actually advancing again → clear any stuck seek flag so the playhead moves.
+  audio.addEventListener('playing', () => { seeking = false; });
   audio.addEventListener('pause', () => {
     setPlayingUI(false); saveNowPlaying();
     // Some browsers pause at the very end instead of firing 'ended' (media control then sticks at
@@ -1025,6 +1027,12 @@
     np2Seek.addEventListener('pointerdown', e => { if (!effectiveDur()) return; seeking = true; try { np2Seek.setPointerCapture(e.pointerId); } catch (_) {} to(e.clientX); });
     np2Seek.addEventListener('pointermove', e => { if (seeking) to(e.clientX); });
     np2Seek.addEventListener('pointerup', e => { if (!seeking) return; const p = to(e.clientX); seeking = false; applySeek(p * effectiveDur()); });
+    // If the drag is cancelled or capture is lost (iOS reinterprets the touch as a scroll, the
+    // gesture is interrupted, etc.) pointerup never fires — clear `seeking` so timeupdate resumes
+    // moving the playhead instead of freezing.
+    const np2Abort = () => { if (seeking) seeking = false; };
+    np2Seek.addEventListener('pointercancel', np2Abort);
+    np2Seek.addEventListener('lostpointercapture', np2Abort);
   }
 
   /* ── Queue panel (Spotify-style: pinned now-playing + reorderable/removable upcoming) ── */
@@ -1275,6 +1283,10 @@
   npSeek.addEventListener('pointerdown', e => { if (!effectiveDur()) return; seeking = true; npBar.classList.add('seeking'); npSeek.setPointerCapture(e.pointerId); seekTo(e.clientX); });
   npSeek.addEventListener('pointermove', e => { if (seeking) seekTo(e.clientX); });
   npSeek.addEventListener('pointerup',   e => { if (!seeking) return; const p = seekTo(e.clientX); seeking = false; npBar.classList.remove('seeking'); npTip.hidden = true; applySeek(p * effectiveDur()); });
+  // Abort a cancelled / capture-lost drag (see np2Seek) so `seeking` can't stick and freeze the bar.
+  const npSeekAbort = () => { if (!seeking) return; seeking = false; npBar.classList.remove('seeking'); npTip.hidden = true; };
+  npSeek.addEventListener('pointercancel', npSeekAbort);
+  npSeek.addEventListener('lostpointercapture', npSeekAbort);
 
   /* ── Media Session (lock screen / AirPods) ─────── */
   function updatePositionState() {
@@ -1298,16 +1310,36 @@
       if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; });
     set('nexttrack', next);
     set('previoustrack', prev);
+    set('stop', () => { wantPlay = false; audio.pause();
+      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; });
     set('seekto', e => { applySeek(e.seekTime); updatePositionState(); });   // lock-screen / Control Center scrubber
     updatePositionState();
   }
 
+  /* Re-register the Now Playing session for the currently-loaded track. iOS gives
+     the hardware / earbud media button to whichever app most recently owns the
+     session; an interruption (call, another app) hands ownership to a native app
+     like Spotify. Re-asserting metadata + handlers whenever we regain the
+     foreground is what lets us reclaim the button back — resuming audio alone
+     doesn't re-route the controls. Also keeps the lock-screen card "warm" so the
+     user can tap play *there* instead of the hardware button. */
+  function reassertMediaSession() {
+    if (!('mediaSession' in navigator)) return;
+    const q = queue[qi]; if (!q) return;
+    const a = ALB[q.ai]; if (!a) return;
+    const t = a.tracks[q.ti]; if (!t) return;
+    setMediaSession(a, t);
+    navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
+  }
+
   /* ── iOS: best-effort resume after an audio interruption ──────────────
      When another app grabs audio focus, Safari pauses us and does NOT
-     auto-resume. If the user still intends playback, retry when the page
-     becomes visible/focused again. iOS may still block this without a
-     gesture, so it is best-effort and silently no-ops on failure. */
-  function tryResume() { if (wantPlay && audio.paused && audio.src) resumePlayback(); }
+     auto-resume. When we regain the foreground, re-claim the media session
+     (so the earbud button routes back to us) and, if the user still intends
+     playback, resume. iOS may still block resume without a gesture, so that
+     part is best-effort and silently no-ops on failure — but the re-claim
+     re-registers us as the Now Playing app regardless. */
+  function tryResume() { reassertMediaSession(); if (wantPlay && audio.paused && audio.src) resumePlayback(); }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) tryResume(); });
   window.addEventListener('focus', tryResume);
   window.addEventListener('pageshow', tryResume);
