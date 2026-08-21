@@ -530,7 +530,6 @@
         <div class="ah-actions">
           <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
           <button class="btn-ext" id="shuffle-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M21 3l-7 7M4 20l7-7M16 21h5v-5M4 4l16 16"/></svg> Shuffle</button>
-          <button class="btn-ext" id="share-album" aria-label="Copy link to this album"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg> Share</button>
           ${buyLink(a)}
         </div>
       </div>`;
@@ -1344,7 +1343,7 @@
   window.addEventListener('hashchange', applyRoute);
 
   /* ── Top-right button: Settings on the shelf, album Download in album view ── */
-  const topBtn = $('#top-btn'), setPop = $('#settings-pop');
+  const topBtn = $('#top-btn'), setPop = $('#settings-pop'), amMenu = $('#album-menu');
   function setDark(on) { document.body.classList.toggle('dark-mode', on); localStorage.setItem('theme', on ? 'dark' : 'light'); const c = $('#set-dark'); if (c) c.checked = on; }
   // reflect current theme into the settings switch
   { const c = $('#set-dark'); if (c) c.checked = document.body.classList.contains('dark-mode'); }
@@ -1373,41 +1372,50 @@
 
   async function syncTopBtn() {
     if (!topBtn) return;
+    const amLabel = document.getElementById('am-download-label');
     if (view === 'album' && openAlbum >= 0 && offlineOK) {
-      topBtn.dataset.mode = 'download';
+      topBtn.dataset.mode = 'download';                       // kebab: opens the album menu
+      topBtn.setAttribute('aria-label', 'Album options'); topBtn.title = 'Album options';
       const st = dlState[openAlbum];
       if (st?.active) {
         const pct = st.total ? Math.round(st.done / st.total * 100) : 0;
         topBtn.classList.add('state-dl'); topBtn.classList.remove('state-done');
         topBtn.style.setProperty('--dl', pct);
-        topBtn.setAttribute('aria-label', `Downloading ${pct}% — tap to cancel`); topBtn.title = `Downloading ${pct}% — tap to cancel`;
+        if (amLabel) amLabel.textContent = `Downloading ${pct}%… (tap to cancel)`;
       } else {
         const s = await albumSavedState(openAlbum);
         const done = s.total > 0 && s.done >= s.total;
         topBtn.classList.remove('state-dl'); topBtn.classList.toggle('state-done', done);
-        topBtn.setAttribute('aria-label', done ? 'Downloaded — tap to remove' : 'Download album for offline');
-        topBtn.title = done ? 'Saved offline — tap to remove' : (s.done ? `Download album (${s.done}/${s.total} already cached)` : 'Download album for offline');
+        if (amLabel) amLabel.textContent = done ? 'Remove download' : (s.done ? `Download for offline (${s.done}/${s.total} cached)` : 'Download for offline');
       }
     } else {
       topBtn.dataset.mode = 'settings';
       topBtn.classList.remove('state-dl', 'state-done');
       topBtn.setAttribute('aria-label', 'Settings'); topBtn.title = 'Settings';
+      if (amMenu) amMenu.hidden = true;                       // leaving album view closes the album menu
     }
   }
-  topBtn?.addEventListener('click', async e => {
+  // The album-view kebab's Download/Remove action (was the top-btn's direct click).
+  async function albumDownloadAction() {
+    const ai = openAlbum;
+    if (dlState[ai]?.active) { cancelDownload(ai); return; }
+    const s = await albumSavedState(ai);
+    if (s.total > 0 && s.done >= s.total) {
+      if (await confirmDialog({ title: 'Remove download?', body: `“${ALB[ai].title}” will be removed from this device. You can download it again anytime.`, ok: 'Remove' })) removeAlbum(ai);
+    } else { requestPersist(); downloadAlbum(ai); }
+  }
+  topBtn?.addEventListener('click', e => {
     e.stopPropagation();
+    // In an album the button is a kebab → open the album menu (Download + Share); on the shelf it's Settings.
     if (topBtn.dataset.mode === 'download') {
-      const ai = openAlbum;
-      if (dlState[ai]?.active) { cancelDownload(ai); return; }
-      const s = await albumSavedState(ai);
-      if (s.total > 0 && s.done >= s.total) {
-        if (await confirmDialog({ title: 'Remove download?', body: `“${ALB[ai].title}” will be removed from this device. You can download it again anytime.`, ok: 'Remove' })) removeAlbum(ai);
-      } else { requestPersist(); downloadAlbum(ai); }
-      return;
+      const open = amMenu.hidden; amMenu.hidden = !open; topBtn.setAttribute('aria-expanded', String(open));
+    } else {
+      const open = setPop.hidden; setPop.hidden = !open; topBtn.setAttribute('aria-expanded', String(open));
+      if (open) syncInstallRow();   // refresh "Install app" visibility when the menu opens
     }
-    const open = setPop.hidden; setPop.hidden = !open; topBtn.setAttribute('aria-expanded', String(open));
-    if (open) syncInstallRow();   // refresh "Install app" visibility when the menu opens
   });
+  $('#am-download')?.addEventListener('click', () => { amMenu.hidden = true; topBtn.setAttribute('aria-expanded', 'false'); albumDownloadAction(); });
+  $('#am-share')?.addEventListener('click', () => { amMenu.hidden = true; topBtn.setAttribute('aria-expanded', 'false'); copyText(shareUrl(openAlbum)); });
   $('#set-dark')?.addEventListener('change', e => setDark(e.target.checked));
   $('#set-autocache')?.addEventListener('change', e => {
     autoCache = e.target.checked; saveSettings(); sendAutoCache();
@@ -1420,6 +1428,9 @@
   document.addEventListener('click', e => {
     if (setPop && !setPop.hidden && !e.target.closest('#settings-pop') && !e.target.closest('#top-btn')) {
       setPop.hidden = true; topBtn.setAttribute('aria-expanded', 'false');
+    }
+    if (amMenu && !amMenu.hidden && !e.target.closest('#album-menu') && !e.target.closest('#top-btn')) {
+      amMenu.hidden = true; topBtn.setAttribute('aria-expanded', 'false');
     }
   });
 

@@ -1113,3 +1113,16 @@ body.inst-off .trk.is-inst:not(.playing) { opacity: .35; pointer-events: none; }
 /* Kebab is mobile-only. This must come AFTER the base .np-menu-wrap rule so it wins on desktop
    (the earlier min-width:760px hide was being overridden by the later base display:inline-flex). */
 @media (min-width: 760px) { .np-menu-wrap { display: none !important; } }
+
+/* Album-view top-right button becomes a kebab (Download + Share live in a menu). */
+#top-btn .i-kebab { grid-area: 1 / 1; display: none; }
+#top-btn[data-mode="download"] .i-dl,
+#top-btn[data-mode="download"].state-done .i-dl-done { display: none; }   /* kebab replaces dl/done icons */
+#top-btn[data-mode="download"] .i-kebab { display: block; }
+#top-btn[data-mode="download"].state-dl .i-kebab { display: none; }       /* ring shows during active download */
+.album-menu {
+  position: fixed; top: 3.6rem; right: 1rem; z-index: 61; min-width: 12rem;
+  background: var(--panel-raised); border: 1px solid var(--gilt-hair); border-radius: .7rem;
+  padding: .3rem; box-shadow: 0 14px 38px var(--sh-deep); display: flex; flex-direction: column; gap: .1rem;
+}
+.album-menu[hidden] { display: none; }
