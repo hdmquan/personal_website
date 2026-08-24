@@ -67,6 +67,65 @@ const esc = s => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const r2cover = cover => R2 + '/' + String(cover || '').split('/').map(encodeURIComponent).join('/');
 
+// ── Human-readable album slugs ───────────────────────────────────────────
+// Yura's own site uses the lowercased album name as the directory (/oracle/, /witchcraft/),
+// so mirror that. Latin (or latin-containing) titles slugify directly; pure-Japanese titles —
+// and a few messy mixed ones where the latin fragment is a poor name — use a hand-checked
+// Hepburn-romaji override. buildSharePages dedupes with a numeric suffix as a safety net.
+const SLUG_OVERRIDE = {
+  'はつ恋': 'hatsukoi',
+  'ばらいろのあくむ': 'barairo-no-akumu',
+  'まおうのしろ': 'maou-no-shiro',
+  'まほうのはな': 'mahou-no-hana',
+  'まぼろしせかい': 'maboroshi-sekai',
+  'まよなかのうた': 'mayonaka-no-uta',
+  'やみのものがたり': 'yami-no-monogatari',
+  'サロン・ド・シャノワール': 'salon-de-chat-noir',
+  'ヴァルプルギスの夜の夢': 'walpurgis-no-yoru-no-yume',
+  '夜想陽炎': 'yasou-kagerou',
+  '夢幻妖夜行': 'mugen-youyakou',
+  '夢、麗しく闇を奏でる': 'yume-uruwashiku-yami-wo-kanaderu',
+  '妖華語り': 'youka-gatari',
+  '宵闇恋想奇譚': 'yoiyami-rensou-kitan',
+  '少女と儚き薔薇の葬列': 'shoujo-to-hakanaki-bara-no-souretsu',
+  '少女と背徳の欠片': 'shoujo-to-haitoku-no-kakera',
+  '少女の秘密と鍵穴': 'shoujo-no-himitsu-to-kagiana',
+  '幻恋楼閣談集': 'genren-roukaku-danshuu',
+  '東方幻想奇談 ～闇色硝子～': 'touhou-gensou-kidan-yamiiro-garasu',
+  '東方来夢来人': 'touhou-raimuraito',
+  '東方来夢来人Ⅱ～ポップン・ティアラ～': 'touhou-raimuraito-2-poppun-tiara',
+  '流転の巫女 ～魂ノ緒～': 'ruten-no-miko-tama-no-o',
+  '竜と炎の物語': 'ryuu-to-honou-no-monogatari',
+  '紅夜に詠う少女の禁忌': 'kouya-ni-utau-shoujo-no-kinki',
+  '罪に濡れた魔女': 'tsumi-ni-nureta-majo',
+  '聖童話工房': 'sei-douwa-koubou',
+  '蒼炎の姫君': 'souen-no-himegimi',
+  '虚構の楽園': 'kyokou-no-rakuen',
+  '蜜薬ランガージュ': 'mitsuyaku-langage',
+  '金魚恋想歌': 'kingyo-rensouka',
+  '闇童話工房': 'yami-douwa-koubou',
+  '君のいる景色': 'kimi-no-iru-keshiki',
+  '東方万能飲薬': 'touhou-bannou-inyaku',
+  '東方年柄年中': 'touhou-nengaranenjuu',
+  'だってしょうがないじゃない': 'datte-shouganai-janai',
+  'もじもじ ちびっ子魔法学園 ～痛くしちゃイヤだョ～': 'mojimoji-chibikko-mahou-gakuen',
+  // messy mixed titles whose auto-extracted latin fragment is a poor slug
+  'ゆらわーるど -Honey Bee-': 'yura-world-honey-bee',
+  'CRギンギラパラダイス クジラッキーと砂漠の国': 'cr-gingira-paradise',
+  '10年後の君へのアンチテーゼ (ODORIKO Records)': '10-nengo-no-kimi-e-no-antithese',
+  '残念な姉とのラブコメディ Original Soundtrack': 'zannen-na-ane-original-soundtrack',
+  // `album` field variants (differ from display `title` by a comma / tilde) — buildSharePages keys on `album`
+  '夢麗しく闇を奏でる': 'yume-uruwashiku-yami-wo-kanaderu',
+  '東方来夢来人Ⅱ ポップン・ティアラ': 'touhou-raimuraito-2-poppun-tiara',
+};
+function slugifyLatin(name) {
+  return String(name).replace(/[～〜~]/g, ' ').replace(/&/g, ' and ')
+    .replace(/[^\x00-\x7F]/g, ' ')                 // drop non-ASCII (Japanese) runs
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+// name → slug; falls back to the stable hash only if a title yields no usable latin/romaji.
+const albumSlug = name => SLUG_OVERRIDE[name] || slugifyLatin(name) || shardId(name);
+
 function sharePage({ title, desc, img, url, type, redirect }) {
   return `<!doctype html>
 <html lang="ja">
@@ -104,9 +163,12 @@ function buildSharePages(catDir, outDir) {
   const cat = JSON.parse(fs.readFileSync(catPath, 'utf8'));
   const albums = cat.albums || cat;
   let nA = 0, nT = 0;
+  const usedSlugs = new Set();
   albums.forEach((a, ai) => {
     const name = a.album || a.title || '';
-    const slug = shardId(name);
+    let slug = albumSlug(name);
+    if (usedSlugs.has(slug)) { let n = 2; while (usedSlugs.has(`${slug}-${n}`)) n++; slug = `${slug}-${n}`; }
+    usedSlugs.add(slug);
     a.share_slug = slug;
     const img = r2cover(a.cover);
     const aDir = path.join(outDir, 'yura', 'a', slug);
