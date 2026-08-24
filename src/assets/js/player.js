@@ -47,6 +47,14 @@
 
   const SLUG = (location.pathname.match(/\/([^/]+)\//) || [])[1] || 'player';
   const LS = 'fa:' + SLUG;      // localStorage namespace, per artist
+
+  // Pretty-URL routing. The address bar mirrors the shareable links — /yura/a/<slug> for an album,
+  // /yura/t/<slug>/<ti> for a track — instead of the old #a=/#np= hashes. APP_BASE is captured at
+  // load (before History API rewrites the path) so it survives pushState; slugToIdx maps an album's
+  // share_slug back to its catalog index and is filled once the catalog loads.
+  const APP_BASE = location.pathname.replace(/[^/]*$/, '');   // e.g. '/yura/'
+  let slugToIdx = Object.create(null);
+  let routing = false;          // true while applyRoute() syncs views from the URL (suppresses nav writes)
   const DEFAULT_TITLE = document.title;
 
   const audio = new Audio();
@@ -283,6 +291,8 @@
 
   fetch(CATALOG).then(r => r.json()).then(data => {
     ALB = data.albums || [];
+    slugToIdx = Object.create(null);
+    ALB.forEach((a, i) => { if (a.share_slug) slugToIdx[a.share_slug] = i; });
     const s = data.stats || {};
     const tracks = s.tracks != null ? s.tracks : data.track_count;
     const vocal  = s.vocal_tracks, mins = s.vocal_minutes;
@@ -516,7 +526,7 @@
     if (view === 'shelf') shelfScroll = window.scrollY;   // remember for restore
     openAlbum = ai; view = 'album';
     const a = ALB[ai];
-    location.hash = 'a=' + ai;
+    writeRoute(true);
     const shown = (a.tracks||[]).map((t, ti) => ({ t, ti })).filter(({ t }) => trkHasGenre(t));
     const secs = shown.reduce((n, { t }) => n + (t.dur||0), 0);
     albumHead.innerHTML = `
@@ -554,7 +564,7 @@
   }
 
   function backToShelf() {
-    view = 'shelf'; openAlbum = -1; location.hash = '';
+    view = 'shelf'; openAlbum = -1; writeRoute(true);
     albumView.hidden = true; shelf.hidden = false; document.querySelector('#yura-hero').hidden = false;
     document.querySelector('#home-btn').hidden = false;
     window.scrollTo({ top: shelfScroll, behavior: 'instant' });   // restore shelf position instantly
@@ -701,9 +711,9 @@
     renderLyrics();
     renderInfo();
     saveNowPlaying();
-    // Keep the URL pointing at the current track so it stays shareable; replaceState avoids
+    // Keep the URL pointing at the current track so it stays shareable; replace (not push) avoids
     // history spam on auto-advance and doesn't re-fire the router.
-    if (npScreen) { const h = trackHash(); if (location.hash.slice(1) !== h) history.replaceState(null, '', '#' + h); }
+    if (npScreen) writeRoute(false);
   }
 
   function stopPlayback() { queue = []; qi = -1; stream = []; streamStart = 0; wantPlay = false; setPlayingUI(false); document.title = DEFAULT_TITLE; renderQueue(); save('np', null); }
@@ -1086,8 +1096,20 @@
 
   const queueBtn = document.getElementById('queue-btn');
   const queueOpen = () => !!queuePanel && queuePanel.classList.contains('open');
-  // The now-playing screen is a real route: #np=<album>.<track> (shareable per track).
-  function trackHash() { const q = queue[qi]; return q ? ('np=' + q.ai + '.' + q.ti) : 'np'; }
+  // The current app state as a canonical pretty path (matches the shareable links).
+  const albumSlugFor = ai => (ALB[ai] && ALB[ai].share_slug) || String(ai);
+  function routePath() {
+    if (npScreen) { const q = queue[qi]; return q ? (APP_BASE + 't/' + albumSlugFor(q.ai) + '/' + q.ti) : (APP_BASE + 't'); }
+    if (view === 'album' && openAlbum >= 0) return APP_BASE + 'a/' + albumSlugFor(openAlbum);
+    return APP_BASE;
+  }
+  // push=true adds a history entry (Back returns here); false replaces (no entry — auto-advance, normalize).
+  function writeRoute(push) {
+    if (routing) return;                          // applyRoute() is driving the views from the URL — don't fight it
+    const p = routePath();
+    if (location.pathname === p && !location.hash) return;   // already canonical
+    try { history[push ? 'pushState' : 'replaceState'](null, '', p); } catch (e) {}
+  }
   function openQueue(pushHash) {
     if (!queuePanel || !queue.length) return;
     renderQueue(); queuePanel.classList.add('open'); queueBtn?.classList.add('on'); document.body.classList.add('np-open');
@@ -1105,14 +1127,14 @@
     document.getElementById('np-seg-song')?.click();
     // start the queue at the currently-playing track (web/tablet show it immediately; mobile re-anchors on swipe-up)
     requestAnimationFrame(() => window.__npAnchorQueue && window.__npAnchorQueue());
-    if (pushHash) { const h = trackHash(); if (location.hash.slice(1) !== h) location.hash = h; }   // history entry → Back closes
+    if (pushHash) writeRoute(true);   // history entry → Back closes the screen
   }
   function closeQueue(popHash) {
     if (!queuePanel) return;
     queuePanel.classList.remove('open'); queueBtn?.classList.remove('on'); document.body.classList.remove('np-open');
     document.getElementById('np-view-player')?.classList.remove('q-up');
     npScreen = false;
-    if (popHash && /^#np/.test(location.hash)) location.hash = (view === 'album' && openAlbum >= 0) ? ('a=' + openAlbum) : '';
+    if (popHash) writeRoute(true);   // reflect the album/shelf we returned to
   }
   // The queue button opens the now-playing screen AND rides straight up into the queue
   // (the grip's reveal animation), rather than landing at rest. rAF so the q-up transition plays.
@@ -1356,23 +1378,45 @@
     setWindow(s, idx < 0 ? 0 : idx);
     loadCurrent(false);
   }
-  function applyRoute() {
-    const h = location.hash;
-    const npm = h.match(/^#np(?:=(\d+)\.(\d+))?/);
-    if (npm) {                                   // now-playing screen (optionally a specific shared track)
-      if (npm[1] != null) {
-        const ai = +npm[1], ti = +npm[2], cur = queue[qi];
-        if (!(cur && cur.ai === ai && cur.ti === ti) && ALB[ai] && ALB[ai].tracks[ti]) cueTrack(ai, ti);
-      }
-      queue.length ? openQueue(false) : closeQueue(false);
-      return;
-    }
-    if (npScreen) closeQueue(false);             // navigated away from #np → leave the screen
-    const m = h.match(/a=(\d+)/);
-    if (m && ALB[+m[1]]) { if (openAlbum !== +m[1] || view !== 'album') openAlbumView(+m[1]); }
-    else if (view === 'album') backToShelf();
+  // Resolve an album <slug> (or a legacy numeric index) to a catalog index; -1 if unknown.
+  function resolveAlbum(s) {
+    s = decodeURIComponent(String(s));
+    if (slugToIdx[s] != null) return slugToIdx[s];
+    if (/^\d+$/.test(s) && ALB[+s]) return +s;
+    return -1;
   }
-  window.addEventListener('hashchange', applyRoute);
+  // Read the current URL into a route intent. Prefers the pretty path; falls back to the legacy
+  // #a=/#np= hashes (old shared links, and the OG share pages still redirect to those).
+  function parseRoute() {
+    const rel = location.pathname.indexOf(APP_BASE) === 0 ? location.pathname.slice(APP_BASE.length) : '';
+    let m;
+    if (m = rel.match(/^a\/([^/]+)\/?$/))         { const ai = resolveAlbum(m[1]); if (ai >= 0) return { kind: 'album', ai }; }
+    if (m = rel.match(/^t\/([^/]+)\/(\d+)\/?$/))  { const ai = resolveAlbum(m[1]); if (ai >= 0) return { kind: 'track', ai, ti: +m[2] }; }
+    if (/^t\/?$/.test(rel)) return { kind: 'np' };
+    const h = location.hash;
+    if (m = h.match(/^#np(?:=(\d+)\.(\d+))?/)) return m[1] != null ? { kind: 'track', ai: +m[1], ti: +m[2] } : { kind: 'np' };
+    if (m = h.match(/^#a=(.+)$/)) { const ai = resolveAlbum(m[1]); if (ai >= 0) return { kind: 'album', ai }; }
+    return { kind: 'shelf' };
+  }
+  function applyRoute() {
+    routing = true;
+    try {
+      const r = parseRoute();
+      if (r.kind === 'track') {
+        const cur = queue[qi];
+        if (!(cur && cur.ai === r.ai && cur.ti === r.ti) && ALB[r.ai] && ALB[r.ai].tracks[r.ti]) cueTrack(r.ai, r.ti);
+        queue.length ? openQueue(false) : closeQueue(false);
+      } else if (r.kind === 'np') {
+        queue.length ? openQueue(false) : closeQueue(false);
+      } else {
+        if (npScreen) closeQueue(false);         // navigated away from a track → leave the screen
+        if (r.kind === 'album' && ALB[r.ai]) { if (openAlbum !== r.ai || view !== 'album') openAlbumView(r.ai); }
+        else if (view === 'album') backToShelf();
+      }
+    } finally { routing = false; }
+    writeRoute(false);   // normalize the address bar to the canonical pretty path (rewrites legacy hashes)
+  }
+  window.addEventListener('popstate', applyRoute);
 
   /* ── Top-right button: Settings on the shelf, album Download in album view ── */
   const topBtn = $('#top-btn'), setPop = $('#settings-pop'), amMenu = $('#album-menu');
