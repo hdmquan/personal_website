@@ -179,11 +179,12 @@ function buildSharePages(catDir, outDir) {
     }));
     nA++;
     (a.tracks || []).forEach((t, ti) => {
-      const tDir = path.join(outDir, 'yura', 't', slug, String(ti));
+      const n = ti + 1;   // track number is 1-based in the URL; the #np redirect stays 0-based (array index)
+      const tDir = path.join(outDir, 'yura', 't', slug, String(n));
       fs.mkdirSync(tDir, { recursive: true });
       fs.writeFileSync(path.join(tDir, 'index.html'), sharePage({
         title: `${t.title} · ${name}`, desc: `from ${name}${a.year ? ` (${a.year})` : ''}`,
-        img, url: `${SITE}/yura/t/${slug}/${ti}`, type: 'music.song', redirect: `/yura/#np=${ai}.${ti}`,
+        img, url: `${SITE}/yura/t/${slug}/${n}`, type: 'music.song', redirect: `/yura/#np=${ai}.${ti}`,
       }));
       nT++;
     });

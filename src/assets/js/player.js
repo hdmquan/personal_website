@@ -1099,7 +1099,7 @@
   // The current app state as a canonical pretty path (matches the shareable links).
   const albumSlugFor = ai => (ALB[ai] && ALB[ai].share_slug) || String(ai);
   function routePath() {
-    if (npScreen) { const q = queue[qi]; return q ? (APP_BASE + 't/' + albumSlugFor(q.ai) + '/' + q.ti) : (APP_BASE + 't'); }
+    if (npScreen) { const q = queue[qi]; return q ? (APP_BASE + 't/' + albumSlugFor(q.ai) + '/' + (q.ti + 1)) : (APP_BASE + 't'); }   // track number is 1-based in the URL
     if (view === 'album' && openAlbum >= 0) return APP_BASE + 'a/' + albumSlugFor(openAlbum);
     return APP_BASE;
   }
@@ -1391,7 +1391,7 @@
     const rel = location.pathname.indexOf(APP_BASE) === 0 ? location.pathname.slice(APP_BASE.length) : '';
     let m;
     if (m = rel.match(/^a\/([^/]+)\/?$/))         { const ai = resolveAlbum(m[1]); if (ai >= 0) return { kind: 'album', ai }; }
-    if (m = rel.match(/^t\/([^/]+)\/(\d+)\/?$/))  { const ai = resolveAlbum(m[1]); if (ai >= 0) return { kind: 'track', ai, ti: +m[2] }; }
+    if (m = rel.match(/^t\/([^/]+)\/(\d+)\/?$/))  { const ai = resolveAlbum(m[1]), ti = +m[2] - 1; if (ai >= 0 && ti >= 0) return { kind: 'track', ai, ti }; }   // 1-based in URL → 0-based index
     if (/^t\/?$/.test(rel)) return { kind: 'np' };
     const h = location.hash;
     if (m = h.match(/^#np(?:=(\d+)\.(\d+))?/)) return m[1] != null ? { kind: 'track', ai: +m[1], ti: +m[2] } : { kind: 'np' };
@@ -1706,7 +1706,7 @@
     // which then redirects into the player. Falls back to the deep-link hash URL when no slug (dev).
     function shareUrl(ai, ti) {
       const a = ALB[ai]; if (!a) return location.href;
-      if (a.share_slug) return location.origin + '/yura/' + (ti == null ? 'a/' + a.share_slug : 't/' + a.share_slug + '/' + ti);
+      if (a.share_slug) return location.origin + '/yura/' + (ti == null ? 'a/' + a.share_slug : 't/' + a.share_slug + '/' + (ti + 1));
       return location.origin + location.pathname + (ti == null ? '#a=' + ai : '#np=' + ai + '.' + ti);
     }
 
