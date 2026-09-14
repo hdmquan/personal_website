@@ -6,10 +6,12 @@
 function enableDarkMode() {
 	document.body.classList.add('dark-mode');
 	localStorage.setItem('theme', 'dark');
+	document.getElementById('dark-mode-toggle').setAttribute('aria-label', 'Switch to light mode');
 }
 function disableDarkMode() {
 	document.body.classList.remove('dark-mode');
 	localStorage.setItem('theme', 'light');
+	document.getElementById('dark-mode-toggle').setAttribute('aria-label', 'Switch to dark mode');
 }
 
 // determines a new users dark mode preferences

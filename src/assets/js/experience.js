@@ -1,33 +1,23 @@
-const experienceItems = document.querySelectorAll(".experience-item");
-const experienceImage = document
-    .getElementById("experience-image")
-    .querySelector("img");
-
-// Map each item to its corresponding image path
-const imageMap = {
-    "Math Song": "/assets/images/company/math_song_image.jpg",
-    "Fair Dinkum Systems": "/assets/images/company/fair_dinkum_image.jpg",
-    "A.I.gorithm": "/assets/images/company/aigorithm_image.jpg",
-    "Lux Aerobot": "/assets/images/company/lux_image.jpg",
-};
+const experienceItems = document.querySelectorAll('.experience-item');
+const experienceImage = document.querySelector('#experience-image img');
+const experiencePicture = document.querySelector('#experience-image');
+const experienceProjects = document.querySelector('#experience-projects');
 
 experienceItems.forEach((item) => {
-    const button = item.querySelector(".service-button");
-    const companyName = button
-        .querySelector(".button-text")
-        .childNodes[0].textContent.trim();
-
-    button.addEventListener("click", () => {
-        // Remove active from all
-        experienceItems.forEach((el) => el.classList.remove("active"));
-
-        // Set active only on this one
-        item.classList.add("active");
-
-        // Update image
-        if (imageMap[companyName]) {
-            experienceImage.src = imageMap[companyName];
-            experienceImage.alt = companyName;
+    const button = item.querySelector('.service-button');
+    button.addEventListener('click', () => {
+        experienceItems.forEach((entry) => {
+            const active = entry === item;
+            entry.classList.toggle('active', active);
+            entry.querySelector('.service-button').setAttribute('aria-expanded', String(active));
+            entry.querySelector('.item-p').hidden = !active;
+        });
+        const hasImage = Boolean(item.dataset.image);
+        experiencePicture.hidden = !hasImage;
+        experienceProjects.hidden = hasImage;
+        if (experienceImage && hasImage) {
+            experienceImage.src = item.dataset.image;
+            experienceImage.alt = item.dataset.imageAlt;
         }
     });
 });

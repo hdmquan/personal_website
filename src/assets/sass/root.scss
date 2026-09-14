@@ -254,3 +254,11 @@ select:focus-visible,
     scroll-behavior: auto !important;
   }
 }
+
+/* Legible controls in both colour schemes. */
+body.dark-mode { --text-3: #9aaa9c; }
+.button-solid { min-height: 44px; height: auto; padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.button-solid:hover { background: #354d3a; color: #ffffff; }
+section[id], main[id] { scroll-margin-top: 7rem; }
+.skip:focus { padding: 1rem; background: var(--bg); color: var(--text); }
+.skip { color: var(--text); }

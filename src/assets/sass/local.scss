@@ -1586,3 +1586,79 @@ body.dark-mode #hero .social-icons img {
     box-shadow: none;
     border: none;
 }
+
+#experience {
+  .button-text { min-width: 0; }
+  .role, .time-line { display: block; font-size: 0.8rem; font-weight: 400; line-height: 1.5; padding: 0; margin-top: 0.25rem; }
+  .service-button { min-height: 44px; }
+  .service-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+}
+
+#opportunities {
+  border-top: 1px solid var(--rule);
+  padding: var(--sectionPadding);
+  .container { max-width: 80rem; margin: auto; }
+  .text { max-width: 40rem; margin-bottom: 2rem; }
+}
+
+/* Speaking: image-led rows with centred timeline markers. */
+#talks {
+  padding: var(--sectionPadding);
+  .container { display: grid; gap: 2.5rem; }
+  .talks-intro .text { max-width: 25rem; }
+  .talk-timeline { --talk-gap: 2.75rem; list-style: none; padding: 0 0 0 1.75rem; margin: 0; display: grid; gap: var(--talk-gap); }
+  li { position: relative; display: grid; align-items: center; gap: 1.25rem; min-width: 0; }
+  li::before { content: ''; position: absolute; z-index: 1; left: -1.75rem; top: 50%; transform: translate(-50%, -50%); width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--bg); }
+  li::after { content: ''; position: absolute; left: -1.75rem; top: calc(var(--talk-gap) / -2); bottom: calc(var(--talk-gap) / -2); width: 1px; transform: translateX(-50%); background: var(--brass); }
+  li:first-child::after { top: 50%; }
+  li:last-child::after { bottom: 50%; }
+  .talk-image { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: 0.5rem; background: var(--panel); }
+  .talk-content { min-width: 0; }
+  .talk-event { color: var(--text-2); font-size: 0.8rem; line-height: 1.5; margin: 0 0 0.5rem; }
+  h3 { font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.25; margin: 0; text-wrap: pretty; }
+  .talk-date { color: var(--text-2); font-size: 0.8rem; line-height: 1.5; margin: 0.75rem 0 0; }
+  .talk-link { display: inline-flex; gap: 0.5rem; align-items: center; min-height: 44px; margin-top: 0.25rem; color: var(--accent); font-size: 0.875rem; text-decoration: underline; text-underline-offset: 0.25em; }
+  .talk-link:hover { color: var(--text); }
+  @media (min-width: 40rem) { li { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 1.75rem; } }
+  @media (min-width: 64rem) { .container { grid-template-columns: minmax(0, 0.7fr) minmax(0, 2fr); gap: 4rem; } }
+}
+
+#experience .time-line { opacity: 1; color: var(--text-2); }
+#intro .service-button { min-height: 44px; }
+#hero .social-icons a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+#hero .button-transparent { min-height: 44px; }
+#projects, #blog {
+  .topper-small, .button { opacity: 1; }
+}
+
+#experience {
+  #experience-image[hidden], #experience-projects[hidden] { display: none; }
+  .experience-projects { padding: clamp(1.5rem, 4vw, 3rem); background: var(--panel); border-radius: 0.75rem; }
+  .experience-projects h3 { font-size: clamp(1.7rem, 3vw, 2.25rem); margin: 1rem 0 2rem; }
+  .experience-projects dl { margin: 0; }
+  .experience-projects dl div + div { margin-top: 1.75rem; }
+  .experience-projects dt { font-family: var(--serif); color: var(--text); font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .experience-projects dd { margin: 0; color: var(--text-2); font-size: 1rem; line-height: 1.7; }
+}
+#intro {
+  .picture { min-height: 0; height: auto; aspect-ratio: 1282 / 720; }
+  .picture img { position: static; width: 100%; height: auto; object-fit: contain; }
+  .image-caption { font-size: 0.875rem; line-height: 1.7; margin: 1rem 0 0; }
+  .image-caption a { color: var(--accent); text-underline-offset: 0.2em; }
+}
+#about .picture img { object-position: center; }
+
+/* Five distinct gallery images; talk recordings live in Talks. */
+#gallery {
+  .image-group { grid-template-rows: repeat(4, 31vw); }
+  .picture-4 { grid-row: 2 / span 2; }
+  .picture-5, .picture-6 { grid-row: 4; }
+  @media (min-width: 48rem) {
+    .image-group { grid-template-rows: repeat(2, clamp(10rem, 19vw, 15rem)); }
+    .picture-4 { grid-column: 1 / span 6; grid-row: 1 / span 2; }
+    .picture-1 { grid-column: 7 / span 3; grid-row: 1; }
+    .picture-2 { grid-column: 10 / span 3; grid-row: 1; }
+    .picture-5 { grid-column: 7 / span 3; grid-row: 2; }
+    .picture-6 { grid-column: 10 / span 3; grid-row: 2; }
+  }
+}

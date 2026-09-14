@@ -1,12 +1,13 @@
 ---
-title: "Alan Huynh | AI Agent & ML Systems Engineer in Melbourne"
-description: "Melbourne-based AI engineer building automation systems, intelligent agents, and geospatial tools for climate and compliance use cases."
+title: "Alan Huynh | Machine Learning & Software Engineer in Melbourne"
+description: "Melbourne-based machine learning and software engineer. Experience in AI, battery research, remote sensing, and web development. Looking for my next engineering role."
+permalink: "/"
+tags: "sitemap"
+eleventyNavigation:
+    key: Home
+    order: 100
 ---
-
-permalink: "/" tags: "sitemap" # Sitemap will use all pages in content/, due to
-content.json. As index.html is not included in content/ we need to manually add
-the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
---- {% extends "layouts/base.html" %} {% block head %}
+{% extends "layouts/base.html" %} {% block head %}
 <link rel="stylesheet" href="/assets/css/local.css" />
 <link rel="stylesheet" href="/assets/css/critical.css" />
 
@@ -33,10 +34,10 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
     <div class="container">
         <p class="title">Hi, I'm Alan.</p>
         <h1 class="text">
-            Automation & AI<br />
-            for <span>Climate</span>, <span>Compliance</span>, and
-            <span>Business</span>.
+            I’m a <span>machine learning</span><br />
+            and <span>software engineer</span>.
         </h1>
+        <p class="job-note">Based in Melbourne, currently looking for my next role. If you’re hiring, <a href="mailto:hdmquan@outlook.com">let’s chat :D</a></p>
         <div class="social-section">
             <div class="social-icons">
                 <a
@@ -80,113 +81,27 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
     <div class="container">
         <div class="content">
             <span class="topper">Experience</span>
-            <h2 class="title">Professional Works</h2>
+            <h2 class="title">Professional Work</h2>
             <p class="text">
-                I’ve worked across a few different teams building machine
-                learning systems, data pipelines, and tools that actually get
-                used, from climate and compliance to edge devices and backend
-                platforms for {{ currentYear - startYear }}+. Below are some of
-                the places I’ve worked, what I focused on, and how it turned
-                out.
+                I’ve been working in ML and software since 2022. A bit of research,
+                a bit of web development, and a lot of things I didn’t expect to
+                be doing when I started. Here are the places I’ve worked.
             </p>
             <ul class="faq-group">
-                <li class="experience-item active">
-                    <button class="service-button">
-                        <img
-                            class="icon"
-                            aria-hidden="true"
-                            loading="lazy"
-                            decoding="async"
-                            src="/assets/images/company/math_song.jpeg"
-                            alt="Math Song logo"
-                            width="32"
-                            height="32"
-                        />
-                        <span class="button-text">
-                            Math Song
-                            <span class="time-line">Sep 2024 - Present</span>
-                        </span>
+                {% for job in experience %}
+                <li class="experience-item{% if loop.first %} active{% endif %}" data-image="{{ job.image or '' }}" data-image-alt="{{ job.imageAlt }}">
+                    <button class="service-button" type="button" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="experience-detail-{{ loop.index }}">
+                        {% if job.logo %}
+                        <img class="icon" aria-hidden="true" loading="lazy" decoding="async" src="{{ job.logo }}" alt="" width="32" height="32" />
+                        {% else %}
+                        <svg class="icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="7" y="11" width="18" height="14" rx="2"/><path d="M12 11V7h8v4M7 17h18M14 17v3h4v-3"/></svg>
+                        {% endif %}
+                        <span class="button-text">{{ job.company }}<span class="role">{{ job.role }}</span><span class="time-line">{{ job.dates }}</span></span>
                         <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
                     </button>
-                    <p class="item-p">
-                        I design and build production-ready full-stack
-                        automation systems and AI agents with a focus on
-                        reliability, security, and scalability.
-                    </p>
+                    <p class="item-p" id="experience-detail-{{ loop.index }}"{% if not loop.first %} hidden{% endif %}>{{ job.description }}</p>
                 </li>
-                <li class="experience-item">
-                    <button class="service-button">
-                        <img
-                            class="icon"
-                            aria-hidden="true"
-                            loading="lazy"
-                            decoding="async"
-                            src="/assets/images/company/fair_dinkum.jpg"
-                            alt="Fair Dinkum Systems logo"
-                            width="32"
-                            height="32"
-                        />
-                        <span class="button-text">
-                            Fair Dinkum Systems
-                            <span class="time-line">Dec 2024 - Mar 2025</span>
-                        </span>
-                        <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
-                    </button>
-                    <p class="item-p">
-                        I built machine learning systems for predicting battery
-                        health long term, with a focus on reproducibility and
-                        model reliability.
-                    </p>
-                </li>
-                <li class="experience-item">
-                    <button class="service-button">
-                        <img
-                            class="icon"
-                            aria-hidden="true"
-                            loading="lazy"
-                            decoding="async"
-                            src="/assets/images/company/aigorithm.jpeg"
-                            alt="A.I.gorithm logo"
-                            width="32"
-                            height="32"
-                        />
-                        <span class="button-text">
-                            A.I.gorithm
-                            <span class="time-line">Feb 2024 - Sep 2024</span>
-                        </span>
-                        <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
-                    </button>
-                    <p class="item-p">
-                        I worked on live emissions mapping, deforestation
-                        detection, and Scope 3 data analysis. Delivered
-                        geospatial tools using satellite, methane, and CO₂
-                        datasets, adapted for Australian conditions.
-                    </p>
-                </li>
-                <li class="experience-item">
-                    <button class="service-button">
-                        <img
-                            class="icon"
-                            aria-hidden="true"
-                            loading="lazy"
-                            decoding="async"
-                            src="/assets/images/company/lux.jpeg"
-                            alt="Lux Aerobot logo"
-                            width="32"
-                            height="32"
-                        />
-                        <span class="button-text">
-                            Lux Aerobot
-                            <span class="time-line">Jan 2022 - Jan 2024</span>
-                        </span>
-                        <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
-                    </button>
-                    <p class="item-p">
-                        I deployed computer vision models on high-altitude
-                        balloon platforms. Designed pipelines for onboard
-                        inference, and supporting environmental monitoring.
-                    </p>
-                </li>
+                {% endfor %}
             </ul>
             <a
                 href="/assets/images/resume.pdf"
@@ -197,7 +112,16 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
             >
         </div>
         <div class="image-group">
-            <picture class="picture" id="experience-image">
+            <div id="experience-projects" class="experience-projects">
+                <span class="topper">At ProtoFlow</span>
+                <h3>A Few Things I’ve Built</h3>
+                <dl>
+                    <div><dt>AI subtitling</dt><dd>1,000+ hours of video across 10 languages, with 20+ people reviewing the output.</dd></div>
+                    <div><dt>Energy trading</dt><dd>An AEMO dispatch scheduling system using mathematical optimisation and ML.</dd></div>
+                    <div><dt>POS &amp; kiosks</dt><dd>A custom platform for a food and beverage operator serving 1,000+ customers a day across 3 locations.</dd></div>
+                </dl>
+            </div>
+            <picture class="picture" id="experience-image" hidden>
                 <img
                     src="/assets/images/company/lux_image.jpg"
                     alt="Lux Aerobot high-altitude balloon platform"
@@ -209,102 +133,131 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
     </div>
 </section>
 
+<section id="talks" aria-labelledby="talks-title">
+    <div class="container">
+        <div class="talks-intro">
+            <span class="topper">Speaking</span>
+            <h2 class="title" id="talks-title">Talks</h2>
+            <p class="text">Sometimes I get invited to talk about ML. These are the talks I’ve given so far.</p>
+        </div>
+        <ol class="talk-timeline" aria-label="Talks, newest first">
+            <li>
+                <img class="talk-image" src="/assets/images/talks/physics-informed.png" alt="Alan presenting Physics-Informed Neural Networks at DDD Melbourne" width="2048" height="1152" loading="lazy" decoding="async" />
+                <div class="talk-content">
+                    <p class="talk-event">DDD Melbourne</p>
+                    <h3>Physics-Informed Neural Networks: Less Data, More Physics</h3>
+                    <p class="talk-date"><time datetime="2025-09">September 2025</time></p>
+                    <a class="talk-link" href="https://www.youtube.com/watch?v=DP8pss-_6s8" aria-label="Watch Physics-Informed Neural Networks at DDD Melbourne">Watch the talk <span aria-hidden="true">↗</span></a>
+                </div>
+            </li>
+            <li>
+                <img class="talk-image" src="https://i.ytimg.com/vi/LDpGDlyv8W0/hq720.jpg" alt="Thumbnail for Alan’s No ML is (Probably) the Best ML talk" width="1280" height="720" loading="lazy" decoding="async" />
+                <div class="talk-content">
+                    <p class="talk-event">DDD Melbourne</p>
+                    <h3>No ML is (Probably) the Best ML</h3>
+                    <p class="talk-date"><time datetime="2024-12">December 2024</time></p>
+                    <a class="talk-link" href="https://www.youtube.com/watch?v=LDpGDlyv8W0" aria-label="Watch No ML is (Probably) the Best ML at DDD Melbourne">Watch the talk <span aria-hidden="true">↗</span></a>
+                </div>
+            </li>
+            <li>
+                <img class="talk-image" src="/assets/images/talks/aicamp.png" alt="Alan speaking to the audience at AICamp Melbourne" width="1284" height="963" loading="lazy" decoding="async" />
+                <div class="talk-content">
+                    <p class="talk-event">AICamp Melbourne</p>
+                    <h3>No ML is Probably the Best ML</h3>
+                    <p class="talk-date"><time datetime="2024-03">March 2024</time></p>
+                </div>
+            </li>
+        </ol>
+    </div>
+</section>
+
 <!-- {% include "components/tech-ribbon.html" %} -->
 
 <section id="intro">
     <script defer src="/assets/js/about.js"></script>
     <div class="container">
-        <div class="image-group">
-            <picture class="picture">
-                <img
-                    src="/assets/images/talk.jpeg"
-                    alt="Alan Huynh presenting at a talk"
-                    width="605"
-                    height="690"
-                />
-            </picture>
-            <!-- <img class="floater" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Graphics/white-swirl.svg" alt="graphic" loading="lazy" decoding="async" height="710" aria-hidden="true" width="690"> -->
-        </div>
         <div class="content">
             <span class="topper">What I do</span>
-            <h2 class="title">AI Systems for Data, Compliance, and Climate</h2>
+            <h2 class="title">Things I Work On</h2>
             <p class="text">
-                I build systems that help people make sense of data. That
-                usually means machine learning, automation, or working with
-                spatial and environmental info. I focus on tools that get used
-                and not just models that sit in notebooks.
+                Most of my experience is in machine learning, but I also build web
+                apps and have worked on embedded systems. Working in small teams
+                has meant doing a fair bit outside my job title.
             </p>
             <ul class="faq-group">
                 <li class="faq-item active">
                     <button class="service-button">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>
                         <span class="button-text">
-                            AI Agents, Automation, and RPA
+                            AI Agents &amp; Automation
                         </span>
                         <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
                     </button>
                     <p class="item-p">
-                        I design and build AI-powered agents, automation, and RPA
-                        systems that integrate with your operations, using LLMs,
-                        LangChain, Zapier, and Airtable.
+                        I’ve built a subtitling platform using Claude, Gemini, GPT, and
+                        Deepgram, with people reviewing the output. I also built
+                        an LLM assistant used by 200 students daily.
                     </p>
                 </li>
                 <li class="faq-item">
                     <button class="service-button">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
                         <span class="button-text">
-                            Fullstack Tools & Internal Apps
+                            Web Apps &amp; Internal Tools
                         </span>
                         <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
                     </button>
                     <p class="item-p">
-                        I build internal tools, dashboards, and smart workflows
-                        using Next.js, Vue and Django, Laravel, and more.
+                        Mostly Django: automating manual work, integrating payments,
+                        and building internal tools. I also handle deployment
+                        and cloud infrastructure.
                     </p>
                 </li>
                 <li class="faq-item">
                     <button class="service-button">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
                         <span class="button-text">
-                            Static Web Development
+                            Machine Learning &amp; Research
                         </span>
                         <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
                     </button>
                     <p class="item-p">
-                        I design and build business websites with blogging
-                        features, contact forms, and more.
+                        Computer vision, time series, and physics-informed neural networks.
+                        I’ve worked on battery life prediction, wildfire detection,
+                        and modelling airborne microplastics. Mostly in PyTorch.
                     </p>
                 </li>
                 <li class="faq-item">
                     <button class="service-button">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                         <span class="button-text">
-                            Data Systems for Remote Sensing & ESG
+                            Remote Sensing &amp; Environmental Data
                         </span>
                         <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
                     </button>
                     <p class="item-p">
-                        When relevant, I still work with spatial and
-                        environmental data, especially if it intesects with
-                        compliance or monitoring use cases.
+                        I’ve built pipelines for satellite imagery and models for
+                        emissions and land classification, using tools like
+                        Rasterio, GeoPandas, Spark, and AWS.
                     </p>
                 </li>
                 <li class="faq-item">
                     <button class="service-button">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 7V4M12 7V4M15 7V4M9 20v-3M12 20v-3M15 20v-3M4 9h3M4 12h3M4 15h3M17 9h3M17 12h3M17 15h3"/></svg>
                         <span class="button-text">
-                            Prototyping with Sensors / Vision / IoT
+                            Embedded Systems &amp; Computer Vision
                         </span>
                         <span class="indicator" aria-hidden="true"><span class="indicator-led"></span></span>
                     </button>
                     <p class="item-p">
-                        I occasionally prototype fast hardware + ML systems when
-                        it supports a practical goal.
+                        At Lux Aerobot, I built the balloon gondola hardware and firmware,
+                        and got computer vision models running on NVIDIA Jetson.
+                        There was a fair bit of fieldwork too.
                     </p>
                 </li>
             </ul>
             <a href="mailto:hdmquan@outlook.com" class="button-solid"
-                >Work with me</a
+                >Get in Touch</a
             >
         </div>
     </div>
@@ -369,16 +322,7 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
                     </p>
                 </div>
             </a>
-            <picture class="picture picture-3">
-                <iframe
-                    src="https://www.youtube.com/embed/LDpGDlyv8W0"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen
-                ></iframe>
-            </picture>
+
             <a
                 href="https://www.linkedin.com/feed/update/urn:li:activity:7195318442927824896/"
                 target="_blank"
@@ -460,7 +404,7 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
                         <p class="topper-small">{{ project.data.tags[2] }}</p>
                         <h3 class="h4">{{ project.data.title }}</h3>
                         <p class="desc">{{ project.data.description }}</p>
-                        <a class="button">Read more</a>
+                        <span class="button">Read more</span>
                     </div>
                 </a>
             </li>
@@ -510,52 +454,15 @@ the sitemap tag to this page (only). eleventyNavigation: key: Home order: 100
     </div>
 </section>
 
-<section id="about">
+
+
+<section id="opportunities">
     <div class="container">
-        <picture class="picture">
-            <img
-                loading="lazy"
-                decoding="async"
-                src="/assets/images/hackathon.jpeg"
-                alt="Alan with team at the Green Battery Hack"
-                width="738"
-                height="598"
-            />
-        </picture>
-        <div class="content">
-            <div class="flex">
-                <p class="topper">About Me</p>
-                <h2 class="title">AI x Geo x Climate</h2>
-            </div>
-            <p class="text">
-                I'm an AI and automation engineer based in Melbourne, building
-                tools across geospatial, climate-tech, and ESG domains. I focus
-                on turning complex data into practical systems that deliver
-                insight and impact.
-            </p>
-            <p class="text" style="margin-bottom: 3rem">
-                Outside of tech, I am a musician, hiker, and rhythm game
-                enthusiast.
-            </p>
-            <a
-                href="https://www.linkedin.com/in/hdmquan"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="button-solid"
-                >More About Me</a
-            >
-        </div>
+        <span class="topper">What’s Next</span>
+        <h2 class="title">Looking for My Next Role</h2>
+        <p class="text">I’m looking for a role in machine learning, AI, or software engineering. My resume is above, or you can send me an email if you’d like to talk.</p>
+        <a href="mailto:hdmquan@outlook.com" class="button-solid">Let’s Chat</a>
     </div>
-    <picture class="background">
-        <img
-            loading="lazy"
-            decoding="async"
-            src="/assets/svgs/contour-lines.svg"
-            alt=""
-            width="960"
-            height="839"
-        />
-    </picture>
 </section>
 
 {% endblock %}

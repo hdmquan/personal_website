@@ -1,0 +1,47 @@
+[
+  {
+    "company": "ProtoFlow",
+    "role": "Consultant",
+    "dates": "Jun 2025 - Present",
+    "logo": "/assets/images/company/protoflow.jpeg",
+    "image": null,
+    "imageAlt": "",
+    "description": "I spend half my time explaining AI to humans, and the other half explaining humans to code. I work with companies to apply technology where it actually provides value. Most of the time it’s AI (I’m known for it lol). So far that’s included subtitling for 1,000+ hours of video across 10 languages, an AEMO energy trading system, and a POS and kiosk platform."
+  },
+  {
+    "company": "Math Song",
+    "role": "Software Engineer",
+    "dates": "Sep 2024 - Sep 2025",
+    "logo": "/assets/images/company/math_song.jpeg",
+    "image": "/assets/images/company/math_song_image.jpg",
+    "imageAlt": "Software development work at Math Song",
+    "description": "Here I built automations and web apps that solve real problems. Mostly Django, with payment integrations handling $200K+ a month. I also looked after the GCP infrastructure, Docker, Terraform, and deployment pipelines."
+  },
+  {
+    "company": "Fair Dinkum Systems",
+    "role": "Machine Learning Engineer",
+    "dates": "Dec 2024 - Feb 2025",
+    "logo": "/assets/images/company/fair_dinkum.jpg",
+    "image": "/assets/images/company/fair_dinkum_image.jpg",
+    "imageAlt": "Battery research at Fair Dinkum Systems",
+    "description": "One of the more exciting times of my career. Plenty of late nights and overnighters developing ML for battery health and lifecycle prediction. Ever heard of anyone trying to get a Vision Transformer to work with spectrograms of large time series? :D Slightly dumb, I know, but that’s half the fun. I also got to dive into the supply chain and talk to a lot of interesting people."
+  },
+  {
+    "company": "AIgorithm",
+    "role": "Machine Learning Engineer",
+    "dates": "Feb 2024 - Sep 2024",
+    "logo": "/assets/images/company/aigorithm.jpeg",
+    "image": "/assets/images/company/aigorithm_image.jpg",
+    "imageAlt": "Environmental monitoring work at AIgorithm",
+    "description": "Large-scale remote sensing (NDA). I developed end-to-end ML for environmental monitoring serving banking and retail companies. This included satellite data pipelines, emissions modelling, and adapting land-classification models to Australian conditions."
+  },
+  {
+    "company": "Lux Aerobot",
+    "role": "Data Scientist",
+    "dates": "Jan 2022 - Jan 2024",
+    "logo": "/assets/images/company/lux.jpeg",
+    "image": "/assets/images/company/lux_image.jpg",
+    "imageAlt": "Lux Aerobot high-altitude balloon platform",
+    "description": "My first and most loved role. Here I built high-altitude balloon gondola systems for real-time computer vision on board, for environmental monitoring and early detection. The work included hardware, firmware, MLOps with AWS, fieldwork, and some physics-based software. Basically what you’d expect from a startup haha."
+  }
+]

@@ -293,5 +293,16 @@
     transform: none;
   }
 }
+#hero .job-note {
+  max-width: 39rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+#hero .job-note a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 
 /*# sourceMappingURL=critical.css.map */

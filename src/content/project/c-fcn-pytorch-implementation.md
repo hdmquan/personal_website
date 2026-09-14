@@ -41,7 +41,7 @@ Take a lot of inspiration from the paper, the architecture is:
 
 The encoder uses three layers of **depthwise separable convolutions (DSC)**. Unlike standard convolutions, DSCs break the operation into two lightweight steps: one that handles spatial filtering per channel (depthwise), and another that mixes channels (pointwise).
 
-This significantly reduced both the model size and the number of floating-point operations (FLOPs), while preserving most of the accuracy. In testing, the performance drop was negligible, especially considering the resource savings — ideal for our low-power, onboard compute environment.
+This significantly reduced both the model size and the number of floating-point operations (FLOPs), while preserving most of the accuracy. In testing, the performance drop was negligible, especially considering the resource savings, ideal for our low-power, onboard compute environment.
 
 
 The decoder stage consists of three layers of **bilinear upsampling**, the same as in the original C-FCN architecture. Bilinear interpolation is non-parametric (it learns nothing) and very cheap to run, making it perfect when you need to scale up resolution without paying a performance penalty.
@@ -52,7 +52,7 @@ While I can’t fully quantify *why* this worked so well, the intuition is simpl
 
 ### Performance
 
-- **Parameter count**: Just **273 parameters** — yes, total.
+- **Parameter count**: Just **273 parameters**, yes, total.
   - For comparison: even a small UNet typically has ~10,000+ parameters.
 - **Runtime**: Roughly **10× faster** than a baseline small UNet under the same conditions.
 - **Memory footprint**: Roughly equivalent to **one image in RAM**, thanks to the lightweight architecture and single skip connection.

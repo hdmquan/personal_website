@@ -756,5 +756,21 @@
     display: none;
   }
 }
+#navigation .nav-mark-sub {
+  color: var(--text-2);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+}
+
+#navigation .li-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+#dark-mode-toggle {
+  min-width: 44px;
+  min-height: 44px;
+}
 
 /*# sourceMappingURL=header.css.map */

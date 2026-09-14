@@ -3,7 +3,7 @@ title: The Risk of Underestimating or Overestimating Scope 3 Emissions
 url: risk-of-wrong-estimation
 description: A practical breakdown of the risks and trade-offs when SMEs under-
   or overestimate their Scope 3 emissions under Australia’s ASSA 5000 reporting
-  mandate. Learn why your carbon number matters — and what it signals to
+  mandate. Learn why your carbon number matters, and what it signals to
   customers, regulators, and auditors.
 author: Alan Huynh
 date: 2025-07-10T15:23:00.000Z
@@ -17,7 +17,7 @@ At the start of this year (2025), Australia’s mandatory ESG reporting kicked o
 
 Your report will becomes their scope 3. Everyone’s reporting chain is linked and many large firms are already doing a dry run this year to get ahead.
 
-Among all of the requirements, Scope 3 is by far the messiest, see What is Scope 3 and why business should care. And for many Australian companies new to this kind of reporting, mistakes will happen — not out of carelessness but because the process is complicated, unfamiliar, and very data-heavy.
+Among all of the requirements, Scope 3 is by far the messiest, see What is Scope 3 and why business should care. And for many Australian companies new to this kind of reporting, mistakes will happen, not out of carelessness but because the process is complicated, unfamiliar, and very data-heavy.
 
 In practice, most companies will end up either underestimating or overestimating their emissions. While it may seem “safe” on the surface, they come with very different incentives, risks, and long-term effects. Let’s have a look.
 
@@ -40,25 +40,25 @@ So, most companies turn to broad assumptions, default databases, or industry ave
 
 ## The Trade-Off
 
-Once it’s time to actually report, most businesses will either **underestimate** or **overestimate** their Scope 3 emissions. Not because they’re trying to game the system — but because the data’s messy, and the methods vary. The choice often comes down to **how much information you have**, **who’s watching**, and **what you're optimizing for**: cost, credibility, or compliance.  
+Once it’s time to actually report, most businesses will either **underestimate** or **overestimate** their Scope 3 emissions. Not because they’re trying to game the system, but because the data’s messy, and the methods vary. The choice often comes down to **how much information you have**, **who’s watching**, and **what you're optimizing for**: cost, credibility, or compliance.
 
 Each direction has its own trade-offs.
 
 ### Underestimate
 
 - **Attractive**  
-  A lower carbon number can look great on paper, especially to customers or stakeholders. It signals you're "clean" — even if it’s not the full picture.
+  A lower carbon number can look great on paper, especially to customers or stakeholders. It signals you're "clean", even if it’s not the full picture.
 
 - **Risky**  
   If challenged by auditors, partners, or the public, underreporting can damage trust and force expensive corrections.
 
 - **Short-term**  
-  It helps win business or meet targets now, but makes future reductions harder to prove — or even hit.
+  It helps win business or meet targets now, but makes future reductions harder to prove, or even hit.
 
 ### Overestimate
 
 - **Safe**  
-  Using conservative defaults or industry averages is easy to justify — it's often seen as more defensible under scrutiny.
+  Using conservative defaults or industry averages is easy to justify, it's often seen as more defensible under scrutiny.
 
 - **Costly**  
   You may end up paying more for carbon offsets or internal reduction plans than necessary.
@@ -71,11 +71,11 @@ Each direction has its own trade-offs.
 
 It really depends on **why** you're doing this in the first place.  
 For customers? PR? Regulator? Investor pressure?  
-That goal should shape how you approach the numbers — and whether you're more likely underestimating or overestimating right now.
+That goal should shape how you approach the numbers, and whether you're more likely underestimating or overestimating right now.
 
 Everyone gets it wrong the first time. That’s why I recommend doing a **dry run** before your first formal report. Just go through the process, even roughly, so you know where the gaps are.
 
-Then for your next report, focus on the **biggest factor** — where most of your emissions likely are — and start improving data quality there. Not everything at once. Just one step better than last time.
+Then for your next report, focus on the **biggest factor**, where most of your emissions likely are, and start improving data quality there. Not everything at once. Just one step better than last time.
 
 ---
 
@@ -83,5 +83,5 @@ Then for your next report, focus on the **biggest factor** — where most of you
 
 This stuff isn’t black and white. It’s trade-offs all the way down.
 
-What matters isn’t being perfect — it’s knowing **which corner you’re cutting** and **why**.  
+What matters isn’t being perfect. It’s knowing **which corner you’re cutting** and **why**.
 Because sooner or later, someone will ask. Might as well be ready.
