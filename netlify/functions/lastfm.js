@@ -70,8 +70,12 @@ exports.handler = async (event) => {
       if (body.duration) params.duration = String(Math.round(body.duration));
       if (body.action === 'scrobble') params.timestamp = String(body.timestamp || Math.floor(Date.now() / 1000));
       const data = await call(params);
-      if (data.error) return { statusCode: 400, headers, body: JSON.stringify({ error: data.message || 'lastfm error' }) };
-      return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
+      if (data.error) return { statusCode: 400, headers, body: JSON.stringify({ error: data.message || 'lastfm error', code: data.error }) };
+      // Last.fm can answer HTTP-success while explicitly ignoring a submitted scrobble. Surface
+      // that result to the client so it does not count an ignored submission as delivered.
+      const attr = data.scrobbles && (data.scrobbles['@attr'] || data.scrobbles);
+      const accepted = body.action === 'scrobble' && attr && attr.accepted != null ? Number(attr.accepted) : undefined;
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, accepted }) };
     }
 
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'unknown action' }) };

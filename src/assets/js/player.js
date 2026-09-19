@@ -29,11 +29,11 @@
   let ALB = [];
   let view = 'shelf';
   let openAlbum = -1;
-  let queue = [];               // the live window: capped history · now · upcoming
+  let queue = [];               // authoritative session queue: history · now · upcoming
   let qi = -1;
-  let stream = [];              // full ordered backing list (sort order, or shuffled) the window slides over
-  let streamStart = 0;         // index in `stream` of queue[0]
-  const Q_AHEAD = 30, Q_BEHIND = 30;   // rolling window — keep ~30 upcoming (auto-extend) and ~30 played
+  let stream = [];              // source playlist used to build/rebuild the session queue
+  let streamStart = 0;          // index in `stream` represented by queue[0]
+  const Q_AHEAD = 30, Q_BEHIND = 30;
   let shuffle = false;
   let seeking = false;
   let wantPlay = false;         // user *intends* playback (for interruption resume)
@@ -71,9 +71,21 @@
   const load = (k) => { try { return JSON.parse(localStorage.getItem(LS + ':' + k)); } catch (e) { return null; } };
   function saveSettings() { save('settings', { vol: Math.round(audio.volume * 100), muted: audio.muted, shuffle, loopMode, excludeInst, autoCache }); }
   let npSaveT = 0;
+  const persistedTrack = x => {
+    const a = ALB[x.ai], t = a && a.tracks[x.ti];
+    return a && t ? [a.share_slug || a.title, t.track || String(x.ti)] : null;
+  };
   function saveNowPlaying() {
     if (!queue.length || qi < 0) { save('np', null); return; }
-    save('np', { q: queue.map(x => [x.ai, x.ti]), qi, sh: shuffle, t: Math.floor(audio.currentTime || 0) });
+    // Catalogue positions change whenever releases are inserted or sorted differently. Persist the
+    // public album slug plus the catalogue track number instead of brittle numeric array positions.
+    save('np', {
+      v: 2,
+      q: queue.map(persistedTrack).filter(Boolean), qi, sh: shuffle, t: Math.floor(audio.currentTime || 0),
+      // Keep the continuation source separately from the visible queue. This preserves pending
+      // albums after a restart without turning the queue UI into a 1,000-row catalogue listing.
+      src: stream.map(persistedTrack).filter(Boolean), ss: streamStart,
+    });
   }
 
   /* ── Elements ──────────────────────────────────── */
@@ -202,8 +214,11 @@
     } catch (e) {}
   }
   async function clearAllDownloads() {
+    // Cache handles held by an active download remain usable after caches.delete(). Abort first so
+    // a "clear" cannot be followed by a worker quietly putting tracks back into the fresh cache.
+    Object.keys(dlState).forEach(ai => cancelDownload(+ai));
     try { await caches.delete(AUDIO_SAVED); } catch (e) {}
-    save('offline', []); Object.keys(dlState).forEach(k => delete dlState[k]);
+    save('offline', []);
     syncTopBtn(); updateStorageInfo();
   }
   function syncOfflineUI() {
@@ -338,17 +353,30 @@
   }
   function restoreNowPlaying() {
     const np = load('np'); if (!np || !np.q || !np.q.length) return;
-    queue = np.q.filter(([ai, ti]) => ALB[ai] && ALB[ai].tracks[ti]).map(([ai, ti]) => ({ ai, ti, inst: !!ALB[ai].tracks[ti].instrumental }));
+    const savedCurrent = np.q[np.qi|0];
+    const resolveSaved = item => {
+      // v1 used [album index, track index]; retain it only as a migration path.
+      if (Array.isArray(item) && typeof item[0] === 'number') {
+        const [ai, ti] = item;
+        return ALB[ai] && ALB[ai].tracks[ti] ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
+      }
+      if (!Array.isArray(item)) return null;
+      const [slug, trackNo] = item;
+      const ai = slugToIdx[slug] != null ? slugToIdx[slug] : ALB.findIndex(a => a.title === slug);
+      if (ai < 0) return null;
+      const ti = ALB[ai].tracks.findIndex((t, i) => String(t.track || i) === String(trackNo));
+      return ti >= 0 ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
+    };
+    queue = np.q.map(resolveSaved).filter(Boolean);
     if (!queue.length) return;
-    qi = Math.min(Math.max(np.qi|0, 0), queue.length - 1);
+    const wanted = resolveSaved(savedCurrent);
+    qi = wanted ? Math.max(0, queue.findIndex(x => keyOf(x) === keyOf(wanted))) : Math.min(Math.max(np.qi|0, 0), queue.length - 1);
     shuffle = !!np.sh; syncShuffleBtn();
-    // Rebuild the backing stream so playback can auto-extend past the saved window. When shuffled
-    // (order can't be reproduced) the saved window itself becomes the stream.
-    const cur = queue[qi];
-    if (!shuffle) {
-      const s = eligibleStream(); const idx = s.findIndex(x => keyOf(x) === keyOf(cur));
-      if (idx >= 0 && idx - qi >= 0) { stream = s; streamStart = idx - qi; } else { stream = queue.slice(); streamStart = 0; }
-    } else { stream = queue.slice(); streamStart = 0; }
+    // The saved source preserves user reorders/removals plus unseen future albums. Old sessions did
+    // not have it, so their visible queue remains a safe (albeit finite) migration fallback.
+    const savedStream = Array.isArray(np.src) ? np.src.map(resolveSaved).filter(Boolean) : [];
+    stream = savedStream.length ? savedStream : queue.slice();
+    streamStart = Math.min(Math.max(np.ss|0, 0), Math.max(0, stream.length - queue.length));
     loadCurrent(false, np.t || 0);   // restore paused at saved position; user taps play to resume
   }
 
@@ -602,26 +630,40 @@
     sortedIndices().forEach(ai => buildQueue(ai, true).forEach(x => s.push(x)));
     return s;
   }
-  // Point the window at `startIdx` in `full`. With `withHistory`, the earlier tracks of the SAME
-  // album (up to the album boundary) are kept above as history — so starting mid-album shows the
-  // tracks you skipped past (e.g. play track 3 → tracks 1 & 2 sit in the queue above it).
+  // Create an editable session queue from a source playlist. Only the current album (or a bounded
+  // shuffled batch) is materialized initially; later albums are appended deliberately at the queue
+  // boundary. This avoids rendering a thousand-track queue while keeping user reorders/removals
+  // authoritative instead of re-deriving them from the catalogue.
   function setWindow(full, startIdx, withHistory) {
-    stream = full;
+    stream = full.slice();
+    if (!stream.length) { queue = []; qi = -1; streamStart = 0; return; }
     const s = Math.max(0, Math.min(startIdx, full.length - 1));
     let from = s;
     if (withHistory && full[s]) {
       const ai = full[s].ai;
-      while (from > 0 && full[from - 1] && full[from - 1].ai === ai && s - from < Q_BEHIND) from--;
+      while (from > 0 && full[from - 1] && full[from - 1].ai === ai) from--;
     }
     streamStart = from; qi = s - from;
-    queue = stream.slice(from, s + 1 + Q_AHEAD);
+    let end = s + 1;
+    if (shuffle) end = Math.min(stream.length, end + Q_AHEAD);
+    else while (end < stream.length && stream[end].ai === full[s].ai) end++;
+    queue = stream.slice(from, end);
   }
-  // After qi moves: top up the upcoming side to ~Q_AHEAD and trim history to ~Q_BEHIND.
+  // Add the next album as the listener reaches the end of the materialized queue. In shuffle mode
+  // albums have no contiguous boundary, so append a modest batch instead.
+  function appendFromStream() {
+    const at = streamStart + queue.length;
+    if (!stream.length || at >= stream.length) return false;
+    let end = at + 1;
+    if (shuffle) end = Math.min(stream.length, at + Q_AHEAD);
+    else while (end < stream.length && stream[end].ai === stream[at].ai) end++;
+    queue.push(...stream.slice(at, end));
+    return end > at;
+  }
+  // Keep recent playable history bounded without ever changing the upcoming queue or source cursor.
   function reconcileWindow() {
-    if (!stream.length) return;
-    const target = Math.min(stream.length - streamStart, qi + 1 + Q_AHEAD);
-    while (queue.length < target) queue.push(stream[streamStart + queue.length]);
-    if (qi > Q_BEHIND) { const r = qi - Q_BEHIND; queue.splice(0, r); streamStart += r; qi -= r; }
+    if (qi >= queue.length) qi = queue.length - 1;
+    if (qi > Q_BEHIND) { const n = qi - Q_BEHIND; queue.splice(0, n); streamStart += n; qi -= n; }
   }
   const keyOf = x => x.ai + '.' + x.ti;
 
@@ -675,10 +717,20 @@
   let curDur = 0;          // catalog duration of the current track (authoritative when audio.duration is flaky)
   let endHandled = false;  // a track advances exactly once (native 'ended' OR our fallback)
   let endTimer = null;     // watchdog armed near the end in case 'ended' never fires (iOS streamed audio)
-  let playAttempt = null, playRetry = null, playFailures = 0, playGeneration = 0, stallRecoveries = 0;
+  let playAttempt = null, playAttemptTimer = null, playRetry = null, playFailures = 0, playGeneration = 0, stallRecoveries = 0;
+  let sourceLoading = false;    // suppress terminal events emitted by the source being replaced
   let playbackState = 'idle'; // idle | loading | buffering | playing | paused | blocked | failed
   function clearEndTimer() { if (endTimer) { clearTimeout(endTimer); endTimer = null; } }
   function clearPlayRetry() { if (playRetry) { clearTimeout(playRetry); playRetry = null; } }
+  function clearPlayAttemptTimer() { if (playAttemptTimer) { clearTimeout(playAttemptTimer); playAttemptTimer = null; } }
+  function beginScrobbleCycle() {
+    if (!scrobbleMeta) return;
+    // Repeat-one is a new listen each time the media reaches its end. Reusing the same metadata
+    // leaves Scrobbler's `scrobbled` latch set forever, which was why multi-hour loops recorded
+    // only their first pass.
+    scrobbleMeta = { ...scrobbleMeta, startedAt: 0 };
+    if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
+  }
   function setPlaybackState(state) {
     playbackState = state;
     npBar.dataset.playbackState = state;
@@ -695,11 +747,22 @@
     const generation = playGeneration;
     const attempt = audio.play();
     playAttempt = attempt;
+    // Safari can occasionally leave play() pending after an interruption or a resource hand-off.
+    // A pending promise must not hold the player hostage forever; invalidate it and let the normal
+    // retry policy take over. The generation check prevents an old timer touching a newer track.
+    clearPlayAttemptTimer();
+    playAttemptTimer = setTimeout(() => {
+      if (generation !== playGeneration || playAttempt !== attempt || !wantPlay) return;
+      playAttempt = null;
+      if (playFailures >= 3) { wantPlay = false; setPlaybackState('failed'); toast('Could not start this track'); return; }
+      playRetry = setTimeout(() => { playRetry = null; requestPlayback(); }, Math.min(1000 * Math.pow(2, playFailures++), 8000));
+    }, 12000);
     attempt.then(() => {
       if (generation !== playGeneration) return;
-      playFailures = 0; clearPlayRetry();
+      playFailures = 0; clearPlayRetry(); clearPlayAttemptTimer();
     }).catch((err) => {
       if (generation !== playGeneration) return;
+      clearPlayAttemptTimer();
       if (!wantPlay) return;
       if (err && err.name === 'NotAllowedError') {
         wantPlay = false;
@@ -721,7 +784,8 @@
     const q = queue[qi]; if (!q) return;
     const a = ALB[q.ai], t = a.tracks[q.ti];
     curDur = t.dur || 0; endHandled = false; seeking = false; clearEndTimer();
-    playGeneration++; playAttempt = null; playFailures = 0; stallRecoveries = 0; lastCT = -1; lastCTAt = Date.now(); clearPlayRetry();
+    playGeneration++; playAttempt = null; playFailures = 0; stallRecoveries = 0; lastCT = -1; lastCTAt = Date.now(); clearPlayRetry(); clearPlayAttemptTimer();
+    sourceLoading = true;
     wantPlay = !!autoplay;
     setPlaybackState(autoplay ? 'loading' : 'paused');
     // scrobble metadata for the new track (no-op unless a Last.fm session is connected).
@@ -767,7 +831,7 @@
 
   function stopPlayback() {
     queue = []; qi = -1; stream = []; streamStart = 0; wantPlay = false;
-    clearPlayRetry(); audio.pause(); audio.removeAttribute('src'); audio.load();
+    sourceLoading = true; playGeneration++; clearPlayRetry(); clearPlayAttemptTimer(); audio.pause(); audio.removeAttribute('src'); audio.load();
     setPlaybackState('idle'); document.title = DEFAULT_TITLE; renderQueue(); save('np', null);
   }
 
@@ -887,18 +951,19 @@
   });
 
   function next() {
-    if (stream.length && streamStart + qi + 1 < stream.length) { qi++; reconcileWindow(); loadCurrent(true); return; }
+    if (qi + 1 >= queue.length) appendFromStream();
+    if (qi + 1 < queue.length) { qi++; reconcileWindow(); loadCurrent(true); return; }
     if (loopMode === 1 && stream.length) { setWindow(stream, 0); loadCurrent(true); return; }   // loop album/queue → wrap
     stopPlayback();
   }
-  function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; reconcileWindow(); loadCurrent(true); } }
+  function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; loadCurrent(true); } }
 
   /* ── Audio events ──────────────────────────────── */
   audio.addEventListener('loadstart', () => { if (wantPlay) setPlaybackState('loading'); });
   audio.addEventListener('play', () => { if (wantPlay) setPlaybackState('buffering'); });
   // `playing`, not `play`, means decoded audio is actually able to advance.
   audio.addEventListener('playing', () => {
-    seeking = false; playFailures = 0; clearPlayRetry(); setPlaybackState('playing');
+    sourceLoading = false; seeking = false; playFailures = 0; clearPlayRetry(); setPlaybackState('playing');
     // Last.fm timestamps describe when audible playback began, not when the queue selected a track.
     if (scrobbleMeta && !scrobbleMeta.startedAt) {
       scrobbleMeta.startedAt = Math.floor(Date.now() / 1000);
@@ -917,24 +982,25 @@
     // Some browsers pause at the very end instead of firing 'ended' (media control then sticks at
     // the end). Require the REAL finite duration here — during a track change audio.duration is
     // NaN, so a stale currentTime can't be mistaken for "at the end" and skip the new track.
-    if (wantPlay && !endHandled && isFinite(audio.duration) && audio.duration > 0 && audio.currentTime >= audio.duration - 1) handleEnd();
+    if (!sourceLoading && wantPlay && !endHandled && isFinite(audio.duration) && audio.duration > 0 && audio.currentTime >= audio.duration - 1) handleEnd();
   });
   function handleEnd() {
     if (endHandled) return;
     endHandled = true; clearEndTimer(); setPlaybackState('paused');
     if (sleepEndOfTrack) { sleepEndOfTrack = false; syncQFoot(); wantPlay = false; audio.pause(); return; }  // sleep: stop after this track
-    if (loopMode === 2) { endHandled = false; audio.currentTime = 0; requestPlayback(); return; }  // loop one
+    if (loopMode === 2) { beginScrobbleCycle(); endHandled = false; audio.currentTime = 0; requestPlayback(); return; }  // loop one
     next();
   }
-  audio.addEventListener('ended', handleEnd);
+  audio.addEventListener('ended', () => { if (!sourceLoading) handleEnd(); });
   audio.addEventListener('error', () => {
     const code = audio.error && audio.error.code;
     if (code === 1) return; // MEDIA_ERR_ABORTED is normal during a source replacement
-    wantPlay = false; clearPlayRetry(); setPlaybackState('failed');
+    sourceLoading = false; wantPlay = false; clearPlayRetry(); setPlaybackState('failed');
     if (queue.length && qi < queue.length - 1) { toast('Track unavailable — skipping'); next(); }
     else toast('This track could not be played');
   });
   audio.addEventListener('loadedmetadata', () => {
+    sourceLoading = false;
     if (pendingSeek != null) { try { audio.currentTime = pendingSeek; } catch (e) {} pendingSeek = null; }
     updatePositionState();
   });
@@ -944,11 +1010,11 @@
     // otherwise this watchdog advances ~2s later (only while playback is intended, so a deliberate
     // pause near the end is respected).
     const dur = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : curDur;
-    if (dur > 2 && !endHandled && !endTimer && audio.currentTime >= dur - 0.25) {
+    if (!sourceLoading && dur > 2 && !endHandled && !endTimer && audio.currentTime >= dur - 0.25) {
       endTimer = setTimeout(() => {
         endTimer = null;
         const d = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : curDur;
-        if (!endHandled && wantPlay && d && audio.currentTime >= d - 0.6) handleEnd();
+        if (!sourceLoading && !endHandled && wantPlay && d && audio.currentTime >= d - 0.6) handleEnd();
       }, 2000);
     }
     if (seeking) return;
@@ -981,6 +1047,7 @@
     else if (audio.paused) requestPlayback();                  // an interruption left the element paused
     else if (stallRecoveries++ < 1) {                           // fetch stalled while the element still claims playback
       pendingSeek = audio.currentTime || null;
+      playGeneration++; playAttempt = null; clearPlayRetry(); clearPlayAttemptTimer(); sourceLoading = true;
       setPlaybackState('loading');
       audio.load();
     } else {
@@ -1050,7 +1117,7 @@
       let rest = eligibleStream().filter(x => !seen.has(keyOf(x)));       // everything not yet played, in sort order
       if (shuffle) shuf(rest);                                            // ...shuffled, or left in order
       stream = played.concat([cur], rest); streamStart = 0; qi = played.length;
-      queue = stream.slice(0, qi + 1 + Q_AHEAD); reconcileWindow();
+      queue = stream.slice(0, qi + 1); appendFromStream();
       renderQueue(); saveNowPlaying();
     }
     syncQFoot(); saveSettings();

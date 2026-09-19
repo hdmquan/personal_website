@@ -14,6 +14,7 @@
   var FN = '/.netlify/functions/lastfm';
   var LS = 'fa:yura:lastfm';
   var OUTBOX = LS + ':outbox';
+  var MAX_OUTBOX = 100;
   function session() { try { return JSON.parse(localStorage.getItem(LS)); } catch (e) { return null; } }
   function getOutbox() { try { var q = JSON.parse(localStorage.getItem(OUTBOX)); return Array.isArray(q) ? q : []; } catch (e) { return []; } }
   function setOutbox(q) { try { localStorage.setItem(OUTBOX, JSON.stringify(q)); } catch (e) {} }
@@ -21,7 +22,12 @@
     var s = session(); if (!s) return Promise.reject(new Error('not connected'));
     payload.session_key = s.session_key;
     return fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true })
-      .then(function (r) { if (!r.ok) throw new Error('Last.fm rejected the scrobble'); return r.json(); });
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (data) {
+        if (r.ok) return data;
+        var err = new Error(data.error || 'Last.fm rejected the scrobble');
+        err.status = r.status; err.code = data.code; err.permanent = r.status >= 400 && r.status < 500;
+        throw err;
+      }); });
   }
   var curKey = null, scrobbled = false, sending = false, retryTimer = null;
   function key(m) { return m ? (m.artist + '' + m.track + '' + (m.startedAt || 0)) : null; }
@@ -35,15 +41,27 @@
     if (sending || !session()) return;
     var q = getOutbox(), item = q[0];
     if (!item) return;
+    // Never submit queued plays to a different account after a re-login.
+    if (item.account && item.account !== session().username) {
+      setOutbox(q.filter(function (x) { return x.id !== item.id; })); drain(); return;
+    }
     sending = true;
     var succeeded = false;
-    post(item.payload).then(function () {
+    post(item.payload).then(function (data) {
+      if (item.payload.action === 'scrobble' && data && data.accepted === 0) {
+        var ignored = new Error('Last.fm ignored this scrobble'); ignored.permanent = true; throw ignored;
+      }
       succeeded = true;
       q = getOutbox().filter(function (x) { return x.id !== item.id; });
       setOutbox(q);
       if (item.id === curKey) scrobbled = true;
-    }).catch(function () {
-      scheduleDrain();
+    }).catch(function (err) {
+      // A bad timestamp/session/metadata item can never succeed by retrying and must not block
+      // every later listen in the FIFO. Transient network/upstream failures stay durable.
+      if (err && err.permanent) {
+        setOutbox(getOutbox().filter(function (x) { return x.id !== item.id; }));
+        if (err.status === 401 || err.status === 403 || err.code === 9) window.dispatchEvent(new Event('lastfm:reauth'));
+      } else scheduleDrain();
     }).then(function () {
       sending = false;
       if (succeeded && getOutbox().length) drain();
@@ -52,7 +70,8 @@
   function enqueue(m) {
     var id = key(m), q = getOutbox();
     if (!q.some(function (x) { return x.id === id; })) {
-      q.push({ id: id, payload: { action: 'scrobble', artist: m.artist, track: m.track, album: m.album, duration: m.duration, timestamp: m.startedAt || Math.floor(Date.now() / 1000) } });
+      q.push({ id: id, account: (session() || {}).username || '', payload: { action: 'scrobble', artist: m.artist, track: m.track, album: m.album, duration: m.duration, timestamp: m.startedAt || Math.floor(Date.now() / 1000) } });
+      if (q.length > MAX_OUTBOX) q.splice(0, q.length - MAX_OUTBOX);
       setOutbox(q);
     }
     drain();
@@ -135,6 +154,9 @@
     btn.setAttribute('aria-expanded', String(open));
   }
   if (signout) signout.addEventListener('click', function () { setSession(null); });
+  // A revoked/expired session is not recoverable through retries. Make the disconnected state
+  // visible immediately so the next play can be authorized again instead of silently queuing.
+  window.addEventListener('lastfm:reauth', function () { setSession(null); });
   document.addEventListener('click', function (e) {
     if (pop && !pop.hidden && !e.target.closest('#lastfm-pop') && !e.target.closest('#home-btn')) setPop(false);
   });
