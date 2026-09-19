@@ -5,7 +5,8 @@
      latest code when online (no stale-cache "quit and reopen to see changes"); still works offline.
    - R2 covers (cross-origin images): cache-first + LRU, so re-browsing doesn't re-download art.
    - BUILD is stamped at deploy time so every deploy ships a byte-changed worker → the browser detects
-     the update, and the page reloads to it when safe (see player.js).
+     the update. The open page is never forcibly reloaded; network-first requests pick up the shell
+     naturally on the next navigation or launch.
 
    Audio (offline playback) — the new part:
    - Two caches: SAVED (explicit per-album downloads written by the page; never auto-evicted) and

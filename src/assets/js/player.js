@@ -1894,21 +1894,15 @@
     }, true);
   })();
 
-  /* ── Stay current across deploys (no manual quit/reopen) ──
-     A new service worker taking control means a new deploy is live. Reload to pick up the new code —
-     but never mid-playback: if a track is playing, defer until it's paused or the app is refocused. */
+  /* ── Stay current across deploys ──
+     A service-worker update may take control while the page is open. Do not force a reload here:
+     that creates a visible second boot (and can discard a paused player). The worker is
+     network-first for navigations, catalogues, and code, so the next normal navigation/app launch
+     receives the new shell without a flash. */
   if ('serviceWorker' in navigator) {
     const sw = navigator.serviceWorker;
     const check = () => sw.getRegistration().then(r => r && r.update()).catch(() => {});
     setInterval(check, 30 * 60 * 1000);
-    let pending = false, reloaded = false;
-    const apply = () => {
-      if (!pending || reloaded) return;
-      if (wantPlay && ['loading', 'buffering', 'playing'].includes(playbackState)) return;
-      reloaded = true; location.reload();
-    };
-    audio.addEventListener('pause', apply);
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) { check(); apply(); } });
-    if (sw.controller) sw.addEventListener('controllerchange', () => { pending = true; apply(); });   // skip first install
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) check(); });
   }
 })();
