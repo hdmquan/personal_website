@@ -25,11 +25,22 @@ const AUDIO_AUTO  = 'fa-audio-auto-v1';    // cache-on-play — LRU-trimmed
 const IMG_MAX   = 240;
 const AUDIO_MAX = 80;                        // cap for the opportunistic cache only
 const CFG_URL = 'https://fa.config/autocache';   // synthetic key that persists the auto-cache flag
-const SHELL = ['/assets/css/root.css', '/assets/css/yura.css', '/assets/js/player.js'];
+// Enough to open the installed player before any network request succeeds. Downloaded audio remains
+// opt-in; this is only the compact app shell and its catalogue.
+const SHELL = [
+  '/yura/',
+  '/assets/css/root.css',
+  '/assets/css/yura.css',
+  '/assets/js/player.js',
+  '/assets/js/lastfm.js',
+  '/assets/catalogs/yura.json',
+];
 
 self.addEventListener('install', e => {
   self.skipWaiting();
-  e.waitUntil(caches.open(SHELL_C).then(c => c.addAll(SHELL).catch(() => {})));
+  // Do not let one optional/unavailable response prevent the whole installed app shell from being
+  // cached — an especially painful failure mode on iOS during a just-completed Home Screen install.
+  e.waitUntil(caches.open(SHELL_C).then(c => Promise.all(SHELL.map(url => c.add(url).catch(() => {})))));
 });
 self.addEventListener('activate', e => {
   const keep = new Set([SHELL_C, DATA_C, IMG_C, AUDIO_SAVED, AUDIO_AUTO]);

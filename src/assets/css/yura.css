@@ -60,7 +60,7 @@ html, body { overscroll-behavior: none; }
 
 /* ── Hero / frontispiece ───────────────────────────
    Mobile-first: tight top padding, big legible wordmark. */
-#yura-hero { padding: clamp(2.25rem,9vw,4.5rem) 1.25rem clamp(.5rem,2vw,1rem); text-align: center; }
+#yura-hero { padding: max(clamp(2.25rem,9vw,4.5rem), calc(env(safe-area-inset-top) + 1rem)) 1.25rem clamp(.5rem,2vw,1rem); text-align: center; }
 #yura-hero .eyebrow {
   margin: 0 0 1.1rem; font-family: var(--mono); font-size: .66rem; font-weight: 400;
   letter-spacing: .42em; text-transform: uppercase; color: var(--text-3); padding-left: .42em;
@@ -504,6 +504,11 @@ html, body { overscroll-behavior: none; }
 .np-play:active { transform: translateY(1px); }
 .np-play.playing { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 12px var(--led-glow); }
 .np-play svg { width: 16px; height: 16px; }
+/* Playback is requested but no decoded audio is advancing yet. Keep the control actionable while
+   making the distinction from genuine playing explicit. */
+#np-bar.is-buffering .np-play::after { content: ""; position: absolute; inset: -3px; border: 2px solid transparent;
+  border-top-color: var(--accent); border-right-color: var(--accent); border-radius: 50%; animation: np-spin .8s linear infinite; }
+@keyframes np-spin { to { transform: rotate(360deg); } }
 .np-toggle.on { color: var(--accent); }
 .np-toggle { position: relative; }
 .np-toggle.on::after { content: ""; width: 3px; height: 3px; border-radius: 50%; background: var(--accent);
@@ -945,7 +950,7 @@ body.np-open #q-history .q-row { border-radius: 0; padding: .6rem 1.15rem; }
 
 /* ── Floating corner buttons (home / dark) ─────────*/
 #home-btn, #top-btn {
-  position: fixed; top: 1rem; z-index: 60; width: 38px; height: 38px; border-radius: 50%;
+  position: fixed; top: calc(env(safe-area-inset-top) + 1rem); z-index: 60; width: 44px; height: 44px; border-radius: 50%;
   border: 1px solid var(--gilt-hair); cursor: pointer; background: var(--panel-raised); color: var(--text-3);
   box-shadow: 0 3px 12px var(--sh); display: grid; place-items: center;
   transition: color .15s, border-color .15s, transform .08s;

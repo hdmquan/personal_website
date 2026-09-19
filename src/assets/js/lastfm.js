@@ -13,33 +13,70 @@
 (function () {
   var FN = '/.netlify/functions/lastfm';
   var LS = 'fa:yura:lastfm';
+  var OUTBOX = LS + ':outbox';
   function session() { try { return JSON.parse(localStorage.getItem(LS)); } catch (e) { return null; } }
+  function getOutbox() { try { var q = JSON.parse(localStorage.getItem(OUTBOX)); return Array.isArray(q) ? q : []; } catch (e) { return []; } }
+  function setOutbox(q) { try { localStorage.setItem(OUTBOX, JSON.stringify(q)); } catch (e) {} }
   function post(payload) {
-    var s = session(); if (!s) return;
+    var s = session(); if (!s) return Promise.reject(new Error('not connected'));
     payload.session_key = s.session_key;
-    fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function () {});
+    return fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true })
+      .then(function (r) { if (!r.ok) throw new Error('Last.fm rejected the scrobble'); return r.json(); });
   }
-  var curKey = null, scrobbled = false;
+  var curKey = null, scrobbled = false, sending = false, retryTimer = null;
   function key(m) { return m ? (m.artist + '' + m.track + '' + (m.startedAt || 0)) : null; }
+  function scheduleDrain() {
+    if (retryTimer) return;
+    retryTimer = setTimeout(function () { retryTimer = null; drain(); }, 15000);
+  }
+  // Store pending scrobbles before sending. A request may be cancelled when a mobile browser is
+  // backgrounded; retaining it means the next visit retries instead of silently losing the listen.
+  function drain() {
+    if (sending || !session()) return;
+    var q = getOutbox(), item = q[0];
+    if (!item) return;
+    sending = true;
+    var succeeded = false;
+    post(item.payload).then(function () {
+      succeeded = true;
+      q = getOutbox().filter(function (x) { return x.id !== item.id; });
+      setOutbox(q);
+      if (item.id === curKey) scrobbled = true;
+    }).catch(function () {
+      scheduleDrain();
+    }).then(function () {
+      sending = false;
+      if (succeeded && getOutbox().length) drain();
+    });
+  }
+  function enqueue(m) {
+    var id = key(m), q = getOutbox();
+    if (!q.some(function (x) { return x.id === id; })) {
+      q.push({ id: id, payload: { action: 'scrobble', artist: m.artist, track: m.track, album: m.album, duration: m.duration, timestamp: m.startedAt || Math.floor(Date.now() / 1000) } });
+      setOutbox(q);
+    }
+    drain();
+  }
 
   var S = {
     enabled: !!session(),
-    refresh: function () { S.enabled = !!session(); },
+    refresh: function () { S.enabled = !!session(); if (S.enabled) drain(); },
     track: function (m) { curKey = key(m); scrobbled = false; },        // new track loaded
     playing: function (m) {                                             // playback started → now-playing ping
       if (key(m) !== curKey) { curKey = key(m); scrobbled = false; }
-      post({ action: 'nowPlaying', artist: m.artist, track: m.track, album: m.album, duration: m.duration });
+      post({ action: 'nowPlaying', artist: m.artist, track: m.track, album: m.album, duration: m.duration }).catch(function () {});
     },
     tick: function (m, cur, dur) {                                      // Last.fm rule: >30s, played ≥half or 4min
       if (scrobbled || !m) return;
       dur = dur || m.duration || 0;
       if (dur > 30 && cur >= Math.min(dur / 2, 240)) {
-        scrobbled = true;
-        post({ action: 'scrobble', artist: m.artist, track: m.track, album: m.album, duration: m.duration, timestamp: m.startedAt || Math.floor(Date.now() / 1000 - cur) });
+        enqueue(m);
       }
     },
   };
   window.Scrobbler = S;
+  window.addEventListener('online', drain);
+  drain();
 })();
 
 (function () {
@@ -55,7 +92,7 @@
 
   function getSession() { try { return JSON.parse(localStorage.getItem(LS)); } catch (e) { return null; } }
   function setSession(s) {
-    if (s) localStorage.setItem(LS, JSON.stringify(s)); else localStorage.removeItem(LS);
+    if (s) localStorage.setItem(LS, JSON.stringify(s)); else { localStorage.removeItem(LS); localStorage.removeItem(LS + ':outbox'); }
     if (window.Scrobbler) window.Scrobbler.refresh();   // toggle scrobbling with login state
     render();
   }

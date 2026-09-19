@@ -6,7 +6,7 @@ permalink: /yura/
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Yura Archive</title>
   <meta name="description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography. Fan preservation." />
   <!-- Japanese album/track titles are proper nouns, not text to translate; the page is mostly
@@ -26,11 +26,12 @@ permalink: /yura/
   <link rel="stylesheet" href="/assets/css/yura.css" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/yura-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/yura-512.png" />
-  <link rel="manifest" href="/assets/yura.webmanifest" />
+  <link rel="manifest" href="/assets/yura.webmanifest" type="application/manifest+json" />
   <meta name="theme-color" content="#eae6df" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#191e1a" media="(prefers-color-scheme: dark)" />
   <link rel="apple-touch-icon" href="/assets/icons/yura-180.png" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="葉月ゆら" />
   <meta property="og:title" content="Hatsuki Yura Fan Archive Player" />
   <meta property="og:description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography — 107 albums, 1053 tracks. Fan preservation." />
@@ -380,7 +381,7 @@ permalink: /yura/
   </div>
 </div>
 
-<!-- Install-to-home-screen nudge — phone-only, shown once after the first download (see player.js). -->
+<!-- Install-to-home-screen guidance (see player.js). -->
 <div id="install-nudge" class="install-nudge" hidden>
   <button type="button" class="in-x" id="in-dismiss" aria-label="Dismiss">✕</button>
   <p class="in-title" id="in-title"></p>

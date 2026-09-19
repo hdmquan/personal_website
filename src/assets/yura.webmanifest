@@ -1,6 +1,10 @@
 {
   "name": "葉月ゆら Fan Archive",
   "short_name": "葉月ゆら",
+  "description": "A streaming fan archive for the Hatsuki Yura and La Bella Luna discography.",
+  "lang": "en",
+  "categories": ["music", "entertainment"],
+  "id": "/yura/",
   "start_url": "/yura/",
   "scope": "/yura/",
   "display": "standalone",

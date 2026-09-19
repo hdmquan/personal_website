@@ -60,6 +60,11 @@
   const audio = new Audio();
   audio.preload = 'none';
   audio.volume = 0.85;
+  // Where supported, tell the OS that this is long-form media rather than a short UI sound.
+  // This is progressive enhancement only: browsers that lack AudioSession keep normal <audio> behavior.
+  function activateOSAudio() {
+    try { if (navigator.audioSession && 'type' in navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+  }
 
   /* ── Persistence ───────────────────────────────── */
   const save = (k, v) => { try { localStorage.setItem(LS + ':' + k, JSON.stringify(v)); } catch (e) {} };
@@ -208,33 +213,33 @@
     updateStorageInfo();
   }
 
-  /* ── Install (Add to Home Screen) — PHONE ONLY, offered once after the first download ───────────
-     Skips desktop/tablet and anything already installed. Android/Chromium gives a real prompt; iOS
+  /* ── Install (Add to Home Screen) — PHONE / TABLET ──────────────────────────────────────────────
+     Skips desktop and anything already installed. Android/Chromium gives a real prompt; iOS
      has no programmatic install, so we show the Share → Add to Home Screen steps instead. */
   let deferredInstall = null, installOffered = false;
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; syncInstallRow(); });
   window.addEventListener('appinstalled', () => { save('installDone', true); hideInstall(); syncInstallRow(); });
   const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  const isIPhone = () => /iPhone|iPod/.test(navigator.userAgent);
-  function installEligible() {                          // phone, not already installed
+  const isIOS = () => /iPhone|iPod|iPad/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  function installEligible() {
     if (isStandalone() || load('installDone')) return false;
     if (!matchMedia('(pointer: coarse)').matches || !matchMedia('(hover: none)').matches) return false;   // has a mouse → desktop
+    if (isIOS()) return true;
     const m = navigator.userAgentData ? navigator.userAgentData.mobile : undefined;
     if (m === true) return true;
     if (m === false) return false;                     // Chromium says tablet/desktop
-    const isIPad = /iPad/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    return !isIPad && Math.min(screen.width, screen.height) <= 500;   // phone-sized, not an iPad
+    return Math.min(screen.width, screen.height) <= 500;
   }
-  const canInstall = () => installEligible() && (deferredInstall || isIPhone());
+  const canInstall = () => installEligible() && (deferredInstall || isIOS());
   function showInstall() {
     const n = $('#install-nudge'); if (!n) return;
-    if (isIPhone() && !deferredInstall) {
+    if (isIOS() && !deferredInstall) {
       $('#in-title').textContent = 'Add to Home Screen';
-      $('#in-sub').textContent = 'Tap the Share button, then “Add to Home Screen” — your downloads stay safe and it opens like an app.';
+      $('#in-sub').textContent = 'Tap Share, then “Add to Home Screen”. On newer iOS, leave “Open as Web App” on. The installed app has its own offline library, so download albums there after installing.';
       $('#in-go').hidden = true;                       // iOS: no button, just the steps
     } else {
       $('#in-title').textContent = 'Install the app';
-      $('#in-sub').textContent = 'Add 葉月ゆら to your home screen so your offline downloads stay put and it launches like a real app.';
+      $('#in-sub').textContent = 'Add 葉月ゆら to your home screen. Install before downloading so your offline library lives with the app.';
       $('#in-go').hidden = false;
     }
     n.hidden = false;
@@ -243,10 +248,12 @@
   function syncInstallRow() { const row = $('#set-install'); if (row) row.hidden = !canInstall(); }
   async function doInstall() {
     if (deferredInstall) { deferredInstall.prompt(); try { await deferredInstall.userChoice; } catch (e) {} deferredInstall = null; hideInstall(); syncInstallRow(); }
-    else if (isIPhone()) showInstall();                // iOS steps
+    else if (isIOS()) showInstall();                   // iOS steps
   }
   function maybeOfferInstall() {                        // called once a download finishes
-    if (installOffered || load('installDismissed') || !canInstall()) return;
+    // iOS Home Screen apps have isolated storage, so prompting immediately after a browser download
+    // would wrongly suggest that the completed offline library transfers into the installed app.
+    if (isIOS() || installOffered || load('installDismissed') || !canInstall()) return;
     installOffered = true; showInstall();
   }
   $('#in-go')?.addEventListener('click', doInstall);
@@ -668,21 +675,66 @@
   let curDur = 0;          // catalog duration of the current track (authoritative when audio.duration is flaky)
   let endHandled = false;  // a track advances exactly once (native 'ended' OR our fallback)
   let endTimer = null;     // watchdog armed near the end in case 'ended' never fires (iOS streamed audio)
+  let playAttempt = null, playRetry = null, playFailures = 0, playGeneration = 0, stallRecoveries = 0;
+  let playbackState = 'idle'; // idle | loading | buffering | playing | paused | blocked | failed
   function clearEndTimer() { if (endTimer) { clearTimeout(endTimer); endTimer = null; } }
+  function clearPlayRetry() { if (playRetry) { clearTimeout(playRetry); playRetry = null; } }
+  function setPlaybackState(state) {
+    playbackState = state;
+    npBar.dataset.playbackState = state;
+    npBar.classList.toggle('is-buffering', state === 'loading' || state === 'buffering');
+    const label = state === 'loading' || state === 'buffering' ? 'Buffering' : state === 'blocked' ? 'Playback blocked — tap to play' : state === 'failed' ? 'Playback failed — tap to retry' : state === 'playing' ? 'Pause' : 'Play';
+    [npPlay, document.getElementById('np2-play')].filter(Boolean).forEach(b => { b.setAttribute('aria-label', label); b.title = label; });
+    setPlayingUI(state === 'playing');
+  }
+  // Source changes on iOS can reject the first play() while the new media resource is still being
+  // selected. A player state machine makes policy blocks visible and retries only transient failures.
+  function requestPlayback() {
+    if (!wantPlay || !audio.src || !audio.paused || playAttempt) return;
+    activateOSAudio();
+    const generation = playGeneration;
+    const attempt = audio.play();
+    playAttempt = attempt;
+    attempt.then(() => {
+      if (generation !== playGeneration) return;
+      playFailures = 0; clearPlayRetry();
+    }).catch((err) => {
+      if (generation !== playGeneration) return;
+      if (!wantPlay) return;
+      if (err && err.name === 'NotAllowedError') {
+        wantPlay = false;
+        setPlaybackState('blocked');
+        toast('Playback needs a tap to continue');
+        return;
+      }
+      if (playFailures >= 3) {
+        wantPlay = false;
+        setPlaybackState('failed');
+        toast('Could not start this track');
+        return;
+      }
+      clearPlayRetry();
+      playRetry = setTimeout(() => { playRetry = null; requestPlayback(); }, Math.min(1000 * Math.pow(2, playFailures++), 8000));
+    }).then(() => { if (playAttempt === attempt) playAttempt = null; });
+  }
   function loadCurrent(autoplay, startAt) {
     const q = queue[qi]; if (!q) return;
     const a = ALB[q.ai], t = a.tracks[q.ti];
     curDur = t.dur || 0; endHandled = false; seeking = false; clearEndTimer();
+    playGeneration++; playAttempt = null; playFailures = 0; stallRecoveries = 0; lastCT = -1; lastCTAt = Date.now(); clearPlayRetry();
+    wantPlay = !!autoplay;
+    setPlaybackState(autoplay ? 'loading' : 'paused');
     // scrobble metadata for the new track (no-op unless a Last.fm session is connected).
     // a.artist overrides the default vocalist for circle/collab releases (e.g. La Bella Luna) so
     // scrobbles match how Last.fm catalogues them and pick up the right page + cover art.
-    scrobbleMeta = { artist: a.artist || ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: Math.floor(Date.now() / 1000) };
+    scrobbleMeta = { artist: a.artist || ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: 0 };
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
-    audio.src = mediaURL(t.url);  // via the media proxy when configured (enables offline); else direct R2
     // Keep the active track fully buffered so iOS retains the media element (and its live audio
     // route) through a background pause; that lets a plain play() resume with sound instead of
     // iOS freeing it and forcing a silent reload.
     audio.preload = 'auto';
+    audio.src = mediaURL(t.url);  // via the media proxy when configured (enables offline); else direct R2
+    audio.load();                 // begin selecting the new resource before the play request
     pendingSeek = (startAt && startAt > 0) ? startAt : null;
     npBar.classList.add('show');
     (npTitleIn || npTitle).textContent = disp(t) + (t.instrumental ? ' (inst)' : '');
@@ -700,10 +752,7 @@
     setPct(0); setBuf(0);
     document.title = DEFAULT_TITLE + ' | ' + a.title;
     applyMarquee();
-    if (autoplay) {
-      wantPlay = true; audio.play().catch(()=>{});
-      if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.playing(scrobbleMeta);   // now-playing ping
-    }
+    if (autoplay) requestPlayback();
     setMediaSession(a, t);
     highlightPlaying();
     renderQueue();
@@ -716,7 +765,11 @@
     if (npScreen) writeRoute(false);
   }
 
-  function stopPlayback() { queue = []; qi = -1; stream = []; streamStart = 0; wantPlay = false; setPlayingUI(false); document.title = DEFAULT_TITLE; renderQueue(); save('np', null); }
+  function stopPlayback() {
+    queue = []; qi = -1; stream = []; streamStart = 0; wantPlay = false;
+    clearPlayRetry(); audio.pause(); audio.removeAttribute('src'); audio.load();
+    setPlaybackState('idle'); document.title = DEFAULT_TITLE; renderQueue(); save('np', null);
+  }
 
   /* ── Lyrics ─────────────────────────────────────────
      Render the current track's lyrics into the mobile (#np-lyrics-scroll) and web
@@ -841,11 +894,26 @@
   function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; reconcileWindow(); loadCurrent(true); } }
 
   /* ── Audio events ──────────────────────────────── */
-  audio.addEventListener('play',  () => setPlayingUI(true));
-  // 'playing' = audio is actually advancing again → clear any stuck seek flag so the playhead moves.
-  audio.addEventListener('playing', () => { seeking = false; });
+  audio.addEventListener('loadstart', () => { if (wantPlay) setPlaybackState('loading'); });
+  audio.addEventListener('play', () => { if (wantPlay) setPlaybackState('buffering'); });
+  // `playing`, not `play`, means decoded audio is actually able to advance.
+  audio.addEventListener('playing', () => {
+    seeking = false; playFailures = 0; clearPlayRetry(); setPlaybackState('playing');
+    // Last.fm timestamps describe when audible playback began, not when the queue selected a track.
+    if (scrobbleMeta && !scrobbleMeta.startedAt) {
+      scrobbleMeta.startedAt = Math.floor(Date.now() / 1000);
+      if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
+    }
+    if (scrobbleMeta && window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.playing(scrobbleMeta);
+  });
+  audio.addEventListener('canplay', () => { if (wantPlay) { setPlaybackState('buffering'); requestPlayback(); } });
+  audio.addEventListener('loadeddata', () => { if (wantPlay) requestPlayback(); });
+  audio.addEventListener('waiting', () => { if (wantPlay) setPlaybackState('buffering'); });
+  audio.addEventListener('stalled', () => { if (wantPlay) setPlaybackState('buffering'); });
   audio.addEventListener('pause', () => {
-    setPlayingUI(false); saveNowPlaying();
+    if (!wantPlay) { clearPlayRetry(); setPlaybackState('paused'); }
+    else if (playbackState !== 'loading') setPlaybackState('buffering');
+    saveNowPlaying();
     // Some browsers pause at the very end instead of firing 'ended' (media control then sticks at
     // the end). Require the REAL finite duration here — during a track change audio.duration is
     // NaN, so a stale currentTime can't be mistaken for "at the end" and skip the new track.
@@ -853,13 +921,19 @@
   });
   function handleEnd() {
     if (endHandled) return;
-    endHandled = true; clearEndTimer();
+    endHandled = true; clearEndTimer(); setPlaybackState('paused');
     if (sleepEndOfTrack) { sleepEndOfTrack = false; syncQFoot(); wantPlay = false; audio.pause(); return; }  // sleep: stop after this track
-    if (loopMode === 2) { endHandled = false; audio.currentTime = 0; audio.play().catch(()=>{}); return; }  // loop one
+    if (loopMode === 2) { endHandled = false; audio.currentTime = 0; requestPlayback(); return; }  // loop one
     next();
   }
   audio.addEventListener('ended', handleEnd);
-  audio.addEventListener('error', () => { if (queue.length && qi < queue.length - 1) { toast('Track unavailable — skipping'); next(); } });
+  audio.addEventListener('error', () => {
+    const code = audio.error && audio.error.code;
+    if (code === 1) return; // MEDIA_ERR_ABORTED is normal during a source replacement
+    wantPlay = false; clearPlayRetry(); setPlaybackState('failed');
+    if (queue.length && qi < queue.length - 1) { toast('Track unavailable — skipping'); next(); }
+    else toast('This track could not be played');
+  });
   audio.addEventListener('loadedmetadata', () => {
     if (pendingSeek != null) { try { audio.currentTime = pendingSeek; } catch (e) {} pendingSeek = null; }
     updatePositionState();
@@ -904,7 +978,14 @@
     lastCTAt = Date.now();
     const d = effectiveDur();
     if (d && audio.currentTime >= d - 3) handleEnd();          // stuck at/near the end → move on
-    else audio.play().catch(() => {});                         // buffering / interrupted mid-track → nudge resume
+    else if (audio.paused) requestPlayback();                  // an interruption left the element paused
+    else if (stallRecoveries++ < 1) {                           // fetch stalled while the element still claims playback
+      pendingSeek = audio.currentTime || null;
+      setPlaybackState('loading');
+      audio.load();
+    } else {
+      wantPlay = false; setPlaybackState('failed'); toast('Playback stalled — tap play to retry');
+    }
   }, 2500);
 
   function setPct(p){ npFill.style.width=p+'%'; npThumb.style.left=p+'%'; npSeek.setAttribute('aria-valuenow', Math.round(p));
@@ -945,9 +1026,10 @@
   // media as a silent background load (timeline advances, no sound).
   function resumePlayback() {
     if (!queue.length) return;
-    wantPlay = true;
-    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-    audio.play().catch(() => {});
+    activateOSAudio();
+    wantPlay = true; playFailures = 0; stallRecoveries = 0; clearPlayRetry();
+    setPlaybackState('loading');
+    requestPlayback();
   }
   function togglePlay() {
     if (!queue.length) return;
@@ -1323,17 +1405,19 @@
     if (!('mediaSession' in navigator)) return;
     const art = a.cover_url;
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: disp(t) + (t.instrumental ? ' (inst)' : ''), artist: ART.mediaArtist || ART.name || '', album: a.title,
-      artwork: ['256x256','512x512','1000x1000'].map(s => ({ src: art, sizes: s, type: 'image/jpeg' }))
+      title: disp(t) + (t.instrumental ? ' (inst)' : ''), artist: a.artist || ART.mediaArtist || ART.name || '', album: a.title,
+      // Cover URLs are AVIF in the current catalogue. Omitting `type` avoids falsely declaring them JPEG
+      // and lets the OS/browser decode any format it supports.
+      artwork: ['256x256','512x512','1000x1000'].map(s => ({ src: art, sizes: s }))
     });
     const set = (action, fn) => { try { navigator.mediaSession.setActionHandler(action, fn); } catch (e) {} };
     set('play',  () => resumePlayback());
-    set('pause', () => { wantPlay = false; audio.pause();
-      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; });
+    set('pause', () => { wantPlay = false; audio.pause(); setPlaybackState('paused'); });
     set('nexttrack', next);
     set('previoustrack', prev);
-    set('stop', () => { wantPlay = false; audio.pause();
-      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused'; });
+    set('seekbackward', e => { applySeek(audio.currentTime - (e.seekOffset || 10)); updatePositionState(); });
+    set('seekforward', e => { applySeek(audio.currentTime + (e.seekOffset || 10)); updatePositionState(); });
+    set('stop', () => { wantPlay = false; audio.pause(); setPlaybackState('paused'); });
     set('seekto', e => { applySeek(e.seekTime); updatePositionState(); });   // lock-screen / Control Center scrubber
     updatePositionState();
   }
@@ -1351,7 +1435,7 @@
     const a = ALB[q.ai]; if (!a) return;
     const t = a.tracks[q.ti]; if (!t) return;
     setMediaSession(a, t);
-    navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
+    navigator.mediaSession.playbackState = playbackState === 'playing' ? 'playing' : 'paused';
   }
 
   /* ── iOS: best-effort resume after an audio interruption ──────────────
@@ -1749,7 +1833,7 @@
     let pending = false, reloaded = false;
     const apply = () => {
       if (!pending || reloaded) return;
-      if (wantPlay && !audio.paused) return;          // playing → wait for a pause
+      if (wantPlay && ['loading', 'buffering', 'playing'].includes(playbackState)) return;
       reloaded = true; location.reload();
     };
     audio.addEventListener('pause', apply);
