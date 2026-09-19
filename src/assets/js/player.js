@@ -104,6 +104,9 @@
   const fmtDate = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso)); return m ? (+m[3]) + ' ' + MON[+m[2]-1] + ' ' + m[1] : String(iso); };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const disp = t => t.instrumental ? t.title.replace(/\s*\[Instrumental\]\s*$/i, '') : t.title;
+  // Display/scrobble metadata may use a canonical external release title while local lyrics and
+  // notes retain their historical archive key.
+  const archiveTitle = a => a.archive_title || a.title;
   const COPY_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
   // per-album purchase / source link (round icon) — only if the catalog provides one
   function buyLink(a) {
@@ -152,7 +155,8 @@
     try { if (navigator.storage?.persist && !(await navigator.storage.persisted())) await navigator.storage.persist(); } catch (e) {}
   }
 
-  const savedKey = ai => ALB[ai]?.title || String(ai);
+  // Keep existing explicit downloads discoverable when an album gets a corrected display title.
+  const savedKey = ai => ALB[ai] ? archiveTitle(ALB[ai]) : String(ai);
   const loadSavedList = () => new Set(load('offline') || []);
   function markSaved(ai, on) { const s = loadSavedList(); on ? s.add(savedKey(ai)) : s.delete(savedKey(ai)); save('offline', [...s]); }
   async function albumSavedState(ai) {
@@ -362,7 +366,7 @@
       }
       if (!Array.isArray(item)) return null;
       const [slug, trackNo] = item;
-      const ai = slugToIdx[slug] != null ? slugToIdx[slug] : ALB.findIndex(a => a.title === slug);
+      const ai = slugToIdx[slug] != null ? slugToIdx[slug] : ALB.findIndex(a => a.title === slug || a.archive_title === slug);
       if (ai < 0) return null;
       const ti = ALB[ai].tracks.findIndex((t, i) => String(t.track || i) === String(trackNo));
       return ti >= 0 ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
@@ -569,8 +573,8 @@
       <div class="ah-info">
         <span class="ah-year">${esc(fmtDate(a.date || a.year))}</span>
         <h2 class="ah-title">${esc(a.title)}<button class="copy-inline" data-copy="album" type="button" aria-label="Copy album name" title="Copy album name">${COPY_SVG}</button></h2>
-        ${ NOTES[a.title]
-            ? `<div class="ah-note">${NOTES[a.title]}</div>`
+        ${ NOTES[archiveTitle(a)]
+            ? `<div class="ah-note">${NOTES[archiveTitle(a)]}</div>`
             : `<p class="ah-count">${shown.length} tracks${secs ? ' · ' + fmtLong(secs) : ''}${genreFilter ? ' · ' + esc(genreFilter) : ''}</p>` }
         <div class="ah-actions">
           <button class="btn-ext btn-ext-play" id="play-all"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play</button>
@@ -820,7 +824,7 @@
     setMediaSession(a, t);
     highlightPlaying();
     renderQueue();
-    ensureAlbumLyrics(a.title);   // lazy-load this album's lyrics shard (re-renders when it arrives)
+    ensureAlbumLyrics(archiveTitle(a));   // lazy-load this album's lyrics shard (re-renders when it arrives)
     renderLyrics();
     renderInfo();
     saveNowPlaying();
@@ -844,7 +848,7 @@
     const q = queue[qi]; if (!q) return null;
     const a = ALB[q.ai]; if (!a) return null;
     const t = a.tracks[q.ti]; if (!t) return null;
-    const alb = LYRICS[a.title]; if (!alb) return null;
+    const alb = LYRICS[archiveTitle(a)]; if (!alb) return null;
     // keys match the catalog's own track value ("02"); fall back to unpadded / position
     return alb[t.track] || alb[String(Number(t.track))] || alb[String(q.ti + 1)] || null;
   }

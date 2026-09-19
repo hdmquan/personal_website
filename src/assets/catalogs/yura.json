@@ -2562,7 +2562,7 @@
         },
         {
           "track": "07",
-          "title": "あの日見た",
+          "title": "あの日見た...",
           "instrumental": false,
           "file": "audio/Cherry Melody/1-07 あの日見た.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Cherry%20Melody/1-07%20%E3%81%82%E3%81%AE%E6%97%A5%E8%A6%8B%E3%81%9F.mp3",
@@ -6025,7 +6025,7 @@
       "tracks": [
         {
           "track": "01",
-          "title": "ネクロフィリア.ロマンサー",
+          "title": "ネクロフィリア・ロマンサー",
           "instrumental": false,
           "file": "audio/Gothika III/1-01 ネクロフィリア.ロマンサー.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Gothika%20III/1-01%20%E3%83%8D%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A3%E3%83%AA%E3%82%A2.%E3%83%AD%E3%83%9E%E3%83%B3%E3%82%B5%E3%83%BC.mp3",
@@ -6362,7 +6362,7 @@
         },
         {
           "track": "07",
-          "title": "パンズ.ラビリンス",
+          "title": "パンズ・ラビリンス",
           "instrumental": false,
           "file": "audio/Gothika 赤羊音戯箱/1-07 パンズ.ラビリンス.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Gothika%20%E8%B5%A4%E7%BE%8A%E9%9F%B3%E6%88%AF%E7%AE%B1/1-07%20%E3%83%91%E3%83%B3%E3%82%BA.%E3%83%A9%E3%83%93%E3%83%AA%E3%83%B3%E3%82%B9.mp3",
@@ -6580,7 +6580,7 @@
         },
         {
           "track": "05",
-          "title": "ジュリエット",
+          "title": "ュリエット",
           "instrumental": false,
           "file": "audio/HAMELN/1-05 ュリエット.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/HAMELN/1-05%20%E3%83%A5%E3%83%AA%E3%82%A8%E3%83%83%E3%83%88.mp3",
@@ -6727,8 +6727,9 @@
       "artist": "清風明月"
     },
     {
-      "album": "HAMELN Limitedver",
-      "title": "HAMELN Limitedver",
+      "album": "HAMELN ~Limitedver~",
+      "title": "HAMELN ~Limitedver~",
+      "archive_title": "HAMELN Limitedver",
       "year": "2009",
       "date": "2009-12-30",
       "cover": "covers/HAMELN Limitedver.jpg",
@@ -7566,7 +7567,7 @@
       "tracks": [
         {
           "track": "01",
-          "title": "聖なる激情 織部まふゆ.山辺燈",
+          "title": "聖なる激情 ～織部まふゆ・山辺燈～",
           "instrumental": false,
           "file": "audio/Iconostasis/1-01 聖なる激情 織部まふゆ.山辺燈.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Iconostasis/1-01%20%E8%81%96%E3%81%AA%E3%82%8B%E6%BF%80%E6%83%85%20%E7%B9%94%E9%83%A8%E3%81%BE%E3%81%B5%E3%82%86.%E5%B1%B1%E8%BE%BA%E7%87%88.mp3",
@@ -7617,7 +7618,7 @@
         },
         {
           "track": "03",
-          "title": "勇敢なる剣 Excalibur 鳳榊一郎.エリザベス(リジー)",
+          "title": "勇敢なる剣 ～ Excalibur ～鳳榊一郎・エリザベス（リジー）～",
           "instrumental": false,
           "file": "audio/Iconostasis/1-03 勇敢なる剣 Excalibur 鳳榊一郎.エリザベス(リジー).mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Iconostasis/1-03%20%E5%8B%87%E6%95%A2%E3%81%AA%E3%82%8B%E5%89%A3%20Excalibur%20%E9%B3%B3%E6%A6%8A%E4%B8%80%E9%83%8E.%E3%82%A8%E3%83%AA%E3%82%B6%E3%83%99%E3%82%B9%28%E3%83%AA%E3%82%B8%E3%83%BC%29.mp3",
@@ -7742,7 +7743,7 @@
         },
         {
           "track": "08",
-          "title": "恋の刃 藤臣弼.仙道六実",
+          "title": "恋の刃 ～藤臣弼・仙道六実～",
           "instrumental": false,
           "file": "audio/Iconostasis/1-08 恋の刃 藤臣弼.仙道六実.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Iconostasis/1-08%20%E6%81%8B%E3%81%AE%E5%88%83%20%E8%97%A4%E8%87%A3%E5%BC%BC.%E4%BB%99%E9%81%93%E5%85%AD%E5%AE%9F.mp3",
@@ -9717,7 +9718,7 @@
         },
         {
           "track": "05",
-          "title": "Lunna Musique",
+          "title": "Lunna*Musique",
           "instrumental": false,
           "file": "audio/Lunna Musique/1-05 Lunna Musique.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Lunna%20Musique/1-05%20Lunna%20Musique.mp3",
@@ -10049,7 +10050,7 @@
         },
         {
           "track": "03",
-          "title": "オルディネ.ラアネッタと灰の男",
+          "title": "オルディネ・ラアネッタと灰の男",
           "instrumental": false,
           "file": "audio/Mirage Dolls/1-03 オルディネ.ラアネッタと灰の男.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Mirage%20Dolls/1-03%20%E3%82%AA%E3%83%AB%E3%83%87%E3%82%A3%E3%83%8D.%E3%83%A9%E3%82%A2%E3%83%8D%E3%83%83%E3%82%BF%E3%81%A8%E7%81%B0%E3%81%AE%E7%94%B7.mp3",
@@ -14188,7 +14189,7 @@
         },
         {
           "track": "04",
-          "title": "I fall in love with you",
+          "title": "I fall in love with you.",
           "instrumental": false,
           "file": "audio/Snow Flower/1-04 I fall in love with you.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Snow%20Flower/1-04%20I%20fall%20in%20love%20with%20you.mp3",
@@ -14648,7 +14649,7 @@
         },
         {
           "track": "05",
-          "title": "マリッジ.トゥルー",
+          "title": "マリッジ・トゥルー",
           "instrumental": false,
           "file": "audio/Spooktacular/1-05 マリッジ.トゥルー.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Spooktacular/1-05%20%E3%83%9E%E3%83%AA%E3%83%83%E3%82%B8.%E3%83%88%E3%82%A5%E3%83%AB%E3%83%BC.mp3",
@@ -14936,7 +14937,7 @@
         },
         {
           "track": "03",
-          "title": "ラズベリィお嬢様のハロウィン.ナイト",
+          "title": "ラズベリィお嬢様のハロウィン・ナイト",
           "instrumental": false,
           "file": "audio/Sweet Halloween/1-03 ラズベリィお嬢様のハロウィン.ナイト.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Sweet%20Halloween/1-03%20%E3%83%A9%E3%82%BA%E3%83%99%E3%83%AA%E3%82%A3%E3%81%8A%E5%AC%A2%E6%A7%98%E3%81%AE%E3%83%8F%E3%83%AD%E3%82%A6%E3%82%A3%E3%83%B3.%E3%83%8A%E3%82%A4%E3%83%88.mp3",
@@ -14986,7 +14987,7 @@
         },
         {
           "track": "05",
-          "title": "Ghostly Party",
+          "title": "Ghost Party",
           "instrumental": false,
           "file": "audio/Sweet Halloween/1-05 Ghostly Party.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/Sweet%20Halloween/1-05%20Ghostly%20Party.mp3",
@@ -16682,8 +16683,9 @@
       ]
     },
     {
-      "album": "はつ恋",
-      "title": "はつ恋",
+      "album": "はつ恋 Hatsukoi",
+      "title": "はつ恋 Hatsukoi",
+      "archive_title": "はつ恋",
       "year": "2006",
       "date": "2006-07-07",
       "cover": "covers/はつ恋.jpg",
@@ -16816,7 +16818,7 @@
         },
         {
           "track": "06",
-          "title": "らぶ☆すいきす",
+          "title": "らぶ☆すいきす6",
           "instrumental": false,
           "file": "audio/はつ恋/1-06 らぶ☆すいきす6.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/%E3%81%AF%E3%81%A4%E6%81%8B/1-06%20%E3%82%89%E3%81%B6%E2%98%86%E3%81%99%E3%81%84%E3%81%8D%E3%81%996.mp3",
@@ -18199,8 +18201,9 @@
       "artist": "清風明月"
     },
     {
-      "album": "ゆらわーるど -Honey Bee-",
-      "title": "ゆらわーるど -Honey Bee-",
+      "album": "ゆらわーるど-Honey Bee-(初回限定版)",
+      "title": "ゆらわーるど-Honey Bee-(初回限定版)",
+      "archive_title": "ゆらわーるど -Honey Bee-",
       "year": "2005",
       "date": "2005-09-17",
       "cover": "covers/ゆらわーるど .Honey Bee_.jpg",
@@ -18208,7 +18211,7 @@
       "tracks": [
         {
           "track": "01",
-          "title": "夏を飛び越えて",
+          "title": "夏を飞び越えて",
           "instrumental": false,
           "file": "audio/ゆらわーるど .Honey Bee_/1-01 夏を飞び越えて.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/%E3%82%86%E3%82%89%E3%82%8F%E3%83%BC%E3%82%8B%E3%81%A9%20.Honey%20Bee_/1-01%20%E5%A4%8F%E3%82%92%E9%A3%9E%E3%81%B3%E8%B6%8A%E3%81%88%E3%81%A6.mp3",
@@ -18233,7 +18236,7 @@
         },
         {
           "track": "02",
-          "title": "薔薇と弾丸",
+          "title": "蔷薇と弾丸",
           "instrumental": false,
           "file": "audio/ゆらわーるど .Honey Bee_/1-02 蔷薇と弾丸.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/%E3%82%86%E3%82%89%E3%82%8F%E3%83%BC%E3%82%8B%E3%81%A9%20.Honey%20Bee_/1-02%20%E8%94%B7%E8%96%87%E3%81%A8%E5%BC%BE%E4%B8%B8.mp3",
@@ -18255,7 +18258,7 @@
         },
         {
           "track": "03",
-          "title": "輪廻",
+          "title": "轮廻",
           "instrumental": false,
           "file": "audio/ゆらわーるど .Honey Bee_/1-03 轮廻.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/%E3%82%86%E3%82%89%E3%82%8F%E3%83%BC%E3%82%8B%E3%81%A9%20.Honey%20Bee_/1-03%20%E8%BD%AE%E5%BB%BB.mp3",
@@ -20464,7 +20467,7 @@
         },
         {
           "track": "06",
-          "title": "ダークメルヘン.フリークス",
+          "title": "ダークメルヘン・フリークス",
           "instrumental": false,
           "file": "audio/少女と背徳の欠片/1-06 ダークメルヘン.フリークス.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/%E5%B0%91%E5%A5%B3%E3%81%A8%E8%83%8C%E5%BE%B3%E3%81%AE%E6%AC%A0%E7%89%87/1-06%20%E3%83%80%E3%83%BC%E3%82%AF%E3%83%A1%E3%83%AB%E3%83%98%E3%83%B3.%E3%83%95%E3%83%AA%E3%83%BC%E3%82%AF%E3%82%B9.mp3",
@@ -22342,7 +22345,7 @@
         },
         {
           "track": "07",
-          "title": "アニマ.エピローグ",
+          "title": "アニマ・エピローグ",
           "instrumental": false,
           "file": "audio/流転の巫女 魂ノ緒/1-07 アニマ.エピローグ.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/audio/%E6%B5%81%E8%BB%A2%E3%81%AE%E5%B7%AB%E5%A5%B3%20%E9%AD%82%E3%83%8E%E7%B7%92/1-07%20%E3%82%A2%E3%83%8B%E3%83%9E.%E3%82%A8%E3%83%94%E3%83%AD%E3%83%BC%E3%82%B0.mp3",
@@ -22620,8 +22623,9 @@
       ]
     },
     {
-      "album": "竜と炎の物語",
-      "title": "竜と炎の物語",
+      "album": "竜と炎の物語 ~Dragon and Flame Story~",
+      "title": "竜と炎の物語 ~Dragon and Flame Story~",
+      "archive_title": "竜と炎の物語",
       "year": "2013",
       "date": "2013-12-31",
       "cover": "covers/竜と炎の物語.jpg",
@@ -24589,7 +24593,7 @@
       "tracks": [
         {
           "track": "01",
-          "title": "Kei",
+          "title": "啓",
           "instrumental": false,
           "file": "others/Lost Omen/1. Kei.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/1.%20Kei.mp3",
@@ -24598,7 +24602,7 @@
         },
         {
           "track": "02",
-          "title": "Tsukamenu Taiyou [vo. Arai Kazuhiro]",
+          "title": "ツカメヌタイヨウ",
           "instrumental": false,
           "file": "others/Lost Omen/2. Tsukamenu Taiyou [vo. Arai Kazuhiro].mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/2.%20Tsukamenu%20Taiyou%20%5Bvo.%20Arai%20Kazuhiro%5D.mp3",
@@ -24618,7 +24622,7 @@
         },
         {
           "track": "03",
-          "title": "Hagoromo [vo. au, Hoshimi Aoto]",
+          "title": "羽衣",
           "instrumental": false,
           "file": "others/Lost Omen/3. Hagoromo [vo. au, Hoshimi Aoto].mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/3.%20Hagoromo%20%5Bvo.%20au%2C%20Hoshimi%20Aoto%5D.mp3",
@@ -24639,7 +24643,7 @@
         },
         {
           "track": "04",
-          "title": "Rapunzel",
+          "title": "ラプンツェル",
           "instrumental": false,
           "file": "others/Lost Omen/4. Rapunzel.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/4.%20Rapunzel.mp3",
@@ -24659,7 +24663,7 @@
         },
         {
           "track": "05",
-          "title": "One Thousand and One [vo. Nagi Kaiji, Hoshimi Aoto]",
+          "title": "One Thousand and One",
           "instrumental": false,
           "file": "others/Lost Omen/5. One Thousand and One [vo. Nagi Kaiji, Hoshimi Aoto].mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/5.%20One%20Thousand%20and%20One%20%5Bvo.%20Nagi%20Kaiji%2C%20Hoshimi%20Aoto%5D.mp3",
@@ -24680,7 +24684,7 @@
         },
         {
           "track": "06",
-          "title": "Gense no Yume ~Cantarella~",
+          "title": "現世の夢 ～カンタレラ～",
           "instrumental": false,
           "file": "others/Lost Omen/6. Gense no Yume ~Cantarella~.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/6.%20Gense%20no%20Yume%20~Cantarella~.mp3",
@@ -24700,7 +24704,7 @@
         },
         {
           "track": "07",
-          "title": "Cantarella [vo. Hoshimi Aoto]",
+          "title": "カンタレラ",
           "instrumental": false,
           "file": "others/Lost Omen/7. Cantarella [vo. Hoshimi Aoto].mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/7.%20Cantarella%20%5Bvo.%20Hoshimi%20Aoto%5D.mp3",
@@ -24720,7 +24724,7 @@
         },
         {
           "track": "08",
-          "title": "Tsukiyo no Akai Kutsu [vo. au]",
+          "title": "月夜の赤い靴",
           "instrumental": false,
           "file": "others/Lost Omen/8. Tsukiyo no Akai Kutsu [vo. au].mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/8.%20Tsukiyo%20no%20Akai%20Kutsu%20%5Bvo.%20au%5D.mp3",
@@ -24740,7 +24744,7 @@
         },
         {
           "track": "09",
-          "title": "Kae",
+          "title": "還",
           "instrumental": false,
           "file": "others/Lost Omen/9. Kae.mp3",
           "url": "https://pub-35c05111c2ae48c18bfe65c07895af75.r2.dev/others/Lost%20Omen/9.%20Kae.mp3",
