@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readFile } from 'node:fs/promises';
+import { readFile, access } from 'node:fs/promises';
 
 const catalogPath = new URL('../src/assets/catalogs/yura.json', import.meta.url);
 const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
@@ -10,9 +10,15 @@ const preserved = catalog.albums
   .flatMap(item => item.tracks.map(track => track.url));
 
 async function check(url, expectedType) {
-  const response = await fetch(url, { method: 'HEAD' });
+  try {
+  if (url.startsWith('/')) {
+    await access(new URL('../src' + url, import.meta.url));
+    return { url, ok: true, status: 'local' };
+  }
+  const response = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(15000) });
   const type = response.headers.get('content-type') || '';
   return { url, ok: response.ok && type.startsWith(expectedType), status: response.status, type };
+  } catch (error) { return { url, ok: false, error: error.message }; }
 }
 
 async function checkAll(urls, expectedType, concurrency = 12) {

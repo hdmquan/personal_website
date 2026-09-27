@@ -4,7 +4,6 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "preinstall": "npm config set registry http://registry.npmjs.org",
         "watch:sass": "sass --watch src/assets/sass:./src/assets/css",
         "build:sass": "sass src/assets/sass:./src/assets/css",
         "watch:eleventy": "cross-env ELEVENTY_ENV=DEV eleventy --serve",
@@ -12,7 +11,8 @@
         "gen:decap": "node scripts/gen-decap-album-options.mjs",
         "watch:cms": "npx decap-server",
         "start": "del-cli ./public --force && npm-run-all --parallel watch:*",
-        "build": "npm cache clean --force && npm ci && run-s gen:decap build:sass build:eleventy"
+        "build": "npm test && run-s gen:decap build:sass build:eleventy",
+        "test": "node scripts/test-yura-playback.cjs && node scripts/test-yura-state.cjs && node scripts/test-yura-recovery.cjs"
     },
     "engines": {
         "node": ">=16.0.0",

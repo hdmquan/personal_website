@@ -145,7 +145,7 @@
       const r = await fetch(sample, { method: 'GET', headers: { Range: 'bytes=0-1' }, mode: 'cors', cache: 'no-store' });
       offlineOK = !!(r && (r.ok || r.status === 206));
     } catch (e) { offlineOK = false; }
-    if (offlineOK) audio.crossOrigin = 'anonymous';   // readable media requests → SW can cache + range-serve
+    if (offlineOK && !audio.src) audio.crossOrigin = 'anonymous';   // readable media requests → SW can cache + range-serve
     sendAutoCache(); syncOfflineUI(); syncTopBtn();
   }
   function sendAutoCache() {
@@ -371,17 +371,19 @@
       const ti = ALB[ai].tracks.findIndex((t, i) => String(t.track || i) === String(trackNo));
       return ti >= 0 ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
     };
-    queue = np.q.map(resolveSaved).filter(Boolean);
+    queue = np.q.map(resolveSaved).filter(x => x && !(excludeInst && x.inst));
     if (!queue.length) return;
     const wanted = resolveSaved(savedCurrent);
     qi = wanted ? Math.max(0, queue.findIndex(x => keyOf(x) === keyOf(wanted))) : Math.min(Math.max(np.qi|0, 0), queue.length - 1);
     shuffle = !!np.sh; syncShuffleBtn();
     // The saved source preserves user reorders/removals plus unseen future albums. Old sessions did
     // not have it, so their visible queue remains a safe (albeit finite) migration fallback.
-    const savedStream = Array.isArray(np.src) ? np.src.map(resolveSaved).filter(Boolean) : [];
+    const savedStream = Array.isArray(np.src) ? np.src.map(resolveSaved).filter(x => x && !(excludeInst && x.inst)) : [];
     stream = savedStream.length ? savedStream : queue.slice();
-    streamStart = Math.min(Math.max(np.ss|0, 0), Math.max(0, stream.length - queue.length));
-    loadCurrent(false, np.t || 0);   // restore paused at saved position; user taps play to resume
+    const restoredOffset = Array.isArray(np.src)
+      ? np.src.slice(0, Math.max(np.ss|0, 0)).map(resolveSaved).filter(x => x && !(excludeInst && x.inst)).length : 0;
+    streamStart = Math.min(restoredOffset, Math.max(0, stream.length - queue.length));
+    loadCurrent(false, wanted && !(excludeInst && wanted.inst) ? np.t || 0 : 0);   // restore paused at saved position; user taps play to resume
   }
 
   /* ── Shelf rendering ───────────────────────────── */
@@ -614,6 +616,7 @@
   albumView.addEventListener('click', e => {
     if (e.target.closest('.ah-buy')) return;   // let the buy link navigate
     const li = e.target.closest('.trk');
+    if (li && excludeInst && ALB[+li.dataset.ai].tracks[+li.dataset.ti].instrumental) { toast('Instrumental tracks are excluded'); return; }
     if (li) { playAlbumFrom(+li.dataset.ai, +li.dataset.ti, false, true); return; }
     if (e.target.closest('#play-all')) playAlbumFrom(openAlbum, 0, false, true);
     if (e.target.closest('#shuffle-all')) playAlbumFrom(openAlbum, 0, true, true);
@@ -624,7 +627,7 @@
   function buildQueue(ai, respectFilter) {
     let q = (ALB[ai].tracks||[]).map((t, ti) => ({ ai, ti, inst: !!t.instrumental }));
     if (genreFilter) q = q.filter(x => (ALB[ai].tracks[x.ti].genres||[]).includes(genreFilter));
-    if (respectFilter && excludeInst) q = q.filter(x => !x.inst);
+    if (excludeInst) q = q.filter(x => !x.inst);
     return q;
   }
   // The whole discography as one flat track list, in the current sort/filter order — the backing
@@ -675,19 +678,20 @@
     shuffle = !!shuffled;
     const track = (ALB[ai] && ALB[ai].tracks[ti]) ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
     if (shuffle) {                                   // shuffle button on an album → that album, shuffled
-      let q = buildQueue(ai, respectFilter); if (!q.length) q = buildQueue(ai, false);
+      let q = buildQueue(ai, respectFilter);
       shuf(q);
-      if (track) { const k = q.findIndex(x => x.ti === ti); if (k > 0) { q.splice(k, 1); q.unshift(track); } else if (k < 0) q.unshift(track); }
+      if (track && !(excludeInst && track.inst)) { const k = q.findIndex(x => x.ti === ti); if (k > 0) { q.splice(k, 1); q.unshift(track); } else if (k < 0) q.unshift(track); }
       setWindow(q, 0);
     } else {
       // dot/album-loop mode → confine the queue to THIS album; otherwise the whole discography
       // in sort order from here. Either way keep the album's earlier tracks as history.
       const s = (loopMode === 1)
-        ? (buildQueue(ai, respectFilter).length ? buildQueue(ai, respectFilter) : buildQueue(ai, false))
+        ? buildQueue(ai, respectFilter)
         : eligibleStream();
       let idx = s.findIndex(x => x.ai === ai && x.ti === ti);
-      if (idx < 0 && track) { let ins = s.findIndex(y => y.ai === ai); if (ins < 0) ins = 0; s.splice(ins, 0, track); idx = ins; }
-      setWindow(s, idx < 0 ? 0 : idx, true);
+      if (idx < 0 && track && !(excludeInst && track.inst)) { let ins = s.findIndex(y => y.ai === ai); if (ins < 0) ins = 0; s.splice(ins, 0, track); idx = ins; }
+      if (idx < 0) idx = s.findIndex(x => x.ai === ai);
+      setWindow(idx < 0 ? [] : s, idx, true);
     }
     syncShuffleBtn();
     loadCurrent(true);
@@ -704,10 +708,10 @@
       for (let j = qi + 1; j < queue.length; j++) if (!queue[j].inst) { target = queue[j]; break; }
       if (!target) for (let j = qi - 1; j >= 0; j--) if (!queue[j].inst) { target = queue[j]; break; }
     }
-    const s = shuffle ? stream.filter(x => !x.inst) : eligibleStream();
+    const s = stream.filter(x => !x.inst);
     let idx = target ? s.findIndex(x => keyOf(x) === keyOf(target)) : -1;
     setWindow(s, idx < 0 ? 0 : idx);
-    if (cur && !cur.inst) { renderQueue(); saveNowPlaying(); } else loadCurrent(true);
+    if (cur && !cur.inst) { renderQueue(); saveNowPlaying(); } else loadCurrent(wantPlay);
   }
 
   function shuffleAll() {
@@ -720,13 +724,53 @@
   let scrobbleMeta = null;
   let curDur = 0;          // catalog duration of the current track (authoritative when audio.duration is flaky)
   let endHandled = false;  // a track advances exactly once (native 'ended' OR our fallback)
-  let endTimer = null;     // watchdog armed near the end in case 'ended' never fires (iOS streamed audio)
   let playAttempt = null, playAttemptTimer = null, playRetry = null, playFailures = 0, playGeneration = 0, stallRecoveries = 0;
   let sourceLoading = false;    // suppress terminal events emitted by the source being replaced
-  let playbackState = 'idle'; // idle | loading | buffering | playing | paused | blocked | failed
-  function clearEndTimer() { if (endTimer) { clearTimeout(endTimer); endTimer = null; } }
+  let playbackState = 'idle'; // idle | loading | buffering | playing | paused | interrupted | blocked | failed
+  let interrupted = false;
   function clearPlayRetry() { if (playRetry) { clearTimeout(playRetry); playRetry = null; } }
   function clearPlayAttemptTimer() { if (playAttemptTimer) { clearTimeout(playAttemptTimer); playAttemptTimer = null; } }
+  // Local, bounded diagnostics: never include URLs, titles, credentials, or API responses.
+  const playbackLog = [];
+  const previousPlaybackLog = load('playback-log');
+  function recordPlayback(event) {
+    playbackLog.push({ at: new Date().toISOString(), event, state: playbackState,
+      generation: playGeneration, position: Math.round(audio.currentTime || 0),
+      paused: audio.paused, ended: audio.ended, ready: audio.readyState, network: audio.networkState,
+      error: audio.error?.code || 0, hidden: document.hidden, online: navigator.onLine,
+      session: navigator.audioSession?.state || 'unsupported', wantPlay });
+    if (playbackLog.length > 100) playbackLog.shift();
+    if (['error', 'interrupted', 'failed', 'pagehide'].includes(event)) save('playback-log', playbackLog);
+  }
+  document.getElementById('set-playback-report')?.addEventListener('click', () => {
+    recordPlayback('report');
+    const report = { version: 'playback-recovery-1', browser: navigator.userAgent,
+      standalone: window.matchMedia('(display-mode: standalone)').matches || !!navigator.standalone,
+      previous: Array.isArray(previousPlaybackLog) ? previousPlaybackLog : [], events: playbackLog };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' }));
+    const link = document.createElement('a'); link.href = url; link.download = 'playback-report.json';
+    document.body.appendChild(link); link.click(); link.remove();
+    toast('Playback report prepared');
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  });
+  window.addEventListener('pagehide', () => { recordPlayback('pagehide'); saveNowPlaying(); });
+  function cancelPlayAttempt() {
+    playGeneration++; playAttempt = null; clearPlayRetry(); clearPlayAttemptTimer();
+  }
+  function markInterrupted() {
+    if (!wantPlay || audio.ended || sourceLoading) return;
+    interrupted = true; cancelPlayAttempt(); setPlaybackState('interrupted'); saveNowPlaying();
+  }
+  function pausePlayback() {
+    wantPlay = false; interrupted = false; cancelPlayAttempt();
+    audio.pause(); setPlaybackState('paused'); saveNowPlaying();
+  }
+  // Keep the same media element and URL; repair a failed resource only when needed.
+  function reloadPlayback(explicit = false) {
+    pendingSeek = pendingSeek ?? (audio.currentTime || 0);
+    cancelPlayAttempt(); sourceLoading = true; setPlaybackState('loading');
+    recordPlayback('reload'); audio.load(); requestPlayback(explicit);
+  }
   function beginScrobbleCycle() {
     if (!scrobbleMeta) return;
     // Repeat-one is a new listen each time the media reaches its end. Reusing the same metadata
@@ -736,20 +780,25 @@
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
   }
   function setPlaybackState(state) {
+    const changed = playbackState !== state;
     playbackState = state;
+    if (changed) recordPlayback(state);
     npBar.dataset.playbackState = state;
     npBar.classList.toggle('is-buffering', state === 'loading' || state === 'buffering');
-    const label = state === 'loading' || state === 'buffering' ? 'Buffering' : state === 'blocked' ? 'Playback blocked — tap to play' : state === 'failed' ? 'Playback failed — tap to retry' : state === 'playing' ? 'Pause' : 'Play';
+    const label = state === 'loading' || state === 'buffering' ? 'Buffering' : state === 'interrupted' ? 'Playback interrupted — tap to resume' : state === 'blocked' ? 'Playback blocked — tap to play' : state === 'failed' ? 'Playback failed — tap to retry' : state === 'playing' ? 'Pause' : 'Play';
     [npPlay, document.getElementById('np2-play')].filter(Boolean).forEach(b => { b.setAttribute('aria-label', label); b.title = label; });
     setPlayingUI(state === 'playing');
   }
   // Source changes on iOS can reject the first play() while the new media resource is still being
   // selected. A player state machine makes policy blocks visible and retries only transient failures.
-  function requestPlayback() {
-    if (!wantPlay || !audio.src || !audio.paused || playAttempt) return;
+  function requestPlayback(explicit = false) {
+    if (!wantPlay || interrupted || !audio.src || !audio.paused || playAttempt) return;
+    if (!explicit && navigator.audioSession?.state === 'interrupted') { markInterrupted(); return; }
     activateOSAudio();
     const generation = playGeneration;
-    const attempt = audio.play();
+    recordPlayback('play-request');
+    let attempt;
+    try { attempt = Promise.resolve(audio.play()); } catch (error) { attempt = Promise.reject(error); }
     playAttempt = attempt;
     // Safari can occasionally leave play() pending after an interruption or a resource hand-off.
     // A pending promise must not hold the player hostage forever; invalidate it and let the normal
@@ -758,16 +807,19 @@
     playAttemptTimer = setTimeout(() => {
       if (generation !== playGeneration || playAttempt !== attempt || !wantPlay) return;
       playAttempt = null;
+      if (!audio.paused && audio.readyState >= 3) return;
+      if (navigator.onLine === false) return;
       if (playFailures >= 3) { wantPlay = false; setPlaybackState('failed'); toast('Could not start this track'); return; }
       playRetry = setTimeout(() => { playRetry = null; requestPlayback(); }, Math.min(1000 * Math.pow(2, playFailures++), 8000));
     }, 12000);
     attempt.then(() => {
-      if (generation !== playGeneration) return;
+      if (generation !== playGeneration || playAttempt !== attempt) return;
       playFailures = 0; clearPlayRetry(); clearPlayAttemptTimer();
     }).catch((err) => {
-      if (generation !== playGeneration) return;
+      if (generation !== playGeneration || playAttempt !== attempt) return;
       clearPlayAttemptTimer();
-      if (!wantPlay) return;
+      recordPlayback('play-rejected:' + (err?.name || 'Error'));
+      if (!wantPlay || navigator.onLine === false) return;
       if (err && err.name === 'NotAllowedError') {
         wantPlay = false;
         setPlaybackState('blocked');
@@ -785,11 +837,12 @@
     }).then(() => { if (playAttempt === attempt) playAttempt = null; });
   }
   function loadCurrent(autoplay, startAt) {
-    const q = queue[qi]; if (!q) return;
+    const q = queue[qi]; if (!q) { stopPlayback(); return; }
+    if (excludeInst && q.inst) { pruneInstFromQueue(); return; }
     const a = ALB[q.ai], t = a.tracks[q.ti];
-    curDur = t.dur || 0; endHandled = false; seeking = false; clearEndTimer();
+    curDur = t.dur || 0; endHandled = false; seeking = false;
     playGeneration++; playAttempt = null; playFailures = 0; stallRecoveries = 0; lastCT = -1; lastCTAt = Date.now(); clearPlayRetry(); clearPlayAttemptTimer();
-    sourceLoading = true;
+    sourceLoading = true; interrupted = false;
     wantPlay = !!autoplay;
     setPlaybackState(autoplay ? 'loading' : 'paused');
     // scrobble metadata for the new track (no-op unless a Last.fm session is connected).
@@ -797,10 +850,10 @@
     // scrobbles match how Last.fm catalogues them and pick up the right page + cover art.
     scrobbleMeta = { artist: a.artist || ART.mediaArtist || ART.name || '', track: t.title, album: a.album || a.title, duration: t.dur || 0, startedAt: 0 };
     if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.track(scrobbleMeta);
-    // Keep the active track fully buffered so iOS retains the media element (and its live audio
-    // route) through a background pause; that lets a plain play() resume with sound instead of
-    // iOS freeing it and forcing a silent reload.
+    // Ask the browser to buffer the track. This is a hint, not a guarantee that the OS
+    // will keep the resource or media session alive while the page is backgrounded.
     audio.preload = 'auto';
+    if (offlineOK) audio.crossOrigin = 'anonymous';
     audio.src = mediaURL(t.url);  // via the media proxy when configured (enables offline); else direct R2
     audio.load();                 // begin selecting the new resource before the play request
     pendingSeek = (startAt && startAt > 0) ? startAt : null;
@@ -963,11 +1016,20 @@
   function prev() { if (audio.currentTime > 3) { audio.currentTime = 0; return; } if (qi > 0) { qi--; loadCurrent(true); } }
 
   /* ── Audio events ──────────────────────────────── */
+  audio.addEventListener('seeking', () => { if (window.Scrobbler) window.Scrobbler.suspend(); });
+  ['pause', 'waiting', 'ended'].forEach(event => audio.addEventListener(event, () => {
+    if (window.Scrobbler) window.Scrobbler.suspend();
+  }));
   audio.addEventListener('loadstart', () => { if (wantPlay) setPlaybackState('loading'); });
   audio.addEventListener('play', () => { if (wantPlay) setPlaybackState('buffering'); });
   // `playing`, not `play`, means decoded audio is actually able to advance.
   audio.addEventListener('playing', () => {
-    sourceLoading = false; seeking = false; playFailures = 0; clearPlayRetry(); setPlaybackState('playing');
+    if (!wantPlay) { audio.pause(); return; }
+    interrupted = false;
+    sourceLoading = false; seeking = false; playFailures = 0; stallRecoveries = 0;
+    lastCT = audio.currentTime; lastCTAt = Date.now();
+    clearPlayRetry(); clearPlayAttemptTimer(); setPlaybackState('playing');
+    reassertMediaSession();
     // Last.fm timestamps describe when audible playback began, not when the queue selected a track.
     if (scrobbleMeta && !scrobbleMeta.startedAt) {
       scrobbleMeta.startedAt = Math.floor(Date.now() / 1000);
@@ -975,30 +1037,30 @@
     }
     if (scrobbleMeta && window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.playing(scrobbleMeta);
   });
-  audio.addEventListener('canplay', () => { if (wantPlay) { setPlaybackState('buffering'); requestPlayback(); } });
+  audio.addEventListener('canplay', () => { if (wantPlay && !interrupted) { if (audio.paused) setPlaybackState('buffering'); requestPlayback(); } });
   audio.addEventListener('loadeddata', () => { if (wantPlay) requestPlayback(); });
   audio.addEventListener('waiting', () => { if (wantPlay) setPlaybackState('buffering'); });
   audio.addEventListener('stalled', () => { if (wantPlay) setPlaybackState('buffering'); });
   audio.addEventListener('pause', () => {
     if (!wantPlay) { clearPlayRetry(); setPlaybackState('paused'); }
-    else if (playbackState !== 'loading') setPlaybackState('buffering');
+    else if (!audio.ended && !audio.error && !sourceLoading) markInterrupted();
     saveNowPlaying();
-    // Some browsers pause at the very end instead of firing 'ended' (media control then sticks at
-    // the end). Require the REAL finite duration here — during a track change audio.duration is
-    // NaN, so a stale currentTime can't be mistaken for "at the end" and skip the new track.
-    if (!sourceLoading && wantPlay && !endHandled && isFinite(audio.duration) && audio.duration > 0 && audio.currentTime >= audio.duration - 1) handleEnd();
+    // Only the media element can confirm completion. A near-end pause may be a network stall.
+    if (!sourceLoading && wantPlay && audio.ended) handleEnd();
   });
   function handleEnd() {
     if (endHandled) return;
-    endHandled = true; clearEndTimer(); setPlaybackState('paused');
+    endHandled = true; setPlaybackState('paused');
     if (sleepEndOfTrack) { sleepEndOfTrack = false; syncQFoot(); wantPlay = false; audio.pause(); return; }  // sleep: stop after this track
     if (loopMode === 2) { beginScrobbleCycle(); endHandled = false; audio.currentTime = 0; requestPlayback(); return; }  // loop one
     next();
   }
-  audio.addEventListener('ended', () => { if (!sourceLoading) handleEnd(); });
+  audio.addEventListener('ended', () => { if (!sourceLoading && audio.ended && wantPlay) handleEnd(); });
   audio.addEventListener('error', () => {
+    recordPlayback('error');
     const code = audio.error && audio.error.code;
     if (code === 1) return; // MEDIA_ERR_ABORTED is normal during a source replacement
+    if (code === 2) { if (wantPlay) setPlaybackState('buffering'); return; } // retry network failures, not the next song
     sourceLoading = false; wantPlay = false; clearPlayRetry(); setPlaybackState('failed');
     if (queue.length && qi < queue.length - 1) { toast('Track unavailable — skipping'); next(); }
     else toast('This track could not be played');
@@ -1009,18 +1071,6 @@
     updatePositionState();
   });
   audio.addEventListener('timeupdate', () => {
-    // Safety net: iOS often doesn't fire 'ended' for streamed audio, so a track can stall at the
-    // end and never advance. Once we're at the very end, let the native 'ended' win if it fires;
-    // otherwise this watchdog advances ~2s later (only while playback is intended, so a deliberate
-    // pause near the end is respected).
-    const dur = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : curDur;
-    if (!sourceLoading && dur > 2 && !endHandled && !endTimer && audio.currentTime >= dur - 0.25) {
-      endTimer = setTimeout(() => {
-        endTimer = null;
-        const d = (isFinite(audio.duration) && audio.duration > 0) ? audio.duration : curDur;
-        if (!sourceLoading && !endHandled && wantPlay && d && audio.currentTime >= d - 0.6) handleEnd();
-      }, 2000);
-    }
     if (seeking) return;
     const c2 = document.getElementById('np2-cur'), d2 = document.getElementById('np2-dur');
     if (c2) c2.textContent = fmt(audio.currentTime);
@@ -1029,7 +1079,7 @@
     const eDur = effectiveDur();
     if (eDur > 0) { setPct(Math.min(audio.currentTime, eDur) / eDur * 100); if (d2) d2.textContent = fmt(eDur); }
     updatePositionState();
-    if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.tick(scrobbleMeta, audio.currentTime, audio.duration);
+    if (window.Scrobbler && window.Scrobbler.enabled) window.Scrobbler.tick(scrobbleMeta, audio.currentTime, audio.duration, !audio.paused && !audio.seeking && playbackState === 'playing');
     if ((npSaveT = (npSaveT + 1) % 20) === 0) saveNowPlaying();   // persist position ~every 20 ticks
   });
   audio.addEventListener('progress', () => {
@@ -1039,25 +1089,30 @@
 
   /* Stall recovery: if playback should be running but currentTime hasn't advanced for a while
      (e.g. the network dropped near the end and the last bytes never arrived, or after a reconnect),
-     advance when we're at the end, otherwise nudge playback to resume. */
+     require confirmed completion; otherwise recover the same track and position. */
   let lastCT = -1, lastCTAt = Date.now();
   setInterval(() => {
     if (!wantPlay || !queue.length) { lastCT = audio.currentTime; lastCTAt = Date.now(); return; }
-    if (Math.abs(audio.currentTime - lastCT) > 0.1) { lastCT = audio.currentTime; lastCTAt = Date.now(); return; }  // progressing
+    if (interrupted || navigator.audioSession?.state === 'interrupted' || navigator.onLine === false || seeking || audio.seeking) { lastCTAt = Date.now(); return; }
+    if (Math.abs(audio.currentTime - lastCT) > 0.1) { lastCT = audio.currentTime; lastCTAt = Date.now(); stallRecoveries = 0; return; }  // progressing
     if (Date.now() - lastCTAt < 8000) return;                 // give a reconnect a few seconds first
     lastCTAt = Date.now();
-    const d = effectiveDur();
-    if (d && audio.currentTime >= d - 3) handleEnd();          // stuck at/near the end → move on
-    else if (audio.paused) requestPlayback();                  // an interruption left the element paused
+    if (!sourceLoading && audio.ended && !audio.seeking) handleEnd();
+    else if (audio.paused && !audio.error) requestPlayback();
     else if (stallRecoveries++ < 1) {                           // fetch stalled while the element still claims playback
-      pendingSeek = audio.currentTime || null;
-      playGeneration++; playAttempt = null; clearPlayRetry(); clearPlayAttemptTimer(); sourceLoading = true;
-      setPlaybackState('loading');
-      audio.load();
+      reloadPlayback();
     } else {
       wantPlay = false; setPlaybackState('failed'); toast('Playback stalled — tap play to retry');
     }
   }, 2500);
+  window.addEventListener('online', () => {
+    if (!wantPlay || interrupted || !queue.length) return;
+    stallRecoveries = 0; playFailures = 0; lastCTAt = Date.now();
+    if (audio.error) {
+      reloadPlayback();
+    }
+    requestPlayback();
+  });
 
   function setPct(p){ npFill.style.width=p+'%'; npThumb.style.left=p+'%'; npSeek.setAttribute('aria-valuenow', Math.round(p));
     const f=document.getElementById('np2-fill'), th=document.getElementById('np2-thumb');
@@ -1091,21 +1146,21 @@
   }
 
   /* ── NP controls ───────────────────────────────── */
-  // Resume for iOS lock-screen / background. Do a PLAIN play() of the existing,
-  // still-loaded element: that lets iOS re-attach the audio route to the speaker.
-  // Do NOT reload the src here — reloading in the background makes iOS start the
-  // media as a silent background load (timeline advances, no sound).
-  function resumePlayback() {
+  // Explicit play is allowed to replace a hung attempt. Automatic foreground recovery is not.
+  function resumePlayback(explicit = true) {
     if (!queue.length) return;
-    activateOSAudio();
-    wantPlay = true; playFailures = 0; stallRecoveries = 0; clearPlayRetry();
-    setPlaybackState('loading');
-    requestPlayback();
+    const repair = !!audio.error || playbackState === 'failed' ||
+      (explicit && !audio.paused && playbackState !== 'playing');
+    if (explicit) { cancelPlayAttempt(); playFailures = 0; stallRecoveries = 0; }
+    interrupted = false; wantPlay = true; lastCTAt = Date.now();
+    activateOSAudio(); reassertMediaSession();
+    if (repair) { reloadPlayback(explicit); return; }
+    setPlaybackState('loading'); requestPlayback(explicit);
   }
   function togglePlay() {
     if (!queue.length) return;
-    if (audio.paused) resumePlayback();
-    else { wantPlay = false; audio.pause(); }
+    if (audio.paused || ['failed', 'blocked', 'interrupted'].includes(playbackState)) resumePlayback();
+    else pausePlayback();
   }
   npPlay.addEventListener('click', togglePlay);
   $('#np-next').addEventListener('click', next);
@@ -1118,7 +1173,11 @@
       const cur = queue[qi];
       const played = queue.slice(0, qi);                                  // keep what's already been played
       const seen = new Set(queue.slice(0, qi + 1).map(keyOf));
-      let rest = eligibleStream().filter(x => !seen.has(keyOf(x)));       // everything not yet played, in sort order
+      let rest = stream.slice(streamStart + qi + 1).filter(x => !seen.has(keyOf(x)));
+      if (!shuffle) {
+        const rank = new Map(eligibleStream().map((x, i) => [keyOf(x), i]));
+        rest.sort((a, b) => (rank.get(keyOf(a)) ?? Infinity) - (rank.get(keyOf(b)) ?? Infinity));
+      }
       if (shuffle) shuf(rest);                                            // ...shuffled, or left in order
       stream = played.concat([cur], rest); streamStart = 0; qi = played.length;
       queue = stream.slice(0, qi + 1); appendFromStream();
@@ -1157,7 +1216,7 @@
     loopMode = (loopMode + 1) % 3; syncLoopBtn(); syncQFoot(); saveSettings();
     const cur = queue[qi]; if (!cur) return;
     if (loopMode === 1) {                                    // → album mode: confine to this album
-      let s = buildQueue(cur.ai, true); if (!s.length) s = buildQueue(cur.ai, false);
+      let s = buildQueue(cur.ai, true);
       let idx = s.findIndex(x => keyOf(x) === keyOf(cur)); if (idx < 0) { s.unshift(cur); idx = 0; }
       setWindow(s, idx, true); renderQueue(); saveNowPlaying();
     } else if (prev === 1 && !shuffle) {                     // left album mode: back to the whole discography
@@ -1233,7 +1292,7 @@
       return `<li class="q-item" data-i="${i}">
         <div class="q-del" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M9 6V4h6v2M7 6l1 14h8l1-14"/></svg></div>
         <div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${qName(t)}</span><span class="q-a">${esc(a.title)}</span></span>
-          <button class="q-handle" aria-label="Drag to reorder" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></button></div>
+          <span class="q-actions"><button data-q-action="up" aria-label="Move up" ${i === qi + 1 ? 'disabled' : ''}>↑</button><button data-q-action="down" aria-label="Move down" ${i === queue.length - 1 ? 'disabled' : ''}>↓</button><button data-q-action="remove" aria-label="Remove from queue">×</button></span><button class="q-handle" aria-label="Drag to reorder" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></button></div>
       </li>`;
     }).join('');
     syncQFoot();
@@ -1302,6 +1361,22 @@
   /* tap an upcoming item → jump to it (suppressed right after a swipe/drag) */
   let suppressClick = false;
   queueList?.addEventListener('click', e => {
+    const action = e.target.closest('[data-q-action]');
+    if (action) {
+      const i = +action.closest('.q-item').dataset.i;
+      let target = i;
+      if (action.dataset.qAction === 'remove') removeFromQueue(i);
+      else {
+        target = i + (action.dataset.qAction === 'up' ? -1 : 1);
+        if (target <= qi || target >= queue.length) return;
+        [queue[i], queue[target]] = [queue[target], queue[i]];
+        [stream[streamStart + i], stream[streamStart + target]] = [stream[streamStart + target], stream[streamStart + i]];
+        renderQueue(); saveNowPlaying();
+      }
+      const row = queueList.querySelector(`[data-i="${Math.min(target, queue.length - 1)}"]`);
+      (row?.querySelector(`[data-q-action="${action.dataset.qAction}"]:not(:disabled)`) || row?.querySelector('[data-q-action]:not(:disabled)') || queueBtn)?.focus();
+      return;
+    }
     if (suppressClick || e.target.closest('.q-handle')) return;
     const li = e.target.closest('.q-item'); if (!li) return;
     qi = +li.dataset.i; loadCurrent(true);
@@ -1310,7 +1385,7 @@
   /* swipe-left to remove (on the row); the handle is reserved for reordering */
   let swipe = null;
   queueList?.addEventListener('pointerdown', e => {
-    if (e.target.closest('.q-handle')) return;
+    if (e.target.closest('.q-handle, [data-q-action]')) return;
     const row = e.target.closest('.q-row'), item = e.target.closest('.q-item');
     if (!row || !item) return;
     swipe = { item, row, x0: e.clientX, y0: e.clientY, dx: 0, active: false, decided: false, id: e.pointerId };
@@ -1475,31 +1550,28 @@
   function setMediaSession(a, t) {
     if (!('mediaSession' in navigator)) return;
     const art = a.cover_url;
-    navigator.mediaSession.metadata = new MediaMetadata({
+    try { navigator.mediaSession.metadata = new MediaMetadata({
       title: disp(t) + (t.instrumental ? ' (inst)' : ''), artist: a.artist || ART.mediaArtist || ART.name || '', album: a.title,
       // Cover URLs are AVIF in the current catalogue. Omitting `type` avoids falsely declaring them JPEG
       // and lets the OS/browser decode any format it supports.
       artwork: ['256x256','512x512','1000x1000'].map(s => ({ src: art, sizes: s }))
-    });
+    }); } catch (e) { recordPlayback('metadata-unavailable'); }
     const set = (action, fn) => { try { navigator.mediaSession.setActionHandler(action, fn); } catch (e) {} };
     set('play',  () => resumePlayback());
-    set('pause', () => { wantPlay = false; audio.pause(); setPlaybackState('paused'); });
+    set('pause', () => {
+      if (navigator.audioSession?.state === 'interrupted' && wantPlay) markInterrupted();
+      else pausePlayback();
+    });
     set('nexttrack', next);
     set('previoustrack', prev);
     set('seekbackward', e => { applySeek(audio.currentTime - (e.seekOffset || 10)); updatePositionState(); });
     set('seekforward', e => { applySeek(audio.currentTime + (e.seekOffset || 10)); updatePositionState(); });
-    set('stop', () => { wantPlay = false; audio.pause(); setPlaybackState('paused'); });
+    set('stop', pausePlayback);
     set('seekto', e => { applySeek(e.seekTime); updatePositionState(); });   // lock-screen / Control Center scrubber
     updatePositionState();
   }
 
-  /* Re-register the Now Playing session for the currently-loaded track. iOS gives
-     the hardware / earbud media button to whichever app most recently owns the
-     session; an interruption (call, another app) hands ownership to a native app
-     like Spotify. Re-asserting metadata + handlers whenever we regain the
-     foreground is what lets us reclaim the button back — resuming audio alone
-     doesn't re-route the controls. Also keeps the lock-screen card "warm" so the
-     user can tap play *there* instead of the hardware button. */
+  // Publish metadata and handlers. The OS still decides which app receives media commands.
   function reassertMediaSession() {
     if (!('mediaSession' in navigator)) return;
     const q = queue[qi]; if (!q) return;
@@ -1509,14 +1581,18 @@
     navigator.mediaSession.playbackState = playbackState === 'playing' ? 'playing' : 'paused';
   }
 
-  /* ── iOS: best-effort resume after an audio interruption ──────────────
-     When another app grabs audio focus, Safari pauses us and does NOT
-     auto-resume. When we regain the foreground, re-claim the media session
-     (so the earbud button routes back to us) and, if the user still intends
-     playback, resume. iOS may still block resume without a gesture, so that
-     part is best-effort and silently no-ops on failure — but the re-claim
-     re-registers us as the Now Playing app regardless. */
-  function tryResume() { reassertMediaSession(); if (wantPlay && audio.paused && audio.src) resumePlayback(); }
+  // Resume only when returning to the page, or when a supported Audio Session reports
+  // the interruption has ended. Never spend retry budgets fighting another app in the background.
+  function tryResume() {
+    recordPlayback('foreground');
+    if (wantPlay && audio.src && navigator.audioSession?.state !== 'interrupted' &&
+        (audio.paused || interrupted)) resumePlayback(false);
+  }
+  navigator.audioSession?.addEventListener?.('statechange', () => {
+    recordPlayback('audio-session');
+    if (navigator.audioSession.state === 'interrupted') markInterrupted();
+    else if (interrupted && wantPlay && !document.hidden) resumePlayback(false);
+  });
   document.addEventListener('visibilitychange', () => { if (!document.hidden) tryResume(); });
   window.addEventListener('focus', tryResume);
   window.addEventListener('pageshow', tryResume);
@@ -1526,9 +1602,10 @@
   // Load a specific track paused (autoplay is blocked before a user gesture) — for shared #np links.
   function cueTrack(ai, ti) {
     const track = (ALB[ai] && ALB[ai].tracks[ti]) ? { ai, ti, inst: !!ALB[ai].tracks[ti].instrumental } : null;
+    if (track && excludeInst && track.inst) { toast('Instrumental tracks are excluded'); return; }
     const s = eligibleStream();
     let idx = s.findIndex(x => x.ai === ai && x.ti === ti);
-    if (idx < 0 && track) { let ins = s.findIndex(y => y.ai === ai); if (ins < 0) ins = 0; s.splice(ins, 0, track); idx = ins; }
+    if (idx < 0 && track && !(excludeInst && track.inst)) { let ins = s.findIndex(y => y.ai === ai); if (ins < 0) ins = 0; s.splice(ins, 0, track); idx = ins; }
     shuffle = false; syncShuffleBtn();
     setWindow(s, idx < 0 ? 0 : idx);
     loadCurrent(false);

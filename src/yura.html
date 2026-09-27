@@ -6,7 +6,7 @@ permalink: /yura/
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Yura Archive</title>
   <meta name="description" content="A streaming player for the Hatsuki Yura / La Bella Luna discography. Fan preservation." />
   <!-- Japanese album/track titles are proper nouns, not text to translate; the page is mostly
@@ -358,6 +358,8 @@ permalink: /yura/
     <span>Install app</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
   </button>
+  <button type="button" class="set-install" id="set-playback-report">Download playback report</button>
+  <p class="set-note">If playback stops, save this report to share with the maintainer. It stays on your device until you share it.</p>
   <div class="set-foot">
     <span class="set-storage" id="set-storage"></span>
     <button type="button" class="set-clear" id="set-clear" hidden>Clear</button>
@@ -526,6 +528,7 @@ permalink: /yura/
     });
   })();
 </script>
+<script src="/assets/js/yura-mobile.js"></script>
 <script src="/assets/js/lastfm.js"></script>
 <script src="/assets/js/player.js"></script>
 <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{});</script>

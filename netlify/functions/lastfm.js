@@ -27,6 +27,7 @@ async function call(params) {
   const res = await fetch('https://ws.audioscrobbler.com/2.0/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    signal: AbortSignal.timeout(10000),
     body: new URLSearchParams({ ...params, api_sig, format: 'json' }),
   });
   return res.json();
@@ -44,7 +45,7 @@ exports.handler = async (event) => {
   if (!API_KEY || !SECRET) return { statusCode: 500, headers, body: JSON.stringify({ error: 'server not configured' }) };
 
   let body;
-  try { body = JSON.parse(event.body || '{}'); } catch { return { statusCode: 400, headers, body: JSON.stringify({ error: 'bad request' }) }; }
+  try { body = JSON.parse(event.body || '{}'); if (!body || typeof body !== 'object' || Array.isArray(body)) throw new Error('bad body'); } catch { return { statusCode: 400, headers, body: JSON.stringify({ error: 'bad request' }) }; }
 
   try {
     // The public api_key is served from here (env only) so it isn't hardcoded in the build output,
@@ -70,7 +71,7 @@ exports.handler = async (event) => {
       if (body.duration) params.duration = String(Math.round(body.duration));
       if (body.action === 'scrobble') params.timestamp = String(body.timestamp || Math.floor(Date.now() / 1000));
       const data = await call(params);
-      if (data.error) return { statusCode: 400, headers, body: JSON.stringify({ error: data.message || 'lastfm error', code: data.error }) };
+      if (data.error) return { statusCode: [11, 16, 29].includes(Number(data.error)) ? 503 : Number(data.error) === 9 ? 401 : 400, headers, body: JSON.stringify({ error: data.message || 'lastfm error', code: data.error }) };
       // Last.fm can answer HTTP-success while explicitly ignoring a submitted scrobble. Surface
       // that result to the client so it does not count an ignored submission as delivered.
       const attr = data.scrobbles && (data.scrobbles['@attr'] || data.scrobbles);

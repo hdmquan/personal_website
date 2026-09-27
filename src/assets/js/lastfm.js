@@ -29,6 +29,7 @@
         throw err;
       }); });
   }
+  var listened = 0, sample = null;
   var curKey = null, scrobbled = false, sending = false, retryTimer = null;
   function key(m) { return m ? (m.artist + '' + m.track + '' + (m.startedAt || 0)) : null; }
   function scheduleDrain() {
@@ -38,7 +39,7 @@
   // Store pending scrobbles before sending. A request may be cancelled when a mobile browser is
   // backgrounded; retaining it means the next visit retries instead of silently losing the listen.
   function drain() {
-    if (sending || !session()) return;
+    if (sending || retryTimer || !session()) return;
     var q = getOutbox(), item = q[0];
     if (!item) return;
     // Never submit queued plays to a different account after a re-login.
@@ -64,7 +65,7 @@
       } else scheduleDrain();
     }).then(function () {
       sending = false;
-      if (succeeded && getOutbox().length) drain();
+      if ((succeeded || !getOutbox().some(function (x) { return x.id === item.id; })) && getOutbox().length) drain();
     });
   }
   function enqueue(m) {
@@ -80,15 +81,24 @@
   var S = {
     enabled: !!session(),
     refresh: function () { S.enabled = !!session(); if (S.enabled) drain(); },
-    track: function (m) { curKey = key(m); scrobbled = false; },        // new track loaded
+    track: function (m) { curKey = key(m); scrobbled = false; listened = 0; sample = null; },        // new track loaded
     playing: function (m) {                                             // playback started → now-playing ping
       if (key(m) !== curKey) { curKey = key(m); scrobbled = false; }
       post({ action: 'nowPlaying', artist: m.artist, track: m.track, album: m.album, duration: m.duration }).catch(function () {});
     },
-    tick: function (m, cur, dur) {                                      // Last.fm rule: >30s, played ≥half or 4min
-      if (scrobbled || !m) return;
+    suspend: function () { sample = null; },
+    tick: function (m, cur, dur, playing) {                                      // Last.fm rule: >30s, played ≥half or 4min
+      if (!S.enabled || scrobbled || !m) return;
+      if (!playing) { sample = null; return; }
+      var now = performance.now();
+      if (sample) {
+        var delta = cur - sample.cur, elapsed = (now - sample.at) / 1000;
+        // Both clocks must agree: seeking cannot manufacture listening time.
+        if (delta > 0 && delta <= elapsed + 1) listened += Math.min(delta, elapsed);
+      }
+      sample = { cur: cur, at: now };
       dur = dur || m.duration || 0;
-      if (dur > 30 && cur >= Math.min(dur / 2, 240)) {
+      if (dur > 30 && listened >= Math.min(dur / 2, 240)) {
         enqueue(m);
       }
     },
