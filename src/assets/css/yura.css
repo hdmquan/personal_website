@@ -1136,10 +1136,3 @@ body.inst-off .trk.is-inst:not(.playing) { opacity: .35; pointer-events: none; }
   padding: .3rem; box-shadow: 0 14px 38px var(--sh-deep); display: flex; flex-direction: column; gap: .1rem;
 }
 .album-menu[hidden] { display: none; }
-
-/* Explicit queue actions complement swipe/drag and remain keyboard accessible. */
-.q-actions { grid-column: 2; display: flex; gap: 8px; }
-.q-actions button { min-width: 44px; min-height: 44px; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: 6px; cursor: pointer; }
-.q-actions button:disabled { opacity: .35; cursor: default; }
-.q-actions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.q-row > .q-handle { grid-column: 3; grid-row: 1 / span 2; }

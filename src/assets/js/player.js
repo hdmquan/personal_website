@@ -1292,7 +1292,7 @@
       return `<li class="q-item" data-i="${i}">
         <div class="q-del" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M9 6V4h6v2M7 6l1 14h8l1-14"/></svg></div>
         <div class="q-row">${qCover(a)}<span class="q-meta"><span class="q-t">${qName(t)}</span><span class="q-a">${esc(a.title)}</span></span>
-          <span class="q-actions"><button data-q-action="up" aria-label="Move up" ${i === qi + 1 ? 'disabled' : ''}>↑</button><button data-q-action="down" aria-label="Move down" ${i === queue.length - 1 ? 'disabled' : ''}>↓</button><button data-q-action="remove" aria-label="Remove from queue">×</button></span><button class="q-handle" aria-label="Drag to reorder" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></button></div>
+          <button class="q-handle" aria-label="Drag to reorder" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h16"/></svg></button></div>
       </li>`;
     }).join('');
     syncQFoot();
@@ -1361,22 +1361,6 @@
   /* tap an upcoming item → jump to it (suppressed right after a swipe/drag) */
   let suppressClick = false;
   queueList?.addEventListener('click', e => {
-    const action = e.target.closest('[data-q-action]');
-    if (action) {
-      const i = +action.closest('.q-item').dataset.i;
-      let target = i;
-      if (action.dataset.qAction === 'remove') removeFromQueue(i);
-      else {
-        target = i + (action.dataset.qAction === 'up' ? -1 : 1);
-        if (target <= qi || target >= queue.length) return;
-        [queue[i], queue[target]] = [queue[target], queue[i]];
-        [stream[streamStart + i], stream[streamStart + target]] = [stream[streamStart + target], stream[streamStart + i]];
-        renderQueue(); saveNowPlaying();
-      }
-      const row = queueList.querySelector(`[data-i="${Math.min(target, queue.length - 1)}"]`);
-      (row?.querySelector(`[data-q-action="${action.dataset.qAction}"]:not(:disabled)`) || row?.querySelector('[data-q-action]:not(:disabled)') || queueBtn)?.focus();
-      return;
-    }
     if (suppressClick || e.target.closest('.q-handle')) return;
     const li = e.target.closest('.q-item'); if (!li) return;
     qi = +li.dataset.i; loadCurrent(true);
@@ -1385,7 +1369,7 @@
   /* swipe-left to remove (on the row); the handle is reserved for reordering */
   let swipe = null;
   queueList?.addEventListener('pointerdown', e => {
-    if (e.target.closest('.q-handle, [data-q-action]')) return;
+    if (e.target.closest('.q-handle')) return;
     const row = e.target.closest('.q-row'), item = e.target.closest('.q-item');
     if (!row || !item) return;
     swipe = { item, row, x0: e.clientX, y0: e.clientY, dx: 0, active: false, decided: false, id: e.pointerId };
