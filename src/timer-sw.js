@@ -1,0 +1,24 @@
+const CACHE = "accountability-timer-v2";
+const SHELL = ["/timer/", "/assets/css/timer.css", "/assets/js/timer-core.js", "/assets/js/timer.js", "/assets/fonts/Nexa-Heavy.ttf", "/assets/fonts/baskervville-v19-latin-regular.woff2"];
+self.addEventListener("install", (event) => {
+  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));
+});
+self.addEventListener("activate", (event) => {
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key.startsWith("accountability-timer-") && key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim()));
+});
+self.addEventListener("fetch", (event) => {
+  const request = event.request;
+  if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
+  if (new URL(request.url).pathname.startsWith("/.netlify/")) return;
+  event.respondWith(fetch(request).then((response) => {
+    if (response.ok) caches.open(CACHE).then((cache) => cache.put(request, response.clone()));
+    return response;
+  }).catch(() => caches.match(request).then((hit) => hit || caches.match("/timer/"))));
+});
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(clients.matchAll({ type: "window", includeUncontrolled: true }).then((windows) => {
+    const existing = windows.find((client) => new URL(client.url).pathname.startsWith("/timer"));
+    return existing ? existing.focus() : clients.openWindow("/timer/");
+  }));
+});

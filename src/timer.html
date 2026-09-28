@@ -1,153 +1,67 @@
 ---
 permalink: /timer/
 ---
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Timer</title>
-  <meta name="description" content="A minimal speedcube timer." />
-  <meta name="robots" content="noindex" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="/assets/css/timer.css" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
-  <meta name="theme-color" content="#eef" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#eff2df">
+  <meta name="description" content="A quiet personal time-accountability tool.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Today">
+  <title>Today — time accountability</title>
+  <link rel="manifest" href="/assets/timer.webmanifest">
+  <link rel="apple-touch-icon" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="icon" href="/assets/favicons/favicon-32x32.png">
+  <link rel="stylesheet" href="/assets/css/timer.css">
 </head>
 <body>
-
-<!-- Background image. Drop the artwork at /assets/images/timer-bg.jpg -->
-<div id="bg" aria-hidden="true"></div>
-
-<!-- ===== Main timer view ===== -->
-<main id="app">
-
-  <!-- Scramble -->
-  <div id="scramble-bar">
-    <button id="menu-btn" class="mini-btn" aria-haspopup="true" aria-label="Menu" title="Menu">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="19" r="1.7"/></svg>
-    </button>
-    <button id="scramble-prev" class="mini-btn" title="Previous scramble" aria-label="Previous scramble">‹</button>
-    <div id="scramble" role="text" aria-live="polite"></div>
-    <button id="scramble-next" class="mini-btn" title="New scramble" aria-label="New scramble">↻</button>
-  </div>
-
-  <!-- Timer -->
-  <div id="timer-zone">
-    <div id="time">0.00</div>
-    <div id="hint">tap / space to inspect</div>
-  </div>
-
-  <!-- Stats panel (floating) -->
-  <aside id="panel" class="panel">
-    <div class="panel-head">
-      <span id="session-label">Session</span>
-      <button id="panel-collapse" class="mini-btn" title="Collapse" aria-label="Collapse panel">–</button>
-    </div>
-    <table id="stat-table">
-      <thead><tr><th></th><th>current</th><th>best</th></tr></thead>
-      <tbody>
-        <tr><th>time</th><td id="cur-time">–</td><td id="best-time">–</td></tr>
-        <tr><th>mo3</th> <td id="cur-mo3">–</td><td id="best-mo3">–</td></tr>
-        <tr><th>ao5</th> <td id="cur-ao5">–</td><td id="best-ao5">–</td></tr>
-        <tr><th>ao12</th><td id="cur-ao12">–</td><td id="best-ao12">–</td></tr>
-      </tbody>
-    </table>
-    <div id="solve-summary"></div>
-    <ol id="solve-list" aria-label="Solve history"></ol>
-    <div class="panel-foot">
-      <button id="btn-clear" class="text-btn" title="Clear this session">clear</button>
-      <span id="sync-dot" title="Sync status">●</span>
-    </div>
-    <!-- VS standings (shown only while a VS game is running) -->
-    <div id="vs-standings">
-      <div id="vs-turn-line" class="vs-turn-line"></div>
-      <div id="vs-scores" class="vs-scores"></div>
-      <button id="vs-exit" class="text-btn">Exit VS</button>
-    </div>
-  </aside>
-
-  <!-- Cube net preview -->
-  <div id="cube-wrap">
-    <div id="cube-net" class="net" aria-label="Scrambled cube preview"></div>
-  </div>
-
-  <!-- Bottom controls -->
-  <div id="controls">
-    <button id="btn-vs" class="pill">VS mode</button>
-    <button id="btn-settings" class="pill" aria-haspopup="true">settings</button>
-  </div>
-
-  <!-- Last-solve penalty bar (shows after a solve) -->
-  <div id="penalty-bar" hidden>
-    <button data-pen="ok"    class="pen">OK</button>
-    <button data-pen="plus2" class="pen">+2</button>
-    <button data-pen="dnf"   class="pen">DNF</button>
-    <button data-pen="del"   class="pen danger">delete</button>
-  </div>
-
-</main>
-
-<!-- ===== Mobile kebab menu ===== -->
-<div id="menu-pop" class="pop" hidden>
-  <button id="menu-vs" class="menu-item">VS mode</button>
-  <button id="menu-settings" class="menu-item">Settings</button>
-</div>
-
-<!-- ===== Settings popover ===== -->
-<div id="settings-pop" class="pop" hidden>
-  <label class="pop-row">
-    <span>Inspection (15s)</span>
-    <input type="checkbox" id="opt-inspection" checked />
-  </label>
-  <label class="pop-row">
-    <span>Hold to start</span>
-    <input type="checkbox" id="opt-hold" checked />
-  </label>
-  <label class="pop-row">
-    <span>Show cube preview</span>
-    <input type="checkbox" id="opt-cube" checked />
-  </label>
-  <label class="pop-row">
-    <span>Hide time while solving</span>
-    <input type="checkbox" id="opt-hidetime" checked />
-  </label>
-</div>
-
-<!-- ===== VS mode overlay ===== -->
-<div id="vs" class="overlay" hidden>
-  <div class="vs-card">
-    <!-- setup -->
-    <div id="vs-setup" class="vs-panel">
-      <h2>VS</h2>
-      <p class="vs-sub">Same scramble for everyone. Local only.</p>
-      <label class="vs-field"><span>Players</span><input type="number" id="vs-n" min="2" max="12" value="2" /></label>
-      <div id="vs-names"></div>
-      <div class="vs-actions">
-        <button id="vs-start" class="pill accent">Start</button>
-        <button id="vs-cancel" class="pill">Cancel</button>
+  <main class="shell" id="app">
+    <header class="masthead">
+      <p class="eyebrow" id="today-date"></p>
+      <button class="quiet-action" id="notification-button" type="button" hidden>Enable alerts</button>
+    </header>
+    <section class="hero" aria-labelledby="today-label">
+      <div class="hero-shape" aria-hidden="true"></div>
+      <p class="time" id="verified-time" aria-live="polite">0m</p>
+      <h1 id="today-label">Today</h1>
+      <p class="session-status" id="session-status">Ready when you are.</p>
+      <button class="timer-button" id="timer-button" type="button">Start</button>
+    </section>
+    <section class="section todos-section" aria-labelledby="todos-heading">
+      <div class="section-heading"><h2 id="todos-heading">Today</h2><span id="todo-count" aria-live="polite"></span></div>
+      <ul class="todo-list" id="todo-list"></ul>
+      <form class="todo-form" id="todo-form" hidden>
+        <label class="sr-only" for="todo-input">New todo</label>
+        <input id="todo-input" maxlength="180" autocomplete="off" placeholder="What needs doing?">
+        <button class="sr-only" type="submit">Save todo</button>
+      </form>
+      <button class="add-button" id="add-button" type="button"><span aria-hidden="true">＋</span> Add</button>
+    </section>
+    <section class="section week-section" aria-labelledby="week-heading">
+      <div class="section-heading week-heading-row"><h2 id="week-heading">This week</h2><p><span id="week-average">0m</span> average</p></div>
+      <div class="chart-wrap"><div class="y-axis" aria-hidden="true"><span>8h</span><span>4h</span><span>0</span></div><div class="chart" id="week-chart" role="list" aria-label="Verified time over the last seven days"></div></div>
+      <div class="day-detail" id="day-detail" hidden>
+        <div class="day-detail-heading"><h3 id="detail-title"></h3><button id="detail-close" type="button">Close</button></div>
+        <ul id="detail-list"></ul>
       </div>
+    </section>
+    <footer><span>Time is counted only when you check in.</span><span id="sync-status" aria-live="polite"></span></footer>
+  </main>
+  <section class="takeover" id="checkin-takeover" hidden aria-labelledby="checkin-title">
+    <div class="takeover-inner"><p class="eyebrow">15 minutes complete</p><h2 id="checkin-title">What did you do in the last 15 minutes?</h2>
+      <form id="checkin-form"><label class="sr-only" for="checkin-input">Your check-in</label><textarea id="checkin-input" rows="4" maxlength="600" aria-describedby="checkin-help" placeholder="A short, specific note…"></textarea><div class="checkin-meta"><span id="checkin-help">At least 20 characters</span><span id="checkin-count">0 / 20</span></div><button class="submit-button" id="checkin-submit" disabled>Continue working</button></form>
+      <button class="stop-link" id="checkin-stop" type="button">Stop session</button>
     </div>
-
-    <!-- play happens on the main interface; standings render in the panel -->
-
-    <!-- results -->
-    <div id="vs-results" class="vs-panel" hidden>
-      <h2>Results</h2>
-      <div id="vs-board"></div>
-      <div class="vs-actions">
-        <button id="vs-again" class="pill accent">Rematch</button>
-        <button id="vs-done" class="pill">Done</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="/assets/js/timer.js"></script>
+  </section>
+  <section class="takeover expired" id="expired-takeover" hidden aria-labelledby="expired-title">
+    <div class="takeover-inner"><p class="eyebrow">Yesterday is finished</p><h2 id="expired-title">You left these unfinished</h2><ul class="expired-list" id="expired-list"></ul><button class="submit-button" id="expired-ack" type="button">Got it</button></div>
+  </section>
+  <noscript>This timer requires JavaScript to preserve session state.</noscript>
+  <script src="/assets/js/timer-core.js"></script>
+  <script src="/assets/js/timer.js"></script>
 </body>
 </html>

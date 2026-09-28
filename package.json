@@ -12,7 +12,7 @@
         "watch:cms": "npx decap-server",
         "start": "del-cli ./public --force && npm-run-all --parallel watch:*",
         "build": "npm test && run-s gen:decap build:sass build:eleventy",
-        "test": "node scripts/test-yura-playback.cjs && node scripts/test-yura-state.cjs && node scripts/test-yura-recovery.cjs"
+        "test": "node scripts/test-yura-playback.cjs && node scripts/test-yura-state.cjs && node scripts/test-yura-recovery.cjs && node scripts/test-accountability-timer.cjs"
     },
     "engines": {
         "node": ">=16.0.0",

@@ -1,722 +1,190 @@
-/* ============================================================
-   /timer — a minimal speedcube timer (3x3)
-   Single file, plain JS, bundled by esbuild.
-   - Cube engine (3D cubie model, validated by invariants)
-   - Random-move scrambler
-   - Cube-net preview
-   - Inspection + timer state machine (keyboard + touch)
-   - Penalties (+2 / DNF / delete), ao5 / ao12 / mo3 stats
-   - VS mode (local only, never synced)
-   - Supabase sync via /.netlify/functions/timer, localStorage-first
-   ============================================================ */
 (function () {
   "use strict";
-
-  // ---------- tiny helpers ----------
+  const C = window.TimerCore, API = "/.netlify/functions/timer", KEY = "accountability_timer_v1";
   const $ = (id) => document.getElementById(id);
-  const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
-  const uid = () => (Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
+  const uuid = () => crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+  const iso = (ms = Date.now()) => new Date(ms).toISOString();
+  const parse = (v) => { try { return JSON.parse(v); } catch (_) { return null; } };
+  const empty = () => ({ todos: [], sessions: [], blocks: [], outbox: [], activeSessionId: null, notifiedBlock: null });
+  let data = Object.assign(empty(), parse(localStorage.getItem(KEY)) || {});
+  let notificationTimer = 0, syncing = false;
 
-  // ============================================================
-  // CUBE ENGINE  (faces U=+y D=-y R=+x L=-x F=+z B=-z)
-  // ============================================================
-  const FACES = ["U", "R", "F", "D", "L", "B"];
-  const DIRV = { U: [0, 1, 0], D: [0, -1, 0], R: [1, 0, 0], L: [-1, 0, 0], F: [0, 0, 1], B: [0, 0, -1] };
-  const vecFace = (v) => {
-    for (const f in DIRV) { const d = DIRV[f]; if (d[0] === v[0] && d[1] === v[1] && d[2] === v[2]) return f; }
-    return null;
-  };
-  // clockwise (viewed from outside) rotations
-  const MOVES = {
-    U: { sel: (c) => c.p[1] === 1,  rot: ([x, y, z]) => [-z, y, x] },
-    D: { sel: (c) => c.p[1] === -1, rot: ([x, y, z]) => [z, y, -x] },
-    R: { sel: (c) => c.p[0] === 1,  rot: ([x, y, z]) => [x, z, -y] },
-    L: { sel: (c) => c.p[0] === -1, rot: ([x, y, z]) => [x, -z, y] },
-    F: { sel: (c) => c.p[2] === 1,  rot: ([x, y, z]) => [y, -x, z] },
-    B: { sel: (c) => c.p[2] === -1, rot: ([x, y, z]) => [-y, x, z] },
-  };
-  function solvedCube() {
-    const cubies = [];
-    for (let x = -1; x <= 1; x++)
-      for (let y = -1; y <= 1; y++)
-        for (let z = -1; z <= 1; z++) {
-          const s = {};
-          if (y === 1) s.U = "U"; if (y === -1) s.D = "D";
-          if (x === 1) s.R = "R"; if (x === -1) s.L = "L";
-          if (z === 1) s.F = "F"; if (z === -1) s.B = "B";
-          cubies.push({ p: [x, y, z], s });
-        }
-    return cubies;
+  function save() { localStorage.setItem(KEY, JSON.stringify(data)); }
+  function activeSession() { return data.sessions.find((s) => s.id === data.activeSessionId && !s.ended_at) || null; }
+  function queue(kind, record) {
+    record.updated_at = iso();
+    const index = data.outbox.findIndex((x) => x.kind === kind && x.record.id === record.id);
+    const item = { kind, record: Object.assign({}, record) };
+    if (index >= 0) data.outbox[index] = item; else data.outbox.push(item);
+    save(); flush();
   }
-  function turn(cubies, name) {
-    const m = MOVES[name];
-    return cubies.map((c) => {
-      if (!m.sel(c)) return c;
-      const np = m.rot(c.p), ns = {};
-      for (const f in c.s) ns[vecFace(m.rot(DIRV[f]))] = c.s[f];
-      return { p: np, s: ns };
+  function merge(list, incoming) {
+    incoming.forEach((record) => {
+      const i = list.findIndex((x) => x.id === record.id);
+      if (i < 0) list.push(record);
+      else if (new Date(record.updated_at || 0) > new Date(list[i].updated_at || 0)) list[i] = record;
     });
   }
-  function applyScramble(scr) {
-    let c = solvedCube();
-    for (const tok of scr.trim().split(/\s+/).filter(Boolean)) {
-      const face = tok[0], times = tok.endsWith("2") ? 2 : tok.endsWith("'") ? 3 : 1;
-      for (let i = 0; i < times; i++) c = turn(c, face);
-    }
-    return c;
-  }
-  // net extraction
-  const FACEDEF = {
-    U: { right: [1, 0, 0],  down: [0, 0, 1]  },
-    L: { right: [0, 0, 1],  down: [0, -1, 0] },
-    F: { right: [1, 0, 0],  down: [0, -1, 0] },
-    R: { right: [0, 0, -1], down: [0, -1, 0] },
-    B: { right: [-1, 0, 0], down: [0, -1, 0] },
-    D: { right: [1, 0, 0],  down: [0, 0, -1] },
-  };
-  const at = (cubies, p) => cubies.find((c) => c.p[0] === p[0] && c.p[1] === p[1] && c.p[2] === p[2]);
-  function faceGrid(cubies, face) {
-    const n = DIRV[face], { right, down } = FACEDEF[face], out = [];
-    for (let r = -1; r <= 1; r++)
-      for (let cc = -1; cc <= 1; cc++)
-        out.push(at(cubies, [
-          n[0] + right[0] * cc + down[0] * r,
-          n[1] + right[1] * cc + down[1] * r,
-          n[2] + right[2] * cc + down[2] * r,
-        ]).s[face]);
-    return out;
-  }
-
-  // ---------- scrambler (random-move, WCA-style avoidance) ----------
-  const SFACES = ["U", "D", "R", "L", "F", "B"];
-  const AXIS = { U: 0, D: 0, R: 1, L: 1, F: 2, B: 2 };
-  const SUF = ["", "'", "2"];
-  function scramble(len) {
-    len = len || 22;
-    const out = [];
-    let last = -1, prev = -1;
-    while (out.length < len) {
-      const f = SFACES[(Math.random() * 6) | 0];
-      if (f === last) continue;
-      if (AXIS[f] === AXIS[last] && AXIS[last] === AXIS[prev]) continue;
-      out.push(f + SUF[(Math.random() * 3) | 0]);
-      prev = last; last = f;
-    }
-    return out.join(" ");
-  }
-
-  // ============================================================
-  // TIME + STATS
-  // ============================================================
-  const fmt = (ms) => {
-    if (ms == null) return "–";
-    const s = ms / 1000;
-    if (s >= 60) { const m = Math.floor(s / 60), r = s - m * 60; return m + ":" + (r < 10 ? "0" : "") + r.toFixed(2); }
-    return s.toFixed(2);
-  };
-  // effective time in ms for a solve, or Infinity for DNF
-  const eff = (sv) => sv.penalty === "dnf" ? Infinity : sv.ms + (sv.penalty === "plus2" ? 2000 : 0);
-  const label = (sv) => {
-    if (sv.penalty === "dnf") return "DNF";
-    return fmt(sv.ms + (sv.penalty === "plus2" ? 2000 : 0)) + (sv.penalty === "plus2" ? "+" : "");
-  };
-  // WCA average of the last n solves (trim best+worst, mean of middle). DNFs count as worst.
-  function avgOf(list, n) {
-    if (list.length < n) return null;
-    const slice = list.slice(-n).map(eff);
-    const dnf = slice.filter((x) => x === Infinity).length;
-    const trim = n <= 3 ? 0 : 1; // mo3 = plain mean; ao5/ao12 trim 1 each end
-    if (dnf > trim) return Infinity;
-    const sorted = slice.slice().sort((a, b) => a - b);
-    const kept = trim ? sorted.slice(trim, n - trim) : sorted;
-    const sum = kept.reduce((a, b) => a + b, 0);
-    return sum / kept.length;
-  }
-  // best rolling average across the whole session
-  function bestAvg(list, n) {
-    let best = null;
-    for (let i = n; i <= list.length; i++) {
-      const a = avgOf(list.slice(0, i), n);
-      if (a != null && a !== Infinity && (best == null || a < best)) best = a;
-    }
-    return best;
-  }
-  const fmtAvg = (a) => a == null ? "–" : a === Infinity ? "DNF" : fmt(a);
-
-  // ============================================================
-  // SYNC LAYER  (localStorage-first, Supabase best-effort)
-  // ============================================================
-  const API = "/.netlify/functions/timer";
-  const LS_SOLVES = "cube_solves_v1";
-  const LS_OUTBOX = "cube_outbox_v1";
-
-  const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } };
-  const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
-
-  const Store = {
-    solves: load(LS_SOLVES, []),
-    outbox: load(LS_OUTBOX, []),
-    persist() { save(LS_SOLVES, this.solves); },
-    persistOutbox() { save(LS_OUTBOX, this.outbox); },
-
-    add(sv) { this.solves.push(sv); this.persist(); this.queue({ op: "upsert", solve: sv }); },
-    update(sv) { this.persist(); this.queue({ op: "upsert", solve: sv }); },
-    remove(id) {
-      const i = this.solves.findIndex((s) => s.id === id);
-      if (i >= 0) { this.solves.splice(i, 1); this.persist(); }
-      this.queue({ op: "delete", id });
-    },
-    clearAll() {
-      const ids = this.solves.map((s) => s.id);
-      this.solves = []; this.persist();
-      ids.forEach((id) => this.queue({ op: "delete", id }));
-    },
-
-    queue(op) { this.outbox.push(op); this.persistOutbox(); syncFlush(); },
-  };
-
-  let syncing = false;
-  function setDot(state) { const d = $("sync-dot"); if (d) d.className = state; }
-
-  async function post(body) {
-    const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-    if (!r.ok) throw new Error("http " + r.status);
-    return r.json();
-  }
-
-  async function syncFlush() {
-    if (syncing || !Store.outbox.length) return;
-    syncing = true; setDot("busy");
+  async function flush() {
+    if (syncing || !navigator.onLine || !data.outbox.length) return;
+    syncing = true; renderSync("Saving…");
     try {
-      while (Store.outbox.length) {
-        const op = Store.outbox[0];
-        await post(op);
-        Store.outbox.shift(); Store.persistOutbox();
+      while (data.outbox.length) {
+        const response = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data.outbox[0]) });
+        if (!response.ok) throw new Error("sync failed");
+        data.outbox.shift(); save();
       }
-      setDot("ok");
-    } catch (e) {
-      // offline or function not deployed (e.g. local dev) — keep the queue, try later
-      setDot("off");
-    } finally { syncing = false; }
+      renderSync("");
+    } catch (_) { renderSync("Offline"); }
+    finally { syncing = false; }
   }
-
-  // pull remote and merge in anything we don't have locally (added from another browser)
-  async function syncPull() {
+  async function pull() {
     try {
-      const r = await fetch(API, { method: "GET" });
-      if (!r.ok) throw new Error("http " + r.status);
-      const { solves } = await r.json();
-      if (!Array.isArray(solves)) return;
-      const have = new Set(Store.solves.map((s) => s.id));
-      let changed = false;
-      for (const s of solves) if (!have.has(s.id)) { Store.solves.push(s); changed = true; }
-      if (changed) { Store.solves.sort((a, b) => a.ts - b.ts); Store.persist(); renderStats(); }
-      setDot(Store.outbox.length ? "off" : "ok");
-    } catch { setDot("off"); }
+      const response = await fetch(API);
+      if (!response.ok) throw new Error("pull failed");
+      const remote = await response.json();
+      merge(data.todos, remote.todos || []); merge(data.sessions, remote.sessions || []); merge(data.blocks, remote.blocks || []);
+      const active = data.sessions.filter((s) => !s.ended_at).sort((a, b) => new Date(b.started_at) - new Date(a.started_at))[0];
+      data.activeSessionId = active ? active.id : null; save(); render();
+    } catch (_) { if (!navigator.onLine) renderSync("Offline"); }
   }
 
-  // ============================================================
-  // MAIN TIMER UI
-  // ============================================================
-  const opts = Object.assign({ inspection: true, hold: true, cube: true, hideTime: true }, load("cube_opts_v1", {}));
-  const saveOpts = () => save("cube_opts_v1", opts);
-
-  let curScramble = scramble();
-  let scrambleHistory = [curScramble];
-  let scrambleIdx = 0;
-
-  // timer state machine
-  const S = { IDLE: 0, INSPECT: 1, HOLD: 2, RUNNING: 3, REVIEW: 4 };
-  let state = S.IDLE;
-  let startT = 0, raf = 0;
-  let inspectStart = 0, inspectPenalty = "ok", inspTick = 0;
-  let holdTimer = 0, holdReady = false;
-
-  const timeEl = $("time"), hintEl = $("hint");
-  const setTime = (txt) => { timeEl.textContent = txt; };
-  const cls = (name) => { timeEl.className = name || ""; };
-  const hint = (t) => { hintEl.textContent = t; };
-
-  function newScramble() {
-    if (VS.active) return;   // VS controls the scramble per round
-    curScramble = scramble();
-    scrambleHistory.push(curScramble);
-    if (scrambleHistory.length > 50) scrambleHistory.shift();
-    scrambleIdx = scrambleHistory.length - 1;
-    showScramble();
+  function newTodoExpiry(now) { const at = C.expiryFor(now); return at > now ? at : at + 86400000; }
+  function expiredTodos(now = Date.now()) { return data.todos.filter((t) => !t.completed_at && !t.acknowledged_at && new Date(t.expires_at).getTime() <= now); }
+  function showExpiredIfNeeded() {
+    const expired = expiredTodos(); if (!expired.length) return false;
+    $("expired-list").replaceChildren(...expired.map((t) => { const li = document.createElement("li"); li.textContent = t.text; return li; }));
+    $("expired-takeover").hidden = false; document.body.classList.add("locked"); $("expired-ack").focus(); return true;
   }
-  function showScramble() {
-    $("scramble").textContent = curScramble;
-    renderNet(curScramble);
+  function acknowledgeExpired() {
+    const time = iso();
+    expiredTodos().forEach((todo) => { todo.acknowledged_at = time; queue("todo", todo); });
+    $("expired-takeover").hidden = true; document.body.classList.remove("locked"); render();
   }
-  function renderNet(scr) {
-    const cube = applyScramble(scr);
-    const net = $("cube-net"); net.innerHTML = "";
-    for (const f of ["U", "L", "F", "R", "B", "D"]) {
-      const face = el("div", "face " + f);
-      for (const color of faceGrid(cube, f)) { const st = el("div", "st " + color); face.appendChild(st); }
-      net.appendChild(face);
+  function startSession() {
+    const now = iso(), session = { id: uuid(), started_at: now, block_started_at: now, waiting_at: null, ended_at: null, updated_at: now };
+    data.sessions.push(session); data.activeSessionId = session.id; data.notifiedBlock = null;
+    queue("session", session); scheduleBoundary(); render();
+  }
+  function stopSession() {
+    const session = activeSession(); if (!session) return;
+    const status = C.timerStatus(session, Date.now());
+    if (status.state === "running" && status.elapsed >= 1000) {
+      const now = iso(), block = { id: uuid(), session_id: session.id, started_at: session.block_started_at, ended_at: now, duration_seconds: Math.floor(status.elapsed / 1000), reflection: null, verified_at: now, updated_at: now };
+      data.blocks.push(block); queue("block", block);
+    }
+    session.ended_at = iso(); session.waiting_at = null; data.activeSessionId = null; data.notifiedBlock = null;
+    queue("session", session); clearTimeout(notificationTimer); hideCheckin(); render();
+  }
+  function markWaiting() {
+    const session = activeSession(); if (!session || session.waiting_at) return;
+    session.waiting_at = iso(new Date(session.block_started_at).getTime() + C.BLOCK_MS);
+    queue("session", session); signalBoundary(session); render();
+  }
+  function submitCheckin(event) {
+    event.preventDefault();
+    const reflection = $("checkin-input").value.trim(); if (reflection.length < 20) return;
+    const session = activeSession(); if (!session) return;
+    const verified = iso(), block = { id: uuid(), session_id: session.id, started_at: session.block_started_at, ended_at: session.waiting_at || verified, duration_seconds: 900, reflection, verified_at: verified, updated_at: verified };
+    data.blocks.push(block); queue("block", block);
+    session.block_started_at = verified; session.waiting_at = null; data.notifiedBlock = null; queue("session", session);
+    $("checkin-input").value = ""; updateCheckinCount(); hideCheckin(); scheduleBoundary(); render();
+  }
+  function signalBoundary(session) {
+    const token = session.id + ":" + session.block_started_at;
+    if (data.notifiedBlock === token) return;
+    data.notifiedBlock = token; save(); playChime();
+    if ("Notification" in window && Notification.permission === "granted" && document.hidden) {
+      navigator.serviceWorker.ready.then((reg) => reg.showNotification("Time to check in", { body: "What did you do in the last 15 minutes?", tag: "timer-checkin", renotify: false, icon: "/assets/favicons/android-chrome-192x192.png" })).catch(() => {});
     }
   }
-
-  // ---- inspection ----
-  function startInspect() {
-    state = S.INSPECT; inspectStart = performance.now(); inspectPenalty = "ok";
-    hidePenaltyBar();
-    cls("inspect"); hint("hold to start");
-    startInspectTick();
+  function playChime() {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext, ctx = new AudioContext();
+      [0, .12].forEach((delay, i) => { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = i ? 740 : 554; g.gain.setValueAtTime(.0001, ctx.currentTime + delay); g.gain.exponentialRampToValueAtTime(.12, ctx.currentTime + delay + .01); g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + delay + .18); o.connect(g).connect(ctx.destination); o.start(ctx.currentTime + delay); o.stop(ctx.currentTime + delay + .2); });
+    } catch (_) {}
   }
-  function startInspectTick() {
-    clearInterval(inspTick);
-    inspTick = setInterval(() => {
-      const t = (performance.now() - inspectStart) / 1000, remain = 15 - t;
-      if (t > 17) { setTime("DNF"); cls("warn"); }
-      else if (t > 15) { setTime("+2"); cls("warn"); }
-      else { setTime(Math.max(0, Math.ceil(remain)).toString()); cls(remain <= 4 ? "warn" : "inspect"); }
-    }, 50);
+  function scheduleBoundary() {
+    clearTimeout(notificationTimer);
+    const session = activeSession(); if (!session) return;
+    const status = C.timerStatus(session, Date.now());
+    if (status.state === "waiting") { markWaiting(); return; }
+    notificationTimer = setTimeout(markWaiting, status.remaining + 20);
   }
-  function stopInspect() { clearInterval(inspTick); inspTick = 0; }
 
-  // ---- running ----
-  function startRun() {
-    // lock in the inspection penalty from elapsed time at the moment the solve starts
-    if (opts.inspection && inspectStart) {
-      const e = (performance.now() - inspectStart) / 1000;
-      inspectPenalty = e > 17 ? "dnf" : e > 15 ? "plus2" : "ok";
-    } else inspectPenalty = "ok";
-    stopInspect();
-    state = S.RUNNING; startT = performance.now();
-    // start-guard: ignore input for the first 0.5s so a fumbled start can't record a ~0.1s solve
-    inputLockUntil = performance.now() + INPUT_LOCK_MS;
-    cls("running"); hint("");
-    if (opts.hideTime) {
-      // don't show the ticking count during the solve (less nerve-wracking)
-      setTime("solving"); timeEl.classList.add("solving");
-    } else {
-      const tick = () => {
-        if (state !== S.RUNNING) return;
-        setTime(fmt(performance.now() - startT));
-        raf = requestAnimationFrame(tick);
-      };
-      raf = requestAnimationFrame(tick);
+  function todayBlocks() { const key = C.dayKey(new Date()); return data.blocks.filter((b) => C.dayKey(b.verified_at) === key); }
+  function renderTimer() {
+    const session = activeSession(), status = C.timerStatus(session, Date.now());
+    const verified = todayBlocks().reduce((sum, b) => sum + Number(b.duration_seconds), 0);
+    $("verified-time").textContent = C.formatDuration(verified, true);
+    const button = $("timer-button"), label = $("session-status"); button.classList.toggle("is-running", status.state !== "idle");
+    if (status.state === "idle") { button.textContent = "Start"; label.textContent = "Ready when you are."; }
+    if (status.state === "running") {
+      const seconds = Math.ceil(status.remaining / 1000), m = Math.floor(seconds / 60), s = seconds % 60;
+      button.textContent = "Stop"; label.textContent = "Check-in in " + m + ":" + String(s).padStart(2, "0");
     }
+    if (status.state === "waiting") { button.textContent = "Stop"; label.textContent = "Waiting for your check-in."; showCheckin(); }
   }
-  function stopRun() {
-    cancelAnimationFrame(raf);
-    const ms = performance.now() - startT;
-    state = S.IDLE;
-    const pen = inspectPenalty;
-    inspectStart = 0;
-    inputLockUntil = performance.now() + INPUT_LOCK_MS;   // ignore input briefly after a stop
-
-    if (VS.active) {
-      // show this solve's time, record it, advance to the next player
-      setTime(label({ ms: Math.round(ms), penalty: pen })); cls(pen === "dnf" ? "warn" : "");
-      vsRecord(ms, pen);
-      $("penalty-bar").hidden = false;   // OK/+2/DNF/delete edit this VS result
-      return;
-    }
-
-    const sv = { id: uid(), ms: Math.round(ms), penalty: pen, scramble: curScramble, puzzle: "333", ts: Date.now() };
-    Store.add(sv);
-    setTime(label(sv)); cls(sv.penalty === "dnf" ? "warn" : "");
-    hint("any key / tap to inspect");
-    renderStats();
-    showPenaltyBar(sv.id);
-    newScramble();
-  }
-
-  // ---- hold-to-start arming ----
-  function beginHold() {
-    stopInspect();                 // freeze the countdown so the ready/hold colour shows
-    state = S.HOLD; holdReady = false;
-    setTime(currentDisplayForHold()); cls("holding");
-    if (opts.hold) {
-      holdTimer = setTimeout(() => { holdReady = true; cls("ready"); }, 300);
-    } else { holdReady = true; }
-  }
-  function currentDisplayForHold() {
-    if (opts.inspection && inspectStart) {
-      const t = (performance.now() - inspectStart) / 1000;
-      if (t > 17) return "DNF"; if (t > 15) return "+2";
-      return Math.max(0, Math.ceil(15 - t)).toString();
-    }
-    return "0.00";
-  }
-  function cancelHold() {
-    clearTimeout(holdTimer);
-    // released too early → back to prior state
-    if (opts.inspection && inspectStart) { state = S.INSPECT; startInspectTick(); }
-    else { state = S.IDLE; cls(""); setTime("0.00"); hint("any key / tap to inspect"); }
-  }
-  function releaseHold() {
-    clearTimeout(holdTimer);
-    if (holdReady) startRun();
-    else cancelHold();
-  }
-
-  // ---- input events ----
-  // brief lockout after a stop so the same frantic press can't instantly re-arm
-  const INPUT_LOCK_MS = 500;
-  let inputLockUntil = 0;
-  const locked = () => performance.now() < inputLockUntil;
-
-  let pressState = S.IDLE;
-  function onDown() {
-    if (locked()) return;
-    pressState = state;
-    if (state === S.RUNNING) { stopRun(); return; }
-    if (state === S.IDLE) {
-      if (opts.inspection) return;      // idle+inspection: press does nothing, release starts inspection
-      beginHold(); return;              // no inspection: hold to start
-    }
-    if (state === S.INSPECT) { beginHold(); return; }
-  }
-  function onUp() {
-    if (locked()) return;
-    if (state === S.HOLD) { releaseHold(); return; }
-    // start inspection only on a press that began in IDLE — so the keyup that
-    // accompanies stopping a solve (press began while RUNNING) does not re-arm.
-    if (state === S.IDLE && pressState === S.IDLE && opts.inspection) { startInspect(); return; }
-  }
-
-  // keyboard — ANY key drives the timer (space, letters, etc.). Mouse does NOT:
-  // left-click can't start/stop, so a misclick never ruins a solve. One key at a
-  // time; the exact key that pressed down is the one that releases.
-  const isTyping = (t) => t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
-  function isTimerKey(e) {
-    if (e.ctrlKey || e.metaKey || e.altKey) return false;                 // leave browser shortcuts alone
-    if (["Escape", "Tab", "Shift", "Control", "Alt", "Meta"].includes(e.key)) return false;
-    if (/^F\d+$/.test(e.key)) return false;                               // F1..F12 (reload, devtools, …)
-    return true;
-  }
-  // Every fresh keydown is judged by the live timer state, so it never gets
-  // "stuck": mashing several keys (which can drop keyup events on n-key-rollover
-  // keyboards) still stops the timer on the first keydown. e.repeat filters the
-  // OS auto-repeat of a held key; onDown/onUp already ignore redundant calls.
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { closeAllPops(); return; }
-    if (!$("vs").hidden) return;   // setup/results overlay open → don't drive the timer
-    if (e.repeat || isTyping(e.target) || !isTimerKey(e)) return;
-    e.preventDefault();
-    onDown();
-  });
-  document.addEventListener("keyup", (e) => {
-    if (!$("vs").hidden) return;
-    if (isTyping(e.target) || !isTimerKey(e)) return;
-    e.preventDefault();
-    onUp();
-  });
-
-  // touch — only the timer zone reacts, so panel/buttons stay tappable. No mouse
-  // handlers on purpose: clicking the page never controls the timer.
-  const zone = $("timer-zone");
-  zone.addEventListener("touchstart", (e) => { e.preventDefault(); onDown(); }, { passive: false });
-  zone.addEventListener("touchend", (e) => { e.preventDefault(); onUp(); }, { passive: false });
-
-  // ---------- penalty bar ----------
-  let lastSolveId = null;
-  function showPenaltyBar(id) { lastSolveId = id; $("penalty-bar").hidden = false; }
-  function hidePenaltyBar() { $("penalty-bar").hidden = true; lastSolveId = null; }
-  $("penalty-bar").addEventListener("click", (e) => {
-    const b = e.target.closest(".pen"); if (!b) return;
-    const pen = b.dataset.pen;
-
-    if (VS.active) {
-      if (!VS.last) return;
-      const { turn, round } = VS.last;
-      if (pen === "del") {
-        // redo: clear the result and hand the turn back to that player
-        VS.results[turn][round] = undefined; VS.round = round; VS.turn = turn; VS.last = null;
-        curScramble = VS.scrambles[round]; showScramble();
-        updateVsPanel(); hint(vsTurnHint()); setTime("0.00"); cls(""); hidePenaltyBar();
-      } else {
-        const cell = VS.results[turn][round];
-        if (cell) { cell.penalty = pen; setTime(label(cell)); cls(pen === "dnf" ? "warn" : ""); updateVsPanel(); }
-      }
-      return;
-    }
-
-    if (!lastSolveId) return;
-    const sv = Store.solves.find((s) => s.id === lastSolveId);
-    if (!sv) return;
-    if (pen === "del") { Store.remove(lastSolveId); hidePenaltyBar(); }
-    else { sv.penalty = pen; Store.update(sv); }
-    renderStats(); hidePenaltyBar(); setTime("0.00"); cls("");
-  });
-
-  // ---------- stats render ----------
-  function renderStats() {
-    const list = Store.solves;
-    const last = list[list.length - 1];
-    // current column
-    $("cur-time").textContent = last ? label(last) : "–";
-    $("cur-mo3").textContent  = fmtAvg(avgOf(list, 3));
-    $("cur-ao5").textContent  = fmtAvg(avgOf(list, 5));
-    $("cur-ao12").textContent = fmtAvg(avgOf(list, 12));
-    // best column
-    const singles = list.filter((s) => s.penalty !== "dnf").map(eff);
-    $("best-time").textContent = singles.length ? fmt(Math.min(...singles)) : "–";
-    $("best-mo3").textContent  = fmtAvg(bestAvg(list, 3));
-    $("best-ao5").textContent  = fmtAvg(bestAvg(list, 5));
-    $("best-ao12").textContent = fmtAvg(bestAvg(list, 12));
-    // summary
-    const meanAll = singles.length ? singles.reduce((a, b) => a + b, 0) / singles.length : null;
-    $("solve-summary").textContent = `solves: ${list.length}` + (meanAll ? `   mean: ${fmt(meanAll)}` : "");
-
-    // solve list (newest first), mark session best/worst
-    const ol = $("solve-list"); ol.innerHTML = "";
-    if (!list.length) {
-      const empty = el("div", "solve-empty");
-      empty.textContent = "No solves yet — press any key to start.";
-      ol.appendChild(empty);
-      return;
-    }
-    const effs = list.map(eff);
-    const bestE = Math.min(...effs), worstE = Math.max(...effs.filter((x) => x !== Infinity), -1);
-    for (let i = list.length - 1; i >= 0; i--) {
-      const sv = list[i], li = el("li", "solve");
-      if (sv.penalty === "dnf") li.classList.add("dnf");
-      else if (eff(sv) === bestE) li.classList.add("best");
-      else if (eff(sv) === worstE && list.length > 2) li.classList.add("worst");
-      const idx = el("span", "idx"); idx.textContent = (i + 1);
-      const t = el("span"); t.textContent = label(sv);
-      li.appendChild(idx); li.appendChild(t);
-      li.addEventListener("click", () => openSolveMenu(sv, li));
-      ol.appendChild(li);
-    }
-  }
-
-  // click a past solve → on-theme inline menu (OK / +2 / DNF / delete)
-  let solveMenu = null;
-  function closeSolveMenu() {
-    if (!solveMenu) return;
-    solveMenu.remove(); solveMenu = null;
-    document.removeEventListener("mousedown", outsideSolveMenu, true);
-    document.removeEventListener("touchstart", outsideSolveMenu, true);
-  }
-  function outsideSolveMenu(e) { if (solveMenu && !solveMenu.contains(e.target)) closeSolveMenu(); }
-  function openSolveMenu(sv, li) {
-    closeSolveMenu();
-    const m = el("div", "solve-menu");
-    const head = el("div", "sm-head"); head.textContent = `#${Store.solves.indexOf(sv) + 1} · ${label(sv)}`;
-    const scr = el("div", "sm-scramble"); scr.textContent = sv.scramble;
-    const row = el("div", "sm-row");
-    const mk = (a, txt, extra) => {
-      const b = el("button", extra); b.textContent = txt;
-      if ((sv.penalty || "ok") === a) b.classList.add("on");
-      b.addEventListener("click", () => {
-        if (a === "del") Store.remove(sv.id);
-        else { sv.penalty = a; Store.update(sv); }
-        closeSolveMenu(); renderStats();
-      });
-      return b;
-    };
-    row.appendChild(mk("ok", "OK"));
-    row.appendChild(mk("plus2", "+2"));
-    row.appendChild(mk("dnf", "DNF"));
-    row.appendChild(mk("del", "Delete", "danger"));
-    m.appendChild(head); m.appendChild(scr); m.appendChild(row);
-    document.body.appendChild(m);
-    // position near the clicked solve, clamped to the viewport
-    const r = li.getBoundingClientRect(), mw = m.offsetWidth, mh = m.offsetHeight, pad = 8;
-    let left = Math.min(Math.max(pad, r.left), window.innerWidth - mw - pad);
-    let top = r.bottom + 6;
-    if (top + mh > window.innerHeight - pad) top = Math.max(pad, r.top - mh - 6);
-    m.style.left = left + "px"; m.style.top = top + "px";
-    solveMenu = m;
-    setTimeout(() => {
-      document.addEventListener("mousedown", outsideSolveMenu, true);
-      document.addEventListener("touchstart", outsideSolveMenu, true);
-    }, 0);
-  }
-
-  // ---------- scramble nav ----------
-  $("scramble-next").addEventListener("click", newScramble);
-  $("scramble-prev").addEventListener("click", () => {
-    if (VS.active) return;
-    if (scrambleIdx > 0) { scrambleIdx--; curScramble = scrambleHistory[scrambleIdx]; showScramble(); }
-  });
-  $("scramble").addEventListener("click", () => {
-    if (navigator.clipboard) navigator.clipboard.writeText(curScramble).catch(() => {});
-    const s = $("scramble"); s.classList.add("copied");
-    setTimeout(() => s.classList.remove("copied"), 500);
-  });
-
-  // ---------- panel controls ----------
-  $("panel-collapse").addEventListener("click", () => {
-    const p = $("panel"); p.classList.toggle("collapsed");
-    $("panel-collapse").textContent = p.classList.contains("collapsed") ? "+" : "–";
-  });
-  $("btn-clear").addEventListener("click", () => {
-    if (confirm("Clear this session's solves? (also removes them from the database)")) { Store.clearAll(); renderStats(); }
-  });
-
-  // ---------- settings popover ----------
-  const setPop = $("settings-pop");
-  $("opt-inspection").checked = opts.inspection;
-  $("opt-hold").checked = opts.hold;
-  $("opt-cube").checked = opts.cube;
-  $("opt-hidetime").checked = opts.hideTime;
-  function applyCubeVis() { $("cube-wrap").classList.toggle("hidden", !opts.cube); }
-  applyCubeVis();
-  $("btn-settings").addEventListener("click", (e) => { e.stopPropagation(); setPop.hidden = !setPop.hidden; });
-  $("opt-inspection").addEventListener("change", (e) => { opts.inspection = e.target.checked; saveOpts(); });
-  $("opt-hold").addEventListener("change", (e) => { opts.hold = e.target.checked; saveOpts(); });
-  $("opt-cube").addEventListener("change", (e) => { opts.cube = e.target.checked; saveOpts(); applyCubeVis(); });
-  $("opt-hidetime").addEventListener("change", (e) => { opts.hideTime = e.target.checked; saveOpts(); });
-  document.addEventListener("click", (e) => {
-    if (!setPop.hidden && !e.target.closest("#settings-pop") && e.target !== $("btn-settings") && !e.target.closest("#menu-settings")) setPop.hidden = true;
-  });
-
-  // ---------- mobile kebab menu (VS mode + settings) ----------
-  const menuPop = $("menu-pop"), menuBtn = $("menu-btn");
-  menuBtn.addEventListener("click", (e) => { e.stopPropagation(); setPop.hidden = true; menuPop.hidden = !menuPop.hidden; });
-  $("menu-vs").addEventListener("click", () => { menuPop.hidden = true; openVsSetup(); });
-  $("menu-settings").addEventListener("click", (e) => { e.stopPropagation(); menuPop.hidden = true; setPop.hidden = false; });
-  document.addEventListener("click", (e) => {
-    if (!menuPop.hidden && !e.target.closest("#menu-pop") && !menuBtn.contains(e.target)) menuPop.hidden = true;
-  });
-  function closeAllPops() {
-    setPop.hidden = true;
-    $("menu-pop").hidden = true;
-    closeSolveMenu();
-    if (!$("vs").hidden) $("vs").hidden = true;   // Esc closes the setup/results overlay
-  }
-
-  // ============================================================
-  // VS MODE — runs on the MAIN interface (real scramble, cube
-  // preview, timer, penalties). Only setup + final results use an
-  // overlay. Scores are local; never touches Store / DB.
-  //   results[player][round] = { ms, penalty } | undefined
-  // ============================================================
-  const VS = {
-    active: false, players: [], rounds: 0, round: 0, turn: 0,
-    scrambles: [], results: [], last: null,   // last = {turn,round} of most recent solve
-  };
-  const vsOverlay = $("vs"), vsSetup = $("vs-setup"), vsResults = $("vs-results");
-
-  $("btn-vs").addEventListener("click", openVsSetup);
-  $("vs-cancel").addEventListener("click", () => { vsOverlay.hidden = true; });
-  $("vs-start").addEventListener("click", startVs);
-  $("vs-n").addEventListener("input", renderVsNames);
-  $("vs-again").addEventListener("click", () => { buildVsGame(VS.players.map((p) => p.name), VS.rounds); vsOverlay.hidden = true; enterVsPlay(); });
-  $("vs-done").addEventListener("click", () => { vsOverlay.hidden = true; });
-  $("vs-exit").addEventListener("click", exitVs);
-
-  function openVsSetup() {
-    vsOverlay.hidden = false; vsSetup.hidden = false; vsResults.hidden = true;
-    renderVsNames();
-    if (!window.matchMedia("(pointer: coarse)").matches) { const n = $("vs-n"); n.focus(); n.select(); }
-  }
-  function renderVsNames() {
-    const n = Math.max(2, Math.min(12, parseInt($("vs-n").value) || 2));
-    const wrap = $("vs-names"); wrap.innerHTML = "";
-    for (let i = 0; i < n; i++) { const inp = el("input"); inp.type = "text"; inp.placeholder = "Player " + (i + 1); wrap.appendChild(inp); }
-  }
-  function startVs() {
-    const names = Array.from($("vs-names").querySelectorAll("input")).map((inp, i) => inp.value.trim() || ("Player " + (i + 1)));
-    buildVsGame(names, 1);   // one shared scramble, each player solves it once
-    vsOverlay.hidden = true;
-    enterVsPlay();
-  }
-  function buildVsGame(names, rounds) {
-    VS.players = names.map((name) => ({ name }));
-    VS.rounds = rounds; VS.round = 0; VS.turn = 0; VS.last = null;
-    VS.scrambles = Array.from({ length: rounds }, () => scramble());
-    VS.results = names.map(() => Array(rounds).fill(undefined));
-  }
-
-  const vsTurnHint = () => VS.players[VS.turn].name + " to solve";
-
-  function enterVsPlay() {
-    VS.active = true;
-    state = S.IDLE; inspectStart = 0; stopInspect(); hidePenaltyBar();
-    curScramble = VS.scrambles[VS.round]; showScramble();
-    $("panel").classList.add("vs");
-    updateVsPanel();
-    setTime("0.00"); cls(""); hint(vsTurnHint());
-  }
-  function updateVsPanel() {
-    $("session-label").textContent = "VS";
-    const tl = $("vs-turn-line"); tl.innerHTML = "";
-    const b = el("b"); b.textContent = VS.players[VS.turn].name; tl.appendChild(b);
-    tl.appendChild(document.createTextNode(" to solve"));
-    const sc = $("vs-scores"); sc.innerHTML = "";
-    VS.players.forEach((p, i) => {
-      const cells = VS.results[i].filter((c) => c !== undefined);
-      const valid = cells.filter((c) => c.penalty !== "dnf").map((c) => c.ms + (c.penalty === "plus2" ? 2000 : 0));
-      const dnfs = cells.filter((c) => c.penalty === "dnf").length;
-      const best = valid.length ? Math.min(...valid) : null;
-      const row = el("div", "vs-score-row" + (i === VS.turn ? " cur" : ""));
-      const who = el("span", "who"); who.textContent = p.name;
-      const s = el("span", "sc");
-      s.textContent = cells.length ? (best != null ? fmt(best) : "DNF") + (dnfs ? ` · ${dnfs}DNF` : "") : "—";
-      row.appendChild(who); row.appendChild(s); sc.appendChild(row);
+  function renderTodos() {
+    const now = Date.now(), todos = data.todos.filter((t) => new Date(t.expires_at).getTime() > now).sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    const open = todos.filter((t) => !t.completed_at).length; $("todo-count").textContent = todos.length ? open + " open" : "";
+    const nodes = todos.map((todo) => {
+      const li = document.createElement("li"); li.className = todo.completed_at ? "todo completed" : "todo";
+      const button = document.createElement("button"); button.type = "button"; button.className = "todo-toggle"; button.setAttribute("aria-label", (todo.completed_at ? "Mark incomplete: " : "Complete: ") + todo.text); button.setAttribute("aria-pressed", String(!!todo.completed_at));
+      const mark = document.createElement("span"); mark.className = "todo-mark"; mark.setAttribute("aria-hidden", "true");
+      const text = document.createElement("span"); text.className = "todo-text"; text.textContent = todo.text;
+      button.append(mark, text); button.addEventListener("click", () => { todo.completed_at = todo.completed_at ? null : iso(); queue("todo", todo); renderTodos(); }); li.append(button); return li;
     });
+    if (!nodes.length) { const empty = document.createElement("li"); empty.className = "empty-todos"; empty.textContent = "Nothing carried over. A clean page."; nodes.push(empty); }
+    $("todo-list").replaceChildren(...nodes);
   }
-  // record the current turn's solve, then advance turn / round
-  function vsRecord(rawMs, pen) {
-    VS.results[VS.turn][VS.round] = { ms: Math.round(rawMs), penalty: pen };
-    VS.last = { turn: VS.turn, round: VS.round };
-    VS.turn++;
-    if (VS.turn >= VS.players.length) { VS.turn = 0; VS.round++; }
-    if (VS.round >= VS.rounds) { finishVs(); return; }
-    curScramble = VS.scrambles[VS.round]; showScramble();
-    updateVsPanel(); hint(vsTurnHint());
+  function renderChart() {
+    const days = C.lastSevenDays(new Date()), totals = C.totalsByDay(data.blocks), max = Math.max(8 * 3600, ...Object.values(totals));
+    const formatter = new Intl.DateTimeFormat(undefined, { weekday: "narrow" });
+    $("week-average").textContent = C.formatDuration(days.reduce((sum, d) => sum + (totals[C.dayKey(d)] || 0), 0) / 7, true);
+    $("week-chart").replaceChildren(...days.map((day) => {
+      const key = C.dayKey(day), seconds = totals[key] || 0, button = document.createElement("button");
+      button.type = "button"; button.className = "bar-column"; button.setAttribute("role", "listitem"); button.setAttribute("aria-label", day.toLocaleDateString(undefined, { weekday: "long" }) + ": " + C.formatDuration(seconds, true));
+      const value = document.createElement("span"); value.className = "bar-value"; value.textContent = seconds ? C.formatDuration(seconds, true) : "";
+      const track = document.createElement("span"); track.className = "bar-track"; const bar = document.createElement("span"); bar.className = "bar"; bar.style.height = (seconds ? Math.max(4, seconds / max * 100) : 0) + "%"; track.append(bar);
+      const label = document.createElement("span"); label.className = "bar-label"; label.textContent = formatter.format(day); button.append(value, track, label); button.addEventListener("click", () => showDay(day)); return button;
+    }));
   }
-  function finishVs() {
-    VS.active = false;
-    $("panel").classList.remove("vs");
-    $("session-label").textContent = "Session";
-    renderStats();
-    hidePenaltyBar();
-    showVsResults();
-    newScramble(); setTime("0.00"); cls(""); hint("any key / tap to inspect");
+  function showDay(day) {
+    const key = C.dayKey(day), blocks = data.blocks.filter((b) => C.dayKey(b.verified_at) === key && b.reflection);
+    $("detail-title").textContent = day.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
+    const nodes = blocks.map((b) => { const li = document.createElement("li"), time = document.createElement("time"), p = document.createElement("p"); time.textContent = new Date(b.verified_at).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); p.textContent = b.reflection; li.append(time, p); return li; });
+    if (!nodes.length) { const li = document.createElement("li"); li.className = "no-checkins"; li.textContent = "No written check-ins."; nodes.push(li); }
+    $("detail-list").replaceChildren(...nodes); $("day-detail").hidden = false;
   }
-  function exitVs() {
-    if (VS.active && !confirm("Exit VS mode? Scores will be discarded.")) return;
-    VS.active = false;
-    $("panel").classList.remove("vs");
-    $("session-label").textContent = "Session";
-    renderStats(); hidePenaltyBar();
-    newScramble(); setTime("0.00"); cls(""); hint("any key / tap to inspect");
+  function renderSync(text) { $("sync-status").textContent = text; }
+  function render() { renderTimer(); renderTodos(); renderChart(); }
+  function showCheckin() { if (!$("expired-takeover").hidden) return; $("checkin-takeover").hidden = false; document.body.classList.add("locked"); setTimeout(() => $("checkin-input").focus(), 30); }
+  function hideCheckin() { $("checkin-takeover").hidden = true; if ($("expired-takeover").hidden) document.body.classList.remove("locked"); }
+  function updateCheckinCount() { const length = $("checkin-input").value.trim().length; $("checkin-count").textContent = length + " / 20"; $("checkin-submit").disabled = length < 20; }
+  function addTodo(event) {
+    event.preventDefault(); const input = $("todo-input"), text = input.value.trim(); if (!text) return;
+    const now = Date.now(), todo = { id: uuid(), text, created_at: iso(now), expires_at: iso(newTodoExpiry(now)), completed_at: null, acknowledged_at: null, updated_at: iso(now) };
+    data.todos.push(todo); queue("todo", todo); input.value = ""; $("todo-form").hidden = true; $("add-button").hidden = false; renderTodos();
   }
-
-  function showVsResults() {
-    vsOverlay.hidden = false; vsSetup.hidden = true; vsResults.hidden = false;
-    const board = VS.players.map((p, i) => {
-      const cells = VS.results[i].filter((c) => c !== undefined);
-      const valid = cells.filter((c) => c.penalty !== "dnf").map((c) => c.ms + (c.penalty === "plus2" ? 2000 : 0));
-      const dnfs = cells.filter((c) => c.penalty === "dnf").length;
-      const sum = valid.reduce((a, b) => a + b, 0) + dnfs * 600000;
-      const mean = valid.length ? valid.reduce((a, b) => a + b, 0) / valid.length : null;
-      const best = valid.length ? Math.min(...valid) : null;
-      return { name: p.name, sum, mean, best, dnfs, solved: valid.length };
-    });
-    board.sort((a, b) => a.sum - b.sum);
-    const wrap = $("vs-board"); wrap.innerHTML = "";
-    board.forEach((b, i) => {
-      const row = el("div", "vs-row" + (i === 0 ? " lead" : ""));
-      const rank = el("span", "rank"); rank.textContent = i + 1;
-      const who = el("span", "who"); who.textContent = b.name;
-      const score = el("span", "score");
-      score.textContent = b.solved ? `best ${fmt(b.best)} · avg ${fmt(b.mean)}` + (b.dnfs ? ` · ${b.dnfs} DNF` : "") : "no solves";
-      row.appendChild(rank); row.appendChild(who); row.appendChild(score);
-      wrap.appendChild(row);
-    });
+  async function enableNotifications() { const result = await Notification.requestPermission(); $("notification-button").hidden = result !== "default"; }
+  function reconcile() { const session = activeSession(); if (session && C.timerStatus(session, Date.now()).state === "waiting") markWaiting(); render(); }
+  function bind() {
+    $("timer-button").addEventListener("click", () => activeSession() ? stopSession() : startSession());
+    $("add-button").addEventListener("click", () => { $("todo-form").hidden = false; $("add-button").hidden = true; $("todo-input").focus(); });
+    $("todo-form").addEventListener("submit", addTodo);
+    $("todo-input").addEventListener("keydown", (event) => { if (event.key === "Enter") addTodo(event); });
+    $("todo-input").addEventListener("blur", () => { if (!$("todo-input").value.trim()) { $("todo-form").hidden = true; $("add-button").hidden = false; } });
+    $("checkin-input").addEventListener("input", updateCheckinCount); $("checkin-form").addEventListener("submit", submitCheckin); $("checkin-stop").addEventListener("click", stopSession);
+    $("expired-ack").addEventListener("click", acknowledgeExpired); $("detail-close").addEventListener("click", () => $("day-detail").hidden = true); $("notification-button").addEventListener("click", enableNotifications);
+    addEventListener("online", () => { flush(); pull(); }); addEventListener("focus", reconcile); document.addEventListener("visibilitychange", () => { if (!document.hidden) reconcile(); });
   }
-
-  // ============================================================
-  // BOOT
-  // ============================================================
-  showScramble();
-  renderStats();
-  setTime("0.00"); hint("any key / tap to inspect");
-  setDot(Store.outbox.length ? "off" : "ok");
-  syncPull();       // merge anything from other browsers
-  syncFlush();      // push anything queued while offline
-  window.addEventListener("online", () => { syncFlush(); syncPull(); });
-  // periodic light pull so a second browser stays roughly in sync
-  setInterval(syncPull, 60000);
+  function init() {
+    $("today-date").textContent = new Intl.DateTimeFormat(undefined, { weekday: "long", day: "numeric", month: "long" }).format(new Date());
+    if ("Notification" in window) $("notification-button").hidden = Notification.permission !== "default";
+    bind(); render(); showExpiredIfNeeded(); reconcile(); scheduleBoundary(); pull(); flush();
+    setInterval(renderTimer, 1000);
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("/timer-sw.js", { scope: "/timer/" }).catch(() => {});
+  }
+  init();
 })();

@@ -44,6 +44,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("./src/admin");
     eleventyConfig.addPassthroughCopy("./src/_redirects");
     eleventyConfig.addPassthroughCopy("./src/sw.js");
+    eleventyConfig.addPassthroughCopy("./src/timer-sw.js");
 
     // Add Filters
     eleventyConfig.addFilter("postDate", filterPostDate);
