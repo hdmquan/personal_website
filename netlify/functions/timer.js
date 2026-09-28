@@ -49,7 +49,10 @@ function safeDatabaseError(error) {
     "ETIMEDOUT": "database connection timed out",
     "SELF_SIGNED_CERT_IN_CHAIN": "database SSL configuration failed"
   };
-  return { error: known[code] || "database unavailable", code };
+  const attemptedHost = error && typeof error.hostname === "string" && /^[a-z0-9.-]{1,253}$/i.test(error.hostname)
+    ? error.hostname
+    : undefined;
+  return { error: known[code] || "database unavailable", code, ...(attemptedHost ? { host: attemptedHost } : {}) };
 }
 
 async function upsertTodo(client, r) {
