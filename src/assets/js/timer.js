@@ -45,7 +45,7 @@
       const remote = await response.json();
       merge(data.todos, remote.todos || []); merge(data.sessions, remote.sessions || []); merge(data.blocks, remote.blocks || []);
       const active = data.sessions.filter((s) => !s.ended_at).sort((a, b) => new Date(b.started_at) - new Date(a.started_at))[0];
-      data.activeSessionId = active ? active.id : null; save(); render();
+      data.activeSessionId = active ? active.id : null; save(); render(); showExpiredIfNeeded();
     } catch (_) { if (!navigator.onLine) renderSync("Offline"); }
   }
 
