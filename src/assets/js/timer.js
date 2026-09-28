@@ -118,7 +118,7 @@
     const verified = todayBlocks().reduce((sum, b) => sum + Number(b.duration_seconds), 0);
     $("verified-time").textContent = C.formatDuration(verified, true);
     const button = $("timer-button"), label = $("session-status"); button.classList.toggle("is-running", status.state !== "idle");
-    if (status.state === "idle") { button.textContent = "Start"; label.textContent = "Ready when you are."; }
+    if (status.state === "idle") { button.textContent = "Start"; label.textContent = ""; }
     if (status.state === "running") {
       const seconds = Math.ceil(status.remaining / 1000), m = Math.floor(seconds / 60), s = seconds % 60;
       button.textContent = "Stop"; label.textContent = "Check-in in " + m + ":" + String(s).padStart(2, "0");
@@ -132,11 +132,26 @@
       const li = document.createElement("li"); li.className = todo.completed_at ? "todo completed" : "todo";
       const button = document.createElement("button"); button.type = "button"; button.className = "todo-toggle"; button.setAttribute("aria-label", (todo.completed_at ? "Mark incomplete: " : "Complete: ") + todo.text); button.setAttribute("aria-pressed", String(!!todo.completed_at));
       const mark = document.createElement("span"); mark.className = "todo-mark"; mark.setAttribute("aria-hidden", "true");
-      const text = document.createElement("span"); text.className = "todo-text"; text.textContent = todo.text;
-      button.append(mark, text); button.addEventListener("click", () => { todo.completed_at = todo.completed_at ? null : iso(); queue("todo", todo); renderTodos(); }); li.append(button); return li;
+      const text = document.createElement("button"); text.type = "button"; text.className = "todo-text"; text.textContent = todo.text; text.setAttribute("aria-label", "Edit " + todo.text);
+      button.append(mark); button.addEventListener("click", () => { todo.completed_at = todo.completed_at ? null : iso(); queue("todo", todo); renderTodos(); });
+      text.addEventListener("click", () => editTodo(todo, li));
+      li.append(button, text); return li;
     });
     if (!nodes.length) { const empty = document.createElement("li"); empty.className = "empty-todos"; empty.textContent = "Nothing carried over. A clean page."; nodes.push(empty); }
     $("todo-list").replaceChildren(...nodes);
+  }
+  function editTodo(todo, li) {
+    const input = document.createElement("input"); input.className = "todo-edit"; input.value = todo.text; input.maxLength = 180; input.setAttribute("aria-label", "Edit todo");
+    let saved = false;
+    const finish = (commit) => {
+      if (saved) return; saved = true;
+      const value = input.value.trim();
+      if (commit && value && value !== todo.text) { todo.text = value; queue("todo", todo); }
+      renderTodos();
+    };
+    li.classList.add("editing"); li.replaceChildren(input); input.focus(); input.select();
+    input.addEventListener("keydown", (event) => { if (event.key === "Enter") finish(true); if (event.key === "Escape") finish(false); });
+    input.addEventListener("blur", () => finish(true));
   }
   function renderChart() {
     const days = C.lastSevenDays(new Date()), totals = C.totalsByDay(data.blocks), max = Math.max(8 * 3600, ...Object.values(totals));
@@ -157,7 +172,7 @@
     if (!nodes.length) { const li = document.createElement("li"); li.className = "no-checkins"; li.textContent = "No written check-ins."; nodes.push(li); }
     $("detail-list").replaceChildren(...nodes); $("day-detail").hidden = false;
   }
-  function renderSync(text) { $("sync-status").textContent = text; }
+  function renderSync() {}
   function render() { renderTimer(); renderTodos(); renderChart(); }
   function showCheckin() { if (!$("expired-takeover").hidden) return; $("checkin-takeover").hidden = false; document.body.classList.add("locked"); setTimeout(() => $("checkin-input").focus(), 30); }
   function hideCheckin() { $("checkin-takeover").hidden = true; if ($("expired-takeover").hidden) document.body.classList.remove("locked"); }
