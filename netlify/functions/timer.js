@@ -39,6 +39,18 @@ const headers = {
 const response = (statusCode, body) => ({ statusCode, headers, body: JSON.stringify(body) });
 const validId = (id) => typeof id === "string" && id.length > 5 && id.length < 100;
 const date = (value) => value ? new Date(value) : null;
+function safeDatabaseError(error) {
+  const code = error && error.code ? String(error.code) : "UNKNOWN";
+  const known = {
+    "28P01": "database authentication failed",
+    "3D000": "database name is invalid",
+    "ENOTFOUND": "database hostname was not found",
+    "ECONNREFUSED": "database connection was refused",
+    "ETIMEDOUT": "database connection timed out",
+    "SELF_SIGNED_CERT_IN_CHAIN": "database SSL configuration failed"
+  };
+  return { error: known[code] || "database unavailable", code };
+}
 
 async function upsertTodo(client, r) {
   if (!validId(r.id) || typeof r.text !== "string" || !r.text.trim() || r.text.length > 180) throw new Error("invalid todo");
@@ -97,6 +109,6 @@ exports.handler = async (event) => {
     return response(405, { error: "method not allowed" });
   } catch (error) {
     console.error("timer API", error);
-    return response(error.message.startsWith("invalid") ? 400 : 502, { error: error.message.startsWith("invalid") ? error.message : "database unavailable" });
+    return response(error.message.startsWith("invalid") ? 400 : 502, error.message.startsWith("invalid") ? { error: error.message } : safeDatabaseError(error));
   }
 };
