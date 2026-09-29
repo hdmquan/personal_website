@@ -54,7 +54,7 @@
   function showExpiredIfNeeded() {
     const expired = expiredTodos(); if (!expired.length) return false;
     $("expired-list").replaceChildren(...expired.map((t) => { const li = document.createElement("li"); li.textContent = t.text; return li; }));
-    $("expired-takeover").hidden = false; document.body.classList.add("locked"); $("expired-ack").focus(); return true;
+    $("expired-takeover").hidden = false; document.body.classList.add("locked"); window.scrollTo(0, 0); $("expired-ack").focus(); return true;
   }
   function acknowledgeExpired() {
     const time = iso();
@@ -175,7 +175,7 @@
   }
   function renderSync() {}
   function render() { renderTimer(); renderTodos(); renderChart(); }
-  function showCheckin() { if (!$("expired-takeover").hidden) return; $("checkin-takeover").hidden = false; document.body.classList.add("locked"); setTimeout(() => $("checkin-input").focus(), 30); }
+  function showCheckin() { if (!$("expired-takeover").hidden) return; $("checkin-takeover").hidden = false; document.body.classList.add("locked"); window.scrollTo(0, 0); setTimeout(() => $("checkin-input").focus(), 30); }
   function hideCheckin() { $("checkin-takeover").hidden = true; if ($("expired-takeover").hidden) document.body.classList.remove("locked"); }
   function updateCheckinCount() { const length = $("checkin-input").value.trim().length; $("checkin-count").textContent = length + " / 20"; $("checkin-submit").disabled = length < 20; }
   function addTodo(event) {
@@ -186,11 +186,6 @@
   async function enableNotifications() { const result = await Notification.requestPermission(); $("notification-button").hidden = result !== "default"; }
   function reconcile() { const session = activeSession(); if (session && C.timerStatus(session, Date.now()).state === "waiting") markWaiting(); render(); }
   function bind() {
-    [$("checkin-takeover"), $("expired-takeover")].forEach((takeover) => takeover.addEventListener("wheel", (event) => {
-      if (takeover.hidden || !event.deltaY) return;
-      takeover.scrollTop += event.deltaY;
-      event.preventDefault();
-    }, { passive: false }));
     $("timer-button").addEventListener("click", () => activeSession() ? stopSession() : startSession());
     $("add-button").addEventListener("click", () => { $("todo-form").hidden = false; $("add-button").hidden = true; $("todo-input").focus(); });
     $("todo-form").addEventListener("submit", addTodo);

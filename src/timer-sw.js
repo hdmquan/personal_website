@@ -1,4 +1,4 @@
-const CACHE = "accountability-timer-v9";
+const CACHE = "accountability-timer-v10";
 const SHELL = ["/timer/", "/assets/css/timer.css", "/assets/js/timer-core.js", "/assets/js/timer.js", "/assets/fonts/Nexa-Heavy.ttf", "/assets/fonts/baskervville-v19-latin-regular.woff2"];
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting()));
