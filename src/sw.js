@@ -33,6 +33,7 @@ const SHELL = [
   '/assets/css/root.css',
   '/assets/css/yura.css',
   '/assets/js/player.js',
+  '/assets/js/yura-mobile.js',
   '/assets/js/lastfm.js',
   '/assets/catalogs/yura.json',
 ];
