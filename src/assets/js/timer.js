@@ -69,12 +69,13 @@
   function stopSession() {
     const session = activeSession(); if (!session) return;
     const status = C.timerStatus(session, Date.now());
-    if (status.state === "running" && status.elapsed >= 1000) {
-      const now = iso(), block = { id: uuid(), session_id: session.id, started_at: session.block_started_at, ended_at: now, duration_seconds: Math.floor(status.elapsed / 1000), reflection: null, verified_at: now, updated_at: now };
+    if (status.state === "waiting" || (status.state === "running" && status.elapsed >= 1000)) {
+      const now = iso(), completed = status.state === "waiting";
+      const block = { id: uuid(), session_id: session.id, started_at: session.block_started_at, ended_at: completed ? (session.waiting_at || now) : now, duration_seconds: completed ? 900 : Math.floor(status.elapsed / 1000), reflection: null, verified_at: now, updated_at: now };
       data.blocks.push(block); queue("block", block);
     }
     session.ended_at = iso(); session.waiting_at = null; data.activeSessionId = null; data.notifiedBlock = null;
-    queue("session", session); clearTimeout(notificationTimer); hideCheckin(); render();
+    queue("session", session); clearTimeout(notificationTimer); $("checkin-input").value = ""; updateCheckinCount(); hideCheckin(); render();
   }
   function markWaiting() {
     const session = activeSession(); if (!session || session.waiting_at) return;
@@ -180,7 +181,7 @@
   function addTodo(event) {
     event.preventDefault(); const input = $("todo-input"), text = input.value.trim(); if (!text) return;
     const now = Date.now(), todo = { id: uuid(), text, created_at: iso(now), expires_at: iso(newTodoExpiry(now)), completed_at: null, acknowledged_at: null, updated_at: iso(now) };
-    data.todos.push(todo); queue("todo", todo); input.value = ""; $("todo-form").hidden = true; $("add-button").hidden = false; renderTodos();
+    data.todos.push(todo); queue("todo", todo); input.value = ""; renderTodos(); input.focus();
   }
   async function enableNotifications() { const result = await Notification.requestPermission(); $("notification-button").hidden = result !== "default"; }
   function reconcile() { const session = activeSession(); if (session && C.timerStatus(session, Date.now()).state === "waiting") markWaiting(); render(); }
