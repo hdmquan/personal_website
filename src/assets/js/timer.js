@@ -186,6 +186,11 @@
   async function enableNotifications() { const result = await Notification.requestPermission(); $("notification-button").hidden = result !== "default"; }
   function reconcile() { const session = activeSession(); if (session && C.timerStatus(session, Date.now()).state === "waiting") markWaiting(); render(); }
   function bind() {
+    [$("checkin-takeover"), $("expired-takeover")].forEach((takeover) => takeover.addEventListener("wheel", (event) => {
+      if (takeover.hidden || !event.deltaY) return;
+      takeover.scrollTop += event.deltaY;
+      event.preventDefault();
+    }, { passive: false }));
     $("timer-button").addEventListener("click", () => activeSession() ? stopSession() : startSession());
     $("add-button").addEventListener("click", () => { $("todo-form").hidden = false; $("add-button").hidden = true; $("todo-input").focus(); });
     $("todo-form").addEventListener("submit", addTodo);
