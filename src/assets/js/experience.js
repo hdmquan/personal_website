@@ -1,23 +1,22 @@
+// Experience accordion — one open row, inline landscape photo when expanded.
 const experienceItems = document.querySelectorAll('.experience-item');
-const experienceImage = document.querySelector('#experience-image img');
-const experiencePicture = document.querySelector('#experience-image');
-const experienceProjects = document.querySelector('#experience-projects');
 
 experienceItems.forEach((item) => {
     const button = item.querySelector('.service-button');
+    const panel = item.querySelector('.item-panel');
+    if (!button || !panel) return;
+
     button.addEventListener('click', () => {
+        const willOpen = !item.classList.contains('active');
+
         experienceItems.forEach((entry) => {
-            const active = entry === item;
-            entry.classList.toggle('active', active);
-            entry.querySelector('.service-button').setAttribute('aria-expanded', String(active));
-            entry.querySelector('.item-p').hidden = !active;
+            const entryButton = entry.querySelector('.service-button');
+            const entryPanel = entry.querySelector('.item-panel');
+            const open = entry === item && willOpen;
+
+            entry.classList.toggle('active', open);
+            if (entryButton) entryButton.setAttribute('aria-expanded', String(open));
+            if (entryPanel) entryPanel.hidden = !open;
         });
-        const hasImage = Boolean(item.dataset.image);
-        experiencePicture.hidden = !hasImage;
-        experienceProjects.hidden = hasImage;
-        if (experienceImage && hasImage) {
-            experienceImage.src = item.dataset.image;
-            experienceImage.alt = item.dataset.imageAlt;
-        }
     });
 });

@@ -1359,10 +1359,6 @@
 /* ── Dark mode social icon inversion ─ */
 /* #hero scopes these icons with an ID in critical.scss, so match that
    specificity here or the inversion is overridden and the icons stay black. */
-body.dark-mode #hero .social-icons img {
-  filter: invert(1) brightness(0.85);
-}
-
 /* ── Image wrapper treatment — flat, framed by a hairline ─ */
 .picture,
 .image-group .picture {
@@ -1575,35 +1571,77 @@ body.dark-mode #hero .social-icons img {
   opacity: 1;
 }
 
-#experience #experience-image[hidden], #experience #experience-projects[hidden] {
+/* Professional Work — full-width accordion with inline landscape photos */
+#experience .container {
+  width: 100%;
+  max-width: 57.5rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+}
+#experience .experience-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  text-align: left;
+  max-width: 40rem;
+}
+#experience .experience-intro .title {
+  margin: 0;
+}
+#experience .experience-intro .text {
+  margin: 0 0 0.5rem;
+}
+#experience .experience-list {
+  width: 100%;
+  max-width: none;
+  align-items: stretch;
+  gap: 0;
+}
+#experience .item-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  padding: 0.25rem 0 1.5rem;
+}
+#experience .item-panel[hidden] {
   display: none;
 }
-#experience .experience-projects {
-  padding: clamp(1.5rem, 4vw, 3rem);
+#experience .item-p {
+  margin: 0;
+  max-width: 52rem;
+  padding: 0;
+}
+#experience .experience-figure {
+  margin: 0;
+  width: 100%;
   background: var(--panel);
-  border-radius: 0.75rem;
+  border: 1px solid var(--rule);
+  overflow: hidden;
 }
-#experience .experience-projects h3 {
-  font-size: clamp(1.7rem, 3vw, 2.25rem);
-  margin: 1rem 0 2rem;
+#experience .experience-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(28rem, 55vh);
+  object-fit: cover;
+  object-position: center;
 }
-#experience .experience-projects dl {
+#experience .role,
+#experience .time-line {
+  display: inline;
   margin: 0;
+  padding: 0;
 }
-#experience .experience-projects dl div + div {
-  margin-top: 1.75rem;
+#experience .role::before {
+  content: " · ";
 }
-#experience .experience-projects dt {
-  font-family: var(--serif);
-  color: var(--text);
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-}
-#experience .experience-projects dd {
-  margin: 0;
-  color: var(--text-2);
-  font-size: 1rem;
-  line-height: 1.7;
+#experience .time-line {
+  display: block;
+  margin-top: 0.2rem;
 }
 
 #intro .picture {

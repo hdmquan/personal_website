@@ -1540,9 +1540,6 @@
 /* ── Dark mode social icon inversion ─ */
 /* #hero scopes these icons with an ID in critical.scss, so match that
    specificity here or the inversion is overridden and the icons stay black. */
-body.dark-mode #hero .social-icons img {
-    filter: invert(1) brightness(0.85);
-}
 
 /* ── Image wrapper treatment — flat, framed by a hairline ─ */
 .picture,
@@ -1631,14 +1628,88 @@ body.dark-mode #hero .social-icons img {
   .topper-small, .button { opacity: 1; }
 }
 
+/* Professional Work — full-width accordion with inline landscape photos */
 #experience {
-  #experience-image[hidden], #experience-projects[hidden] { display: none; }
-  .experience-projects { padding: clamp(1.5rem, 4vw, 3rem); background: var(--panel); border-radius: 0.75rem; }
-  .experience-projects h3 { font-size: clamp(1.7rem, 3vw, 2.25rem); margin: 1rem 0 2rem; }
-  .experience-projects dl { margin: 0; }
-  .experience-projects dl div + div { margin-top: 1.75rem; }
-  .experience-projects dt { font-family: var(--serif); color: var(--text); font-size: 1.4rem; margin-bottom: 0.5rem; }
-  .experience-projects dd { margin: 0; color: var(--text-2); font-size: 1rem; line-height: 1.7; }
+  .container {
+    width: 100%;
+    max-width: calc(920 / 16 * 1rem);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .experience-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-align: left;
+    max-width: 40rem;
+
+    .title { margin: 0; }
+    .text { margin: 0 0 0.5rem; }
+  }
+
+  .experience-list {
+    width: 100%;
+    max-width: none;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .item-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    padding: 0.25rem 0 1.5rem;
+  }
+
+  .item-panel[hidden] {
+    display: none;
+  }
+
+  .item-p {
+    margin: 0;
+    max-width: 52rem;
+    padding: 0;
+  }
+
+  .experience-figure {
+    margin: 0;
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: min(28rem, 55vh);
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .role,
+  .time-line {
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+
+  .role {
+    &::before {
+      content: " · ";
+    }
+  }
+
+  .time-line {
+    display: block;
+    margin-top: 0.2rem;
+  }
 }
 #intro {
   .picture { min-height: 0; height: auto; aspect-ratio: 1282 / 720; }

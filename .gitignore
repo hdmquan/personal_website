@@ -6,3 +6,5 @@ public
 .claude
 .env
 .netlify
+*.log
+.playwright-cli

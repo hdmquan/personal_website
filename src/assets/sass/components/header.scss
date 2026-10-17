@@ -4,39 +4,11 @@
 
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
-    body.dark-mode #dark-mode-toggle {
-        .sun {
-            opacity: 1;
-            transform: translate(-50%, -50%);
-        }
         .moon {
             opacity: 0;
             transform: translate(-50%, -150%);
         }
     }
-
-    #dark-mode-toggle {
-        width: 2.2rem;
-        height: 2.2rem;
-        margin: 0;
-        padding: 0;
-        background: var(--panel-raised);
-        border: 1px solid var(--rule);
-        border-radius: 0.35rem;
-        box-shadow: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        order: 4;
-        flex-shrink: 0;
-        position: relative;
-        z-index: 1000;
-        overflow: hidden;
-        transition: border-color 0.15s ease, color 0.15s ease;
-        cursor: pointer;
-        color: var(--text-2);
-
-        &:hover { border-color: var(--brass); color: var(--accent); }
 
         &:active { background: var(--panel-inset); }
 
@@ -66,16 +38,6 @@
 
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
-    #dark-mode-toggle {
-        margin: 0;
-        position: relative;
-        top: auto;
-        right: auto;
-        transform: none;
-
-        &:hover {
-            cursor: pointer;
-        }
     }
 }
 
@@ -822,4 +784,3 @@
 
 #navigation .nav-mark-sub { color: var(--text-2); font-size: 0.65rem; letter-spacing: 0.16em; }
 #navigation .li-link { min-height: 44px; display: inline-flex; align-items: center; }
-#dark-mode-toggle { min-width: 44px; min-height: 44px; }
