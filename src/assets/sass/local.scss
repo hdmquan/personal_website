@@ -1695,20 +1695,22 @@
 
   .role,
   .time-line {
-    display: inline;
+    display: block;
     margin: 0;
     padding: 0;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-2);
+    line-height: 1.45;
   }
 
   .role {
-    &::before {
-      content: " · ";
-    }
+    margin-top: 0.15rem;
   }
 
   .time-line {
-    display: block;
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
+    opacity: 0.85;
   }
 }
 #intro {
