@@ -538,7 +538,9 @@
     margin-bottom: 1rem;
     font-size: 1rem;
     line-height: 1.6em;
-    font-family: "Nexa", sans-serif;
+    /* Real 400 weight — Nexa only has ExtraLight, which is too faint for articles */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
     color: var(--text-2);
   }
   .blog-article #blog-content a {
@@ -557,7 +559,8 @@
     list-style: circle;
     font-size: 1rem;
     line-height: 1.6em;
-    font-family: "Nexa", sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
     color: var(--text-2);
   }
   .blog-article #blog-content img {
