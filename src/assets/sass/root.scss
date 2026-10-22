@@ -67,6 +67,37 @@
   --key-green:   var(--g1);
 }
 
+/* Dark tokens — used by standalone pages (yura, top-9) that toggle
+   body.dark-mode. The main site has no dark toggle. */
+body.dark-mode {
+  --bg:           #191e1a;
+  --panel:        #1e2420;
+  --panel-raised: #242c26;
+  --panel-inset:  #171c18;
+  --text:         #e8ede8;
+  --text-2:       #9aaa9c;
+  --text-3:       #7e8f80;
+  --accent:       #8ba888;
+  --accent-hi:    #a0bfa0;
+  --accent-sh:    #5a7c60;
+  --hi:           rgba(255,255,255,0.06);
+  --sh:           rgba(0,0,0,0.35);
+  --sh-deep:      rgba(0,0,0,0.5);
+  --rule:         rgba(255,255,255,0.05);
+  --overlay:      rgba(10,20,12,0.85);
+
+  --brass:      #c2a36a;
+  --brass-hi:   #e3c184;
+  --brass-deep: #a8884e;
+  --brass-line: rgba(194,163,106,0.5);
+
+  --milled:      var(--panel-raised);
+  --milled-key:  var(--panel-raised);
+  --plate:       var(--panel);
+  --key-green:   var(--g1);
+
+  --text-3: #9aaa9c;
+}
 
 html { scroll-behavior: smooth; }
 
